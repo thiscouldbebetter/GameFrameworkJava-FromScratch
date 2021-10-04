@@ -15,4 +15,5 @@ Running
 Open a command prompt in the Source directory, and run these commands:
 
 > javac *.java
+
 > java GameFrameworkDemo
