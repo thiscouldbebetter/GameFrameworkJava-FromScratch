@@ -7,7 +7,7 @@ public class CollisionTracker implements EntityProperty
 {
 	public MapOfCells<CollisionTrackerMapCell> collisionMap;
 
-	private _CollisionTrackerMapCell cells[];
+	private CollisionTrackerMapCell _cells[];
 
 	public CollisionTracker(Coords size, Coords collisionMapSizeInCells)
 	{

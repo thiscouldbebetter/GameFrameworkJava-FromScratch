@@ -1,5 +1,5 @@
 
-package GameFramework.Display
+package GameFramework.Display;
 
 imports GameFramework.Model.*;
 
@@ -35,7 +35,7 @@ public class DisplayRecorder
 		(
 			"Recording Start/Stop",
 			DisplayRecorder.actionStartStopPerform
-		)
+		);
 	}
 
 	public static void actionStartStopPerform
@@ -73,9 +73,10 @@ public class DisplayRecorder
 
 		var displayAsImage = display.toImage();
 		var displayAsCanvas = displayAsImage.systemImage;
+		/*
 		displayAsCanvas.toBlob
 		(
-			(any displayAsBlob) =>
+			(Object displayAsBlob) =>
 			{
 				var reader = new FileReader();
 				reader.onload = () =>
@@ -89,6 +90,7 @@ public class DisplayRecorder
 				reader.readAsArrayBuffer(displayAsBlob);
 			}
 		);
+		*/
 	}
 
 	public void framesRecordedDownload(Universe universe)
@@ -103,6 +105,8 @@ public class DisplayRecorder
 		for (var i = 0; i < frameCount; i++)
 		{
 			var frameIndex = i;
+
+			/*
 			var frameAsArrayBuffer =
 				this.framesRecordedAsArrayBuffers[frameIndex];
 			if (frameAsArrayBuffer == null)
@@ -119,6 +123,7 @@ public class DisplayRecorder
 				"Frame" + frameIndexPadded + ".png", frameAsBytes
 			);
 			framesRecordedAsTarFile.entries.push(displayAsTarFileEntry);
+			*/
 		}
 
 		var script =

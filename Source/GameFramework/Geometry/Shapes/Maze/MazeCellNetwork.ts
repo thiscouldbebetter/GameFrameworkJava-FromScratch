@@ -1,26 +1,25 @@
 
-namespace ThisCouldBeBetter.GameFramework
-{
+package GameFramework.Geometry.Shapes.Maze;
 
-export class MazeCellNetwork
+public class MazeCellNetwork
 {
-	networkID: number;
-	cells: any;
+	public int networkID;
+	public List<Object> cells;
 
-	constructor()
+	public MazeCellNetwork()
 	{
 		this.networkID = MazeCellNetwork.MaxIDSoFar;
 		MazeCellNetwork.MaxIDSoFar++;
-		this.cells = [];
+		this.cells = new List<Object>();
 	}
 
-	static MaxIDSoFar = 0;
+	public static int MaxIDSoFar = 0;
 
-	static mergeNetworks(network0: MazeCellNetwork, network1: MazeCellNetwork)
+	public static mergeNetworks(MazeCellNetwork network0, MazeCellNetwork network1)
 	{
 		var networkMerged = new MazeCellNetwork();
 
-		var networksToMerge = [ network0, network1 ];
+		var networksToMerge = new MazeCellNetwork[] { network0, network1 };
 
 		var numberOfNetworks = networksToMerge.length;
 
@@ -37,6 +36,4 @@ export class MazeCellNetwork
 
 		return networkMerged;
 	}
-}
-
 }

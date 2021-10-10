@@ -31,13 +31,13 @@ public class InputHelper implements KeyListener, MouseListener, MouseMotionListe
 
 		var inputNames = Input.Names();
 		this.inputNamesLookup = inputNames._AllByName;
-		this.keysToPreventDefaultsFor =
-		[
+		this.keysToPreventDefaultsFor = new String[]
+		{
 			inputNames.ArrowDown, inputNames.ArrowLeft, inputNames.ArrowRight,
 			inputNames.ArrowUp, inputNames.Tab,
-		];
+		};
 
-		this.inputsPressed = [];
+		this.inputsPressed = new List<Input>();
 		this.inputsPressedByName = new Map<String, Input>();
 
 		this.isEnabled = true;

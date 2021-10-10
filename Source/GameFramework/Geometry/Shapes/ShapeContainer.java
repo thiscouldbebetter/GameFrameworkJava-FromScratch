@@ -1,6 +1,7 @@
 
 package GameFramework.Geometry.Shapes;
-{
+
+import GameFramework.Geometry.*;
 
 public class ShapeContainer implements ShapeBase
 {
@@ -32,7 +33,7 @@ public class ShapeContainer implements ShapeBase
 		return this;
 	}
 
-	public Coords normalAtPos(Coords posToCheckCoords , normalOut)
+	public Coords normalAtPos(Coords posToCheck, Coords normalOut)
 	{
 		return this.shape.normalAtPos(posToCheck, normalOut);
 	}

@@ -5,9 +5,9 @@ import GameFramework.Geometry.*;
 
 public class Cylinder
 {
-	pulic Coords center;
-	pulic double radius;
-	pulic double length;
+	public Coords center;
+	public double radius;
+	public double length;
 
 	double lengthHalf;
 

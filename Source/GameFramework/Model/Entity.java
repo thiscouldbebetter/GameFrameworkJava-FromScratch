@@ -4,14 +4,14 @@ package GameFramework.Model;
 public class Entity //
 {
 	public int id;
-	public String.class.name;
+	public String name;
 	public EntityProperty[] properties;
 	public Map<String, EntityProperty> propertiesByName;
 
-	public Entity(String.class.name, EntityProperty[] properties)
+	public Entity(String name, EntityProperty[] properties)
 	{
 		this.id = IDHelper.Instance().idNext();
-		this.class.name =.class.name;
+		this.name = name;
 		this.properties = properties;
 
 		this.propertiesByName = new HashMap<String, Object>();
@@ -61,22 +61,22 @@ public class Entity //
 	public Entity propertyAddForPlace(EntityProperty propertyToAdd, Place place)
 	{
 		this.properties.push(propertyToAdd);
-		this.propertiesByName.set(propertyToAdd.constructor.class.name, propertyToAdd);
+		this.propertiesByName.set(propertyToAdd.getClass().getName(), propertyToAdd);
 		if (place != null)
 		{
 			if (place.entities.indexOf(this) >= 0)
 			{
 				var propertyName = propertyToAdd.constructor.class.name;
 				var entitiesWithProperty = place.entitiesByPropertyName(propertyName);
-				entitiesWithProperty.push(this);
+				entitiesWithProperty.add(this);
 			}
 		}
 		return this;
 	}
 
-	public EntityProperty propertyByName(String.class.name)
+	public EntityProperty propertyByName(String name)
 	{
-		return this.propertiesByName.get.class.name);
+		return this.propertiesByName.get(name);
 	}
 
 	public Entity propertyRemoveForPlace
@@ -115,7 +115,7 @@ public class Entity //
 
 	public Entity clone()
 	{
-		var.class.nameCloned = this.class.name; // + IDHelper.Instance().idNext();
+		var nameCloned = this.name; // + IDHelper.Instance().idNext();
 		var propertiesCloned = [];
 		for (var i = 0; i < this.properties.length; i++)
 		{
@@ -130,7 +130,7 @@ public class Entity //
 		}
 		var returnValue = new Entity
 		(
-		.class.nameCloned, propertiesCloned
+			nameCloned, propertiesCloned
 		);
 		return returnValue;
 	}
@@ -143,7 +143,7 @@ public class Entity //
 			ArrayHelper.areEqual(this.properties, other.properties);
 
 		var areEntitiesEqual =
-			(this.class.name == other.class.name && areAllPropertiesEqual);
+			(this.name == other.name && areAllPropertiesEqual);
 
 		return areEntitiesEqual;
 	}

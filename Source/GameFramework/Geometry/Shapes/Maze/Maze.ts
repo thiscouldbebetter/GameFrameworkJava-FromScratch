@@ -27,12 +27,12 @@ export class Maze
 
 		var numberOfCellsInMaze = this.sizeInCells.productOfDimensions();
 
-		this.cells = [];
+		this.cells = new MazeCell[numberOfCellsInMaze];
 
 		for (var i = 0; i < numberOfCellsInMaze; i++)
 		{
 			var cell = new MazeCell(numberOfNeighbors);
-			this.cells.push(cell);
+			this.cells[i] = cell;
 		}
 
 		this.sizeInCellsMinusOnes = sizeInCells.clone().subtract

@@ -5,6 +5,9 @@ import GameFramework.Geometry.*;
 
 public class Hemispace implements ShapeBase
 {
+	// A hemispace is that infinitely large half of all space
+	// that lies beneath a specified plane.
+
 	public Plane plane;
 
 	private Coords _displacement;
@@ -65,12 +68,12 @@ public class Hemispace implements ShapeBase
 		throw new Error("Not implemented!");
 	}
 
-	public  Coords normalAtPos(Coords posToCheckCoords , normalOut)
+	public  Coords normalAtPos(Coords posToCheck, Coords normalOut)
 	{
 		return this.plane.normal;
 	}
 
-	public Coords surfacePointNearPos(Coords posToCheckCoords , surfacePointOut)
+	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
 	{
 		return surfacePointOut.overwriteWith
 		(

@@ -36,20 +36,20 @@ public class Box implements ShapeBase
 		return Box.fromCenterAndSize(Coords.zeroes(), Coords.ones() );
 	}
 
-	public static Box fromCenterAndSize(Coords centerCoords , size)
+	public static Box fromCenterAndSize(Coords center, Coords size)
 	{
 		// This takes the same arguments as the constructor.
 		return new Box(center, size);
 	}
 
-	public static Box fromMinAndMax(Coords minCoords , max)
+	public static Box fromMinAndMax(Coords min, Coords max)
 	{
 		var center = min.clone().add(max).half();
 		var size = max.clone().subtract(min);
 		return new Box(center, size);
 	}
 
-	public static Box fromMinAndSize(Coords minCoords , size)
+	public static Box fromMinAndSize(Coords min, Coords size)
 	{
 		var center = size.clone().half().add(min);
 		return new Box(center, size);
@@ -383,7 +383,7 @@ public class Box implements ShapeBase
 
 	public double dimensionForSurfaceClosestToPoint
 	(
-		Coords posToCheckCoords , displacementOverSizeHalf
+		Coords posToCheck, Coords displacementOverSizeHalf
 	)
 	{
 		var greatestAbsoluteDisplacementDimensionSoFar = -1;

@@ -1,6 +1,7 @@
 
 package GameFramework.Geometry.Shapes;
-{
+
+import GameFramework.Geometry.*;
 
 public class Sphere implements ShapeBase
 {
@@ -78,7 +79,7 @@ public class Sphere implements ShapeBase
 		);
 	}
 
-	public Sphere overwriteWith(Sphere other): Sphere
+	public Sphere overwriteWith(Sphere other)
 	{
 		this.center.overwriteWith(other.center);
 		this.radius = other.radius;

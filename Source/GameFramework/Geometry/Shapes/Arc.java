@@ -85,12 +85,12 @@ public class Arc implements ShapeBase
 		return ShapeHelper.Instance().applyLocationToShapeDefault(loc, this);
 	}
 
-	public Coords normalAtPos(Coords posToCheckCoords , normalOut)
+	public Coords normalAtPos(Coords posToCheck, Coords normalOut)
 	{
 		return this.shell.normalAtPos(posToCheck, normalOut);
 	}
 
-	public Coords surfacePointNearPos(Coords posToCheckCoords , surfacePointOut)
+	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
 	{
 		return surfacePointOut.overwriteWith(posToCheck); // todo
 	}

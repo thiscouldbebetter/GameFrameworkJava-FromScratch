@@ -1,18 +1,27 @@
 
-namespace ThisCouldBeBetter.GameFramework
+package GameFramework.Geometry.Shapes.Meshes;
+
+import java.util.*;
+
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
+
+public class Mesh implements ShapeBase
 {
+	public Coords center;
+	public Coords[] vertexOffsets[];
+	public FaceBuilder[] faceBuilders;
 
-export class Mesh implements ShapeBase
-{
-	center: Coords;
-	vertexOffsets: Coords[];
-	faceBuilders: Mesh_FaceBuilder[];
+	private Box _box;
+	private Face[] _faces;
+	private Coords[] _vertices;
 
-	_box: Box;
-	_faces: Face[];
-	_vertices: Coords[];
-
-	constructor(center: Coords, vertexOffsets: Coords[], faceBuilders: Mesh_FaceBuilder[])
+	public Mesh
+	(
+		Coords center,
+		Coords[] vertexOffsets,
+		FaceBuilder[] faceBuilders
+	)
 	{
 		this.center = center;
 		this.vertexOffsets = vertexOffsets;
@@ -21,14 +30,14 @@ export class Mesh implements ShapeBase
 
 	// static methods
 
-	static boxOfSize(center: Coords, size: Coords): Mesh
+	public static Mesh boxOfSize(Coords center, Coords size)
 	{
 		var box = new Box(center, size);
 		var returnValue = Mesh.fromBox(box);
 		return returnValue;
 	}
 
-	static cubeUnit(center: Coords): Mesh
+	public static Mesh cubeUnit(Coords center)
 	{
 		if (center == null)
 		{
@@ -39,14 +48,14 @@ export class Mesh implements ShapeBase
 		return returnValue;
 	}
 
-	static fromBox(box: Box): Mesh
+	public static Mesh fromBox(Box box)
 	{
 		var sizeHalf = box.sizeHalf();
 		var min = new Coords(-sizeHalf.x, -sizeHalf.y, -sizeHalf.z);
 		var max = new Coords(sizeHalf.x, sizeHalf.y, sizeHalf.z);
 
-		var vertexOffsets =
-		[
+		var vertexOffsets = new Coords[]
+		{
 			// top
 			new Coords(min.x, min.y, min.z),
 			new Coords(max.x, min.y, min.z),
@@ -58,19 +67,19 @@ export class Mesh implements ShapeBase
 			new Coords(max.x, min.y, max.z),
 			new Coords(max.x, max.y, max.z),
 			new Coords(min.x, max.y, max.z),
-		];
+		};
 
-		var faceBuilders =
-		[
-			new Mesh_FaceBuilder([0, 1, 5, 4]), // north
-			new Mesh_FaceBuilder([1, 2, 6, 5]), // east
+		var faceBuilders = new FaceBuilder[]
+		{
+			new FaceBuilder(new int[] {0, 1, 5, 4}), // north
+			new FaceBuilder(new int[] {1, 2, 6, 5}), // east
 
-			new Mesh_FaceBuilder([2, 3, 7, 6]), // south
-			new Mesh_FaceBuilder([3, 0, 4, 7]), // west
+			new FaceBuilder(new int[] {2, 3, 7, 6}), // south
+			new FaceBuilder(new int[] {3, 0, 4, 7}), // west
 
-			new Mesh_FaceBuilder([0, 3, 2, 1]), // top
-			new Mesh_FaceBuilder([4, 5, 6, 7]), // bottom
-		];
+			new FaceBuilder(new int[] {0, 3, 2, 1}), // top
+			new FaceBuilder(new int[] {4, 5, 6, 7}), // bottom
+		};
 
 		var returnValue = new Mesh
 		(
@@ -80,14 +89,14 @@ export class Mesh implements ShapeBase
 		return returnValue;
 	}
 
-	static fromFace(center: Coords, faceToExtrude: Face, thickness: number): Mesh
+	public static Mesh fromFace(Coords center, Face faceToExtrude, double thickness)
 	{
 		var faceVertices = faceToExtrude.vertices;
-		var numberOfFaceVertices = faceVertices.length;
+		var doubleOfFaceVertices = faceVertices.length;
 		var thicknessHalf = thickness / 2;
 
-		var meshVertices = [];
-		var faceBuilders = [];
+		var meshVertices = new ArrayList<Coords>();
+		var faceBuilders = new ArrayList<FaceBuilder>();
 
 		for (var z = 0; z < 2; z++)
 		{
@@ -99,27 +108,30 @@ export class Mesh implements ShapeBase
 				thicknessHalf
 			);
 
-			var vertexIndicesTopOrBottom = [];
+			var vertexIndicesTopOrBottom = new List<Integer>();
 
-			for (var v = 0; v < numberOfFaceVertices; v++)
+			for (var v = 0; v < doubleOfFaceVertices; v++)
 			{
 				var vertexIndex = meshVertices.length;
 
 				if (z == 0)
 				{
-					var vertexIndexNext = NumberHelper.wrapToRangeMinMax
+					var vertexIndexNext = doubleHelper.wrapToRangeMinMax
 					(
 						vertexIndex + 1,
-						0, numberOfFaceVertices
+						0, doubleOfFaceVertices
 					);
 
-					var faceBuilderSide = new Mesh_FaceBuilder
-					([
-						vertexIndex,
-						vertexIndexNext,
-						vertexIndexNext + numberOfFaceVertices,
-						vertexIndex + numberOfFaceVertices
-					]);
+					var faceBuilderSide = new FaceBuilder
+					(
+						new int[]
+						{
+							vertexIndex,
+							vertexIndexNext,
+							vertexIndexNext + doubleOfFaceVertices,
+							vertexIndex + doubleOfFaceVertices
+						}
+					);
 					faceBuilders.push(faceBuilderSide);
 
 					vertexIndicesTopOrBottom.push(vertexIndex);
@@ -137,7 +149,7 @@ export class Mesh implements ShapeBase
 				meshVertices.push(vertex);
 			}
 
-			var faceBuilderTopOrBottom = new Mesh_FaceBuilder
+			var faceBuilderTopOrBottom = new FaceBuilder
 			(
 				vertexIndicesTopOrBottom
 			);
@@ -156,7 +168,7 @@ export class Mesh implements ShapeBase
 
 	// instance methods
 
-	box(): Box
+	public Box box()
 	{
 		if (this._box == null)
 		{
@@ -166,38 +178,38 @@ export class Mesh implements ShapeBase
 		return this._box;
 	}
 
-	edges(): Edge[]
+	public Edge[] edges()
 	{
 		return null; // todo
 	}
 
-	faces(): Face[]
+	public Face[] faces()
 	{
 		var vertices = this.vertices();
 
 		if (this._faces == null)
 		{
-			this._faces = [];
+			this._faces = new Face[this.faceBuilders.length];
 
 			for (var f = 0; f < this.faceBuilders.length; f++)
 			{
 				var faceBuilder = this.faceBuilders[f];
 				var face = faceBuilder.toFace(vertices);
-				this._faces.push(face);
+				this._faces[f] = face;
 			}
 		}
 
 		return this._faces;
 	}
 
-	vertices(): Coords[]
+	public Coords[] vertices()
 	{
 		if (this._vertices == null)
 		{
-			this._vertices = [];
+			this._vertices = new Coords[this.vertexOffsets.length];
 			for (var v = 0; v < this.vertexOffsets.length; v++)
 			{
-				this._vertices.push(Coords.create());
+				this._vertices[v] = Coords.create();
 			}
 		}
 
@@ -213,7 +225,7 @@ export class Mesh implements ShapeBase
 
 	// transformable
 
-	transform(transformToApply: Transform): Transformable
+	public Transformable transform(Transform transformToApply)
 	{
 		for (var v = 0; v < this.vertexOffsets.length; v++)
 		{
@@ -228,7 +240,7 @@ export class Mesh implements ShapeBase
 
 	// clonable
 
-	clone(): Mesh
+	public Mesh clone()
 	{
 		return new Mesh
 		(
@@ -238,7 +250,7 @@ export class Mesh implements ShapeBase
 		);
 	}
 
-	overwriteWith(other: Mesh): Mesh
+	public Mesh overwriteWith(Mesh other)
 	{
 		this.center.overwriteWith(other.center);
 		ArrayHelper.overwriteWith(this.vertexOffsets, other.vertexOffsets);
@@ -248,83 +260,87 @@ export class Mesh implements ShapeBase
 
 	// transformable
 
-	coordsGroupToTranslate(): Coords[]
+	public Coords[] coordsGroupToTranslate()
 	{
-		return [ this.center ];
+		return new Coords[] { this.center };
 	}
 
 	// ShapeBase.
 
-	locate(loc: Disposition): ShapeBase
+	public ShapeBase locate(Disposition loc)
 	{
 		return ShapeHelper.Instance().applyLocationToShapeDefault(loc, this);
 	}
 
-	normalAtPos(posToCheck: Coords, normalOut: Coords): Coords
+	public Coords normalAtPos(Coords posToCheck, Coords normalOut)
 	{
 		return this.box().normalAtPos(posToCheck, normalOut);
 	}
 
-	surfacePointNearPos(posToCheck: Coords, surfacePointOut: Coords): Coords
+	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
 	{
 		return surfacePointOut.overwriteWith(posToCheck); // todo
 	}
 
-	toBox(boxOut: Box): Box
+	public Box toBox(Box boxOut)
 	{
 		return boxOut.ofPoints(this.vertices());
 	}
-}
 
-export class Mesh_FaceBuilder
-{
-	vertexIndices: number[];
+	// Inner classes.
 
-	constructor(vertexIndices: number[])
+	class FaceBuilder
 	{
-		this.vertexIndices = vertexIndices;
-	}
+		public double[] vertexIndices;
 
-	toFace(meshVertices: Coords[]): Face
-	{
-		var faceVertices: Coords[] = [];
-		for (var vi = 0; vi < this.vertexIndices.length; vi++)
+		public FaceBuilder(double[] vertexIndices)
 		{
-			var vertexIndex = this.vertexIndices[vi];
-			var meshVertex = meshVertices[vertexIndex];
-			faceVertices.push(meshVertex);
+			this.vertexIndices = vertexIndices;
 		}
-		var returnValue = new Face(faceVertices);
-		return returnValue;
-	}
 
-	vertexIndicesShift(offset: number): void
-	{
-		for (var i = 0; i < this.vertexIndices.length; i++)
+		public Face toFace(Coords[] meshVertices)
 		{
-			var vertexIndex = this.vertexIndices[i];
-			vertexIndex += offset;
-			this.vertexIndices[i] = vertexIndex;
+			var faceVertices = new Coords[this.vertexIndices.length];
+			for (var vi = 0; vi < this.vertexIndices.length; vi++)
+			{
+				var vertexIndex = this.vertexIndices[vi];
+				var meshVertex = meshVertices[vertexIndex];
+				faceVertices.push(meshVertex);
+			}
+			var returnValue = new Face(faceVertices);
+			return returnValue;
+		}
+
+		public void vertexIndicesShift(double offset)
+		{
+			for (var i = 0; i < this.vertexIndices.length; i++)
+			{
+				var vertexIndex = this.vertexIndices[i];
+				vertexIndex += offset;
+				this.vertexIndices[i] = vertexIndex;
+			}
+		}
+
+		// clonable
+
+		public FaceBuilder clone()
+		{
+			return new FaceBuilder(this.vertexIndices.slice());
+		}
+
+		public FaceBuilder overwriteWith(Mesh other_FaceBuilder)
+		{
+			ArrayHelper.overwriteWith(this.vertexIndices, other.vertexIndices);
+			return this;
+		}
+
+		// Transformable.
+
+		public Transformable transform(Transform transformToApply)
+		{
+			throw new Error("Not implemented!");
 		}
 	}
-
-	// clonable
-
-	clone(): Mesh_FaceBuilder
-	{
-		return new Mesh_FaceBuilder(this.vertexIndices.slice());
-	}
-
-	overwriteWith(other: Mesh_FaceBuilder): Mesh_FaceBuilder
-	{
-		ArrayHelper.overwriteWith(this.vertexIndices, other.vertexIndices);
-		return this;
-	}
-
-	// Transformable.
-
-	transform(transformToApply: Transform): Transformable { throw new Error("Not implemented!");  }
-
 }
 
-}
+

@@ -12,7 +12,7 @@ public class IDHelper
 		this._idNext = 0;
 	}
 
-	public static Instance()
+	public static IDHelper Instance()
 	{
 		if (IDHelper._instance == null)
 		{

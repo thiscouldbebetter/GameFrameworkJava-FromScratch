@@ -11,7 +11,7 @@ export class MazeCell
 
 	constructor(numberOfNeighbors: number)
 	{
-		this.connectedToNeighbors = [];
+		this.connectedToNeighbors = new boolean[numberOfNeighbors];
 		for (var n = 0; n < numberOfNeighbors; n++)
 		{
 			this.connectedToNeighbors.push(false);

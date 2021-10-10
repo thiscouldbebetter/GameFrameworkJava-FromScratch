@@ -1,6 +1,7 @@
 
 package GameFramework.Geometry.Shapes;
-{
+
+import GameFramework.Geometry.*;
 
 public class ShapeGroupAny implements ShapeBase
 {

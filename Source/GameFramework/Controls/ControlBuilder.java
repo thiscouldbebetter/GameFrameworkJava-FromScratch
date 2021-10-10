@@ -1948,6 +1948,8 @@ public class ControlBuilder
 								DataBinding.fromContext("Ready to load from file..."),
 								() -> // acknowledge
 								{
+									throw new Exception("todo");
+									/*
 									(String fileContentsAsString) -> // callback
 									{
 										var worldAsStringCompressed = fileContentsAsString;
@@ -1967,7 +1969,6 @@ public class ControlBuilder
 										universe.venueNext = venueNext;
 									}
 
-									/*
 									var inputFile =
 										venueFileUpload.toDomElement().getElementsByTagName("input")[0];
 									var fileToLoad = inputFile.files[0];

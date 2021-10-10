@@ -1,6 +1,7 @@
 
 package GameFramework.Geometry.Shapes;
-{
+
+import GameFramework.Geometry.*;
 
 public class Plane implements ShapeBase
 {

@@ -196,12 +196,12 @@ public class Wedge implements ShapeBase
 		return this;
 	}
 
-	public Coords normalAtPos(Coords posToCheckCoords , normalOut)
+	public Coords normalAtPos(Coords posToCheck, Coords normalOut)
 	{
 		throw new Exception("Not implemented!");
 	}
 
-	public Coords surfacePointNearPos(Coords posToCheckCoords , surfacePointOut)
+	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
 	{
 		throw new Exception("Not implemented!");
 	}

@@ -3,13 +3,13 @@ package GameFramework.Model;
 
 public class UniverseWorldPlaceEntities
 {
-	Universe universe;
-	World world;
-	Place place;
-	Entity entity; // Usually the entity acting.
-	Entity entity2; // Usually the entity acted upon.
+	public Universe universe;
+	public World world;
+	public Place place;
+	public Entity entity; // Usually the entity acting.
+	public Entity entity2; // Usually the entity acted upon.
 
-	constructor
+	public UniverseWorldPlaceEntities
 	(
 		Universe universe, World world, Place place, Entity entity,
 		Entity entity2

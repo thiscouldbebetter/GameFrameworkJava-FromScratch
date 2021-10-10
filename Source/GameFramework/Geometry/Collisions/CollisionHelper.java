@@ -1,7 +1,12 @@
 
 package GameFramework.Geometry.Collisions;
 
+import java.util.*;
+
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
+import GameFramework.Geometry.Shapes.Maps.*;
+import GameFramework.Geometry.Shapes.Meshes.*;
 import GameFramework.Model.*;
 
 public class CollisionHelper
@@ -14,7 +19,6 @@ public class CollisionHelper
 	private Box _box;
 	private Box _box2;
 	private Collision _collision;
-	private Coords _displacement;
 	private Edge _edge;
 	private Polar _polar;
 	private Coords _pos;
@@ -54,13 +58,13 @@ public class CollisionHelper
 		var lookupOfLookups = new Map<String,Map<String,Object>>();
 		Map<String, Object> lookup;
 
-		var boxName = Box.class.name;
-		var boxRotatedName = BoxRotated.class.name;
-		var mapLocatedName = MapLocated.class.name;
-		var meshName = Mesh.class.name;
-		var shapeGroupAllName = ShapeGroupAll.class.name;
-		var shapeInverseName = ShapeInverse.class.name;
-		var sphereName = Sphere.class.name;
+		var boxName = Box.class.getName();
+		var boxRotatedName = BoxRotated.class.getName();
+		var mapLocatedName = MapLocated.class.getName();
+		var meshName = Mesh.class.getName();
+		var shapeGroupAllName = ShapeGroupAll.class.getName();
+		var shapeInverseName = ShapeInverse.class.getName();
+		var sphereName = Sphere.class.getName();
 
 		if (boxName != null)
 		{
@@ -282,8 +286,8 @@ public class CollisionHelper
 			collider1 = collider1.collider();
 		}
 
-		var collider0TypeName = collider0.constructor.class.name;
-		var collider1TypeName = collider1.constructor.class.name;
+		var collider0TypeName = collider0.constructor.class.getName();
+		var collider1TypeName = collider1.constructor.class.getName();
 
 		var collideLookup =
 			this.colliderTypeNamesToCollisionFindLookup.get(collider0TypeName);
@@ -423,8 +427,8 @@ public class CollisionHelper
 			collider1 = collider1.collider();
 		}
 
-		var collider0TypeName = collider0.constructor.class.name;
-		var collider1TypeName = collider1.constructor.class.name;
+		var collider0TypeName = collider0.constructor.class.getName();
+		var collider1TypeName = collider1.constructor.class.getName();
 
 		var doesContainLookup =
 			this.colliderTypeNamesToDoesContainLookup.get(collider0TypeName);
@@ -954,7 +958,7 @@ public class CollisionHelper
 						edge0.vertices[0]
 					);
 					collision.colliders.push(edge1);
-					collision.collidersByName.set(Edge.class.name, edge1);
+					collision.collidersByName.set(Edge.class.getName(), edge1);
 				}
 
 			} // end if (doesEdgeCrossLineOfOther)
@@ -988,7 +992,7 @@ public class CollisionHelper
 			if (isWithinFace)
 			{
 				collision.colliders.push(face);
-				collision.collidersByName.set(Face.class.name, face);
+				collision.collidersByName.set(Face.class.getName(), face);
 			}
 		}
 
@@ -1016,7 +1020,7 @@ public class CollisionHelper
 			if (collision.isActive)
 			{
 				collision.colliders.push(mesh);
-				collision.collidersByName.set(Mesh.class.name, mesh);
+				collision.collidersByName.set(Mesh.class.getName(), mesh);
 				collisions.push(collision);
 				if (stopAfterFirst)
 				{
@@ -1083,9 +1087,9 @@ public class CollisionHelper
 				collidersByName.clear();
 
 				colliders.push(edge);
-				collidersByName.set(Edge.class.name, edge);
+				collidersByName.set(Edge.class.getName(), edge);
 				colliders.push(plane);
-				collidersByName.set(Plane.class.name, plane);
+				collidersByName.set(Plane.class.getName(), plane);
 			}
 		}
 
@@ -1851,7 +1855,7 @@ public class CollisionHelper
 							);
 							if (isCell1PosInBox)
 							{
-								cell1 = ((Object)(map1.cellAtPosInCells(cell1PosInCells));
+								cell1 = map1.cellAtPosInCells(cell1PosInCells);
 
 								if (cell1.isBlocking)
 								{
@@ -2247,7 +2251,7 @@ public class CollisionHelper
 		return false;
 	}
 
-	doesSphereContainSphere(Sphere sphere0, Sphere sphere1): boolean
+	doesSphereContainSphere(Sphere sphere0, Sphere sphere1)
 	{
 		return sphere0.containsOther(sphere1);
 	}

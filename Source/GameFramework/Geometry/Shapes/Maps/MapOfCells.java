@@ -1,41 +1,44 @@
 
-namespace ThisCouldBeBetter.GameFramework
+package GameFramework.Geometry.Shapes.Maps;
+
+import java.util.functions.*;
+
+import GameFramework.Geometry.*;
+
+public class MapOfCells<T>
 {
+	public String name;
+	public Coords sizeInCells;
+	public Coords cellSize;
+	private Producer<T> _cellCreate;
+	private _cellAtPosInCells: (MapOfCells map<T>, Coords posInCells, T cell) => T;
+	private Object cellSource;
 
-export class MapOfCells<T>
-{
-	name: string;
-	sizeInCells: Coords;
-	cellSize: Coords;
-	cellCreate: () => T;
-	_cellAtPosInCells: (map: MapOfCells<T>, posInCells: Coords, cell: T) => T;
-	cellSource: any;
+	public Coords cellSizeHalf;
+	public Coords size;
+	public Coords sizeHalf;
+	public Coords sizeInCellsMinusOnes;
 
-	cellSizeHalf: Coords;
-	size: Coords;
-	sizeHalf: Coords;
-	sizeInCellsMinusOnes: Coords;
+	private T _cell;
+	private Coords _posInCells;
+	private Coords _posInCellsMax;
+	private Coords _posInCellsMin;
 
-	_cell: T;
-	_posInCells: Coords;
-	_posInCellsMax: Coords;
-	_posInCellsMin: Coords;
-
-	constructor
+	public MapOfCells
 	(
-		name: string,
-		sizeInCells: Coords,
-		cellSize: Coords,
-		cellCreate: () => T,
-		cellAtPosInCells: (map: MapOfCells<T>, posInCells: Coords, cell: T) => T,
-		cellSource: any
+		String name,
+		Coords sizeInCells,
+		Coords cellSize,
+		Producer cellCreate<T>,
+		cellAtPosInCells: (MapOfCells map<T>, Coords posInCells, T cell) => T,
+		Object cellSource
 	)
 	{
 		this.name = name;
 		this.sizeInCells = sizeInCells;
 		this.cellSize = cellSize;
-		this.cellCreate = cellCreate || this.cellCreateDefault;
-		this._cellAtPosInCells = cellAtPosInCells || this.cellAtPosInCellsDefault;
+		this._cellCreate = cellCreate;
+		this._cellAtPosInCells = cellAtPosInCells;
 		this.cellSource = cellSource || new Array<T>();
 
 		this.sizeInCellsMinusOnes = this.sizeInCells.clone().subtract
@@ -53,26 +56,26 @@ export class MapOfCells<T>
 		this._posInCellsMin = Coords.create();
 	}
 
-	static fromNameSizeInCellsAndCellSize<T>
+	public static MapOfCells<T> fromNameSizeInCellsAndCellSize<T>
 	(
-		name: string, sizeInCells: Coords, cellSize: Coords
-	): MapOfCells<T>
+		String name, Coords sizeInCells, Coords cellSize
+	)
 	{
 		return new MapOfCells(name, sizeInCells, cellSize, null, null, null);
 	}
 
-	cellAtPos(pos: Coords): T
+	public T cellAtPos(Coords pos)
 	{
 		this._posInCells.overwriteWith(pos).divide(this.cellSize).floor();
 		return this.cellAtPosInCells(this._posInCells);
 	}
 
-	cellAtPosInCells(cellPosInCells: Coords): T
+	public T cellAtPosInCells(Coords cellPosInCells)
 	{
 		return this._cellAtPosInCells(this, cellPosInCells, this._cell);
 	}
 
-	cellAtPosInCellsDefault(map: MapOfCells<T>, cellPosInCells: Coords, cell: T): T
+	public T cellAtPosInCellsDefault(MapOfCells<T> map, Coords cellPosInCells, T cell)
 	{
 		var cellIndex = cellPosInCells.y * this.sizeInCells.x + cellPosInCells.x;
 		var cell = this.cellSource[cellIndex] as T;
@@ -84,17 +87,17 @@ export class MapOfCells<T>
 		return cell;
 	}
 
-	cellCreateDefault(): any
+	public Object cellCreateDefault()
 	{
-		return {};
+		return new Object();
 	}
 
-	cellsCount(): number
+	public int cellsCount()
 	{
 		return this.sizeInCells.x * this.sizeInCells.y;
 	}
 
-	cellsInBoxAddToList(box: Box, cellsInBox: T[]): T[]
+	public List<T> cellsInBoxAddToList(Box box, List<T> cellsInBox)
 	{
 		ArrayHelper.clear(cellsInBox);
 
@@ -137,7 +140,7 @@ export class MapOfCells<T>
 		return cellsInBox;
 	}
 
-	cellsAsEntities(mapAndCellPosToEntity: (m: MapOfCells<T>, p: Coords) => Entity): Entity[]
+	public Entity[] cellsAsEntities(mapAndCellPosToEntity: (MapOfCells m<T>, Coords p) => Entity)
 	{
 		var returnValues = new Array<Entity>();
 
@@ -164,7 +167,7 @@ export class MapOfCells<T>
 
 	// cloneable
 
-	clone(): MapOfCells<T>
+	public MapOfCells<T> clone()
 	{
 		return new MapOfCells<T>
 		(
@@ -177,11 +180,9 @@ export class MapOfCells<T>
 		);
 	}
 
-	overwriteWith(other: MapOfCells<T>): MapOfCells<T>
+	public MapOfCells<T> overwriteWith(MapOfCells other<T>)
 	{
 		this.cellSource.overwriteWith(other.cellSource);
 		return this;
 	}
-}
-
 }

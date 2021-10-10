@@ -5,29 +5,34 @@ public class Serializer
 {
 	public Object deserialize(String StringToDeserialize)
 	{
+		throw new Exception("todo");
+
+		/*
 		var nodeRoot = JSON.parse(StringToDeserialize);
 		var typeNames = nodeRoot["typeNames"];
 		nodeRoot.__proto__ = SerializerNode.prototype;
 		nodeRoot.prototypesAssign();
 		var returnValue = nodeRoot.unwrap(typeNames, []);
-
 		return returnValue;
+		*/		
 	}
 
 	public String serialize(Object objectToSerialize, boolean prettyPrint)
 	{
-		var Object nodeRoot = new SerializerNode(objectToSerialize);
+		throw new Exception("todo");
+		/*
+		var nodeRoot = new SerializerNode(objectToSerialize);
 
-		var typeNames = new Array<String>();
+		var typeNames = new List<String>();
 		nodeRoot.wrap
 		(
 			typeNames,
-			new HashMap<String, Integer>(),
-			[], // ?
-			[] // ?
+			new HashMap<String, Integer>(), // typeIdsByName
+			new ArrayList<Object>(), // objectsAlreadyWrapped 
+			new ArrayList<Object>() // objectIndexToNodeLookup
 		);
 
-		nodeRoot["typeNames"] = typeNames;
+		// nodeRoot["typeNames"] = typeNames;
 
 		var nodeRootSerialized = JSON.Stringify
 		(
@@ -37,16 +42,18 @@ public class Serializer
 		);
 
 		return nodeRootSerialized;
+		*/
 	}
 }
 
+/*
 public class SerializerNode
 {
-	int t;
-	int i;
-	int r;
-	Object o;
-	Object c; // todo - Map<String, Object> - Tricky.
+	public int t;
+	public int i;
+	public int r;
+	public Map<String,Object> o;
+	public Object c; // todo - Map<String, Object> - Tricky.
 
 	public SerializerNode(Object objectWrapped)
 	{
@@ -57,8 +64,8 @@ public class SerializerNode
 	(
 		List<String> typeNamesSoFar,
 		Map<String, Integer> typeIdsByName,
-		Object objectsAlreadyWrapped,
-		Object objectIndexToNodeLookup
+		List<Object> objectsAlreadyWrapped,
+		List<Object> objectIndexToNodeLookup
 	)
 	{
 		var objectWrapped = this.o;
@@ -82,7 +89,7 @@ public class SerializerNode
 				var nodeForObjectExisting = objectIndexToNodeLookup[objectIndexExisting];
 				this.i = nodeForObjectExisting.i;
 				this.r = 1; // isReference
-				delete this.o; // objectWrapped
+				//delete this.o; // objectWrapped
 			}
 			else
 			{
@@ -100,27 +107,27 @@ public class SerializerNode
 				}
 				else
 				{
-					var Object children = {}; // new Map<String, Object>();
+					var children = new HashMap<String, Object>();
 					this.c = children;
 
 					if (typeName == Map.name)
 					{
 						// Maps don't serialize well with JSON.Stringify(),
 						// so convert it to a generic object.
-						var Object objectWrappedAsObject = {};
+						var objectWrappedAsObject = new HashMap<String, Object>;
 						for (var key of objectWrapped.keys())
 						{
 							var value = objectWrapped.get(key);
-							objectWrappedAsObject[key] = value;
+							objectWrappedAsObject.put(key, value);
 						}
 						objectWrapped = objectWrappedAsObject;
 					}
 
 					for (var propertyName in objectWrapped)
 					{
-						if (objectWrapped.__proto__[propertyName] == null)
+						if (true) // objectWrapped.__proto__[propertyName] == null)
 						{
-							var propertyValue = objectWrapped[propertyName];
+							var propertyValue = objectWrapped.get(propertyName);
 
 							if (propertyValue == null)
 							{
@@ -160,7 +167,7 @@ public class SerializerNode
 						var child = children[childName];
 						if (child != null)
 						{
-							var childTypeName = child.constructor.name;
+							var childTypeName = child.GetType().name;
 							if (childTypeName == SerializerNode.name)
 							{
 								child.wrap
@@ -285,5 +292,5 @@ public class SerializerNode
 		return this.o; // objectWrapped
 	}
 }
+*/
 
-}
