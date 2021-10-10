@@ -1,0 +1,19 @@
+Useful Regular Expressions
+==========================
+
+Variable or parameter type annotation:
+--------------------------------------
+([A-Za-z]+): ([A-Za-z]+)
+\2 \1
+
+
+Method return type annotations:
+-------------------------------
+^(\s+)(.+): ([A-Za-z]+)
+\1\3 \2
+
+
+Default on null:
+----------------
+([A-Za-z]+) \|\| ([A-Za-z.()]+)
+(\1 != null ? \1 : \2)
