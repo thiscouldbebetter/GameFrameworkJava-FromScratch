@@ -38,7 +38,7 @@ public class ControlContainer extends ControlBase
 		this._actionToInputsMappings = (actionToInputsMappings != null ? actionToInputsMappings : new ActionToInputsMapping[] {});
 		this._actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this._actionToInputsMappings, x => x.inputNames
+			this._actionToInputsMappings, x -> x.inputNames
 		);
 
 		this.childrenByName = ArrayHelper.addLookupsByName(this.children);
@@ -128,7 +128,7 @@ public class ControlContainer extends ControlBase
 				}
 			}
 		}
-		else if (this._actionToInputsMappingsByInputName.has(actionNameToHandle))
+		else if (this._actionToInputsMappingsByInputName.containsKey(actionNameToHandle))
 		{
 			var inputName = actionNameToHandle; // Likely passed from parent as raw input.
 			var mapping = this._actionToInputsMappingsByInputName.get(inputName);
@@ -137,7 +137,7 @@ public class ControlContainer extends ControlBase
 			action.performForUniverse(universe);
 			wasActionHandled = true;
 		}
-		else if (this.actionsByName.has(actionNameToHandle))
+		else if (this.actionsByName.containsKey(actionNameToHandle))
 		{
 			var action = this.actionsByName.get(actionNameToHandle);
 			action.performForUniverse(universe);
@@ -161,8 +161,8 @@ public class ControlContainer extends ControlBase
 
 	childAdd(ControlBase childToAdd): void
 	{
-		this.children.push(childToAdd);
-		this.childrenByName.set(childToAdd.name, childToAdd);
+		this.children.add(childToAdd);
+		this.childrenByName.put(childToAdd.name, childToAdd);
 	}
 
 	childByName(string childName): ControlBase
@@ -253,7 +253,7 @@ public class ControlContainer extends ControlBase
 
 			if (doesChildContainPos)
 			{
-				listToAddTo.push(child);
+				listToAddTo.add(child);
 				if (addFirstChildOnly)
 				{
 					break;

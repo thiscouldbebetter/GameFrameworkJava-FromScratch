@@ -1,5 +1,7 @@
 
-package GameFramework;
+package GameFramework.Input;
+
+import GameFramework.Helpers.*;
 
 public class Input
 {
@@ -17,7 +19,7 @@ public class Input
 	}
 
 	public static Input_Names _names;
-	public static Names()
+	public static Input_Names Names()
 	{
 		if (Input._names == null)
 		{
@@ -28,7 +30,7 @@ public class Input
 	}
 }
 
-public class Input_Names
+class Input_Names
 {
 	public String ArrowDown;
 	public String ArrowLeft;
@@ -38,8 +40,8 @@ public class Input_Names
 	public String Control;
 	public String Enter;
 	public String Escape;
-	public GamepadButton0: String;
-	public GamepadButton1: String;
+	public String GamepadButton0;
+	public String GamepadButton1;
 	public String GamepadMoveDown;
 	public String GamepadMoveLeft;
 	public String GamepadMoveRight;
@@ -53,7 +55,7 @@ public class Input_Names
 	public String[] _All[];
 	public Map<String,String> _AllByName;
 
-	public Input()
+	public Input_Names()
 	{
 		this.ArrowDown = "ArrowDown";
 		this.ArrowLeft = "ArrowLeft";
@@ -75,8 +77,8 @@ public class Input_Names
 		this.Space = "_";
 		this.Tab = "Tab";
 
-		this._All =
-		[
+		this._All = new String[]
+		{
 			this.ArrowDown,
 			this.ArrowLeft,
 			this.ArrowRight,
@@ -96,11 +98,9 @@ public class Input_Names
 			this.Shift,
 			this.Space,
 			this.Tab
-		];
+		};
 
 		this._AllByName =
 			ArrayHelper.addLookups(this._All, (String x) -> x);
 	}
-}
-
 }

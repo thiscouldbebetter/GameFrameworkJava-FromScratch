@@ -1,7 +1,7 @@
 
 package GameFramework.Display;
 
-imports GameFramework.Model.*;
+import GameFramework.Model.*;
 
 public class DisplayRecorder
 {
@@ -187,6 +187,4 @@ public class DisplayRecorder
 			}
 		}
 	}
-}
-
 }

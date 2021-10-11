@@ -172,7 +172,7 @@ public class TarFile
 			var entryFileName = entryHeader.fileName;
 			if (entryFileName.length > maxLength)
 			{
-				var entryFileNameAsBytes = entryFileName.split("").map(x => x.charCodeAt(0));
+				var entryFileNameAsBytes = entryFileName.split("").map(x => x.charAt(0));
 				var entryContainingLongPathToPrepend = TarFileEntry.fileNew
 				(
 					typeFlagLongPath.name, entryFileNameAsBytes

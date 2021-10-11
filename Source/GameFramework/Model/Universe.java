@@ -9,8 +9,9 @@ import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Collisions.*;
+import GameFramework.Input.*;
+import GameFramework.Profiles.*;
 import GameFramework.Media.*;
-import GameFramework.Inputs.*;
 import GameFramework.Storage.*;
 import GameFramework.Utility.*;
 

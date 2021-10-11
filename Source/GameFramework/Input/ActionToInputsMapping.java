@@ -1,5 +1,8 @@
 
-package GameFramework;
+package GameFramework.Input;
+
+import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public class ActionToInputsMapping
 {
@@ -31,7 +34,7 @@ public class ActionToInputsMapping
 		);
 	}
 
-	public Action action(Universe universe)
+	public ActorAction action(Universe universe)
 	{
 		return universe.world.defn.actionByName(this.actionName);
 	}

@@ -1,6 +1,8 @@
 
 package GameFramework.Geometry.Shapes;
 
+import GameFramework.Geometry.Transforms.*;
+
 public class ShapeHelper
 {
 	private Transform _transformLocate_Locate;

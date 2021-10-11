@@ -89,32 +89,34 @@ public class ControlTextBox extends ControlBase
 			// This is a bit counterintuitive.
 			var direction = (actionNameToHandle == controlActionNames.ControlIncrement ? -1 : 1);
 
-			var charCodeAtCursor =
+			var charAtCursor =
 			(
-				this.cursorPos < text.length ? text.charCodeAt(this.cursorPos) : "A".charCodeAt(0) - 1
+				this.cursorPos < text.length()
+				? text.charAt(this.cursorPos)
+				: "A".charAt(0) - 1
 			);
 
-			if (charCodeAtCursor == "Z".charCodeAt(0) && direction == 1)
+			if (charAtCursor == "Z".charAt(0) && direction == 1)
 			{
-				charCodeAtCursor = "a".charCodeAt(0);
+				charAtCursor = "a".charAt(0);
 			}
-			else if (charCodeAtCursor == "a".charCodeAt(0) && direction == -1)
+			else if (charAtCursor == "a".charAt(0) && direction == -1)
 			{
-				charCodeAtCursor = "Z".charCodeAt(0);
+				charAtCursor = "Z".charAt(0);
 			}
 			else
 			{
-				charCodeAtCursor = charCodeAtCursor + direction;
+				charAtCursor = charAtCursor + direction;
 			}
 
-			charCodeAtCursor = NumberHelper.wrapToRangeMinMax
+			charAtCursor = NumberHelper.wrapToRangeMinMax
 			(
-				charCodeAtCursor,
-				"A".charCodeAt(0),
-				"z".charCodeAt(0) + 1
+				charAtCursor,
+				"A".charAt(0),
+				"z".charAt(0) + 1
 			);
 
-			var charAtCursor = String.fromCharCode(charCodeAtCursor);
+			var charAtCursor = String.fromCharCode(charAtCursor);
 
 			var textEdited = text.substr(0, this.cursorPos)
 				+ charAtCursor

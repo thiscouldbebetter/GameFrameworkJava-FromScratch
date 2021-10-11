@@ -20,7 +20,7 @@ public class RangeExtent
 	}
 
 	private static RangeExtent_Instances _instances;
-	public static Instances(): RangeExtent_Instances
+	public static RangeExtent_Instances Instances()
 	{
 		if (RangeExtent._instances == null)
 		{
@@ -111,7 +111,7 @@ public class RangeExtent
 		}
 		else
 		{
-			returnValues.push(this);
+			returnValues.add(this);
 		}
 
 		return returnValues;

@@ -3,23 +3,25 @@ package GameFramework.Geometry.Collisions;
 
 import java.util.*;
 
+import GameFramework.Geometry.*;
+
 public class Collision //
 {
 	public Coords pos;
 	public double distanceToCollision;
 	public List<ShapeBase> colliders;
-	public Map<string,ShapeBase> collidersByName;
+	public Map<String,ShapeBase> collidersByName;
 	public Entity entitiesColliding[];
 
 	public Coords normals[];
 	public boolean isActive;
 
-	constructor
+	public Collision;
 	(
 		Coords pos,
 		double distanceToCollision,
-		ShapeBase colliders[],
-		Entity entitiesColliding[]
+		ShapeBase[] colliders,
+		Entity[] entitiesColliding
 	)
 	{
 		this.pos = (pos != null ? pos : Coords.create());
@@ -35,7 +37,7 @@ public class Collision //
 			: new ArrayList<Entity>()
 		);
 
-		this.collidersByName = new Map<string,ShapeBase>();
+		this.collidersByName = new Map<String,ShapeBase>();
 		this.normals = new Coords[] { Coords.create(), Coords.create() };
 
 		this.isActive = false;
@@ -85,7 +87,7 @@ public class Collision //
 		return returnValue;
 	}
 
-	clone(): Collision
+	public Collision clone()
 	{
 		var returnValue = new Collision
 		(
@@ -102,6 +104,4 @@ public class Collision //
 
 		return returnValue;
 	}
-}
-
 }

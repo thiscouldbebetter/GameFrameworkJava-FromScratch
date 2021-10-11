@@ -1,7 +1,8 @@
 
 package GameFramework.Geometry.Shapes;
 
-public GameFramework.Geometry.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class ShapeInverse implements ShapeBase
 {

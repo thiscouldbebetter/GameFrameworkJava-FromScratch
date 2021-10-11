@@ -1,11 +1,10 @@
 
 package GameFramework.Profiles;
-{
 
 public class SaveState
 {
 	public String name;
-	public String placeName
+	public String placeName;
 	public String timePlayingAsString;
 	public DateTime timeSaved;
 	public Image2 imageSnapshot;

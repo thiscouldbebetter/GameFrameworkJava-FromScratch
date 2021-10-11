@@ -107,5 +107,3 @@ public class BoxRotated implements ShapeBase
 		throw new Exception("Not implemented!");
 	}
 }
-
-}

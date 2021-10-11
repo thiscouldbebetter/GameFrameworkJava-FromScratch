@@ -1,12 +1,15 @@
 
 package GameFramework.Storage;
 
+import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
+
 public class VenueFileUpload implements Venue
 {
-	Venue venueNextIfFileSpecified;
-	Venue venueNextIfCancelled;
-	ActionToInputsMapping actionToInputsMappings[];
-	Map<String, ActionToInputsMapping> actionToInputsMappingsByInputName;
+	public Venue venueNextIfFileSpecified;
+	public Venue venueNextIfCancelled;
+	public ActionToInputsMapping actionToInputsMappings[];
+	public Map<String, ActionToInputsMapping> actionToInputsMappingsByInputName;
 
 	// HTMLElement domElement;
 

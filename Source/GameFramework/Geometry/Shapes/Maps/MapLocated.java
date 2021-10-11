@@ -2,6 +2,7 @@
 package GameFramework.Geometry.Shapes.Maps;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
 
 public class MapLocated implements ShapeBase
 {

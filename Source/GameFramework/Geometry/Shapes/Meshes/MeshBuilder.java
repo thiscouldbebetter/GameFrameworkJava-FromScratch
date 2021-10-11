@@ -185,7 +185,11 @@ public class MeshBuilder
 		Coords sizeInCells, Coords cellSize, Material material
 	)
 	{
-		var vertexPositions = [];
+		var numberOfFaces = sizeInCells.x * sizeInCells.y;
+		var numberOfVertices =
+			(sizeInCells.x + 1) * (sizeInCells.y + 1);
+
+		var vertexPositions = new Coords[numberOfVertices];
 		var vertexPosInCells = Coords.create();
 		var vertexPos = Coords.create();
 
@@ -205,11 +209,12 @@ public class MeshBuilder
 					cellSize
 				);
 
-				vertexPositions.push(vertexPos.clone());
+				var vertexIndex = (y * sizeInCells.x + 1) + x;
+				vertexPositions[vertexIndex] = vertexPos.clone();
 			}
 		}
 
-		var faces = [];
+		var faces = new Face[numberOfFaces];
 
 		for (var y = 0; y < sizeInCells.y; y++)
 		{
@@ -217,16 +222,18 @@ public class MeshBuilder
 			{
 				var vertexIndex = y * (sizeInCells.x + 1) + x;
 				var faceVertexIndices =
-				[
+				new int[]
+				{
 					vertexIndex,
 					vertexIndex + 1,
 					vertexIndex + (sizeInCells.x + 1) + 1,
 					vertexIndex + (sizeInCells.x + 1),
-				];
+				};
 
 				var face = new Mesh.FaceBuilder(faceVertexIndices);
 
-				faces.push(face);
+				var faceIndex = y * sizeInCells.x + x;
+				faces[faceIndex] = (face);
 			}
 		}
 
@@ -241,13 +248,13 @@ public class MeshBuilder
 		{
 			var faceTextures = [];
 
-			var textureUVs =
-			[
+			var textureUVs = new Coords[]
+			{
 				Coords.create(),
 				new Coords(1, 0, 0),
 				new Coords(1, 1, 0),
 				new Coords(0, 1, 0),
-			];
+			};
 
 			for (var y = 0; y < sizeInCells.y; y++)
 			{
@@ -258,14 +265,15 @@ public class MeshBuilder
 						material.name, textureUVs
 					);
 
-					faceTextures.push(faceTexture);
+					var faceTextureIndex = y * sizeInCells.x + x;
+					faceTextures[faceTextureIndex] = faceTexture;
 				}
 			}
 
 			var returnMeshTextured = new MeshTextured
 			(
 				returnMesh, // geometry
-				[ material ],
+				new Material[] { material },
 				faceTextures,
 				null
 			);
@@ -276,9 +284,12 @@ public class MeshBuilder
 
 	public MeshTextured room
 	(
-		Coords roomSize, Coords[] neighborOffsets,
-		boolean[] connectedToNeighbors, Material materialWall,
-		Material materialFloor, double doorwayWidthScaleFactor,
+		Coords roomSize,
+		Coords[] neighborOffsets,
+		boolean[] connectedToNeighbors,
+		Material materialWall,
+		Material materialFloor,
+		double doorwayWidthScaleFactor,
 		double wallThickness
 	)
 	{
@@ -331,14 +342,14 @@ public class MeshBuilder
 				new Transform_Translate(wallDisplacement)
 			);
 
-			meshesForRoom.push
+			meshesForRoom.add
 			(
 				meshForWall
 			);
 		}
 
 		var meshForFloor = this.room_Floor(materialFloor);
-		meshesForRoom.push(meshForFloor);
+		meshesForRoom.add(meshForFloor);
 
 		//var meshForCeiling = this.room_Ceiling(material);
 		//meshesForRoom.push(meshForCeiling);
@@ -690,7 +701,7 @@ public class MeshBuilder
 			var vertexPolar = new Polar(vertexAngleInTurns, 1, 0);
 			var vertex = vertexPolar.toCoords(Coords.create());
 
-			vertices.push(vertex);
+			vertices.add(vertex);
 
 			vertexIndicesForFace.splice(0, 0, i);
 		}
@@ -919,7 +930,7 @@ public class MeshBuilder
 			var edge = edges[e];
 			var vertex0 = edge.vertices[0];
 
-			verticesInFaceDivided.push
+			verticesInFaceDivided.add
 			(
 				vertex0
 			);
@@ -944,7 +955,7 @@ public class MeshBuilder
 				{
 					doAnyEdgesCollideWithPlaneSoFar = true;
 
-					verticesInFaceDivided.push
+					verticesInFaceDivided.add
 					(
 						collision.pos
 					);
@@ -953,7 +964,7 @@ public class MeshBuilder
 					verticesInFaceDivided =
 						verticesInFacesDivided[facesDividedIndex];
 
-					verticesInFaceDivided.push(collision.pos);
+					verticesInFaceDivided.add(collision.pos);
 				}
 			}
 		}
@@ -971,7 +982,7 @@ public class MeshBuilder
 						new Face(verticesInFace), faceToDivide.material
 					);
 
-					returnValues.push(faceDivided);
+					returnValues.add(faceDivided);
 				}
 			}
 		}

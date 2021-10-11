@@ -1,13 +1,20 @@
 
 package GameFramework.Storage.Compressor;
-{
+
+import java.util.*;
+import java.util.stream.*;
 
 public class ByteStreamFromBytes implements ByteStream
 {
-	public int[] bytes;
+	public List<Integer> bytes;
 	public int byteIndexCurrent;
 
-	public ByteStreamFromBytes(int[] bytes)
+	public ByteStreamFromBytes()
+	{
+		this(new ArrayList<Integer>());
+	}
+
+	public ByteStreamFromBytes(List<Integer> bytes)
 	{
 		this.bytes = bytes;
 		this.byteIndexCurrent = 0;
@@ -15,17 +22,17 @@ public class ByteStreamFromBytes implements ByteStream
 
 	public boolean hasMoreBytes()
 	{
-		return this.byteIndexCurrent < this.bytes.length;
+		return this.byteIndexCurrent < this.bytes.size();
 	}
 
 	public int peekByteCurrent()
 	{
-		return this.bytes[this.byteIndexCurrent];
+		return this.bytes.get(this.byteIndexCurrent);
 	}
 
 	public int readByte()
 	{
-		var byteRead = this.bytes[this.byteIndexCurrent];
+		var byteRead = this.bytes.get(this.byteIndexCurrent);
 		this.byteIndexCurrent++;
 		return byteRead;
 	}
@@ -47,11 +54,11 @@ public class ByteStreamFromBytes implements ByteStream
 
 		for (var i = 0; i < lengthOfString; i++)
 		{
-			var byte = this.readByte();
+			var byteRead = this.readByte();
 
-			if (byte != 0)
+			if (byteRead != 0)
 			{
-				var byteAsChar = String.fromCharCode(byte);
+				var byteAsChar = (char)byteRead;
 				returnValue += byteAsChar;
 			}
 		}
@@ -67,18 +74,18 @@ public class ByteStreamFromBytes implements ByteStream
 
 	public void writeBytes(int[] bytesToWrite)
 	{
-		bytesToWrite.forEach(x -> this.writeByte(x));
+		bytesToWrite.stream().forEach(x -> this.writeByte(x));
 	}
 
 	public void writeStringPaddedToLength(String stringToWrite, int lengthPadded)
 	{
-		for (var i = 0; i < stringToWrite.length; i++)
+		for (var i = 0; i < stringToWrite.length(); i++)
 		{
-			var charAsByte = stringToWrite.charCodeAt(i);
+			var charAsByte = stringToWrite.charAt(i);
 			this.writeByte(charAsByte);
 		}
 
-		var intOfPaddingChars = lengthPadded - stringToWrite.length;
+		var intOfPaddingChars = lengthPadded - stringToWrite.length();
 		for (var i = 0; i < intOfPaddingChars; i++)
 		{
 			this.writeByte(0);

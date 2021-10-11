@@ -2,6 +2,7 @@
 package GameFramework.Geometry.Shapes;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class Sphere implements ShapeBase
 {
@@ -32,7 +33,7 @@ public class Sphere implements ShapeBase
 		return new Sphere(Coords.create(), radius);
 	}
 
-	public static Spehre fromRadiusAndCenter(double radius, Coords center)
+	public static Sphere fromRadiusAndCenter(double radius, Coords center)
 	{
 		return new Sphere(center, radius);
 	}
@@ -131,6 +132,4 @@ public class Sphere implements ShapeBase
 	{
 		throw new Exception("Not implemented!");
 	}
-}
-
 }

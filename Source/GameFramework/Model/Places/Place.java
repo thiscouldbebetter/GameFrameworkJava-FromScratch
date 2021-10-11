@@ -162,14 +162,14 @@ public class Place //
 			entity.name = "Entity";
 		}
 
-		if (this.entitiesByName.has(entity.name))
+		if (this.entitiesByName.containsKey(entity.name))
 		{
 			entity.name += entity.id;
 		}
 
-		this.entities.push(entity);
-		this.entitiesById.set(entity.id, entity);
-		this.entitiesByName.set(entity.name, entity);
+		this.entities.add(entity);
+		this.entitiesById.put(entity.id, entity);
+		this.entitiesByName.put(entity.name, entity);
 
 		var entityProperties = entity.properties;
 		for (var i = 0; i < entityProperties.length; i++)

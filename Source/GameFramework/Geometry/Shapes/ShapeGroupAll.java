@@ -2,6 +2,7 @@
 package GameFramework.Geometry.Shapes;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class ShapeGroupAll implements ShapeBase
 {
@@ -49,7 +50,7 @@ public class ShapeGroupAll implements ShapeBase
 
 	// Transformable.
 
-	public Transforamble transform(Transform transformToApply)
+	public Transformable transform(Transform transformToApply)
 	{
 		this.shapes.stream.forEach
 		(

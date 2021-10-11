@@ -113,7 +113,7 @@ public class CollisionHelper
 				put(shapeInverseName, this.collisionOfShapeAndShapeInverse);
 				put(sphereName, this.collisionOfMeshAndSphere);
 			}};
-			lookupOfLookups.set(meshName, lookup);
+			lookupOfLookups.put(meshName, lookup);
 		}
 
 		if (shapeGroupAllName != null)
@@ -135,7 +135,7 @@ public class CollisionHelper
 				put(meshName, this.collisionOfShapeInverseAndShape);
 				put(sphereName, this.collisionOfShapeInverseAndShape);
 			}};
-			lookupOfLookups.set(shapeInverseName, lookup);
+			lookupOfLookups.put(shapeInverseName, lookup);
 		}
 
 		if (sphereName != null)
@@ -150,7 +150,7 @@ public class CollisionHelper
 				put(shapeInverseName, this.collisionOfShapeAndShapeInverse);
 				put(sphereName, this.collisionOfSpheres);
 			}};
-			lookupOfLookups.set(sphereName, lookup);
+			lookupOfLookups.put(sphereName, lookup);
 		}
 
 		return lookupOfLookups;
@@ -187,11 +187,11 @@ public class CollisionHelper
 			if (lookup == null)
 			{
 				lookup = new Map<String,Object>();
-				lookupOfLookups.set(colliderTypeName0, lookup);
+				lookupOfLookups.put(colliderTypeName0, lookup);
 			}
 			var thisAsAny = (Object)this;
 			var doCollideFunction = thisAsAny[functionName];
-			lookup.set(colliderTypeName1, doCollideFunction);
+			lookup.put(colliderTypeName1, doCollideFunction);
 		}
 
 		return lookupOfLookups;
@@ -226,7 +226,7 @@ public class CollisionHelper
 			if (lookup == null)
 			{
 				lookup = new Map<String, Object>();
-				lookupOfLookups.set(colliderTypeName0, lookup);
+				lookupOfLookups.put(colliderTypeName0, lookup);
 			}
 			var thisAsAny = (Object)this;
 			var doesContainFunction = thisAsAny[functionName];
@@ -262,8 +262,8 @@ public class CollisionHelper
 		collisionOut = this.collisionOfColliders(collider0, collider1, collisionOut);
 
 		var entitiesColliding = collisionOut.entitiesColliding;
-		entitiesColliding.push(entityColliding);
-		entitiesColliding.push(entityCollidedWith);
+		entitiesColliding.add(entityColliding);
+		entitiesColliding.add(entityCollidedWith);
 
 		return collisionOut;
 	}
@@ -340,9 +340,9 @@ public class CollisionHelper
 				if (doCollide)
 				{
 					var collision = Collision.create();
-					collision.entitiesColliding.push(entity0);
-					collision.entitiesColliding.push(entity1);
-					returnValues.push(collision);
+					collision.entitiesColliding.add(entity0);
+					collision.entitiesColliding.add(entity1);
+					returnValues.add(collision);
 				}
 			}
 		}
@@ -957,8 +957,8 @@ public class CollisionHelper
 					(
 						edge0.vertices[0]
 					);
-					collision.colliders.push(edge1);
-					collision.collidersByName.set(Edge.class.getName(), edge1);
+					collision.colliders.add(edge1);
+					collision.collidersByName.put(Edge.class.getName(), edge1);
 				}
 
 			} // end if (doesEdgeCrossLineOfOther)
@@ -991,8 +991,8 @@ public class CollisionHelper
 
 			if (isWithinFace)
 			{
-				collision.colliders.push(face);
-				collision.collidersByName.set(Face.class.getName(), face);
+				collision.colliders.add(face);
+				collision.collidersByName.put(Face.class.getName(), face);
 			}
 		}
 
@@ -1019,9 +1019,9 @@ public class CollisionHelper
 			);
 			if (collision.isActive)
 			{
-				collision.colliders.push(mesh);
-				collision.collidersByName.set(Mesh.class.getName(), mesh);
-				collisions.push(collision);
+				collision.colliders.add(mesh);
+				collision.collidersByName.put(Mesh.class.getName(), mesh);
+				collisions.add(collision);
 				if (stopAfterFirst)
 				{
 					break;
@@ -1086,10 +1086,10 @@ public class CollisionHelper
 				colliders.length = 0;
 				collidersByName.clear();
 
-				colliders.push(edge);
-				collidersByName.set(Edge.class.getName(), edge);
-				colliders.push(plane);
-				collidersByName.set(Plane.class.getName(), plane);
+				colliders.add(edge);
+				collidersByName.put(Edge.class.getName(), edge);
+				colliders.add(plane);
+				collidersByName.put(Plane.class.getName(), plane);
 			}
 		}
 
@@ -1121,7 +1121,7 @@ public class CollisionHelper
 				collision.isActive = true;
 				plane.pointClosestToOrigin(collision.pos);
 				collision.colliders.length = 0;
-				collision.colliders.push(hemispace);
+				collision.colliders.add(hemispace);
 				break;
 			}
 		}
@@ -1150,7 +1150,7 @@ public class CollisionHelper
 			collision.isActive = true;
 			plane.pointClosestToOrigin(collision.pos);
 			collision.colliders.length = 0;
-			collision.colliders.push(hemispace);
+			collision.colliders.add(hemispace);
 		}
 		return collision;
 	}
@@ -2251,10 +2251,9 @@ public class CollisionHelper
 		return false;
 	}
 
-	doesSphereContainSphere(Sphere sphere0, Sphere sphere1)
+	public boolean doesSphereContainSphere(Sphere sphere0, Sphere sphere1)
 	{
 		return sphere0.containsOther(sphere1);
 	}
 }
 
-}

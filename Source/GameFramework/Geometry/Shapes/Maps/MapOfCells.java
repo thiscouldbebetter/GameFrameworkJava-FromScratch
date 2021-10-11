@@ -1,6 +1,7 @@
 
 package GameFramework.Geometry.Shapes.Maps;
 
+import java.util.*;
 import java.util.functions.*;
 
 import GameFramework.Geometry.*;
@@ -11,7 +12,7 @@ public class MapOfCells<T>
 	public Coords sizeInCells;
 	public Coords cellSize;
 	private Producer<T> _cellCreate;
-	private _cellAtPosInCells: (MapOfCells map<T>, Coords posInCells, T cell) => T;
+	private Function<Tuple<MapOfCells<T>,Coords,T>,T> _cellAtPosInCells;
 	private Object cellSource;
 
 	public Coords cellSizeHalf;
@@ -29,8 +30,8 @@ public class MapOfCells<T>
 		String name,
 		Coords sizeInCells,
 		Coords cellSize,
-		Producer cellCreate<T>,
-		cellAtPosInCells: (MapOfCells map<T>, Coords posInCells, T cell) => T,
+		Producer<T> cellCreate,
+		Function<Tuple<MapOfCells<T>,Coords,T>,T> cellAtPosInCells
 		Object cellSource
 	)
 	{
@@ -39,7 +40,12 @@ public class MapOfCells<T>
 		this.cellSize = cellSize;
 		this._cellCreate = cellCreate;
 		this._cellAtPosInCells = cellAtPosInCells;
-		this.cellSource = cellSource || new Array<T>();
+		this.cellSource =
+		(
+			cellSource != null
+			? cellSource
+			: new ArrayList<T>()
+		);
 
 		this.sizeInCellsMinusOnes = this.sizeInCells.clone().subtract
 		(
@@ -133,16 +139,19 @@ public class MapOfCells<T>
 				cellPosInCells.x = x;
 
 				var cellAtPos = this.cellAtPosInCells(cellPosInCells);
-				cellsInBox.push(cellAtPos);
+				cellsInBox.add(cellAtPos);
 			}
 		}
 
 		return cellsInBox;
 	}
 
-	public Entity[] cellsAsEntities(mapAndCellPosToEntity: (MapOfCells m<T>, Coords p) => Entity)
+	public Entity[] cellsAsEntities
+	(
+		(MapOfCells<T> m, Coords p) -> EntityMapAndCellPosToEntity
+	)
 	{
-		var returnValues = new Array<Entity>();
+		var returnValues = new ArrayList<Entity>();
 
 		var cellPosInCells = Coords.create();
 		var cellPosStart = Coords.create();
@@ -158,7 +167,7 @@ public class MapOfCells<T>
 
 				var cellAsEntity = mapAndCellPosToEntity(this, cellPosInCells);
 
-				returnValues.push(cellAsEntity);
+				returnValues.add(cellAsEntity);
 			}
 		}
 

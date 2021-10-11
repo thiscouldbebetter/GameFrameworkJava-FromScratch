@@ -1,8 +1,11 @@
 
 package GameFramework.Controls;
 
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public abstract class ControlBase
 {
@@ -37,7 +40,7 @@ public abstract class ControlBase
 	}
 
 	boolean actionHandle(String actionName, Universe universe) { return false; }
-	ActionToInputsMapping[] actionToInputsMappings() { return new ActionToInputsMapping{} {}; }
+	ActionToInputsMapping[] actionToInputsMappings() { return new ActionToInputsMapping[] {}; }
 	ControlBase childWithFocus() { return null; }
 	void draw(Universe u, Display d, Disposition drawLoc, ControlStyle style) {}
 	void focusGain() { this.isHighlighted = true; }
@@ -49,7 +52,7 @@ public abstract class ControlBase
 	void mouseExit() { this.isHighlighted = false; }
 	boolean mouseMove(Coords x) { return false; }
 	void scalePosAndSize(Coords x) {}
-	style(Universe universe)
+	ControlStyle style(Universe universe)
 	{
 		var returnValue =
 		(

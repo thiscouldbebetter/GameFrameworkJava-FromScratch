@@ -1,9 +1,17 @@
 
 package GameFramework.Input;
 
+import java.awt.event.*;
 import java.util.*;
+import javax.swing.*;
 
-public class InputHelper implements KeyListener, MouseListener, MouseMotionListener, Platformable
+import GameFramework.*;
+import GameFramework.Geometry.*;
+import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
+
+public class InputHelper
+	implements KeyListener, MouseListener, MouseMotionListener, Platformable
 {
 	public Coords mouseClickPos;
 	public Coords mouseMovePos;
@@ -43,13 +51,13 @@ public class InputHelper implements KeyListener, MouseListener, MouseMotionListe
 		this.isEnabled = true;
 	}
 
-	public List<Action> actionsFromInput
+	public List<ActorAction> actionsFromInput
 	(
-		Map<String,Action> actionsByName,
+		Map<String,ActorAction> actionsByName,
 		Map<String,ActionToInputsMapping> actionToInputsMappingsByInputName
 	)
 	{
-		var returnValues = new ArrayList<Action>();
+		var returnValues = new ArrayList<ActorAction>();
 
 		if (this.isEnabled == false)
 		{
@@ -68,7 +76,7 @@ public class InputHelper implements KeyListener, MouseListener, MouseMotionListe
 					var actionName = mapping.actionName;
 					var action = actionsByName.get(actionName);
 					returnValues.push(action);
-					if (mapping.inactivateInputWhenActionPerformed)
+					if (mapping.inactivateInputWhenActorActionPerformed)
 					{
 						inputPressed.isActive = false;
 					}
@@ -105,8 +113,8 @@ public class InputHelper implements KeyListener, MouseListener, MouseMotionListe
 		if (this.inputsPressedByName.containsKey(inputPressedName) == false)
 		{
 			var inputPressed = new Input(inputPressedName);
-			this.inputsPressedByName.set(inputPressedName, inputPressed);
-			this.inputsPressed.push(inputPressed);
+			this.inputsPressedByName.put(inputPressedName, inputPressed);
+			this.inputsPressed.add(inputPressed);
 		}
 	}
 
@@ -352,6 +360,4 @@ public class InputHelper implements KeyListener, MouseListener, MouseMotionListe
 	{
 		return this;
 	}
-}
-
 }

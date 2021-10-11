@@ -1,32 +1,36 @@
 
 package GameFramework.Controls;
-{
+
+import java.util.*;
+import java.util.stream.*;
+
+import GameFramework.Model.*;
 
 public class ControlTabbed extends ControlBase
 {
-	tabButtonSize: Coords;
-	childrenForTabs: ControlBase[];
-	childrenForTabsByName: Map<string,ControlBase>;
-	cancel: (u: Universe) => void;
+	public Coords tabButtonSize;
+	public ControlBase[] childrenForTabs;
+	public Map<String,ControlBase> childrenForTabsByName;
+	public Consumer<Universe> cancel;
 
-	buttonsForChildren: ControlButton[];
-	childSelectedIndex: number;
-	childrenContainingPos: ControlBase[];
-	childrenContainingPosPrev: ControlBase[];
-	isChildSelectedActive: boolean;
+	private ControlButton[] buttonsForChildren;
+	private int childSelectedIndex;
+	private List<ControlBase> childrenContainingPos;
+	private List<ControlBase> childrenContainingPosPrev;
+	private boolean isChildSelectedActive;
 
-	_childMax: Coords;
-	_drawPos: Coords;
-	_drawLoc: Disposition;
-	_mouseClickPos: Coords;
-	_mouseMovePos: Coords;
-	_posToCheck: Coords;
+	private Coords _childMax;
+	private Coords _drawPos;
+	private Disposition _drawLoc;
+	private Coords _mouseClickPos;
+	private Coords _mouseMovePos;
+	private Coords _posToCheck;
 
-	constructor
+	public ControlTabbed
 	(
-		name: string, pos: Coords, size: Coords, tabButtonSize: Coords,
-		childrenForTabs: ControlBase[], fontHeightInPixels: number,
-		cancel: (u: Universe) => void
+		String name, Coords pos, Coords size, Coords tabButtonSize,
+		ControlBase childrenForTabs[], number fontHeightInPixels,
+		Consumer<Universe> cancel
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -45,9 +49,9 @@ public class ControlTabbed extends ControlBase
 		var tabPaneHeight = marginSize + this.tabButtonSize.y;
 		var buttonsForChildren = new Array<ControlButton>();
 
-		var buttonForTabClick = (b: ControlButton) => // click
+		var buttonForTabClick = (ControlButton b) -> // click
 		{
-			buttonsForChildren.forEach(x => x.isHighlighted = false);
+			buttonsForChildren.stream().forEach(x -> x.isHighlighted = false);
 			var buttonIndex = buttonsForChildren.indexOf(b); // hack
 			this.childSelectedIndex = buttonIndex;
 			this.isChildSelectedActive = true;
@@ -79,12 +83,12 @@ public class ControlTabbed extends ControlBase
 				buttonForTabClick
 			);
 			button.context = button; // hack
-			buttonsForChildren.push(button);
+			buttonsForChildren.add(button);
 		}
 
 		if (this.cancel != null)
 		{
-			this.childrenForTabs.push(null);
+			this.childrenForTabs.add(null);
 			var button = ControlButton.from8
 			(
 				"buttonCancel",
@@ -96,7 +100,7 @@ public class ControlTabbed extends ControlBase
 				true, // isEnabled
 				this.cancel // click
 			);
-			buttonsForChildren.push(button);
+			buttonsForChildren.add(button);
 		}
 
 		this.buttonsForChildren = buttonsForChildren;
@@ -116,7 +120,7 @@ public class ControlTabbed extends ControlBase
 
 	// actions
 
-	actionHandle(actionNameToHandle: string, universe: Universe): boolean
+	actionHandle(String actionNameToHandle, Universe universe): boolean
 	{
 		var wasActionHandled = false;
 
@@ -178,7 +182,7 @@ public class ControlTabbed extends ControlBase
 		return wasActionHandled;
 	}
 
-	childSelected(): ControlBase
+	public ControlBase childSelected()
 	{
 		var returnValue =
 		(
@@ -189,7 +193,7 @@ public class ControlTabbed extends ControlBase
 		return returnValue;
 	}
 
-	childSelectNextInDirection(direction: number): ControlBase
+	public ControlBase childSelectNextInDirection(number direction)
 	{
 		while (true)
 		{
@@ -209,7 +213,7 @@ public class ControlTabbed extends ControlBase
 				);
 			}
 
-			this.buttonsForChildren.forEach(x => x.isHighlighted = false);
+			this.buttonsForChildren.stream().forEach(x -> x.isHighlighted = false);
 			var buttonForChild = this.buttonsForChildren[this.childSelectedIndex];
 			buttonForChild.isHighlighted = true;
 
@@ -233,20 +237,22 @@ public class ControlTabbed extends ControlBase
 		return returnValue;
 	}
 
-	childWithFocus(): ControlBase
+	public ControlBase childWithFocus()
 	{
 		return this.childSelected();
 	}
 
-	childrenAtPosAddToList
+	public List<ControlBase> childrenAtPosAddToList
 	(
-		posToCheck: Coords, listToAddTo: ControlBase[], addFirstChildOnly: boolean
-	): ControlBase[]
+		Coords posToCheck,
+		List<ControlBase> listToAddTo,
+		boolean addFirstChildOnly
+	)
 	{
 		posToCheck = this._posToCheck.overwriteWith(posToCheck).clearZ();
 
-		var childrenActive = [];
-		childrenActive.push(...this.buttonsForChildren);
+		var childrenActive = new ArrayList<ControlBase>();
+		childrenActive.addAll(this.buttonsForChildren);
 		var childSelectedAsContainer = this.childSelected() as ControlContainer;
 		if (childSelectedAsContainer != null)
 		{
@@ -277,7 +283,7 @@ public class ControlTabbed extends ControlBase
 		return listToAddTo;
 	}
 
-	focusGain(): void
+	public void focusGain()
 	{
 		this.childSelectedIndex = null;
 		var childSelected = this.childSelectNextInDirection(1);
@@ -287,7 +293,7 @@ public class ControlTabbed extends ControlBase
 		}
 	}
 
-	focusLose(): void
+	public void focusLose()
 	{
 		var childSelected = this.childSelected();
 		if (childSelected != null)
@@ -297,7 +303,7 @@ public class ControlTabbed extends ControlBase
 		}
 	}
 
-	mouseClick(mouseClickPos: Coords): boolean
+	public boolean mouseClick(Coords mouseClickPos)
 	{
 		var mouseClickPos = this._mouseClickPos.overwriteWith
 		(
@@ -331,10 +337,10 @@ public class ControlTabbed extends ControlBase
 		return wasClickHandled;
 	}
 
-	mouseEnter(): void {}
-	mouseExit(): void {}
+	public void mouseEnter()
+	public void mouseExit()
 
-	mouseMove(mouseMovePos: Coords): boolean
+	public boolean mouseMove(Coords mouseMovePos)
 	{
 		var mouseMovePos = this._mouseMovePos.overwriteWith
 		(
@@ -405,7 +411,7 @@ public class ControlTabbed extends ControlBase
 		return wasMoveHandled;
 	}
 
-	scalePosAndSize(scaleFactor: Coords): ControlTabbed
+	public ControlTabbed scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
@@ -433,10 +439,11 @@ public class ControlTabbed extends ControlBase
 
 	// drawable
 
-	draw
+	public void draw
 	(
-		universe: Universe, display: Display, drawLoc: Disposition, style: ControlStyle
-	): void
+		Universe universe, Display display,
+		Disposition drawLoc, ControlStyle style
+	)
 	{
 		drawLoc = this._drawLoc.overwriteWith(drawLoc);
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
@@ -467,6 +474,4 @@ public class ControlTabbed extends ControlBase
 			child.draw(universe, display, drawLoc, style);
 		}
 	}
-}
-
 }

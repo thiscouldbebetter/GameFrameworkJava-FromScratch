@@ -27,10 +27,10 @@ public class CollisionTracker implements EntityProperty
 			collisionMapCellSize,
 			() -> new CollisionTrackerMapCell(),
 			null, // cellAtPosInCells,
-			new Array<CollisionTrackerMapCell>() // cellSource
+			new ArrayList<CollisionTrackerMapCell>() // cellSource
 		);
 
-		this._cells = new Array<CollisionTrackerMapCell>();
+		this._cells = new ArrayList<CollisionTrackerMapCell>();
 	}
 
 	static fromSize(Coords size): CollisionTracker
@@ -87,13 +87,13 @@ public class CollisionTracker implements EntityProperty
 							(
 								entity, entityOther, Collision.create()
 							);
-							collisionsSoFar.push(collision);
+							collisionsSoFar.add(collision);
 						}
 					}
 				}
 			}
 
-			cellEntitiesPresent.push(entity);
+			cellEntitiesPresent.add(entity);
 		}
 
 		return collisionsSoFar;

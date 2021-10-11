@@ -9,6 +9,6 @@ public interface ByteStream
 	int[] readBytes(int byteCount);
 	String readStringOfLength(int lengthOfString);
 	void writeByte(int byteToWrite);
-	void writeBytes(int bytesToWrite[]);
-	void writeStringPaddedToLength(string stringToWrite, int lengthPadded);
+	void writeBytes(int[] bytesToWrite);
+	void writeStringPaddedToLength(String stringToWrite, int lengthPadded);
 }

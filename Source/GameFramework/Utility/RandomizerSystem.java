@@ -1,5 +1,5 @@
 
-package GameFramework.Utility.*;
+package GameFramework.Utility;
 
 public class RandomizerSystem implements Randomizer
 {

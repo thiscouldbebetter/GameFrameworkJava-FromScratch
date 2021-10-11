@@ -43,17 +43,18 @@ public class StorageHelper
 		*/
 	}
 
-	public void load(String propertyName)
+	public Object load(String propertyName)
 	{
-		var returnValue;
+		Object returnValue;
 
 		var propertyNamePrefixed =
 			this.propertyNamePrefix + propertyName;
 
-		var returnValueAsStringCompressed = localStorage.getItem
+		var returnValueAsStringCompressed = "todo";
+		/*localStorage.getItem
 		(
 			propertyNamePrefixed
-		);
+		);*/
 
 		if (returnValueAsStringCompressed == null)
 		{

@@ -2,6 +2,8 @@
 package GameFramework.Geometry.Shapes;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helpers.*;
 
 public class ShapeGroupAny implements ShapeBase
 {
@@ -45,7 +47,7 @@ public class ShapeGroupAny implements ShapeBase
 
 	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
 	{
-		var distanceMinSoFar = Number.POSITIVE_INFINITY;
+		var distanceMinSoFar = Integer.POSITIVE_INFINITY;
 		for (var i = 0; i < this.shapes.length; i++)
 		{
 			var shape = this.shapes[i];

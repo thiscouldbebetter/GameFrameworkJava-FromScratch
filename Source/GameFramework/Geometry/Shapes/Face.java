@@ -1,7 +1,10 @@
 
 package GameFramework.Geometry.Shapes;
 
+import java.util.*;
+
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class Face implements ShapeBase
 {

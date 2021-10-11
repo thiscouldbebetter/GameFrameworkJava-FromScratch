@@ -15,7 +15,7 @@ public class BitStream
 	{
 		if (byteStream == null)
 		{
-			byteStream = new ByteStreamFromBytes([]);
+			byteStream = new ByteStreamFromBytes();
 		}
 
 		this.byteStream = byteStream;

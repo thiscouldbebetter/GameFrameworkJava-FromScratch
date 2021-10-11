@@ -81,7 +81,7 @@ public class TarFileEntryHeader
 		for (var i = 0; i < secondsSinceUnixEpochAsStringOctal.length; i++)
 		{
 			var digitAsASCIICode =
-				secondsSinceUnixEpochAsStringOctal.charCodeAt(i);
+				secondsSinceUnixEpochAsStringOctal.charAt(i);
 			timeModifiedInUnixFormat.push(digitAsASCIICode);
 		}
 
@@ -204,7 +204,7 @@ public class TarFileEntryHeader
 
 		var offsetOfChecksumInBytes = 148;
 		var intOfBytesInChecksum = 8;
-		var presumedValueOfEachChecksumByte = " ".charCodeAt(0);
+		var presumedValueOfEachChecksumByte = " ".charAt(0);
 		for (var i = 0; i < intOfBytesInChecksum; i++)
 		{
 			var offsetOfByte = offsetOfChecksumInBytes + i;

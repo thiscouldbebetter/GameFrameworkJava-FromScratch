@@ -1,6 +1,10 @@
 
 package GameFramework.Geometry;
 
+import GameFramework.Model.*;
+import GameFramework.Model.Places.*;
+import GameFramework.Utility.*;
+
 public class Disposition
 {
 	public Coords pos;
@@ -11,7 +15,7 @@ public class Disposition
 	public Coords accel;
 	public Coords force;
 	public Rotation spin;
-	public number timeOffsetInTicks;
+	public int timeOffsetInTicks;
 
 	public Disposition
 	(

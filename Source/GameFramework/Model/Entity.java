@@ -19,7 +19,7 @@ public class Entity //
 		{
 			var property = this.properties[i];
 			var propertyName = property.constructor.class.name;
-			this.propertiesByName.set(propertyName, property);
+			this.propertiesByName.put(propertyName, property);
 		}
 	}
 
@@ -61,7 +61,10 @@ public class Entity //
 	public Entity propertyAddForPlace(EntityProperty propertyToAdd, Place place)
 	{
 		this.properties.push(propertyToAdd);
-		this.propertiesByName.set(propertyToAdd.getClass().getName(), propertyToAdd);
+		this.propertiesByName.put
+		(
+			propertyToAdd.getClass().getName(), propertyToAdd
+		);
 		if (place != null)
 		{
 			if (place.entities.indexOf(this) >= 0)

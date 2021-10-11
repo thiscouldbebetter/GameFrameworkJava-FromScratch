@@ -5,6 +5,7 @@ import java.util.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class Mesh implements ShapeBase
 {
@@ -132,9 +133,9 @@ public class Mesh implements ShapeBase
 							vertexIndex + doubleOfFaceVertices
 						}
 					);
-					faceBuilders.push(faceBuilderSide);
+					faceBuilders.add(faceBuilderSide);
 
-					vertexIndicesTopOrBottom.push(vertexIndex);
+					vertexIndicesTopOrBottom.add(vertexIndex);
 				}
 				else
 				{
@@ -146,14 +147,14 @@ public class Mesh implements ShapeBase
 					offsetForExtrusion
 				);
 
-				meshVertices.push(vertex);
+				meshVertices.add(vertex);
 			}
 
 			var faceBuilderTopOrBottom = new FaceBuilder
 			(
 				vertexIndicesTopOrBottom
 			);
-			faceBuilders.push(faceBuilderTopOrBottom);
+			faceBuilders.add(faceBuilderTopOrBottom);
 		}
 
 		var returnValue = new Mesh
@@ -305,7 +306,7 @@ public class Mesh implements ShapeBase
 			{
 				var vertexIndex = this.vertexIndices[vi];
 				var meshVertex = meshVertices[vertexIndex];
-				faceVertices.push(meshVertex);
+				faceVertices.add(meshVertex);
 			}
 			var returnValue = new Face(faceVertices);
 			return returnValue;

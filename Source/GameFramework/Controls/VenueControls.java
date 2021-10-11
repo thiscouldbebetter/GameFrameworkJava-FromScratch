@@ -5,6 +5,7 @@ import java.util.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public class VenueControls implements Venue
 {
@@ -12,10 +13,10 @@ public class VenueControls implements Venue
 	public ActionToInputsMapping[] actionToInputsMappings;
 	public Map<String, ActionToInputsMapping> actionToInputsMappingsByInputName;
 
-	private _Disposition drawLoc;
-	private _Coords mouseClickPos;
-	private _Coords mouseMovePos;
-	private _Coords mouseMovePosPrev;
+	private Disposition _drawLoc;
+	private Coords _mouseClickPos;
+	private Coords _mouseMovePos;
+	private Coords _mouseMovePosPrev;
 
 	public VenueControls
 	(
@@ -142,12 +143,12 @@ public class VenueControls implements Venue
 		this._mouseMovePosPrev = Coords.create();
 	}
 
-	static fromControl(ControlBase controlRoot): VenueControls
+	public static VenueControls fromControl(ControlBase controlRoot)
 	{
 		return new VenueControls(controlRoot, false);
 	}
 
-	draw(Universe universe)
+	public void draw(Universe universe)
 	{
 		var display = universe.display;
 		var drawLoc = this._drawLoc;
