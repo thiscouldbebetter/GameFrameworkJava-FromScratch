@@ -1,13 +1,10 @@
 
 package GameFramework.Controls;
-{
 
 public class ControlNone extends ControlBase
 {
-	constructor()
+	public ControlNone()
 	{
 		super(null, null, null, null);
 	}
-}
-
 }

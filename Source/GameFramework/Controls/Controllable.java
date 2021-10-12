@@ -1,19 +1,21 @@
 
 package GameFramework.Controls;
 
+import GameFramework.Model.*;
+
 public class Controllable implements EntityProperty
 {
-	Object toControl;
+	public Object toControl;
 
-	constructor(Object toControl)
+	public Controllable(Object toControl)
 	{
 		this.toControl = toControl;
 	}
 
 	// EntityProperty.
 
-	void finalize(uwpe: UniverseWorldPlaceEntities) {}
-	void initialize(uwpe: UniverseWorldPlaceEntities) {}
-	void updateForTimerTick(uwpe: UniverseWorldPlaceEntities) {}
+	public void finalize(UniverseWorldPlaceEntities uwpe) {}
+	public void initialize(UniverseWorldPlaceEntities uwpe) {}
+	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe) {}
 
 }

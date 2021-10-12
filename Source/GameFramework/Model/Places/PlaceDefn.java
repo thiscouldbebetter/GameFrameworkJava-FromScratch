@@ -1,30 +1,36 @@
 
-namespace ThisCouldBeBetter.GameFramework
+package GameFramework.Model.Places;
+
+import java.util.*;
+import java.util.function.*;
+
+import GameFramework.Helpers.*;
+import GameFramework.Input.*;
+import GameFramework.Model.Actors.*;
+
+public class PlaceDefn
 {
+	public String name;
+	public ActorAction[] actions;
+	public Map<String,ActorAction> actionsByName;
+	public ActionToInputsMapping[] actionToInputsMappings;
+	public String[] propertyNamesToProcess;
+	private Consumer<UniverseWorldPlaceEntities>_placeInitialize;
+	private Consumer<UniverseWorldPlaceEntities>_placeFinalize;
 
-export class PlaceDefn
-{
-	name: string;
-	actions: Action[];
-	actionsByName: Map<string,Action>;
-	actionToInputsMappings: ActionToInputsMapping[];
-	propertyNamesToProcess: string[];
-	_placeInitialize: (uwpe: UniverseWorldPlaceEntities) => void;
-	_placeFinalize: (uwpe: UniverseWorldPlaceEntities) => void;
+	public Map<String,ActionToInputsMapping> actionToInputsMappingsByInputName;
+	public ActionToInputsMapping actionToInputsMappingSelected;
+	public ActionToInputsMapping[] actionToInputsMappingsDefault;
+	public ActionToInputsMapping[] actionToInputsMappingsEdited;
 
-	actionToInputsMappingsByInputName: Map<string,ActionToInputsMapping>;
-	actionToInputsMappingSelected: ActionToInputsMapping;
-	actionToInputsMappingsDefault: ActionToInputsMapping[];
-	actionToInputsMappingsEdited: ActionToInputsMapping[];
-
-	constructor
+	public PlaceDefn
 	(
-		name: string,
-		actions: Action[],
-		actionToInputsMappings: ActionToInputsMapping[],
-		propertyNamesToProcess: string[],
-		placeInitialize: (uwpe: UniverseWorldPlaceEntities) => void,
-		placeFinalize: (uwpe: UniverseWorldPlaceEntities) => void
+		String name,
+		ActorAction[] actions,
+		ActionToInputsMapping[] actionToInputsMappings,
+		String[] propertyNamesToProcess,
+		Consumer<UniverseWorldPlaceEntities> placeInitialize,
+		Consumer<UniverseWorldPlaceEntities> placeFinalize
 	)
 	{
 		this.name = name;
@@ -35,44 +41,50 @@ export class PlaceDefn
 		this._placeInitialize = placeInitialize;
 		this._placeFinalize = placeFinalize;
 
-		this.actionToInputsMappings = ArrayHelper.clone(this.actionToInputsMappingsDefault);
-		this.actionToInputsMappingsEdited = ArrayHelper.clone(this.actionToInputsMappings);
+		this.actionToInputsMappings =
+			ArrayHelper.clone(this.actionToInputsMappingsDefault);
+		this.actionToInputsMappingsEdited =
+			ArrayHelper.clone(this.actionToInputsMappings);
 
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this.actionToInputsMappings, (x: ActionToInputsMapping) => x.inputNames
+			this.actionToInputsMappings,
+			(ActionToInputsMapping x) -> x.inputNames
 		);
 	}
 
-	static default(): PlaceDefn
+	public static PlaceDefn _default()
 	{
 		return new PlaceDefn
 		(
 			"Default", // name,
-			[], // actions,
-			[], // actionToInputsMappings,
-			[], // propertyNamesToProcess,
+			new ActorAction[] {}, // actions,
+			new ActionToInputMapping[] {}, // actionToInputsMappings,
+			new String[] {}, // propertyNamesToProcess,
 			null, // placeInitialize
 			null // placeFinalize
 		);
 	}
 
-	static from4
+	public static PlaceDefn from4
 	(
-		name: string,
-		actions: Action[],
-		actionToInputsMappings: ActionToInputsMapping[],
-		propertyNamesToProcess: string[]
-	): PlaceDefn
+		String name,
+		ActorAction[] actions,
+		ActionToInputsMapping[] actionToInputsMappings,
+		String[] propertyNamesToProcess
+	)
 	{
 		return new PlaceDefn
 		(
-			name, actions, actionToInputsMappings, propertyNamesToProcess,
+			name,
+			actions,
+			actionToInputsMappings,
+			propertyNamesToProcess,
 			null, null // placeInitialize, placeFinalize
 		);
 	}
 
-	actionToInputsMappingsEdit(): void
+	public void actionToInputsMappingsEdit()
 	{
 		ArrayHelper.overwriteWith
 		(
@@ -83,7 +95,7 @@ export class PlaceDefn
 		this.actionToInputsMappingSelected = null;
 	}
 
-	actionToInputsMappingsRestoreDefaults(): void
+	public void actionToInputsMappingsRestoreDefaults()
 	{
 		ArrayHelper.overwriteWith
 		(
@@ -92,7 +104,7 @@ export class PlaceDefn
 		);
 	}
 
-	actionToInputsMappingsSave(): void
+	public void actionToInputsMappingsSave()
 	{
 		this.actionToInputsMappings = ArrayHelper.clone
 		(
@@ -100,11 +112,12 @@ export class PlaceDefn
 		);
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this.actionToInputsMappings, (x: ActionToInputsMapping) => x.inputNames
+			this.actionToInputsMappings,
+			(ActionToInputsMapping x) -> x.inputNames
 		);
 	}
 
-	placeFinalize(uwpe: UniverseWorldPlaceEntities): void
+	public void placeFinalize(UniverseWorldPlaceEntities uwpe)
 	{
 		if (this._placeFinalize != null)
 		{
@@ -112,13 +125,11 @@ export class PlaceDefn
 		}
 	}
 
-	placeInitialize(uwpe: UniverseWorldPlaceEntities): void
+	public void placeInitialize(UniverseWorldPlaceEntities uwpe)
 	{
 		if (this._placeInitialize != null)
 		{
 			this._placeInitialize(uwpe);
 		}
 	}
-}
-
 }

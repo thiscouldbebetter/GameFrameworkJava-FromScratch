@@ -2,9 +2,10 @@
 package GameFramework.Geometry.Shapes.Maps;
 
 import java.util.*;
-import java.util.functions.*;
+import java.util.function.*;
 
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class MapOfCells<T>
 {
@@ -62,7 +63,7 @@ public class MapOfCells<T>
 		this._posInCellsMin = Coords.create();
 	}
 
-	public static MapOfCells<T> fromNameSizeInCellsAndCellSize<T>
+	public static <T> MapOfCells<T> fromNameSizeInCellsAndCellSize<T>
 	(
 		String name, Coords sizeInCells, Coords cellSize
 	)

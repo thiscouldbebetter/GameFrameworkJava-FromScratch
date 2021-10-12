@@ -2,7 +2,9 @@
 package GameFramework.Controls;
 
 import java.util.*;
-import java.util.functions.*;
+import java.util.function.*;
+
+import GameFramework.Geometry.*;
 
 public class ControlList extends ControlBase
 {

@@ -1,6 +1,8 @@
 
 package GameFramework.Geometry.Shapes;
 
+import GameFramework.Geometry.*;
+
 public class Edge implements ShapeBase
 {
 	public Coords[] vertices;

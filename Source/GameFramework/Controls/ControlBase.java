@@ -51,7 +51,7 @@ public abstract class ControlBase
 	void mouseEnter() { this.isHighlighted = true; }
 	void mouseExit() { this.isHighlighted = false; }
 	boolean mouseMove(Coords x) { return false; }
-	void scalePosAndSize(Coords x) {}
+	ControlBase scalePosAndSize(Coords x) { return this; }
 	ControlStyle style(Universe universe)
 	{
 		var returnValue =

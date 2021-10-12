@@ -1,20 +1,22 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
 
 public class ControlLabel extends ControlBase
 {
-	isTextCentered: boolean;
-	_text: any;
+	public boolean isTextCentered;
+	private Object _text;
 
-	parent: ControlBase;
+	public ControlBase parent;
 
-	_drawPos: Coords;
+	private Coords _drawPos;
 
-	constructor
+	public ControlLabel
 	(
-		name: string, pos: Coords, size: Coords, isTextCentered: boolean,
-		text: any, fontHeightInPixels: number
+		String name, Coords pos, Coords size, boolean isTextCentered,
+		Object text, number fontHeightInPixels
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -26,7 +28,7 @@ public class ControlLabel extends ControlBase
 		this._drawPos = Coords.create();
 	}
 
-	static fromPosAndText(pos: Coords, text: any)
+	public static fromPosAndText(Coords pos, Object text)
 	{
 		return new ControlLabel
 		(
@@ -39,10 +41,10 @@ public class ControlLabel extends ControlBase
 		);
 	}
 
-	static from5
+	public static from5
 	(
-		name: string, pos: Coords, size: Coords, isTextCentered: boolean,
-		text: any
+		String name, Coords pos, Coords size, boolean isTextCentered,
+		Object text
 	)
 	{
 		return new ControlLabel
@@ -56,39 +58,43 @@ public class ControlLabel extends ControlBase
 		);
 	}
 
-	actionHandle(actionName: string)
+	public boolean actionHandle(String actionName)
 	{
 		return false; // wasActionHandled
 	}
 
-	isEnabled()
+	public boolean isEnabled()
 	{
 		return false;
 	}
 
-	mouseClick(pos: Coords): boolean
+	public boolean mouseClick(Coords pos)
 	{
 		return false;
 	}
 
-	scalePosAndSize(scaleFactor: Coords)
+	public ControlBase scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
 		this.fontHeightInPixels *= scaleFactor.y;
 	}
 
-	text()
+	public String text()
 	{
 		return (this._text.get == null ? this._text : this._text.get() );
 	}
 
 	// drawable
 
-	draw(universe: Universe, display: Display, drawLoc: Disposition, style: ControlStyle)
+	public void draw
+	(
+		Universe universe, Display display, Disposition drawLoc,
+		ControlStyle style
+	)
 	{
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
-		var style = style || this.style(universe);
+		var style = (style != null ? style : this.style(universe) );
 		var text = this.text();
 
 		if (text != null)
@@ -114,6 +120,4 @@ public class ControlLabel extends ControlBase
 			}
 		}
 	}
-}
-
 }

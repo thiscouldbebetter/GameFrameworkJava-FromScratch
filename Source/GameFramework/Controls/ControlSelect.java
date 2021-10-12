@@ -1,29 +1,31 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
 
 public class ControlSelect extends ControlBase
 {
-	_valueSelected: any;
-	_options: any;
-	bindingForOptionValues: DataBinding<any, any>;
-	bindingForOptionText: DataBinding<any, string>;
+	private Object _valueSelected;
+	private Object _options;
+	public DataBinding<Object,Object> bindingForOptionValues;
+	public DataBinding<Object,String> bindingForOptionText;
 
-	indexOfOptionSelected: number;
+	public int indexOfOptionSelected;
 
-	_drawPos: Coords;
-	_sizeHalf: Coords;
+	private Coords _drawPos;
+	private Coords _sizeHalf;
 
-	constructor
+	public ControlSelect
 	(
-		name: string,
-		pos: Coords,
-		size: Coords,
-		valueSelected: any,
-		options: any,
-		bindingForOptionValues: DataBinding<any, any>,
-		bindingForOptionText: DataBinding<any, string>,
-		fontHeightInPixels: number
+		String name,
+		Coords pos,
+		Coords size,
+		Object valueSelected,
+		Object options,
+		DataBinding<Object,Object> bindingForOptionValues,
+		DataBinding<Object,String> bindingForOptionText,
+		double fontHeightInPixels
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -55,7 +57,7 @@ public class ControlSelect extends ControlBase
 		this._sizeHalf = Coords.create();
 	}
 
-	actionHandle(actionNameToHandle: string, universe: Universe)
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		var controlActionNames = ControlActionNames.Instances();
 		if (actionNameToHandle == controlActionNames.ControlDecrement)
@@ -73,13 +75,13 @@ public class ControlSelect extends ControlBase
 		return true; // wasActionHandled
 	}
 
-	mouseClick(clickPos: Coords)
+	public boolean mouseClick(Coords clickPos)
 	{
 		this.optionSelectedNextInDirection(1);
 		return true; // wasClickHandled
 	}
 
-	optionSelected()
+	public Object optionSelected()
 	{
 		var optionSelected =
 		(
@@ -90,7 +92,7 @@ public class ControlSelect extends ControlBase
 		return optionSelected;
 	}
 
-	optionSelectedNextInDirection(direction: number)
+	public void optionSelectedNextInDirection(int direction)
 	{
 		var options = this.options();
 
@@ -117,19 +119,19 @@ public class ControlSelect extends ControlBase
 		}
 	}
 
-	options()
+	public Object[] options()
 	{
 		return (this._options.get == null ? this._options : this._options.get() );
 	}
 
-	scalePosAndSize(scaleFactor: Coords)
+	public ControlBase scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
 		this.fontHeightInPixels *= scaleFactor.y;
 	}
 
-	valueSelected()
+	public Object valueSelected()
 	{
 		var returnValue =
 		(
@@ -143,7 +145,7 @@ public class ControlSelect extends ControlBase
 
 	// drawable
 
-	draw(universe: Universe, display: Display, drawLoc: Disposition)
+	public void draw(Universe universe, Display display, Disposition drawLoc)
 	{
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
 
@@ -179,6 +181,4 @@ public class ControlSelect extends ControlBase
 			this.size.x // widthMaxInPixels
 		);
 	}
-}
-
 }

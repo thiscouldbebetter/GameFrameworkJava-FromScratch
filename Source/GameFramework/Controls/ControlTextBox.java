@@ -1,26 +1,28 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
 
 public class ControlTextBox extends ControlBase
 {
-	_text: any;
-	numberOfCharsMax: number;
-	_isEnabled: DataBinding<any,boolean>;
+	public Object _text;
+	public int numberOfCharsMax;
+	public DataBinding<Object,boolean> isEnabled;
 
-	cursorPos: number;
+	public int cursorPos;
 
-	_drawPos: Coords;
-	_drawPosText: Coords;
-	_drawLoc: Disposition;
-	_textMargin: Coords;
-	_textSize: Coords;
+	private Coords _drawPos;
+	private Coords _drawPosText;
+	private Disposition _drawLoc;
+	private Coords _textMargin;
+	private Coords _textSize;
 
-	constructor
+	public ControlTextBox
 	(
-		name: string, pos: Coords, size: Coords, text: any,
-		fontHeightInPixels: number, numberOfCharsMax: number,
-		isEnabled: DataBinding<any,boolean>
+		String name, Coords pos, Coords size, Object text,
+		double fontHeightInPixels, int numberOfCharsMax,
+		DataBinding<Object,boolean> isEnabled
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -39,7 +41,7 @@ public class ControlTextBox extends ControlBase
 		this._textSize = Coords.create();
 	}
 
-	text(value: any, universe: Universe)
+	public String text(Object value, Universe universe)
 	{
 		if (value != null)
 		{
@@ -58,7 +60,7 @@ public class ControlTextBox extends ControlBase
 
 	// events
 
-	actionHandle(actionNameToHandle: string, universe: Universe): boolean
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		var text = this.text(null, null);
 
@@ -69,16 +71,19 @@ public class ControlTextBox extends ControlBase
 			|| actionNameToHandle == Input.Names().Backspace
 		)
 		{
-			this.text(text.substr(0, text.length - 1), null);
+			this.text(text.substring(0, text.length() - 1), null);
 
 			this.cursorPos = NumberHelper.wrapToRangeMinMax
 			(
-				this.cursorPos - 1, 0, text.length + 1
+				this.cursorPos - 1, 0, text.length() + 1
 			);
 		}
 		else if (actionNameToHandle == controlActionNames.ControlConfirm)
 		{
-			this.cursorPos = NumberHelper.wrapToRangeMinMax(this.cursorPos + 1, 0, text.length + 1);
+			this.cursorPos = NumberHelper.wrapToRangeMinMax
+			(
+				this.cursorPos + 1, 0, text.length() + 1
+			);
 		}
 		else if
 		(
@@ -87,7 +92,10 @@ public class ControlTextBox extends ControlBase
 		)
 		{
 			// This is a bit counterintuitive.
-			var direction = (actionNameToHandle == controlActionNames.ControlIncrement ? -1 : 1);
+			var direction =
+			(
+				actionNameToHandle == controlActionNames.ControlIncrement ? -1 : 1
+			);
 
 			var charAtCursor =
 			(
@@ -118,9 +126,9 @@ public class ControlTextBox extends ControlBase
 
 			var charAtCursor = String.fromCharCode(charAtCursor);
 
-			var textEdited = text.substr(0, this.cursorPos)
+			var textEdited = text.substring(0, this.cursorPos)
 				+ charAtCursor
-				+ text.substr(this.cursorPos + 1);
+				+ text.substring(this.cursorPos + 1);
 
 			this.text(textEdited, null);
 		}
@@ -134,22 +142,26 @@ public class ControlTextBox extends ControlBase
 				}
 				else
 				{
-					actionNameToHandle = actionNameToHandle.substr(1);
+					actionNameToHandle = actionNameToHandle.substring(1);
 				}
 			}
 
-			if (this.numberOfCharsMax == null || text.length < this.numberOfCharsMax)
+			if
+			(
+				this.numberOfCharsMax == null
+				|| text.length() < this.numberOfCharsMax
+			)
 			{
 				var textEdited =
-					text.substr(0, this.cursorPos)
+					text.substring(0, this.cursorPos)
 						+ actionNameToHandle
-						+ text.substr(this.cursorPos);
+						+ text.substring(this.cursorPos);
 
 				text = this.text(textEdited, null);
 
 				this.cursorPos = NumberHelper.wrapToRangeMinMax
 				(
-					this.cursorPos + 1, 0, text.length + 1
+					this.cursorPos + 1, 0, text.length() + 1
 				);
 			}
 		}
@@ -157,24 +169,24 @@ public class ControlTextBox extends ControlBase
 		return true; // wasActionHandled
 	}
 
-	focusGain()
+	public void focusGain()
 	{
 		this.isHighlighted = true;
 		this.cursorPos = this.text(null, null).length;
 	}
 
-	focusLose()
+	public void focusLose()
 	{
 		this.isHighlighted = false;
 		this.cursorPos = null;
 	}
 
-	isEnabled()
+	public boolean isEnabled()
 	{
 		return (this._isEnabled.get());
 	}
 
-	mouseClick(mouseClickPos: Coords)
+	public boolean mouseClick(Coords mouseClickPos)
 	{
 		var parent = this.parent;
 		var parentAsContainer = parent as ControlContainer;
@@ -184,7 +196,7 @@ public class ControlTextBox extends ControlBase
 		return true;
 	}
 
-	scalePosAndSize(scaleFactor: Coords)
+	public ControlTextBox scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
@@ -194,7 +206,7 @@ public class ControlTextBox extends ControlBase
 
 	// drawable
 
-	draw(universe: Universe, display: Display, drawLoc: Disposition)
+	public void draw(Universe universe, Display display, Disposition drawLoc)
 	{
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
 		var style = this.style(universe);
@@ -231,8 +243,8 @@ public class ControlTextBox extends ControlBase
 
 		if (this.isHighlighted)
 		{
-			var textBeforeCursor = text.substr(0, this.cursorPos);
-			var textAtCursor = text.substr(this.cursorPos, 1);
+			var textBeforeCursor = text.substring(0, this.cursorPos);
+			var textAtCursor = text.substring(this.cursorPos, 1);
 			var cursorX = display.textWidthForFontHeight
 			(
 				textBeforeCursor, this.fontHeightInPixels
@@ -265,6 +277,4 @@ public class ControlTextBox extends ControlBase
 			);
 		}
 	}
-}
-
 }

@@ -4,6 +4,7 @@ package GameFramework.Controls;
 import java.util.*;
 
 import GameFramework.Geometry.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 

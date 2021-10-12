@@ -1,11 +1,12 @@
 
 package GameFramework.Geometry.Shapes;
 
+import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 
 public class ShapeHelper
 {
-	private Transform _transformLocate_Locate;
+	private Transform_Locate _transformLocate;
 
 	public constructor()
 	{
@@ -22,7 +23,10 @@ public class ShapeHelper
 		return ShapeHelper._instance;
 	}
 
-	public ShapeBase applyLocationToShapeDefault(Disposition loc, ShapeBase shape)
+	public ShapeBase applyLocationToShapeDefault
+	(
+		Disposition loc, ShapeBase shape
+	)
 	{
 		this._transformLocate.loc = loc;
 

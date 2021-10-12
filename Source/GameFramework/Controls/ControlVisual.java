@@ -1,21 +1,28 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
+import GameFramework.Geometry.*;
 
 public class ControlVisual extends ControlBase
 {
-	visual: DataBinding<any,Visual>;
-	colorBackground: Color;
-	colorBorder: Color;
+	public DataBinding<Object,Visual> visual;
+	public Color colorBackground;
+	public Color colorBorder;
 
-	_drawPos: Coords;
-	_entity: Entity;
-	_sizeHalf: Coords;
+	private Coords _drawPos;
+	private Entity _entity;
+	private Coords _sizeHalf;
 
-	constructor(
-		name: string, pos: Coords, size: Coords,
-		visual: DataBinding<any, Visual>, colorBackground: Color,
-		colorBorder: Color
+	public ControlVisual
+	(
+		String name,
+		Coords pos,
+		Coords size,
+		DataBinding<Object, Visual> visual,
+		Color colorBackground,
+		Color colorBorder
 	)
 	{
 		super(name, pos, size, null);
@@ -28,48 +35,55 @@ public class ControlVisual extends ControlBase
 		this._entity = new Entity
 		(
 			this.name,
-			[
+			new EntityProperty[]
+			{
 				new Audible(),
 				Locatable.fromPos(this._drawPos),
 				Drawable.fromVisual(new VisualNone())
-			]
+			}
 		);
 		this._sizeHalf = Coords.create();
 	}
 
-	static from4
+	public static ControlVisual from4
 	(
-		name: string, pos: Coords, size: Coords, visual: DataBinding<any, Visual>
+		String name,
+		Coords pos,
+		Coords size,
+		DataBinding<Object, Visual> visual
 	)
 	{
 		return new ControlVisual(name, pos, size, visual, null, null);
 	}
 
-	static from5
+	public static ControlVisual from5
 	(
-		name: string, pos: Coords, size: Coords,
-		visual: DataBinding<any, Visual>, colorBackground: Color
+		String name,
+		Coords pos,
+		Coords size,
+		DataBinding<Object, Visual> visual,
+		Color colorBackground
 	)
 	{
 		return new ControlVisual(name, pos, size, visual, colorBackground, null);
 	}
 
-	actionHandle(actionName: string, universe: Universe): boolean
+	public boolean actionHandle(String actionName, Universe universe)
 	{
 		return false;
 	}
 
-	isEnabled(): boolean
+	public boolean isEnabled()
 	{
 		return false;
 	}
 
-	mouseClick(x: Coords): boolean
+	public boolean mouseClick(Coords x)
 	{
 		return false;
 	}
 
-	scalePosAndSize(scaleFactors: Coords): ControlBase
+	public ControlBase scalePosAndSize(Coords scaleFactors)
 	{
 		this.pos.multiply(scaleFactors);
 		this.size.multiply(scaleFactors);
@@ -79,11 +93,11 @@ public class ControlVisual extends ControlBase
 
 	// drawable
 
-	draw
+	public void draw
 	(
-		universe: Universe, display: Display, drawLoc: Disposition,
-		style: ControlStyle
-	): void
+		Universe universe, Display display, Disposition drawLoc,
+		ControlStyle style
+	)
 	{
 		var visualToDraw = this.visual.get();
 		if (visualToDraw != null)
@@ -112,6 +126,4 @@ public class ControlVisual extends ControlBase
 			visualToDraw.draw(uwpe, display);
 		}
 	}
-}
-
 }

@@ -1,5 +1,6 @@
 package GameFramework.Controls;
 
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 
 public class ControlButton extends ControlBase
@@ -11,8 +12,8 @@ public class ControlButton extends ControlBase
 	public Object context;
 	public boolean canBeHeldDown;
 
-	_Disposition drawLoc;
-	_Coords sizeHalf;
+	private Disposition _drawLoc;
+	private Coords _sizeHalf;
 
 	public ControlButton
 	(
@@ -41,7 +42,7 @@ public class ControlButton extends ControlBase
 		this._sizeHalf = Coords.create();
 	}
 
-	static from8
+	public static ControlButton from8
 	(
 		String name,
 		Coords pos,
@@ -60,7 +61,7 @@ public class ControlButton extends ControlBase
 		);
 	}
 
-	static from9
+	public static ControlButton from9
 	(
 		String name,
 		Coords pos,
@@ -80,7 +81,7 @@ public class ControlButton extends ControlBase
 		);
 	}
 
-	actionHandle(String actionNameToHandle, Universe universe)
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		if (actionNameToHandle == ControlActionNames.Instances().ControlConfirm)
 		{
@@ -90,14 +91,14 @@ public class ControlButton extends ControlBase
 		return (this.canBeHeldDown == false); // wasActionHandled
 	}
 
-	isEnabled()
+	public boolean isEnabled()
 	{
 		return (this._isEnabled.get == null ? this._isEnabled : this._isEnabled.get() );
 	}
 
 	// events
 
-	mouseClick(Coords clickPos)
+	public boolean mouseClick(Coords clickPos)
 	{
 		if (this.isEnabled())
 		{
@@ -106,7 +107,7 @@ public class ControlButton extends ControlBase
 		return (this.canBeHeldDown == false); // wasClickHandled
 	}
 
-	scalePosAndSize(Coords scaleFactor)
+	public ControlBase scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
@@ -115,7 +116,11 @@ public class ControlButton extends ControlBase
 
 	// drawable
 
-	draw(Universe universe, Display display, Disposition drawLoc, ControlStyle style)
+	public void draw
+	(
+		Universe universe, Display display, Disposition drawLoc,
+		ControlStyle style
+	)
 	{
 		var drawPos = this._drawLoc.overwriteWith(drawLoc).pos;
 		drawPos.add(this.pos);
@@ -154,6 +159,4 @@ public class ControlButton extends ControlBase
 			this.size.x // widthMaxInPixels
 		);
 	}
-}
-
 }

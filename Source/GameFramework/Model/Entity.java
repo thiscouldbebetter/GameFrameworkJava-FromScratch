@@ -119,17 +119,19 @@ public class Entity //
 	public Entity clone()
 	{
 		var nameCloned = this.name; // + IDHelper.Instance().idNext();
-		var propertiesCloned = [];
+		var propertiesCloned = EntityProperty[this.properties.length];
 		for (var i = 0; i < this.properties.length; i++)
 		{
 			var property = this.properties[i];
-			var propertyAsAny = property as Object;
-			var propertyCloned =
+			var propertyAsAny = (Object)property;
+			var propertyClonedAsObject =
 			(
-				propertyAsAny.clone == null ?
-				propertyAsAny : propertyAsAny.clone()
-			) as EntityProperty;
-			propertiesCloned.push(propertyCloned);
+				propertyAsAny.clone == null
+				? propertyAsAny
+				: propertyAsAny.clone()
+			);
+			var propertyCloned = (EntityProperty)propertyClonedAsObject;
+			propertiesCloned[i] = propertyCloned;
 		}
 		var returnValue = new Entity
 		(

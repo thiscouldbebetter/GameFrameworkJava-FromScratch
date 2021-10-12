@@ -1,12 +1,16 @@
 
 package GameFramework.Controls;
-{
+
+import java.util.*;
+
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
 
 public class ControlContainerTransparent extends ControlBase
 {
-	containerInner: ControlContainer;
+	ControlContainer containerInner;
 
-	constructor(containerInner: ControlContainer)
+	public ControlContainerTransparent(ControlContainer containerInner)
 	{
 		super
 		(
@@ -18,25 +22,26 @@ public class ControlContainerTransparent extends ControlBase
 
 	// instance methods
 
-	actionToInputsMappings(): ActionToInputsMapping[]
+	public ActionToInputsMapping[] actionToInputsMappings()
 	{
 		return this.containerInner.actionToInputsMappings();
 	}
 
-	childWithFocus(): ControlBase
+	public ControlBase childWithFocus()
 	{
 		return this.containerInner.childWithFocus();
 	}
 
-	childWithFocusNextInDirection(direction: number): ControlBase
+	public ControlBase childWithFocusNextInDirection(int direction)
 	{
 		return this.containerInner.childWithFocusNextInDirection(direction);
 	}
 
-	childrenAtPosAddToList
+	public List<ControlBase> childrenAtPosAddToList
 	(
-		posToCheck: Coords, listToAddTo: ControlBase[], addFirstChildOnly: boolean
-	): ControlBase[]
+		Coords posToCheck, List<ControlBase> listToAddTo,
+		boolean addFirstChildOnly
+	)
 	{
 		return this.containerInner.childrenAtPosAddToList
 		(
@@ -44,17 +49,17 @@ public class ControlContainerTransparent extends ControlBase
 		);
 	}
 
-	actionHandle(actionNameToHandle: string, universe: Universe): boolean
+	public boolea actionHandle(string actionNameToHandle, Universe universe)
 	{
 		return this.containerInner.actionHandle(actionNameToHandle, universe);
 	}
 
-	isEnabled(): boolean
+	public boolean isEnabled()
 	{
 		return true; // todo
 	}
 
-	mouseClick(mouseClickPos: Coords): boolean
+	public boolean mouseClick(Coords mouseClickPos)
 	{
 		var childrenContainingPos = this.containerInner.childrenAtPosAddToList
 		(
@@ -80,23 +85,23 @@ public class ControlContainerTransparent extends ControlBase
 		return wasClickHandled;
 	}
 
-	mouseMove(mouseMovePos: Coords): boolean
+	public boolean mouseMove(Coords mouseMovePos)
 	{
 		return this.containerInner.mouseMove(mouseMovePos);
 	}
 
-	scalePosAndSize(scaleFactor: Coords): ControlBase
+	public ControlBase scalePosAndSize(Coords scaleFactor)
 	{
 		return this.containerInner.scalePosAndSize(scaleFactor);
 	}
 
 	// drawable
 
-	draw
+	public void draw
 	(
-		universe: Universe, display: Display, drawLoc: Disposition,
-		style: ControlStyle
-	): void
+		Universe universe, Display display, Disposition drawLoc,
+		ControlStyle style
+	)
 	{
 		if (this.isVisible() == false)
 		{
@@ -109,7 +114,7 @@ public class ControlContainerTransparent extends ControlBase
 			this.containerInner.pos
 		);
 
-		style = style || this.style(universe);
+		style = (style != null ? style : this.style(universe);
 
 		display.drawRectangle
 		(
@@ -125,6 +130,4 @@ public class ControlContainerTransparent extends ControlBase
 			child.draw(universe, display, drawLoc, style);
 		}
 	}
-}
-
 }

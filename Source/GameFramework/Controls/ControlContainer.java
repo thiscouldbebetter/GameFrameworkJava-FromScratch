@@ -1,6 +1,7 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Geometry.*;
 
 public class ControlContainer extends ControlBase
 {

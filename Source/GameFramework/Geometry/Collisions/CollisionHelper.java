@@ -175,8 +175,8 @@ public class CollisionHelper
 
 			var colliderTypeNamesAsString = functionName.substr
 			(
-				doText.length,
-				functionName.length - doText.length - collideText.length
+				doText.length(),
+				functionName.length - doText.length() - collideText.length
 			);
 
 			var colliderTypeNames = colliderTypeNamesAsString.split(andText);
@@ -215,7 +215,7 @@ public class CollisionHelper
 
 			var colliderTypeNamesAsString = functionName.substr
 			(
-				doesText.length
+				doesText.length()
 			);
 
 			var colliderTypeNames = colliderTypeNamesAsString.split(containText);

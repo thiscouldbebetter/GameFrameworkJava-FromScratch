@@ -1,19 +1,19 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Geometry.*;
 
 public class ControlSelectOption
 {
-	value: any;
-	text: any;
+	public Object value;
+	public String text;
 
-	fontHeightInPixels: number;
+	public double fontHeightInPixels;
 
-	constructor(value: any, text: any)
+	public ControlSelectOption(Object value, Object text)
 	{
 		this.value = value;
 		this.text = text;
 	}
 }
 
-}

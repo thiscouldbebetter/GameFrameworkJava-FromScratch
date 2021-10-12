@@ -35,5 +35,3 @@ public class ControlActionNames
 		return ControlActionNames._instances;
 	}
 }
-
-}

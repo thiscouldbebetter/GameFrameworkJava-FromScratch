@@ -182,7 +182,7 @@ public class TarFile
 					entryHeader.timeModifiedInUnixFormat;
 				entryContainingLongPathToPrepend.header.checksumCalculate();
 				entryHeader.fileName =
-					entryFileName.substr(0, maxLength) + String.fromCharCode(0);
+					entryFileName.substring(0, maxLength) + String.fromCharCode(0);
 				entries.splice(i, 0, entryContainingLongPathToPrepend);
 				i++;
 			}

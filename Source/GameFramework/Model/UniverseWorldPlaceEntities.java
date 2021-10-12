@@ -1,6 +1,8 @@
 
 package GameFramework.Model;
 
+import GameFramework.Model.Places.*;
+
 public class UniverseWorldPlaceEntities
 {
 	public Universe universe;

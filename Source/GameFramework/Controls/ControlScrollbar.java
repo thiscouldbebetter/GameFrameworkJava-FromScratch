@@ -1,24 +1,29 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Geometry.*;
 
 public class ControlScrollbar extends ControlBase
 {
-	itemHeight: number;
-	_items: any;
-	_sliderPosInItems: number;
+	public double itemHeight;
+	private Object _items;
+	private number _sliderPosInItems;
 
-	buttonScrollDown: ControlButton;
-	buttonScrollUp: ControlButton;
-	handleSize: Coords;
-	windowSizeInItems: number;
+	public ControlButton buttonScrollDown;
+	public ControlButton buttonScrollUp;
+	public Coords handleSize;
+	public double windowSizeInItems;
 
-	_drawPos: Coords;
+	private Coords _drawPos;
 
-	constructor
+	public ControlScrollbar
 	(
-		pos: Coords, size: Coords, fontHeightInPixels: number,
-		itemHeight: number, items: any, sliderPosInItems: number
+		Coords pos,
+		Coords size,
+		double fontHeightInPixels,
+		double itemHeight,
+		Object items,
+		number sliderPosInItems
 	)
 	{
 		super(null, pos, size, fontHeightInPixels);
@@ -58,27 +63,27 @@ public class ControlScrollbar extends ControlBase
 		this._drawPos = Coords.create();
 	}
 
-	actionHandle(actionNameToHandle: string, universe: Universe)
+	public boolean actionHandle(string actionNameToHandle, Universe universe)
 	{
 		return true;
 	}
 
-	isVisible()
+	public boolean isVisible()
 	{
 		return this.windowSizeInItems < this.items().length
 	}
 
-	items()
+	public Object items()
 	{
 		return (this._items.get == null ? this._items : this._items.get());
 	}
 
-	mouseClick(pos: Coords): boolean
+	public boolean mouseClick(Coords pos)
 	{
 		return false;
 	}
 
-	scalePosAndSize(scaleFactor: Coords)
+	public ControlBase scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
@@ -88,7 +93,7 @@ public class ControlScrollbar extends ControlBase
 		this.buttonScrollDown.scalePosAndSize(scaleFactor);
 	}
 
-	scrollDown()
+	public void scrollDown()
 	{
 		var sliderPosInItems = NumberHelper.trimToRangeMinMax
 		(
@@ -98,7 +103,7 @@ public class ControlScrollbar extends ControlBase
 		this._sliderPosInItems = sliderPosInItems;
 	}
 
-	scrollUp()
+	public void scrollUp()
 	{
 		var sliderPosInItems = NumberHelper.trimToRangeMinMax
 		(
@@ -108,7 +113,7 @@ public class ControlScrollbar extends ControlBase
 		this._sliderPosInItems = sliderPosInItems;
 	}
 
-	slideSizeInPixels()
+	public Coords slideSizeInPixels()
 	{
 		var slideSizeInPixels = new Coords
 		(
@@ -120,17 +125,17 @@ public class ControlScrollbar extends ControlBase
 		return slideSizeInPixels;
 	}
 
-	sliderPosInItems()
+	public int sliderPosInItems()
 	{
 		return this._sliderPosInItems;
 	}
 
-	sliderMaxInItems()
+	public int sliderMaxInItems()
 	{
 		return this.items().length - Math.floor(this.windowSizeInItems);
 	}
 
-	sliderPosInPixels()
+	public Coords sliderPosInPixels()
 	{
 		var sliderPosInPixels = new Coords
 		(
@@ -145,7 +150,7 @@ public class ControlScrollbar extends ControlBase
 		return sliderPosInPixels;
 	}
 
-	sliderSizeInPixels()
+	public Coords sliderSizeInPixels()
 	{
 		var sliderSizeInPixels = this.slideSizeInPixels().multiply
 		(
@@ -157,7 +162,11 @@ public class ControlScrollbar extends ControlBase
 
 	// drawable
 
-	draw(universe: Universe, display: Display, drawLoc: Disposition, style: ControlStyle)
+	public void draw
+	(
+		Universe universe, Display display, Disposition drawLoc,
+		ControlStyle style
+	)
 	{
 		if (this.isVisible())
 		{
@@ -183,6 +192,4 @@ public class ControlScrollbar extends ControlBase
 			);
 		}
 	}
-}
-
 }

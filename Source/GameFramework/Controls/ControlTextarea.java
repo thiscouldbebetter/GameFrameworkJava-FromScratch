@@ -1,27 +1,33 @@
 
 package GameFramework.Controls;
-{
+
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
 
 public class ControlTextarea extends ControlBase
 {
-	_text: DataBinding<any, string>;
-	_isEnabled: DataBinding<any, boolean>;
+	private DataBinding<Object,String> _text;
+	private DataBinding<Object,Boolean>; _isEnabled
 
-	charCountMax: number;
-	cursorPos: number;
-	lineSpacing: number;
-	scrollbar: ControlScrollbar;
+	public int charCountMax;
+	public int cursorPos;
+	public double lineSpacing;
+	public ControlScrollbar scrollbar;
 
-	_drawPos: Coords;
-	_drawLoc: Disposition;
-	_indexOfLineSelected: number;
-	_mouseClickPos: Coords;
-	_textAsLines: any;
+	private Coords _drawPos;
+	private Disposition _drawLoc;
+	private int _indexOfLineSelected;
+	private Coords _mouseClickPos;
+	private Object _textAsLines;
 
-	constructor
+	public ControlTextarea
 	(
-		name: string, pos: Coords, size: Coords, text: DataBinding<any, string>,
-		fontHeightInPixels: number, isEnabled: DataBinding<any, boolean>
+		String name,
+		Coords pos,
+		Coords size,
+		DataBinding<Object,String> text,
+		double fontHeightInPixels,
+		DataBinding<Object,Boolean> isEnabled
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -42,7 +48,7 @@ public class ControlTextarea extends ControlBase
 			this.lineSpacing, // itemHeight
 			DataBinding.fromContextAndGet
 			(
-				this, (c: ControlTextarea) => c.textAsLines()
+				this, (ControlTextarea c) => c.textAsLines()
 			),
 			0 // sliderPosInItems
 		);
@@ -53,7 +59,7 @@ public class ControlTextarea extends ControlBase
 		this._mouseClickPos = Coords.create();
 	}
 
-	actionHandle(actionNameToHandle: string, universe: Universe): boolean
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		var text = this.text(null);
 
@@ -64,16 +70,19 @@ public class ControlTextarea extends ControlBase
 			|| actionNameToHandle == Input.Names().Backspace
 		)
 		{
-			this.text(text.substr(0, text.length - 1));
+			this.text(text.substring(0, text.length() - 1));
 
 			this.cursorPos = NumberHelper.wrapToRangeMinMax
 			(
-				this.cursorPos - 1, 0, text.length + 1
+				this.cursorPos - 1, 0, text.length() + 1
 			);
 		}
 		else if (actionNameToHandle == controlActionNames.ControlConfirm)
 		{
-			this.cursorPos = NumberHelper.wrapToRangeMinMax(this.cursorPos + 1, 0, text.length + 1);
+			this.cursorPos = NumberHelper.wrapToRangeMinMax
+			(
+				this.cursorPos + 1, 0, text.length() + 1
+			);
 		}
 		/* // todo - No-keyboard support.
 		else if
@@ -130,22 +139,22 @@ public class ControlTextarea extends ControlBase
 				}
 				else
 				{
-					actionNameToHandle = actionNameToHandle.substr(1);
+					actionNameToHandle = actionNameToHandle.substring(1);
 				}
 			}
 
-			if (this.charCountMax == null || text.length < this.charCountMax)
+			if (this.charCountMax == null || text.length() < this.charCountMax)
 			{
 				var textEdited =
-					text.substr(0, this.cursorPos)
+					text.substring(0, this.cursorPos)
 						+ actionNameToHandle
-						+ text.substr(this.cursorPos)
+						+ text.substring(this.cursorPos)
 
 				text = this.text(textEdited);
 
 				this.cursorPos = NumberHelper.wrapToRangeMinMax
 				(
-					this.cursorPos + 1, 0, text.length + 1
+					this.cursorPos + 1, 0, text.length() + 1
 				);
 			}
 		}
@@ -153,29 +162,31 @@ public class ControlTextarea extends ControlBase
 		return true; // wasActionHandled
 	}
 
-	focusGain()
+	public void focusGain()
 	{
 		this.isHighlighted = true;
 		this.cursorPos = this.text(null).length;
 	}
 
-	focusLose()
+	public void focusLose()
 	{
 		this.isHighlighted = false;
 		this.cursorPos = null;
 	}
 
-	indexOfFirstLineVisible()
+	public int indexOfFirstLineVisible()
 	{
 		return this.scrollbar.sliderPosInItems();
 	}
 
-	indexOfLastLineVisible()
+	public int indexOfLastLineVisible()
 	{
-		return this.indexOfFirstLineVisible() + Math.floor(this.scrollbar.windowSizeInItems) - 1;
+		return
+			this.indexOfFirstLineVisible()
+			+ Math.floor(this.scrollbar.windowSizeInItems) - 1;
 	}
 
-	indexOfLineSelected(valueToSet: number)
+	public int indexOfLineSelected(int valueToSet)
 	{
 		var returnValue = valueToSet;
 		if (valueToSet == null)
@@ -189,12 +200,12 @@ public class ControlTextarea extends ControlBase
 		return returnValue;
 	}
 
-	isEnabled()
+	public boolean isEnabled()
 	{
 		return (this._isEnabled.get());
 	}
 
-	text(value: string)
+	public String text(String value)
 	{
 		if (value != null)
 		{
@@ -204,9 +215,9 @@ public class ControlTextarea extends ControlBase
 		return this._text.get();
 	}
 
-	textAsLines()
+	public List<String> textAsLines()
 	{
-		this._textAsLines = [];
+		this._textAsLines = new List<String>();
 
 		var charWidthInPixels = this.fontHeightInPixels / 2; // hack
 		var charsPerLine = Math.floor(this.size.x / charWidthInPixels);
@@ -215,15 +226,15 @@ public class ControlTextarea extends ControlBase
 		var i = 0;
 		while (i < textLength)
 		{
-			var line = textComplete.substr(i, charsPerLine);
-			this._textAsLines.push(line);
+			var line = textComplete.substring(i, charsPerLine);
+			this._textAsLines.add(line);
 			i += charsPerLine;
 		}
 
 		return this._textAsLines;
 	}
 
-	mouseClick(clickPos: Coords)
+	public boolean mouseClick(Coords clickPos)
 	{
 		clickPos = this._mouseClickPos.overwriteWith(clickPos);
 
@@ -273,7 +284,7 @@ public class ControlTextarea extends ControlBase
 		return true; // wasActionHandled
 	}
 
-	scalePosAndSize(scaleFactor: Coords)
+	public ControlBase scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
@@ -284,7 +295,11 @@ public class ControlTextarea extends ControlBase
 
 	// drawable
 
-	draw(universe: Universe, display: Display, drawLoc: Disposition, style: ControlStyle)
+	public void draw
+	(
+		Universe universe, Display display, Disposition drawLoc,
+		ControlStyle style
+	)
 	{
 		drawLoc = this._drawLoc.overwriteWith(drawLoc);
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
@@ -353,6 +368,4 @@ public class ControlTextarea extends ControlBase
 
 		this.scrollbar.draw(universe, display, drawLoc, style);
 	}
-}
-
 }

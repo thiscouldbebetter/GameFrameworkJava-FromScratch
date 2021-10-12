@@ -4,6 +4,7 @@ package GameFramework.Controls;
 import java.util.*;
 import java.util.stream.*;
 
+import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
 public class ControlTabbed extends ControlBase

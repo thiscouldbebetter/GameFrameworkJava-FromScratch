@@ -2,6 +2,11 @@
 package GameFramework.Model.Places;
 
 import java.util.*;
+
+import GameFramework.Controls.*;
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Collisions.*;
 import GameFramework.Model.*;
 
 public class Place //
@@ -9,13 +14,13 @@ public class Place //
 	public String name;
 	public String defnName;
 	public Coords size;
-	public Entity[] entities;
-	public Map<int, Entity> entitiesById;
-	public Map<String, Entity> entitiesByName;
+	public List<Entity> entities;
+	public Map<Integer,Entity> entitiesById;
+	public Map<String,Entity> entitiesByName;
 
-	public Map<String, Entity[]> _entitiesByPropertyName;
-	public Entity[] entitiesToSpawn;
-	public Entity[] entitiesToRemove;
+	public Map<String,List<Entity>> _entitiesByPropertyName;
+	public List<Entity> entitiesToSpawn;
+	public List<Entity> entitiesToRemove;
 	public boolean isLoaded;
 
 	public Place
@@ -26,13 +31,14 @@ public class Place //
 		this.name = name;
 		this.defnName = defnName;
 		this.size = size;
-		this.entities = [];
-		this.entitiesById = new Map<int, Entity>();
-		this.entitiesByName = new Map<String, Entity>();
+		this.entities = new ArrayList<Entity>();
+		this.entitiesById = new HashMap<Integer,Entity>();
+		this.entitiesByName = new HashMap<String,Entity>();
 
-		this._entitiesByPropertyName = new Map<String, Entity[]>();
-		this.entitiesToSpawn = entities.slice();
-		this.entitiesToRemove = [];
+		this._entitiesByPropertyName = new HashMap<String,List<Entity>>();
+		this.entitiesToSpawn = new ArrayList<Entity>();
+		this.entitiesToSpawn.addAll(entities);
+		this.entitiesToRemove = new ArrayList<Entity>();
 		this.isLoaded = false;
 	}
 
@@ -71,7 +77,7 @@ public class Place //
 				{
 					x.drawable().updateForTimerTick(uwpe.entitySet(x) );
 				}
-			)
+			);
 		}
 		else
 		{
@@ -302,18 +308,19 @@ public class Place //
 
 	public CollisionTracker collisionTracker()
 	{
-		var CollisionTracker returnValue = null;
+		CollisionTracker returnValue = null;
  
 		if (typeof(CollisionTracker) != "undefined")
 		{
-			var collisionTrackerEntity = this.entitiesByPropertyName(CollisionTracker.name)[0];
+			var collisionTrackerEntity =
+				this.entitiesByPropertyName(CollisionTracker.name)[0];
 			var returnValueAsProperty =
 			(
 				collisionTrackerEntity == null
 				? null
 				: collisionTrackerEntity.propertyByName(CollisionTracker.name)
 			);
-			returnValue = returnValueAsProperty as CollisionTracker;
+			returnValue = (CollisionTracker)returnValueAsProperty;
 		}
 		return returnValue;
 	}
