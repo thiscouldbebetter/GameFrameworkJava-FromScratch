@@ -5,10 +5,10 @@ import java.util.*;
 
 public class VideoHelper
 {
-	public Video[] videos;
+	public List<Video> videos;
 	public Map<String,Video> videosByName;
 
-	public VideoHelper(Video[] videos)
+	public VideoHelper(List<Video> videos)
 	{
 		this.videos = videos;
 		this.videosByName = ArrayHelper.addLookupsByName(this.videos);

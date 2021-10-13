@@ -1,6 +1,8 @@
 
 package GameFramework.Input;
 
+import java.util.*;
+
 import GameFramework.Helpers.*;
 
 public class Input

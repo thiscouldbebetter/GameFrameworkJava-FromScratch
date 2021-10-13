@@ -20,6 +20,10 @@ public class World
 
 	public void updateForTimerTick(Universe universe)
 	{
-		this.placeCurrent.updateForTimerTick(universe, this);
+		var uwpe = new UniverseWorldPlaceEntities
+		(
+			universe, this, this.placeCurrent, null, null
+		);
+		this.placeCurrent.updateForTimerTick(uwpe);
 	}
 }

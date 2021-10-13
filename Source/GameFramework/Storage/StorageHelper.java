@@ -1,6 +1,8 @@
 
 package GameFramework.Storage;
 
+import GameFramework.Storage.Compressor.*;
+
 public class StorageHelper
 {
 	private String propertyNamePrefix;

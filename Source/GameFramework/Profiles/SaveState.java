@@ -1,6 +1,10 @@
 
 package GameFramework.Profiles;
 
+import GameFramework.Media.*;
+import GameFramework.Model.*;
+import GameFramework.Utility.*;
+
 public class SaveState
 {
 	public String name;

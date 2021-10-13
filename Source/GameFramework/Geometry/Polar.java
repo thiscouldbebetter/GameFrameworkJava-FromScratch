@@ -1,6 +1,7 @@
 
 package GameFramework.Geometry;
 
+import GameFramework.Utility.*;
 
 public class Polar
 {
@@ -20,7 +21,7 @@ public class Polar
 		return new Polar(0, 0, 0);
 	}
 
-	public static _default()
+	public static Polar _default()
 	{
 		return new Polar(0, 1, 0);
 	}
@@ -128,6 +129,4 @@ public class Polar
 	{
 		return new Polar(this.azimuthInTurns, this.radius, this.elevationInTurns);
 	}
-}
-
 }

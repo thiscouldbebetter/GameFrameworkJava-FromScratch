@@ -1,7 +1,11 @@
 
 package GameFramework.Geometry.Shapes;
 
+import java.util.*;
+
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
+import GameFramework.Utility.*;
 
 public class Box implements ShapeBase
 {
@@ -14,7 +18,7 @@ public class Box implements ShapeBase
 	private Coords _sizeHalf;
 	private Coords _vertices[];
 
-	public Box (Coords center, Coords size)
+	public Box(Coords center, Coords size)
 	{
 		this.center = (center != null ? center : Coords.create());
 		this.size = (size != null ? size : Coords.create());
@@ -31,7 +35,7 @@ public class Box implements ShapeBase
 		return Box.fromCenterAndSize(Coords.create(), Coords.create());
 	}
 
-	public static Box default()
+	public static Box _default()
 	{
 		return Box.fromCenterAndSize(Coords.zeroes(), Coords.ones() );
 	}
@@ -107,7 +111,7 @@ public class Box implements ShapeBase
 		return pointToCheck.isInRangeMinMax(this.min(), this.max());
 	}
 
-	public Box fromMinAndMax(Coords min, Coords max)
+	public Box setMinAndMax(Coords min, Coords max)
 	{
 		this.center.overwriteWith(min).add(max).half();
 		this.size.overwriteWith(max).subtract(min);
@@ -263,7 +267,7 @@ public class Box implements ShapeBase
 	public Coords posRandom(Randomizer randomizer)
 	{
 		var min = this.min();
-		var offset = Coords.default().randomize
+		var offset = Coords._default().randomize
 		(
 			randomizer
 		).multiply
@@ -324,7 +328,7 @@ public class Box implements ShapeBase
 		return returnValue;
 	}
 
-	public boolean touchesOtherInDimension(Box othernumber , dimensionIndex)
+	public boolean touchesOtherInDimension(Box other, int dimensionIndex)
 	{
 		var rangeThis = this.rangeForDimension(dimensionIndex, this._range);
 		var rangeOther = other.rangeForDimension(dimensionIndex, other._range);
@@ -354,7 +358,7 @@ public class Box implements ShapeBase
 		return new Box(this.center.clone(), this.size.clone());
 	}
 
-	publc boolean equals(Box other)
+	public boolean equals(Box other)
 	{
 		var returnValue =
 		(
@@ -462,6 +466,4 @@ public class Box implements ShapeBase
 		);
 		return this;
 	}
-}
-
 }

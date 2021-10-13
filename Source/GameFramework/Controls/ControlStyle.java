@@ -1,6 +1,8 @@
 
 package GameFramework.Controls;
 
+import java.util.*;
+
 import GameFramework.Display.*;
 
 public class ControlStyle
@@ -45,8 +47,8 @@ class ControlStyle_Instances
 	public ControlStyle Default;
 	public ControlStyle Dark;
 
-	private ControlStyle _All[];
-	private Map<String,ControlStyle> _AllByName;
+	public ControlStyle _All[];
+	public Map<String,ControlStyle> _AllByName;
 
 	public ControlStyle_Instances()
 	{

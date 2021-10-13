@@ -1,6 +1,10 @@
 
 package GameFramework.Model;
 
+import java.util.*;
+
+import GameFramework.Model.Places.*;
+
 public class Entity //
 {
 	public int id;

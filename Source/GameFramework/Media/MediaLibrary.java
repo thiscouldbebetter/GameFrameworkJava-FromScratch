@@ -8,11 +8,11 @@ import GameFramework.Helpers.*;
 
 public class MediaLibrary
 {
-	private List<Image2> images;
-	private List<Sound> sounds;
-	private List<Video> videos;
-	private List<Font> fonts;
-	private List<TextString> textStrings;
+	public List<Image2> images;
+	public List<Sound> sounds;
+	public List<Video> videos;
+	public List<Font> fonts;
+	public List<TextString> textStrings;
 
 	private HashMap<String, Image2> imagesByName;
 	private HashMap<String, Sound> soundsByName;
@@ -93,7 +93,7 @@ public class MediaLibrary
 		}};
 	}
 
-	public static MediaLibrary create()
+	public static MediaLibrary _default()
 	{
 		return MediaLibrary.fromFilePaths(new String[] {});
 	}
@@ -265,12 +265,13 @@ public class MediaLibrary
 		return returnValue;
 	}
 
-	/*
-
 	// Instance methods.
 
 	public boolean areAllItemsLoaded()
 	{
+		return true;
+
+		/*
 		var areAllItemsLoadedSoFar = true;
 
 		for (var c = 0; c < this.collectionsAll.length; c++)
@@ -293,21 +294,29 @@ public class MediaLibrary
 		}
 
 		return areAllItemsLoadedSoFar;
+		*/
 	}
 
 	public void waitForItemToLoad
 	(
-		String collectionName, String itemName, callback: ()=>void
+		String collectionName, String itemName, Runnable callback
 	)
 	{
+		// Do nothing.
+
+		callback.run();
+
+		/*
 		var itemToLoad = this.collectionsByName.get(collectionName).get(itemName);
 		this.timer = setInterval
 		(
 			this.waitForItemToLoad_TimerTick.bind(this, itemToLoad, callback),
 			100 // milliseconds
 		);
+		*/
 	}
 
+	/*
 	waitForItemToLoad_TimerTick(itemToLoad: Object, callback: ()=>void ): void
 	{
 		if (itemToLoad.isLoaded)
@@ -316,16 +325,23 @@ public class MediaLibrary
 			callback();
 		}
 	}
+	*/
 
-	waitForItemsAllToLoad(callback: ()=>void): void
+	public void waitForItemsAllToLoad(Runnable callback)
 	{
+		// Do nothing.
+		callback.run();
+
+		/*
 		this.timer = setInterval
 		(
 			this.waitForItemsAllToLoad_TimerTick.bind(this, callback),
 			100 // milliseconds
 		);
+		*/
 	}
 
+	/*
 	waitForItemsAllToLoad_TimerTick(callback: ()=>void)
 	{
 		if (this.areAllItemsLoaded())
@@ -334,22 +350,23 @@ public class MediaLibrary
 			callback();
 		}
 	}
+	*/
 
 	// accessors
 
-	imagesAdd(images: List<Image2>): void
+	public void imagesAdd(List<Image2> images)
 	{
 		for (var i = 0; i < images.length; i++)
 		{
-			var image = images[i];
-			if (this.imagesByName.get(image.name) == null)
+			var image = images.get(i);
+			var imageName = image.name();
+			if (this.imagesByName.containsKey(imageName) == false)
 			{
 				this.images.add(image);
-				this.imagesByName.set(image.name, image);
+				this.imagesByName.put(imageName, image);
 			}
 		}
 	}
-	*/
 
 	public Font fontGetByName(String name)
 	{

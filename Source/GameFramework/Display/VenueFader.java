@@ -2,22 +2,23 @@
 package GameFramework.Display;
 
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public class VenueFader implements Venue
 {
 	public Venue venuesToFadeFromAndTo[];
 	public Color backgroundColor;
-	public number millisecondsPerFade;
+	public int millisecondsPerFade;
 
 	public DateTime timeFadeStarted;
-	public number venueIndexCurrent;
+	public int venueIndexCurrent;
 
 	public VenueFader
 	(
 		Venue venueToFadeTo,
 		Venue venueToFadeFrom,
 		Color backgroundColor,
-		number millisecondsPerFade
+		int millisecondsPerFade
 	)
 	{
 		this.venuesToFadeFromAndTo = new Venue[]

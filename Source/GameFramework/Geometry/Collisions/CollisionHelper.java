@@ -2,6 +2,7 @@
 package GameFramework.Geometry.Collisions;
 
 import java.util.*;
+import java.util.function.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
@@ -14,11 +15,12 @@ public class CollisionHelper
 	public boolean throwErrorIfCollidersCannotBeCollided;
 	public Map<String,Map<String,Object>> colliderTypeNamesToDoCollideLookup;
 	public Map<String,Map<String,Object>> colliderTypeNamesToDoesContainLookup;
-	public Map<String,Map<String,Object>> colliderTypeNamesToCollisionFindLookup;
+	public Map<String,Map<String,Function<ShapeShapeCollision,Collision>>> colliderTypeNamesToCollisionFindLookup;
 
 	private Box _box;
 	private Box _box2;
 	private Collision _collision;
+	private Coords _displacement;
 	private Edge _edge;
 	private Polar _polar;
 	private Coords _pos;
@@ -53,10 +55,14 @@ public class CollisionHelper
 
 	// constructor helpers
 
-	public Map<String,Map<String,Object>> collisionFindLookupBuild()
+	public Map<String,Map<String,Function<ShapeShapeCollision,Collision>>> collisionFindLookupBuild()
 	{
-		var lookupOfLookups = new Map<String,Map<String,Object>>();
-		Map<String, Object> lookup;
+		var findPos = true;
+
+		var lookupOfLookups =
+			new HashMap<String,Map<String,Function<ShapeShapeCollision,Collision>>>();
+
+		Map<String,Function<ShapeShapeCollision,Collision>> lookup;
 
 		var boxName = Box.class.getName();
 		var boxRotatedName = BoxRotated.class.getName();
@@ -66,90 +72,253 @@ public class CollisionHelper
 		var shapeInverseName = ShapeInverse.class.getName();
 		var sphereName = Sphere.class.getName();
 
+		var ch = this;
+
 		if (boxName != null)
 		{
-			lookup = new HashMap<String, Object>()
+			lookup = new HashMap<String,Function<ShapeShapeCollision,Collision>>()
 			{{
-				put(boxName, this.collisionOfBoxAndBox);
-				put(boxRotatedName, this.collisionOfBoxAndBoxRotated);
-				put(mapLocatedName, this.collisionOfBoxAndMapLocated);
-				put(meshName, this.collisionOfBoxAndMesh);
-				put(shapeGroupAllName, this.collisionOfShapeAndShapeGroupAll);
-				put(shapeInverseName, this.collisionOfShapeAndShapeInverse);
-				put(sphereName, this.collisionOfBoxAndSphere);
+				put
+				(
+					boxName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfBoxAndBox((Box)x.a, (Box)x.b, x.c)
+				);
+				put
+				(
+					boxRotatedName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfBoxAndBoxRotated((Box)x.a, (BoxRotated)x.b, x.c, findPos)
+				);
+				put
+				(
+					mapLocatedName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfBoxAndMapLocated((Box)x.a, (MapLocated)x.b, x.c)
+				);
+				put
+				(
+					meshName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfBoxAndMesh((Box)x.a, (Mesh)x.b, x.c)
+				);
+				put
+				(
+					shapeGroupAllName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeAndShapeGroupAll(x.a, (ShapeGroupAll)x.b, x.c)
+				);
+				put
+				(
+					shapeInverseName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeAndShapeInverse(x.a, (ShapeInverse)x.b, x.c)
+				);
+				put
+				(
+					sphereName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfBoxAndSphere((Box)x.a, (Sphere)x.b, x.c, findPos)
+				);
 			}};
 			lookupOfLookups.put(boxName, lookup);
 		}
-		
+
 		if (boxRotatedName != null)
 		{
-			lookup = new HashMap<String, Object>()
+			lookup = new HashMap<String,Function<ShapeShapeCollision,Collision>>()
 			{{
-				put(boxName, this.collisionOfBoxRotatedAndBox);
-				put(boxRotatedName, this.collisionOfBoxRotatedAndBoxRotated);
+				put
+				(
+					boxName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfBoxRotatedAndBox((BoxRotated)x.a, (Box)x.b, x.c, findPos)
+				);
+				put
+				(
+					boxRotatedName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfBoxRotatedAndBoxRotated((BoxRotated)x.a, (BoxRotated)x.b, x.c, findPos)
+				);
 			}};
+
 			lookupOfLookups.put(boxRotatedName, lookup);
 		}
 
 		if (mapLocatedName != null)
 		{
-			lookup = new HashMap<String, Object>()
+			lookup = new HashMap<String,Function<ShapeShapeCollision,Collision>>()
 			{{
-				put(boxName, this.collisionOfMapLocatedAndBox);
-				put(boxRotatedName, this.collisionOfMapLocatedAndBoxRotated);
-				put(mapLocatedName, this.collisionOfMapLocatedAndMapLocated);
-				put(shapeGroupAllName, this.collisionOfShapeAndShapeGroupAll);
-				put(sphereName, this.collisionOfMapLocatedAndSphere);
+				put
+				(
+					boxName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfMapLocatedAndBox((MapLocated)x.a, (Box)x.b, x.c)
+				);
+				put
+				(
+					boxRotatedName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfMapLocatedAndBoxRotated((MapLocated)x.a, (BoxRotated)x.b, x.c, findPos)
+				);
+				put
+				(
+					mapLocatedName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfMapLocatedAndMapLocated((MapLocated)x.a, (MapLocated)x.b, x.c)
+				);
+				put
+				(
+					shapeGroupAllName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeAndShapeGroupAll(x.a, (ShapeGroupAll)x.b, x.c)
+				);
+				put
+				(
+					sphereName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfMapLocatedAndSphere((MapLocated)x.a, (Sphere)x.b, x.c)
+				);
 			}};
+
 			lookupOfLookups.put(mapLocatedName, lookup);
 		}
 
 		if (meshName != null)
 		{
-			lookup = new HashMap<String, Object>()
+			lookup = new HashMap<String,Function<ShapeShapeCollision,Collision>>()
 			{{
-				put(boxName, this.collisionOfMeshAndBox);
-				put(shapeGroupAllName, this.collisionOfShapeAndShapeGroupAll);
-				put(shapeInverseName, this.collisionOfShapeAndShapeInverse);
-				put(sphereName, this.collisionOfMeshAndSphere);
+				put
+				(
+					boxName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfMeshAndBox((Mesh)x.a, (Box)x.b, x.c)
+				);
+				put
+				(
+					shapeGroupAllName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeAndShapeGroupAll(x.a, (ShapeGroupAll)x.b, x.c)
+				);
+				put
+				(
+					shapeInverseName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeAndShapeInverse(x.a, (ShapeInverse)x.b, x.c)
+				);
+				put
+				(
+					sphereName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfMeshAndSphere((Mesh)x.a, (Sphere)x.b, x.c)
+				);
 			}};
+
 			lookupOfLookups.put(meshName, lookup);
 		}
 
 		if (shapeGroupAllName != null)
 		{
-			lookup = new HashMap<String, Object>()
+			lookup = new HashMap<String,Function<ShapeShapeCollision,Collision>>()
 			{{
-				put(boxName, this.collisionOfShapeGroupAllAndShape);
-				put(meshName, this.collisionOfShapeGroupAllAndShape);
-				put(sphereName, this.collisionOfShapeGroupAllAndShape);
+				put
+				(
+					boxName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeGroupAllAndShape((ShapeGroupAll)x.a, x.b, x.c)
+				);
+				put
+				(
+					meshName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeGroupAllAndShape((ShapeGroupAll)x.a, x.b, x.c)
+				);
+				put
+				(
+					sphereName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeGroupAllAndShape((ShapeGroupAll)x.a, x.b, x.c)
+				);
 			}};
+
 			lookupOfLookups.put(shapeGroupAllName, lookup);
 		}
 
 		if (shapeInverseName != null)
 		{
-			lookup = new HashMap<String, Object>()
+			lookup = new HashMap<String,Function<ShapeShapeCollision,Collision>>()
 			{{
-				put(boxName, this.collisionOfShapeInverseAndShape);
-				put(meshName, this.collisionOfShapeInverseAndShape);
-				put(sphereName, this.collisionOfShapeInverseAndShape);
+				put
+				(
+					boxName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeInverseAndShape((ShapeInverse)x.a, x.b, x.c)
+				);
+				put
+				(
+					meshName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeInverseAndShape((ShapeInverse)x.a, x.b, x.c)
+				);
+				put
+				(
+					sphereName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeInverseAndShape((ShapeInverse)x.a, x.b, x.c)
+				);
 			}};
+
 			lookupOfLookups.put(shapeInverseName, lookup);
 		}
 
 		if (sphereName != null)
 		{
-			lookup = new HashMap<String, Object>()
+			lookup = new HashMap<String,Function<ShapeShapeCollision,Collision>>()
 			{{
-				put(boxName, this.collisionOfSphereAndBox);
-				put(boxRotatedName, this.collisionOfSphereAndBoxRotated);
-				put(mapLocatedName, this.collisionOfSphereAndMapLocated);
-				put(meshName, this.collisionOfSphereAndMesh);
-				put(shapeGroupAllName, this.collisionOfShapeAndShapeGroupAll);
-				put(shapeInverseName, this.collisionOfShapeAndShapeInverse);
-				put(sphereName, this.collisionOfSpheres);
+				put
+				(
+					boxName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfSphereAndBox((Sphere)x.a, (Box)x.b, x.c, findPos)
+				);
+				put
+				(
+					boxRotatedName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfSphereAndBoxRotated((Sphere)x.a, (BoxRotated)x.b, x.c, findPos)
+				);
+				put
+				(
+					mapLocatedName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfSphereAndMapLocated((Sphere)x.a, (MapLocated)x.b, x.c)
+				);
+				put
+				(
+					meshName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfSphereAndMesh((Sphere)x.a, (Mesh)x.b, x.c)
+				);
+				put
+				(
+					shapeGroupAllName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeAndShapeGroupAll(x.a, (ShapeGroupAll)x.b, x.c)
+				);
+				put
+				(
+					shapeInverseName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfShapeAndShapeInverse(x.a, (ShapeInverse)x.b, x.c)
+				);
+				put
+				(
+					sphereName,
+					(ShapeShapeCollision x) ->
+						ch.collisionOfSpheres((Sphere)x.a, (Sphere)x.b, x.c)
+				);
 			}};
+
 			lookupOfLookups.put(sphereName, lookup);
 		}
 
@@ -158,7 +327,7 @@ public class CollisionHelper
 
 	public Map<String,Map<String,Object>> doCollideLookupBuild()
 	{
-		var lookupOfLookups = new Map<String,Map<String,Object>>();
+		var lookupOfLookups = new HashMap<String,Map<String,Object>>();
 
 		var andText = "And";
 		var collideText = "Collide";
@@ -286,8 +455,8 @@ public class CollisionHelper
 			collider1 = collider1.collider();
 		}
 
-		var collider0TypeName = collider0.constructor.class.getName();
-		var collider1TypeName = collider1.constructor.class.getName();
+		var collider0TypeName = collider0.getClass().getName();
+		var collider1TypeName = collider1.getClass().getName();
 
 		var collideLookup =
 			this.colliderTypeNamesToCollisionFindLookup.get(collider0TypeName);
@@ -2257,3 +2426,16 @@ public class CollisionHelper
 	}
 }
 
+class ShapeShapeCollision
+{
+	public ShapeBase a;
+	public ShapeBase b;
+	public Collision c;
+
+	public ShapeShapeCollision(ShapeBase a, ShapeBase b, Collision c)
+	{
+		this.a = a;
+		this.b = b;
+		this.c = c;
+	}
+}

@@ -5,8 +5,9 @@ import java.util.*;
 import java.util.function.*;
 
 import GameFramework.*;
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
-import GameFramework.Inputs.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
 
 public class ControlBuilder
@@ -20,8 +21,8 @@ public class ControlBuilder
 	public double fontHeightInPixelsBase;
 	public Coords sizeBase;
 
-	private _Coords zeroes;
-	private _Coords scaleMultiplier;
+	private Coords _zeroes;
+	private Coords _scaleMultiplier;
 
 	public ControlBuilder
 	(
@@ -50,7 +51,7 @@ public class ControlBuilder
 		this._scaleMultiplier = Coords.create();
 	}
 
-	public static ControlBuilder create()
+	public static ControlBuilder _default()
 	{
 		return new ControlBuilder(null, null);
 	}

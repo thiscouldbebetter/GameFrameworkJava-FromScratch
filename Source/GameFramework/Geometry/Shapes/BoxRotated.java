@@ -2,6 +2,8 @@
 package GameFramework.Geometry.Shapes;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
+import GameFramework.Utility.*;
 
 public class BoxRotated implements ShapeBase
 {

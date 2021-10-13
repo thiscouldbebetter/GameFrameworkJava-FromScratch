@@ -50,7 +50,9 @@ public class GameFramework
 			"0.0.0-20211105-0000",
 			timerHelper,
 			display,
-			mediaLibrary
+			mediaLibrary,
+			null, // controlBuilder
+			null // worldCreate
 		);
 
 		universe.initialize

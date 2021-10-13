@@ -1,5 +1,5 @@
 
-public GameFramework.Model;
+package GameFramework.Model;
 
 public interface EntityProperty
 {

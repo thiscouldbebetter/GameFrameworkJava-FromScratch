@@ -5,15 +5,17 @@ import java.util.*;
 import java.util.function.*;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public class MapOfCells<T>
 {
 	public String name;
 	public Coords sizeInCells;
 	public Coords cellSize;
-	private Producer<T> _cellCreate;
-	private Function<Tuple<MapOfCells<T>,Coords,T>,T> _cellAtPosInCells;
+	private Supplier<T> _cellCreate;
+	private Function<Triple<MapOfCells<T>,Coords,T>,T> _cellAtPosInCells;
 	private Object cellSource;
 
 	public Coords cellSizeHalf;
@@ -31,8 +33,8 @@ public class MapOfCells<T>
 		String name,
 		Coords sizeInCells,
 		Coords cellSize,
-		Producer<T> cellCreate,
-		Function<Tuple<MapOfCells<T>,Coords,T>,T> cellAtPosInCells
+		Supplier<T> cellCreate,
+		Function<Triple<MapOfCells<T>,Coords,T>,T> cellAtPosInCells,
 		Object cellSource
 	)
 	{
@@ -63,7 +65,7 @@ public class MapOfCells<T>
 		this._posInCellsMin = Coords.create();
 	}
 
-	public static <T> MapOfCells<T> fromNameSizeInCellsAndCellSize<T>
+	public static <T> MapOfCells<T> fromNameSizeInCellsAndCellSize
 	(
 		String name, Coords sizeInCells, Coords cellSize
 	)
@@ -79,13 +81,20 @@ public class MapOfCells<T>
 
 	public T cellAtPosInCells(Coords cellPosInCells)
 	{
-		return this._cellAtPosInCells(this, cellPosInCells, this._cell);
+		return this._cellAtPosInCells.apply
+		(
+			new Triple(this, cellPosInCells, this._cell)
+		);
 	}
 
-	public T cellAtPosInCellsDefault(MapOfCells<T> map, Coords cellPosInCells, T cell)
+	public T cellAtPosInCellsDefault(Triple<MapOfCells<T>,Coords,T> mapPosCell)
 	{
+		var map = mapPosCell.first;
+		var cellPosInCells = mapPosCell.second;
+		var cell = mapPosCell.third;
+
 		var cellIndex = cellPosInCells.y * this.sizeInCells.x + cellPosInCells.x;
-		var cell = this.cellSource[cellIndex] as T;
+		var cell = ((T)(this.cellSource[cellIndex]));
 		if (cell == null)
 		{
 			cell = this.cellCreate();
@@ -149,7 +158,7 @@ public class MapOfCells<T>
 
 	public Entity[] cellsAsEntities
 	(
-		(MapOfCells<T> m, Coords p) -> EntityMapAndCellPosToEntity
+		BiFunction<MapOfCells<T>,Coords,Entity> mapAndCellPosToEntity
 	)
 	{
 		var returnValues = new ArrayList<Entity>();
@@ -190,7 +199,7 @@ public class MapOfCells<T>
 		);
 	}
 
-	public MapOfCells<T> overwriteWith(MapOfCells other<T>)
+	public MapOfCells<T> overwriteWith(MapOfCells<T> other)
 	{
 		this.cellSource.overwriteWith(other.cellSource);
 		return this;

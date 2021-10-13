@@ -2,6 +2,7 @@
 package GameFramework.Display;
 
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public class DisplayRecorder
 {
@@ -29,7 +30,7 @@ public class DisplayRecorder
 		this.shouldDownload = false;
 	}
 
-	public static Action actionStartStop()
+	public static ActorAction actionStartStop()
 	{
 		return new Action
 		(

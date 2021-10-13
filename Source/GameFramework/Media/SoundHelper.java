@@ -4,11 +4,12 @@ package GameFramework.Media;
 import java.util.*;
 import java.util.stream.*;
 
+import GameFramework.Controls.*;
 import GameFramework.Model.*;
 
 public class SoundHelper
 {
-	public Sound[] sounds;
+	public List<Sound> sounds;
 
 	public Map<String,Sound> soundsByName;
 	public double musicVolume;
@@ -17,7 +18,7 @@ public class SoundHelper
 
 	//private AudioContext _audioContext;
 
-	public SoundHelper(Sound sounds[])
+	public SoundHelper(List<Sound> sounds)
 	{
 		this.sounds = sounds;
 		this.soundsByName = ArrayHelper.addLookupsByName(this.sounds);

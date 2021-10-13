@@ -3,6 +3,8 @@ package GameFramework.Geometry;
 
 import java.util.*;
 
+import GameFramework.Utility.*;
+
 public class RangeExtent
 {
 	public double min;

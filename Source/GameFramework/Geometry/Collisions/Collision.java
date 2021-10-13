@@ -4,6 +4,8 @@ package GameFramework.Geometry.Collisions;
 import java.util.*;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
+import GameFramework.Model.*;
 
 public class Collision //
 {
@@ -11,12 +13,12 @@ public class Collision //
 	public double distanceToCollision;
 	public List<ShapeBase> colliders;
 	public Map<String,ShapeBase> collidersByName;
-	public Entity entitiesColliding[];
+	public List<Entity> entitiesColliding;
 
-	public Coords normals[];
+	public Coords[] normals;
 	public boolean isActive;
 
-	public Collision;
+	public Collision
 	(
 		Coords pos,
 		double distanceToCollision,

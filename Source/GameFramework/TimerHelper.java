@@ -1,6 +1,8 @@
 
 package GameFramework;
 
+import GameFramework.Model.*;
+
 public class TimerHelper
 {
 	public double ticksPerSecond;

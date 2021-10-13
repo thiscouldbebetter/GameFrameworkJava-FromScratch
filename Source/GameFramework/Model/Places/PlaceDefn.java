@@ -6,6 +6,7 @@ import java.util.function.*;
 
 import GameFramework.Helpers.*;
 import GameFramework.Input.*;
+import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
 public class PlaceDefn

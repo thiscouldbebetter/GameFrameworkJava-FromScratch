@@ -6,12 +6,14 @@ import java.awt.image.*;
 import javax.swing.*;
 import GameFramework.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public interface Display extends Platformable
 {
 	void clear();
 	void drawRectangle(Coords pos, Coords size);
 	void initialize(Universe universe);
+	Coords sizeInPixels();
 	void updateForTimerTick(Universe universe);
 
 	// Platformable.

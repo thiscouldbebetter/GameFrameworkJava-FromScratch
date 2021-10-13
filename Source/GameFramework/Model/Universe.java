@@ -9,10 +9,12 @@ import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Collisions.*;
+import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Profiles.*;
 import GameFramework.Media.*;
 import GameFramework.Storage.*;
+import GameFramework.Storage.Compressor.*;
 import GameFramework.Utility.*;
 
 public class Universe
@@ -80,7 +82,8 @@ public class Universe
 		this.venueNext = null;
 
 		var debuggingModeName =
-			URLParser.fromWindow().queryStringParameterByName("debug");
+			//URLParser.fromWindow().queryStringParameterByName("debug");
+			"todo";
 		this.debuggingModeName = debuggingModeName;
 	}
 
@@ -134,7 +137,7 @@ public class Universe
 
 	public void initialize(Consumer<Universe> callback)
 	{
-		this.platformHelper.initialize(this);
+		this.platformHelper.initialize();
 		this.storageHelper = new StorageHelper
 		(
 			StringHelper.replaceAll(this.name, " ", "_") + "_",
@@ -158,7 +161,7 @@ public class Universe
 		{
 			venueInitial = this.controlBuilder.opening
 			(
-				this, this.display.sizeInPixels
+				this, this.display.sizeInPixels()
 			).toVenue();
 		}
 
@@ -175,7 +178,7 @@ public class Universe
 		var universe = this;
 		this.mediaLibrary.waitForItemsAllToLoad
 		(
-			() -> callback.call(universe)
+			() -> callback.accept(universe)
 		);
 	}
 
@@ -189,7 +192,7 @@ public class Universe
 	{
 		this.timerHelper.initialize
 		(
-			() -> this.updateForTimerTick()
+			this // () -> this.updateForTimerTick()
 		);
 	}
 
@@ -216,7 +219,7 @@ public class Universe
 
 	public World worldCreate()
 	{
-		this.world = this._worldCreate.call(this);
+		this.world = this._worldCreate.apply(this);
 		return this.world;
 	}
 }

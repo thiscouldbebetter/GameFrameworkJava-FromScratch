@@ -3,14 +3,17 @@ package GameFramework.Utility;
 
 public class DateTime
 {
-	int year;
-	int month;
-	int day;
-	int hours;
-	int minutes;
-	int seconds;
+	public int year;
+	public int month;
+	public int day;
+	public int hours;
+	public int minutes;
+	public int seconds;
 
-	constructor(int year, int month, int day, int hours, int minutes, int seconds)
+	public DateTime
+	(
+		int year, int month, int day, int hours, int minutes, int seconds
+	)
 	{
 		this.year = year;
 		this.month = month;

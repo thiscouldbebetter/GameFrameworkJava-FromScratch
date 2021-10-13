@@ -30,14 +30,14 @@ public class ActorAction //
 		this.perform(UniverseWorldPlaceEntities.fromUniverse(universe) );
 	}
 
-	private static Action_Instances _instances;
-	public static Action_Instances Instances()
+	private static ActorAction_Instances _instances;
+	public static ActorAction_Instances Instances()
 	{
-		if (Action._instances == null)
+		if (ActorAction._instances == null)
 		{
-			Action._instances = new Action_Instances();
+			ActorAction._instances = new ActorAction_Instances();
 		}
-		return Action._instances;
+		return ActorAction._instances;
 	}
 }
 

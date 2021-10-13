@@ -1,8 +1,5 @@
 
-namespace ThisCouldBeBetter.GameFramework
-{
+package GameFramework.Geometry.Shapes.Maps;
 
-export interface MapCell
+public interface MapCell
 {}
-
-}

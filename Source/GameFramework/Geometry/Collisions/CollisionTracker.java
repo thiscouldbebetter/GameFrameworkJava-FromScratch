@@ -3,6 +3,11 @@ package GameFramework.Geometry.Collisions;
 
 import java.util.*;
 
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
+import GameFramework.Geometry.Shapes.Maps.*;
+import GameFramework.Model.*;
+
 public class CollisionTracker implements EntityProperty
 {
 	public MapOfCells<CollisionTrackerMapCell> collisionMap;
@@ -33,17 +38,19 @@ public class CollisionTracker implements EntityProperty
 		this._cells = new ArrayList<CollisionTrackerMapCell>();
 	}
 
-	static fromSize(Coords size): CollisionTracker
+	static CollisionTracker fromSize(Coords size)
 	{
 		return new CollisionTracker(size, Coords.fromXY(4, 4));
 	}
 
 	public List<Collision> entityCollidableAddAndFindCollisions
 	(
-		Entity, entity CollisionHelper, collisionHelper Collision collisionsSoFar[]
+		Entity entity,
+		CollisionHelper collisionHelper,
+		List<Collision> collisionsSoFar
 	)
 	{
-		collisionsSoFar.length = 0;
+		collisionsSoFar.clear();
 
 		var entityBoundable = entity.boundable();
 		var entityCollidable = entity.collidable();
@@ -99,11 +106,11 @@ public class CollisionTracker implements EntityProperty
 		return collisionsSoFar;
 	}
 
-	toEntity(): Entity
+	public Entity toEntity()
 	{
 		return new Entity
 		(
-			CollisionTracker.name, new EntityProperty[] { this }
+			CollisionTracker.class.name, new EntityProperty[] { this }
 		);
 	}
 
@@ -118,20 +125,20 @@ public class CollisionTracker implements EntityProperty
 		var cellsAll = (CollisionTrackerMapCell[])this.collisionMap.cellSource;
 		cellsAll.forEach(x ->
 		{
-			x.entitiesPresent = x.entitiesPresent.filter
+			x.entitiesPresent = x.entitiesPresent.stream().filter
 			(
 				y -> y.collidable().isEntityStationary(y)
-			)
+			);
 		});
 	}
 }
 
 class CollisionTrackerMapCell implements MapCell
 {
-	Entity entitiesPresent[];
+	public List<Entity> entitiesPresent;
 
-	constructor()
+	public CollisionTrackerMapCell()
 	{
-		this.entitiesPresent = new List<Entity>();
+		this.entitiesPresent = new ArrayList<Entity>();
 	}
 }
