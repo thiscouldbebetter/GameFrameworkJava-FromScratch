@@ -356,7 +356,7 @@ public class MediaLibrary
 
 	public void imagesAdd(List<Image2> images)
 	{
-		for (var i = 0; i < images.length; i++)
+		for (var i = 0; i < images.size(); i++)
 		{
 			var image = images.get(i);
 			var imageName = image.name();

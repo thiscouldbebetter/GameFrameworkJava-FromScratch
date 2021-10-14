@@ -3,6 +3,7 @@ package GameFramework.Controls;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class ControlLabel extends ControlBase
 {
@@ -16,7 +17,7 @@ public class ControlLabel extends ControlBase
 	public ControlLabel
 	(
 		String name, Coords pos, Coords size, boolean isTextCentered,
-		Object text, number fontHeightInPixels
+		Object text, double fontHeightInPixels
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -28,7 +29,7 @@ public class ControlLabel extends ControlBase
 		this._drawPos = Coords.create();
 	}
 
-	public static fromPosAndText(Coords pos, Object text)
+	public static ControlLabel fromPosAndText(Coords pos, Object text)
 	{
 		return new ControlLabel
 		(
@@ -41,7 +42,7 @@ public class ControlLabel extends ControlBase
 		);
 	}
 
-	public static from5
+	public static ControlLabel from5
 	(
 		String name, Coords pos, Coords size, boolean isTextCentered,
 		Object text

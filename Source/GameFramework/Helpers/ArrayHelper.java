@@ -40,6 +40,21 @@ public class ArrayHelper
 
 	public static <K,E> HashMap<K,E> addLookups
 	(
+		E[] list, Function<E,K> getKeyForElement
+	)
+	{
+		var returnLookup = new HashMap<K, E>();
+		for (var i = 0; i < list.length; i++)
+		{
+			var element = list[i];
+			var key = getKeyForElement.apply(element);
+			returnLookup.put(key, element);
+		}
+		return returnLookup;
+	}
+
+	public static <K,E> HashMap<K,E> addLookups
+	(
 		List<E> list,
 		Function<E,K> getKeyForElement
 	)
@@ -52,6 +67,17 @@ public class ArrayHelper
 			returnLookup.put(key, element);
 		}
 		return returnLookup;
+	}
+
+	public static <E extends Namable> HashMap<String,E> addLookupsByName
+	(
+		E[] array
+	)
+	{
+		return ArrayHelper.addLookups
+		(
+			array, (E element) -> element.name()
+		);
 	}
 
 	public static <E extends Namable> HashMap<String,E> addLookupsByName

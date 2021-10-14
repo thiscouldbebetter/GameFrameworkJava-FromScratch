@@ -4,6 +4,7 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Media.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public class GameFramework
 {
@@ -57,7 +58,7 @@ public class GameFramework
 
 		universe.initialize
 		(
-			() -> { universe.start(); }
+			(Universe u) -> { u.start(); }
 		);
 	}
 }

@@ -35,7 +35,7 @@ public class ControlBuilder
 		(
 			venueTransitionalFromTo != null
 			? venueTransitional
-			: this.venueFaderFromTo
+			: (Venue vFrom, Venue vTo) -> this.venueFaderFromTo(vFrom, vTo)
 		);
 
 		this.stylesByName = ArrayHelper.addLookupsByName(this.styles);
@@ -68,7 +68,7 @@ public class ControlBuilder
 
 	public VenueFader venueFaderFromTo(Venue vFrom, Venue vTo)
 	{
-		if (vTo.constructor.name == VenueFader.name)
+		if (vTo.getClass().getName() == VenueFader.class.getName())
 		{
 			vTo = ((VenueFader)vTo).venueToFadeTo();
 		}
@@ -83,13 +83,12 @@ public class ControlBuilder
 		Universe universe,
 		Coords size,
 		DataBinding<Object, String> message,
-		List<String> optionNames,
-		List<Object> optionFunctions,
+		String[] optionNames,
+		Function<Object,Object>[] optionFunctions,
 		boolean showMessageOnly
 	)
 	{
 		size = (size != null ? size : universe.display.sizeDefault());
-		showMessageOnly = (showMessageOnly != null ? showMessageOnly : false);
 
 		var scaleMultiplier =
 			this._scaleMultiplier.overwriteWith(size).divide(this.sizeBase);
@@ -799,7 +798,7 @@ public class ControlBuilder
 						var mappingSelected = placeDefn.actionToInputsMappingSelected;
 						if (mappingSelected != null)
 						{
-							mappingSelected.inputNames.length = 0;
+							mappingSelected.inputNames.clear();
 						}
 					}
 				),

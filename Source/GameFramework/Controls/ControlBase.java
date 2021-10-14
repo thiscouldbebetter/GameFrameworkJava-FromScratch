@@ -39,20 +39,20 @@ public abstract class ControlBase
 		this.isHighlighted = false;
 	}
 
-	boolean actionHandle(String actionName, Universe universe) { return false; }
-	ActionToInputsMapping[] actionToInputsMappings() { return new ActionToInputsMapping[] {}; }
-	ControlBase childWithFocus() { return null; }
-	void draw(Universe u, Display d, Disposition drawLoc, ControlStyle style) {}
-	void focusGain() { this.isHighlighted = true; }
-	void focusLose() { this.isHighlighted = false; }
-	boolean isEnabled() { return true; }
-	boolean isVisible() { return this._isVisible; }
-	boolean mouseClick(Coords x) { return false; }
-	void mouseEnter() { this.isHighlighted = true; }
-	void mouseExit() { this.isHighlighted = false; }
-	boolean mouseMove(Coords x) { return false; }
-	ControlBase scalePosAndSize(Coords x) { return this; }
-	ControlStyle style(Universe universe)
+	public boolean actionHandle(String actionName, Universe universe) { return false; }
+	public ActionToInputsMapping[] actionToInputsMappings() { return new ActionToInputsMapping[] {}; }
+	public ControlBase childWithFocus() { return null; }
+	public void draw(Universe u, Display d, Disposition drawLoc, ControlStyle style) {}
+	public void focusGain() { this.isHighlighted = true; }
+	public void focusLose() { this.isHighlighted = false; }
+	public boolean isEnabled() { return true; }
+	public boolean isVisible() { return this._isVisible; }
+	public boolean mouseClick(Coords x) { return false; }
+	public void mouseEnter() { this.isHighlighted = true; }
+	public void mouseExit() { this.isHighlighted = false; }
+	public boolean mouseMove(Coords x) { return false; }
+	public ControlBase scalePosAndSize(Coords x) { return this; }
+	public ControlStyle style(Universe universe)
 	{
 		var returnValue =
 		(
@@ -62,5 +62,5 @@ public abstract class ControlBase
 		);
 		return returnValue;
 	}
-	VenueControls toVenue() { return VenueControls.fromControl(this); }
+	public VenueControls toVenue() { return VenueControls.fromControl(this); }
 }

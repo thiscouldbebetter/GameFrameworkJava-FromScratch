@@ -9,7 +9,7 @@ import GameFramework.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
-public class Display2D extends JPanel implements Platformable
+public class Display2D extends JPanel implements Display, Platformable
 {
 	public Coords _sizeInPixels;
 
@@ -87,6 +87,11 @@ public class Display2D extends JPanel implements Platformable
 		platformHelper.resizeForPlatformables();
 
 		setBackground(java.awt.Color.BLACK);
+	}
+
+	public Coords sizeDefault()
+	{
+		return this.sizesAvailable[0];
 	}
 
 	public Coords sizeInPixels()

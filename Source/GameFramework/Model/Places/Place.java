@@ -8,10 +8,11 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Collisions.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
-public class Place //
+public class Place implements Namable
 {
-	public String name;
+	public String _name;
 	public String defnName;
 	public Coords size;
 	public List<Entity> entities;
@@ -28,7 +29,7 @@ public class Place //
 		String name, String defnName, Coords size, Entity entities[]
 	)
 	{
-		this.name = name;
+		this._name = name;
 		this.defnName = defnName;
 		this.size = size;
 		this.entities = new ArrayList<Entity>();
@@ -105,7 +106,7 @@ public class Place //
 			var entity = this.entitiesToRemove[i];
 			this.entityRemove(entity);
 		}
-		this.entitiesToRemove.length = 0;
+		this.entitiesToRemove.clear();
 	}
 
 	public void entitiesToRemoveAdd(Entity[] entitiesToRemove)
@@ -128,7 +129,7 @@ public class Place //
 			this.entitySpawn(uwpe);
 		}
 
-		this.entitiesToSpawn.length = 0;
+		this.entitiesToSpawn.clear();
 	}
 
 	public Entity entityById(int entityId)
@@ -227,7 +228,7 @@ public class Place //
 		var defn = this.defn(world);
 		defn.placeInitialize(uwpe);
 		this.entitiesSpawn(uwpe);
-		this.entitiesToSpawn.length = 0;
+		this.entitiesToSpawn.clear();
 		for (var i = 0; i < this.entities.length; i++)
 		{
 			var entity = this.entities[i];
@@ -355,4 +356,10 @@ public class Place //
 		return this.entitiesByPropertyName(Usable.class.name);
 	}
 
+	// Namable.
+
+	public String name()
+	{
+		return this._name;
+	}
 }

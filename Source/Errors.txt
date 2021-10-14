@@ -1,297 +1,94 @@
-GameFramework/GameFramework.java:52: error: incompatible types: Display2D cannot be converted to Display
-			display,
-			^
-./GameFramework/Media/MediaLibrary.java:359: error: cannot find symbol
-		for (var i = 0; i < images.length; i++)
-		                          ^
-  symbol:   variable length
-  location: variable images of type List<Image2>
-./GameFramework/Geometry/Coords.java:296: error: cannot infer type for local variable returnValue
-		var returnValue;
-		    ^
-  (cannot use 'var' on variable without initializer)
-./GameFramework/Model/Universe.java:125: error: incompatible types: Display2D cannot be converted to Display
-			(
-			^
-./GameFramework/Model/Universe.java:130: error: cannot find symbol
-			() -> World._default()
-			           ^
-  symbol:   method _default()
-  location: class World
-./GameFramework/Model/Universe.java:165: error: toVenue() is not public in ControlBase; cannot be accessed from outside package
-			).toVenue();
-			 ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:336: error: cannot find symbol
-		var functionNames = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
-		                                                     ^
-  symbol:   method getPrototypeOf(CollisionHelper)
-  location: class Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:348: error: cannot find symbol
-				functionName.length - doText.length() - collideText.length
-				                                                   ^
-  symbol:   variable length
-  location: variable collideText of type String
-./GameFramework/Geometry/Collisions/CollisionHelper.java:358: error: Map is abstract; cannot be instantiated
-				lookup = new Map<String,Object>();
-				         ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:362: error: array required, but Object found
-			var doCollideFunction = thisAsAny[functionName];
-			                                 ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:376: error: cannot find symbol
-		var functionNames = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
-		                                                     ^
-  symbol:   method getPrototypeOf(CollisionHelper)
-  location: class Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:397: error: Map is abstract; cannot be instantiated
-				lookup = new Map<String, Object>();
-				         ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:401: error: array required, but Object found
-			var doesContainFunction = thisAsAny[functionName];
-			                                   ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:412: error: cannot find symbol
-		var returnValue = collisionsToCheck.filter
-		                                   ^
-  symbol:   method filter((x)->x.isActive)
-  location: variable collisionsToCheck of type List<Collision>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:428: error: cannot find symbol
-		var collider0 = entityColliding.collidable().collider;
+./GameFramework/Model/Places/Place.java:13: error: cannot find symbol
+public class Place implements Namable
+                              ^
+  symbol: class Namable
+./GameFramework/Display/Display2D.java:94: error: cannot find symbol
+		return this.sizesAvailable[0];
+		           ^
+  symbol: variable sizesAvailable
+./GameFramework/Model/World.java:36: error: no suitable method found for addLookupsByName(Place[])
+		this.placesByName = ArrayHelper.addLookupsByName(this.places);
 		                               ^
-  symbol:   method collidable()
-  location: variable entityColliding of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:429: error: cannot find symbol
-		var collider1 = entityCollidedWith.collidable().collider;
-		                                  ^
-  symbol:   method collidable()
-  location: variable entityCollidedWith of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:448: error: cannot find symbol
-		while (collider0.collider != null)
-		                ^
-  symbol:   variable collider
-  location: variable collider0 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:450: error: cannot find symbol
-			collider0 = collider0.collider();
-			                     ^
-  symbol:   method collider()
-  location: variable collider0 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:453: error: cannot find symbol
-		while (collider1.collider != null)
-		                ^
-  symbol:   variable collider
-  location: variable collider1 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:455: error: cannot find symbol
-			collider1 = collider1.collider();
-			                     ^
-  symbol:   method collider()
-  location: variable collider1 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:482: error: cannot find symbol
-				collisionMethod.call
-				               ^
-  symbol:   method call(CollisionHelper,Object,Object,Collision,boolean)
-  location: variable collisionMethod of type Function<ShapeShapeCollision,Collision>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:526: error: cannot find symbol
-		var collidable0 = entity0.collidable();
-		                         ^
-  symbol:   method collidable()
-  location: variable entity0 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:527: error: cannot find symbol
-		var collidable1 = entity1.collidable();
-		                         ^
-  symbol:   method collidable()
-  location: variable entity1 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:541: error: cannot find symbol
-		while (collider0.collider != null)
-		                ^
-  symbol:   variable collider
-  location: variable collider0 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:543: error: cannot find symbol
-			collider0 = collider0.collider();
-			                     ^
-  symbol:   method collider()
-  location: variable collider0 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:546: error: cannot find symbol
-		while (collider1.collider != null)
-		                ^
-  symbol:   variable collider
-  location: variable collider1 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:548: error: cannot find symbol
-			collider1 = collider1.collider();
-			                     ^
-  symbol:   method collider()
-  location: variable collider1 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:551: error: cannot find symbol
-		var collider0TypeName = collider0.getType().name;
-		                                 ^
-  symbol:   method getType()
-  location: variable collider0 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:552: error: cannot find symbol
-		var collider1TypeName = collider1.getType().name;
-		                                 ^
-  symbol:   method getType()
-  location: variable collider1 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:589: error: cannot find symbol
-		while (collider0.collider != null)
-		                ^
-  symbol:   variable collider
-  location: variable collider0 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:591: error: cannot find symbol
-			collider0 = collider0.collider();
-			                     ^
-  symbol:   method collider()
-  location: variable collider0 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:594: error: cannot find symbol
-		while (collider1.collider != null)
-		                ^
-  symbol:   variable collider
-  location: variable collider1 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:596: error: cannot find symbol
-			collider1 = collider1.collider();
-			                     ^
-  symbol:   method collider()
-  location: variable collider1 of type Object
-./GameFramework/Geometry/Collisions/CollisionHelper.java:599: error: package collider0 does not exist
-		var collider0TypeName = collider0.constructor.class.getName();
-		                                 ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:600: error: package collider1 does not exist
-		var collider1TypeName = collider1.constructor.class.getName();
-		                                 ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:639: error: cannot find symbol
-		var collidable0 = entity0.collidable();
-		                         ^
-  symbol:   method collidable()
-  location: variable entity0 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:640: error: cannot find symbol
-		var collidable1 = entity1.collidable();
-		                         ^
-  symbol:   method collidable()
-  location: variable entity1 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:642: error: cannot find symbol
-		var entity0Loc = entity0.locatable().loc;
-		                        ^
-  symbol:   method locatable()
-  location: variable entity0 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:643: error: cannot find symbol
-		var entity1Loc = entity1.locatable().loc;
-		                        ^
-  symbol:   method locatable()
-  location: variable entity1 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:699: error: cannot find symbol
-		var collidable0 = entity0.collidable();
-		                         ^
-  symbol:   method collidable()
-  location: variable entity0 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:700: error: cannot find symbol
-		var collidable1 = entity1.collidable();
-		                         ^
-  symbol:   method collidable()
-  location: variable entity1 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:714: error: cannot find symbol
-		var entity0Loc = entity0.locatable().loc;
-		                        ^
-  symbol:   method locatable()
-  location: variable entity0 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:715: error: cannot find symbol
-		var entity1Loc = entity1.locatable().loc;
-		                        ^
-  symbol:   method locatable()
-  location: variable entity1 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:761: error: cannot find symbol
-		var entity0Loc = entity0.locatable().loc;
-		                        ^
-  symbol:   method locatable()
-  location: variable entity0 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:763: error: cannot find symbol
-		var collidable1 = entity1.collidable();
-		                         ^
-  symbol:   method collidable()
-  location: variable entity1 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:779: error: cannot find symbol
-			var collidable0 = entity0.collidable();
-			                         ^
-  symbol:   method collidable()
-  location: variable entity0 of type Entity
-./GameFramework/Geometry/Collisions/CollisionHelper.java:833: error: cannot find symbol
+    method ArrayHelper.<E#1>addLookupsByName(E#1[]) is not applicable
+      (inference variable E#1 has incompatible bounds
+        lower bounds: Namable
+        lower bounds: Place)
+    method ArrayHelper.<E#2>addLookupsByName(List<E#2>) is not applicable
+      (cannot infer type-variable(s) E#2
+        (argument mismatch; Place[] cannot be converted to List<E#2>))
+  where E#1,E#2 are type-variables:
+    E#1 extends Namable declared in method <E#1>addLookupsByName(E#1[])
+    E#2 extends Namable declared in method <E#2>addLookupsByName(List<E#2>)
+./GameFramework/Geometry/Collisions/CollisionHelper.java:359: error: incompatible types: bad return type in lambda expression
+			(Collision x, Collision y) -> x.distanceToCollision - y.distanceToCollision
+			                                                    ^
+    possible lossy conversion from double to int
+./GameFramework/Geometry/Collisions/CollisionHelper.java:497: error: cannot find symbol
+				returnValue = collisionMethod.call
+				                             ^
+  symbol:   method call(CollisionHelper,Object,Object)
+  location: variable collisionMethod of type Function<ShapeShapeCollision,Boolean>
+./GameFramework/Geometry/Collisions/CollisionHelper.java:535: error: cannot find symbol
+				returnValue = doesColliderContainOther.call
+				                                      ^
+  symbol:   method call(CollisionHelper,Object,Object)
+  location: variable doesColliderContainOther of type Function<ShapeShapeCollision,Boolean>
+./GameFramework/Geometry/Collisions/CollisionHelper.java:745: error: cannot find symbol
 		var cell = map.cellCreate();
 		              ^
   symbol:   method cellCreate()
   location: variable map of type MapOfCells<Object>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:854: error: illegal parenthesized expression
+./GameFramework/Geometry/Collisions/CollisionHelper.java:766: error: illegal parenthesized expression
 				if (cell.isBlocking)
 				   ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1056: error: array required, but List<ShapeBase> found
-			colliders[0] = boxRotated;
-			         ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1057: error: array required, but List<ShapeBase> found
-			colliders[1] = sphere;
-			         ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1159: error: incompatible types: Coords cannot be converted to boolean
-			collision.isActive = isWithinFace;
-			                     ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1161: error: incompatible types: Coords cannot be converted to boolean
-			if (isWithinFace)
-			    ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1255: error: cannot find symbol
-				colliders.length = 0;
-				         ^
-  symbol:   variable length
-  location: variable colliders of type List<ShapeBase>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1292: error: cannot find symbol
-				collision.colliders.length = 0;
-				                   ^
-  symbol:   variable length
-  location: variable colliders of type List<ShapeBase>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1321: error: cannot find symbol
-			collision.colliders.length = 0;
-			                   ^
-  symbol:   variable length
-  location: variable colliders of type List<ShapeBase>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1369: error: cannot find symbol
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1281: error: cannot find symbol
 		var cell = map.cellCreate();
 		              ^
   symbol:   method cellCreate()
   location: variable map of type MapOfCells<Object>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1390: error: illegal parenthesized expression
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1302: error: illegal parenthesized expression
 				if (cell.isBlocking)
 				   ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1447: error: incompatible types: Object cannot be converted to ShapeBase
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1359: error: incompatible types: Object cannot be converted to ShapeBase
 		return this.collisionOfShapeAndShapeGroupAll(shape, shapeGroupAll, collisionOut);
 		                                             ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1455: error: incompatible types: Object cannot be converted to ShapeBase
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1367: error: incompatible types: Object cannot be converted to ShapeBase
 		return this.collisionOfShapeAndShapeInverse(shape, shapeInverse, collisionOut);
 		                                            ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1571: error: lengthHalf is not public in Cylinder; cannot be accessed from outside package
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1483: error: lengthHalf is not public in Cylinder; cannot be accessed from outside package
 		if (displacementBetweenCenters.z < box.sizeHalf().z + cylinder.lengthHalf)
 		                                                              ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1953: error: cannot find symbol
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1865: error: cannot find symbol
 		var cell0 = map0.cellCreate();
 		                ^
   symbol:   method cellCreate()
   location: variable map0 of type MapOfCells<Object>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1954: error: cannot find symbol
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1866: error: cannot find symbol
 		var cell1 = map1.cellCreate();
 		                ^
   symbol:   method cellCreate()
   location: variable map1 of type MapOfCells<Object>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:1986: error: illegal parenthesized expression
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1898: error: illegal parenthesized expression
 				if (cell0.isBlocking)
 				   ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:2023: error: Coords_Instances.Zeroes is defined in an inaccessible class or interface
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1935: error: Coords_Instances.Zeroes is defined in an inaccessible class or interface
 								Coords.Instances().Zeroes, map1SizeInCellsMinusOnes
 								                  ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:2029: error: illegal parenthesized expression
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1941: error: illegal parenthesized expression
 								if (cell1.isBlocking)
 								   ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:2034: error: incompatible types: possible lossy conversion from double to int
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1946: error: incompatible types: possible lossy conversion from double to int
 									x0 = map0SizeInCells.x;
 									                    ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:2035: error: incompatible types: possible lossy conversion from double to int
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1947: error: incompatible types: possible lossy conversion from double to int
 									y0 = map0SizeInCells.y;
 									                    ^
-./GameFramework/Geometry/Collisions/CollisionHelper.java:2064: error: cannot find symbol
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1976: error: cannot find symbol
 		var cell = map.cellCreate();
 		              ^
   symbol:   method cellCreate()
   location: variable map of type MapOfCells<Object>
-./GameFramework/Geometry/Collisions/CollisionHelper.java:2085: error: illegal parenthesized expression
+./GameFramework/Geometry/Collisions/CollisionHelper.java:1997: error: illegal parenthesized expression
 				if (cell.isBlocking)
 				   ^
 ./GameFramework/Controls/ControlBuilder.java:33: error: incompatible types: bad type in conditional expression
@@ -311,62 +108,14 @@ GameFramework/GameFramework.java:52: error: incompatible types: Display2D cannot
 			  ^
   symbol:   variable venueTransitional
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:38: error: cannot find symbol
-			: this.venueFaderFromTo
-			      ^
-  symbol: variable venueFaderFromTo
+./GameFramework/Controls/ControlBuilder.java:38: error: lambda expression not expected here
+			: (Venue vFrom, Venue vTo) -> this.venueFaderFromTo(vFrom, vTo)
+			  ^
 ./GameFramework/Controls/ControlBuilder.java:41: error: cannot find symbol
 		this.stylesByName = ArrayHelper.addLookupsByName(this.styles);
 		                    ^
   symbol:   variable ArrayHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:71: error: cannot find symbol
-		if (vTo.constructor.name == VenueFader.name)
-		       ^
-  symbol:   variable constructor
-  location: variable vTo of type Venue
-./GameFramework/Controls/ControlBuilder.java:71: error: cannot find symbol
-		if (vTo.constructor.name == VenueFader.name)
-		                                      ^
-  symbol:   variable name
-  location: class VenueFader
-./GameFramework/Controls/ControlBuilder.java:91: error: cannot find symbol
-		size = (size != null ? size : universe.display.sizeDefault());
-		                                              ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:92: error: bad operand types for binary operator '!='
-		showMessageOnly = (showMessageOnly != null ? showMessageOnly : false);
-		                                   ^
-  first type:  boolean
-  second type: <null>
-./GameFramework/Controls/ControlBuilder.java:104: error: cannot find symbol
-		var doubleOfOptions = optionNames.length;
-		                                 ^
-  symbol:   variable length
-  location: variable optionNames of type List<String>
-./GameFramework/Controls/ControlLabel.java:31: error: invalid method declaration; return type required
-	public static fromPosAndText(Coords pos, Object text)
-	              ^
-./GameFramework/Controls/ControlLabel.java:44: error: invalid method declaration; return type required
-	public static from5
-	              ^
-./GameFramework/Controls/ControlLabel.java:19: error: cannot find symbol
-		Object text, number fontHeightInPixels
-		             ^
-  symbol:   class number
-  location: class ControlLabel
-./GameFramework/Controls/ControlLabel.java:92: error: cannot find symbol
-		Universe universe, Display display, Disposition drawLoc,
-		^
-  symbol:   class Universe
-  location: class ControlLabel
-./GameFramework/Controls/ControlBuilder.java:154: error: array required, but List<String> found
-					optionNames[i],
-					           ^
-./GameFramework/Controls/ControlBuilder.java:158: error: array required, but List<Object> found
-					optionFunctions[i],
-					               ^
 ./GameFramework/Controls/ControlButton.java:10: error: cannot find symbol
 	public _any isEnabled;
 	       ^
@@ -397,18 +146,15 @@ GameFramework/GameFramework.java:52: error: incompatible types: Display2D cannot
 		^
   symbol:   class Universe
   location: class ControlButton
-./GameFramework/Controls/ControlBuilder.java:170: error: cannot find symbol
-			display.sizeDefault().clone().clearZ().divide(scaleMultiplier);
-			       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:173: error: cannot infer type for local variable actions
+./GameFramework/Controls/ControlBuilder.java:161: error: cannot find symbol
+				childControls.add(button);
+				             ^
+  symbol:   method add(ControlButton)
+  location: variable childControls of type Object[]
+./GameFramework/Controls/ControlBuilder.java:172: error: cannot infer type for local variable actions
 		var actions = null;
 		    ^
   (variable initializer is 'null')
-./GameFramework/Controls/ControlBuilder.java:176: error: array required, but List<Object> found
-			var acknowledge = optionFunctions[0];
-			                                 ^
 ./GameFramework/Controls/ControlActionNames.java:26: error: <identifier> expected
 	public static _instances: ControlActionNames_Instances;
 	                        ^
@@ -423,22 +169,22 @@ GameFramework/GameFramework.java:52: error: incompatible types: Display2D cannot
 	              ^
   symbol:   class _instances
   location: class ControlActionNames
-./GameFramework/Controls/ControlBuilder.java:177: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:176: error: cannot find symbol
 			var controlActionNames = ControlActionNames.Instances();
 			                                           ^
   symbol:   method Instances()
   location: class ControlActionNames
-./GameFramework/Controls/ControlBuilder.java:178: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:177: error: cannot find symbol
 			actions = new Action[]
 			              ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:180: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:179: error: cannot find symbol
 				new Action( controlActionNames.ControlCancel, acknowledge ),
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:181: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:180: error: cannot find symbol
 				new Action( controlActionNames.ControlConfirm, acknowledge ),
 				    ^
   symbol:   class Action
@@ -701,11 +447,6 @@ GameFramework/GameFramework.java:52: error: incompatible types: Display2D cannot
 		^
   symbol:   class Universe
   location: class ControlContainerTransparent
-./GameFramework/Controls/ControlBuilder.java:218: error: cannot find symbol
-		size = (size != null ? size : universe.display.sizeDefault());
-		                                              ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
 ./GameFramework/Controls/ControlList.java:12: error: ';' expected
 	public DataBinding bindingForItemText<Object, String>;
 	                                     ^
@@ -1100,64 +841,59 @@ GameFramework/GameFramework.java:52: error: incompatible types: Display2D cannot
 		                   ^
   symbol:   class Display
   location: class ControlScrollbar
-./GameFramework/Controls/ControlBuilder.java:231: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:230: error: cannot find symbol
 		var listOptions = ControlList.from8
 		                             ^
   symbol:   method from8(String,Coords,Coords,DataBinding<Object,Object[]>,DataBinding<Object,Object>,int,<null>,<null>)
   location: class ControlList
-./GameFramework/Controls/ControlBuilder.java:262: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:261: error: incompatible types: Object is not a functional interface
 				new ControlButton
 				^
-./GameFramework/Controls/ControlBuilder.java:243: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:242: error: cannot find symbol
 		var returnValue = ControlContainer.from4
 		                                  ^
   symbol:   method from4(String,Coords,Coords,ControlBase[])
   location: class ControlContainer
-./GameFramework/Controls/ControlBuilder.java:300: error: incompatible types: String[] cannot be converted to List<String>
-			new String[] { "Confirm", "Cancel" },
+./GameFramework/Controls/ControlBuilder.java:300: error: incompatible types: Runnable[] cannot be converted to Function<Object,Object>[]
+			new Runnable[] { confirm, cancel },
 			^
-./GameFramework/Controls/ControlBuilder.java:318: error: cannot infer type for local variable confirmThenReturnToVenuePrev
+./GameFramework/Controls/ControlBuilder.java:317: error: cannot infer type for local variable confirmThenReturnToVenuePrev
 		var confirmThenReturnToVenuePrev = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:328: error: cannot infer type for local variable cancelThenReturnToVenuePrev
+./GameFramework/Controls/ControlBuilder.java:327: error: cannot infer type for local variable cancelThenReturnToVenuePrev
 		var cancelThenReturnToVenuePrev = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:344: error: incompatible types: String[] cannot be converted to List<String>
-			new String[] { "Confirm", "Cancel" },
+./GameFramework/Controls/ControlBuilder.java:344: error: incompatible types: Runnable[] cannot be converted to Function<Object,Object>[]
+			new Runnable[]
 			^
-./GameFramework/Controls/ControlBuilder.java:359: error: cannot find symbol
-			size = universe.display.sizeDefault().clone();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:383: error: cannot infer type for local variable back
+./GameFramework/Controls/ControlBuilder.java:382: error: cannot infer type for local variable back
 		var back = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:401: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:400: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:412: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:411: error: cannot find symbol
 						Venue venueNext = Profile.toControlSaveStateSave
 						                  ^
   symbol:   variable Profile
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:416: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:415: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:424: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:423: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:435: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:434: error: cannot find symbol
 						Venue venueNext = Profile.toControlSaveStateLoad
 						                  ^
   symbol:   variable Profile
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:439: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:438: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
@@ -1445,10 +1181,10 @@ public class VenueMessage implements Venue
 	           ^
   symbol:   class universe
   location: class VenueMessage
-./GameFramework/Controls/ControlBuilder.java:447: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:446: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:459: error: no suitable constructor found for VenueMessage(DataBinding<Object,String>,()->{  ven[...]xt; },Venue,Coords,boolean)
+./GameFramework/Controls/ControlBuilder.java:458: error: no suitable constructor found for VenueMessage(DataBinding<Object,String>,()->{  ven[...]xt; },Venue,Coords,boolean)
 						Venue venueNext = new VenueMessage
 						                  ^
     constructor VenueMessage.VenueMessage(messageToShow) is not applicable
@@ -1471,114 +1207,106 @@ public class VenueMessage implements Venue
       (actual and formal argument lists differ in length)
     constructor VenueMessage.VenueMessage(universe) is not applicable
       (actual and formal argument lists differ in length)
-./GameFramework/Controls/ControlBuilder.java:464: error: variable venueNext is already defined in method game(Universe,Coords,Venue)
+./GameFramework/Controls/ControlBuilder.java:463: error: variable venueNext is already defined in method game(Universe,Coords,Venue)
 								var venueNext = controlBuilder.venueTransitionalFromTo
 								    ^
-./GameFramework/Controls/ControlBuilder.java:464: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:463: error: cannot find symbol
 								var venueNext = controlBuilder.venueTransitionalFromTo
 								                              ^
   symbol:   method venueTransitionalFromTo(<null>,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:474: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:473: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:482: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:481: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:503: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:502: error: cannot find symbol
 								venueNext = controlBuilder.venueTransitionalFromTo
 								                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:512: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:511: error: cannot find symbol
 								venueNext = controlBuilder.venueTransitionalFromTo
 								                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:521: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:520: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:542: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:541: error: cannot find symbol
 			new Action[] { new Action("Back", back) },
 			    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:542: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:541: error: cannot find symbol
 			new Action[] { new Action("Back", back) },
 			                   ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:573: error: cannot find symbol
-			size = universe.display.sizeDefault().clone();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:606: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:605: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:621: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:620: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:629: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:628: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:644: error: variable venueNext is already defined in method gameAndSettings(Universe,Coords,Venue,boolean)
+./GameFramework/Controls/ControlBuilder.java:643: error: variable venueNext is already defined in method gameAndSettings(Universe,Coords,Venue,boolean)
 						venueNext = controlBuilder.venueTransitionalFromTo
 						^
-./GameFramework/Controls/ControlBuilder.java:644: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:643: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:658: error: cannot infer type for local variable back
+./GameFramework/Controls/ControlBuilder.java:657: error: cannot infer type for local variable back
 			var back = () ->
 			    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:682: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:681: error: cannot find symbol
 			returnValue.actions.add(new Action("Back", back));
 			                            ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:704: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:751: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:750: error: incompatible types: incompatible parameter types in lambda expression
 						(PlaceDefn c, ActionToInputsMapping v) -> { c.actionToInputsMappingSelected = v; }
 						^
-./GameFramework/Controls/ControlBuilder.java:750: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:749: error: cannot find symbol
 						(PlaceDefn c) -> c.actionToInputsMappingSelected,
 						 ^
   symbol:   class PlaceDefn
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:751: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:750: error: cannot find symbol
 						(PlaceDefn c, ActionToInputsMapping v) -> { c.actionToInputsMappingSelected = v; }
 						 ^
   symbol:   class PlaceDefn
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:775: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:774: error: cannot find symbol
 						(PlaceDefn c) ->
 						 ^
   symbol:   class PlaceDefn
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:784: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:783: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:795: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:794: error: cannot find symbol
 						(PlaceDefn c) -> c.actionToInputsMappingSelected
 						 ^
   symbol:   class PlaceDefn
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:802: error: cannot assign a value to final variable length
-							mappingSelected.inputNames.length = 0;
+./GameFramework/Controls/ControlBuilder.java:801: error: cannot find symbol
+							mappingSelected.inputNames.clear();
 							                          ^
+  symbol:   method clear()
+  location: variable inputNames of type String[]
 ./GameFramework/Input/VenueInputCapture.java:62: error: class, interface, or enum expected
 }
 ^
@@ -1616,127 +1344,102 @@ public class VenueInputCapture implements Venue
 	                               ^
   symbol:   class Universe
   location: class VenueInputCapture
-./GameFramework/Controls/ControlBuilder.java:807: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:806: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:818: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:817: error: cannot find symbol
 						(PlaceDefn c) -> c.actionToInputsMappingSelected
 						 ^
   symbol:   class PlaceDefn
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:825: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:824: error: incompatible types: Object is not a functional interface
 							var venueInputCapture = new VenueInputCapture
 							                        ^
-./GameFramework/Controls/ControlBuilder.java:831: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:830: error: cannot find symbol
 									mappingSelected.inputNames.add(inputName);
 									                          ^
   symbol:   method add(String)
   location: variable inputNames of type String[]
-./GameFramework/Controls/ControlBuilder.java:839: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:838: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:850: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:849: error: cannot find symbol
 						(PlaceDefn c) -> (c.actionToInputsMappingSelected != null)
 						 ^
   symbol:   class PlaceDefn
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:857: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:856: error: cannot find symbol
 							var mappingDefault = placeDefn.actionToInputsMappingsDefault.filter
 							                                                            ^
   symbol:   method filter((ActionToI[...]Name))
   location: variable actionToInputsMappingsDefault of type ActionToInputsMapping[]
-./GameFramework/Controls/ControlBuilder.java:866: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:865: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:891: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:890: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:899: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:898: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:911: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:910: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:919: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:918: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:931: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:930: error: cannot find symbol
 						(PlaceDefn c) ->
 						 ^
   symbol:   class PlaceDefn
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:945: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:944: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:718: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:717: error: cannot find symbol
 		var returnValue = ControlContainer.from4
 		                                  ^
   symbol:   method from4(String,Coords,Coords,ControlBase[])
   location: class ControlContainer
-./GameFramework/Controls/ControlBuilder.java:974: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:973: error: cannot find symbol
 			optionNames.add("Acknowledge");
 			           ^
   symbol:   method add(String)
   location: variable optionNames of type String[]
-./GameFramework/Controls/ControlBuilder.java:975: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:974: error: cannot find symbol
 			optionFunctions.add(acknowledge);
 			               ^
   symbol:   method add(Runnable)
   location: variable optionFunctions of type Runnable[]
-./GameFramework/Controls/ControlBuilder.java:980: error: incompatible types: String[] cannot be converted to List<String>
+./GameFramework/Controls/ControlBuilder.java:979: error: incompatible types: Runnable[] cannot be converted to Function<Object,Object>[]
 			universe, size, message, optionNames, optionFunctions, showMessageOnly
-			                         ^
-./GameFramework/Controls/ControlBuilder.java:990: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:998: error: cannot infer type for local variable goToVenueNext
+			                                      ^
+./GameFramework/Controls/ControlBuilder.java:997: error: cannot infer type for local variable goToVenueNext
 		var goToVenueNext = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:1010: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1009: error: cannot find symbol
 		var visual = new VisualGroup
 		                 ^
   symbol:   class VisualGroup
   location: class ControlBuilder
-./GameFramework/Display/Visual.java:10: error: cannot find symbol
-		Universe universe, World world, Place place, Entity entity
-		^
-  symbol:   class Universe
-  location: interface Visual
-./GameFramework/Display/Visual.java:10: error: cannot find symbol
-		Universe universe, World world, Place place, Entity entity
-		                   ^
-  symbol:   class World
-  location: interface Visual
-./GameFramework/Display/Visual.java:10: error: cannot find symbol
-		Universe universe, World world, Place place, Entity entity
-		                                ^
-  symbol:   class Place
-  location: interface Visual
-./GameFramework/Display/Visual.java:10: error: cannot find symbol
-		Universe universe, World world, Place place, Entity entity
-		                                             ^
-  symbol:   class Entity
-  location: interface Visual
-./GameFramework/Controls/ControlBuilder.java:1014: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1013: error: cannot find symbol
 				new VisualImageScaled
 				    ^
   symbol:   class VisualImageScaled
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1016: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1015: error: cannot find symbol
 					new VisualImageFromLibrary("Opening"), size
 					    ^
   symbol:   class VisualImageFromLibrary
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1022: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1021: error: cannot find symbol
 		var controlActionNames = ControlActionNames.Instances();
 		                                           ^
   symbol:   method Instances()
@@ -1759,96 +1462,86 @@ public class VenueInputCapture implements Venue
 ./GameFramework/Controls/ControlVisual.java:5: error: package GameFramework.Display.Visuals does not exist
 import GameFramework.Display.Visuals.*;
 ^
-./GameFramework/Controls/ControlBuilder.java:1037: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1036: error: cannot find symbol
 					DataBinding.fromContext<Visual>(visual),
 					           ^
   symbol:   variable fromContext
   location: class DataBinding
-./GameFramework/Controls/ControlBuilder.java:1037: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1036: error: cannot find symbol
 					DataBinding.fromContext<Visual>(visual),
 					                        ^
   symbol:   variable Visual
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1054: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1053: error: cannot find symbol
 			new Action[]
 			    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1056: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1055: error: cannot find symbol
 				new Action( controlActionNames.ControlCancel, goToVenueNext ),
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1057: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1056: error: cannot find symbol
 				new Action( controlActionNames.ControlConfirm, goToVenueNext )
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1074: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1082: error: cannot infer type for local variable goToVenueNext
+./GameFramework/Controls/ControlBuilder.java:1081: error: cannot infer type for local variable goToVenueNext
 		var goToVenueNext = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:1094: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1093: error: cannot find symbol
 		var visual = new VisualGroup
 		                 ^
   symbol:   class VisualGroup
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1098: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1097: error: cannot find symbol
 				new VisualImageScaled
 				    ^
   symbol:   class VisualImageScaled
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1100: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1099: error: cannot find symbol
 					new VisualImageFromLibrary("Producer"), size
 					    ^
   symbol:   class VisualImageFromLibrary
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1102: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1101: error: cannot find symbol
 				new VisualSound("Music_Producer", false) // repeat
 				    ^
   symbol:   class VisualSound
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1106: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1105: error: cannot find symbol
 		var controlActionNames = ControlActionNames.Instances();
 		                                           ^
   symbol:   method Instances()
   location: class ControlActionNames
-./GameFramework/Controls/ControlBuilder.java:1121: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1120: error: cannot find symbol
 					DataBinding.fromContext<Visual>(visual),
 					           ^
   symbol:   variable fromContext
   location: class DataBinding
-./GameFramework/Controls/ControlBuilder.java:1121: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1120: error: cannot find symbol
 					DataBinding.fromContext<Visual>(visual),
 					                        ^
   symbol:   variable Visual
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1138: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1137: error: cannot find symbol
 			new Action[]
 			    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1140: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1139: error: cannot find symbol
 				new Action( controlActionNames.ControlCancel, goToVenueNext ),
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1141: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1140: error: cannot find symbol
 				new Action( controlActionNames.ControlConfirm, goToVenueNext )
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1161: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1181: error: cannot infer type for local variable back
+./GameFramework/Controls/ControlBuilder.java:1180: error: cannot infer type for local variable back
 		var back = () ->
 		    ^
   (lambda expression needs an explicit target-type)
@@ -1862,376 +1555,341 @@ import GameFramework.Display.Visuals.*;
 	                 ^
   symbol:   class Universe
   location: class ControlSelect
-./GameFramework/Controls/ControlBuilder.java:1218: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1217: error: incompatible types: incompatible parameter types in lambda expression
 						(SoundHelper c, double v) -> c.musicVolume = v
 						^
-./GameFramework/Controls/ControlBuilder.java:1217: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1216: error: cannot find symbol
 						(SoundHelper c) -> c.musicVolume,
 						 ^
   symbol:   class SoundHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1218: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1217: error: cannot find symbol
 						(SoundHelper c, double v) -> c.musicVolume = v
 						 ^
   symbol:   class SoundHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1220: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1219: error: cannot find symbol
 					SoundHelper.controlSelectOptionsVolume(), // options
 					^
   symbol:   variable SoundHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1221: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1220: error: cannot find symbol
 					DataBinding.fromGet((Object c) -> c.value), // bindingForOptionValues,
 					                                   ^
   symbol:   variable value
   location: variable c of type Object
-./GameFramework/Controls/ControlBuilder.java:1222: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1221: error: cannot find symbol
 					DataBinding.fromGet((Object c) -> { return c.text; }), // bindingForOptionText
 					                                            ^
   symbol:   variable text
   location: variable c of type Object
-./GameFramework/Controls/ControlBuilder.java:1245: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1244: error: incompatible types: incompatible parameter types in lambda expression
 						(SoundHelper c, double v) -> { c.soundVolume = v; }
 						^
-./GameFramework/Controls/ControlBuilder.java:1244: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1243: error: cannot find symbol
 						(SoundHelper c) -> c.soundVolume,
 						 ^
   symbol:   class SoundHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1245: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1244: error: cannot find symbol
 						(SoundHelper c, double v) -> { c.soundVolume = v; }
 						 ^
   symbol:   class SoundHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1247: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1246: error: cannot find symbol
 					SoundHelper.controlSelectOptionsVolume(), // options
 					^
   symbol:   variable SoundHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1268: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1267: error: cannot find symbol
 					universe.display.sizeInPixels, // valueSelected
 					                ^
   symbol:   variable sizeInPixels
   location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1270: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1269: error: cannot find symbol
 					universe.display.sizesAvailable,
 					                ^
   symbol:   variable sizesAvailable
   location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1276: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:1275: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:1299: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1298: error: cannot find symbol
 						platformHelper.platformableRemove(display);
 						              ^
   symbol:   method platformableRemove(Display2D)
   location: variable platformHelper of type PlatformHelper
-./GameFramework/Controls/ControlBuilder.java:1300: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1299: error: cannot find symbol
 						display.sizeInPixels = displaySizeSpecified;
 						       ^
   symbol:   variable sizeInPixels
   location: variable display of type Display2D
-./GameFramework/Controls/ControlBuilder.java:1301: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1300: error: cannot find symbol
 						display.canvas = null; // hack
 						       ^
   symbol:   variable canvas
   location: variable display of type Display2D
-./GameFramework/Controls/ControlBuilder.java:1303: error: method initialize in class PlatformHelper cannot be applied to given types;
+./GameFramework/Controls/ControlBuilder.java:1302: error: method initialize in class PlatformHelper cannot be applied to given types;
 						platformHelper.initialize(universe);
 						              ^
   required: no arguments
   found: Universe
   reason: actual and formal argument lists differ in length
-./GameFramework/Controls/ControlBuilder.java:1309: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1308: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,VenueControls)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1317: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:1316: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:1332: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1331: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo(venueCurrent, venueNext);
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1350: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1349: error: cannot find symbol
 			new Action[] { new Action("Back", back) },
 			    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1350: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1349: error: cannot find symbol
 			new Action[] { new Action("Back", back) },
 			                   ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1379: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1387: error: cannot infer type for local variable nextDefn
+./GameFramework/Controls/ControlBuilder.java:1386: error: cannot infer type for local variable nextDefn
 		var nextDefn = (double slideIndexNext) -> // click
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:1406: error: cannot infer type for local variable skip
+./GameFramework/Controls/ControlBuilder.java:1405: error: cannot infer type for local variable skip
 		var skip = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:1435: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1434: error: cannot find symbol
 						DataBinding.fromContext<Visual>
 						           ^
   symbol:   variable fromContext
   location: class DataBinding
-./GameFramework/Controls/ControlBuilder.java:1435: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1434: error: cannot find symbol
 						DataBinding.fromContext<Visual>
 						                        ^
   symbol:   variable Visual
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1437: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1436: error: cannot find symbol
 							new VisualImageScaled
 							    ^
   symbol:   class VisualImageScaled
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1439: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1438: error: cannot find symbol
 								new VisualImageFromLibrary(imageName),
 								    ^
   symbol:   class VisualImageFromLibrary
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1469: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1468: error: cannot find symbol
 				new Action[]
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1471: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1470: error: cannot find symbol
 					new Action( ControlActionNames.Instances().ControlCancel, skip ),
 					    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1471: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1470: error: cannot find symbol
 					new Action( ControlActionNames.Instances().ControlCancel, skip ),
 					                              ^
   symbol:   method Instances()
   location: class ControlActionNames
-./GameFramework/Controls/ControlBuilder.java:1472: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1471: error: cannot find symbol
 					new Action( ControlActionNames.Instances().ControlConfirm, next )
 					    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1472: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1471: error: cannot find symbol
 					new Action( ControlActionNames.Instances().ControlConfirm, next )
 					                              ^
   symbol:   method Instances()
   location: class ControlActionNames
-./GameFramework/Controls/ControlBuilder.java:1484: error: array required, but ArrayList<Object> found
+./GameFramework/Controls/ControlBuilder.java:1483: error: array required, but ArrayList<Object> found
 		return controlsForSlides[0];
 		                        ^
-./GameFramework/Controls/ControlBuilder.java:1493: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1501: error: cannot infer type for local variable start
+./GameFramework/Controls/ControlBuilder.java:1500: error: cannot infer type for local variable start
 		var start = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:1527: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1526: error: cannot find symbol
 		var visual = new VisualGroup
 		                 ^
   symbol:   class VisualGroup
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1531: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1530: error: cannot find symbol
 				new VisualImageScaled
 				    ^
   symbol:   class VisualImageScaled
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1533: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1532: error: cannot find symbol
 					new VisualImageFromLibrary("Title"), size
 					    ^
   symbol:   class VisualImageFromLibrary
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1535: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1534: error: cannot find symbol
 				new VisualSound("Music_Title", true) // isMusic
 				    ^
   symbol:   class VisualSound
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1552: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1551: error: cannot find symbol
 					DataBinding.fromContext<Visual>(visual)
 					           ^
   symbol:   variable fromContext
   location: class DataBinding
-./GameFramework/Controls/ControlBuilder.java:1552: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1551: error: cannot find symbol
 					DataBinding.fromContext<Visual>(visual)
 					                        ^
   symbol:   variable Visual
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1568: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1567: error: cannot find symbol
 			new Action[]
 			    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1570: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1569: error: cannot find symbol
 				new Action( ControlActionNames.Instances().ControlCancel, start ),
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1570: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1569: error: cannot find symbol
 				new Action( ControlActionNames.Instances().ControlCancel, start ),
 				                              ^
   symbol:   method Instances()
   location: class ControlActionNames
-./GameFramework/Controls/ControlBuilder.java:1571: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1570: error: cannot find symbol
 				new Action( ControlActionNames.Instances().ControlConfirm, start )
 				    ^
   symbol:   class Action
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1571: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1570: error: cannot find symbol
 				new Action( ControlActionNames.Instances().ControlConfirm, start )
 				                              ^
   symbol:   method Instances()
   location: class ControlActionNames
-./GameFramework/Controls/ControlBuilder.java:1591: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1601: error: cannot find symbol
-		var dateCreated = world.dateCreated;
-		                       ^
-  symbol:   variable dateCreated
-  location: variable world of type World
-./GameFramework/Controls/ControlBuilder.java:1602: error: cannot find symbol
-		var dateSaved = world.dateSaved;
-		                     ^
-  symbol:   variable dateSaved
-  location: variable world of type World
-./GameFramework/Controls/ControlBuilder.java:1654: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:1653: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:1665: error: variable world is already defined in method worldDetail(Universe,Coords,Venue)
+./GameFramework/Controls/ControlBuilder.java:1664: error: variable world is already defined in method worldDetail(Universe,Coords,Venue)
 						var world = universe.world;
 						    ^
-./GameFramework/Controls/ControlBuilder.java:1666: error: cannot find symbol
-						var venueWorld = world.toVenue();
-						                      ^
-  symbol:   method toVenue()
-  location: variable world of type World
-./GameFramework/Controls/ControlBuilder.java:1667: error: cannot infer type for local variable venueNext
+./GameFramework/Controls/ControlBuilder.java:1666: error: cannot infer type for local variable venueNext
 						var venueNext;
 						    ^
   (cannot use 'var' on variable without initializer)
-./GameFramework/Controls/ControlBuilder.java:1668: error: cannot find symbol
-						if (world.dateSaved != null)
-						         ^
-  symbol:   variable dateSaved
-  location: variable world of type World
-./GameFramework/Controls/ControlBuilder.java:1676: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1675: error: cannot find symbol
 							var instructions = textInstructions.value;
 							                                   ^
   symbol:   variable value
   location: variable textInstructions of type TextString
-./GameFramework/Controls/ControlBuilder.java:1695: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1683: error: cannot find symbol
+									universe.venueNext = controlBuilder.venueTransitionalFromTo
+									                                   ^
+  symbol:   method venueTransitionalFromTo(Venue,VenueWorld)
+  location: variable controlBuilder of type ControlBuilder
+./GameFramework/Controls/ControlBuilder.java:1694: error: cannot find symbol
 							var venueMovie = new VenueVideo
 							                     ^
   symbol:   class VenueVideo
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1712: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:1711: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:1724: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1723: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1732: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:1731: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:1761: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1760: error: cannot find symbol
 								ArrayHelper.remove(saveStates, saveState);
 								^
   symbol:   variable ArrayHelper
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1771: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1770: error: cannot find symbol
 						venueNext = controlBuilder.venueTransitionalFromTo
 						                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1604: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1603: error: cannot find symbol
 		var returnValue = ControlContainer.from4
 		                                  ^
   symbol:   method from4(String,Coords,Coords,ControlBase[])
   location: class ControlContainer
-./GameFramework/Controls/ControlBuilder.java:1793: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
-./GameFramework/Controls/ControlBuilder.java:1801: error: cannot infer type for local variable confirm
+./GameFramework/Controls/ControlBuilder.java:1800: error: cannot infer type for local variable confirm
 		var confirm = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:1848: error: cannot infer type for local variable cancel
+./GameFramework/Controls/ControlBuilder.java:1847: error: cannot infer type for local variable cancel
 		var cancel = () ->
 		    ^
   (lambda expression needs an explicit target-type)
-./GameFramework/Controls/ControlBuilder.java:1901: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1900: error: cannot find symbol
 						(Profile c) -> c.saveStateSelected(),
 						 ^
   symbol:   class Profile
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1902: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1901: error: cannot find symbol
 						(Profile c, SaveState v) -> { c.saveStateNameSelected = v.name; }
 						 ^
   symbol:   class Profile
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1902: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1901: error: cannot find symbol
 						(Profile c, SaveState v) -> { c.saveStateNameSelected = v.name; }
 						            ^
   symbol:   class SaveState
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1886: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1885: error: cannot find symbol
 				ControlList.from8
 				           ^
   symbol:   method from8(String,Coords,Coords,DataBinding<Profile,Object>,DataBinding<Object,Object>,double,DataBinding,DataBinding<String,String>)
   location: class ControlList
-./GameFramework/Controls/ControlBuilder.java:1894: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1893: error: cannot find symbol
 						(Profile c) -> c.saveStates
 						 ^
   symbol:   class Profile
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1896: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1895: error: cannot find symbol
 					DataBinding.fromGet( (SaveState c) -> c.name ), // bindingForOptionText
 					                      ^
   symbol:   class SaveState
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1907: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:1906: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:1931: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:1930: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:1942: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1941: error: cannot find symbol
 						var venueFileUpload = new VenueFileUpload(null, null);
 						                          ^
   symbol:   class VenueFileUpload
   location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1984: error: incompatible types: <null> cannot be converted to boolean
+./GameFramework/Controls/ControlBuilder.java:1983: error: incompatible types: <null> cannot be converted to boolean
 								null
 								^
-./GameFramework/Controls/ControlBuilder.java:2001: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:2000: error: cannot find symbol
 								venueNext = controlBuilder.venueTransitionalFromTo
 								                          ^
   symbol:   method venueTransitionalFromTo(Venue,Venue)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:2019: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:2018: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Controls/ControlBuilder.java:2034: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:2033: error: cannot find symbol
 						universe.venueNext = controlBuilder.venueTransitionalFromTo
 						                                   ^
   symbol:   method venueTransitionalFromTo(Venue,VenueControls)
   location: variable controlBuilder of type ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:1858: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1857: error: cannot find symbol
 		var returnValue = ControlContainer.from4
 		                                  ^
   symbol:   method from4(String,Coords,Coords,ControlBase[])
@@ -2256,9 +1914,11 @@ import GameFramework.Display.Visuals.*;
 			               ^
   symbol:   variable actionStartStopPerform
   location: class DisplayRecorder
-./GameFramework/Display/DisplayRecorder.java:62: error: cannot assign a value to final variable length
-		this.framesRecordedAsArrayBuffers.length = 0;
+./GameFramework/Display/DisplayRecorder.java:62: error: cannot find symbol
+		this.framesRecordedAsArrayBuffers.clear();
 		                                 ^
+  symbol:   method clear()
+  location: variable framesRecordedAsArrayBuffers of type Object[]
 ./GameFramework/Display/DisplayRecorder.java:72: error: cannot find symbol
 			framesRecorded.splice(0, 1);
 			              ^
@@ -2525,11 +2185,6 @@ public class RandomizerSystem implements Randomizer
 ./GameFramework/Profiles/Profile.java:38: error: array required, but Stream<SaveState> found
 		)[0];
 		 ^
-./GameFramework/Profiles/Profile.java:74: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
 ./GameFramework/Profiles/Profile.java:87: error: cannot infer type for local variable loadNewWorld
 		var loadNewWorld = () ->
 		    ^
@@ -2607,14 +2262,6 @@ public class RandomizerSystem implements Randomizer
 ./GameFramework/Profiles/Profile.java:691: error: variable returnValue is already defined in method toControlSaveStateLoadOrSave(Universe,Coords,Venue,boolean)
 							var returnValue =
 							    ^
-./GameFramework/Profiles/Profile.java:744: error: scalePosAndSize(Coords) is not public in ControlBase; cannot be accessed from outside package
-		returnValue.scalePosAndSize(scaleMultiplier);
-		           ^
-./GameFramework/Profiles/Profile.java:756: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
 ./GameFramework/Controls/ControlTextBox.java:192: error: ';' expected
 		var parentAsContainer = parent as ControlContainer;
 		                              ^
@@ -2662,9 +2309,6 @@ public class RandomizerSystem implements Randomizer
 						            ^
   symbol:   method add(String)
   location: variable profileNames of type Object
-./GameFramework/Profiles/Profile.java:842: error: toVenue() is not public in ControlBase; cannot be accessed from outside package
-						).toVenue();
-						 ^
 ./GameFramework/Profiles/Profile.java:843: error: cannot find symbol
 						venueNext = VenueFader.fromVenuesToAndFrom
 						            ^
@@ -2673,9 +2317,6 @@ public class RandomizerSystem implements Randomizer
 ./GameFramework/Profiles/Profile.java:851: error: incompatible types: Object is not a functional interface
 				ControlButton.from8
 				             ^
-./GameFramework/Profiles/Profile.java:865: error: toVenue() is not public in ControlBase; cannot be accessed from outside package
-						).toVenue();
-						 ^
 ./GameFramework/Profiles/Profile.java:866: error: cannot find symbol
 						venueNext = VenueFader.fromVenuesToAndFrom(venueNext, universe.venueCurrent);
 						            ^
@@ -2686,11 +2327,6 @@ public class RandomizerSystem implements Randomizer
 		                                  ^
   symbol:   method from4(String,Coords,Coords,ControlBase[])
   location: class ControlContainer
-./GameFramework/Profiles/Profile.java:885: error: cannot find symbol
-			size = universe.display.sizeDefault();
-			                       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
 ./GameFramework/Profiles/Profile.java:895: error: incompatible types: Object cannot be converted to List<String>
 		List<String> profileNames = storageHelper.load("ProfileNames");
 		                                              ^
@@ -2752,11 +2388,6 @@ public class RandomizerSystem implements Randomizer
 ./GameFramework/Profiles/Profile.java:1103: error: variable universe is already defined in method venueWorldGenerate(Universe)
 			(Universe universe, World world) -> // done
 			          ^
-./GameFramework/Profiles/Profile.java:1110: error: cannot find symbol
-				Venue venueNext = universe.world.toVenue();
-				                                ^
-  symbol:   method toVenue()
-  location: variable world of type World
 ./GameFramework/Profiles/Profile.java:1111: error: cannot find symbol
 				venueNext = VenueFader.fromVenuesToAndFrom
 				            ^
@@ -2767,11 +2398,6 @@ public class RandomizerSystem implements Randomizer
 			^
   symbol:   variable VenueFader
   location: class Profile
-./GameFramework/Input/ActionToInputsMapping.java:39: error: cannot find symbol
-		return universe.world.defn.actionByName(this.actionName);
-		                     ^
-  symbol:   variable defn
-  location: variable world of type World
 ./GameFramework/Input/ActionToInputsMapping.java:49: error: cannot find symbol
 			ArrayHelper.clone(this.inputNames),
 			^
@@ -2787,11 +2413,6 @@ public class RandomizerSystem implements Randomizer
 		               ^
   first type:  Coords
   second type: Coords
-./GameFramework/Geometry/Disposition.java:88: error: cannot find symbol
-		return world.placesByName.get(this.placeName);
-		            ^
-  symbol:   variable placesByName
-  location: variable world of type World
 ./GameFramework/Controls/VenueControls.java:30: error: bad operand types for binary operator '!='
 			ignoreKeyboardAndGamepadInputs != null
 			                               ^
@@ -2918,9 +2539,11 @@ public class RandomizerSystem implements Randomizer
 					^
   symbol:   method buildGamepadInputs(String)
   location: class VenueControls
-./GameFramework/Controls/VenueControls.java:123: error: cannot assign a value to final variable length
-			this.actionToInputsMappings.length = 0;
+./GameFramework/Controls/VenueControls.java:123: error: cannot find symbol
+			this.actionToInputsMappings.clear();
 			                           ^
+  symbol:   method clear()
+  location: variable actionToInputsMappings of type ActionToInputsMapping[]
 ./GameFramework/Controls/VenueControls.java:126: error: cannot find symbol
 		var mappingsGet = this.controlRoot.actionToInputsMappings;
 		                                  ^
@@ -2978,281 +2601,271 @@ public class RandomizerSystem implements Randomizer
 		                       ^
   symbol:   variable NumberHelper
   location: class Rotation
-./GameFramework/Model/Places/Place.java:40: error: incompatible types: Entity[] cannot be converted to Collection<? extends Entity>
+./GameFramework/Model/Places/Place.java:41: error: incompatible types: Entity[] cannot be converted to Collection<? extends Entity>
 		this.entitiesToSpawn.addAll(entities);
 		                            ^
-./GameFramework/Model/Places/Place.java:58: error: cannot find symbol
-		return world.defn.placeDefnByName(this.defnName);
-		            ^
-  symbol:   variable defn
-  location: variable world of type World
-./GameFramework/Model/Places/Place.java:68: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:69: error: cannot find symbol
 		display.drawBackground(colorBlack, colorBlack);
 		       ^
   symbol:   method drawBackground(Color,Color)
   location: variable display of type Display
-./GameFramework/Model/Places/Place.java:78: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:79: error: cannot find symbol
 					x.drawable().updateForTimerTick(uwpe.entitySet(x) );
 					 ^
   symbol:   method drawable()
   location: variable x of type Entity
-./GameFramework/Model/Places/Place.java:84: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:85: error: cannot find symbol
 			var camera = cameraEntity.camera();
 			                         ^
   symbol:   method camera()
   location: variable cameraEntity of type Entity
-./GameFramework/Model/Places/Place.java:103: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:104: error: cannot find symbol
 		for (var i = 0; i < this.entitiesToRemove.length; i++)
 		                                         ^
   symbol:   variable length
   location: variable entitiesToRemove of type List<Entity>
-./GameFramework/Model/Places/Place.java:105: error: array required, but List<Entity> found
+./GameFramework/Model/Places/Place.java:106: error: array required, but List<Entity> found
 			var entity = this.entitiesToRemove[i];
 			                                  ^
-./GameFramework/Model/Places/Place.java:108: error: cannot find symbol
-		this.entitiesToRemove.length = 0;
-		                     ^
-  symbol:   variable length
-  location: variable entitiesToRemove of type List<Entity>
-./GameFramework/Model/Places/Place.java:113: error: incompatible types: Entity[] cannot be converted to Collection<? extends Entity>
+./GameFramework/Model/Places/Place.java:114: error: incompatible types: Entity[] cannot be converted to Collection<? extends Entity>
 		this.entitiesToRemove.addAll(entitiesToRemove);
 		                             ^
-./GameFramework/Model/Places/Place.java:118: error: incompatible types: Entity[] cannot be converted to Collection<? extends Entity>
+./GameFramework/Model/Places/Place.java:119: error: incompatible types: Entity[] cannot be converted to Collection<? extends Entity>
 		this.entitiesToSpawn.addAll(entitiesToSpawn);
 		                            ^
-./GameFramework/Model/Places/Place.java:124: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:125: error: cannot find symbol
 		for (var i = 0; i < this.entitiesToSpawn.length; i++)
 		                                        ^
   symbol:   variable length
   location: variable entitiesToSpawn of type List<Entity>
-./GameFramework/Model/Places/Place.java:126: error: array required, but List<Entity> found
+./GameFramework/Model/Places/Place.java:127: error: array required, but List<Entity> found
 			var entity = this.entitiesToSpawn[i];
 			                                 ^
-./GameFramework/Model/Places/Place.java:131: error: cannot find symbol
-		this.entitiesToSpawn.length = 0;
-		                    ^
-  symbol:   variable length
-  location: variable entitiesToSpawn of type List<Entity>
-./GameFramework/Model/Places/Place.java:150: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:151: error: cannot find symbol
 			var propertyName = property.constructor.name;
 			                           ^
   symbol:   variable constructor
   location: variable property of type EntityProperty
-./GameFramework/Model/Places/Place.java:153: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:154: error: cannot find symbol
 			ArrayHelper.remove(entitiesWithProperty, entity);
 			^
   symbol:   variable ArrayHelper
   location: class Place
-./GameFramework/Model/Places/Place.java:155: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:156: error: cannot find symbol
 		ArrayHelper.remove(this.entities, entity);
 		^
   symbol:   variable ArrayHelper
   location: class Place
-./GameFramework/Model/Places/Place.java:156: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:157: error: cannot find symbol
 		this.entitiesById.delete(entity.id);
 		                 ^
   symbol:   method delete(int)
   location: variable entitiesById of type Map<Integer,Entity>
-./GameFramework/Model/Places/Place.java:157: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:158: error: cannot find symbol
 		this.entitiesByName.delete(entity.name);
 		                   ^
   symbol:   method delete(String)
   location: variable entitiesByName of type Map<String,Entity>
-./GameFramework/Model/Places/Place.java:184: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:185: error: cannot find symbol
 			var propertyName = property.constructor.name;
 			                           ^
   symbol:   variable constructor
   location: variable property of type EntityProperty
-./GameFramework/Model/Places/Place.java:202: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:203: error: cannot find symbol
 		this.entitiesToRemove.push(entityToRemove);
 		                     ^
   symbol:   method push(Entity)
   location: variable entitiesToRemove of type List<Entity>
-./GameFramework/Model/Places/Place.java:207: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:208: error: cannot find symbol
 		this.entitiesToSpawn.push(entityToSpawn);
 		                    ^
   symbol:   method push(Entity)
   location: variable entitiesToSpawn of type List<Entity>
-./GameFramework/Model/Places/Place.java:216: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:217: error: cannot find symbol
 		for (var i = 0; i < this.entities.length; i++)
 		                                 ^
   symbol:   variable length
   location: variable entities of type List<Entity>
-./GameFramework/Model/Places/Place.java:218: error: array required, but List<Entity> found
+./GameFramework/Model/Places/Place.java:219: error: array required, but List<Entity> found
 			var entity = this.entities[i];
 			                          ^
-./GameFramework/Model/Places/Place.java:230: error: cannot find symbol
-		this.entitiesToSpawn.length = 0;
-		                    ^
-  symbol:   variable length
-  location: variable entitiesToSpawn of type List<Entity>
-./GameFramework/Model/Places/Place.java:231: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:232: error: cannot find symbol
 		for (var i = 0; i < this.entities.length; i++)
 		                                 ^
   symbol:   variable length
   location: variable entities of type List<Entity>
-./GameFramework/Model/Places/Place.java:233: error: array required, but List<Entity> found
+./GameFramework/Model/Places/Place.java:234: error: array required, but List<Entity> found
 			var entity = this.entities[i];
 			                          ^
-./GameFramework/Model/Places/Place.java:244: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:245: error: cannot find symbol
 			loadables.forEach(x -> x.loadable().load(uwpe.entitySet(x) ) );
 			                        ^
   symbol:   method loadable()
   location: variable x of type Entity
-./GameFramework/Model/Places/Place.java:255: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:256: error: cannot find symbol
 			loadables.forEach(x -> x.loadable().unload(uwpe.entitySet(x) ) );
 			                        ^
   symbol:   method loadable()
   location: variable x of type Entity
-./GameFramework/Model/Places/Place.java:278: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:279: error: cannot find symbol
 				for (var i = 0; i < entitiesWithProperty.length; i++)
 				                                        ^
   symbol:   variable length
   location: variable entitiesWithProperty of type List<Entity>
-./GameFramework/Model/Places/Place.java:280: error: array required, but List<Entity> found
+./GameFramework/Model/Places/Place.java:281: error: array required, but List<Entity> found
 					var entity = entitiesWithProperty[i];
 					                                 ^
-./GameFramework/Model/Places/Place.java:294: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:295: error: cannot find symbol
 		var playerControllable = player.controllable();
 		                               ^
   symbol:   method controllable()
   location: variable player of type List<Entity>
-./GameFramework/Model/Places/Place.java:297: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:298: error: cannot find symbol
 			universe, universe.display.sizeInPixels, player, null, false
 			                          ^
   symbol:   variable sizeInPixels
   location: variable display of type Display
-./GameFramework/Model/Places/Place.java:306: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:307: error: cannot find symbol
 		return this.entitiesByPropertyName(Camera.name)[0];
 		                                   ^
   symbol:   variable Camera
   location: class Place
-./GameFramework/Model/Places/Place.java:313: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:314: error: cannot find symbol
 		if (typeof(CollisionTracker) != "undefined")
 		           ^
   symbol:   variable CollisionTracker
   location: class Place
-./GameFramework/Model/Places/Place.java:316: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:317: error: cannot find symbol
 				this.entitiesByPropertyName(CollisionTracker.name)[0];
 				                                            ^
   symbol:   variable name
   location: class CollisionTracker
-./GameFramework/Model/Places/Place.java:321: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:322: error: cannot find symbol
 				: collisionTrackerEntity.propertyByName(CollisionTracker.name)
 				                                                        ^
   symbol:   variable name
   location: class CollisionTracker
-./GameFramework/Model/Places/Place.java:317: error: cannot infer type for local variable returnValueAsProperty
+./GameFramework/Model/Places/Place.java:318: error: cannot infer type for local variable returnValueAsProperty
 			var returnValueAsProperty =
 			    ^
   (variable initializer is 'null')
-./GameFramework/Model/Places/Place.java:330: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:331: error: cannot find symbol
 		return this.entitiesByPropertyName(Drawable.class.name);
 		                                   ^
   symbol:   class Drawable
   location: class Place
-./GameFramework/Model/Places/Place.java:335: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:336: error: cannot find symbol
 		return this.entitiesByPropertyName(Item.class.name);
 		                                   ^
   symbol:   class Item
   location: class Place
-./GameFramework/Model/Places/Place.java:340: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:341: error: cannot find symbol
 		return this.entitiesByPropertyName(Loadable.class.name);
 		                                   ^
   symbol:   class Loadable
   location: class Place
-./GameFramework/Model/Places/Place.java:345: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:346: error: cannot find symbol
 		return this.entitiesByPropertyName(Movable.class.name);
 		                                   ^
   symbol:   class Movable
   location: class Place
-./GameFramework/Model/Places/Place.java:350: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:351: error: cannot find symbol
 		return this.entitiesByPropertyName(Playable.class.name)[0];
 		                                   ^
   symbol:   class Playable
   location: class Place
-./GameFramework/Model/Places/Place.java:355: error: cannot find symbol
+./GameFramework/Model/Places/Place.java:356: error: cannot find symbol
 		return this.entitiesByPropertyName(Usable.class.name);
 		                                   ^
   symbol:   class Usable
   location: class Place
-./GameFramework/Model/Entity.java:17: error: cannot find symbol
+./GameFramework/Model/Entity.java:18: error: cannot find symbol
 		this.id = IDHelper.Instance().idNext();
 		          ^
   symbol:   variable IDHelper
   location: class Entity
-./GameFramework/Model/Entity.java:21: error: incompatible types: HashMap<String,Object> cannot be converted to Map<String,EntityProperty>
+./GameFramework/Model/Entity.java:22: error: incompatible types: HashMap<String,Object> cannot be converted to Map<String,EntityProperty>
 		this.propertiesByName = new HashMap<String, Object>();
 		                        ^
-./GameFramework/Model/Entity.java:25: error: package property does not exist
+./GameFramework/Model/Entity.java:26: error: package property does not exist
 			var propertyName = property.constructor.class.name;
 			                           ^
-./GameFramework/Model/Entity.java:37: error: cannot find symbol
+./GameFramework/Model/Entity.java:38: error: cannot find symbol
 			if (property.finalize != null)
 			            ^
   symbol:   variable finalize
   location: variable property of type EntityProperty
-./GameFramework/Model/Entity.java:52: error: cannot find symbol
+./GameFramework/Model/Entity.java:53: error: cannot find symbol
 			if (property.initialize != null)
 			            ^
   symbol:   variable initialize
   location: variable property of type EntityProperty
-./GameFramework/Model/Entity.java:67: error: cannot find symbol
+./GameFramework/Model/Entity.java:68: error: cannot find symbol
 		this.properties.push(propertyToAdd);
 		               ^
   symbol:   method push(EntityProperty)
   location: variable properties of type EntityProperty[]
-./GameFramework/Model/Entity.java:76: error: package propertyToAdd does not exist
+./GameFramework/Model/Entity.java:77: error: package propertyToAdd does not exist
 				var propertyName = propertyToAdd.constructor.class.name;
 				                                ^
-./GameFramework/Model/Entity.java:94: error: cannot find symbol
+./GameFramework/Model/Entity.java:95: error: cannot find symbol
 		ArrayHelper.remove(this.properties, propertyToRemove);
 		^
   symbol:   variable ArrayHelper
   location: class Entity
-./GameFramework/Model/Entity.java:95: error: package propertyToRemove does not exist
+./GameFramework/Model/Entity.java:96: error: package propertyToRemove does not exist
 		this.propertiesByName.delete(propertyToRemove.constructor.class.name);
 		                                             ^
-./GameFramework/Model/Entity.java:98: error: package propertyToRemove does not exist
+./GameFramework/Model/Entity.java:99: error: package propertyToRemove does not exist
 			var propertyName = propertyToRemove.constructor.class.name;
 			                                   ^
-./GameFramework/Model/Entity.java:100: error: cannot find symbol
+./GameFramework/Model/Entity.java:101: error: cannot find symbol
 			ArrayHelper.remove(entitiesWithProperty, this);
 			^
   symbol:   variable ArrayHelper
   location: class Entity
-./GameFramework/Model/Entity.java:113: error: cannot find symbol
+./GameFramework/Model/Entity.java:114: error: cannot find symbol
 			if (property.finalize != null)
 			            ^
   symbol:   variable finalize
   location: variable property of type EntityProperty
-./GameFramework/Model/Entity.java:126: error: cannot find symbol
+./GameFramework/Model/Entity.java:127: error: cannot find symbol
 		var propertiesCloned = EntityProperty[this.properties.length];
 		                       ^
   symbol:   variable EntityProperty
   location: class Entity
-./GameFramework/Model/Entity.java:133: error: cannot find symbol
+./GameFramework/Model/Entity.java:134: error: cannot find symbol
 				propertyAsAny.clone == null
 				             ^
   symbol:   variable clone
   location: variable propertyAsAny of type Object
-./GameFramework/Model/Entity.java:135: error: clone() has protected access in Object
+./GameFramework/Model/Entity.java:136: error: clone() has protected access in Object
 				: propertyAsAny.clone()
 				               ^
-./GameFramework/Model/Entity.java:152: error: cannot find symbol
+./GameFramework/Model/Entity.java:153: error: cannot find symbol
 			ArrayHelper.areEqual(this.properties, other.properties);
 			^
   symbol:   variable ArrayHelper
   location: class Entity
-./GameFramework/Model/Places/PlaceDefn.java:39: error: method addLookupsByName in class ArrayHelper cannot be applied to given types;
+./GameFramework/Model/Entity.java:168: error: name has private access in Class
+	public Collidable collidable() { return (Collidable)(this.propertyByName(Collidable.class.name) ); }
+	                                                                                         ^
+./GameFramework/Model/Entity.java:189: error: name has private access in Class
+	public Locatable locatable() { return (Locatable)(this.propertyByName(Locatable.class.name) ); }
+	                                                                                     ^
+./GameFramework/Model/Places/PlaceDefn.java:39: error: no suitable method found for addLookupsByName(ActorAction[])
 		this.actionsByName = ArrayHelper.addLookupsByName(this.actions);
 		                                ^
-  required: List<E>
-  found: ActorAction[]
-  reason: cannot infer type-variable(s) E
-    (argument mismatch; ActorAction[] cannot be converted to List<E>)
-  where E is a type-variable:
-    E extends Namable declared in method <E>addLookupsByName(List<E>)
+    method ArrayHelper.<E#1>addLookupsByName(E#1[]) is not applicable
+      (inference variable E#1 has incompatible bounds
+        lower bounds: Namable
+        lower bounds: ActorAction)
+    method ArrayHelper.<E#2>addLookupsByName(List<E#2>) is not applicable
+      (cannot infer type-variable(s) E#2
+        (argument mismatch; ActorAction[] cannot be converted to List<E#2>))
+  where E#1,E#2 are type-variables:
+    E#1 extends Namable declared in method <E#1>addLookupsByName(E#1[])
+    E#2 extends Namable declared in method <E#2>addLookupsByName(List<E#2>)
 ./GameFramework/Model/Places/PlaceDefn.java:46: error: method clone in class ArrayHelper cannot be applied to given types;
 			ArrayHelper.clone(this.actionToInputsMappingsDefault);
 			           ^
@@ -3326,16 +2939,14 @@ public class RandomizerSystem implements Randomizer
 		                            ^
   symbol:   method boundable()
   location: variable entity of type Entity
-./GameFramework/Geometry/Collisions/CollisionTracker.java:56: error: cannot find symbol
-		var entityCollidable = entity.collidable();
-		                             ^
-  symbol:   method collidable()
-  location: variable entity of type Entity
 ./GameFramework/Geometry/Collisions/CollisionTracker.java:61: error: cannot find symbol
 			entityBounds, ArrayHelper.clear(this._cells)
 			              ^
   symbol:   variable ArrayHelper
   location: class CollisionTracker
+./GameFramework/Geometry/Collisions/CollisionTracker.java:64: error: _collisionTrackerMapCellsOccupied has private access in Collidable
+		entityCollidable._collisionTrackerMapCellsOccupied.addAll
+		                ^
 ./GameFramework/Geometry/Collisions/CollisionTracker.java:82: error: cannot find symbol
 						Debug.doNothing();
 						^
@@ -3497,14 +3108,136 @@ public class Box implements ShapeBase
 				            ^
   symbol:   variable VenueFader
   location: class ActorAction_Instances
-./GameFramework/Model/Actors/ActorAction.java:92: error: toVenue() is not public in ControlBase; cannot be accessed from outside package
-				Venue venueNext = control.toVenue();
-				                         ^
 ./GameFramework/Model/Actors/ActorAction.java:93: error: cannot find symbol
 				venueNext = VenueFader.fromVenuesToAndFrom
 				            ^
   symbol:   variable VenueFader
   location: class ActorAction_Instances
+./GameFramework/Model/Physics/Collidable.java:47: error: clone() has protected access in Object
+		this.collider = this.colliderAtRest.clone();
+		                                   ^
+./GameFramework/Model/Physics/Collidable.java:47: error: incompatible types: Object cannot be converted to ShapeBase
+		this.collider = this.colliderAtRest.clone();
+		                                         ^
+./GameFramework/Model/Physics/Collidable.java:57: error: cannot find symbol
+		this._collisions = new ArrayList<Collision>();
+		    ^
+  symbol: variable _collisions
+./GameFramework/Model/Physics/Collidable.java:62: error: incompatible types: <null> cannot be converted to int
+		return new Collidable(null, colliderAtRest, null, null);
+		                      ^
+./GameFramework/Model/Physics/Collidable.java:71: error: incompatible types: <null> cannot be converted to int
+		return new Collidable(null, colliderAtRest, null, collideEntities);
+		                      ^
+./GameFramework/Model/Physics/Collidable.java:81: error: cannot find symbol
+			this._collideEntities.apply(uwpe, collision);
+			                     ^
+  symbol:   method apply(UniverseWorldPlaceEntities,Collision)
+  location: variable _collideEntities of type BiConsumer<UniverseWorldPlaceEntities,Collision>
+./GameFramework/Model/Physics/Collidable.java:88: error: incompatible types: Object cannot be converted to ShapeBase
+		this.collider.overwriteWith(this.colliderAtRest);
+		                                ^
+./GameFramework/Model/Physics/Collidable.java:98: error: array required, but List<Entity> found
+		var entity = entitiesColliding[0];
+		                              ^
+./GameFramework/Model/Physics/Collidable.java:99: error: array required, but List<Entity> found
+		var entityOther = entitiesColliding[1];
+		                                   ^
+./GameFramework/Model/Physics/Collidable.java:134: error: cannot find symbol
+					uwpe, ArrayHelper.clear(this._collisions)
+					                            ^
+  symbol: variable _collisions
+./GameFramework/Model/Physics/Collidable.java:154: error: cannot find symbol
+		var entityBoundable = entity.boundable();
+		                            ^
+  symbol:   method boundable()
+  location: variable entity of type Entity
+./GameFramework/Model/Physics/Collidable.java:160: error: cannot find symbol
+			|| entityBoundable.bounds.constructor.name != Box.name
+			                                                 ^
+  symbol:   variable name
+  location: class Box
+./GameFramework/Model/Physics/Collidable.java:191: error: cannot find symbol
+			x -> ArrayHelper.remove(x.entitiesPresent, entity)
+			                ^
+  symbol:   method remove(List<Entity>,Entity)
+  location: class ArrayHelper
+./GameFramework/Model/Physics/Collidable.java:199: error: cannot find symbol
+		collisionsSoFar = collisionsSoFar.filter
+		                                 ^
+  symbol:   method filter((collision[...]null))
+  location: variable collisionsSoFar of type List<Collision>
+./GameFramework/Model/Physics/Collidable.java:202: error: cannot find symbol
+				this.entityPropertyNamesToCollideWith.some
+				                                     ^
+  symbol:   method some((propertyN[...] null)
+  location: variable entityPropertyNamesToCollideWith of type String[]
+./GameFramework/Model/Physics/Collidable.java:229: error: cannot find symbol
+				for (var e = 0; e < entitiesWithProperty.length; e++)
+				                                        ^
+  symbol:   variable length
+  location: variable entitiesWithProperty of type List<Entity>
+./GameFramework/Model/Physics/Collidable.java:231: error: array required, but List<Entity> found
+					var entityOther = entitiesWithProperty[e];
+					                                      ^
+./GameFramework/Model/Physics/Collidable.java:278: error: cannot find symbol
+			var collidable0Boundable = entity0.boundable();
+			                                  ^
+  symbol:   method boundable()
+  location: variable entity0 of type Entity
+./GameFramework/Model/Physics/Collidable.java:279: error: cannot find symbol
+			var collidable1Boundable = entity1.boundable();
+			                                  ^
+  symbol:   method boundable()
+  location: variable entity1 of type Entity
+./GameFramework/Model/Physics/Collidable.java:315: error: cannot find symbol
+				collidable0EntitiesAlreadyCollidedWith.push(entity1);
+				                                      ^
+  symbol:   method push(Entity)
+  location: variable collidable0EntitiesAlreadyCollidedWith of type List<Entity>
+./GameFramework/Model/Physics/Collidable.java:316: error: cannot find symbol
+				collidable1EntitiesAlreadyCollidedWith.push(entity0);
+				                                      ^
+  symbol:   method push(Entity)
+  location: variable collidable1EntitiesAlreadyCollidedWith of type List<Entity>
+./GameFramework/Model/Physics/Collidable.java:321: error: cannot find symbol
+			ArrayHelper.remove(collidable0EntitiesAlreadyCollidedWith, entity1);
+			           ^
+  symbol:   method remove(List<Entity>,Entity)
+  location: class ArrayHelper
+./GameFramework/Model/Physics/Collidable.java:322: error: cannot find symbol
+			ArrayHelper.remove(collidable1EntitiesAlreadyCollidedWith, entity0);
+			           ^
+  symbol:   method remove(List<Entity>,Entity)
+  location: class ArrayHelper
+./GameFramework/Model/Physics/Collidable.java:336: error: cannot find symbol
+		return (entity.movable() == null);
+		              ^
+  symbol:   method movable()
+  location: variable entity of type Entity
+./GameFramework/Model/Physics/Collidable.java:370: error: incompatible types: Object cannot be converted to ShapeBase
+			this.colliderAtRest.clone(),
+			                         ^
+./GameFramework/Model/Physics/Collidable.java:370: error: clone() has protected access in Object
+			this.colliderAtRest.clone(),
+			                   ^
+./GameFramework/Model/Physics/Locatable.java:16: error: bad operand types for binary operator '||'
+		this.loc = loc || Disposition.create();
+		               ^
+  first type:  Disposition
+  second type: Disposition
+./GameFramework/Model/Physics/Locatable.java:31: error: cannot find symbol
+		entitiesToSort.sort
+		              ^
+  symbol:   method sort((Entity a,[...]ue; })
+  location: variable entitiesToSort of type Entity[]
+./GameFramework/Model/Physics/Locatable.java:37: error: cannot infer type for local variable returnValue
+				var returnValue;
+				    ^
+  (cannot use 'var' on variable without initializer)
+./GameFramework/Model/Physics/Locatable.java:51: error: incompatible types: Entity[] cannot be converted to List<Entity>
+		return entitiesToSort;
+		       ^
 ./GameFramework/Utility/DateTime.java:47: error: cannot find symbol
 		return DateTime.fromSystemDate(new Date());
 		                                   ^
@@ -3670,16 +3403,21 @@ public class Box implements ShapeBase
 ./GameFramework/Input/Input.java:82: error: incompatible types: String[] cannot be converted to String[][]
 		this._All = new String[]
 		            ^
-./GameFramework/Input/Input.java:106: error: method addLookups in class ArrayHelper cannot be applied to given types;
+./GameFramework/Input/Input.java:106: error: no suitable method found for addLookups(String[][],(String x)->x)
 			ArrayHelper.addLookups(this._All, (String x) -> x);
 			           ^
-  required: List<E>,Function<E,K>
-  found: String[][],(String x)->x
-  reason: cannot infer type-variable(s) K,E
-    (argument mismatch; String[][] cannot be converted to List<E>)
-  where E,K are type-variables:
-    E extends Object declared in method <K,E>addLookups(List<E>,Function<E,K>)
-    K extends Object declared in method <K,E>addLookups(List<E>,Function<E,K>)
+    method ArrayHelper.<K#1,E#1>addLookups(E#1[],Function<E#1,K#1>) is not applicable
+      (inference variable E#1 has incompatible bounds
+        equality constraints: String
+        lower bounds: String[])
+    method ArrayHelper.<K#2,E#2>addLookups(List<E#2>,Function<E#2,K#2>) is not applicable
+      (cannot infer type-variable(s) K#2,E#2
+        (argument mismatch; String[][] cannot be converted to List<E#2>))
+  where K#1,E#1,K#2,E#2 are type-variables:
+    K#1 extends Object declared in method <K#1,E#1>addLookups(E#1[],Function<E#1,K#1>)
+    E#1 extends Object declared in method <K#1,E#1>addLookups(E#1[],Function<E#1,K#1>)
+    K#2 extends Object declared in method <K#2,E#2>addLookups(List<E#2>,Function<E#2,K#2>)
+    E#2 extends Object declared in method <K#2,E#2>addLookups(List<E#2>,Function<E#2,K#2>)
 ./GameFramework/Display/VenueFader.java:30: error: bad operand types for binary operator '=='
 			(millisecondsPerFade == null ? 250 : millisecondsPerFade);
 			                     ^
@@ -3728,11 +3466,6 @@ public class Box implements ShapeBase
 			^
   symbol:   variable Coords
   location: class VenueFader
-./GameFramework/Display/VenueFader.java:126: error: cannot find symbol
-			display.sizeDefault(), // Scaled automatically.
-			       ^
-  symbol:   method sizeDefault()
-  location: variable display of type Display
 ./GameFramework/Display/VenueFader.java:137: error: missing method body, or declare abstract
 	public Venue venueCurrent();
 	             ^
@@ -3976,9 +3709,6 @@ public class Face implements ShapeBase
 ./GameFramework/Geometry/Shapes/Face.java:45: error: array required, but List<Edge> found
 			var edgeFromFace = edges[e];
 			                        ^
-./GameFramework/Geometry/Shapes/Face.java:72: error: incompatible types: boolean cannot be converted to Coords
-		return isPosWithinAllEdgesOfFaceSoFar;
-		       ^
 ./GameFramework/Geometry/Shapes/Face.java:79: error: incompatible types: ArrayList<Edge> cannot be converted to Edge[]
 			this._edges = new ArrayList<Edge>();
 			              ^
@@ -4079,6 +3809,87 @@ public class ShapeGroupAny implements ShapeBase
 		           ^
   symbol:   method stream()
   location: variable shapes of type ShapeBase[]
+./GameFramework/Model/WorldDefn.java:25: error: cannot find symbol
+			var defnsByName = ArrayHelper.addLookupsByName(defnsOfType);
+			                  ^
+  symbol:   variable ArrayHelper
+  location: class WorldDefn
+./GameFramework/Model/WorldDefn.java:29: error: name has private access in Class
+				var itemTypeName = itemFirst.getClass().name;
+				                                       ^
+./GameFramework/Model/WorldDefn.java:45: error: cannot find symbol
+		var defnsByName = this.defnsByNameByTypeName.get(Action.name);
+		                                                 ^
+  symbol:   variable Action
+  location: class WorldDefn
+./GameFramework/Model/WorldDefn.java:52: error: non-static variable name cannot be referenced from a static context
+		var defnsByName = this.defnsByNameByTypeName.get(ActivityDefn.name);
+		                                                             ^
+./GameFramework/Model/WorldDefn.java:59: error: non-static variable name cannot be referenced from a static context
+		var defnsByName = this.defnsByNameByTypeName.get(Entity.name);
+		                                                       ^
+./GameFramework/Model/WorldDefn.java:66: error: non-static variable name cannot be referenced from a static context
+		var defnsByName = this.defnsByNameByTypeName.get(ItemDefn.name);
+		                                                         ^
+./GameFramework/Model/WorldDefn.java:73: error: non-static variable name cannot be referenced from a static context
+		var defnsByName = this.defnsByNameByTypeName.get(PlaceDefn.name);
+		                                                          ^
+./GameFramework/Model/VenueWorld.java:26: error: cannot find symbol
+		universe.soundHelper.soundForMusic.pause(universe);
+		                                  ^
+  symbol:   method pause(Universe)
+  location: variable soundForMusic of type Sound
+./GameFramework/Model/Actors/ActivityDefn.java:36: error: cannot find symbol
+		this._perform(uwpe);
+		    ^
+  symbol: method _perform(UniverseWorldPlaceEntities)
+./GameFramework/Model/Items/ItemDefn.java:53: error: incompatible types: <null> cannot be converted to double
+			name, null, null, null, null, null, null, null, null, null
+			                  ^
+./GameFramework/Model/Items/ItemDefn.java:77: error: cannot find symbol
+		returnValue.use = use;
+		           ^
+  symbol:   variable use
+  location: variable returnValue of type ItemDefn
+./GameFramework/Model/Items/ItemDefn.java:88: error: incompatible types: <null> cannot be converted to double
+			name, null, null, mass, tradeValue, null, null, null, visual, null
+			                                    ^
+./GameFramework/Model/Items/ItemDefn.java:94: error: cannot infer type for local variable returnValue
+		var returnValue;
+		    ^
+  (cannot use 'var' on variable without initializer)
+./GameFramework/Model/Items/ItemDefn.java:109: error: cannot infer type for local variable returnValue
+		var returnValue;
+		    ^
+  (cannot use 'var' on variable without initializer)
+./GameFramework/Model/Items/ItemDefn.java:116: error: cannot find symbol
+			returnValue = this._use(uwpe);
+			                  ^
+  symbol: method _use(UniverseWorldPlaceEntities)
+./GameFramework/Model/Items/Item.java:26: error: cannot find symbol
+		return (this.defn(world).use != null);
+		                        ^
+  symbol:   variable use
+  location: class ItemDefn
+./GameFramework/Model/Items/Item.java:56: error: cannot infer type for local variable returnValue
+		var returnValue = null;
+		    ^
+  (variable initializer is 'null')
+./GameFramework/Model/Items/Item.java:58: error: cannot find symbol
+		if (defn.use != null)
+		        ^
+  symbol:   variable use
+  location: variable defn of type ItemDefn
+./GameFramework/Model/Actors/ActivityDefn.java:66: error: cannot find symbol
+				var activity = e.actor().activity;
+				                ^
+  symbol:   method actor()
+  location: variable e of type Entity
+./GameFramework/Model/Actors/ActivityDefn.java:83: error: cannot find symbol
+		this._AllByName = ArrayHelper.addLookupsByName(this._All);
+		                  ^
+  symbol:   variable ArrayHelper
+  location: class ActivityDefn_Instances
 ./GameFramework/Controls/ControlStyle.java:58: error: cannot find symbol
 			Color.fromRGB(240/255, 240/255, 240/255), // colorBackground
 			     ^
@@ -4107,39 +3918,24 @@ public class ShapeGroupAny implements ShapeBase
 		                                                      ^
   symbol:   method join(String)
   location: class String[]
-./GameFramework/Controls/ControlLabel.java:32: error: constructor ControlBase in class ControlBase cannot be applied to given types;
-	{
-	^
-  required: String,Coords,Coords,double
-  found: no arguments
-  reason: actual and formal argument lists differ in length
-./GameFramework/Controls/ControlLabel.java:33: error: incompatible types: unexpected return value
-		return new ControlLabel
-		       ^
-./GameFramework/Controls/ControlLabel.java:49: error: constructor ControlBase in class ControlBase cannot be applied to given types;
-	{
-	^
-  required: String,Coords,Coords,double
-  found: no arguments
-  reason: actual and formal argument lists differ in length
-./GameFramework/Controls/ControlLabel.java:50: error: incompatible types: unexpected return value
-		return new ControlLabel
-		       ^
-./GameFramework/Controls/ControlLabel.java:85: error: cannot find symbol
+./GameFramework/Controls/ControlLabel.java:58: error: incompatible types: <null> cannot be converted to double
+			null // fontHeightInPixels
+			^
+./GameFramework/Controls/ControlLabel.java:86: error: cannot find symbol
 		return (this._text.get == null ? this._text : this._text.get() );
 		                  ^
   symbol:   variable get
   location: variable _text of type Object
-./GameFramework/Controls/ControlLabel.java:85: error: incompatible types: bad type in conditional expression
+./GameFramework/Controls/ControlLabel.java:86: error: incompatible types: bad type in conditional expression
 		return (this._text.get == null ? this._text : this._text.get() );
 		                                     ^
     Object cannot be converted to String
-./GameFramework/Controls/ControlLabel.java:85: error: cannot find symbol
+./GameFramework/Controls/ControlLabel.java:86: error: cannot find symbol
 		return (this._text.get == null ? this._text : this._text.get() );
 		                                                        ^
   symbol:   method get()
   location: variable _text of type Object
-./GameFramework/Controls/ControlLabel.java:97: error: variable style is already defined in method draw(Universe,Display,Disposition,ControlStyle)
+./GameFramework/Controls/ControlLabel.java:98: error: variable style is already defined in method draw(Universe,Display,Disposition,ControlStyle)
 		var style = (style != null ? style : this.style(universe) );
 		    ^
 ./GameFramework/Controls/ControlButton.java:35: error: cannot find symbol
@@ -5260,4 +5056,4 @@ public class ByteStreamFromBytes implements ByteStream
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-1236 errors
+1192 errors

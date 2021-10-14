@@ -13,6 +13,7 @@ public interface Display extends Platformable
 	void clear();
 	void drawRectangle(Coords pos, Coords size);
 	void initialize(Universe universe);
+	Coords sizeDefault();
 	Coords sizeInPixels();
 	void updateForTimerTick(Universe universe);
 

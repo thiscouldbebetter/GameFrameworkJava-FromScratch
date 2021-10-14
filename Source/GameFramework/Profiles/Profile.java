@@ -153,7 +153,7 @@ public class Profile
 
 			var nowAsString = now.toStringYYYYMMDD_HHMM_SS();
 			var place = world.placeCurrent;
-			var placeName = place.name;
+			var placeName = place.name();
 			var timePlayingAsString = world.timePlayingAsStringShort(universe);
 
 			var displaySize = universe.display.sizeInPixels;

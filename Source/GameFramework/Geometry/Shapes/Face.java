@@ -29,7 +29,7 @@ public class Face implements ShapeBase
 		return this._box;
 	}
 
-	public Coords containsPoint(Coords pointToCheck)
+	public boolean containsPoint(Coords pointToCheck)
 	{
 		var face = this;
 

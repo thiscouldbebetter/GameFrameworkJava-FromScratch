@@ -1,12 +1,15 @@
 
 package GameFramework.Model.Actors;
 
+import java.util.*;
 import java.util.function.*;
+
+import GameFramework.Model.*;
 
 public class ActivityDefn
 {
 	public String name;
-	private Consumer<UniverseWorldPlaceEntities> _perform
+	private Consumer<UniverseWorldPlaceEntities> _perform;
 
 	public ActivityDefn
 	(
@@ -37,7 +40,7 @@ public class ActivityDefn
 class ActivityDefn_Instances
 {
 	public ActivityDefn[] _All;
-	public Map<String, ActivityDefn> _AllByName;
+	public Map<String,ActivityDefn> _AllByName;
 
 	public ActivityDefn DoNothing;
 	public ActivityDefn Simultaneous;
@@ -61,7 +64,7 @@ class ActivityDefn_Instances
 				var w = uwpe.world;
 				var e = uwpe.entity;
 				var activity = e.actor().activity;
-				var childDefnNames = activity.target() as String[];
+				var childDefnNames = (String[])activity.target();
 				for (var i = 0; i < childDefnNames.length; i++)
 				{
 					var childDefnName = childDefnNames[i];

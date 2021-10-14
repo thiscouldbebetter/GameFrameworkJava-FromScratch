@@ -59,7 +59,7 @@ public class DisplayRecorder
 
 	public void clear()
 	{
-		this.framesRecordedAsArrayBuffers.length = 0;
+		this.framesRecordedAsArrayBuffers.clear();
 	}
 
 	public void frameRecord(Display display)

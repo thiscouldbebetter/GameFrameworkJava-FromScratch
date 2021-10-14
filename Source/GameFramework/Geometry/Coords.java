@@ -293,11 +293,11 @@ public class Coords
 
 	public double headingInTurns()
 	{
-		var returnValue;
+		double returnValue;
 
 		if (this.x == 0 && this.y == 0)
 		{
-			returnValue = null;
+			returnValue = 0;
 		}
 		else
 		{

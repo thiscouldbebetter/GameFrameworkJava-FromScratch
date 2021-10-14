@@ -2,6 +2,8 @@
 package GameFramework.Display;
 
 import GameFramework.*;
+import GameFramework.Model.*;
+import GameFramework.Model.Places.*;
 
 public interface Visual
 {

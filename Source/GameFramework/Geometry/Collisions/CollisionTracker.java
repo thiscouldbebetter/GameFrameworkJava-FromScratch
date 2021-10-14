@@ -132,13 +132,3 @@ public class CollisionTracker implements EntityProperty
 		});
 	}
 }
-
-class CollisionTrackerMapCell implements MapCell
-{
-	public List<Entity> entitiesPresent;
-
-	public CollisionTrackerMapCell()
-	{
-		this.entitiesPresent = new ArrayList<Entity>();
-	}
-}

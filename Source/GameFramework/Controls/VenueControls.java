@@ -120,7 +120,7 @@ public class VenueControls implements Venue
 
 		if (ignoreKeyboardAndGamepadInputs)
 		{
-			this.actionToInputsMappings.length = 0;
+			this.actionToInputsMappings.clear();
 		}
 
 		var mappingsGet = this.controlRoot.actionToInputsMappings;

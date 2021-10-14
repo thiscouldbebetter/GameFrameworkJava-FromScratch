@@ -127,7 +127,7 @@ public class Universe
 			),
 			MediaLibrary._default(),
 			ControlBuilder._default(),
-			() -> World._default()
+			(Universe u) -> World._default()
 		);
 
 		return universe;

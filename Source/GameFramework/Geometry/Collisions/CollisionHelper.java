@@ -13,8 +13,8 @@ import GameFramework.Model.*;
 public class CollisionHelper
 {
 	public boolean throwErrorIfCollidersCannotBeCollided;
-	public Map<String,Map<String,Object>> colliderTypeNamesToDoCollideLookup;
-	public Map<String,Map<String,Object>> colliderTypeNamesToDoesContainLookup;
+	public Map<String,Map<String,Function<ShapeShapeCollision,Boolean>>> colliderTypeNamesToDoCollideLookup;
+	public Map<String,Map<String,Function<ShapeShapeCollision,Boolean>>> colliderTypeNamesToDoesContainLookup;
 	public Map<String,Map<String,Function<ShapeShapeCollision,Collision>>> colliderTypeNamesToCollisionFindLookup;
 
 	private Box _box;
@@ -26,6 +26,7 @@ public class CollisionHelper
 	private Coords _pos;
 	private RangeExtent _range;
 	private RangeExtent _range2;
+	private ShapeShapeCollision _shapeShapeCollision;
 	private Coords _size;
 	private Coords _vel;
 	private Coords _vel2;
@@ -48,6 +49,7 @@ public class CollisionHelper
 		this._pos = Coords.create();
 		this._range = RangeExtent.create();
 		this._range2 = RangeExtent.create();
+		this._shapeShapeCollision = new ShapeShapeCollision();
 		this._size = Coords.create();
 		this._vel = Coords.create();
 		this._vel2 = Coords.create();
@@ -325,82 +327,22 @@ public class CollisionHelper
 		return lookupOfLookups;
 	}
 
-	public Map<String,Map<String,Object>> doCollideLookupBuild()
+	public Map<String,Map<String,Function<ShapeShapeCollision,Boolean>>> doCollideLookupBuild()
 	{
-		var lookupOfLookups = new HashMap<String,Map<String,Object>>();
+		var lookupOfLookups =
+			new HashMap<String,Map<String,Function<ShapeShapeCollision,Boolean>>>();
 
-		var andText = "And";
-		var collideText = "Collide";
-		var doText = "do";
-
-		var functionNames = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
-		var functionNamesDoCollide = functionNames.filter(
-			x -> x.startsWith(doText) && x.endsWith(collideText) && x.indexOf(andText) >= 0
-		);
-
-		for (var i = 0; i < functionNamesDoCollide.length; i++)
-		{
-			var functionName = functionNamesDoCollide[i];
-
-			var colliderTypeNamesAsString = functionName.substr
-			(
-				doText.length(),
-				functionName.length - doText.length() - collideText.length
-			);
-
-			var colliderTypeNames = colliderTypeNamesAsString.split(andText);
-			var colliderTypeName0 = colliderTypeNames[0];
-			var colliderTypeName1 = colliderTypeNames[1];
-
-			var lookup = lookupOfLookups.get(colliderTypeName0);
-			if (lookup == null)
-			{
-				lookup = new Map<String,Object>();
-				lookupOfLookups.put(colliderTypeName0, lookup);
-			}
-			var thisAsAny = (Object)this;
-			var doCollideFunction = thisAsAny[functionName];
-			lookup.put(colliderTypeName1, doCollideFunction);
-		}
+		// todo
 
 		return lookupOfLookups;
 	}
 
-	public Map<String,Map<String,Object>> doesContainLookupBuild()
+	public Map<String,Map<String,Function<ShapeShapeCollision,Boolean>>> doesContainLookupBuild()
 	{
-		var lookupOfLookups = new HashMap<String,Map<String,Object>>();
+		var lookupOfLookups =
+			new HashMap<String,Map<String,Function<ShapeShapeCollision,Boolean>>>();
 
-		var containText = "Contain";
-		var doesText = "does";
-
-		var functionNames = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
-		var functionNamesDoesContain = functionNames.filter(
-			x -> x.startsWith(doesText) && x.indexOf(containText) >= 0
-		);
-
-		for (var i = 0; i < functionNamesDoesContain.length; i++)
-		{
-			var functionName = functionNamesDoesContain[i];
-
-			var colliderTypeNamesAsString = functionName.substr
-			(
-				doesText.length()
-			);
-
-			var colliderTypeNames = colliderTypeNamesAsString.split(containText);
-			var colliderTypeName0 = colliderTypeNames[0];
-			var colliderTypeName1 = colliderTypeNames[1];
-
-			var lookup = lookupOfLookups.get(colliderTypeName0);
-			if (lookup == null)
-			{
-				lookup = new Map<String, Object>();
-				lookupOfLookups.put(colliderTypeName0, lookup);
-			}
-			var thisAsAny = (Object)this;
-			var doesContainFunction = thisAsAny[functionName];
-			lookup.put(colliderTypeName1, doesContainFunction);
-		}
+		// todo
 
 		return lookupOfLookups;
 	}
@@ -409,10 +351,10 @@ public class CollisionHelper
 
 	public Collision collisionActiveClosest(List<Collision> collisionsToCheck)
 	{
-		var returnValue = collisionsToCheck.filter
+		var returnValue = collisionsToCheck.stream().filter
 		(
 			x -> x.isActive
-		).sort
+		).sorted
 		(
 			(Collision x, Collision y) -> x.distanceToCollision - y.distanceToCollision
 		)[0];
@@ -439,27 +381,17 @@ public class CollisionHelper
 
 	public Collision collisionOfColliders
 	(
-		Object collider0, Object collider1, Collision collisionOut
+		ShapeBase collider0, ShapeBase collider1, Collision collisionOut
 	)
 	{
 		collisionOut.clear();
-
-		// Prevents having to add some composite shapes, for example, Shell.
-		while (collider0.collider != null)
-		{
-			collider0 = collider0.collider();
-		}
-
-		while (collider1.collider != null)
-		{
-			collider1 = collider1.collider();
-		}
 
 		var collider0TypeName = collider0.getClass().getName();
 		var collider1TypeName = collider1.getClass().getName();
 
 		var collideLookup =
 			this.colliderTypeNamesToCollisionFindLookup.get(collider0TypeName);
+
 		if (collideLookup == null)
 		{
 			if (this.throwErrorIfCollidersCannotBeCollided)
@@ -479,9 +411,9 @@ public class CollisionHelper
 			}
 			else
 			{
-				collisionMethod.call
+				collisionMethod.apply
 				(
-					this, collider0, collider1, collisionOut, true // shouldCalculatePos
+					_shapeShapeCollision.set(collider0, collider1, collisionOut) // , true // shouldCalculatePos
 				);
 			}
 		}
@@ -538,18 +470,8 @@ public class CollisionHelper
 	{
 		var returnValue = false;
 
-		while (collider0.collider != null)
-		{
-			collider0 = collider0.collider();
-		}
-
-		while (collider1.collider != null)
-		{
-			collider1 = collider1.collider();
-		}
-
-		var collider0TypeName = collider0.getType().name;
-		var collider1TypeName = collider1.getType().name;
+		var collider0TypeName = collider0.getClass().getName();
+		var collider1TypeName = collider1.getClass().getName();
 
 		var doCollideLookup =
 			this.colliderTypeNamesToDoCollideLookup.get(collider0TypeName);
@@ -586,18 +508,8 @@ public class CollisionHelper
 	{
 		var returnValue = false;
 
-		while (collider0.collider != null)
-		{
-			collider0 = collider0.collider();
-		}
-
-		while (collider1.collider != null)
-		{
-			collider1 = collider1.collider();
-		}
-
-		var collider0TypeName = collider0.constructor.class.getName();
-		var collider1TypeName = collider1.constructor.class.getName();
+		var collider0TypeName = collider0.getClass().getName();
+		var collider1TypeName = collider1.getClass().getName();
 
 		var doesContainLookup =
 			this.colliderTypeNamesToDoesContainLookup.get(collider0TypeName);
@@ -1053,8 +965,8 @@ public class CollisionHelper
 			normals[1].overwriteWith(normals[0]).invert();
 
 			var colliders = collision.colliders;
-			colliders[0] = boxRotated;
-			colliders[1] = sphere;
+			colliders.set(0, boxRotated);
+			colliders.set(1, sphere);
 
 			return collision;
 		}
@@ -1252,7 +1164,7 @@ public class CollisionHelper
 				var colliders = returnValue.colliders;
 				var collidersByName = returnValue.collidersByName;
 
-				colliders.length = 0;
+				colliders.clear();
 				collidersByName.clear();
 
 				colliders.add(edge);
@@ -1289,7 +1201,7 @@ public class CollisionHelper
 			{
 				collision.isActive = true;
 				plane.pointClosestToOrigin(collision.pos);
-				collision.colliders.length = 0;
+				collision.colliders.clear();
 				collision.colliders.add(hemispace);
 				break;
 			}
@@ -1318,7 +1230,7 @@ public class CollisionHelper
 		{
 			collision.isActive = true;
 			plane.pointClosestToOrigin(collision.pos);
-			collision.colliders.length = 0;
+			collision.colliders.clear();
 			collision.colliders.add(hemispace);
 		}
 		return collision;
@@ -2432,10 +2344,23 @@ class ShapeShapeCollision
 	public ShapeBase b;
 	public Collision c;
 
+	public ShapeShapeCollision()
+	{
+		this(null, null, null);
+	}
+
 	public ShapeShapeCollision(ShapeBase a, ShapeBase b, Collision c)
 	{
 		this.a = a;
 		this.b = b;
 		this.c = c;
+	}
+
+	public ShapeShapeCollision set(ShapeBase a, ShapeBase b, Collision c)
+	{
+		this.a = a;
+		this.b = b;
+		this.c = c;
+		return this;
 	}
 }
