@@ -1,5 +1,5 @@
 
-package GameFramework.Model;
+package GameFramework.Utility;
 
 public interface Clonable<T>
 {

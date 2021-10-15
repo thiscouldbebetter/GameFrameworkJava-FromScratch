@@ -1,7 +1,7 @@
 
 package GameFramework.Media;
 
-import GameFramework.*;
+import GameFramework.Utility.*;
 
 public interface MediaLibraryItem extends Namable
 {}

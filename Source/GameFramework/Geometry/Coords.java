@@ -160,7 +160,8 @@ public class Coords
 		}
 		else
 		{
-			throw new Exception("Unrecognized dimension index: " + dimensionIndex);
+			//throw new Exception("Unrecognized dimension index: " + dimensionIndex);
+			return Double.NaN;
 		}
 
 		return returnValue;

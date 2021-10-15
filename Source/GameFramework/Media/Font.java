@@ -1,7 +1,7 @@
 
 package GameFramework.Media;
 
-import GameFramework.*;
+import GameFramework.Utility.*;
 
 public class Font implements MediaLibraryItem, Namable
 {
@@ -9,7 +9,10 @@ public class Font implements MediaLibraryItem, Namable
 	public String filePath;
 
 	public Font(String id, String filePath)
-	{}
+	{
+		this.id = id;
+		this.filePath = filePath;
+	}
 
 	// Namable.
 

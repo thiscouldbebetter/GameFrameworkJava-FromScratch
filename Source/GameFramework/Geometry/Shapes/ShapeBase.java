@@ -3,7 +3,7 @@ package GameFramework.Geometry.Shapes;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
-import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public interface ShapeBase extends Clonable<ShapeBase>, Transformable
 {

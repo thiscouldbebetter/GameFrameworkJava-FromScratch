@@ -103,9 +103,9 @@ public class MapOfCells<T>
 		return cell;
 	}
 
-	public Object cellCreateDefault()
+	public T cellCreate()
 	{
-		return new Object();
+		return this._cellCreate.call();
 	}
 
 	public int cellsCount()

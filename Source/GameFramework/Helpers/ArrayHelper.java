@@ -3,7 +3,8 @@ package GameFramework.Helpers;
 
 import java.util.*;
 import java.util.function.*;
-import GameFramework.*;
+
+import GameFramework.Utility.*;
 
 public class ArrayHelper
 {
@@ -169,6 +170,25 @@ public class ArrayHelper
 	{
 		list.clear();
 		return list;
+	}
+
+	public static <T extends Clonable<T>> T[] clone(T[] arrayToClone)
+	{
+		T[] returnValues = null;
+
+		if (arrayToClone != null)
+		{
+			returnValues = new T[arrayToClone.length];
+
+			for (var i = 0; i < arrayToClone.length; i++)
+			{
+				var element = arrayToClone[i];
+				var elementCloned = element.clone();
+				returnValues[i] = elementCloned;
+			}
+		}
+
+		return returnValues;
 	}
 
 	public static <T extends Clonable<T>> List<T> clone(List<T> list)

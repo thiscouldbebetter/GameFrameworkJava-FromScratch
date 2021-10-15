@@ -5,14 +5,14 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class MapLocated implements ShapeBase
+public class MapLocated<T> implements ShapeBase
 {
-	public MapOfCells<Object> map;
+	public MapOfCells<T> map;
 	public Disposition loc;
 
 	public Box box;
 
-	public MapLocated(MapOfCells<Object> map, Disposition loc)
+	public MapLocated(MapOfCells<T> map, Disposition loc)
 	{
 		this.map = map;
 		this.loc = loc;
@@ -22,12 +22,12 @@ public class MapLocated implements ShapeBase
 
 	// cloneable
 
-	public MapLocated clone()
+	public MapLocated<T> clone()
 	{
-		return new MapLocated(this.map, this.loc.clone());
+		return new MapLocated<T>(this.map, this.loc.clone());
 	}
 
-	public MapLocated overwriteWith(MapLocated other)
+	public MapLocated<T> overwriteWith(MapLocated<T> other)
 	{
 		this.loc.overwriteWith(other.loc);
 		return this;

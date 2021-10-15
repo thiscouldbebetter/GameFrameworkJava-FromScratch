@@ -1,4 +1,4 @@
-package GameFramework;
+package GameFramework.Utility;
 
 public interface Namable
 {

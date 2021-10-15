@@ -23,9 +23,9 @@ class ControlActionNames_Instances
 
 public class ControlActionNames
 {
-	public static _instances: ControlActionNames_Instances;
+	public static ControlActionNames_Instances _instances;
 
-	static Instances()
+	public static ControlActionNames_Instances Instances()
 	{
 		if (ControlActionNames._instances == null)
 		{

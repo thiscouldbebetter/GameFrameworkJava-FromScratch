@@ -15,8 +15,11 @@ public class ControlStyle
 
 	public ControlStyle
 	(
-		String name, Color colorBackground, Color colorFill,
-		Color colorBorder, Color colorDisabled
+		String name,
+		Color colorBackground,
+		Color colorFill,
+		Color colorBorder,
+		Color colorDisabled
 	)
 	{
 		this.name = name;
@@ -47,7 +50,7 @@ class ControlStyle_Instances
 	public ControlStyle Default;
 	public ControlStyle Dark;
 
-	public ControlStyle _All[];
+	public List<ControlStyle> _All;
 	public Map<String,ControlStyle> _AllByName;
 
 	public ControlStyle_Instances()
@@ -70,7 +73,7 @@ class ControlStyle_Instances
 			Color.byName("GrayLight") // colorDisabled
 		);
 
-		this._All = new ControlStyle[] { this.Default, this.Dark };
+		this._All = Arrays.asList(new ControlStyle[] { this.Default, this.Dark });
 
 		this._AllByName = ArrayHelper.addLookupsByName(this._All);
 	}

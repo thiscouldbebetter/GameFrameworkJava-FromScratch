@@ -12,6 +12,7 @@ import GameFramework.Model.*;
 public class Display2D extends JPanel implements Display, Platformable
 {
 	public Coords _sizeInPixels;
+	public Coords[] sizesAvailable;
 
 	private BufferedImage bufferedImage;
 	private Graphics graphics;
@@ -25,6 +26,7 @@ public class Display2D extends JPanel implements Display, Platformable
 		String colorBackName
 	)
 	{
+		this.sizesAvailable = sizesAvailable;
 		this._sizeInPixels = sizesAvailable[0];
 	}
 

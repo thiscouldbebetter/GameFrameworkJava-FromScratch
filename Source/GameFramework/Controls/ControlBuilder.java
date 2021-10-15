@@ -5,16 +5,19 @@ import java.util.*;
 import java.util.function.*;
 
 import GameFramework.*;
+import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public class ControlBuilder
 {
 	public ControlStyle[] styles;
 	public Map<String,ControlStyle> stylesByName;
-	public BiFunction<Venue,Venue,Venue> venuevenueTransitionalFromTo;
+	public BiFunction<Venue,Venue,Venue> venueTransitionalFromTo;
 
 	public double buttonHeightBase;
 	public double buttonHeightSmallBase;
@@ -30,11 +33,16 @@ public class ControlBuilder
 		BiFunction<Venue,Venue,Venue> venueTransitionalFromTo
 	)
 	{
-		this.styles = (styles != null ? styles : this.Instances()._All);
+		this.styles =
+		(
+			styles != null
+			? styles
+			: ControlStyle.Instances()._All
+		);
 		this.venueTransitionalFromTo =
 		(
 			venueTransitionalFromTo != null
-			? venueTransitional
+			? venueTransitionalFromTo
 			: (Venue vFrom, Venue vTo) -> this.venueFaderFromTo(vFrom, vTo)
 		);
 
@@ -84,7 +92,7 @@ public class ControlBuilder
 		Coords size,
 		DataBinding<Object, String> message,
 		String[] optionNames,
-		Function<Object,Object>[] optionFunctions,
+		Consumer<UniverseWorldPlaceEntities>[] optionConsumers,
 		boolean showMessageOnly
 	)
 	{
@@ -94,24 +102,25 @@ public class ControlBuilder
 			this._scaleMultiplier.overwriteWith(size).divide(this.sizeBase);
 		var fontHeight = this.fontHeightInPixelsBase;
 
-		var doubleOfLinesInMessageMinusOne = message.get().split("\n").length - 1;
+		var numberOfLinesInMessageMinusOne =
+			message.get().split("\n").length - 1;
 		var labelSize = Coords.fromXY
 		(
-			200, fontHeight * doubleOfLinesInMessageMinusOne
+			200, fontHeight * numberOfLinesInMessageMinusOne
 		);
 
-		var doubleOfOptions = optionNames.length;
+		var numberOfOptions = optionNames.length;
 
-		if (showMessageOnly && doubleOfOptions == 1)
+		if (showMessageOnly && numberOfOptions == 1)
 		{
-			doubleOfOptions = 0; // Is a single option really an option?
+			numberOfOptions = 0; // Is a single option really an option?
 		}
 
-		var labelPosYBase = (doubleOfOptions > 0 ? 65 : 75); // hack
+		var labelPosYBase = (numberOfOptions > 0 ? 65 : 75); // hack
 
 		var labelPos = Coords.fromXY
 		(
-			100, labelPosYBase - fontHeight * (doubleOfLinesInMessageMinusOne / 4)
+			100, labelPosYBase - fontHeight * (numberOfLinesInMessageMinusOne / 4)
 		);
 
 		var labelMessage = new ControlLabel
@@ -124,7 +133,7 @@ public class ControlBuilder
 			fontHeight
 		);
 
-		var childControls = new Object[] { labelMessage };
+		var childControls = Arrays.asList( new ControlBase[] { labelMessage } );
 
 		if (showMessageOnly == false)
 		{
@@ -134,11 +143,11 @@ public class ControlBuilder
 			var buttonMarginLeftRight =
 				(
 					this.sizeBase.x
-					- (buttonWidth * doubleOfOptions)
-					- (spaceBetweenButtons * (doubleOfOptions - 1))
+					- (buttonWidth * numberOfOptions)
+					- (spaceBetweenButtons * (numberOfOptions - 1))
 				) / 2;
 
-			for (var i = 0; i < doubleOfOptions; i++)
+			for (var i = 0; i < numberOfOptions; i++)
 			{
 				var button = ControlButton.from9
 				(
@@ -153,8 +162,8 @@ public class ControlBuilder
 					optionNames[i],
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
-					optionFunctions[i],
+					DataBinding.fromTrue(), // isEnabled
+					optionConsumers[i],
 					universe
 				);
 
@@ -169,15 +178,15 @@ public class ControlBuilder
 			display.sizeDefault().clone().clearZ().divide(scaleMultiplier);
 		var containerPosScaled =
 			displaySize.clone().subtract(containerSizeScaled).half();
-		var actions = null;
-		if (doubleOfOptions <= 1)
+		ActorAction[] actions = null;
+		if (numberOfOptions <= 1)
 		{
-			var acknowledge = optionFunctions[0];
+			var acknowledge = optionConsumers[0];
 			var controlActionNames = ControlActionNames.Instances();
-			actions = new Action[]
+			actions = new ActorAction[]
 			{
-				new Action( controlActionNames.ControlCancel, acknowledge ),
-				new Action( controlActionNames.ControlConfirm, acknowledge ),
+				new ActorAction( controlActionNames.ControlCancel, acknowledge ),
+				new ActorAction( controlActionNames.ControlConfirm, acknowledge ),
 			};
 		}
 
@@ -186,7 +195,7 @@ public class ControlBuilder
 			"containerChoice",
 			containerPosScaled,
 			containerSizeScaled,
-			childControls,
+			childControls.toArray(new ControlBase[] {}),
 			actions,
 			null //?
 		);

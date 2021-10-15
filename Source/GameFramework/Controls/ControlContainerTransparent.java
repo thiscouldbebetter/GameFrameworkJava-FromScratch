@@ -5,6 +5,7 @@ import java.util.*;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.Actors.*;
 
 public class ControlContainerTransparent extends ControlBase
 {
@@ -14,7 +15,9 @@ public class ControlContainerTransparent extends ControlBase
 	{
 		super
 		(
-			containerInner.name, containerInner.pos, containerInner.size,
+			containerInner.name,
+			containerInner.pos,
+			containerInner.size,
 			containerInner.fontHeightInPixels
 		);
 		this.containerInner = containerInner;
@@ -39,7 +42,8 @@ public class ControlContainerTransparent extends ControlBase
 
 	public List<ControlBase> childrenAtPosAddToList
 	(
-		Coords posToCheck, List<ControlBase> listToAddTo,
+		Coords posToCheck,
+		List<ControlBase> listToAddTo,
 		boolean addFirstChildOnly
 	)
 	{

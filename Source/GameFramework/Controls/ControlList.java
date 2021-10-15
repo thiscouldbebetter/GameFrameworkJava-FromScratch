@@ -9,10 +9,10 @@ import GameFramework.Geometry.*;
 public class ControlList extends ControlBase
 {
 	public List<Object> items;
-	public DataBinding bindingForItemText<Object, String>;
-	public DataBinding bindingForItemSelected<Object, Object>;
-	public DataBinding bindingForItemValue<Object, Object>;
-	public DataBinding bindingForIsEnabled<Object, boolean>;
+	public DataBinding<Object,String> bindingForItemText;
+	public DataBinding<Object,Object> bindingForItemSelected;
+	public DataBinding<Object,Object> bindingForItemValue;
+	public DataBinding<Object,Boolean> bindingForIsEnabled;
 	public Consumer<Universe> confirm;
 	public double widthInItems;
 
@@ -31,14 +31,14 @@ public class ControlList extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding items<Object, Object[]>,
-		DataBinding bindingForItemText<Object, String>,
-		number fontHeightInPixels,
-		DataBinding bindingForItemSelected<Object, Object>,
-		DataBinding bindingForItemValue<Object, Object>,
-		DataBinding bindingForIsEnabled<Object, boolean>,
-		confirm: (Universe u) => void,
-		number widthInItems
+		DataBinding<Object,Object[]> items,
+		DataBinding<Object,String> bindingForItemText,
+		double fontHeightInPixels,
+		DataBinding<Object,Object> bindingForItemSelected,
+		DataBinding<Object,Object> bindingForItemValue,
+		DataBinding<Object,Boolean> bindingForIsEnabled,
+		Consumer<Universe> confirm,
+		double widthInItems
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -73,9 +73,9 @@ public class ControlList extends ControlBase
 		this._mouseClickPos = Coords.create();
 	}
 
-	public static fromPosSizeAndItems
+	public static ControlList fromPosSizeAndItems
 	(
-		Coords pos, Coords size, DataBinding items<Object, Object[]>
+		Coords pos, Coords size, DataBinding<Object, Object[]> items
 	)
 	{
 		var returnValue = new ControlList
@@ -95,11 +95,11 @@ public class ControlList extends ControlBase
 		return returnValue;
 	}
 
-	public static fromPosSizeItemsAndBindingForItemText
+	public static ControlList fromPosSizeItemsAndBindingForItemText
 	(
 		Coords pos,
 		Coords size,
-		DataBinding<Object, Object[]> items,
+		DataBinding<Object,Object[]> items,
 		DataBinding<Object,String> bindingForItemText
 	)
 	{
@@ -125,8 +125,8 @@ public class ControlList extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object, Object[]> items,
-		DataBinding<Object, String> bindingForItemText,
+		DataBinding<Object,Object[]> items,
+		DataBinding<Object,String> bindingForItemText,
 		double fontHeightInPixels
 	{
 		return new ControlList
@@ -154,17 +154,17 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	static from8
+	public static ControlList from8
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding items<Object, Object[]>,
-		DataBinding bindingForItemText<Object, String>,
+		DataBinding<Object,Object[]> items,
+		DataBinding<Object,String> bindingForItemText,
 		number fontHeightInPixels,
-		DataBinding bindingForItemSelected<Object, Object>,
-		DataBinding bindingForItemValue<Object, Object>,
-	): ControlList
+		DataBinding<ObjectObject> bindingForItemSelected,
+		DataBinding<ObjectObject> bindingForItemValue,
+	)
 	{
 		return new ControlList
 		(
@@ -178,12 +178,12 @@ public class ControlList extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding items<Object, Object[]>,
-		DataBinding bindingForItemText<Object, String>,
+		DataBinding items<Object,Object[]>,
+		DataBinding bindingForItemText<Object,String>,
 		number fontHeightInPixels,
-		DataBinding bindingForItemSelected<Object, Object>,
-		DataBinding bindingForItemValue<Object, Object>,
-		DataBinding bindingForIsEnabled<Object, boolean>
+		DataBinding bindingForItemSelected<Object,Object>,
+		DataBinding bindingForItemValue<Object,Object>,
+		DataBinding bindingForIsEnabled<Object,Boolean>
 	): ControlList
 	{
 		return new ControlList
@@ -194,19 +194,19 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	static from10
+	public static ControlList from10
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding items<Object, Object[]>,
-		DataBinding bindingForItemText<Object, String>,
+		DataBinding<Object,Object[]> items,
+		DataBinding<Object,String> bindingForItemText,
 		number fontHeightInPixels,
-		DataBinding<Object, Object> bindingForItemSelected,
-		DataBinding<Object, Object> bindingForItemValue,
-		DataBinding<Object, boolean> bindingForIsEnabled,
+		DataBinding<Object,Object> bindingForItemSelected,
+		DataBinding<Object,Object> bindingForItemValue,
+		DataBinding<Object,Boolean> bindingForIsEnabled,
 		Consumer<Universe> confirm
-	): ControlList
+	)
 	{
 		return new ControlList
 		(
@@ -216,7 +216,7 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	actionHandle(String actionNameToHandle, Universe universe): boolean
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		var wasActionHandled = false;
 		var controlActionNames = ControlActionNames.Instances();
@@ -241,17 +241,17 @@ public class ControlList extends ControlBase
 		return wasActionHandled;
 	}
 
-	indexOfFirstItemVisible(): number
+	public int indexOfFirstItemVisible()
 	{
 		return this.indexOfFirstRowVisible() * this.widthInItems;
 	}
 
-	indexOfFirstRowVisible(): number
+	public int indexOfFirstRowVisible()
 	{
 		return this.scrollbar.sliderPosInItems();
 	}
 
-	indexOfItemSelected(number valueToSet): number
+	public int indexOfItemSelected(int valueToSet)
 	{
 		var returnValue = valueToSet;
 		var items = this.items();
@@ -285,7 +285,12 @@ public class ControlList extends ControlBase
 
 	public boolean isEnabled()
 	{
-		return (this.bindingForIsEnabled == null ? true : this.bindingForIsEnabled.get());
+		return
+		(
+			this.bindingForIsEnabled == null
+			? true
+			: this.bindingForIsEnabled.get()
+		);
 	}
 
 	public Object itemSelected(Object itemToSet)

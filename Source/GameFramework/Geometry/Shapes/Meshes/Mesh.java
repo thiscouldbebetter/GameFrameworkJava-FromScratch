@@ -6,11 +6,12 @@ import java.util.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helpers.*;
 
 public class Mesh implements ShapeBase
 {
 	public Coords center;
-	public Coords[] vertexOffsets[];
+	public Coords[] vertexOffsets;
 	public FaceBuilder[] faceBuilders;
 
 	private Box _box;
@@ -160,7 +161,7 @@ public class Mesh implements ShapeBase
 		var returnValue = new Mesh
 		(
 			center,
-			meshVertices, // vertexOffsets
+			meshVertices.toArray(new Coords[] {}), // vertexOffsets
 			faceBuilders
 		);
 
@@ -292,9 +293,9 @@ public class Mesh implements ShapeBase
 
 	class FaceBuilder
 	{
-		public double[] vertexIndices;
+		public int[] vertexIndices;
 
-		public FaceBuilder(double[] vertexIndices)
+		public FaceBuilder(int[] vertexIndices)
 		{
 			this.vertexIndices = vertexIndices;
 		}
@@ -326,7 +327,7 @@ public class Mesh implements ShapeBase
 
 		public FaceBuilder clone()
 		{
-			return new FaceBuilder(this.vertexIndices.slice());
+			return new FaceBuilder(ArrayHelper.clone(this.vertexIndices));
 		}
 
 		public FaceBuilder overwriteWith(Mesh other_FaceBuilder)

@@ -1,14 +1,17 @@
 package GameFramework.Controls;
 
+import java.util.*;
+
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class ControlButton extends ControlBase
 {
 	public String text;
 	public boolean hasBorder;
-	public _any isEnabled;
-	public Object click;
+	public DataBinding<Object,Boolean> _isEnabled;
+	public Runnable click;
 	public Object context;
 	public boolean canBeHeldDown;
 
@@ -21,10 +24,10 @@ public class ControlButton extends ControlBase
 		Coords pos,
 		Coords size,
 		String text,
-		number fontHeightInPixels,
+		double fontHeightInPixels,
 		boolean hasBorder,
-		Object isEnabled,
-		Object click,
+		DataBinding<Object,Boolean> isEnabled,
+		Runnable click,
 		Object context,
 		boolean canBeHeldDown
 	)
@@ -48,7 +51,7 @@ public class ControlButton extends ControlBase
 		Coords pos,
 		Coords size,
 		String text,
-		number fontHeightInPixels,
+		double fontHeightInPixels,
 		boolean hasBorder,
 		Object isEnabled,
 		Object click
@@ -67,10 +70,10 @@ public class ControlButton extends ControlBase
 		Coords pos,
 		Coords size,
 		String text,
-		number fontHeightInPixels,
+		double fontHeightInPixels,
 		boolean hasBorder,
-		Object isEnabled,
-		Object click,
+		DataBinding<Object,Boolean> isEnabled,
+		Runnable click,
 		Object context
 	)
 	{

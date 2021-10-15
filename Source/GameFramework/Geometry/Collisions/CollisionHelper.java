@@ -354,10 +354,7 @@ public class CollisionHelper
 		var returnValue = collisionsToCheck.stream().filter
 		(
 			x -> x.isActive
-		).sorted
-		(
-			(Collision x, Collision y) -> x.distanceToCollision - y.distanceToCollision
-		)[0];
+		).sorted().findFirst().get();
 
 		return returnValue;
 	}
@@ -466,7 +463,7 @@ public class CollisionHelper
 		return doCollidersCollide;
 	}
 
-	public boolean doCollidersCollide(Object collider0, Object collider1)
+	public boolean doCollidersCollide(ShapeBase collider0, ShapeBase collider1)
 	{
 		var returnValue = false;
 
@@ -479,7 +476,13 @@ public class CollisionHelper
 		{
 			if (this.throwErrorIfCollidersCannotBeCollided)
 			{
-				throw new Exception("Colliders Error of types cannot be collided: " + collider0TypeName + ", " + collider1TypeName);
+				/*
+				throw new Exception
+				(
+					"Colliders Error of types cannot be collided: "
+					+ collider0TypeName + ", " + collider1TypeName
+				);
+				*/
 			}
 		}
 		else
@@ -489,14 +492,20 @@ public class CollisionHelper
 			{
 				if (this.throwErrorIfCollidersCannotBeCollided)
 				{
-					throw new Exception("Colliders Error of types cannot be collided: " + collider0TypeName + ", " + collider1TypeName);
+					/*
+					throw new Exception
+					(
+						"Colliders Error of types cannot be collided: "
+						+ collider0TypeName + ", " + collider1TypeName
+					);
+					*/
 				}
 			}
 			else
 			{
-				returnValue = collisionMethod.call
+				returnValue = collisionMethod.apply
 				(
-					this, collider0, collider1
+					_shapeShapeCollision.set(collider0, collider1)
 				);
 			}
 		}
@@ -504,7 +513,10 @@ public class CollisionHelper
 		return returnValue;
 	}
 
-	public boolean doesColliderContainOther(Object collider0, Object collider1)
+	public boolean doesColliderContainOther
+	(
+		ShapeBase collider0, ShapeBase collider1
+	)
 	{
 		var returnValue = false;
 
@@ -517,7 +529,7 @@ public class CollisionHelper
 		{
 			if (this.throwErrorIfCollidersCannotBeCollided)
 			{
-				throw new Exception("Colliders Error of types cannot be collided: " + collider0TypeName + ", " + collider1TypeName);
+				// throw new Exception("Colliders Error of types cannot be collided: " + collider0TypeName + ", " + collider1TypeName);
 			}
 		}
 		else
@@ -527,14 +539,14 @@ public class CollisionHelper
 			{
 				if (this.throwErrorIfCollidersCannotBeCollided)
 				{
-					throw new Exception("Colliders Error of types cannot be collided: " + collider0TypeName + ", " + collider1TypeName);
+					// throw new Exception("Colliders Error of types cannot be collided: " + collider0TypeName + ", " + collider1TypeName);
 				}
 			}
 			else
 			{
-				returnValue = doesColliderContainOther.call
+				returnValue = doesColliderContainOther.apply
 				(
-					this, collider0, collider1
+					_shapeShapeCollision.set(collider0, collider1)
 				);
 			}
 		}
@@ -730,7 +742,7 @@ public class CollisionHelper
 
 	public Collision collisionOfBoxAndMapLocated
 	(
-		Box box, MapLocated mapLocated, Collision collision
+		Box box, MapLocated<Blockable> mapLocated, Collision collision
 	)
 	{
 		var doBoundsCollide =
@@ -763,7 +775,7 @@ public class CollisionHelper
 
 				cell = map.cellAtPosInCells(cellPosInCells);
 
-				if (cell.isBlocking)
+				if (cell.isBlocking())
 				{
 					cellAsBox.center.overwriteWith(cellPosAbsolute);
 					var doCellAndBoxCollide =
@@ -1266,7 +1278,7 @@ public class CollisionHelper
 
 	public Collision collisionOfMapLocatedAndSphere
 	(
-		MapLocated mapLocated, Sphere sphere, Collision collision
+		MapLocated<Blockable> mapLocated, Sphere sphere, Collision collision
 	)
 	{
 		var doBoundsCollide =
@@ -1299,7 +1311,7 @@ public class CollisionHelper
 
 				cell = map.cellAtPosInCells(cellPosInCells);
 
-				if (cell.isBlocking)
+				if (cell.isBlocking())
 				{
 					cellAsBox.center.overwriteWith(cellPosAbsolute);
 					var doCellAndSphereCollide =
@@ -1353,7 +1365,7 @@ public class CollisionHelper
 
 	public Collision collisionOfShapeGroupAllAndShape
 	(
-		ShapeGroupAll shapeGroupAll, Object shape, Collision collisionOut
+		ShapeGroupAll shapeGroupAll, ShapeBase shape, Collision collisionOut
 	)
 	{
 		return this.collisionOfShapeAndShapeGroupAll(shape, shapeGroupAll, collisionOut);
@@ -1361,7 +1373,7 @@ public class CollisionHelper
 
 	public Collision collisionOfShapeInverseAndShape
 	(
-		ShapeInverse shapeInverse, Object shape, Collision collisionOut
+		ShapeInverse shapeInverse, ShapeBase shape, Collision collisionOut
 	)
 	{
 		return this.collisionOfShapeAndShapeInverse(shape, shapeInverse, collisionOut);
@@ -1846,7 +1858,7 @@ public class CollisionHelper
 
 	public boolean doMapLocatedAndMapLocatedCollide
 	(
-		MapLocated mapLocated0, MapLocated mapLocated1
+		MapLocated<Blockable> mapLocated0, MapLocated<Blockable> mapLocated1
 	)
 	{
 		var returnValue = false;
@@ -1895,7 +1907,7 @@ public class CollisionHelper
 
 				cell0 = map0.cellAtPosInCells(cell0PosInCells);
 
-				if (cell0.isBlocking)
+				if (cell0.isBlocking())
 				{
 					cell1PosInCellsMin.overwriteWith
 					(
@@ -1938,13 +1950,13 @@ public class CollisionHelper
 							{
 								cell1 = map1.cellAtPosInCells(cell1PosInCells);
 
-								if (cell1.isBlocking)
+								if (cell1.isBlocking())
 								{
 									returnValue = true;
 
 									y1 = cell1PosInCellsMax.y;
-									x0 = map0SizeInCells.x;
-									y0 = map0SizeInCells.y;
+									x0 = (int)map0SizeInCells.x;
+									y0 = (int)map0SizeInCells.y;
 									break;
 								}
 							}
@@ -1959,7 +1971,7 @@ public class CollisionHelper
 
 	public boolean doMapLocatedAndSphereCollide
 	(
-		MapLocated mapLocated, Sphere sphere
+		MapLocated<Blockable> mapLocated, Sphere sphere
 	)
 	{
 		var returnValue = false;
@@ -1994,7 +2006,7 @@ public class CollisionHelper
 
 				cell = map.cellAtPosInCells(cellPosInCells);
 
-				if (cell.isBlocking)
+				if (cell.isBlocking())
 				{
 					cellAsBox.center.overwriteWith(cellPosAbsolute);
 					var doCellAndSphereCollide =
@@ -2354,6 +2366,13 @@ class ShapeShapeCollision
 		this.a = a;
 		this.b = b;
 		this.c = c;
+	}
+
+	public ShapeShapeCollision set(ShapeBase a, ShapeBase b)
+	{
+		this.a = a;
+		this.b = b;
+		return this;
 	}
 
 	public ShapeShapeCollision set(ShapeBase a, ShapeBase b, Collision c)

@@ -9,7 +9,7 @@ public class Cylinder
 	public double radius;
 	public double length;
 
-	double lengthHalf;
+	public double lengthHalf;
 
 	public Cylinder(Coords center, double radius, double length)
 	{

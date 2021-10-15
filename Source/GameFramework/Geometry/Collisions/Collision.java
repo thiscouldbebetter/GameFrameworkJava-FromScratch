@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Model.*;
 
-public class Collision //
+public class Collision implements Comparable<Collision>
 {
 	public Coords pos;
 	public double distanceToCollision;
@@ -105,5 +105,12 @@ public class Collision //
 		returnValue.isActive = this.isActive;
 
 		return returnValue;
+	}
+
+	// Comparable.
+
+	public int compareTo(Collision other)
+	{
+		return this.distanceToCollision - other.distanceToCollision;
 	}
 }

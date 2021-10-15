@@ -1,73 +1,72 @@
 
 package GameFramework.Controls;
-{
 
 public class VenueMessage implements Venue
 {
-	messageToShow: DataBinding<any, string>;
-	acknowledge: ()=>void;
-	venuePrev: Venue;
-	_sizeInPixels: Coords;
-	showMessageOnly: boolean;
+	public DataBinding<Object,String> messageToShow;
+	public Runnable acknowledge;
+	public Venue venuePrev;
+	public Coords _sizeInPixels;
+	public boolean showMessageOnly;
 
-	_venueInner: Venue;
+	public Venue _venueInner;
 
-	constructor
+	public VenueMessage
 	(
-		messageToShow: DataBinding<any, string>,
-		acknowledge: ()=>void,
-		venuePrev: Venue,
-		sizeInPixels: Coords,
-		showMessageOnly: boolean
+		DataBinding<Object,String> messageToShow,
+		Runnable acknowledge,
+		Venue venuePrev,
+		Coords sizeInPixels,
+		boolean showMessageOnly
 	)
 	{
 		this.messageToShow = messageToShow;
 		this.acknowledge = acknowledge;
 		this.venuePrev = venuePrev;
 		this._sizeInPixels = sizeInPixels;
-		this.showMessageOnly = showMessageOnly || false;
+		this.showMessageOnly = showMessageOnly;
 	}
 
-	static fromMessage(message: DataBinding<any,string>)
+	public static VenueMessage fromMessage(DataBinding<Object,String> message)
 	{
 		return VenueMessage.fromMessageAndAcknowledge(message, null);
 	}
 
-	static fromMessageAndAcknowledge
+	public static VenueMessage fromMessageAndAcknowledge
 	(
-		messageToShow: DataBinding<any, string>, acknowledge: any
+		DataBinding<Object,String> messageToShow, Runnable acknowledge
 	)
 	{
 		return new VenueMessage(messageToShow, acknowledge, null, null, null);
 	}
 
-	static fromText(message: string)
+	public static VenueMessage fromText(String message)
 	{
 		return VenueMessage.fromMessage(DataBinding.fromContext(message));
 	}
 
 	// instance methods
 
-	draw(universe: Universe)
+	public void draw(Universe universe)
 	{
 		this.venueInner(universe).draw(universe);
 	}
 
-	finalize(universe: Universe) {}
+	public void finalize(Universe universe) {}
 
-	initialize(universe: Universe) {}
+	public void initialize(Universe universe) {}
 
-	updateForTimerTick(universe: Universe)
+	public void updateForTimerTick(Universe universe)
 	{
 		this.venueInner(universe).updateForTimerTick(universe);
 	}
 
-	sizeInPixels(universe: Universe)
+	public Coords sizeInPixels(Universe universe)
 	{
 		return (this._sizeInPixels == null ? universe.display.sizeInPixels : this._sizeInPixels);
 	}
 
-	venueInner(universe: Universe)
+	public Venue venueInner(Universe universe)
 	{
 		if (this._venueInner == null)
 		{
@@ -82,20 +81,21 @@ public class VenueMessage implements Venue
 				this.showMessageOnly
 			);
 
-			var venuesToLayer = [];
+			var venuesToLayer = new ArrayList<Venue>();
 
 			if (this.venuePrev != null)
 			{
-				venuesToLayer.push(this.venuePrev);
+				venuesToLayer.add(this.venuePrev);
 			}
 
-			venuesToLayer.push(controlMessage.toVenue());
+			venuesToLayer.add(controlMessage.toVenue());
 
-			this._venueInner = new VenueLayered(venuesToLayer, null);
+			this._venueInner = new VenueLayered
+			(
+				venuesToLayer.toArray(new Venue[] {}), null
+			);
 		}
 
 		return this._venueInner;
 	}
-}
-
 }

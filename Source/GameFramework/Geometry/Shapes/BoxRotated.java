@@ -3,6 +3,7 @@ package GameFramework.Geometry.Shapes;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helper.*;
 import GameFramework.Utility.*;
 
 public class BoxRotated implements ShapeBase
@@ -38,7 +39,7 @@ public class BoxRotated implements ShapeBase
 		var center = box.center;
 		var sizeHalf = box.sizeHalf();
 		var displacementToSurface = Coords.create();
-		var distanceMinSoFar = Number.POSITIVE_INFINITY;
+		var distanceMinSoFar = Double.POSITIVE_INFINITY;
 
 		for (var d = 0; d < 2; d++)
 		{

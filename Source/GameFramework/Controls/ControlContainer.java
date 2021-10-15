@@ -1,16 +1,20 @@
 
 package GameFramework.Controls;
 
+import java.util.*;
+
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.Actors.*;
 
 public class ControlContainer extends ControlBase
 {
-	public ControlBase children[];
-	public Map childrenByName<string, ControlBase>;
-	public Action actions[];
-	public Map actionsByName<string, Action>;
+	public ControlBase[] children;
+	public Map<String, ControlBase> childrenByName;
+	public ActorAction[] actions;
+	public Map<String, Action> actionsByName;
 	public ActionToInputsMapping[] _actionToInputsMappings;
-	public Map _actionToInputsMappingsByInputName<string, ActionToInputsMapping>;
+	public Map<String, ActionToInputsMapping> _actionToInputsMappingsByInputName;
 
 	public List<ControlBase> childrenContainingPos;
 	public List<ControlBase> childrenContainingPosPrev;
@@ -25,7 +29,7 @@ public class ControlContainer extends ControlBase
 
 	public ControlContainer
 	(
-		string name,
+		String name,
 		Coords pos,
 		Coords size,
 		ControlBase[] children,
@@ -64,13 +68,13 @@ public class ControlContainer extends ControlBase
 		this._posToCheck = Coords.create();
 	}
 
-	static from4
+	public static ControlContainer from4
 	(
-		string name,
+		String name,
 		Coords pos,
 		Coords size,
-		ControlBase children[]
-	): ControlContainer
+		ControlBase[] children
+	)
 	{
 		return new ControlContainer
 		(
@@ -82,7 +86,7 @@ public class ControlContainer extends ControlBase
 
 	// actions
 
-	actionHandle(string actionNameToHandle, Universe universe): boolean
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		var wasActionHandled = false;
 
@@ -155,28 +159,33 @@ public class ControlContainer extends ControlBase
 		return wasActionHandled;
 	}
 
-	actionToInputsMappings(): ActionToInputsMapping[]
+	public ActionToInputsMapping[] actionToInputsMappings()
 	{
 		return this._actionToInputsMappings;
 	}
 
-	childAdd(ControlBase childToAdd): void
+	public void childAdd(ControlBase childToAdd)
 	{
 		this.children.add(childToAdd);
 		this.childrenByName.put(childToAdd.name, childToAdd);
 	}
 
-	childByName(string childName): ControlBase
+	public ControlBase childByName(String childName)
 	{
 		return this.childrenByName.get(childName);
 	}
 
-	childWithFocus(): ControlBase
+	public ControlBase childWithFocus()
 	{
-		return (this.indexOfChildWithFocus == null ? null : this.children[this.indexOfChildWithFocus] );
+		return
+		(
+			this.indexOfChildWithFocus == null
+			? null
+			: this.children[this.indexOfChildWithFocus]
+		);
 	}
 
-	childWithFocusNextInDirection(int direction): ControlBase
+	public ControlBase childWithFocusNextInDirection(int direction)
 	{
 		if (this.indexOfChildWithFocus == null)
 		{
@@ -235,10 +244,12 @@ public class ControlContainer extends ControlBase
 		return returnValue;
 	}
 
-	childrenAtPosAddToList
+	public List<ControlBase> childrenAtPosAddToList
 	(
-		Coords posToCheck, ControlBase listToAddTo[], boolean addFirstChildOnly
-	): ControlBase[]
+		Coords posToCheck,
+		List<ControlBase> listToAddTo,
+		boolean addFirstChildOnly
+	)
 	{
 		posToCheck = this._posToCheck.overwriteWith(posToCheck).clearZ();
 
@@ -265,7 +276,7 @@ public class ControlContainer extends ControlBase
 		return listToAddTo;
 	}
 
-	focusGain(): void
+	public void focusGain()
 	{
 		this.indexOfChildWithFocus = null;
 		var childWithFocus = this.childWithFocusNextInDirection(1);
@@ -275,7 +286,7 @@ public class ControlContainer extends ControlBase
 		}
 	}
 
-	focusLose(): void
+	public void focusLose()
 	{
 		var childWithFocus = this.childWithFocus();
 		if (childWithFocus != null)
@@ -285,7 +296,7 @@ public class ControlContainer extends ControlBase
 		}
 	}
 
-	mouseClick(Coords mouseClickPos): boolean
+	public boolean mouseClick(Coords mouseClickPos)
 	{
 		mouseClickPos = this._mouseClickPos.overwriteWith
 		(
@@ -319,7 +330,7 @@ public class ControlContainer extends ControlBase
 		return wasClickHandled;
 	}
 
-	mouseMove(Coords mouseMovePos): boolean
+	public boolean mouseMove(Coords mouseMovePos)
 	{
 		var temp = this.childrenContainingPosPrev;
 		this.childrenContainingPosPrev = this.childrenContainingPos;
@@ -366,7 +377,7 @@ public class ControlContainer extends ControlBase
 		return false; // wasMoveHandled
 	}
 
-	scalePosAndSize(Coords scaleFactor): ControlBase
+	public ControlBase scalePosAndSize(Coords scaleFactor)
 	{
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
@@ -392,7 +403,7 @@ public class ControlContainer extends ControlBase
 		return this;
 	}
 
-	shiftChildPositions(Coords displacement): void
+	public void shiftChildPositions(Coords displacement)
 	{
 		for (var i = 0; i < this.children.length; i++)
 		{
@@ -403,15 +414,15 @@ public class ControlContainer extends ControlBase
 
 	// drawable
 
-	draw
+	public void draw
 	(
 		Universe universe, Display display, Disposition drawLoc,
 		ControlStyle style
-	): void
+	)
 	{
 		drawLoc = this._drawLoc.overwriteWith(drawLoc);
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
-		style = style || this.style(universe);
+		style = (style != null ? style : this.style(universe) );
 
 		display.drawRectangle
 		(
