@@ -5,6 +5,8 @@ import java.util.*;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Input.*;
+import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
 public class ControlContainer extends ControlBase
@@ -12,7 +14,7 @@ public class ControlContainer extends ControlBase
 	public ControlBase[] children;
 	public Map<String, ControlBase> childrenByName;
 	public ActorAction[] actions;
-	public Map<String, Action> actionsByName;
+	public Map<String, ActorAction> actionsByName;
 	public ActionToInputsMapping[] _actionToInputsMappings;
 	public Map<String, ActionToInputsMapping> _actionToInputsMappingsByInputName;
 
@@ -21,7 +23,7 @@ public class ControlContainer extends ControlBase
 	public int indexOfChildWithFocus;
 
 	private Coords _childMax;
-	private Coords _drawPos;
+	public Coords _drawPos; // hack
 	private Disposition _drawLoc;
 	private Coords _mouseClickPos;
 	private Coords _mouseMovePos;
@@ -33,7 +35,7 @@ public class ControlContainer extends ControlBase
 		Coords pos,
 		Coords size,
 		ControlBase[] children,
-		Action[] actions,
+		ActorAction[] actions,
 		ActionToInputsMapping[] actionToInputsMappings
 	)
 	{
@@ -439,6 +441,4 @@ public class ControlContainer extends ControlBase
 			child.draw(universe, display, drawLoc, style);
 		}
 	}
-}
-
 }

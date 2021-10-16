@@ -172,13 +172,34 @@ public class ArrayHelper
 		return list;
 	}
 
+	public static double[] clone(double[] arrayToClone)
+	{
+		double[] returnValues = null;
+
+		if (arrayToClone != null)
+		{
+			returnValues = new double[arrayToClone.length];
+				
+			for (var i = 0; i < arrayToClone.length; i++)
+			{
+				var element = arrayToClone[i];
+				var elementCloned = element.clone();
+				returnValues[i] = elementCloned;
+			}
+		}
+
+		return returnValues;
+	}
+
 	public static <T extends Clonable<T>> T[] clone(T[] arrayToClone)
 	{
 		T[] returnValues = null;
 
 		if (arrayToClone != null)
 		{
-			returnValues = new T[arrayToClone.length];
+			returnValues =
+				//new T[arrayToClone.length];
+				(T[]) Array.newInstance(T.getClass(), arrayToClone.length);
 
 			for (var i = 0; i < arrayToClone.length; i++)
 			{
@@ -295,26 +316,31 @@ public class ArrayHelper
 		}
 		return elementsInBothLists;
 	}
+	*/
 
-	static overwriteWith(list: any[], other: any[]): any[]
+	public static double[] overwriteWith(double[] arrayToOverwrite, double[] other)
 	{
-		for (var i = 0; i < list.length; i++)
+		for (var i = 0; i < arrayToOverwrite.length; i++)
 		{
-			var elementThis = list[i];
-			var elementOther = other[i];
-			if (elementThis.overwriteWith == null)
-			{
-				list[i] = elementOther;
-			}
-			else
-			{
-				elementThis.overwriteWith(elementOther);
-			}
+			arrayToOverwrite[i] = other[i];
+		}
+
+		return arrayToOverwrite;
+	}
+
+	public static <T extends Clonable<T>> List<T> overwriteWith(List<T> list, List<T> other)
+	{
+		for (var i = 0; i < list.size(); i++)
+		{
+			var elementThis = list.get(i);
+			var elementOther = other.get(i);
+			elementThis.overwriteWith(elementOther);
 		}
 
 		return list;
 	}
 
+	/*
 	static prepend(list: any, other: any): any[]
 	{
 		for (var i = 0; i < other.length; i++)

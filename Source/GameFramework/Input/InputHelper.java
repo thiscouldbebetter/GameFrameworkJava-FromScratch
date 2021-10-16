@@ -11,6 +11,7 @@ import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
 public class InputHelper
+	extends JComponent
 	implements KeyListener, MouseListener, MouseMotionListener, Platformable
 {
 	public Coords mouseClickPos;
@@ -23,7 +24,6 @@ public class InputHelper
 	public Map<String,String> inputNamesLookup;
 	public List<Input> inputsPressed;
 	public HashMap<String, Input> inputsPressedByName;
-	public String[] keysToPreventDefaultsFor;
 
 	boolean isEnabled;
 	boolean isMouseMovementTracked;
@@ -39,14 +39,9 @@ public class InputHelper
 
 		var inputNames = Input.Names();
 		this.inputNamesLookup = inputNames._AllByName;
-		this.keysToPreventDefaultsFor = new String[]
-		{
-			inputNames.ArrowDown, inputNames.ArrowLeft, inputNames.ArrowRight,
-			inputNames.ArrowUp, inputNames.Tab,
-		};
 
-		this.inputsPressed = new List<Input>();
-		this.inputsPressedByName = new Map<String, Input>();
+		this.inputsPressed = new ArrayList<Input>();
+		this.inputsPressedByName = new HashMap<String, Input>();
 
 		this.isEnabled = true;
 	}
@@ -65,9 +60,9 @@ public class InputHelper
 		}
 
 		var inputsPressed = this.inputsPressed;
-		for (var i = 0; i < inputsPressed.length; i++)
+		for (var i = 0; i < inputsPressed.size(); i++)
 		{
-			var inputPressed = inputsPressed[i];
+			var inputPressed = inputsPressed.get(i);
 			if (inputPressed.isActive)
 			{
 				var mapping = actionToInputsMappingsByInputName.get(inputPressed.name);
@@ -135,9 +130,9 @@ public class InputHelper
 
 	public void inputsRemoveAll()
 	{
-		for (var i = 0; i < this.inputsPressed.length; i++)
+		for (var i = 0; i < this.inputsPressed.size(); i++)
 		{
-			var input = this.inputsPressed[i];
+			var input = this.inputsPressed.get(i);
 			this.inputRemove(input.name);
 		}
 	}
@@ -245,12 +240,7 @@ public class InputHelper
 
 	public void keyDown(KeyEvent event)
 	{
-		var inputPressed = event.getKeyCode();
-
-		if (this.keysToPreventDefaultsFor.indexOf(inputPressed) >= 0)
-		{
-			event.preventDefault();
-		}
+		var inputPressed = "" + event.getKeyChar();
 
 		if (inputPressed == " ")
 		{
@@ -260,7 +250,7 @@ public class InputHelper
 		{
 			inputPressed = "__";
 		}
-		else if (isNaN(inputPressed) == false)
+		else if (inputPressed >= "0" && inputPressed <= "9")
 		{
 			inputPressed = "_" + inputPressed;
 		}
@@ -268,9 +258,9 @@ public class InputHelper
 		this.inputAdd(inputPressed);
 	}
 
-	public void keyUp(KeyEvent event)
+	public void keyReleased(KeyEvent event)
 	{
-		var inputReleased = event.getKeyCode();
+		var inputReleased = "" + event.getKeyChar();
 		if (inputReleased == " ")
 		{
 			inputReleased = "_";
@@ -279,7 +269,7 @@ public class InputHelper
 		{
 			inputReleased = "__";
 		}
-		else if (isNaN(inputReleased) == false)
+		else if (inputPressed >= "0" && inputPressed <= "9")
 		{
 			inputReleased = "_" + inputReleased;
 		}

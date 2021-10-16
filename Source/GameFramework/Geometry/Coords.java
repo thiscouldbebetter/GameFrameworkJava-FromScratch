@@ -4,7 +4,7 @@ package GameFramework.Geometry;
 import GameFramework.Helpers.*;
 import GameFramework.Utility.*;
 
-public class Coords
+public class Coords implements Clonable<Coords>
 {
 	public double x;
 	public double y;

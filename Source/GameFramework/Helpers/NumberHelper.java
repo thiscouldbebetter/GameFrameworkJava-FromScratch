@@ -5,7 +5,7 @@ public class NumberHelper
 {
 	// static class
 
-	public static double isInRangeMinMax(double n, double min, double max)
+	public static boolean isInRangeMinMax(double n, double min, double max)
 	{
 		return (n >= min && n <= max);
 	}
@@ -85,6 +85,32 @@ public class NumberHelper
 	}
 
 	public static double wrapToRangeMinMax(double n, double min, double max)
+	{
+		var value = n;
+
+		var rangeSize = max - min;
+
+		if (rangeSize == 0)
+		{
+			value = min;
+		}
+		else
+		{
+			while (value < min)
+			{
+				value += rangeSize;
+			}
+
+			while (value >= max)
+			{
+				value -= rangeSize;
+			}
+		}
+
+		return value;
+	}
+
+	public static int wrapToRangeMinMax(int n, int min, int max)
 	{
 		var value = n;
 

@@ -4,11 +4,14 @@ package GameFramework.Controls;
 import java.util.*;
 import java.util.function.*;
 
+import GameFramework.Display.*;
+import GameFramework.Helpers.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class ControlList extends ControlBase
 {
-	public List<Object> items;
+	public DataBinding<Object,Object[]> _items;
 	public DataBinding<Object,String> bindingForItemText;
 	public DataBinding<Object,Object> bindingForItemSelected;
 	public DataBinding<Object,Object> bindingForItemValue;
@@ -128,6 +131,7 @@ public class ControlList extends ControlBase
 		DataBinding<Object,Object[]> items,
 		DataBinding<Object,String> bindingForItemText,
 		double fontHeightInPixels
+	)
 	{
 		return new ControlList
 		(
@@ -143,8 +147,8 @@ public class ControlList extends ControlBase
 		Coords size,
 		DataBinding<Object, Object[]> items,
 		DataBinding<Object, String> bindingForItemText,
-		number fontHeightInPixels,
-		DataBinding<Object, Object> bindingForItemSelected,
+		double fontHeightInPixels,
+		DataBinding<Object, Object> bindingForItemSelected
 	)
 	{
 		return new ControlList
@@ -161,9 +165,9 @@ public class ControlList extends ControlBase
 		Coords size,
 		DataBinding<Object,Object[]> items,
 		DataBinding<Object,String> bindingForItemText,
-		number fontHeightInPixels,
-		DataBinding<ObjectObject> bindingForItemSelected,
-		DataBinding<ObjectObject> bindingForItemValue,
+		double fontHeightInPixels,
+		DataBinding<Object,Object> bindingForItemSelected,
+		DataBinding<Object,Object> bindingForItemValue
 	)
 	{
 		return new ControlList
@@ -173,18 +177,18 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	static from9
+	public static ControlList from9
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding items<Object,Object[]>,
-		DataBinding bindingForItemText<Object,String>,
-		number fontHeightInPixels,
-		DataBinding bindingForItemSelected<Object,Object>,
-		DataBinding bindingForItemValue<Object,Object>,
-		DataBinding bindingForIsEnabled<Object,Boolean>
-	): ControlList
+		DataBinding<Object,Object[]> items,
+		DataBinding<Object,String> bindingForItemText,
+		double fontHeightInPixels,
+		DataBinding<Object,Object> bindingForItemSelected,
+		DataBinding<Object,Object> bindingForItemValue,
+		DataBinding<Object,Boolean> bindingForIsEnabled
+	)
 	{
 		return new ControlList
 		(
@@ -201,7 +205,7 @@ public class ControlList extends ControlBase
 		Coords size,
 		DataBinding<Object,Object[]> items,
 		DataBinding<Object,String> bindingForItemText,
-		number fontHeightInPixels,
+		double fontHeightInPixels,
 		DataBinding<Object,Object> bindingForItemSelected,
 		DataBinding<Object,Object> bindingForItemValue,
 		DataBinding<Object,Boolean> bindingForIsEnabled,
@@ -255,12 +259,12 @@ public class ControlList extends ControlBase
 	{
 		var returnValue = valueToSet;
 		var items = this.items();
-		if (valueToSet == null)
+		if (valueToSet < 0)
 		{
 			returnValue = items.indexOf(this.itemSelected(null));
 			if (returnValue == -1)
 			{
-				returnValue = null;
+				returnValue = -1;
 			}
 		}
 		else
@@ -406,7 +410,7 @@ public class ControlList extends ControlBase
 
 	public Object[] items()
 	{
-		return (this._items.get == null ? this._items : this._items.get());
+		return this._items.get();
 	}
 
 	public boolean mouseClick(Coords clickPos)
@@ -434,7 +438,7 @@ public class ControlList extends ControlBase
 			var rowOfItemClicked =
 				this.indexOfFirstRowVisible() + clickOffsetInItems.y;
 			var indexOfItemClicked =
-				rowOfItemClicked * this.widthInItems + clickOffsetInItems.x;
+				(int)(rowOfItemClicked * this.widthInItems + clickOffsetInItems.x);
 
 			var items = this.items();
 			if (indexOfItemClicked < items.length)
@@ -444,7 +448,7 @@ public class ControlList extends ControlBase
 				{
 					if (this.confirm != null)
 					{
-						this.confirm(null); // todo
+						this.confirm(); // todo
 					}
 				}
 				else
@@ -485,7 +489,7 @@ public class ControlList extends ControlBase
 		drawLoc = this._drawLoc.overwriteWith(drawLoc);
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
 
-		var style = style || this.style(universe);
+		var style = (style != null ? style : this.style(universe) );
 		var colorFore = (this.isHighlighted ? style.colorFill : style.colorBorder);
 		var colorBack = (this.isHighlighted ? style.colorBorder : style.colorFill);
 
@@ -539,7 +543,7 @@ public class ControlList extends ControlBase
 			).add
 			(
 				drawPos
-			)
+			);
 
 			if (item == itemSelected)
 			{

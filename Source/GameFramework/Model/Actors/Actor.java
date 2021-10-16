@@ -3,16 +3,18 @@ package GameFramework.Model.Actors;
 
 import java.util.*;
 
+import GameFramework.Model.*;
+
 public class Actor implements EntityProperty
 {
 	public Activity activity;
 
-	public List<Action> actions;
+	public List<ActorAction> actions;
 
 	public Actor(Activity activity)
 	{
 		this.activity = activity;
-		this.actions = new List<Action>;
+		this.actions = new ArrayList<ActorAction>;
 	}
 
 	public static Actor create()

@@ -2,6 +2,7 @@
 package GameFramework.Storage.Compressor;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class ByteStreamFromString implements ByteStream
 {
@@ -39,7 +40,7 @@ public class ByteStreamFromString implements ByteStream
 			var byteRead = this.readByte();
 			bytesRead.add(byteRead);
 		}
-		return bytesRead;
+		return bytesRead.toArray(new int[] {});
 	}
 
 	public String readStringOfLength(int lengthOfString)

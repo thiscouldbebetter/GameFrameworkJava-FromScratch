@@ -892,7 +892,7 @@ public class MeshBuilder
 	{
 		var returnValues = new ArrayList<FaceTextured>();
 
-		var verticesInFacesDivided = new List<Coords>[]
+		var verticesInFacesDivided = new ArrayList<Coords>[]
 		[
 			new ArrayList<Coords>(), // front
 			new ArrayList<Coords>() // back

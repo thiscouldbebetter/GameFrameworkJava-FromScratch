@@ -53,8 +53,8 @@ public class ControlButton extends ControlBase
 		String text,
 		double fontHeightInPixels,
 		boolean hasBorder,
-		Object isEnabled,
-		Object click
+		DataBinding<Object,Boolean> isEnabled,
+		Runnable click
 	)
 	{
 		return new ControlButton

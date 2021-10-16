@@ -1,13 +1,15 @@
 
 package GameFramework.Input;
 
+import java.util.*;
+
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
 public class ActionToInputsMapping
 {
 	public String actionName;
-	public String inputNames[];
+	public List<String> inputNames;
 	public boolean inactivateInputWhenActionPerformed;
 
 	public ActionToInputsMapping
@@ -18,7 +20,7 @@ public class ActionToInputsMapping
 	)
 	{
 		this.actionName = actionName;
-		this.inputNames = inputNames;
+		this.inputNames = Arrays.asList(inputNames);
 		this.inactivateInputWhenActionPerformed =
 			inactivateInputWhenActionPerformed;
 	}
@@ -54,7 +56,7 @@ public class ActionToInputsMapping
 	public ActionToInputsMapping overwriteWith(ActionToInputsMapping other)
 	{
 		this.actionName = other.actionName;
-		this.inputNames = other.inputNames.slice();
+		ArrayHelper.overwriteWith(this.inputNames, other.inputNames);
 		this.inactivateInputWhenActionPerformed =
 			other.inactivateInputWhenActionPerformed;
 		return this;

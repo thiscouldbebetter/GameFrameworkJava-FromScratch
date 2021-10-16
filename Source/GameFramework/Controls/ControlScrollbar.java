@@ -1,13 +1,15 @@
 
 package GameFramework.Controls;
 
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class ControlScrollbar extends ControlBase
 {
 	public double itemHeight;
 	private Object _items;
-	private number _sliderPosInItems;
+	private int _sliderPosInItems;
 
 	public ControlButton buttonScrollDown;
 	public ControlButton buttonScrollUp;
@@ -23,7 +25,7 @@ public class ControlScrollbar extends ControlBase
 		double fontHeightInPixels,
 		double itemHeight,
 		Object items,
-		number sliderPosInItems
+		double sliderPosInItems
 	)
 	{
 		super(null, pos, size, fontHeightInPixels);
@@ -44,7 +46,7 @@ public class ControlScrollbar extends ControlBase
 			this.fontHeightInPixels,
 			true, // hasBorder
 			true, // isEnabled
-			this.scrollUp // click
+			() -> this.scrollUp() // click
 		);
 
 		this.buttonScrollDown = ControlButton.from8
@@ -56,21 +58,21 @@ public class ControlScrollbar extends ControlBase
 			this.fontHeightInPixels,
 			true, // hasBorder
 			true, // isEnabled
-			this.scrollDown // click
+			() -> this.scrollDown() // click
 		);
 
 		// Helper variables.
 		this._drawPos = Coords.create();
 	}
 
-	public boolean actionHandle(string actionNameToHandle, Universe universe)
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		return true;
 	}
 
 	public boolean isVisible()
 	{
-		return this.windowSizeInItems < this.items().length
+		return (this.windowSizeInItems < this.items().length);
 	}
 
 	public Object items()

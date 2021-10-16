@@ -3,12 +3,13 @@ package GameFramework.Controls;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 
 public class ControlTextBox extends ControlBase
 {
-	public Object _text;
+	public DataBinding<Object,String> _text;
 	public int numberOfCharsMax;
-	public DataBinding<Object,boolean> isEnabled;
+	public DataBinding<Object,Boolean> _isEnabled;
 
 	public int cursorPos;
 
@@ -20,9 +21,13 @@ public class ControlTextBox extends ControlBase
 
 	public ControlTextBox
 	(
-		String name, Coords pos, Coords size, Object text,
-		double fontHeightInPixels, int numberOfCharsMax,
-		DataBinding<Object,boolean> isEnabled
+		String name,
+		Coords pos,
+		Coords size,
+		DataBinding<Object,String> text,
+		double fontHeightInPixels,
+		int numberOfCharsMax,
+		DataBinding<Object,Boolean> isEnabled
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -41,21 +46,9 @@ public class ControlTextBox extends ControlBase
 		this._textSize = Coords.create();
 	}
 
-	public String text(Object value, Universe universe)
+	public String text()
 	{
-		if (value != null)
-		{
-			if (this._text.set == null)
-			{
-				this._text = value;
-			}
-			else
-			{
-				this._text.set(value);
-			}
-		}
-
-		return (this._text.get == null ? this._text : this._text.get(universe) );
+		return this._text.get();
 	}
 
 	// events
@@ -178,7 +171,7 @@ public class ControlTextBox extends ControlBase
 	public void focusLose()
 	{
 		this.isHighlighted = false;
-		this.cursorPos = null;
+		this.cursorPos = -1;
 	}
 
 	public boolean isEnabled()
@@ -189,7 +182,7 @@ public class ControlTextBox extends ControlBase
 	public boolean mouseClick(Coords mouseClickPos)
 	{
 		var parent = this.parent;
-		var parentAsContainer = parent as ControlContainer;
+		var parentAsContainer = (ControlContainer)parent;
 		parentAsContainer.indexOfChildWithFocus =
 			parentAsContainer.children.indexOf(this);
 		this.isHighlighted = true;

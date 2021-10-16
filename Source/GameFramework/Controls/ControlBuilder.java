@@ -7,17 +7,20 @@ import java.util.function.*;
 import GameFramework.*;
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
+import GameFramework.Model.Places.*;
+import GameFramework.Profiles.*;
 
 public class ControlBuilder
 {
 	public ControlStyle[] styles;
 	public Map<String,ControlStyle> stylesByName;
-	public BiFunction<Venue,Venue,Venue> venueTransitionalFromTo;
+	public BiFunction<Venue,Venue,Venue> _venueTransitionalFromTo;
 
 	public double buttonHeightBase;
 	public double buttonHeightSmallBase;
@@ -29,7 +32,7 @@ public class ControlBuilder
 
 	public ControlBuilder
 	(
-		List<ControlStyle> styles,
+		ControlStyle[] styles,
 		BiFunction<Venue,Venue,Venue> venueTransitionalFromTo
 	)
 	{
@@ -39,7 +42,7 @@ public class ControlBuilder
 			? styles
 			: ControlStyle.Instances()._All
 		);
-		this.venueTransitionalFromTo =
+		this._venueTransitionalFromTo =
 		(
 			venueTransitionalFromTo != null
 			? venueTransitionalFromTo
@@ -92,7 +95,7 @@ public class ControlBuilder
 		Coords size,
 		DataBinding<Object, String> message,
 		String[] optionNames,
-		Consumer<UniverseWorldPlaceEntities>[] optionConsumers,
+		List<Consumer<UniverseWorldPlaceEntities>> optionConsumers,
 		boolean showMessageOnly
 	)
 	{
@@ -163,7 +166,7 @@ public class ControlBuilder
 					fontHeight,
 					true, // hasBorder
 					DataBinding.fromTrue(), // isEnabled
-					optionConsumers[i],
+					() -> optionConsumers.get(i).accept(null),
 					universe
 				);
 
@@ -181,7 +184,7 @@ public class ControlBuilder
 		ActorAction[] actions = null;
 		if (numberOfOptions <= 1)
 		{
-			var acknowledge = optionConsumers[0];
+			var acknowledge = optionConsumers.get(0);
 			var controlActionNames = ControlActionNames.Instances();
 			actions = new ActorAction[]
 			{
@@ -216,7 +219,7 @@ public class ControlBuilder
 		Coords size,
 		String message,
 		DataBinding<Object,Object[]> options,
-		DataBinding<Object,Object> bindingForOptionText,
+		DataBinding<Object,String> bindingForOptionText,
 		String buttonSelectText,
 		BiConsumer<Universe,Object> select
 	)
@@ -275,13 +278,13 @@ public class ControlBuilder
 					buttonSelectText,
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled,
+					DataBinding.fromTrue(), // isEnabled,
 					() -> // click
 					{
 						var itemSelected = listOptions.itemSelected(null);
 						if (itemSelected != null)
 						{
-							select(universe, itemSelected);
+							select.accept(universe, itemSelected);
 						}
 					},
 					universe, // context
@@ -298,16 +301,16 @@ public class ControlBuilder
 		Universe universe,
 		Coords size,
 		String message,
-		Runnable confirm,
-		Runnable cancel
+		Consumer<UniverseWorldPlaceEntities> confirm,
+		Consumer<UniverseWorldPlaceEntities> cancel
 	)
 	{
 		return this.choice
 		(
 			universe, size, DataBinding.fromContext(message),
 			new String[] { "Confirm", "Cancel" },
-			new Runnable[] { confirm, cancel },
-			null
+			Arrays.asList(new Consumer<UniverseWorldPlaceEntities>[] { confirm, cancel }),
+			false // showMessageOnly
 		);
 	}
 
@@ -317,44 +320,49 @@ public class ControlBuilder
 		Coords size,
 		String message,
 		Venue venuePrev,
-		Runnable confirm,
-		Runnable cancel
+		Consumer<UniverseWorldPlaceEntities> confirm,
+		Consumer<UniverseWorldPlaceEntities> cancel
 	)
 	{
 		var controlBuilder = this;
 
-		var confirmThenReturnToVenuePrev = () ->
-		{
-			confirm();
-			var venueNext = controlBuilder.venueTransitionalFromTo
-			(
-				universe.venueCurrent, venuePrev
-			);
-			universe.venueNext = venueNext;
-		};
-
-		var cancelThenReturnToVenuePrev = () ->
-		{
-			if (cancel != null)
+		Consumer<UniverseWorldPlaceEntities> confirmThenReturnToVenuePrev =
+			(UniverseWorldPlaceEntities uwpe) ->
 			{
-				cancel();
-			}
-			var venueNext = controlBuilder.venueTransitionalFromTo
-			(
-				universe.venueCurrent, venuePrev
-			);
-			universe.venueNext = venueNext;
-		};
+				confirm.accept(uwpe);
+				var venueNext = controlBuilder.venueTransitionalFromTo
+				(
+					universe.venueCurrent, venuePrev
+				);
+				universe.venueNext = venueNext;
+			};
+
+		Consumer<UniverseWorldPlaceEntities> cancelThenReturnToVenuePrev =
+			(UniverseWorldPlaceEntities uwpe) ->
+			{
+				if (cancel != null)
+				{
+					cancel.accept(uwpe);
+				}
+				var venueNext = controlBuilder.venueTransitionalFromTo
+				(
+					universe.venueCurrent, venuePrev
+				);
+				universe.venueNext = venueNext;
+			};
 
 		return this.choice
 		(
 			universe, size, DataBinding.fromContext(message),
 			new String[] { "Confirm", "Cancel" },
-			new Runnable[]
-			{
-				confirmThenReturnToVenuePrev, cancelThenReturnToVenuePrev
-			},
-			null
+			Arrays.asList
+			(
+				new Consumer<UniverseWorldPlaceEntities>>()
+				{
+					confirmThenReturnToVenuePrev, cancelThenReturnToVenuePrev
+				}
+			),
+			false // showMessageOnly
 		);
 	}
 
@@ -388,7 +396,7 @@ public class ControlBuilder
 		var row3PosY = row2PosY + rowHeight;
 		var row4PosY = row3PosY + rowHeight;
 
-		var back = () ->
+		Consumer<UniverseWorldPlaceEntities> back = (UniverseWorldPlaceEntities uwpe) ->
 		{
 			var venueNext = venuePrev;
 			venueNext = controlBuilder.venueTransitionalFromTo
@@ -414,7 +422,7 @@ public class ControlBuilder
 					"Save",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						Venue venueNext = Profile.toControlSaveStateSave
@@ -437,7 +445,7 @@ public class ControlBuilder
 					"Load",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						Venue venueNext = Profile.toControlSaveStateLoad
@@ -460,30 +468,30 @@ public class ControlBuilder
 					"About",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var venueCurrent = universe.venueCurrent;
-						Venue venueNext = new VenueMessage
+						Venue venueNext2 = new VenueMessage
 						(
 							DataBinding.fromContext(universe.name + "\nv" + universe.version),
 							() -> // acknowledge
 							{
-								var venueNext = controlBuilder.venueTransitionalFromTo
+								var venueNext3 = controlBuilder.venueTransitionalFromTo
 								(
 									null, venueCurrent
 								);
-								universe.venueNext = venueNext;
+								universe.venueNext = venueNext3;
 							},
 							universe.venueCurrent, // venuePrev
 							size,
 							false
 						);
-						venueNext = controlBuilder.venueTransitionalFromTo
+						venueNext2 = controlBuilder.venueTransitionalFromTo
 						(
-							venueCurrent, venueNext
+							venueCurrent, venueNext2
 						);
-						universe.venueNext = venueNext;
+						universe.venueNext = venueNext2;
 					}
 				),
 
@@ -495,7 +503,7 @@ public class ControlBuilder
 					"Quit",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var controlConfirm = universe.controlBuilder.confirm
@@ -503,7 +511,7 @@ public class ControlBuilder
 							universe,
 							size,
 							"Are you sure you want to quit?",
-							() -> // confirm
+							(UniverseWorldPlaceEntities uwpe) -> // confirm
 							{
 								universe.reset();
 								Venue venueNext =
@@ -514,7 +522,7 @@ public class ControlBuilder
 								);
 								universe.venueNext = venueNext;
 							},
-							() -> // cancel
+							(UniverseWorldPlaceEntities uwpe) -> // cancel
 							{
 								var venueNext = venuePrev;
 								venueNext = controlBuilder.venueTransitionalFromTo
@@ -542,12 +550,12 @@ public class ControlBuilder
 					"Back",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					back // click
 				),
 			},
 
-			new Action[] { new Action("Back", back) },
+			new ActorAction[] { new ActorAction("Back", back) },
 
 			new ActionToInputsMapping[]
 			{
@@ -619,7 +627,7 @@ public class ControlBuilder
 					"Game",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						Venue venueNext = controlBuilder.game
@@ -642,7 +650,7 @@ public class ControlBuilder
 					"Settings",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						Venue venueNext = controlBuilder.settings
@@ -681,13 +689,13 @@ public class ControlBuilder
 				"Resume",
 				fontHeight,
 				true, // hasBorder
-				true, // isEnabled
+				DataBinding.fromTrue(), // isEnabled
 				back
 			);
 
 			returnValue.children.add(buttonResume);
 
-			returnValue.actions.add(new Action("Back", back));
+			returnValue.actions.add(new ActorAction("Back", back));
 
 			returnValue._actionToInputsMappings.add
 			(
@@ -879,7 +887,7 @@ public class ControlBuilder
 					"Default All",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() ->
 					{
 						var venueInputs = universe.venueCurrent;
@@ -912,7 +920,7 @@ public class ControlBuilder
 					"Cancel",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						Venue venueNext = venuePrev;
@@ -939,7 +947,7 @@ public class ControlBuilder
 						(PlaceDefn c) ->
 						{
 							var mappings = c.actionToInputsMappingsEdited;
-							var doAnyActionsLackInputs = mappings.some
+							var doAnyActionsLackInputs = mappings.stream.anyMatch
 							(
 								(ActionToInputsMapping x) -> (x.inputNames.length == 0)
 							);
@@ -974,7 +982,7 @@ public class ControlBuilder
 		boolean showMessageOnly
 	)
 	{
-		var optionNames = new String[] {};
+		var optionNames = new ArrayList<String>();
 		var optionFunctions = new Runnable[] {};
 
 		if (acknowledge != null)
@@ -985,7 +993,9 @@ public class ControlBuilder
 
 		return this.choice
 		(
-			universe, size, message, optionNames, optionFunctions, showMessageOnly
+			universe, size, message,
+			optionNames.toArray(new String[] {}),
+			optionFunctions, showMessageOnly
 		);
 	}
 
@@ -1003,7 +1013,7 @@ public class ControlBuilder
 
 		var fontHeight = this.fontHeightInPixelsBase;
 
-		var goToVenueNext = () ->
+		Runnable goToVenueNext = () ->
 		{
 			universe.soundHelper.soundsAllStop(universe);
 
@@ -1042,7 +1052,7 @@ public class ControlBuilder
 					"imageOpening",
 					this._zeroes.clone(),
 					this.sizeBase.clone(), // size
-					DataBinding.fromContext<Visual>(visual),
+					DataBinding.fromContext(visual),
 					null, null // colors
 				),
 
@@ -1054,15 +1064,15 @@ public class ControlBuilder
 					"Next",
 					fontHeight * 2,
 					false, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					goToVenueNext // click
 				)
 			}, // end children
 
-			new Action[]
+			new ActorAction[]
 			{
-				new Action( controlActionNames.ControlCancel, goToVenueNext ),
-				new Action( controlActionNames.ControlConfirm, goToVenueNext )
+				new ActorAction( controlActionNames.ControlCancel, goToVenueNext ),
+				new ActorAction( controlActionNames.ControlConfirm, goToVenueNext )
 			},
 
 			null
@@ -1138,15 +1148,15 @@ public class ControlBuilder
 					"Next",
 					fontHeight * 2,
 					false, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					goToVenueNext // click
 				)
 			}, // end children
 
-			new Action[]
+			new ActorAction[]
 			{
-				new Action( controlActionNames.ControlCancel, goToVenueNext ),
-				new Action( controlActionNames.ControlConfirm, goToVenueNext )
+				new ActorAction( controlActionNames.ControlCancel, goToVenueNext ),
+				new ActorAction( controlActionNames.ControlConfirm, goToVenueNext )
 			},
 
 			null
@@ -1289,7 +1299,7 @@ public class ControlBuilder
 					"Change",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var venueControls =
@@ -1330,7 +1340,7 @@ public class ControlBuilder
 					"Inputs",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var venueCurrent = universe.venueCurrent;
@@ -1350,12 +1360,12 @@ public class ControlBuilder
 					"Done",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					back // click
 				),
 			},
 
-			new Action[] { new Action("Back", back) },
+			new ActorAction[] { new ActorAction("Back", back) },
 
 			new ActionToInputsMapping[]
 			{
@@ -1469,15 +1479,15 @@ public class ControlBuilder
 						"Next",
 						this.fontHeightInPixelsBase,
 						false, // hasBorder
-						true, // isEnabled
+						DataBinding.fromTrue(), // isEnabled
 						next
 					)
 				},
 
-				new Action[]
+				new ActorAction[]
 				{
-					new Action( ControlActionNames.Instances().ControlCancel, skip ),
-					new Action( ControlActionNames.Instances().ControlConfirm, next )
+					new ActorAction( ControlActionNames.Instances().ControlCancel, skip ),
+					new ActorAction( ControlActionNames.Instances().ControlConfirm, next )
 				},
 
 				null // ?
@@ -1568,15 +1578,15 @@ public class ControlBuilder
 					"Start",
 					fontHeight * 2,
 					false, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					start // click
 				)
 			}, // end children
 
-			new Action[]
+			new ActorAction[]
 			{
-				new Action( ControlActionNames.Instances().ControlCancel, start ),
-				new Action( ControlActionNames.Instances().ControlConfirm, start )
+				new ActorAction( ControlActionNames.Instances().ControlCancel, start ),
+				new ActorAction( ControlActionNames.Instances().ControlConfirm, start )
 			},
 
 			null // mappings
@@ -1585,6 +1595,11 @@ public class ControlBuilder
 		returnValue.scalePosAndSize(scaleMultiplier);
 
 		return returnValue;
+	}
+
+	public Venue venueTransitionalFromTo(Venue venueFrom, Venue venueTo)
+	{
+		return this._venueTransitionalFromTo.apply(venueFrom, venueTo);
 	}
 
 	public ControlBase worldDetail
@@ -1667,7 +1682,7 @@ public class ControlBuilder
 					"Start",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var world = universe.world;
@@ -1725,7 +1740,7 @@ public class ControlBuilder
 					"<",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var venueNext = venuePrev;
@@ -1745,7 +1760,7 @@ public class ControlBuilder
 					"x",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var saveState = universe.profile.saveStateSelected();
@@ -1944,7 +1959,7 @@ public class ControlBuilder
 					"Load File",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var venueFileUpload = new VenueFileUpload(null, null);
@@ -2032,7 +2047,7 @@ public class ControlBuilder
 					"Return",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var venueGame = controlBuilder.game

@@ -10,7 +10,7 @@ public class MazeCellNetwork
 	{
 		this.networkID = MazeCellNetwork.MaxIDSoFar;
 		MazeCellNetwork.MaxIDSoFar++;
-		this.cells = new List<Object>();
+		this.cells = new ArrayList<Object>();
 	}
 
 	public static int MaxIDSoFar = 0;

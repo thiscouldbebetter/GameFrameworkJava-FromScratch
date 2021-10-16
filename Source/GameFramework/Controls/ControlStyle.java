@@ -4,10 +4,11 @@ package GameFramework.Controls;
 import java.util.*;
 
 import GameFramework.Display.*;
+import GameFramework.Utility.*;
 
-public class ControlStyle
+public class ControlStyle implements Namable
 {
-	public String name;
+	public String _name;
 	public Color colorBackground;
 	public Color colorFill;
 	public Color colorBorder;
@@ -43,38 +44,11 @@ public class ControlStyle
 	{
 		return ControlStyle.Instances()._AllByName.get(styleName);
 	}
-}
 
-class ControlStyle_Instances
-{
-	public ControlStyle Default;
-	public ControlStyle Dark;
+	// Namable.
 
-	public List<ControlStyle> _All;
-	public Map<String,ControlStyle> _AllByName;
-
-	public ControlStyle_Instances()
+	public String name()
 	{
-		this.Default = new ControlStyle
-		(
-			"Default", // name
-			Color.fromRGB(240/255, 240/255, 240/255), // colorBackground
-			Color.byName("White"), // colorFill
-			Color.byName("Gray"), // colorBorder
-			Color.byName("GrayLight") // colorDisabled
-		);
-
-		this.Dark = new ControlStyle
-		(
-			"Dark", // name
-			Color.byName("GrayDark"), // colorBackground
-			Color.byName("Black"), // colorFill
-			Color.byName("White"), // colorBorder
-			Color.byName("GrayLight") // colorDisabled
-		);
-
-		this._All = Arrays.asList(new ControlStyle[] { this.Default, this.Dark });
-
-		this._AllByName = ArrayHelper.addLookupsByName(this._All);
+		return this._name;
 	}
 }

@@ -829,7 +829,7 @@ public class Profile
 						var profileNames = storageHelper.load("ProfileNames");
 						if (profileNames == null)
 						{
-							profileNames = new List<String>();
+							profileNames = new ArrayList<String>();
 						}
 						profileNames.add(profileName);
 						storageHelper.save("ProfileNames", profileNames);

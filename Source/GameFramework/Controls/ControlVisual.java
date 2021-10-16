@@ -4,6 +4,7 @@ package GameFramework.Controls;
 import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class ControlVisual extends ControlBase
 {
@@ -50,7 +51,7 @@ public class ControlVisual extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object, Visual> visual
+		DataBinding<Object,Visual> visual
 	)
 	{
 		return new ControlVisual(name, pos, size, visual, null, null);

@@ -43,7 +43,7 @@ public class DataBinding<C,V>
 		return new DataBinding(null, get, null);
 	}
 
-	public static DataBinding<Boolean,Boolean> fromTrue()
+	public static DataBinding<Object,Boolean> fromTrue()
 	{
 		return DataBinding.fromContext<Boolean>(true);
 	}

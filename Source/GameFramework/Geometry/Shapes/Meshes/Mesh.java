@@ -94,7 +94,7 @@ public class Mesh implements ShapeBase
 	public static Mesh fromFace(Coords center, Face faceToExtrude, double thickness)
 	{
 		var faceVertices = faceToExtrude.vertices;
-		var doubleOfFaceVertices = faceVertices.length;
+		var numberOfFaceVertices = faceVertices.length;
 		var thicknessHalf = thickness / 2;
 
 		var meshVertices = new ArrayList<Coords>();
@@ -110,18 +110,18 @@ public class Mesh implements ShapeBase
 				thicknessHalf
 			);
 
-			var vertexIndicesTopOrBottom = new List<Integer>();
+			var vertexIndicesTopOrBottom = new ArrayList<Integer>();
 
-			for (var v = 0; v < doubleOfFaceVertices; v++)
+			for (var v = 0; v < numberOfFaceVertices; v++)
 			{
-				var vertexIndex = meshVertices.length;
+				var vertexIndex = meshVertices.size();
 
 				if (z == 0)
 				{
-					var vertexIndexNext = doubleHelper.wrapToRangeMinMax
+					var vertexIndexNext = NumberHelper.wrapToRangeMinMax
 					(
 						vertexIndex + 1,
-						0, doubleOfFaceVertices
+						0, numberOfFaceVertices
 					);
 
 					var faceBuilderSide = new FaceBuilder
@@ -130,8 +130,8 @@ public class Mesh implements ShapeBase
 						{
 							vertexIndex,
 							vertexIndexNext,
-							vertexIndexNext + doubleOfFaceVertices,
-							vertexIndex + doubleOfFaceVertices
+							vertexIndexNext + numberOfFaceVertices,
+							vertexIndex + numberOfFaceVertices
 						}
 					);
 					faceBuilders.add(faceBuilderSide);
@@ -162,7 +162,7 @@ public class Mesh implements ShapeBase
 		(
 			center,
 			meshVertices.toArray(new Coords[] {}), // vertexOffsets
-			faceBuilders
+			faceBuilders.toArray(new FaceBuilder[] {} )
 		);
 
 		return returnValue;
@@ -242,6 +242,7 @@ public class Mesh implements ShapeBase
 
 	// clonable
 
+	/*
 	public Mesh clone()
 	{
 		return new Mesh
@@ -251,6 +252,7 @@ public class Mesh implements ShapeBase
 			ArrayHelper.clone(this.faceBuilders)
 		);
 	}
+	*/
 
 	public Mesh overwriteWith(Mesh other)
 	{
@@ -258,6 +260,20 @@ public class Mesh implements ShapeBase
 		ArrayHelper.overwriteWith(this.vertexOffsets, other.vertexOffsets);
 		ArrayHelper.overwriteWith(this.faceBuilders, other.faceBuilders);
 		return this;
+	}
+
+	// Clonable<ShapeBase>.
+
+	public ShapeBase clone()
+	{
+		return this.clone();
+	}
+
+	public ShapeBase overwriteWith(ShapeBase other)
+	{
+		var otherAsMesh = (Mesh)other;
+		this.overwriteWith(otherAsMesh);
+		return (ShapeBase)this;
 	}
 
 	// transformable
@@ -287,61 +303,6 @@ public class Mesh implements ShapeBase
 	public Box toBox(Box boxOut)
 	{
 		return boxOut.ofPoints(this.vertices());
-	}
-
-	// Inner classes.
-
-	class FaceBuilder
-	{
-		public int[] vertexIndices;
-
-		public FaceBuilder(int[] vertexIndices)
-		{
-			this.vertexIndices = vertexIndices;
-		}
-
-		public Face toFace(Coords[] meshVertices)
-		{
-			var faceVertices = new Coords[this.vertexIndices.length];
-			for (var vi = 0; vi < this.vertexIndices.length; vi++)
-			{
-				var vertexIndex = this.vertexIndices[vi];
-				var meshVertex = meshVertices[vertexIndex];
-				faceVertices.add(meshVertex);
-			}
-			var returnValue = new Face(faceVertices);
-			return returnValue;
-		}
-
-		public void vertexIndicesShift(double offset)
-		{
-			for (var i = 0; i < this.vertexIndices.length; i++)
-			{
-				var vertexIndex = this.vertexIndices[i];
-				vertexIndex += offset;
-				this.vertexIndices[i] = vertexIndex;
-			}
-		}
-
-		// clonable
-
-		public FaceBuilder clone()
-		{
-			return new FaceBuilder(ArrayHelper.clone(this.vertexIndices));
-		}
-
-		public FaceBuilder overwriteWith(Mesh other_FaceBuilder)
-		{
-			ArrayHelper.overwriteWith(this.vertexIndices, other.vertexIndices);
-			return this;
-		}
-
-		// Transformable.
-
-		public Transformable transform(Transform transformToApply)
-		{
-			throw new Error("Not implemented!");
-		}
 	}
 }
 

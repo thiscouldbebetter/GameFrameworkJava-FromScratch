@@ -1,6 +1,8 @@
 
 package GameFramework.Input;
 
+import GameFramework.Model.*;
+
 public class VenueInputCapture implements Venue
 {
 	public Venue venueToReturnTo;
@@ -57,6 +59,4 @@ public class VenueInputCapture implements Venue
 			}
 		}
 	}
-}
-
 }

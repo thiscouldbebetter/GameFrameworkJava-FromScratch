@@ -217,7 +217,7 @@ public class ControlTextarea extends ControlBase
 
 	public List<String> textAsLines()
 	{
-		this._textAsLines = new List<String>();
+		this._textAsLines = new ArrayList<String>();
 
 		var charWidthInPixels = this.fontHeightInPixels / 2; // hack
 		var charsPerLine = Math.floor(this.size.x / charWidthInPixels);

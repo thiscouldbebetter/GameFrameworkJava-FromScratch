@@ -1,6 +1,9 @@
 
 package GameFramework.Controls;
 
+import GameFramework.Geometry.*;
+import GameFramework.Model.*;
+
 public class VenueMessage implements Venue
 {
 	public DataBinding<Object,String> messageToShow;

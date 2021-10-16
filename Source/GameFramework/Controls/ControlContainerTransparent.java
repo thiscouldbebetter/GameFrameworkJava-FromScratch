@@ -5,9 +5,11 @@ import java.util.*;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Input.*;
+import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
-public class ControlContainerTransparent extends ControlBase
+public class ControlContainerTransparent extends ControlContainer
 {
 	ControlContainer containerInner;
 
@@ -53,7 +55,7 @@ public class ControlContainerTransparent extends ControlBase
 		);
 	}
 
-	public boolea actionHandle(string actionNameToHandle, Universe universe)
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		return this.containerInner.actionHandle(actionNameToHandle, universe);
 	}
@@ -118,7 +120,7 @@ public class ControlContainerTransparent extends ControlBase
 			this.containerInner.pos
 		);
 
-		style = (style != null ? style : this.style(universe);
+		style = (style != null ? style : this.style(universe));
 
 		display.drawRectangle
 		(
