@@ -65,9 +65,9 @@ public class SoundHelper
 
 	public void reset()
 	{
-		for (var i = 0; i < this.sounds.length; i++)
+		for (var i = 0; i < this.sounds.size(); i++)
 		{
-			var sound = this.sounds[i];
+			var sound = this.sounds.get(i);
 			sound.offsetInSeconds = 0;
 		}
 	}

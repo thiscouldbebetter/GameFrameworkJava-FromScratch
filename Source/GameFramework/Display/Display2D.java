@@ -90,6 +90,10 @@ public class Display2D extends JPanel implements Display, Platformable
 	{
 		return this._sizeInPixels;
 	}
+	public void sizeInPixelsSet(Coords value)
+	{
+		this._sizeInPixels.overwriteWith(value);
+	}
 	public Coords sizeInPixelsHalf() { return null; }
 	public Coords[] sizesAvailable() { return this._sizesAvailable; }
 

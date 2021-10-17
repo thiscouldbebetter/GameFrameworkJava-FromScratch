@@ -11,6 +11,7 @@ import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Input.*;
+import GameFramework.Media.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 import GameFramework.Model.Places.*;
@@ -309,7 +310,7 @@ public class ControlBuilder
 		(
 			universe, size, DataBinding.fromContext(message),
 			new String[] { "Confirm", "Cancel" },
-			Arrays.asList(new Consumer<UniverseWorldPlaceEntities>[] { confirm, cancel }),
+			new ArrayList<Consumer<UniverseWorldPlaceEntities>>(List.of(confirm, cancel)),
 			false // showMessageOnly
 		);
 	}
@@ -355,13 +356,13 @@ public class ControlBuilder
 		(
 			universe, size, DataBinding.fromContext(message),
 			new String[] { "Confirm", "Cancel" },
-			Arrays.asList
+			new ArrayList<Consumer<UniverseWorldPlaceEntities>>
 			(
-				new Consumer<UniverseWorldPlaceEntities>>()
-				{
+				List.of
+				(
 					confirmThenReturnToVenuePrev, cancelThenReturnToVenuePrev
-				}
-			),
+				)
+			},
 			false // showMessageOnly
 		);
 	}
@@ -396,7 +397,7 @@ public class ControlBuilder
 		var row3PosY = row2PosY + rowHeight;
 		var row4PosY = row3PosY + rowHeight;
 
-		Consumer<UniverseWorldPlaceEntities> back = (UniverseWorldPlaceEntities uwpe) ->
+		Runnable back = () ->
 		{
 			var venueNext = venuePrev;
 			venueNext = controlBuilder.venueTransitionalFromTo
@@ -555,7 +556,7 @@ public class ControlBuilder
 				),
 			},
 
-			new ActorAction[] { new ActorAction("Back", back) },
+			new ActorAction[] { new ActorAction("Back", () -> back) },
 
 			new ActionToInputsMapping[]
 			{
@@ -653,15 +654,15 @@ public class ControlBuilder
 					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
-						Venue venueNext = controlBuilder.settings
+						Venue venueNext2 = controlBuilder.settings
 						(
 							universe, null, universe.venueCurrent
 						).toVenue(),
 						venueNext = controlBuilder.venueTransitionalFromTo
 						(
-							universe.venueCurrent, venueNext
+							universe.venueCurrent, venueNext2
 						);
-						universe.venueNext = venueNext;
+						universe.venueNext = venueNext2;
 					}
 				),
 			},
@@ -673,12 +674,12 @@ public class ControlBuilder
 		{
 			var back = () ->
 			{
-				Venue venueNext = venuePrev;
-				venueNext = controlBuilder.venueTransitionalFromTo
+				Venue venueNext2 = venuePrev;
+				venueNext2 = controlBuilder.venueTransitionalFromTo
 				(
 					universe.venueCurrent, venueNext
 				);
-				universe.venueNext = venueNext;
+				universe.venueNext = venueNext2;
 			};
 
 			var buttonResume = ControlButton.from8
@@ -695,14 +696,29 @@ public class ControlBuilder
 
 			returnValue.children.add(buttonResume);
 
-			returnValue.actions.add(new ActorAction("Back", back));
+			returnValue.actions = Arrays.asList
+			(
+				returnValue.actions
+			).add
+			(
+				new ActorAction("Back", back)
+			).toArray
+			(
+				new ActorAction[] {}
+			);
 
-			returnValue._actionToInputsMappings.add
+			returnValue._actionToInputsMappings = Arrays.asList
+			(
+				returnValue._actionToInputsMappings
+			).add
 			(
 				new ActionToInputsMapping
 				(
 					"Back", new String[] { "Escape" }, true
 				)
+			).toArray
+			(
+				new ActionToInputsMapping[] {}
 			);
 		}
 
@@ -978,12 +994,12 @@ public class ControlBuilder
 		Universe universe,
 		Coords size,
 		DataBinding<Object, String> message,
-		Runnable acknowledge,
+		Consumer<UniverseWorldPlaceEntities> acknowledge,
 		boolean showMessageOnly
 	)
 	{
 		var optionNames = new ArrayList<String>();
-		var optionFunctions = new Runnable[] {};
+		var  optionFunctions = new ArrayList<Consumer<UniverseWorldPlaceEntities>>();
 
 		if (acknowledge != null)
 		{
@@ -995,7 +1011,8 @@ public class ControlBuilder
 		(
 			universe, size, message,
 			optionNames.toArray(new String[] {}),
-			optionFunctions, showMessageOnly
+			optionFunctions,
+			showMessageOnly
 		);
 	}
 
@@ -1316,13 +1333,13 @@ public class ControlBuilder
 						var platformHelper = universe.platformHelper;
 						platformHelper.platformableRemove(display);
 						display.sizeInPixels = displaySizeSpecified;
-						display.canvas = null; // hack
+						//display.canvas = null; // hack
 						display.initialize(universe);
-						platformHelper.initialize(universe);
+						platformHelper.initialize();
 
 						var venueNext = universe.controlBuilder.settings
 						(
-							universe, null, universe.venueCurrent
+							universe, null, (VenueControls)(universe.venueCurrent)
 						).toVenue();
 						venueNext = controlBuilder.venueTransitionalFromTo
 						(
@@ -1402,7 +1419,7 @@ public class ControlBuilder
 
 		var controlsForSlides = new ArrayList<Object>();
 
-		var nextDefn = (double slideIndexNext) -> // click
+		Consumer<double> nextDefn = (Double slideIndexNext) -> // click
 		{
 			var venueNext;
 			if (slideIndexNext < controlsForSlides.length)
@@ -1421,7 +1438,7 @@ public class ControlBuilder
 			universe.venueNext = venueNext;
 		};
 
-		var skip = () ->
+		Runnable skip = () ->
 		{
 			universe.venueNext = controlBuilder.venueTransitionalFromTo
 			(

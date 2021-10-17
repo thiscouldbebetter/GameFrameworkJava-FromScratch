@@ -1,20 +1,88 @@
 
 package GameFramework.Media;
 
-import GameFramework.Utility.*;
+import GameFramework.Model.*;
 
-public class Sound implements MediaLibraryItem, Namable
+public class Sound
 {
-	public String id;
-	public String filePath;
+	public String name;
+	public String sourcePath;
 
-	public Sound(String id, String filePath)
-	{}
+	public double offsetInSeconds;
+	public boolean isRepeating;
 
-	// Namable.
+	// public any domElement;
 
-	public String name()
+	public Sound(String name, String sourcePath)
 	{
-		return this.id;
+		this.name = name;
+		this.sourcePath = sourcePath;
+
+		this.offsetInSeconds = 0;
 	}
+
+	/*
+	domElementBuild(Universe universe, number volume): any
+	{
+		this.domElement = document.createElement("audio");
+		this.domElement.sound = this;
+		this.domElement.autoplay = true;
+		this.domElement.onended = this.stopOrRepeat.bind(this, universe);
+		this.domElement.loop = this.isRepeating;
+		this.domElement.volume = volume;
+
+		var domElementForSoundSource = document.createElement("source");
+		domElementForSoundSource.src = this.sourcePath;
+
+		this.domElement.appendChild
+		(
+			domElementForSoundSource
+		);
+
+		return this.domElement;
+	}
+	*/
+
+	public void pause(Universe universe)
+	{
+		var offsetInSeconds = this.domElement.currentTime;
+		this.stop(universe);
+		this.offsetInSeconds = offsetInSeconds;
+	}
+
+	public void play(Universe universe, number volume)
+	{
+		this.domElementBuild(universe, volume);
+		this.domElement.currentTime = this.offsetInSeconds;
+
+		universe.platformHelper.platformableAdd(this);
+	}
+
+	public void reset()
+	{
+		this.offsetInSeconds = 0;
+	}
+
+	public void stop(Universe universe)
+	{
+		universe.platformHelper.platformableRemove(this);
+		this.offsetInSeconds = 0;
+	}
+
+	public void stopOrRepeat(Universe universe)
+	{
+		if (this.isRepeating == false)
+		{
+			this.stop(universe);
+		}
+	}
+
+	// platformable
+
+	/*
+	toDomElement(): any
+	{
+		return this.domElement;
+	}
+	*/
 }

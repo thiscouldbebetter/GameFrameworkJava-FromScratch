@@ -16,6 +16,7 @@ public interface Display
 	double fontHeightInPixels();
 	String fontName();
 	Coords sizeInPixels();
+	void sizeInPixelsSet();
 	Coords sizeInPixelsHalf();
 	Coords[] sizesAvailable();
 

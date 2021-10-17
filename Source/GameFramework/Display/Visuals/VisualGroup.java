@@ -1,8 +1,12 @@
 
 package GameFramework.Display.Visuals;
 
+import java.util.stream.*;
+
 import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public class VisualGroup implements Visual
 {
@@ -31,7 +35,7 @@ public class VisualGroup implements Visual
 
 	public Visual overwriteWith(Visual other)
 	{
-		var otherAsVisualGroup = other as VisualGroup;
+		var otherAsVisualGroup = (VisualGroup)other;
 		ArrayHelper.overwriteWith(this.children, otherAsVisualGroup.children);
 		return this;
 	}
@@ -40,7 +44,7 @@ public class VisualGroup implements Visual
 
 	public Transformable transform(Transform transformToApply)
 	{
-		this.children.forEach(x => transformToApply.transform(x));
+		this.children.stream().forEach(x -> transformToApply.transform(x));
 		return this;
 	}
 }

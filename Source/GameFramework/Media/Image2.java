@@ -17,4 +17,14 @@ public class Image2 implements MediaLibraryItem, Namable
 	{
 		return this.id;
 	}
+
+	public void load()
+	{
+		// todo
+	}
+
+	public void unload()
+	{
+		// todo
+	}
 }

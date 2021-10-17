@@ -137,30 +137,28 @@ public class InputHelper
 		}
 	}
 
+	public boolean isMouseClicked()
+	{
+		var inputNameMouseClick = Input.Names().MouseClick;
+		var inputPressed = this.inputsPressedByName.get(inputNameMouseClick);
+		var returnValue = (inputPressed != null && inputPressed.isActive);
+		return returnValue;
+	}
+
 	public boolean isMouseClicked(boolean value)
 	{
 		var returnValue = false;
 
 		var inputNameMouseClick = Input.Names().MouseClick;
 
-		if (value == null)
+		if (value == true)
 		{
-			var inputPressed = this.inputsPressedByName.get(inputNameMouseClick);
-			returnValue = (inputPressed != null && inputPressed.isActive);
+			this.inputAdd(inputNameMouseClick);
 		}
 		else
 		{
-			if (value == true)
-			{
-				this.inputAdd(inputNameMouseClick);
-			}
-			else
-			{
-				this.inputRemove(inputNameMouseClick);
-			}
+			this.inputRemove(inputNameMouseClick);
 		}
-
-		return returnValue;
 	}
 
 	public void updateForTimerTick(Universe universe)
@@ -250,7 +248,7 @@ public class InputHelper
 		{
 			inputPressed = "__";
 		}
-		else if (inputPressed >= "0" && inputPressed <= "9")
+		else if (inputPressed.compareTo("0") >= 0 && inputPressed.compareTo("9") <= 0)
 		{
 			inputPressed = "_" + inputPressed;
 		}

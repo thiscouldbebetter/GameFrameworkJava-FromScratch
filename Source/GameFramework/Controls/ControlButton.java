@@ -45,7 +45,7 @@ public class ControlButton extends ControlBase
 		this._sizeHalf = Coords.create();
 	}
 
-	public static ControlButton from8
+	public static <T> ControlButton from8
 	(
 		String name,
 		Coords pos,
@@ -53,7 +53,7 @@ public class ControlButton extends ControlBase
 		String text,
 		double fontHeightInPixels,
 		boolean hasBorder,
-		DataBinding<Object,Boolean> isEnabled,
+		DataBinding<T,Boolean> isEnabled,
 		Runnable click
 	)
 	{

@@ -4,6 +4,8 @@ package GameFramework.Controls;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
+import GameFramework.Input.*;
+import GameFramework.Model.*;
 
 public class ControlTextBox extends ControlBase
 {
@@ -93,7 +95,7 @@ public class ControlTextBox extends ControlBase
 			var charAtCursor =
 			(
 				this.cursorPos < text.length()
-				? text.charAt(this.cursorPos)
+				? text[this.cursorPos]
 				: "A".charAt(0) - 1
 			);
 
@@ -125,7 +127,7 @@ public class ControlTextBox extends ControlBase
 
 			this.text(textEdited, null);
 		}
-		else if (actionNameToHandle.length == 1 || actionNameToHandle.startsWith("_") ) // printable character
+		else if (actionNameToHandle.length() == 1 || actionNameToHandle.startsWith("_") ) // printable character
 		{
 			if (actionNameToHandle.startsWith("_"))
 			{
@@ -141,7 +143,7 @@ public class ControlTextBox extends ControlBase
 
 			if
 			(
-				this.numberOfCharsMax == null
+				this.numberOfCharsMax == 0 // 0 = infinity
 				|| text.length() < this.numberOfCharsMax
 			)
 			{
@@ -165,7 +167,7 @@ public class ControlTextBox extends ControlBase
 	public void focusGain()
 	{
 		this.isHighlighted = true;
-		this.cursorPos = this.text(null, null).length;
+		this.cursorPos = this.text().length;
 	}
 
 	public void focusLose()
@@ -184,7 +186,7 @@ public class ControlTextBox extends ControlBase
 		var parent = this.parent;
 		var parentAsContainer = (ControlContainer)parent;
 		parentAsContainer.indexOfChildWithFocus =
-			parentAsContainer.children.indexOf(this);
+			Arrays.asList(parentAsContainer.children).indexOf(this);
 		this.isHighlighted = true;
 		return true;
 	}
@@ -204,7 +206,7 @@ public class ControlTextBox extends ControlBase
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
 		var style = this.style(universe);
 
-		var text = this.text(null, null);
+		var text = this.text();
 
 		display.drawRectangle
 		(

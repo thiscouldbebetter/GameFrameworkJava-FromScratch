@@ -3,6 +3,7 @@ package GameFramework.Controls;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class ControlSelect extends ControlBase
 {

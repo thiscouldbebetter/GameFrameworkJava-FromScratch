@@ -2,49 +2,30 @@
 package GameFramework.Display.Visuals;
 
 import GameFramework.Display.*;
-import GameFramework.Geometry.*;
-import GameFramework.Geometry.Transforms.*;
-import GameFramework.Media.*;
 import GameFramework.Model.*;
 
-public class VisualImageFromLibrary implements VisualImage
+public class VisualImageImmediate implements VisualImage
 {
-	public String imageName;
+	public Image2 _image;
+	public boolean isScaled;
 
 	private Coords _drawPos;
 
-	public VisualImageFromLibrary(String imageName)
+	public VisualImageImmediate(Image2 image, boolean isScaled)
 	{
-		this.imageName = imageName;
+		this._image = image;
+		this.isScaled = isScaled;
 
 		// Helper variables.
+
 		this._drawPos = Coords.create();
-	}
-
-	// static methods
-
-	public static VisualImageFromLibrary[] manyFromImages
-	(
-		Image2[] images, Coords imageSizeScaled
-	)
-	{
-		var returnValues = new VisualImageFromLibrary[images.length];
-
-		for (var i = 0; i < images.length; i++)
-		{
-			var image = images[i];
-			var visual = new VisualImageFromLibrary(image.name);
-			returnValues[i] = visual;
-		}
-
-		return returnValues;
 	}
 
 	// instance methods
 
 	public Image2 image(Universe universe)
 	{
-		return universe.mediaLibrary.imageGetByName(this.imageName);
+		return this._image;
 	}
 
 	public Coords sizeInPixels(Universe universe)
@@ -58,13 +39,21 @@ public class VisualImageFromLibrary implements VisualImage
 	{
 		var universe = uwpe.universe;
 		var entity = uwpe.entity;
+
 		var image = this.image(universe);
 		var imageSize = image.sizeInPixels;
 		var drawPos = this._drawPos.clear().subtract(imageSize).half().add
 		(
 			entity.locatable().loc.pos
 		);
-		display.drawImageScaled(image, drawPos, imageSize);
+		if (this.isScaled)
+		{
+			display.drawImageScaled(image, drawPos, imageSize);
+		}
+		else
+		{
+			display.drawImage(image, drawPos);
+		}
 	}
 
 	// Clonable.

@@ -37,7 +37,7 @@ public class ByteStreamFromBytes implements ByteStream
 		return byteRead;
 	}
 
-	public List<Integer> readBytes(int byteCount)
+	public int[] readBytes(int byteCount)
 	{
 		var bytesRead = new ArrayList<Integer>();
 		for (var i = 0; i < byteCount; i++)
@@ -45,7 +45,7 @@ public class ByteStreamFromBytes implements ByteStream
 			var byteRead = this.readByte();
 			bytesRead.add(byteRead);
 		}
-		return bytesRead;
+		return (int[])( bytesRead.toArray(new int[] {}) );
 	}
 
 	public String readStringOfLength(int lengthOfString)
@@ -68,13 +68,13 @@ public class ByteStreamFromBytes implements ByteStream
 
 	public void writeByte(int byteToWrite)
 	{
-		this.bytes[this.byteIndexCurrent] = byteToWrite;
+		this.bytes.set(this.byteIndexCurrent, byteToWrite);
 		this.byteIndexCurrent++;
 	}
 
 	public void writeBytes(int[] bytesToWrite)
 	{
-		bytesToWrite.stream().forEach(x -> this.writeByte(x));
+		Arrays.asList(bytesToWrite).stream().forEach(x -> this.writeByte(x));
 	}
 
 	public void writeStringPaddedToLength(String stringToWrite, int lengthPadded)

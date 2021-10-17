@@ -33,7 +33,7 @@ public class ShapeHelper
 		Transforms.applyTransformToCoordsMObject
 		(
 			this._transformLocate,
-			((Object)(shape)).coordsGroupToTranslate()
+			shape.coordsGroupToTranslate()
 		);
 
 		return shape;

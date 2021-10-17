@@ -27,7 +27,7 @@ public class VisualNone implements Visual
 
 	// Transformable.
 
-	public void transform(Transform transformToApply)
+	public Transformable transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

@@ -14,6 +14,6 @@ Running
 
 Open a command prompt in the Source directory, and run these commands:
 
-> javac *.java
+> javac -sourcepath . GameFramework/GameFramework.java
 
-> java GameFrameworkDemo
+> java GameFramework/GameFramework

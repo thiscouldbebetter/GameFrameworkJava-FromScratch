@@ -4,7 +4,9 @@ package GameFramework.Controls;
 import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transform.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Places.*;
 
 public class ControlVisual extends ControlBase
 {

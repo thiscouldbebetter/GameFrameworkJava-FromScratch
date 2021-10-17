@@ -4,9 +4,11 @@ package GameFramework.Profiles;
 import java.util.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Media.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public class Profile
 {
@@ -144,7 +146,7 @@ public class Profile
 			}
 		};
 
-		var saveToLocalStorage = (SaveState saveState) ->
+		Consumer<SaveState> saveToLocalStorage = (SaveState saveState) ->
 		{
 			var profile = universe.profile;
 			var world = universe.world;
@@ -196,13 +198,13 @@ public class Profile
 				if (profile.saveStates.some(x -> x.name == saveStateName) == false)
 				{
 					saveState.unload();
-					profile.saveStates.push(saveState);
+					profile.saveStates.add(saveState);
 					storageHelper.save(profile.name, profile);
 				}
 				var profileNames = storageHelper.load("ProfileNames");
-				if (profileNames.indexOf(profile.name) == -1)
+				if (Arrays.asList(profileNames.indexOf(profile.name)) == -1)
 				{
-					profileNames.push(profile.name);
+					profileNames.add(profile.name);
 					storageHelper.save("ProfileNames", profileNames);
 				}
 
@@ -216,7 +218,7 @@ public class Profile
 			return wasSaveSuccessful;
 		};
 
-		var saveToLocalStorageDone = (boolean wasSaveSuccessful) ->
+		Consumer<Boolean> saveToLocalStorageDone = (boolean wasSaveSuccessful) ->
 		{
 			var message =
 			(
@@ -253,7 +255,7 @@ public class Profile
 			universe.venueNext = venueNext;
 		};
 
-		var saveToLocalStorageAsNewSlot = () ->
+		Runnable saveToLocalStorageAsNewSlot = () ->
 		{
 			var messageAsDataBinding = DataBinding.fromContextAndGet
 			(
@@ -493,7 +495,7 @@ public class Profile
 					"labelProfileName",
 					Coords.fromXY(100, 10), // pos
 					Coords.fromXY(120, fontHeight), // size
-					true, // isTextCentered
+					DataBinding.fromTrue(), // isTextCentered
 					"Profile: " + universe.profile.name,
 					fontHeight
 				),
@@ -555,7 +557,7 @@ public class Profile
 					"New",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isTextCentered
 					(isLoadNotSave ? loadNewWorld : saveToLocalStorageAsNewSlot) // click
 				),
 
@@ -817,7 +819,7 @@ public class Profile
 							((ControlContainer)(venueControls.controlRoot));
 						var textBoxName =
 							(ControlTextBox)(controlRootAsContainer.childrenByName.get("textBoxName"));
-						var profileName = textBoxName.text(null, universe);
+						var profileName = textBoxName.text();
 						if (profileName == "")
 						{
 							return;
@@ -900,7 +902,7 @@ public class Profile
 		}
 		var profiles = profileNames.map(x -> storageHelper.load(x));
 
-		var create = () ->
+		Runnable create = () ->
 		{
 			universe.profile = new Profile("", null);
 			Venue venueNext = Profile.toControlProfileNew(universe, null).toVenue();
@@ -908,13 +910,13 @@ public class Profile
 			universe.venueNext = venueNext;
 		};
 
-		var select = () ->
+		Runnable select = () ->
 		{
 			VenueControls venueControls = universe.venueCurrent;
-			ControlContainer controlRootAsContainer = venueControls.controlRoot;
-			ControlList listProfiles =
-				controlRootAsContainer.childrenByName.get("listProfiles");
-			var profileSelected = listProfiles.itemSelected(null);
+			var controlRootAsContainer = (ControlContainer)(venueControls.controlRoot);
+			var listProfiles =
+				(ControlList)(controlRootAsContainer.childrenByName.get("listProfiles"));
+			var profileSelected = (Profile)(listProfiles.itemSelected());
 			universe.profile = profileSelected;
 			if (profileSelected != null)
 			{
@@ -1100,9 +1102,9 @@ public class Profile
 		(
 			venueMessage,
 			() -> universe.worldCreate(), // perform
-			(Universe universe, World world) -> // done
+			(Universe universe2, World world) -> // done
 			{
-				universe.world = world;
+				universe2.world = world;
 
 				var profile = Profile.anonymous();
 				universe.profile = profile;

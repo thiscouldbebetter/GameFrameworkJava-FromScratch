@@ -16,7 +16,7 @@ public class ControlList extends ControlBase
 	public DataBinding<Object,Object> bindingForItemSelected;
 	public DataBinding<Object,Object> bindingForItemValue;
 	public DataBinding<Object,Boolean> bindingForIsEnabled;
-	public Consumer<Universe> confirm;
+	public Consumer<Universe> _confirm;
 	public double widthInItems;
 
 	public boolean isHighlighted;
@@ -51,7 +51,7 @@ public class ControlList extends ControlBase
 		this.bindingForItemValue = bindingForItemValue;
 		this.bindingForIsEnabled =
 			(bindingForIsEnabled != null ? bindingForIsEnabled : DataBinding.fromTrue());
-		this.confirm = confirm;
+		this._confirm = confirm;
 		this.widthInItems = (widthInItems != null ? widthInItems : 1);
 
 		var itemSpacingY = 1.2 * this.fontHeightInPixels; // hack
@@ -92,7 +92,8 @@ public class ControlList extends ControlBase
 			null, // bindingForItemSelected,
 			null, // bindingForItemValue,
 			DataBinding.fromTrue(), // isEnabled
-			null, null
+			null, // confirm
+			1 // widthInItems
 		);
 
 		return returnValue;
@@ -117,7 +118,8 @@ public class ControlList extends ControlBase
 			null, // bindingForItemSelected,
 			null, // bindingForItemValue,
 			DataBinding.fromTrue(), // isEnabled
-			null, null
+			null, // confirm
+			1 // widthInItems
 		);
 
 		return returnValue;
@@ -136,7 +138,11 @@ public class ControlList extends ControlBase
 		return new ControlList
 		(
 			name, pos, size, items, bindingForItemText, fontHeightInPixels,
-			null, null, null, null, null
+			null, // bindingForItemSelected
+			null, // bindingForItemValue
+			DataBinding.fromTrue(), // isEnabled
+			null, // confirm
+			1 // widthInItems
 		);
 	}
 
@@ -154,7 +160,11 @@ public class ControlList extends ControlBase
 		return new ControlList
 		(
 			name, pos, size, items, bindingForItemText, fontHeightInPixels,
-			bindingForItemSelected, null, null, null, null
+			bindingForItemSelected,
+			null, // bindingForItemValue
+			DataBinding.fromTrue(), // isEnabled
+			null, // confirm
+			1 // widthInItems
 		);
 	}
 
@@ -173,7 +183,10 @@ public class ControlList extends ControlBase
 		return new ControlList
 		(
 			name, pos, size, items, bindingForItemText, fontHeightInPixels,
-			bindingForItemSelected, bindingForItemValue, null, null, null
+			bindingForItemSelected, bindingForItemValue,
+			DataBinding.fromTrue(),
+			null, // confirm
+			1 // widthInItems
 		);
 	}
 
@@ -194,7 +207,8 @@ public class ControlList extends ControlBase
 		(
 			name, pos, size, items, bindingForItemText, fontHeightInPixels,
 			bindingForItemSelected, bindingForItemValue, bindingForIsEnabled,
-			null, null
+			null, // confirm
+			1 // widthInItems
 		);
 	}
 
@@ -216,7 +230,8 @@ public class ControlList extends ControlBase
 		(
 			name, pos, size, items, bindingForItemText, fontHeightInPixels,
 			bindingForItemSelected, bindingForItemValue, bindingForIsEnabled,
-			confirm, null
+			confirm,
+			1 // widthInItems
 		);
 	}
 
@@ -243,6 +258,11 @@ public class ControlList extends ControlBase
 			}
 		}
 		return wasActionHandled;
+	}
+
+	public void confirm(Universe u)
+	{
+		return this._confirm.accept(u);
 	}
 
 	public int indexOfFirstItemVisible()
@@ -347,7 +367,7 @@ public class ControlList extends ControlBase
 		var items = this.items();
 		var numberOfItems = items.length;
 
-		var indexOfItemSelected = this.indexOfItemSelected(null);
+		var indexOfItemSelected = this.indexOfItemSelected();
 
 		if (indexOfItemSelected == null)
 		{
@@ -380,7 +400,7 @@ public class ControlList extends ControlBase
 		var indexOfFirstItemVisible = this.indexOfFirstItemVisible();
 		var indexOfLastItemVisible = this.indexOfLastItemVisible();
 
-		var indexOfItemSelected = this.indexOfItemSelected(null);
+		var indexOfItemSelected = this.indexOfItemSelected();
 		if (indexOfItemSelected < indexOfFirstItemVisible)
 		{
 			this.scrollbar.scrollUp();
@@ -443,13 +463,10 @@ public class ControlList extends ControlBase
 			var items = this.items();
 			if (indexOfItemClicked < items.length)
 			{
-				var indexOfItemSelectedOld = this.indexOfItemSelected(null);
+				var indexOfItemSelectedOld = this.indexOfItemSelected();
 				if (indexOfItemClicked == indexOfItemSelectedOld)
 				{
-					if (this.confirm != null)
-					{
-						this.confirm(); // todo
-					}
+					this.confirm(); // todo
 				}
 				else
 				{
@@ -489,7 +506,7 @@ public class ControlList extends ControlBase
 		drawLoc = this._drawLoc.overwriteWith(drawLoc);
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
 
-		var style = (style != null ? style : this.style(universe) );
+		style = (style != null ? style : this.style(universe) );
 		var colorFore = (this.isHighlighted ? style.colorFill : style.colorBorder);
 		var colorBack = (this.isHighlighted ? style.colorBorder : style.colorFill);
 
@@ -573,7 +590,7 @@ public class ControlList extends ControlBase
 				drawPos2,
 				colorFore,
 				colorBack,
-				(i == this.indexOfItemSelected(null)), // areColorsReversed
+				(i == this.indexOfItemSelected()), // areColorsReversed
 				false, // isCentered
 				this.size.x // widthMaxInPixels
 			);

@@ -3,12 +3,14 @@ package GameFramework.Controls;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public class ControlScrollbar extends ControlBase
 {
 	public double itemHeight;
-	private Object _items;
+	private DataBinding<Object,Object[]> _items;
 	private int _sliderPosInItems;
 
 	public ControlButton buttonScrollDown;
@@ -24,7 +26,7 @@ public class ControlScrollbar extends ControlBase
 		Coords size,
 		double fontHeightInPixels,
 		double itemHeight,
-		Object items,
+		DataBinding<Object,Object[]> items,
 		double sliderPosInItems
 	)
 	{
@@ -45,7 +47,7 @@ public class ControlScrollbar extends ControlBase
 			"-", // text
 			this.fontHeightInPixels,
 			true, // hasBorder
-			true, // isEnabled
+			DataBinding.fromTrue(), // isEnabled
 			() -> this.scrollUp() // click
 		);
 
@@ -57,7 +59,7 @@ public class ControlScrollbar extends ControlBase
 			"+", // text
 			this.fontHeightInPixels,
 			true, // hasBorder
-			true, // isEnabled
+			DataBinding.fromTrue(), // hasBorder
 			() -> this.scrollDown() // click
 		);
 
@@ -75,9 +77,9 @@ public class ControlScrollbar extends ControlBase
 		return (this.windowSizeInItems < this.items().length);
 	}
 
-	public Object items()
+	public Object[] items()
 	{
-		return (this._items.get == null ? this._items : this._items.get());
+		return this._items.get();
 	}
 
 	public boolean mouseClick(Coords pos)
@@ -172,12 +174,12 @@ public class ControlScrollbar extends ControlBase
 	{
 		if (this.isVisible())
 		{
-			style = style || this.style(universe);
+			style = (style != null ? style : this.style(universe) );
 			var colorFore = (this.isHighlighted ? style.colorFill : style.colorBorder);
 			var colorBack = (this.isHighlighted ? style.colorBorder : style.colorFill);
 
 			var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
-			display.drawRectangle(drawPos, this.size, colorFore, null, null);
+			display.drawRectangle(drawPos, this.size, colorFore, null, false);
 
 			drawLoc.pos.add(this.pos);
 			this.buttonScrollDown.draw(universe, display, drawLoc, style);
@@ -190,7 +192,7 @@ public class ControlScrollbar extends ControlBase
 			(
 				sliderPosInPixels, sliderSizeInPixels,
 				colorBack, colorFore,
-				null
+				false // areColorsReversed
 			);
 		}
 	}

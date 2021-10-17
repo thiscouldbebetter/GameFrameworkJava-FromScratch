@@ -15,7 +15,7 @@ public class RandomizerSystem implements Randomizer
 		return RandomizerSystem._instance;
 	}
 
-	public void getNextRandom()
+	public double getNextRandom()
 	{
 		return Math.random();
 	}
