@@ -4,6 +4,7 @@ package GameFramework.Model.Items;
 import java.util.function.*;
 
 import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
 
 public class ItemDefn implements EntityProperty

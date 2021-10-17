@@ -11,16 +11,9 @@ import GameFramework.Utility.*;
 
 public interface Display
 {
+	void clear();
 	Color colorBack();
 	Color colorFore();
-	double fontHeightInPixels();
-	String fontName();
-	Coords sizeInPixels();
-	void sizeInPixelsSet();
-	Coords sizeInPixelsHalf();
-	Coords[] sizesAvailable();
-
-	void clear();
 	Display displayToUse();
 	void drawArc
 	(
@@ -88,6 +81,8 @@ public interface Display
 		double angleStopInTurns, Color colorFill, Color colorBorder
 	);
 	void eraseModeSet(boolean value);
+	double fontHeightInPixels();
+	String fontName();
 	void fontSet(String fontName, double fontHeightInPixels);
 	void flush();
 	void hide(Universe universe);
@@ -97,6 +92,10 @@ public interface Display
 		double turnsToRotate, Coords centerOfRotation
 	);
 	Coords sizeDefault();
+	Coords sizeInPixels();
+	void sizeInPixelsSet(Coords value);
+	Coords sizeInPixelsHalf();
+	Coords[] sizesAvailable();
 	Coords scaleFactor();
 	void stateRestore();
 	void stateSave();

@@ -140,7 +140,7 @@ public class Mesh implements ShapeBase
 				}
 				else
 				{
-					vertexIndicesTopOrBottom.splice(0, 0, vertexIndex);
+					vertexIndicesTopOrBottom.insert(0, vertexIndex);
 				}
 
 				var vertex = faceVertices[v].clone().add
@@ -153,7 +153,7 @@ public class Mesh implements ShapeBase
 
 			var faceBuilderTopOrBottom = new FaceBuilder
 			(
-				vertexIndicesTopOrBottom
+				vertexIndicesTopOrBottom.toArray(new int[] {})
 			);
 			faceBuilders.add(faceBuilderTopOrBottom);
 		}

@@ -1,6 +1,7 @@
 
 package GameFramework.Display;
 
+import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
 
 public class Drawable implements Clonable<Drawable>, EntityProperty

@@ -93,10 +93,10 @@ public class TarFile
 				var entryNext = entries[i + 1];
 				entryNext.header.fileName = entry.dataAsBytes.reduce
 				(
-					(a, b) => a += String.fromCharCode(b),
+					(a, b) -> a += String.fromCharCode(b),
 					""
 				);
-				entries.splice(i, 1);
+				entries.remove(i);
 				i--;
 			}
 		}
@@ -183,7 +183,7 @@ public class TarFile
 				entryContainingLongPathToPrepend.header.checksumCalculate();
 				entryHeader.fileName =
 					entryFileName.substring(0, maxLength) + String.fromCharCode(0);
-				entries.splice(i, 0, entryContainingLongPathToPrepend);
+				entries.insert(i, entryContainingLongPathToPrepend);
 				i++;
 			}
 		}

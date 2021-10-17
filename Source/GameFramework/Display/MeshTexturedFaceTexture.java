@@ -3,6 +3,7 @@ package GameFramework.Display;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helpers.*;
 import GameFramework.Utility.*;
 
 public class MeshTexturedFaceTexture implements Clonable<MeshTexturedFaceTexture>

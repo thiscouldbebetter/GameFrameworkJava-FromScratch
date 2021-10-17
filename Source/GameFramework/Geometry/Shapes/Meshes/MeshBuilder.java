@@ -703,7 +703,7 @@ public class MeshBuilder
 
 			vertices.add(vertex);
 
-			vertexIndicesForFace.splice(0, 0, i);
+			vertexIndicesForFace.insert(0, i);
 		}
 
 		var returnMesh = new Mesh

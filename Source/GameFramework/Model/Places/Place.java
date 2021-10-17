@@ -7,6 +7,7 @@ import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Collisions.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
@@ -101,9 +102,9 @@ public class Place implements Namable
 
 	public void entitiesRemove()
 	{
-		for (var i = 0; i < this.entitiesToRemove.length; i++)
+		for (var i = 0; i < this.entitiesToRemove.size(); i++)
 		{
-			var entity = this.entitiesToRemove[i];
+			var entity = this.entitiesToRemove.get(i);
 			this.entityRemove(entity);
 		}
 		this.entitiesToRemove.clear();
@@ -111,20 +112,20 @@ public class Place implements Namable
 
 	public void entitiesToRemoveAdd(Entity[] entitiesToRemove)
 	{
-		this.entitiesToRemove.addAll(entitiesToRemove);
+		this.entitiesToRemove.addAll(Arrays.asList(entitiesToRemove));
 	}
 
 	public void entitiesToSpawnAdd(Entity entitiesToSpawn[])
 	{
-		this.entitiesToSpawn.addAll(entitiesToSpawn);
+		this.entitiesToSpawn.addAll(Arrays.asList(entitiesToSpawn));
 	}
 
 	public void entitiesSpawn(UniverseWorldPlaceEntities uwpe)
 	{
 		uwpe.place = this;
-		for (var i = 0; i < this.entitiesToSpawn.length; i++)
+		for (var i = 0; i < this.entitiesToSpawn.size(); i++)
 		{
-			var entity = this.entitiesToSpawn[i];
+			var entity = this.entitiesToSpawn.get(i);
 			uwpe.entity = entity;
 			this.entitySpawn(uwpe);
 		}
@@ -148,14 +149,14 @@ public class Place implements Namable
 		for (var p = 0; p < entityProperties.length; p++)
 		{
 			var property = entityProperties[p];
-			var propertyName = property.constructor.name;
+			var propertyName = property.getClass().getName();
 			var entitiesWithProperty =
 				this.entitiesByPropertyName(propertyName);
 			ArrayHelper.remove(entitiesWithProperty, entity);
 		}
 		ArrayHelper.remove(this.entities, entity);
-		this.entitiesById.delete(entity.id);
-		this.entitiesByName.delete(entity.name);
+		this.entitiesById.remove(entity.id);
+		this.entitiesByName.remove(entity.name);
 	}
 
 	public void entitySpawn(UniverseWorldPlaceEntities uwpe)
@@ -182,9 +183,9 @@ public class Place implements Namable
 		for (var i = 0; i < entityProperties.length; i++)
 		{
 			var property = entityProperties[i];
-			var propertyName = property.constructor.name;
+			var propertyName = property.getClass().getName();
 			var entitiesWithProperty = this.entitiesByPropertyName(propertyName);
-			entitiesWithProperty.push(entity);
+			entitiesWithProperty.add(entity);
 		}
 
 		entity.initialize(uwpe);
@@ -200,12 +201,12 @@ public class Place implements Namable
 
 	public void entityToRemoveAdd(Entity entityToRemove)
 	{
-		this.entitiesToRemove.push(entityToRemove);
+		this.entitiesToRemove.add(entityToRemove);
 	}
 
 	public void entityToSpawnAdd(Entity entityToSpawn)
 	{
-		this.entitiesToSpawn.push(entityToSpawn);
+		this.entitiesToSpawn.add(entityToSpawn);
 	}
 
 	public void finalize(UniverseWorldPlaceEntities uwpe)
@@ -214,9 +215,9 @@ public class Place implements Namable
 		var universe = uwpe.universe;
 		this.entitiesRemove();
 		universe.inputHelper.inputsRemoveAll();
-		for (var i = 0; i < this.entities.length; i++)
+		for (var i = 0; i < this.entities.size(); i++)
 		{
-			var entity = this.entities[i];
+			var entity = this.entities.get(i);
 			entity.finalize(uwpe);
 		}
 	}
@@ -229,9 +230,9 @@ public class Place implements Namable
 		defn.placeInitialize(uwpe);
 		this.entitiesSpawn(uwpe);
 		this.entitiesToSpawn.clear();
-		for (var i = 0; i < this.entities.length; i++)
+		for (var i = 0; i < this.entities.size(); i++)
 		{
-			var entity = this.entities[i];
+			var entity = this.entities.get(i);
 			entity.initialize(uwpe);
 		}
 	}
@@ -276,9 +277,9 @@ public class Place implements Namable
 			var entitiesWithProperty = this.entitiesByPropertyName(propertyName);
 			if (entitiesWithProperty != null)
 			{
-				for (var i = 0; i < entitiesWithProperty.length; i++)
+				for (var i = 0; i < entitiesWithProperty.size(); i++)
 				{
-					var entity = entitiesWithProperty[i];
+					var entity = entitiesWithProperty.get(i);
 					var entityProperty = entity.propertiesByName.get(propertyName);
 					uwpe.entity = entity;
 					entityProperty.updateForTimerTick(uwpe);
@@ -295,7 +296,7 @@ public class Place implements Namable
 		var playerControllable = player.controllable();
 		var returnValue = playerControllable.toControl
 		(
-			universe, universe.display.sizeInPixels, player, null, false
+			universe, universe.display.sizeInPixels(), player, null, false
 		);
 		return returnValue;
 	}
@@ -304,56 +305,54 @@ public class Place implements Namable
 
 	public Entity camera()
 	{
-		return this.entitiesByPropertyName(Camera.name)[0];
+		return this.entitiesByPropertyName(Camera.class.getName()).get(0);
 	}
 
 	public CollisionTracker collisionTracker()
 	{
 		CollisionTracker returnValue = null;
  
-		if (typeof(CollisionTracker) != "undefined")
-		{
-			var collisionTrackerEntity =
-				this.entitiesByPropertyName(CollisionTracker.name)[0];
-			var returnValueAsProperty =
-			(
-				collisionTrackerEntity == null
-				? null
-				: collisionTrackerEntity.propertyByName(CollisionTracker.name)
-			);
-			returnValue = (CollisionTracker)returnValueAsProperty;
-		}
+		var collisionTrackerEntity =
+			this.entitiesByPropertyName(CollisionTracker.class.getName()).get(0);
+		var returnValueAsProperty =
+		(
+			collisionTrackerEntity == null
+			? null
+			: collisionTrackerEntity.propertyByName(CollisionTracker.class.getName())
+		);
+		returnValue = (CollisionTracker)returnValueAsProperty;
+
 		return returnValue;
 	}
 
 	public List<Entity> drawables()
 	{
-		return this.entitiesByPropertyName(Drawable.class.name);
+		return this.entitiesByPropertyName(Drawable.class.getName());
 	}
 
 	public List<Entity> items()
 	{
-		return this.entitiesByPropertyName(Item.class.name);
+		return this.entitiesByPropertyName(Item.class.getName());
 	}
 
 	public List<Entity> loadables()
 	{
-		return this.entitiesByPropertyName(Loadable.class.name);
+		return this.entitiesByPropertyName(Loadable.class.getName());
 	}
 
 	public List<Entity> movables()
 	{
-		return this.entitiesByPropertyName(Movable.class.name);
+		return this.entitiesByPropertyName(Movable.class.getName());
 	}
 
-	public List<Entity> player()
+	public Entity player()
 	{
-		return this.entitiesByPropertyName(Playable.class.name)[0];
+		return this.entitiesByPropertyName(Playable.class.getName()).get(0);
 	}
 
 	public List<Entity> usables()
 	{
-		return this.entitiesByPropertyName(Usable.class.name);
+		return this.entitiesByPropertyName(Usable.class.getName());
 	}
 
 	// Namable.

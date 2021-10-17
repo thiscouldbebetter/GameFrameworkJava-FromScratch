@@ -362,7 +362,7 @@ public class ControlBuilder
 				(
 					confirmThenReturnToVenuePrev, cancelThenReturnToVenuePrev
 				)
-			},
+			),
 			false // showMessageOnly
 		);
 	}
@@ -890,7 +890,8 @@ public class ControlBuilder
 							(
 								(ActionToInputsMapping x) -> (x.actionName == mappingSelected.actionName)
 							)[0];
-							mappingSelected.inputNames = mappingDefault.inputNames.slice();
+							mappingSelected.inputNames =
+								ArrayHelper.clone(mappingDefault.inputNames);
 						}
 					}
 				),

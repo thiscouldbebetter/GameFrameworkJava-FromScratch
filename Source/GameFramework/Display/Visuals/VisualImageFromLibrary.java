@@ -33,7 +33,7 @@ public class VisualImageFromLibrary implements VisualImage
 		for (var i = 0; i < images.length; i++)
 		{
 			var image = images[i];
-			var visual = new VisualImageFromLibrary(image.name);
+			var visual = new VisualImageFromLibrary(image.name());
 			returnValues[i] = visual;
 		}
 

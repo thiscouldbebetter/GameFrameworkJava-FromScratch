@@ -4,6 +4,7 @@ package GameFramework.Controls;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
 public class ControlSelect extends ControlBase
 {
@@ -110,19 +111,12 @@ public class ControlSelect extends ControlBase
 			: this.bindingForOptionValues.contextSet(optionSelected).get()
 		);
 
-		if (this._valueSelected != null && this._valueSelected.constructor.name == DataBinding.name)
-		{
-			this._valueSelected.set(valueToSelect);
-		}
-		else
-		{
-			this._valueSelected = valueToSelect;
-		}
+		this._valueSelected.set(valueToSelect);
 	}
 
 	public Object[] options()
 	{
-		return (this._options.get == null ? this._options : this._options.get() );
+		return this._options.get();
 	}
 
 	public ControlBase scalePosAndSize(Coords scaleFactor)

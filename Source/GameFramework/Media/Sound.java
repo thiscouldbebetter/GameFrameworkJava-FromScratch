@@ -3,7 +3,7 @@ package GameFramework.Media;
 
 import GameFramework.Model.*;
 
-public class Sound
+public class Sound implements Platformable
 {
 	public String name;
 	public String sourcePath;
@@ -45,18 +45,18 @@ public class Sound
 
 	public void pause(Universe universe)
 	{
-		var offsetInSeconds = this.domElement.currentTime;
+		var offsetInSeconds = 0; // todo - Formerly this.domElement.currentTime;
 		this.stop(universe);
 		this.offsetInSeconds = offsetInSeconds;
 	}
 
-	public void play(Universe universe, number volume)
+	public void play(Universe universe, double volume)
 	{
-		this.domElementBuild(universe, volume);
-		this.domElement.currentTime = this.offsetInSeconds;
+		// todo
+		// this.domElementBuild(universe, volume);
+		// this.domElement.currentTime = this.offsetInSeconds;
 
-		universe.platformHelper.platformableAdd(this);
-	}
+		universe.platformHelper.platformableAdd(this);	}
 
 	public void reset()
 	{

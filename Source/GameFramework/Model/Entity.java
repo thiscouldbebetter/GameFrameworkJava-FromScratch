@@ -3,6 +3,8 @@ package GameFramework.Model;
 
 import java.util.*;
 
+import GameFramework.Display.*;
+import GameFramework.Model.Items.*;
 import GameFramework.Model.Physics.*;
 import GameFramework.Model.Places.*;
 
@@ -163,29 +165,29 @@ public class Entity //
 	//public Actor actor() { return (Actor)(this.propertyByName(Actor.class.name) ); }
 	//public Animatable animatable() { return (Animatable2)(this.propertyByName(Animatable2.class.name) ); }
 	//public Audible audible() { return (Audible)(this.propertyByName(Audible.class.name) ); }
-	//public Boundable boundable() { return (Boundable)(this.propertyByName(Boundable.class.name) ); }
-	//public Camera camera() { return (Camera)(this.propertyByName(Camera.class.name) ); }
+	public Boundable boundable() { return (Boundable)(this.propertyByName(Boundable.class.name) ); }
+	public Camera camera() { return (Camera)(this.propertyByName(Camera.class.name) ); }
 	public Collidable collidable() { return (Collidable)(this.propertyByName(Collidable.class.name) ); }
 	//public Constrainable constrainable() { return this.propertyByName(Constrainable.class.name) as Constrainable; }
-	//public Controllable controllable() { return this.propertyByName(Controllable.class.name) as Controllable; }
+	public Controllable controllable() { return (Controllable)(this.propertyByName(Controllable.class.name) ); }
 	//public Damager damager() { return this.propertyByName(Damager.class.name) as Damager; }
 	//public Device device() { return this.propertyByName(Device.class.name) as Device; }
-	//public Drawable drawable() { return this.propertyByName(Drawable.class.name) as Drawable; }
+	public Drawable drawable() { return (Drawable)(this.propertyByName(Drawable.class.name) ); }
 	//public Effectable effectable() { return this.propertyByName(Effectable.class.name) as Effectable; }
 	//public Ephemeral ephemeral() { return this.propertyByName(Ephemeral.class.name) as Ephemeral; }
 	//public EquipmentUser equipmentUser() { return this.propertyByName(EquipmentUser.class.name) as EquipmentUser; }
 	//public Equippable equippable() { return this.propertyByName(Equippable.class.name) as Equippable; }
 	//public Enemy enemy() { return this.propertyByName(Enemy.class.name) as Enemy; }
 	//public ForceField forceField() { return this.propertyByName(ForceField.class.name) as ForceField; }
-	//public Item item() { return this.propertyByName(Item.class.name) as Item; }
+	public Item item() { return (Item)(this.propertyByName(Item.class.name) ); }
 	//public ItemContainer itemContainer() { return this.propertyByName(ItemContainer.class.name) as ItemContainer; }
 	//public ItemCrafter itemCrafter() { return this.propertyByName(ItemCrafter.class.name) as ItemCrafter; }
-	//public ItemDefn itemDefn() { return this.propertyByName(ItemDefn.class.name) as ItemDefn; }
+	public ItemDefn itemDefn() { return (ItemDefn)(this.propertyByName(ItemDefn.class.name) ); }
 	//public ItemHolder itemHolder() { return this.propertyByName(ItemHolder.class.name) as ItemHolder; }
 	//public ItemStore itemStore() { return this.propertyByName(ItemStore.class.name) as ItemStore; }
 	//public JournalKeeper journalKeeper() { return this.propertyByName(JournalKeeper.class.name) as JournalKeeper; }
-	//public Killable killable() { return this.propertyByName(Killable.class.name) as Killable; }
-	//public Loadable loadable() { return this.propertyByName(Loadable.class.name) as Loadable; }
+	public Killable killable() { return (Killable)(this.propertyByName(Killable.class.name) ); }
+	public Loadable loadable() { return (Loadable)(this.propertyByName(Loadable.class.name) ); }
 	public Locatable locatable() { return (Locatable)(this.propertyByName(Locatable.class.name) ); }
 	//public Movable movable() { return this.propertyByName(Movable.class.name) as Movable; }
 	//public Obstacle obstacle() { return this.propertyByName(Obstacle.class.name) as Obstacle; }

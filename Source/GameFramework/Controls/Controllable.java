@@ -1,15 +1,22 @@
 
 package GameFramework.Controls;
 
+import java.util.function.*;
+
 import GameFramework.Model.*;
 
 public class Controllable implements EntityProperty
 {
-	public Object toControl;
+	public Function<UniverseWorldPlaceEntities,ControlBase> _toControl;
 
-	public Controllable(Object toControl)
+	public Controllable(Function<UniverseWorldPlaceEntities,Control> toControl)
 	{
-		this.toControl = toControl;
+		this._toControl = toControl;
+	}
+
+	public ControlBase toControl(UniverseWorldPlaceEntities uwpe)
+	{
+		return this._toControl.apply(uwpe);
 	}
 
 	// EntityProperty.

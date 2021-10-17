@@ -69,7 +69,7 @@ public class DisplayRecorder
 		var framesRecorded = recorder.framesRecordedAsArrayBuffers;
 		while (framesRecorded.length >= recorder.bufferSizeInFrames)
 		{
-			framesRecorded.splice(0, 1);
+			framesRecorded.remove(0);
 		}
 
 		var displayAsImage = display.toImage();

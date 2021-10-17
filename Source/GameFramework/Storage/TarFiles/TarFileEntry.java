@@ -54,13 +54,14 @@ public class TarFileEntry
 			intOfChunksOccupiedByDataEntry
 			* chunkSize;
 
-		var dataAsBytes = reader.readBytes
-		(
-			sizeOfDataEntryInBytesPadded
-		).slice
-		(
-			0, sizeOfDataEntryInBytesUnpadded
-		);
+		var dataAsBytesToTrim =
+			reader.readBytes(sizeOfDataEntryInBytesPadded);
+
+		var dataAsBytes = new int[sizeOfDataEntryInBytesUnpadded];
+		for (var i = 0; i < dataAsBytes.length; i++)
+		{
+			dataAsBytes[i] = dataAsBytesToTrim[i];
+		}
 
 		var entry = new TarFileEntry(header, dataAsBytes);
 

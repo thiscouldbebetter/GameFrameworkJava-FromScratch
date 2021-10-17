@@ -18,7 +18,7 @@ public class VertexGroup implements Clonable<VertexGroup>
 
 	public VertexGroup clone()
 	{
-		return new VertexGroup(this.name, this.vertexIndices.slice());
+		return new VertexGroup(this.name, ArrayHelper.clone(this.vertexIndices));
 	}
 
 	public VertexGroup overwriteWith(VertexGroup other)

@@ -146,7 +146,7 @@ public class MeshTextured
 	{
 		return new MeshTextured
 		(
-			this.geometry.clone(),
+			(Mesh)(this.geometry.clone()),
 			this.materials,
 			ArrayHelper.clone(this.faceTextures),
 			ArrayHelper.clone(this.vertexGroups)

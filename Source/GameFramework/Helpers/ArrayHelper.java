@@ -328,6 +328,18 @@ public class ArrayHelper
 		return arrayToOverwrite;
 	}
 
+	public static <T extends Clonable<T>> T[] overwriteWith(T[] array, T[] other)
+	{
+		for (var i = 0; i < array.length; i++)
+		{
+			var elementThis = list[i];
+			var elementOther = other[i];
+			elementThis.overwriteWith(elementOther);
+		}
+
+		return array;
+	}
+
 	public static <T extends Clonable<T>> List<T> overwriteWith(List<T> list, List<T> other)
 	{
 		for (var i = 0; i < list.size(); i++)
