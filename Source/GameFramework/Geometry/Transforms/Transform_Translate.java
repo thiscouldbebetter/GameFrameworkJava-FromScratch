@@ -20,7 +20,7 @@ public class Transform_Translate implements Transform
 
 	// transform
 
-	public TransformTranslate overwriteWith(Transform other)
+	public Transform_Translate overwriteWith(Transform other)
 	{
 		return this; // todo
 	}

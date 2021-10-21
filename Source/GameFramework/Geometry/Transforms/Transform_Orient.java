@@ -13,7 +13,7 @@ public class Transform_Orient implements Transform
 	{
 		this.orientation = orientation;
 
-		this._components = mew Coords[] { Coords.create(), Coords.create(), Coords.create() };
+		this._components = new Coords[] { Coords.create(), Coords.create(), Coords.create() };
 	}
 
 	public Transform_Orient overwriteWith(Transform other)

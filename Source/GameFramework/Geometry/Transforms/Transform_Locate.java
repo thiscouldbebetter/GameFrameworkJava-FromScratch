@@ -7,8 +7,8 @@ public class Transform_Locate implements Transform
 {
 	public Disposition loc;
 
-	public Transform transformOrient_Orient;
-	public Transform transformTranslate_Translate;
+	public Transform_Orient transformOrient;
+	public Transform_Translate transformTranslate;
 
 	public Transform_Locate(Disposition loc)
 	{

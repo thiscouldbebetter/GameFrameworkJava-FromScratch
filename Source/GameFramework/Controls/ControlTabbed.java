@@ -2,9 +2,11 @@
 package GameFramework.Controls;
 
 import java.util.*;
+import java.util.function.*;
 import java.util.stream.*;
 
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
 public class ControlTabbed extends ControlBase
@@ -14,7 +16,7 @@ public class ControlTabbed extends ControlBase
 	public Map<String,ControlBase> childrenForTabsByName;
 	public Consumer<Universe> cancel;
 
-	private ControlButton[] buttonsForChildren;
+	private List<ControlButton> buttonsForChildren;
 	private int childSelectedIndex;
 	private List<ControlBase> childrenContainingPos;
 	private List<ControlBase> childrenContainingPosPrev;
@@ -42,17 +44,20 @@ public class ControlTabbed extends ControlBase
 		this.cancel = cancel;
 
 		this.childSelectedIndex = 0;
-		this.childrenContainingPos = new Array<ControlBase>();
-		this.childrenContainingPosPrev = new Array<ControlBase>();
+		this.childrenContainingPos = new ArrayList<ControlBase>();
+		this.childrenContainingPosPrev = new ArrayList<ControlBase>();
 		this.isChildSelectedActive = false;
 
 		var marginSize = this.fontHeightInPixels;
 		var tabPaneHeight = marginSize + this.tabButtonSize.y;
-		var buttonsForChildren = new Array<ControlButton>();
+		var buttonsForChildren = new ArrayList<ControlButton>();
 
-		var buttonForTabClick = (ControlButton b) -> // click
+		Consumer<ControlButton> buttonForTabClick = (ControlButton b) -> // click
 		{
-			buttonsForChildren.stream().forEach(x -> x.isHighlighted = false);
+			buttonsForChildren.stream().forEach
+			(
+				x -> x.isHighlighted = false
+			);
 			var buttonIndex = buttonsForChildren.indexOf(b); // hack
 			this.childSelectedIndex = buttonIndex;
 			this.isChildSelectedActive = true;
@@ -80,7 +85,7 @@ public class ControlTabbed extends ControlBase
 				childName, // text
 				this.fontHeightInPixels,
 				true, // hasBorder
-				true, // isEnabled
+				DataBinding.fromTrue(), // isEnabled
 				buttonForTabClick
 			);
 			button.context = button; // hack
@@ -89,24 +94,28 @@ public class ControlTabbed extends ControlBase
 
 		if (this.cancel != null)
 		{
-			this.childrenForTabs.add(null);
+			// this.childrenForTabs.add(null);
 			var button = ControlButton.from8
 			(
 				"buttonCancel",
-				Coords.fromXY(this.size.x - marginSize - this.tabButtonSize.x, marginSize), // pos
+				Coords.fromXY
+				(
+					this.size.x - marginSize - this.tabButtonSize.x,
+					marginSize
+				), // pos
 				this.tabButtonSize.clone(),
 				"Done", // text
 				this.fontHeightInPixels,
 				true, // hasBorder
-				true, // isEnabled
-				this.cancel // click
+				DataBinding.fromTrue, // isEnabled
+				() -> this.cancel.accept(universe) // click
 			);
 			buttonsForChildren.add(button);
 		}
 
 		this.buttonsForChildren = buttonsForChildren;
 
-		this.buttonsForChildren[0].isHighlighted = true;
+		this.buttonsForChildren.get(0).isHighlighted = true;
 
 		// Temporary variables.
 		this._childMax = Coords.create();
@@ -121,7 +130,7 @@ public class ControlTabbed extends ControlBase
 
 	// actions
 
-	actionHandle(String actionNameToHandle, Universe universe): boolean
+	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
 		var wasActionHandled = false;
 
@@ -137,7 +146,7 @@ public class ControlTabbed extends ControlBase
 				childSelected.focusLose();
 				wasActionHandled = true;
 			}
-			else if (childSelected.actionHandle != null)
+			else
 			{
 				wasActionHandled = childSelected.actionHandle(actionNameToHandle, universe);
 			}
@@ -150,7 +159,7 @@ public class ControlTabbed extends ControlBase
 			{
 				if (childSelected == null)
 				{
-					this.cancel(universe);
+					this.cancel.accept(universe);
 				}
 				else
 				{
@@ -175,7 +184,7 @@ public class ControlTabbed extends ControlBase
 			{
 				if (this.cancel != null)
 				{
-					this.cancel(universe);
+					this.cancel.accept(universe);
 				}
 			}
 		}
@@ -187,7 +196,7 @@ public class ControlTabbed extends ControlBase
 	{
 		var returnValue =
 		(
-			this.childSelectedIndex == null
+			this.childSelectedIndex < 0
 			? null
 			: this.childrenForTabs[this.childSelectedIndex]
 		);
@@ -207,7 +216,7 @@ public class ControlTabbed extends ControlBase
 
 			if (isChildNextInRange == false)
 			{
-				this.childSelectedIndex = NumberHelper.wrapToRangeMax
+				this.childSelectedIndex = (int)NumberHelper.wrapToRangeMax
 				(
 					this.childSelectedIndex,
 					this.childrenForTabs.length
@@ -215,7 +224,8 @@ public class ControlTabbed extends ControlBase
 			}
 
 			this.buttonsForChildren.stream().forEach(x -> x.isHighlighted = false);
-			var buttonForChild = this.buttonsForChildren[this.childSelectedIndex];
+			var buttonForChild =
+				this.buttonsForChildren.get(this.childSelectedIndex);
 			buttonForChild.isHighlighted = true;
 
 			var child = this.childrenForTabs[this.childSelectedIndex];
@@ -225,7 +235,7 @@ public class ControlTabbed extends ControlBase
 			}
 			else if
 			(
-				child.focusGain != null && child.isEnabled()
+				child.isEnabled()
 			)
 			{
 				break;
@@ -254,15 +264,15 @@ public class ControlTabbed extends ControlBase
 
 		var childrenActive = new ArrayList<ControlBase>();
 		childrenActive.addAll(this.buttonsForChildren);
-		var childSelectedAsContainer = this.childSelected() as ControlContainer;
+		var childSelectedAsContainer = (ControlContainer)this.childSelected();
 		if (childSelectedAsContainer != null)
 		{
-			childrenActive.push(childSelectedAsContainer);
+			childrenActive.add(childSelectedAsContainer);
 		}
 
-		for (var i = childrenActive.length - 1; i >= 0; i--)
+		for (var i = childrenActive.size() - 1; i >= 0; i--)
 		{
-			var child = childrenActive[i];
+			var child = childrenActive.get(i);
 			if (child != null)
 			{
 				var childMax =
@@ -272,7 +282,7 @@ public class ControlTabbed extends ControlBase
 
 				if (doesChildContainPos)
 				{
-					listToAddTo.push(child);
+					listToAddTo.add(child);
 					if (addFirstChildOnly)
 					{
 						break;
@@ -286,7 +296,7 @@ public class ControlTabbed extends ControlBase
 
 	public void focusGain()
 	{
-		this.childSelectedIndex = null;
+		this.childSelectedIndex = -1;
 		var childSelected = this.childSelectNextInDirection(1);
 		if (childSelected != null)
 		{
@@ -300,13 +310,13 @@ public class ControlTabbed extends ControlBase
 		if (childSelected != null)
 		{
 			childSelected.focusLose();
-			this.childSelectedIndex = null;
+			this.childSelectedIndex = -1;
 		}
 	}
 
 	public boolean mouseClick(Coords mouseClickPos)
 	{
-		var mouseClickPos = this._mouseClickPos.overwriteWith
+		mouseClickPos = this._mouseClickPos.overwriteWith
 		(
 			mouseClickPos
 		).subtract
@@ -322,28 +332,25 @@ public class ControlTabbed extends ControlBase
 			ArrayHelper.clear(this.childrenContainingPos),
 			true // addFirstChildOnly
 		);
-		var child = childrenContainingPos[0];
+		var child = childrenContainingPos.get(0);
 		if (child != null)
 		{
-			if (child.mouseClick != null)
+			var wasClickHandledByChild = child.mouseClick(mouseClickPos);
+			if (wasClickHandledByChild)
 			{
-				var wasClickHandledByChild = child.mouseClick(mouseClickPos);
-				if (wasClickHandledByChild)
-				{
-					wasClickHandled = true;
-				}
+				wasClickHandled = true;
 			}
 		}
 
 		return wasClickHandled;
 	}
 
-	public void mouseEnter()
-	public void mouseExit()
+	public void mouseEnter() {}
+	public void mouseExit() {}
 
 	public boolean mouseMove(Coords mouseMovePos)
 	{
-		var mouseMovePos = this._mouseMovePos.overwriteWith
+		mouseMovePos = this._mouseMovePos.overwriteWith
 		(
 			mouseMovePos
 		).subtract
@@ -367,45 +374,34 @@ public class ControlTabbed extends ControlBase
 			true // addFirstChildOnly
 		);
 
-		for (var i = 0; i < childrenContainingPos.length; i++)
+		for (var i = 0; i < childrenContainingPos.size(); i++)
 		{
-			var child = childrenContainingPos[i];
+			var child = childrenContainingPos.get(i);
 
-			if (child.mouseMove != null)
-			{
-				child.mouseMove(mouseMovePos);
-			}
+			child.mouseMove(mouseMovePos);
+
 			if (this.childrenContainingPosPrev.indexOf(child) == -1)
 			{
-				if (child.mouseEnter != null)
-				{
-					child.mouseEnter();
-				}
+				child.mouseEnter();
 			}
 		}
 
-		for (var i = 0; i < this.childrenContainingPosPrev.length; i++)
+		for (var i = 0; i < this.childrenContainingPosPrev.size(); i++)
 		{
-			var child = this.childrenContainingPosPrev[i];
+			var child = this.childrenContainingPosPrev.get(i);
 			if (childrenContainingPos.indexOf(child) == -1)
 			{
-				if (child.mouseExit != null)
-				{
-					child.mouseExit();
-				}
+				child.mouseExit();
 			}
 		}
 
 		var child = this.childSelected();
 		if (child != null)
 		{
-			if (child.mouseMove != null)
+			var wasMoveHandledByChild = child.mouseMove(mouseMovePos);
+			if (wasMoveHandledByChild)
 			{
-				var wasMoveHandledByChild = child.mouseMove(mouseMovePos);
-				if (wasMoveHandledByChild)
-				{
-					wasMoveHandled = true;
-				}
+				wasMoveHandled = true;
 			}
 		}
 
@@ -420,19 +416,7 @@ public class ControlTabbed extends ControlBase
 		for (var i = 0; i < this.childrenForTabs.length; i++)
 		{
 			var child = this.childrenForTabs[i];
-			if (child.scalePosAndSize == null)
-			{
-				child.pos.multiply(scaleFactor);
-				child.size.multiply(scaleFactor);
-				if (child.fontHeightInPixels != null)
-				{
-					child.fontHeightInPixels *= scaleFactor.y;
-				}
-			}
-			else
-			{
-				child.scalePosAndSize(scaleFactor);
-			}
+			child.scalePosAndSize(scaleFactor);
 		}
 
 		return this;
@@ -448,7 +432,7 @@ public class ControlTabbed extends ControlBase
 	{
 		drawLoc = this._drawLoc.overwriteWith(drawLoc);
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
-		var style = this.style(universe);
+		style = (style != null ? style : this.style(universe));
 
 		display.drawRectangle
 		(
@@ -459,9 +443,9 @@ public class ControlTabbed extends ControlBase
 		);
 
 		var buttons = this.buttonsForChildren;
-		for (var i = 0; i < buttons.length; i++)
+		for (var i = 0; i < buttons.size(); i++)
 		{
-			var button = buttons[i];
+			var button = buttons.get(i);
 			if (i == this.childSelectedIndex)
 			{
 				button.isHighlighted = true;

@@ -7,10 +7,10 @@ import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
-public abstract class ControlBase
+public abstract class ControlBase implements Namable
 {
 	public double fontHeightInPixels;
-	public String name;
+	public String _name;
 	public ControlBase parent;
 	public Coords pos;
 	public Coords size;
@@ -28,7 +28,7 @@ public abstract class ControlBase
 		double fontHeightInPixels
 	)
 	{
-		this.name = name;
+		this._name = name;
 		this.pos = pos;
 		this.size = size;
 		this.fontHeightInPixels = fontHeightInPixels;
@@ -63,4 +63,11 @@ public abstract class ControlBase
 		return returnValue;
 	}
 	public VenueControls toVenue() { return VenueControls.fromControl(this); }
+	
+	// Namable.
+	
+	public String name()
+	{
+		return this._name;
+	}
 }
