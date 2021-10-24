@@ -9,7 +9,7 @@ public class Controllable implements EntityProperty
 {
 	public Function<UniverseWorldPlaceEntities,ControlBase> _toControl;
 
-	public Controllable(Function<UniverseWorldPlaceEntities,Control> toControl)
+	public Controllable(Function<UniverseWorldPlaceEntities,ControlBase> toControl)
 	{
 		this._toControl = toControl;
 	}

@@ -3,7 +3,10 @@ package GameFramework.Model;
 
 import java.util.*;
 
+import GameFramework.Controls.*;
 import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Model.Combat.*;
 import GameFramework.Model.Items.*;
 import GameFramework.Model.Physics.*;
 import GameFramework.Model.Places.*;
@@ -199,7 +202,7 @@ public class Entity //
 	//public Portal portal() { return this.propertyByName(Portal.class.name) as Portal; }
 	//public ProjectileGenerator projectileGenerator() { return this.propertyByName(ProjectileGenerator.class.name) as ProjectileGenerator; }
 	//public Selectable selectable() { return this.propertyByName(Selectable.class.name) as Selectable; }
-	//public Selector selector() { return this.propertyByName(Selector.class.name) as Selector; }
+	public Selector selector() { return (Selector)this.propertyByName(Selector.class.name); }
 	//public SkillLearner skillLearner() { return this.propertyByName(SkillLearner.class.name) as SkillLearner; }
 	//public Starvable starvable() { return this.propertyByName(Starvable.class.name) as Starvable; }
 	//public Talker talker() { return this.propertyByName(Talker.class.name) as Talker; }

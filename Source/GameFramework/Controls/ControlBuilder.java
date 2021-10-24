@@ -3,6 +3,7 @@ package GameFramework.Controls;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import GameFramework.*;
 import GameFramework.Controls.*;
@@ -696,27 +697,35 @@ public class ControlBuilder
 
 			returnValue.children.add(buttonResume);
 
-			returnValue.actions = Arrays.asList
+			var actions = Arrays.asList
 			(
 				returnValue.actions
-			).add
+			);
+
+			actions.add
 			(
 				new ActorAction("Back", back)
-			).toArray
+			);
+
+			returnValue.actions = actions.toArray
 			(
 				new ActorAction[] {}
 			);
 
-			returnValue._actionToInputsMappings = Arrays.asList
+			var mappings = Arrays.asList
 			(
 				returnValue._actionToInputsMappings
-			).add
+			);
+			
+			mappings.add
 			(
 				new ActionToInputsMapping
 				(
 					"Back", new String[] { "Escape" }, true
 				)
-			).toArray
+			);
+			
+			returnValue._actionToInputsMappings = mappings.toArray
 			(
 				new ActionToInputsMapping[] {}
 			);
@@ -824,7 +833,7 @@ public class ControlBuilder
 					DataBinding.fromContextAndGet
 					(
 						placeDefn,
-						(PlaceDefn c) -> c.actionToInputsMappingSelected
+						(PlaceDefn c) -> (c.actionToInputsMappingSelected != null)
 					), // isEnabled
 					() -> // click
 					{
@@ -966,7 +975,7 @@ public class ControlBuilder
 							var mappings = c.actionToInputsMappingsEdited;
 							var doAnyActionsLackInputs = mappings.stream.anyMatch
 							(
-								(ActionToInputsMapping x) -> (x.inputNames.length == 0)
+								(ActionToInputsMapping x) -> (x.inputNames.size() == 0)
 							);
 							return (doAnyActionsLackInputs == false);
 						}

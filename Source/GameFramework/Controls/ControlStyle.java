@@ -23,7 +23,7 @@ public class ControlStyle implements Namable
 		Color colorDisabled
 	)
 	{
-		this.name = name;
+		this._name = name;
 		this.colorBackground = colorBackground;
 		this.colorFill = colorFill;
 		this.colorBorder = colorBorder;

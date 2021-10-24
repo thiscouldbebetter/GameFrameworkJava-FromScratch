@@ -70,7 +70,7 @@ public class ControlTabbed extends ControlBase
 
 			child.pos.y += tabPaneHeight;
 
-			var childName = child.name;
+			var childName = child.name();
 
 			var buttonPos = Coords.fromXY
 			(
@@ -107,7 +107,7 @@ public class ControlTabbed extends ControlBase
 				"Done", // text
 				this.fontHeightInPixels,
 				true, // hasBorder
-				DataBinding.fromTrue, // isEnabled
+				DataBinding.fromTrue(), // isEnabled
 				() -> this.cancel.accept(universe) // click
 			);
 			buttonsForChildren.add(button);

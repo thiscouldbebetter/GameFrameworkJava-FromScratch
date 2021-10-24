@@ -166,7 +166,7 @@ public class ArrayHelper
 	}
 	*/
 
-	public static List clear(List list)
+	public static <T> List<T> clear(List<T> list)
 	{
 		list.clear();
 		return list;

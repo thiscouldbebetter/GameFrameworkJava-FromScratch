@@ -34,6 +34,11 @@ public class PlatformHelper
 		}
 	}
 
+	public void platformableRemove(Platformable platformableToRemove)
+	{
+		throw new Exception("todo");
+	}
+
 	public void resizeForPlatformables()
 	{
 		this.frame.pack();

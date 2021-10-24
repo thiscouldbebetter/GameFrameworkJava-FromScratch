@@ -16,7 +16,7 @@ public class MapOfCells<T>
 	public Coords cellSize;
 	private Supplier<T> _cellCreate;
 	private Function<Triple<MapOfCells<T>,Coords,T>,T> _cellAtPosInCells;
-	private Object cellSource;
+	private Clonable cellSource;
 
 	public Coords cellSizeHalf;
 	public Coords size;
@@ -193,7 +193,7 @@ public class MapOfCells<T>
 			this.name,
 			this.sizeInCells,
 			this.cellSize,
-			this.cellCreate,
+			this._cellCreate,
 			this._cellAtPosInCells,
 			this.cellSource
 		);

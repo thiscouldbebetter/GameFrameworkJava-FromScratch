@@ -2,6 +2,7 @@
 package GameFramework.Model;
 
 import GameFramework.Controls.*;
+import GameFramework.Geometry.*;
 
 public class Playable implements EntityProperty
 {
@@ -394,7 +395,7 @@ public class Playable implements EntityProperty
 			buttonMargin, size.y - margin - buttonSize.y
 		);
 
-		var useItemInQuickSlot = (int slotNumber) ->
+		Consumer<Integer> useItemInQuickSlot = (int slotNumber) ->
 		{
 			var uwpe = new UniverseWorldPlaceEntities
 			(
@@ -408,16 +409,16 @@ public class Playable implements EntityProperty
 		};
 		var buttonClicks = new Runnable[]
 		{
-			() -> useItemInQuickSlot(0),
-			() -> useItemInQuickSlot(1),
-			() -> useItemInQuickSlot(2),
-			() -> useItemInQuickSlot(3),
-			() -> useItemInQuickSlot(4),
-			() -> useItemInQuickSlot(5),
-			() -> useItemInQuickSlot(6),
-			() -> useItemInQuickSlot(7),
-			() -> useItemInQuickSlot(8),
-			() -> useItemInQuickSlot(9),
+			() -> useItemInQuickSlot.accept(0),
+			() -> useItemInQuickSlot.accept(1),
+			() -> useItemInQuickSlot.accept(2),
+			() -> useItemInQuickSlot.accept(3),
+			() -> useItemInQuickSlot.accept(4),
+			() -> useItemInQuickSlot.accept(5),
+			() -> useItemInQuickSlot.accept(6),
+			() -> useItemInQuickSlot.accept(7),
+			() -> useItemInQuickSlot.accept(8),
+			() -> useItemInQuickSlot.accept(9),
 		};
 
 		for (var i = 0; i < itemQuickSlotCount; i++)
@@ -432,7 +433,7 @@ public class Playable implements EntityProperty
 				buttonText,
 				fontHeightInPixels,
 				false, // hasBorder
-				true, // isEnabled,
+				DataBinding.fromTrue(), // isEnabled,
 				buttonClicks[i],
 				null, // context
 				false // canBeHeldDown
@@ -478,7 +479,7 @@ public class Playable implements EntityProperty
 		var controlOverlayTransparent
 			= new ControlContainerTransparent(controlOverlayContainer);
 
-		controlOverlayTransparent.styleName = ControlStyle.Instances().Dark.name;
+		controlOverlayTransparent.styleName = ControlStyle.Instances().Dark.name();
 
 		return controlOverlayTransparent;
 	}

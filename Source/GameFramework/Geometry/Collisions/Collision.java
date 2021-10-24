@@ -2,9 +2,11 @@
 package GameFramework.Geometry.Collisions;
 
 import java.util.*;
+import java.util.stream.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
 public class Collision implements Comparable<Collision>
@@ -22,8 +24,8 @@ public class Collision implements Comparable<Collision>
 	(
 		Coords pos,
 		double distanceToCollision,
-		ShapeBase[] colliders,
-		Entity[] entitiesColliding
+		List<ShapeBase> colliders,
+		List<Entity> entitiesColliding
 	)
 	{
 		this.pos = (pos != null ? pos : Coords.create());
@@ -39,7 +41,7 @@ public class Collision implements Comparable<Collision>
 			: new ArrayList<Entity>()
 		);
 
-		this.collidersByName = new Map<String,ShapeBase>();
+		this.collidersByName = new HashMap<String,ShapeBase>();
 		this.normals = new Coords[] { Coords.create(), Coords.create() };
 
 		this.isActive = false;
@@ -63,7 +65,7 @@ public class Collision implements Comparable<Collision>
 		this.isActive = false;
 		ArrayHelper.clear(this.entitiesColliding);
 		ArrayHelper.clear(this.colliders);
-		this.normals.forEach(x -> x.clear());
+		this.normals.stream().forEach(x -> x.clear());
 		this.collidersByName.clear();
 		this.distanceToCollision = null;
 		return this;

@@ -2,10 +2,11 @@
 package GameFramework.Media;
 
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
-public class Sound implements Platformable
+public class Sound implements Namable, Platformable
 {
-	public String name;
+	public String _name;
 	public String sourcePath;
 
 	public double offsetInSeconds;
@@ -85,4 +86,11 @@ public class Sound implements Platformable
 		return this.domElement;
 	}
 	*/
+	
+	// Namable.
+	
+	public String name()
+	{
+		return this._name;
+	}
 }

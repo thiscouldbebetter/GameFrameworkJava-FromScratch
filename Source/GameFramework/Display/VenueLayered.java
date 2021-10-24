@@ -1,5 +1,7 @@
 
-namespace ThisCouldBeBetter.GameFramework
+package GameFramework.Display;
+
+import GameFramework.Model.*;
 
 public class VenueLayered implements Venue
 {

@@ -41,4 +41,11 @@ public class VisualNone implements Visual
 	{
 		// Do nothing.
 	}
+	
+	// Transformable.
+	
+	public Coords[] coordsGroupToTranslate()
+	{
+		return new Coords[] {};
+	}
 }

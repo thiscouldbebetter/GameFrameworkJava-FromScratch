@@ -9,7 +9,7 @@ import GameFramework.Media.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public interface Display
+public interface Display extends Platformable
 {
 	void clear();
 	Color colorBack();
