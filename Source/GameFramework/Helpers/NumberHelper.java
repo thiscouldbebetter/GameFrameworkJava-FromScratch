@@ -84,6 +84,11 @@ public class NumberHelper
 		return NumberHelper.wrapToRangeMinMax(n, 0, max);
 	}
 
+	public static int wrapToRangeMax(int n, int max)
+	{
+		return NumberHelper.wrapToRangeMinMax(n, 0, max);
+	}
+
 	public static double wrapToRangeMinMax(double n, double min, double max)
 	{
 		var value = n;

@@ -1,5 +1,5 @@
 
-package GameFramework.Media
+package GameFramework.Media;
 
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Display.Visuals.*;
@@ -57,12 +57,12 @@ public class VisualSound implements Visual
 
 	// Clonable.
 
-	public VisualSound clone()
+	public Visual clone()
 	{
 		return new VisualSound(this.soundNameToPlay, this.isMusic);
 	}
 
-	public VisualSound overwriteWith(VisualSound other)
+	public Visual overwriteWith(Visual other)
 	{
 		this.soundNameToPlay = other.soundNameToPlay;
 		this.isMusic = other.isMusic;

@@ -3,6 +3,8 @@ package GameFramework.Controls;
 
 import java.util.*;
 
+import GameFramework.Display.*;
+
 public class ControlStyle_Instances
 {
 	public ControlStyle Default;

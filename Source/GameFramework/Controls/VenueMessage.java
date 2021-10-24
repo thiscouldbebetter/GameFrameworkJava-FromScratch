@@ -1,13 +1,17 @@
 
 package GameFramework.Controls;
 
+import java.util.*;
+import java.util.function.*;
+
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
 public class VenueMessage implements Venue
 {
 	public DataBinding<Object,String> messageToShow;
-	public Runnable acknowledge;
+	public Consumer<UniverseWorldPlaceEntities> acknowledge;
 	public Venue venuePrev;
 	public Coords _sizeInPixels;
 	public boolean showMessageOnly;
@@ -17,7 +21,7 @@ public class VenueMessage implements Venue
 	public VenueMessage
 	(
 		DataBinding<Object,String> messageToShow,
-		Runnable acknowledge,
+		Consumer<UniverseWorldPlaceEntities> acknowledge,
 		Venue venuePrev,
 		Coords sizeInPixels,
 		boolean showMessageOnly
@@ -40,7 +44,7 @@ public class VenueMessage implements Venue
 		DataBinding<Object,String> messageToShow, Runnable acknowledge
 	)
 	{
-		return new VenueMessage(messageToShow, acknowledge, null, null, null);
+		return new VenueMessage(messageToShow, acknowledge, null, null, false);
 	}
 
 	public static VenueMessage fromText(String message)
@@ -66,7 +70,7 @@ public class VenueMessage implements Venue
 
 	public Coords sizeInPixels(Universe universe)
 	{
-		return (this._sizeInPixels == null ? universe.display.sizeInPixels : this._sizeInPixels);
+		return (this._sizeInPixels == null ? universe.display.sizeInPixels() : this._sizeInPixels);
 	}
 
 	public Venue venueInner(Universe universe)

@@ -99,7 +99,7 @@ public class ControlScrollbar extends ControlBase
 
 	public void scrollDown()
 	{
-		var sliderPosInItems = NumberHelper.trimToRangeMinMax
+		var sliderPosInItems = (int)NumberHelper.trimToRangeMinMax
 		(
 			this.sliderPosInItems() + 1, 0, this.sliderMaxInItems()
 		);
@@ -109,7 +109,7 @@ public class ControlScrollbar extends ControlBase
 
 	public void scrollUp()
 	{
-		var sliderPosInItems = NumberHelper.trimToRangeMinMax
+		var sliderPosInItems = (int)NumberHelper.trimToRangeMinMax
 		(
 			this.sliderPosInItems() - 1, 0, this.sliderMaxInItems()
 		);
@@ -136,7 +136,7 @@ public class ControlScrollbar extends ControlBase
 
 	public int sliderMaxInItems()
 	{
-		return this.items().length - Math.floor(this.windowSizeInItems);
+		return this.items().length - (int)Math.floor(this.windowSizeInItems);
 	}
 
 	public Coords sliderPosInPixels()

@@ -1,8 +1,11 @@
 
 package GameFramework.Geometry.Shapes;
 
+import java.util.stream.*;
+
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helpers.*;
 
 public class ShapeGroupAll implements ShapeBase
 {
@@ -52,7 +55,7 @@ public class ShapeGroupAll implements ShapeBase
 
 	public Transformable transform(Transform transformToApply)
 	{
-		this.shapes.stream.forEach
+		this.shapes.stream().forEach
 		(
 			(ShapeBase x) -> x.transform(transformToApply)
 		);

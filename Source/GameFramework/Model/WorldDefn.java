@@ -42,35 +42,35 @@ public class WorldDefn
 
 	public ActorAction actionByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(Action.name);
+		var defnsByName = this.defnsByNameByTypeName.get(Action.class.name);
 		var returnValue = ((ActorAction)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public ActivityDefn activityDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(ActivityDefn.name);
+		var defnsByName = this.defnsByNameByTypeName.get(ActivityDefn.class.name);
 		var returnValue = ((ActivityDefn)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public Entity entityDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(Entity.name);
+		var defnsByName = this.defnsByNameByTypeName.get(Entity.class.name);
 		var returnValue = ((Entity)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public ItemDefn itemDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(ItemDefn.name);
+		var defnsByName = this.defnsByNameByTypeName.get(ItemDefn.class.name);
 		var returnValue = ((ItemDefn)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public PlaceDefn placeDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(PlaceDefn.name);
+		var defnsByName = this.defnsByNameByTypeName.get(PlaceDefn.class.name);
 		var returnValue = ((PlaceDefn)(defnsByName.get(defnName)));
 		return returnValue;
 	}

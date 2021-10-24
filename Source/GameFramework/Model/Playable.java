@@ -1,7 +1,12 @@
 
 package GameFramework.Model;
 
+import java.util.*;
+import java.util.function.*;
+
 import GameFramework.Controls.*;
+import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
 
 public class Playable implements EntityProperty
@@ -280,7 +285,7 @@ public class Playable implements EntityProperty
 		var timerTicksPerGameDay =
 			minutesPerDay * universe.timerHelper.ticksPerSecond;
 
-		var ticksToHH_MM = (number ticks) ->
+		Function<Integer,String> ticksToHH_MM = (int ticks) ->
 		{
 			var ticksIntoDay = world.timerTicksSoFar % timerTicksPerGameDay;
 			var fractionOfDay = ticksIntoDay / timerTicksPerGameDay;
@@ -313,7 +318,7 @@ public class Playable implements EntityProperty
 			// text
 			DataBinding.fromContextAndGet
 			(
-				world, (World c) -> ticksToHH_MM(c.timerTicksSoFar)
+				world, (World c) -> ticksToHH_MM.apply(c.timerTicksSoFar)
 			)
 		);
 
@@ -334,7 +339,7 @@ public class Playable implements EntityProperty
 
 		var childSpacing = Coords.fromXY(0, playerVisualBarSize.y * 2);
 
-		var Visual playerVisualStatusInfo = new VisualGroup
+		Visual playerVisualStatusInfo = new VisualGroup
 		(
 			new Visual[]
 			{
@@ -380,7 +385,7 @@ public class Playable implements EntityProperty
 		var controlSelection =
 			selector.toControl(controlSelectionSize, controlSelectionPos);
 
-		childControls.push(controlSelection);
+		childControls.add(controlSelection);
 
 		// Quick slots.
 
@@ -447,9 +452,9 @@ public class Playable implements EntityProperty
 				DataBinding.fromContextAndGet
 				(
 					i,
-					(int c) ->
+					(Integer c) ->
 					{
-						var returnValue = null;
+						Visual returnValue = null;
 						var itemEntityEquipped =
 							equipmentUser.itemEntityInSocketWithName("Item" + c);
 						if (itemEntityEquipped != null)
@@ -462,8 +467,8 @@ public class Playable implements EntityProperty
 				)
 			);
 
-			childControls.push(visualItemInQuickSlot);
-			childControls.push(button);
+			childControls.add(visualItemInQuickSlot);
+			childControls.add(button);
 
 			buttonPos.x += buttonSize.x + buttonMargin;
 		}
@@ -472,7 +477,7 @@ public class Playable implements EntityProperty
 		(
 			"containerPlayer",
 			Coords.create(), // pos,
-			universe.display.sizeInPixels.clone(),
+			universe.display.sizeInPixels().clone(),
 			childControls,
 			null, null
 		);
@@ -489,7 +494,5 @@ public class Playable implements EntityProperty
 	public void finalize(UniverseWorldPlaceEntities uwpe) {}
 	public void initialize(UniverseWorldPlaceEntities uwpe) {}
 	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe) {}
-
-}
 
 }

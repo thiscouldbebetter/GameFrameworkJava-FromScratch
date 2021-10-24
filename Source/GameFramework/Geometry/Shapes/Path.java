@@ -1,6 +1,8 @@
 
 package GameFramework.Geometry.Shapes;
-{
+
+import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 
 public class Path
 {

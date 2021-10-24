@@ -7,6 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transform.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Places.*;
+import GameFramework.Model.Physics.*;
 
 public class ControlVisual extends ControlBase
 {
@@ -28,7 +29,7 @@ public class ControlVisual extends ControlBase
 		Color colorBorder
 	)
 	{
-		super(name, pos, size, null);
+		super(name, pos, size, -1);
 		this.visual = visual;
 		this.colorBackground = colorBackground;
 		this.colorBorder = colorBorder;
@@ -37,7 +38,7 @@ public class ControlVisual extends ControlBase
 		this._drawPos = Coords.create();
 		this._entity = new Entity
 		(
-			this.name,
+			this.name(),
 			new EntityProperty[]
 			{
 				new Audible(),
@@ -106,10 +107,20 @@ public class ControlVisual extends ControlBase
 		if (visualToDraw != null)
 		{
 			var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
-			var style = style || this.style(universe);
+			var style = (style != null ? style : this.style(universe));
 
-			var colorFill = this.colorBackground || Color.Instances()._Transparent;
-			var colorBorder = this.colorBorder || style.colorBorder;
+			var colorFill =
+			(
+				this.colorBackground != null
+				? this.colorBackground
+				: Color.Instances()._Transparent
+			);
+			var colorBorder =
+			(
+				this.colorBorder != null
+				? this.colorBorder
+				: style.colorBorder
+			);
 			display.drawRectangle
 			(
 				drawPos, this.size, colorFill, colorBorder, null

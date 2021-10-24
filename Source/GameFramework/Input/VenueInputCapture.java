@@ -45,9 +45,9 @@ public class VenueInputCapture implements Venue
 		else
 		{
 			var inputsPressed = inputHelper.inputsPressed;
-			for (var i = 0; i < inputsPressed.length; i++)
+			for (var i = 0; i < inputsPressed.size(); i++)
 			{
-				var inputPressed = inputsPressed[i];
+				var inputPressed = inputsPressed.get(i);
 				if (inputPressed.name.startsWith("Mouse") == false)
 				{
 					if (inputPressed.isActive)

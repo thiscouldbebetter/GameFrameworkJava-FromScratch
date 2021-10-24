@@ -52,16 +52,18 @@ public class ControlTabbed extends ControlBase
 		var tabPaneHeight = marginSize + this.tabButtonSize.y;
 		var buttonsForChildren = new ArrayList<ControlButton>();
 
-		Consumer<ControlButton> buttonForTabClick = (ControlButton b) -> // click
+		Runnable buttonForTabClick = () -> // click
 		{
 			buttonsForChildren.stream().forEach
 			(
 				x -> x.isHighlighted = false
 			);
+			/*
 			var buttonIndex = buttonsForChildren.indexOf(b); // hack
 			this.childSelectedIndex = buttonIndex;
 			this.isChildSelectedActive = true;
 			b.isHighlighted = true;
+			*/
 		}
 
 		for (var i = 0; i < this.childrenForTabs.length; i++)

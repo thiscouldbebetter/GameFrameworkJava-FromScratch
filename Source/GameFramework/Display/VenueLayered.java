@@ -1,6 +1,7 @@
 
 package GameFramework.Display;
 
+import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
 public class VenueLayered implements Venue
@@ -21,10 +22,7 @@ public class VenueLayered implements Venue
 		for (var i = 0; i < this.children.length; i++)
 		{
 			var child = this.children[i];
-			if (child.initialize != null)
-			{
-				child.initialize(universe);
-			}
+			child.initialize(universe);
 		}
 	}
 

@@ -8,6 +8,7 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.Combat.*;
 import GameFramework.Model.Items.*;
+import GameFramework.Model.Items.Equipment.*;
 import GameFramework.Model.Physics.*;
 import GameFramework.Model.Places.*;
 
@@ -178,7 +179,7 @@ public class Entity //
 	public Drawable drawable() { return (Drawable)(this.propertyByName(Drawable.class.name) ); }
 	//public Effectable effectable() { return this.propertyByName(Effectable.class.name) as Effectable; }
 	//public Ephemeral ephemeral() { return this.propertyByName(Ephemeral.class.name) as Ephemeral; }
-	//public EquipmentUser equipmentUser() { return this.propertyByName(EquipmentUser.class.name) as EquipmentUser; }
+	public EquipmentUser equipmentUser() { return (EquipmentUser)this.propertyByName(EquipmentUser.class.name); }
 	//public Equippable equippable() { return this.propertyByName(Equippable.class.name) as Equippable; }
 	//public Enemy enemy() { return this.propertyByName(Enemy.class.name) as Enemy; }
 	//public ForceField forceField() { return this.propertyByName(ForceField.class.name) as ForceField; }

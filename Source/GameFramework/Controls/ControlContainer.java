@@ -5,13 +5,14 @@ import java.util.*;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
 public class ControlContainer extends ControlBase
 {
-	public ControlBase[] children;
+	public List<ControlBase> children;
 	public Map<String, ControlBase> childrenByName;
 	public ActorAction[] actions;
 	public Map<String, ActorAction> actionsByName;
@@ -24,7 +25,7 @@ public class ControlContainer extends ControlBase
 
 	private Coords _childMax;
 	public Coords _drawPos; // hack
-	private Disposition _drawLoc;
+	public Disposition _drawLoc;
 	private Coords _mouseClickPos;
 	private Coords _mouseMovePos;
 	private Coords _posToCheck;
@@ -51,13 +52,13 @@ public class ControlContainer extends ControlBase
 		this.childrenByName = ArrayHelper.addLookupsByName(this.children);
 		this.actionsByName = ArrayHelper.addLookupsByName(this.actions);
 
-		for (var i = 0; i < this.children.length; i++)
+		for (var i = 0; i < this.children.size(); i++)
 		{
-			var child = this.children[i];
+			var child = this.children.get(i);
 			child.parent = this;
 		}
 
-		this.indexOfChildWithFocus = null;
+		this.indexOfChildWithFocus = -1;
 		this.childrenContainingPos = new ArrayList<ControlBase>();
 		this.childrenContainingPosPrev = new ArrayList<ControlBase>();
 
@@ -152,10 +153,7 @@ public class ControlContainer extends ControlBase
 		}
 		else if (childWithFocus != null)
 		{
-			if (childWithFocus.actionHandle != null)
-			{
-				wasActionHandled = childWithFocus.actionHandle(actionNameToHandle, universe);
-			}
+			wasActionHandled = childWithFocus.actionHandle(actionNameToHandle, universe);
 		}
 
 		return wasActionHandled;
@@ -189,18 +187,17 @@ public class ControlContainer extends ControlBase
 
 	public ControlBase childWithFocusNextInDirection(int direction)
 	{
-		if (this.indexOfChildWithFocus == null)
+		if (this.indexOfChildWithFocus == -1)
 		{
-			var iStart = (direction == 1 ? 0 : this.children.length - 1);
-			var iEnd = (direction == 1 ? this.children.length : -1);
+			var iStart = (direction == 1 ? 0 : this.children.size() - 1);
+			var iEnd = (direction == 1 ? this.children.size() : -1);
 
 			for (var i = iStart; i != iEnd; i += direction)
 			{
-				var child = this.children[i];
+				var child = this.children.get(i);
 				if
 				(
-					child.focusGain != null
-					&& ( child.isEnabled() )
+					child.isEnabled()
 				)
 				{
 					this.indexOfChildWithFocus = i;
@@ -214,9 +211,9 @@ public class ControlContainer extends ControlBase
 			{
 				this.indexOfChildWithFocus += direction;
 
-				var isChildNextInRange = intHelper.isInRangeMinMax
+				var isChildNextInRange = NumberHelper.isInRangeMinMax
 				(
-					this.indexOfChildWithFocus, 0, this.children.length - 1
+					this.indexOfChildWithFocus, 0, this.children.size() - 1
 				);
 
 				if (isChildNextInRange == false)
@@ -226,11 +223,11 @@ public class ControlContainer extends ControlBase
 				}
 				else
 				{
-					var child = this.children[this.indexOfChildWithFocus];
+					var child = this.children.get(this.indexOfChildWithFocus);
 					if
 					(
 						child.focusGain != null
-						&& ( child.isEnabled == null || child.isEnabled() )
+						&& child.isEnabled()
 					)
 					{
 						break;
@@ -255,9 +252,9 @@ public class ControlContainer extends ControlBase
 	{
 		posToCheck = this._posToCheck.overwriteWith(posToCheck).clearZ();
 
-		for (var i = this.children.length - 1; i >= 0; i--)
+		for (var i = this.children.size() - 1; i >= 0; i--)
 		{
-			var child = this.children[i];
+			var child = this.children.get(i);
 
 			var doesChildContainPos = posToCheck.isInRangeMinMax
 			(
@@ -280,7 +277,7 @@ public class ControlContainer extends ControlBase
 
 	public void focusGain()
 	{
-		this.indexOfChildWithFocus = null;
+		this.indexOfChildWithFocus = -1;
 		var childWithFocus = this.childWithFocusNextInDirection(1);
 		if (childWithFocus != null)
 		{
@@ -294,7 +291,7 @@ public class ControlContainer extends ControlBase
 		if (childWithFocus != null)
 		{
 			childWithFocus.focusLose();
-			this.indexOfChildWithFocus = null;
+			this.indexOfChildWithFocus = -1;
 		}
 	}
 
@@ -364,9 +361,9 @@ public class ControlContainer extends ControlBase
 			}
 		}
 
-		for (var i = 0; i < this.childrenContainingPosPrev.length; i++)
+		for (var i = 0; i < this.childrenContainingPosPrev.size(); i++)
 		{
-			var child = this.childrenContainingPosPrev[i];
+			var child = this.childrenContainingPosPrev.get(i);
 			if (childrenContainingPos.indexOf(child) == -1)
 			{
 				if (child.mouseExit != null)
@@ -391,7 +388,7 @@ public class ControlContainer extends ControlBase
 			{
 				child.pos.multiply(scaleFactor);
 				child.size.multiply(scaleFactor);
-				if (child.fontHeightInPixels != null)
+				if (child.fontHeightInPixels > 0)
 				{
 					child.fontHeightInPixels *= scaleFactor.y;
 				}
@@ -431,7 +428,7 @@ public class ControlContainer extends ControlBase
 			drawPos, this.size,
 			style.colorBackground,
 			style.colorBorder,
-			null
+			false
 		);
 
 		var children = this.children;

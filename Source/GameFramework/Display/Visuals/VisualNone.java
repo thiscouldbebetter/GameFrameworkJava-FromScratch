@@ -2,6 +2,8 @@
 package GameFramework.Display.Visuals;
 
 import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
 public class VisualNone implements Visual
@@ -34,10 +36,7 @@ public class VisualNone implements Visual
 
 	// Visual
 
-	void draw
-	(
-		Universe universe, World world, Place place, Entity entity
-	)
+	public void draw(UniverseWorldPlaceEntity uwpe, Display display)
 	{
 		// Do nothing.
 	}

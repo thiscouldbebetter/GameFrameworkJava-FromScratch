@@ -18,6 +18,13 @@ public class Image2 implements MediaLibraryItem, Namable
 		return this.id;
 	}
 
+	public Coords sizeInPixels()
+	{
+		throw new Exception("todo");
+	}
+	
+	// Loadable.
+	
 	public void load()
 	{
 		// todo

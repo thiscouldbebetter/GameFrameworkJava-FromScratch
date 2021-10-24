@@ -6,6 +6,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
+import GameFramework.Utility.*;
 
 public abstract class ControlBase implements Namable
 {

@@ -4,6 +4,7 @@ package GameFramework.Model.Actors;
 import java.util.*;
 import java.util.function.*;
 
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
 public class ActivityDefn

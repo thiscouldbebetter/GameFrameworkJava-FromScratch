@@ -5,6 +5,7 @@ import java.util.stream.*;
 
 import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
+import GameFramework.Helpers.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
@@ -43,6 +44,8 @@ public class VisualGroup implements Visual
 
 	// Transformable.
 
+	public Coords[] coordsGroupToTranslate() { throw new Exception("todo"); }
+	
 	public Transformable transform(Transform transformToApply)
 	{
 		this.children.stream().forEach(x -> transformToApply.transform(x));

@@ -52,7 +52,7 @@ public class ControlList extends ControlBase
 		this.bindingForIsEnabled =
 			(bindingForIsEnabled != null ? bindingForIsEnabled : DataBinding.fromTrue());
 		this._confirm = confirm;
-		this.widthInItems = (widthInItems != null ? widthInItems : 1);
+		this.widthInItems = (widthInItems > 0 ? widthInItems : 1);
 
 		var itemSpacingY = 1.2 * this.fontHeightInPixels; // hack
 		this._itemSpacing = new Coords(0, itemSpacingY, 0);
@@ -251,7 +251,7 @@ public class ControlList extends ControlBase
 		}
 		else if (actionNameToHandle == controlActionNames.ControlConfirm)
 		{
-			if (this.confirm != null)
+			if (this._confirm != null)
 			{
 				this.confirm(universe);
 				wasActionHandled = true;
@@ -262,7 +262,7 @@ public class ControlList extends ControlBase
 
 	public void confirm(Universe u)
 	{
-		return this._confirm.accept(u);
+		this._confirm.accept(u);
 	}
 
 	public int indexOfFirstItemVisible()
@@ -275,23 +275,19 @@ public class ControlList extends ControlBase
 		return this.scrollbar.sliderPosInItems();
 	}
 
+	public int indexOfItemSelected()
+	{
+		var items = this.items();
+		var returnValue = items.indexOf(this.itemSelected());
+		return returnValue;
+	}
+
 	public int indexOfItemSelected(int valueToSet)
 	{
 		var returnValue = valueToSet;
 		var items = this.items();
-		if (valueToSet < 0)
-		{
-			returnValue = items.indexOf(this.itemSelected(null));
-			if (returnValue == -1)
-			{
-				returnValue = -1;
-			}
-		}
-		else
-		{
-			var itemToSelect = items[valueToSet];
-			this.itemSelected(itemToSelect);
-		}
+		var itemToSelect = items[valueToSet];
+		this.itemSelected(itemToSelect);
 		return returnValue;
 	}
 
@@ -315,6 +311,11 @@ public class ControlList extends ControlBase
 			? true
 			: this.bindingForIsEnabled.get()
 		);
+	}
+
+	public Object itemSelected()
+	{
+		return this.itemSelected(null);
 	}
 
 	public Object itemSelected(Object itemToSet)
@@ -466,7 +467,7 @@ public class ControlList extends ControlBase
 				var indexOfItemSelectedOld = this.indexOfItemSelected();
 				if (indexOfItemClicked == indexOfItemSelectedOld)
 				{
-					this.confirm(); // todo
+					this.confirm(null); // todo
 				}
 				else
 				{
@@ -569,7 +570,7 @@ public class ControlList extends ControlBase
 					drawPos2,
 					this.itemSpacing(),
 					colorFore, // colorFill
-					null, null
+					null, false
 				);
 			}
 

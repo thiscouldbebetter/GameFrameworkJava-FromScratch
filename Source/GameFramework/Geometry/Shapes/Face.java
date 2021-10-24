@@ -5,13 +5,14 @@ import java.util.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helpers.*;
 
 public class Face implements ShapeBase
 {
 	public Coords[] vertices;
 
 	private Box _box;
-	private Edge[] _edges;
+	private List<Edge> _edges;
 	private Plane _plane;
 
 	public Face(Coords[] vertices)
@@ -120,13 +121,14 @@ public class Face implements ShapeBase
 
 	// Cloneable.
 
-	public Face clone()
+	public ShapeBase clone()
 	{
 		return new Face(ArrayHelper.clone(this.vertices));
 	}
 
-	public Face overwriteWith(Face other)
+	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
 	{
+		var other = (Face)otherAsShapeBase
 		ArrayHelper.overwriteWith(this.vertices, other.vertices);
 		return this;
 	}

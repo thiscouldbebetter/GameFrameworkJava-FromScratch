@@ -18,11 +18,17 @@ public class Transforms
 		for (var i = 0; i < coordsArraysToTransform.length; i++)
 		{
 			var coordsArray = coordsArraysToTransform[i];
-			Transforms.applyTransformToCoordsMany(transformToApply, coordsArray);
+			Transforms.applyTransformToCoordsMany
+			(
+				transformToApply, coordsArray
+			);
 		}
 	}
 
-	public static applyTransformToCoordsMany(Transform transformToApply, Coords[] coordsSetToTransform)
+	public static applyTransformToCoordsMany
+	(
+		Transform transformToApply, Coords[] coordsSetToTransform
+	)
 	{
 		for (var i = 0; i < coordsSetToTransform.length; i++)
 		{

@@ -28,7 +28,7 @@ public class ShapeInverse implements ShapeBase
 
 	// ShapeBase.
 
-	public Disposition locate(Disposition loc)
+	public ShapeBase locate(Disposition loc)
 	{
 		this.shape.locate(loc);
 		return this;

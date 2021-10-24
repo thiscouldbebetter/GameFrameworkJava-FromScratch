@@ -17,7 +17,7 @@ public class ControlContainerTransparent extends ControlContainer
 	{
 		super
 		(
-			containerInner.name,
+			containerInner.name(),
 			containerInner.pos,
 			containerInner.size,
 			containerInner.fontHeightInPixels
@@ -126,7 +126,7 @@ public class ControlContainerTransparent extends ControlContainer
 		(
 			drawPos, this.containerInner.size,
 			null, // display.colorBack,
-			style.colorBorder, null
+			style.colorBorder, false
 		);
 
 		var children = this.containerInner.children;
