@@ -16,7 +16,7 @@ public class Playable implements EntityProperty
 		Universe universe, Coords size, Entity entity, Venue venuePrev
 	)
 	{
-		var controlsForTabs = new Array<ControlBase>();
+		var controlsForTabs = new ArrayList<ControlBase>();
 
 		var fontHeight = 12;
 		var labelSize = Coords.fromXY(300, fontHeight * 1.25);

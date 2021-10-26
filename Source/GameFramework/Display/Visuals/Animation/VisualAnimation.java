@@ -26,7 +26,7 @@ public class VisualAnimation implements Visual
 			this.ticksToHoldFrames = new int[this.frames.length];
 			for (var f = 0; f < this.frames.length; f++)
 			{
-				this.ticksToHoldFrames.push(1);
+				this.ticksToHoldFrames[f] = 1;
 			}
 		}
 		else if (this.ticksToHoldFrames.length < this.frames.length)

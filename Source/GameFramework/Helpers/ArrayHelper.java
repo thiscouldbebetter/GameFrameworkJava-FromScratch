@@ -92,25 +92,26 @@ public class ArrayHelper
 		);
 	}
 
-	/*
-	static addLookupsMultiple<K, E>
+	public static <K,E> Map<K,E> addLookupsMultiple<K, E>
 	(
-		list: any, getKeysForElement: (e:E) => List<K>
-	): Map<K, E>
+		List<E> list, Function<E,K[]> getKeysForElement
+	)
 	{
-		var returnLookup = new Map<K, E>();
-		for (var i = 0; i < list.length; i++)
+		var returnLookup = new HashMap<K,E>();
+		for (var i = 0; i < list.size(); i++)
 		{
-			var element = list[i];
-			var keys = getKeysForElement(element);
+			var element = list.get(i);
+			var keys = getKeysForElement.apply(element);
 			for (var k = 0; k < keys.length; k++)
 			{
 				var key = keys[k];
-				returnLookup.set(key, element);
+				returnLookup.put(key, element);
 			}
 		}
 		return returnLookup;
 	}
+	
+	/*
 
 	static append(list: any[], other: any[]): any[]
 	{

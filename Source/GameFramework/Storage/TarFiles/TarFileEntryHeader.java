@@ -1,6 +1,7 @@
 
 package GameFramework.Storage.TarFiles;
-{
+
+import GameFramework.Helpers;
 
 public class TarFileEntryHeader
 {
@@ -226,7 +227,7 @@ public class TarFileEntryHeader
 
 	public int[] toBytes()
 	{
-		var headerAsBytes = new Array<int>();
+		var headerAsBytes = new ArrayList<Integer>();
 		var writer = new ByteStreamFromBytes(headerAsBytes);
 
 		var fileSizeInBytesAsStringOctal = StringHelper.padStart
@@ -278,6 +279,4 @@ public class TarFileEntryHeader
 
 		return returnValue;
 	}
-}
-
 }

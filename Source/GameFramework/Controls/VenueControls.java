@@ -2,7 +2,7 @@
 package GameFramework.Controls;
 
 import java.util.*;
-import java.util.function.*
+import java.util.function.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
@@ -27,14 +27,8 @@ public class VenueControls implements Venue
 	)
 	{
 		this.controlRoot = controlRoot;
-		ignoreKeyboardAndGamepadInputs =
-		(
-			ignoreKeyboardAndGamepadInputs != null
-			? ignoreKeyboardAndGamepadInputs
-			: false
-		);
 
-		Consumer<String,String[]> buildGamepadInputs = (String inputName) ->
+		Function<String,String[]> buildGamepadInputs = (String inputName) ->
 		{
 			var numberOfGamepads = 1; // todo
 
@@ -83,7 +77,7 @@ public class VenueControls implements Venue
 					ArrayHelper.addMany
 					(
 						new String[] { inputNames.ArrowRight, inputNames.Tab },
-						buildGamepadInputs(inputNames.GamepadMoveRight)
+						buildGamepadInputs.apply(inputNames.GamepadMoveRight)
 					)
 				),
 				inactivate
@@ -94,7 +88,7 @@ public class VenueControls implements Venue
 				ArrayHelper.addMany
 				(
 					new String[] { inputNames.ArrowUp },
-					buildGamepadInputs(inputNames.GamepadMoveUp)
+					buildGamepadInputs.apply(inputNames.GamepadMoveUp)
 				),
 				inactivate
 			),
@@ -104,7 +98,7 @@ public class VenueControls implements Venue
 				ArrayHelper.addMany
 				(
 					new String[] { inputNames.Enter },
-					buildGamepadInputs(inputNames.GamepadButton1)
+					buildGamepadInputs.apply(inputNames.GamepadButton1)
 				),
 				inactivate
 			),
@@ -114,7 +108,7 @@ public class VenueControls implements Venue
 				ArrayHelper.addMany
 				(
 					new String[] { inputNames.Escape },
-					buildGamepadInputs(inputNames.GamepadButton0)
+					buildGamepadInputs.apply(inputNames.GamepadButton0)
 				),
 				inactivate
 			)

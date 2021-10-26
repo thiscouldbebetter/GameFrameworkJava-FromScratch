@@ -78,5 +78,3 @@ public class VisualSound implements Visual
 		return this; // todo
 	}
 }
-
-}

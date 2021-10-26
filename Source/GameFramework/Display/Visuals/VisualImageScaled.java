@@ -1,5 +1,10 @@
 
-namespace GameFramework.Display.Visuals;
+package GameFramework.Display.Visuals;
+
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
+import GameFramework.Model.*;
 
 public class VisualImageScaled implements VisualImage
 {
@@ -23,7 +28,7 @@ public class VisualImageScaled implements VisualImage
 		Coords sizeToDraw, VisualImage[] visualsToScale
 	)
 	{
-		var returnValues = new VisualImageScaled[visualsToScale.length);
+		var returnValues = new VisualImageScaled[visualsToScale.length];
 		for (var i = 0; i < visualsToScale.length; i++)
 		{
 			var visualToScale = visualsToScale[i];
@@ -69,7 +74,7 @@ public class VisualImageScaled implements VisualImage
 
 	// Transformable.
 
-	public Coords[] coordsGroupToTranslate { return null; }
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public Transformalbe transform(Transform transformToApply)
 	{

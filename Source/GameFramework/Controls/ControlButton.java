@@ -88,7 +88,7 @@ public class ControlButton extends ControlBase
 	{
 		if (actionNameToHandle == ControlActionNames.Instances().ControlConfirm)
 		{
-			this.click(this.context);
+			this.click.run(); // this.context);
 		}
 
 		return (this.canBeHeldDown == false); // wasActionHandled
@@ -105,7 +105,7 @@ public class ControlButton extends ControlBase
 	{
 		if (this.isEnabled())
 		{
-			this.click(this.context);
+			this.click.run(); // (this.context);
 		}
 		return (this.canBeHeldDown == false); // wasClickHandled
 	}

@@ -126,7 +126,10 @@ public class InputHelper
 
 	public List<Input> inputsActive()
 	{
-		return this.inputsPressed.stream().filter( (x) -> x.isActive ).toList();
+		return this.inputsPressed.stream().filter
+		(
+			(x) -> x.isActive
+		).collect(Collectors.toList());
 	}
 
 	public void inputsRemoveAll()
@@ -268,12 +271,21 @@ public class InputHelper
 		{
 			inputReleased = "__";
 		}
-		else if (inputReleased >= "0" && inputReleased <= "9")
+		else if
+		(
+			inputReleased.compareTo("0") >= 0
+			&& inputReleased.compareTo("9") <= 0
+		)
 		{
 			inputReleased = "_" + inputReleased;
 		}
 
 		this.inputRemove(inputReleased);
+	}
+
+	public void keyTyped(KeyEvent event)
+	{
+		// Do nothing.
 	}
 
 	// events - mouse

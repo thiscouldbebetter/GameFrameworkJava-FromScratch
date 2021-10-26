@@ -118,6 +118,12 @@ public class Edge implements ShapeBase
 		return this;
 	}
 
+	public Edge overwriteWith(Edge other)
+	{
+		ArrayHelper.overwriteWith(this.vertices, other.vertices);
+		return this;
+	}
+
 	// ShapeBase.
 
 	public ShapeBase locate(Disposition loc)

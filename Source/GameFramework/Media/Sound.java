@@ -4,7 +4,7 @@ package GameFramework.Media;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class Sound implements Namable
+public class Sound implements MediaLibraryItem
 {
 	public String _name;
 	public String sourcePath;
@@ -68,7 +68,8 @@ public class Sound implements Namable
 
 	public void stop(Universe universe)
 	{
-		universe.platformHelper.platformableRemove(this);
+		// todo
+		// universe.platformHelper.platformableRemove(this);
 		this.offsetInSeconds = 0;
 	}
 

@@ -11,7 +11,7 @@ import GameFramework.Model.*;
 public class VisualSelect implements Visual
 {
 	public Map<String,Visual> childrenByName;
-	public BiFunction<UniverseWorldPlaceEntities,Display,String[]> selectChildNames;
+	public BiFunction<UniverseWorldPlaceEntities,Display,String[]> _selectChildNames;
 
 	public VisualSelect
 	(
@@ -20,8 +20,18 @@ public class VisualSelect implements Visual
 	)
 	{
 		this.childrenByName = childrenByName;
-		this.selectChildNames = selectChildNames;
+		this._selectChildNames = selectChildNames;
 	}
+
+	public String[] selectChildNames
+	(
+		UniverseWorldPlaceEntities uwpe, Display display
+	)
+	{
+		return this._selectChildNames.apply(uwpe, display);
+	}
+
+	// Visual
 
 	public void draw(UniverseWorldPlaceEntities uwpe, Display display)
 	{

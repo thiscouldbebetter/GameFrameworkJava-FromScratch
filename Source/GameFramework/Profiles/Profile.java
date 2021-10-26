@@ -41,7 +41,7 @@ public class Profile
 		return this.saveStates.stream().filter
 		(
 			x -> x.name == this.saveStateNameSelected
-		).toList().get(0);
+		).collect(Collectors.toList()).get(0);
 	}
 
 	// controls
@@ -128,16 +128,16 @@ public class Profile
 					{
 						return universe.storageHelper.load(saveStateNameSelected);
 					},
-					(Universe universe, SaveState saveStateSelected) -> // done
+					(Universe universe2, SaveState saveStateSelected) -> // done
 					{
 						var worldSelected = saveStateSelected.world;
 						universe.world = worldSelected;
 						Venue venueNext = worldSelected.toVenue();
 						venueNext = VenueFader.fromVenuesToAndFrom
 						(
-							venueNext, universe.venueCurrent
+							venueNext, universe2.venueCurrent
 						);
-						universe.venueNext = venueNext;
+						universe2.venueNext = venueNext;
 					}
 				);
 
@@ -162,7 +162,7 @@ public class Profile
 			var placeName = place.name();
 			var timePlayingAsString = world.timePlayingAsStringShort(universe);
 
-			var displaySize = universe.display.sizeInPixels;
+			var displaySize = universe.display.sizeInPixels();
 			var displayFull = Display2D.fromSizeAndIsInvisible(displaySize, true);
 			displayFull.initialize(universe);
 			place.draw(universe, world, displayFull);
@@ -183,7 +183,7 @@ public class Profile
 			var imageThumbnail = new Image2("Snapshot", imageThumbnailAsDataUrl).unload();
 
 			var saveStateName = "Save-" + nowAsString;
-			var saveState = new SaveState
+			var saveState2 = new SaveState
 			(
 				saveStateName,
 				placeName,
@@ -195,18 +195,18 @@ public class Profile
 
 			var storageHelper = universe.storageHelper;
 
-			var wasSaveSuccessful;
+			var wasSaveSuccessful = false;
 			try
 			{
-				storageHelper.save(saveStateName, saveState);
-				if (profile.saveStates.some(x -> x.name == saveStateName) == false)
+				storageHelper.save(saveStateName, saveState2);
+				if (profile.saveStates.stream().anyMatch(x -> x.name == saveStateName) == false)
 				{
 					saveState.unload();
-					profile.saveStates.add(saveState);
+					profile.saveStates.add(saveState2);
 					storageHelper.save(profile.name, profile);
 				}
-				var profileNames = storageHelper.load("ProfileNames");
-				if (Arrays.asList(profileNames.indexOf(profile.name)) == -1)
+				var profileNames = (String[])storageHelper.load("ProfileNames");
+				if (Arrays.asList(profileNames).indexOf(profile.name) == -1)
 				{
 					profileNames.add(profile.name);
 					storageHelper.save("ProfileNames", profileNames);
@@ -222,7 +222,7 @@ public class Profile
 			return wasSaveSuccessful;
 		};
 
-		Consumer<Boolean> saveToLocalStorageDone = (boolean wasSaveSuccessful) ->
+		Consumer<Boolean> saveToLocalStorageDone = (Boolean wasSaveSuccessful) ->
 		{
 			var message =
 			(
@@ -236,7 +236,7 @@ public class Profile
 				universe,
 				size,
 				DataBinding.fromContext(message),
-				() -> // acknowledge
+				(UniverseWorldPlaceEntities uwpe) -> // acknowledge
 				{
 					Venue venueNext = universe.controlBuilder.game
 					(
@@ -264,7 +264,7 @@ public class Profile
 			var messageAsDataBinding = DataBinding.fromContextAndGet
 			(
 				null, // context - Set below.
-				(VenueTask c) -> "Saving game..."
+				(Object c) -> "Saving game..."
 			);
 
 			var venueMessage = VenueMessage.fromMessage
@@ -276,9 +276,9 @@ public class Profile
 			(
 				venueMessage,
 				saveToLocalStorage,
-				(Universe universe, Object result) -> // done
+				(Universe universe2, Object result) -> // done
 				{
-					saveToLocalStorageDone(result);
+					saveToLocalStorageDone.accept(result);
 				}
 			);
 			messageAsDataBinding.contextSet(venueTask);
@@ -298,14 +298,14 @@ public class Profile
 					var world = universe.world;
 
 					world.dateSaved = DateTime.now();
-					var worldSerialized = universe.serializer.serialize(world, null);
+					var worldSerialized = universe.serializer.serialize(world, false);
 
 					var compressor = universe.storageHelper.compressor;
 					var worldCompressedAsBytes = compressor.compressStringToBytes(worldSerialized);
 
 					return worldCompressedAsBytes;
 				},
-				(Universe universe, int[] worldCompressedAsBytes) -> // done
+				(Universe universe2, int[] worldCompressedAsBytes) -> // done
 				{
 					var wasSaveSuccessful = (worldCompressedAsBytes != null);
 					var message =
@@ -315,33 +315,33 @@ public class Profile
 
 					new FileHelper().saveBytesToFileWithName
 					(
-						worldCompressedAsBytes, universe.world.name + ".json.lzw"
+						worldCompressedAsBytes, universe2.world.name + ".json.lzw"
 					);
 
-					var controlMessage = universe.controlBuilder.message
+					var controlMessage = universe2.controlBuilder.message
 					(
-						universe,
+						universe2,
 						size,
 						DataBinding.fromContext(message),
-						() -> // acknowledge
+						(UniverseWorldPlaceEntities uwpe) -> // acknowledge
 						{
-							Venue venueNext = universe.controlBuilder.game
+							Venue venueNext = universe2.controlBuilder.game
 							(
-								universe, null, universe.venueCurrent
+								universe, null, universe2.venueCurrent
 							).toVenue();
 							venueNext = VenueFader.fromVenuesToAndFrom
 							(
-								venueNext, universe.venueCurrent
+								venueNext, universe2.venueCurrent
 							);
-							universe.venueNext = venueNext;
+							universe2.venueNext = venueNext;
 						},
 						null
 					);
 
-					var venueMessage = controlMessage.toVenue();
-					universe.venueNext = VenueFader.fromVenuesToAndFrom
+					var venueMessage2 = controlMessage.toVenue();
+					universe2.venueNext = VenueFader.fromVenuesToAndFrom
 					(
-						venueMessage, universe.venueCurrent
+						venueMessage2, universe2.venueCurrent
 					);
 				}
 			);
@@ -352,7 +352,7 @@ public class Profile
 			);
 		};
 
-		var loadFromFile = () -> // click
+		Runnable loadFromFile = () -> // click
 		{
 			var venueFileUpload = new VenueFileUpload(null, null);
 
@@ -468,7 +468,7 @@ public class Profile
 					+ saveStateSelected.timeSaved.toStringYYYY_MM_DD_HH_MM_SS()
 					+ "\"?",
 				universe.venueCurrent,
-				deleteSaveSelectedConfirm,
+				(UniverseWorldPlaceEntities uwpe) -> deleteSaveSelectedConfirm.run(),
 				null // cancel
 			);
 
@@ -482,8 +482,8 @@ public class Profile
 
 		Runnable saveToLocalStorageOverwritingSlotSelected = () ->
 		{
-			deleteSaveSelectedConfirm();
-			saveToLocalStorageAsNewSlot();
+			deleteSaveSelectedConfirm.run();
+			saveToLocalStorageAsNewSlot.run();
 		};
 
 		var returnValue = new ControlContainer
@@ -740,7 +740,7 @@ public class Profile
 					"Back",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					back // click
 				),
 			},
@@ -940,11 +940,11 @@ public class Profile
 		{
 			var profileSelected = universe.profile;
 
-			var storageHelper = universe.storageHelper;
-			storageHelper.delete(profileSelected.name);
-			var profileNames = storageHelper.load("ProfileNames");
-			ArrayHelper.remove(profileNames, profileSelected.name);
-			storageHelper.save("ProfileNames", profileNames);
+			var storageHelper2 = universe.storageHelper;
+			storageHelper2.delete(profileSelected.name);
+			var profileNames2 = storageHelper2.load("ProfileNames");
+			ArrayHelper.remove(profileNames2, profileSelected.name);
+			storageHelper2.save("ProfileNames", profileNames2);
 		};
 
 		Runnable deleteProfile = () ->
@@ -1076,7 +1076,7 @@ public class Profile
 					"Back",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						var venueNext = venuePrev;

@@ -3,6 +3,7 @@ package GameFramework.Input;
 
 import java.util.*;
 
+import GameFramework.Helpers.*:
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 

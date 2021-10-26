@@ -5,9 +5,9 @@ import GameFramework.Storage.Compressor.*;
 
 public class StorageHelper
 {
-	private String propertyNamePrefix;
-	private Serializer serializer;
-	private CompressorLZW compressor;
+	public String propertyNamePrefix;
+	public Serializer serializer;
+	public CompressorLZW compressor;
 
 	public StorageHelper
 	(

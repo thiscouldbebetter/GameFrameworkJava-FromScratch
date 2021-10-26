@@ -255,7 +255,7 @@ public class VisualBuilder
 		(
 			new Path
 			(
-				new Visual[]
+				new Coords[]
 				{
 					new Coords(0, -legLength, 0),
 					new Coords(0, legLength, 0),
@@ -437,7 +437,7 @@ public class VisualBuilder
 				{
 					var headingCount = 4;
 					var headingIndex =
-						Math.floor(entityForwardInTurns * headingCount); // todo
+						(int)Math.floor(entityForwardInTurns * headingCount); // todo
 					var entitySpeed = entityLoc.vel.magnitude();
 					String[] namesByHeading;
 					var speedMin = 0.2;
@@ -479,7 +479,7 @@ public class VisualBuilder
 			this.circleWithEyesAndLegs(circleRadius, circleColor, eyeRadius, visualEyes);
 
 		var visualNone = new VisualNone();
-		var Visual visualWieldable = new VisualDynamic
+		Visual visualWieldable = new VisualDynamic
 		(
 			(UniverseWorldPlaceEntities uwpe) ->
 			{
@@ -698,7 +698,7 @@ public class VisualBuilder
 	public Visual flame(double dimension)
 	{
 		var dimensionHalf = dimension / 2;
-		var flameVisualStatic = new VisualGroup
+		Visual flameVisualStatic = new VisualGroup
 		(
 			new Visual[]
 			{

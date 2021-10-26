@@ -32,7 +32,7 @@ public class Selector implements EntityProperty, Clonable<Selector>
 		this._entitySelect = entitySelect;
 		this._entityDeselect = entityDeselect;
 
-		this.entitiesSelected = new Array<Entity>();
+		this.entitiesSelected = new ArrayList<Entity>();
 
 		var cursorRadius = this.cursorDimension / 2;
 		var visualCursor = new VisualGroup

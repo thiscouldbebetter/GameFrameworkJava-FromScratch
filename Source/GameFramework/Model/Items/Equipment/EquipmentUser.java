@@ -333,7 +333,7 @@ public class EquipmentUser implements EntityProperty
 		var sockets = this.socketGroup.sockets;
 		var socketDefnGroup = this.socketGroup.defnGroup;
 
-		var itemCategoriesForAllSockets = new ItemCategory[sockets.length];
+		var itemCategoriesForAllSockets = new ArrayList<ItemCategory>();
 		for (var i = 0; i < sockets.length; i++)
 		{
 			var socket = sockets[i];
@@ -344,7 +344,7 @@ public class EquipmentUser implements EntityProperty
 				var categoryName = socketCategoryNames[j];
 				if (itemCategoriesForAllSockets.indexOf(categoryName) == -1)
 				{
-					itemCategoriesForAllSockets.push(categoryName);
+					itemCategoriesForAllSockets.add(categoryName);
 				}
 			}
 		}
@@ -558,17 +558,17 @@ public class EquipmentUser implements EntityProperty
 
 			new ActorAction[]
 			{
-				new ActorAction("Back", back),
-				new ActorAction("EquipItemSelectedInQuickSlot0", () -> equipItemSelectedInQuickSlot(0)),
-				new ActorAction("EquipItemSelectedInQuickSlot1", () -> equipItemSelectedInQuickSlot(1)),
-				new ActorAction("EquipItemSelectedInQuickSlot2", () -> equipItemSelectedInQuickSlot(2)),
-				new ActorAction("EquipItemSelectedInQuickSlot3", () -> equipItemSelectedInQuickSlot(3)),
-				new ActorAction("EquipItemSelectedInQuickSlot4", () -> equipItemSelectedInQuickSlot(4)),
-				new ActorAction("EquipItemSelectedInQuickSlot5", () -> equipItemSelectedInQuickSlot(5)),
-				new ActorAction("EquipItemSelectedInQuickSlot6", () -> equipItemSelectedInQuickSlot(6)),
-				new ActorAction("EquipItemSelectedInQuickSlot7", () -> equipItemSelectedInQuickSlot(7)),
-				new ActorAction("EquipItemSelectedInQuickSlot8", () -> equipItemSelectedInQuickSlot(8)),
-				new ActorAction("EquipItemSelectedInQuickSlot9", () -> equipItemSelectedInQuickSlot(9))
+				new ActorAction("Back", (UniverseWorldPlaceEntities uwpe) -> back.run() ),
+				new ActorAction("EquipItemSelectedInQuickSlot0", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(0)),
+				new ActorAction("EquipItemSelectedInQuickSlot1", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(1)),
+				new ActorAction("EquipItemSelectedInQuickSlot2", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(2)),
+				new ActorAction("EquipItemSelectedInQuickSlot3", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(3)),
+				new ActorAction("EquipItemSelectedInQuickSlot4", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(4)),
+				new ActorAction("EquipItemSelectedInQuickSlot5", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(5)),
+				new ActorAction("EquipItemSelectedInQuickSlot6", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(6)),
+				new ActorAction("EquipItemSelectedInQuickSlot7", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(7)),
+				new ActorAction("EquipItemSelectedInQuickSlot8", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(8)),
+				new ActorAction("EquipItemSelectedInQuickSlot9", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(9))
 			},
 
 			new ActionToInputsMapping[]

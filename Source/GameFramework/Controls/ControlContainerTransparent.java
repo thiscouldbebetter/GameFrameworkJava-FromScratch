@@ -130,9 +130,9 @@ public class ControlContainerTransparent extends ControlContainer
 		);
 
 		var children = this.containerInner.children;
-		for (var i = 0; i < children.length; i++)
+		for (var i = 0; i < children.size(); i++)
 		{
-			var child = children[i];
+			var child = children.get(i);
 			child.draw(universe, display, drawLoc, style);
 		}
 	}

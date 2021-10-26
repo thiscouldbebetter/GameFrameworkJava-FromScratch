@@ -1,10 +1,14 @@
 
 package GameFramework.Display;
 
+import java.util.*;
+
+import GameFramework.Display.Visuals.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 import GameFramework.Storage.*;
+import GameFramework.Storage.TarFiles.*;;
 
 public class DisplayRecorder
 {
@@ -12,7 +16,7 @@ public class DisplayRecorder
 	public int bufferSizeInFrames;
 	public boolean isCircular;
 
-	public Object[] framesRecordedAsArrayBuffers;
+	public List<Object> framesRecordedAsArrayBuffers;
 	public boolean isRecording;
 
 	public boolean shouldDownload; // test
@@ -26,7 +30,7 @@ public class DisplayRecorder
 		this.bufferSizeInFrames = bufferSizeInFrames;
 		this.isCircular = isCircular;
 
-		this.framesRecordedAsArrayBuffers = new ArrayList<ArrayBuffer>();
+		this.framesRecordedAsArrayBuffers = new ArrayList<Object>();
 		this.isRecording = false;
 
 		this.shouldDownload = false;
@@ -37,7 +41,7 @@ public class DisplayRecorder
 		return new ActorAction
 		(
 			"Recording Start/Stop",
-			DisplayRecorder.actionStartStopPerform
+			(UniverseWorldPlaceEntities uwpe) -> DisplayRecorder.actionStartStopPerform(uwpe)
 		);
 	}
 
@@ -140,7 +144,7 @@ public class DisplayRecorder
 		var scriptAsBytes = ByteHelper.stringUTF8ToBytes(script);
 		var scriptAsTarFileEntry =
 			TarFileEntry.fileNew("PngsToGif.sh", scriptAsBytes);
-		framesRecordedAsTarFile.entries.push(scriptAsTarFileEntry);
+		framesRecordedAsTarFile.entries.add(scriptAsTarFileEntry);
 
 		framesRecordedAsTarFile.downloadAs(fileNameToSaveAs);
 	}

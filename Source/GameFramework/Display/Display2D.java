@@ -45,6 +45,14 @@ public class Display2D extends JPanel implements Display, Platformable
 		);
 	}
 
+	public static Display2D fromSizeAndIsInvisible
+	(
+		Coords sizeInPixels, boolean isInvisible
+	)
+	{
+		return Display2D.fromSize(sizeInPixels, isInvisible);
+	}
+
 	public void drawRectangle(Coords pos, Coords size)
 	{
 		this.graphics.setColor(java.awt.Color.BLUE);

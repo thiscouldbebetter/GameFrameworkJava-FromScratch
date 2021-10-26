@@ -44,7 +44,7 @@ public class Camera implements EntityProperty
 		(
 			this.loc.pos, viewColliderSize
 		);
-		this.entitiesInView = new Array<Entity>();
+		this.entitiesInView = new ArrayList<Entity>();
 
 		this._posSaved = Coords.create();
 	}
@@ -66,10 +66,10 @@ public class Camera implements EntityProperty
 		{
 			this._clipPlanes = new Plane[]
 			{
-				new Plane(Coords._create(), 0),
-				new Plane(Coords._create(), 0),
-				new Plane(Coords._create(), 0),
-				new Plane(Coords._create(), 0),
+				new Plane(Coords.create(), 0),
+				new Plane(Coords.create(), 0),
+				new Plane(Coords.create(), 0),
+				new Plane(Coords.create(), 0),
 			};
 		}
 
@@ -191,7 +191,7 @@ public class Camera implements EntityProperty
 
 		cameraOrientation.projectCoordsRDF(viewCoords);
 
-		if (this.focalLength != null)
+		if (this.focalLength != 0)
 		{
 			var viewCoordsZ = viewCoords.z;
 			if (viewCoordsZ != 0)
@@ -230,8 +230,10 @@ public class Camera implements EntityProperty
 
 	public List<Entity> drawEntitiesInView_1_FindEntitiesInView
 	(
-		Place place, Entity cameraEntity,
-		CollisionHelper collisionHelper, Entity entitiesInView[]
+		Place place,
+		Entity cameraEntity,
+		CollisionHelper collisionHelper,
+		List<Entity> entitiesInView
 	)
 	{
 		var collisionTracker = place.collisionTracker();
@@ -255,8 +257,11 @@ public class Camera implements EntityProperty
 
 	private List<Entity> drawEntitiesInView_1_FindEntitiesInView_WithTracker
 	(
-		Place place, Entity cameraEntity, CollisionHelper collisionHelper,
-		Entity entitiesInView[], CollisionTracker collisionTracker
+		Place place,
+		Entity cameraEntity,
+		CollisionHelper collisionHelper,
+		List<Entity> entitiesInView,
+		CollisionTracker collisionTracker
 	)
 	{
 		var cameraCollidable = cameraEntity.collidable();
@@ -264,7 +269,7 @@ public class Camera implements EntityProperty
 		cameraCollidable.entitiesAlreadyCollidedWith.length = 0;
 		var collisions = collisionTracker.entityCollidableAddAndFindCollisions
 		(
-			cameraEntity, collisionHelper, new Array<Collision>()
+			cameraEntity, collisionHelper, new ArrayList<Collision>()
 		);
 		var entitiesCollidedWith = collisions.map(x -> x.entitiesColliding[1]);
 		var entitiesInView = entitiesCollidedWith.filter(x -> x.drawable() != null);
@@ -279,7 +284,9 @@ public class Camera implements EntityProperty
 
 	private List<Entity> drawEntitiesInView_1_FindEntitiesInView_WithoutTracker
 	(
-		Place place, CollisionHelper collisionHelper, Entity entitiesInView[]
+		Place place,
+		CollisionHelper collisionHelper,
+		List<Entity> entitiesInView
 	)
 	{
 		entitiesInView.length = 0;
@@ -326,7 +333,8 @@ public class Camera implements EntityProperty
 
 	private void drawEntitiesInView_2_Draw
 	(
-		UniverseWorldPlaceEntities uwpe, Display display,
+		UniverseWorldPlaceEntities uwpe,
+		Display display,
 		List<Entity> entitiesInView
 	)
 	{
@@ -351,7 +359,7 @@ public class Camera implements EntityProperty
 		}
 	}
 
-	private List<Entity> entitiesInViewSort(Entity entitiesToSort[])
+	private List<Entity> entitiesInViewSort(List<Entity> entitiesToSort)
 	{
 		var entitiesSorted = null;
 

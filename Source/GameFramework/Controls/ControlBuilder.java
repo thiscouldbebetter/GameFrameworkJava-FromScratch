@@ -17,6 +17,7 @@ import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 import GameFramework.Model.Places.*;
 import GameFramework.Profiles.*;
+import GameFramework.Utility.*;
 
 public class ControlBuilder
 {
@@ -557,7 +558,7 @@ public class ControlBuilder
 				),
 			},
 
-			new ActorAction[] { new ActorAction("Back", () -> back) },
+			new ActorAction[] { new ActorAction("Back", (UniverseWorldPlaceEntities uwpe) -> back.run() ) },
 
 			new ActionToInputsMapping[]
 			{
@@ -678,7 +679,7 @@ public class ControlBuilder
 				Venue venueNext2 = venuePrev;
 				venueNext2 = controlBuilder.venueTransitionalFromTo
 				(
-					universe.venueCurrent, venueNext
+					universe.venueCurrent, venueNext2
 				);
 				universe.venueNext = venueNext2;
 			};
@@ -704,7 +705,7 @@ public class ControlBuilder
 
 			actions.add
 			(
-				new ActorAction("Back", back)
+				new ActorAction("Back", (UniverseWorldPlaceEntities uwpe) -> back.run() )
 			);
 
 			returnValue.actions = actions.toArray
@@ -856,7 +857,7 @@ public class ControlBuilder
 					DataBinding.fromContextAndGet
 					(
 						placeDefn,
-						(PlaceDefn c) -> c.actionToInputsMappingSelected
+						(PlaceDefn c) -> (c.actionToInputsMappingSelected != null)
 					), // isEnabled
 					() -> // click
 					{
@@ -925,7 +926,7 @@ public class ControlBuilder
 							size,
 							"Are you sure you want to restore defaults?",
 							venueInputs,
-							() -> // confirm
+							(UniverseWorldPlaceEntities uwpe) -> // confirm
 							{
 								placeDefn.actionToInputsMappingsRestoreDefaults();
 							},
@@ -975,7 +976,7 @@ public class ControlBuilder
 						(PlaceDefn c) ->
 						{
 							var mappings = c.actionToInputsMappingsEdited;
-							var doAnyActionsLackInputs = mappings.stream().anyMatch
+							var doAnyActionsLackInputs = Arrays.stream(mappings).anyMatch
 							(
 								(ActionToInputsMapping x) -> (x.inputNames.size() == 0)
 							);
@@ -1130,7 +1131,7 @@ public class ControlBuilder
 
 		var fontHeight = this.fontHeightInPixelsBase;
 
-		var goToVenueNext = () ->
+		Runnable goToVenueNext = () ->
 		{
 			universe.soundHelper.soundsAllStop(universe);
 
@@ -1169,7 +1170,7 @@ public class ControlBuilder
 					"imageProducer",
 					this._zeroes.clone(),
 					this.sizeBase.clone(), // size
-					DataBinding.fromContext<Visual>(visual),
+					DataBinding.fromContext(visual),
 					null, null // colors
 				),
 
@@ -1348,7 +1349,7 @@ public class ControlBuilder
 						var display = (Display2D)displayAsDisplay;
 						var platformHelper = universe.platformHelper;
 						platformHelper.platformableRemove(display);
-						display.sizeInPixels(displaySizeSpecified);
+						display.sizeInPixelsSet(displaySizeSpecified);
 						//display.canvas = null; // hack
 						display.initialize(universe);
 						platformHelper.initialize();
@@ -1398,7 +1399,10 @@ public class ControlBuilder
 				),
 			},
 
-			new ActorAction[] { new ActorAction("Back", back) },
+			new ActorAction[]
+			{
+				new ActorAction("Back", (UniverseWorldPlaceEntities uwpe) -> back.run())
+			},
 
 			new ActionToInputsMapping[]
 			{
@@ -1433,14 +1437,14 @@ public class ControlBuilder
 		var scaleMultiplier =
 			this._scaleMultiplier.overwriteWith(size).divide(this.sizeBase);
 
-		var controlsForSlides = new ArrayList<Object>();
+		var controlsForSlides = new ArrayList<ControlBase>();
 
 		Consumer<Double> nextDefn = (Double slideIndexNext) -> // click
 		{
 			var venueNext;
-			if (slideIndexNext < controlsForSlides.length)
+			if (slideIndexNext < controlsForSlides.size())
 			{
-				var controlForSlideNext = controlsForSlides[slideIndexNext];
+				var controlForSlideNext = controlsForSlides.get(slideIndexNext);
 				venueNext = controlForSlideNext.toVenue();
 			}
 			else
@@ -1468,7 +1472,7 @@ public class ControlBuilder
 			var imageName = imageNameAndMessage[0];
 			var message = imageNameAndMessage[1];
 
-			var next = nextDefn.bind(this, i + 1);
+			var next = nextDefn.apply(i + 1);
 
 			var containerSlide = new ControlContainer
 			(
@@ -1483,7 +1487,7 @@ public class ControlBuilder
 						"imageSlide",
 						this._zeroes,
 						this.sizeBase.clone(), // size
-						DataBinding.fromContext<Visual>
+						DataBinding.fromContext
 						(
 							new VisualImageScaled
 							(
@@ -1558,13 +1562,13 @@ public class ControlBuilder
 				venueMessage,
 				() ->
 					Profile.toControlProfileSelect(universe, null, universe.venueCurrent),
-				(Universe universe, Object result) -> // done
+				(Universe universe2, Object result) -> // done
 				{
 					var venueProfileSelect = result.toVenue();
 
-					universe.venueNext = controlBuilder.venueTransitionalFromTo
+					universe2.venueNext = controlBuilder.venueTransitionalFromTo
 					(
-						universe.venueCurrent, venueProfileSelect
+						universe2.venueCurrent, venueProfileSelect
 					);
 				}
 			);
@@ -1618,8 +1622,16 @@ public class ControlBuilder
 
 			new ActorAction[]
 			{
-				new ActorAction( ControlActionNames.Instances().ControlCancel, start ),
-				new ActorAction( ControlActionNames.Instances().ControlConfirm, start )
+				new ActorAction
+				(
+					ControlActionNames.Instances().ControlCancel,
+					(UniverseWorldPlaceEntities uwpe) -> start.run()
+				),
+				new ActorAction
+				(
+					ControlActionNames.Instances().ControlConfirm,
+					(UniverseWorldPlaceEntities uwpe) -> start
+				)
 			},
 
 			null // mappings
@@ -1718,10 +1730,10 @@ public class ControlBuilder
 					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
-						var world = universe.world;
-						var venueWorld = world.toVenue();
+						var world2 = universe.world;
+						var venueWorld = world2.toVenue();
 						Venue venueNext;
-						if (world.dateSaved != null)
+						if (world2.dateSaved != null)
 						{
 							venueNext = venueWorld;
 						}
@@ -1875,21 +1887,21 @@ public class ControlBuilder
 				() -> // perform
 				{
 					var profile = universe.profile;
-					var saveStateSelected = profile.saveStateSelected;
+					var saveStateSelected = profile.saveStateSelected();
 					return storageHelper.load(saveStateSelected.name);
 				},
-				(Universe universe, SaveState saveStateReloaded) -> // done
+				(Universe universe2, SaveState saveStateReloaded) -> // done
 				{
-					universe.world = saveStateReloaded.world;
+					universe2.world = saveStateReloaded.world;
 					Venue venueNext = universe.controlBuilder.worldLoad
 					(
-						universe, null
+						universe2, null
 					).toVenue();
 					venueNext = controlBuilder.venueTransitionalFromTo
 					(
-						universe.venueCurrent, venueNext
+						universe2.venueCurrent, venueNext
 					);
-					universe.venueNext = venueNext;
+					universe2.venueNext = venueNext;
 				}
 			);
 

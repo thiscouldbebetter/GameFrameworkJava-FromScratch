@@ -13,7 +13,7 @@ public class TimerHelper
 	
 	public int ticksSoFar;
 
-	public TimerHelper(double ticksPerSecond)
+	public TimerHelper(int ticksPerSecond)
 	{
 		this.ticksPerSecond = ticksPerSecond;
 

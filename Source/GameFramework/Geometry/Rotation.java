@@ -7,9 +7,9 @@ import GameFramework.Utility.*;
 public class Rotation
 {
 	public Coords axis;
-	public Reference angleInTurnsRef;
+	public Reference<Double> angleInTurnsRef;
 
-	public Rotation(Coords axis, Reference angleInTurnsRef)
+	public Rotation(Coords axis, Reference<Double> angleInTurnsRef)
 	{
 		this.axis = axis;
 		this.angleInTurnsRef = angleInTurnsRef;

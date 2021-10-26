@@ -1,7 +1,9 @@
 
 package GameFramework.Model;
 
-public interface EntityProperty
+import GameFramework.Utility.*;
+
+public interface EntityProperty implements Clonable<EntityProperty>
 {
 	void finalize(UniverseWorldPlaceEntities uwpe);
 	void initialize(UniverseWorldPlaceEntities uwpe);

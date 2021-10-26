@@ -1,6 +1,8 @@
 
 package GameFramework.Storage.TarFiles;
 
+import java.util.*;
+
 public class TarFile
 {
 	public String fileName;
@@ -22,7 +24,7 @@ public class TarFile
 	{
 		var reader = new ByteStreamFromBytes(bytes);
 
-		var entries = new Array<TarFileEntry>();
+		var entries = new ArrayList<TarFileEntry>();
 
 		var chunkSize = TarFile.ChunkSize;
 
@@ -126,7 +128,7 @@ public class TarFile
 	{
 		this.toBytes_PrependLongPathEntriesAsNeeded();
 
-		var fileAsBytes = new Array<int>();
+		var fileAsBytes = new ArrayList<int>();
 
 		// hack - For easier debugging.
 		var entriesAsByteArrays = this.entries.map(x => x.toBytes());

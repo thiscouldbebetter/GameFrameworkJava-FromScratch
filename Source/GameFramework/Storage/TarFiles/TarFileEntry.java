@@ -20,7 +20,7 @@ public class TarFileEntry
 	{
 		var header = TarFileEntryHeader.directoryNew(directoryName);
 
-		var entry = new TarFileEntry(header, new Array<int>());
+		var entry = new TarFileEntry(header, new ArrayList<int>());
 
 		return entry;
 	}

@@ -9,6 +9,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Collisions.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Items.*;
 import GameFramework.Utility.*;
 
 public class Place implements Namable
@@ -296,7 +297,10 @@ public class Place implements Namable
 		var playerControllable = player.controllable();
 		var returnValue = playerControllable.toControl
 		(
-			universe, universe.display.sizeInPixels(), player, null, false
+			new UniverseWorldPlaceEntities
+			(
+				universe, world, this, player, null
+			)
 		);
 		return returnValue;
 	}

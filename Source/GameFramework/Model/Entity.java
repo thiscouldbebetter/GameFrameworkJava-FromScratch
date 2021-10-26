@@ -30,7 +30,7 @@ public class Entity //
 		for (var i = 0; i < this.properties.length; i++)
 		{
 			var property = this.properties[i];
-			var propertyName = property.constructor.class.name;
+			var propertyName = property.getClass().getName();
 			this.propertiesByName.put(propertyName, property);
 		}
 	}
@@ -42,10 +42,7 @@ public class Entity //
 		for (var p = 0; p < entityProperties.length; p++)
 		{
 			var property = entityProperties[p];
-			if (property.finalize != null)
-			{
-				property.finalize(uwpe);
-			}
+			property.finalize(uwpe);
 		}
 		return this;
 	}
@@ -57,10 +54,7 @@ public class Entity //
 		for (var p = 0; p < entityProperties.length; p++)
 		{
 			var property = entityProperties[p];
-			if (property.initialize != null)
-			{
-				property.initialize(uwpe);
-			}
+			property.initialize(uwpe);
 		}
 		return this;
 	}
@@ -72,7 +66,7 @@ public class Entity //
 
 	public Entity propertyAddForPlace(EntityProperty propertyToAdd, Place place)
 	{
-		this.properties.push(propertyToAdd);
+		this.properties.add(propertyToAdd);
 		this.propertiesByName.put
 		(
 			propertyToAdd.getClass().getName(), propertyToAdd
@@ -81,7 +75,7 @@ public class Entity //
 		{
 			if (place.entities.indexOf(this) >= 0)
 			{
-				var propertyName = propertyToAdd.constructor.class.name;
+				var propertyName = propertyToAdd.getClass().getName();
 				var entitiesWithProperty = place.entitiesByPropertyName(propertyName);
 				entitiesWithProperty.add(this);
 			}
@@ -100,7 +94,7 @@ public class Entity //
 	)
 	{
 		ArrayHelper.remove(this.properties, propertyToRemove);
-		this.propertiesByName.delete(propertyToRemove.constructor.class.name);
+		this.propertiesByName.delete(propertyToRemove.getClass().getName());
 		if (place != null)
 		{
 			var propertyName = propertyToRemove.constructor.class.name;
@@ -131,18 +125,11 @@ public class Entity //
 	public Entity clone()
 	{
 		var nameCloned = this.name; // + IDHelper.Instance().idNext();
-		var propertiesCloned = EntityProperty[this.properties.length];
+		var propertiesCloned = new EntityProperty[this.properties.length];
 		for (var i = 0; i < this.properties.length; i++)
 		{
 			var property = this.properties[i];
-			var propertyAsAny = (Object)property;
-			var propertyClonedAsObject =
-			(
-				propertyAsAny.clone == null
-				? propertyAsAny
-				: propertyAsAny.clone()
-			);
-			var propertyCloned = (EntityProperty)propertyClonedAsObject;
+			var propertyCloned = property.clone();
 			propertiesCloned[i] = propertyCloned;
 		}
 		var returnValue = new Entity
@@ -194,19 +181,19 @@ public class Entity //
 	public Killable killable() { return (Killable)(this.propertyByName(Killable.class.name) ); }
 	public Loadable loadable() { return (Loadable)(this.propertyByName(Loadable.class.name) ); }
 	public Locatable locatable() { return (Locatable)(this.propertyByName(Locatable.class.name) ); }
-	//public Movable movable() { return this.propertyByName(Movable.class.name) as Movable; }
+	public Movable movable() { return (Movable)this.propertyByName(Movable.class.name); }
 	//public Obstacle obstacle() { return this.propertyByName(Obstacle.class.name) as Obstacle; }
 	//public Phased phased() { return this.propertyByName(Phased.class.name) as Phased; }
 	//public Recurrent recurrent() { return this.propertyByName(Recurrent.class.name) as Recurrent; }
 	//public Perceptible perceptible() { return this.propertyByName(Perceptible.class.name) as Perceptible; }
 	//public Perceptor perceptor() { return this.propertyByName(Perceptor.class.name) as Perceptor; }
-	//public Playable playable() { return this.propertyByName(Playable.class.name) as Playable; }
+	public Playable playable() { return (Playable)this.propertyByName(Playable.class.name); }
 	//public Portal portal() { return this.propertyByName(Portal.class.name) as Portal; }
 	//public ProjectileGenerator projectileGenerator() { return this.propertyByName(ProjectileGenerator.class.name) as ProjectileGenerator; }
 	//public Selectable selectable() { return this.propertyByName(Selectable.class.name) as Selectable; }
 	public Selector selector() { return (Selector)this.propertyByName(Selector.class.name); }
 	//public SkillLearner skillLearner() { return this.propertyByName(SkillLearner.class.name) as SkillLearner; }
-	//public Starvable starvable() { return this.propertyByName(Starvable.class.name) as Starvable; }
+	//public Starvable s	tarvable() { return this.propertyByName(Starvable.class.name) as Starvable; }
 	//public Talker talker() { return this.propertyByName(Talker.class.name) as Talker; }
 	//public Tirable tirable() { return this.propertyByName(Tirable.class.name) as Tirable; }
 	//public Traversable traversable() { return this.propertyByName(Traversable.class.name) as Traversable; }
