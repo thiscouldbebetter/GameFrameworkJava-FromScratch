@@ -1,6 +1,8 @@
 
 package GameFramework.Model.Items.Equipment;
 
+import GameFramework.Model.*;
+
 public class EquipmentSocket //
 {
 	public String defnName;

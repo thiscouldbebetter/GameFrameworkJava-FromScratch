@@ -1,6 +1,7 @@
 
 package GameFramework.Geometry;
 
+import GameFramework.Helpers.*;
 import GameFramework.Utility.*;
 
 public class Rotation
@@ -16,7 +17,7 @@ public class Rotation
 
 	public double angleInTurns()
 	{
-		return this.angleInTurnsRef.value;
+		return this.angleInTurnsRef.get();
 	}
 
 	public Coords transformCoords(Coords coordsToTransform)

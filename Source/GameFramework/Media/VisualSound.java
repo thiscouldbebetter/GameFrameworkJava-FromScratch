@@ -2,7 +2,9 @@
 package GameFramework.Media;
 
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
+import GameFramework.Model.*;
 
 public class VisualSound implements Visual
 {

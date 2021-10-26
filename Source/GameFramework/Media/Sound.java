@@ -4,7 +4,7 @@ package GameFramework.Media;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class Sound implements Namable, Platformable
+public class Sound implements Namable
 {
 	public String _name;
 	public String sourcePath;
@@ -54,10 +54,12 @@ public class Sound implements Namable, Platformable
 	public void play(Universe universe, double volume)
 	{
 		// todo
+
 		// this.domElementBuild(universe, volume);
 		// this.domElement.currentTime = this.offsetInSeconds;
 
-		universe.platformHelper.platformableAdd(this);	}
+		//universe.platformHelper.platformableAdd(this);
+	}
 
 	public void reset()
 	{

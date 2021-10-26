@@ -5,9 +5,11 @@ import java.util.*;
 import java.util.function.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Geometry.*;
+import GameFramework.Model.Actors.*;
 import GameFramework.Utility.*;
 
-public class Selector implements EntityProperty, Clonable<Selector>, Controllable 
+public class Selector implements EntityProperty, Clonable<Selector> 
 {
 	public double cursorDimension;
 	private Consumer<UniverseWorldPlaceEntities> _entitySelect;
@@ -86,11 +88,11 @@ public class Selector implements EntityProperty, Clonable<Selector>, Controllabl
 
 	public static ActorAction actionEntityAtMouseClickPosSelect()
 	{
-		return new Action
+		return new ActorAction
 		(
 			"Recording Start/Stop",
 			Selector.actionEntityAtMouseClickPosSelectPerform
-		)
+		);
 	}
 
 	public static void actionEntityAtMouseClickPosSelectPerform
@@ -263,7 +265,8 @@ public class Selector implements EntityProperty, Clonable<Selector>, Controllabl
 			"visualPlayerSelection",
 			pos,
 			size,
-			[
+			new ControlBase[]
+			{
 				new ControlLabel
 				(
 					"labelSelected",
@@ -292,7 +295,7 @@ public class Selector implements EntityProperty, Clonable<Selector>, Controllabl
 					),
 					fontHeightInPixels
 				)
-			],
+			},
 			null, null
 		);
 
@@ -325,7 +328,7 @@ public class Selector implements EntityProperty, Clonable<Selector>, Controllabl
 		if (isEntitySelected)
 		{
 			var haloLoc = this.entityForHalo.locatable().loc;
-			var entitySelectedLoc = entitySelected.locatable().loc
+			var entitySelectedLoc = entitySelected.locatable().loc;
 			haloLoc.overwriteWith(entitySelectedLoc);
 			haloLoc.pos.z--;
 			var uwpeHalo = uwpe.clone().entitySet(this.entityForHalo);

@@ -11,6 +11,7 @@ import GameFramework.Model.Items.*;
 import GameFramework.Model.Items.Equipment.*;
 import GameFramework.Model.Physics.*;
 import GameFramework.Model.Places.*;
+import GameFramework.Utility.*;
 
 public class Entity //
 {

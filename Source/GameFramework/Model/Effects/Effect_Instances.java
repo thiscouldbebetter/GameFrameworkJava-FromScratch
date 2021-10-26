@@ -56,20 +56,23 @@ public class Effect_Instances
 			VisualPolygon.fromPathAndColorFill
 			(
 				new Path
-				([
-					new Coords(-0.5, -0.2, 0),
-					new Coords(-0.2, -0.2, 0),
-					new Coords(-0.2, -0.5, 0),
-					new Coords(0.2, -0.5, 0),
-					new Coords(0.2, -0.2, 0),
-					new Coords(0.5, -0.2, 0),
-					new Coords(0.5, 0.2, 0),
-					new Coords(0.2, 0.2, 0),
-					new Coords(0.2, 0.5, 0),
-					new Coords(-0.2, 0.5, 0),
-					new Coords(-0.2, 0.2, 0),
-					new Coords(-0.5, 0.2, 0)
-				]).transform
+				(
+					new Coords[]
+					{
+						new Coords(-0.5, -0.2, 0),
+						new Coords(-0.2, -0.2, 0),
+						new Coords(-0.2, -0.5, 0),
+						new Coords(0.2, -0.5, 0),
+						new Coords(0.2, -0.2, 0),
+						new Coords(0.5, -0.2, 0),
+						new Coords(0.5, 0.2, 0),
+						new Coords(0.2, 0.2, 0),
+						new Coords(0.2, 0.5, 0),
+						new Coords(-0.2, 0.5, 0),
+						new Coords(-0.2, 0.2, 0),
+						new Coords(-0.5, 0.2, 0)
+					}
+				).transform
 				(
 					Transform_Scale.fromScalar(visualDimension * 1.5)
 				),

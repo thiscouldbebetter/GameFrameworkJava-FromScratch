@@ -22,7 +22,7 @@ public class Disposition
 		Coords pos, Orientation orientation, String placeName
 	)
 	{
-		this.pos = pos || Coords.create();
+		this.pos = (pos != null ? pos : Coords.create());
 
 		if (orientation == null)
 		{

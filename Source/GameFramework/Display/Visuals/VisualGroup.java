@@ -6,6 +6,7 @@ import java.util.stream.*;
 import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Helpers.*;
+import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;

@@ -3,6 +3,8 @@ package GameFramework.Media;
 
 import java.util.*;
 
+import GameFramework.Helpers.*;
+
 public class VideoHelper
 {
 	public List<Video> videos;

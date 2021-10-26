@@ -673,7 +673,7 @@ public class ControlBuilder
 
 		if (includeResumeButton)
 		{
-			var back = () ->
+			Runnable back = () ->
 			{
 				Venue venueNext2 = venuePrev;
 				venueNext2 = controlBuilder.venueTransitionalFromTo
@@ -816,7 +816,7 @@ public class ControlBuilder
 						(PlaceDefn c) ->
 						{
 							var i = c.actionToInputsMappingSelected;
-							return (i == null ? "-" : i.inputNames.join(", "));
+							return (i == null ? "-" : String.join(", ", i.inputNames));
 						}
 					), // text
 					fontHeight
@@ -895,7 +895,9 @@ public class ControlBuilder
 						var mappingSelected = placeDefn.actionToInputsMappingSelected;
 						if (mappingSelected != null)
 						{
-							var mappingDefault = placeDefn.actionToInputsMappingsDefault.filter
+							var mappingsDefault =
+								placeDefn.actionToInputsMappingsDefault;
+							var mappingDefault = mappingsDefault.stream().filter
 							(
 								(ActionToInputsMapping x) -> (x.actionName == mappingSelected.actionName)
 							)[0];
@@ -973,7 +975,7 @@ public class ControlBuilder
 						(PlaceDefn c) ->
 						{
 							var mappings = c.actionToInputsMappingsEdited;
-							var doAnyActionsLackInputs = mappings.stream.anyMatch
+							var doAnyActionsLackInputs = mappings.stream().anyMatch
 							(
 								(ActionToInputsMapping x) -> (x.inputNames.size() == 0)
 							);
@@ -1040,7 +1042,7 @@ public class ControlBuilder
 
 		var fontHeight = this.fontHeightInPixelsBase;
 
-		Runnable goToVenueNext = () ->
+		Consumer<UniverseWorldPlaceEntities> goToVenueNext = (UniverseWorldPlaceEntities uwpe) ->
 		{
 			universe.soundHelper.soundsAllStop(universe);
 
@@ -1092,7 +1094,11 @@ public class ControlBuilder
 					fontHeight * 2,
 					false, // hasBorder
 					DataBinding.fromTrue(), // isEnabled
-					goToVenueNext // click
+					() ->
+						goToVenueNext.accept
+						(
+							UniverseWorldPlaceEntities.fromUniverse(universe)
+						) // click
 				)
 			}, // end children
 
@@ -1223,7 +1229,7 @@ public class ControlBuilder
 		var row3PosY = row2PosY + rowHeight;
 		var row4PosY = row3PosY + rowHeight;
 
-		var back = () ->
+		Runnable back = () ->
 		{
 			var venueNext = venuePrev;
 			venueNext = controlBuilder.venueTransitionalFromTo
@@ -1263,8 +1269,8 @@ public class ControlBuilder
 						(SoundHelper c, double v) -> c.musicVolume = v
 					), // valueSelected
 					SoundHelper.controlSelectOptionsVolume(), // options
-					DataBinding.fromGet((Object c) -> c.value), // bindingForOptionValues,
-					DataBinding.fromGet((Object c) -> { return c.text; }), // bindingForOptionText
+					DataBinding.fromGet((ControlSelectOption c) -> c.value), // bindingForOptionValues,
+					DataBinding.fromGet((ControlSelectOption c) -> { return c.text; }), // bindingForOptionText
 					fontHeight
 				),
 
@@ -1310,9 +1316,9 @@ public class ControlBuilder
 					"selectDisplaySize",
 					Coords.fromXY(70, row2PosY), // pos
 					Coords.fromXY(65, buttonHeight), // size
-					universe.display.sizeInPixels, // valueSelected
+					universe.display.sizeInPixels(), // valueSelected
 					// options
-					universe.display.sizesAvailable,
+					universe.display.sizesAvailable(),
 					DataBinding.fromGet( (Coords c) -> c ), // bindingForOptionValues,
 					DataBinding.fromGet( (Coords c) -> c.toStringXY() ), // bindingForOptionText
 					fontHeight
@@ -1342,12 +1348,12 @@ public class ControlBuilder
 						var display = (Display2D)displayAsDisplay;
 						var platformHelper = universe.platformHelper;
 						platformHelper.platformableRemove(display);
-						display.sizeInPixels = displaySizeSpecified;
+						display.sizeInPixels(displaySizeSpecified);
 						//display.canvas = null; // hack
 						display.initialize(universe);
 						platformHelper.initialize();
 
-						var venueNext = universe.controlBuilder.settings
+						Venue venueNext = universe.controlBuilder.settings
 						(
 							universe, null, (VenueControls)(universe.venueCurrent)
 						).toVenue();
@@ -1429,7 +1435,7 @@ public class ControlBuilder
 
 		var controlsForSlides = new ArrayList<Object>();
 
-		Consumer<double> nextDefn = (Double slideIndexNext) -> // click
+		Consumer<Double> nextDefn = (Double slideIndexNext) -> // click
 		{
 			var venueNext;
 			if (slideIndexNext < controlsForSlides.length)
@@ -1513,8 +1519,8 @@ public class ControlBuilder
 
 				new ActorAction[]
 				{
-					new ActorAction( ControlActionNames.Instances().ControlCancel, skip ),
-					new ActorAction( ControlActionNames.Instances().ControlConfirm, next )
+					new ActorAction( ControlActionNames.Instances().ControlCancel, (UniverseWorldPlaceEntities uwpe) -> skip.run() ),
+					new ActorAction( ControlActionNames.Instances().ControlConfirm, (UniverseWorldPlaceEntities uwpe) -> next.run() )
 				},
 
 				null // ?
@@ -1526,10 +1532,10 @@ public class ControlBuilder
 			controlsForSlides.add(containerSlide);
 		}
 
-		return controlsForSlides[0];
+		return controlsForSlides.get(0);
 	}
 
-	ControlBase title(Universe universe, Coords size)
+	public ControlBase title(Universe universe, Coords size)
 	{
 		var controlBuilder = this;
 
@@ -1543,7 +1549,7 @@ public class ControlBuilder
 
 		var fontHeight = this.fontHeightInPixelsBase;
 
-		var start = () ->
+		Runnable start = () ->
 		{
 			var venueMessage = VenueMessage.fromText("Loading profiles...");
 
@@ -1594,7 +1600,7 @@ public class ControlBuilder
 					"imageTitle",
 					this._zeroes.clone(),
 					this.sizeBase.clone(), // size
-					DataBinding.fromContext<Visual>(visual)
+					DataBinding.fromContext(visual)
 				),
 
 				ControlButton.from8
@@ -1714,7 +1720,7 @@ public class ControlBuilder
 					{
 						var world = universe.world;
 						var venueWorld = world.toVenue();
-						var venueNext;
+						Venue venueNext;
 						if (world.dateSaved != null)
 						{
 							venueNext = venueWorld;
@@ -1848,7 +1854,7 @@ public class ControlBuilder
 
 		var fontHeight = this.fontHeightInPixelsBase;
 
-		var confirm = () ->
+		Runnable confirm = () ->
 		{
 			var storageHelper = universe.storageHelper;
 
@@ -1895,7 +1901,7 @@ public class ControlBuilder
 			);
 		};
 
-		var cancel = () ->
+		Runnable cancel = () ->
 		{
 			Venue venueNext = controlBuilder.worldLoad(universe, null).toVenue();
 			venueNext = controlBuilder.venueTransitionalFromTo

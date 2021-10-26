@@ -113,7 +113,7 @@ public class Edge implements ShapeBase
 
 	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
 	{
-		var other = (Edge)otherAsShapeBase
+		var other = (Edge)otherAsShapeBase;
 		ArrayHelper.overwriteWith(this.vertices, other.vertices);
 		return this;
 	}

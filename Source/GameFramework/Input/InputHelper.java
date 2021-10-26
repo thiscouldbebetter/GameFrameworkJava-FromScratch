@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import GameFramework.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
@@ -70,8 +71,8 @@ public class InputHelper
 				{
 					var actionName = mapping.actionName;
 					var action = actionsByName.get(actionName);
-					returnValues.push(action);
-					if (mapping.inactivateInputWhenActorActionPerformed)
+					returnValues.add(action);
+					if (mapping.inactivateInputWhenActionPerformed)
 					{
 						inputPressed.isActive = false;
 					}
@@ -93,7 +94,7 @@ public class InputHelper
 		{
 			// hack - Allows use of this class
 			// without including PlatformHelper or Universe.
-			this.toJComponent(null);
+			this.toJComponent();
 		}
 		else
 		{
@@ -118,14 +119,14 @@ public class InputHelper
 		if (this.inputsPressedByName.containsKey(inputReleasedName))
 		{
 			var inputReleased = this.inputsPressedByName.get(inputReleasedName);
-			this.inputsPressedByName.delete(inputReleasedName);
+			this.inputsPressedByName.remove(inputReleasedName);
 			ArrayHelper.remove(this.inputsPressed, inputReleased);
 		}
 	}
 
 	public List<Input> inputsActive()
 	{
-		return this.inputsPressed.stream().filter( (x) -> x.isActive );
+		return this.inputsPressed.stream().filter( (x) -> x.isActive ).toList();
 	}
 
 	public void inputsRemoveAll()
@@ -236,7 +237,7 @@ public class InputHelper
 
 	// events - keyboard
 
-	public void keyDown(KeyEvent event)
+	public void keyPressed(KeyEvent event)
 	{
 		var inputPressed = "" + event.getKeyChar();
 
@@ -267,7 +268,7 @@ public class InputHelper
 		{
 			inputReleased = "__";
 		}
-		else if (inputPressed >= "0" && inputPressed <= "9")
+		else if (inputReleased >= "0" && inputReleased <= "9")
 		{
 			inputReleased = "_" + inputReleased;
 		}

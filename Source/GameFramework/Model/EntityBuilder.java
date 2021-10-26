@@ -2,7 +2,9 @@
 package GameFramework.Model;
 
 import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.Physics.*;
 
 public class EntityBuilder
 {

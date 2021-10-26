@@ -10,13 +10,13 @@ public class Damage
 {
 	public DiceRoll amountAsDiceRoll;
 	public String typeName;
-	public effectsAndChances: List<Pair<Effect,Double>>;
+	public List<Pair<Effect,Double>> effectsAndChances;
 
 	public Damage
 	(
 		DiceRoll amountAsDiceRoll,
 		String typeName,
-		effectsAndChances: List<Pair<Effect,Double>>
+		List<Pair<Effect,Double>> effectsAndChances
 	)
 	{
 		this.amountAsDiceRoll = amountAsDiceRoll;

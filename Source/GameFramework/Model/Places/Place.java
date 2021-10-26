@@ -39,7 +39,7 @@ public class Place implements Namable
 
 		this._entitiesByPropertyName = new HashMap<String,List<Entity>>();
 		this.entitiesToSpawn = new ArrayList<Entity>();
-		this.entitiesToSpawn.addAll(entities);
+		this.entitiesToSpawn.addAll(Arrays.asList(entities));
 		this.entitiesToRemove = new ArrayList<Entity>();
 		this.isLoaded = false;
 	}

@@ -27,7 +27,7 @@ public class IDHelper
 		this._idNext++;
 		if (this._idNext >= Integer.MAX_VALUE)
 		{
-			throw("IDHelper is out of IDs!");
+			throw new Exception("IDHelper is out of IDs!");
 		}
 		return returnValue;
 	}

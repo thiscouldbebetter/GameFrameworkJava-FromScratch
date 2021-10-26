@@ -367,21 +367,22 @@ public class ArrayHelper
 	{
 		return list[ Math.floor(randomizer.getNextRandom() * list.length) ];
 	}
+	*/
 
-	static remove(list: any[], elementToRemove: any): any[]
+	public static <T> List<T> remove(List<T> list, T elementToRemove)
 	{
 		var indexToRemoveAt = list.indexOf(elementToRemove);
 		if (indexToRemoveAt >= 0)
 		{
-			list.splice(indexToRemoveAt, 1);
+			list.remove(indexToRemoveAt);
 		}
 		return list;
 	}
 
-	static removeAt(list: any, index: number): any[]
+	public static <T> List<T> removeAt(List<T> list, int index)
 	{
-		list.splice(index, 1);
+		list.remove(index);
 		return list;
 	}
-	*/
+
 }

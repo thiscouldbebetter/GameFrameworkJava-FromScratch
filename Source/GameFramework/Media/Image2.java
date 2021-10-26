@@ -1,6 +1,7 @@
 
 package GameFramework.Media;
 
+import GameFramework.Geometry.*;
 import GameFramework.Utility.*;
 
 public class Image2 implements MediaLibraryItem, Namable

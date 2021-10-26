@@ -1,21 +1,21 @@
 
 package GameFramework.Utility;
 
-public class Reference
+public class Reference<T>
 {
-	Object value;
+	private T value;
 
-	public Reference(Object value)
+	public Reference(T value)
 	{
 		this.value = value;
 	}
 
-	public Object get()
+	public T get()
 	{
 		return this.value;
 	}
 
-	public Object set(Object valueToSet)
+	public T set(T valueToSet)
 	{
 		this.value = valueToSet;
 		return this.value;

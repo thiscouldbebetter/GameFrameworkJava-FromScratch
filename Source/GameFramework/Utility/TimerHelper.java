@@ -6,10 +6,12 @@ import GameFramework.Model.Places.*;
 
 public class TimerHelper
 {
-	public double ticksPerSecond;
+	public int ticksPerSecond;
 
 	private int millisecondsPerTick;
 	private boolean isRunning;
+	
+	public int ticksSoFar;
 
 	public TimerHelper(double ticksPerSecond)
 	{

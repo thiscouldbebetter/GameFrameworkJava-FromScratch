@@ -1,8 +1,10 @@
 
 package GameFramework.Display;
 
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
+import GameFramework.Storage.*;
 
 public class DisplayRecorder
 {
@@ -24,7 +26,7 @@ public class DisplayRecorder
 		this.bufferSizeInFrames = bufferSizeInFrames;
 		this.isCircular = isCircular;
 
-		this.framesRecordedAsArrayBuffers = new Array<ArrayBuffer>();
+		this.framesRecordedAsArrayBuffers = new ArrayList<ArrayBuffer>();
 		this.isRecording = false;
 
 		this.shouldDownload = false;
@@ -32,7 +34,7 @@ public class DisplayRecorder
 
 	public static ActorAction actionStartStop()
 	{
-		return new Action
+		return new ActorAction
 		(
 			"Recording Start/Stop",
 			DisplayRecorder.actionStartStopPerform
@@ -59,7 +61,7 @@ public class DisplayRecorder
 
 	public void clear()
 	{
-		this.framesRecordedAsArrayBuffers.clear();
+		ArrayHelper.clear(this.framesRecordedAsArrayBuffers);
 	}
 
 	public void frameRecord(Display display)
@@ -69,12 +71,12 @@ public class DisplayRecorder
 		var framesRecorded = recorder.framesRecordedAsArrayBuffers;
 		while (framesRecorded.length >= recorder.bufferSizeInFrames)
 		{
-			framesRecorded.remove(0);
+			framesRecorded.removeAt(0);
 		}
 
+		/*
 		var displayAsImage = display.toImage();
 		var displayAsCanvas = displayAsImage.systemImage;
-		/*
 		displayAsCanvas.toBlob
 		(
 			(Object displayAsBlob) =>
@@ -149,12 +151,12 @@ public class DisplayRecorder
 			(this.isRecording ? "started" : "stopped");
 
 		var logMessage =
-			DisplayRecorder.name + " " + startedOrStoppedText
+			DisplayRecorder.class.getName() + " " + startedOrStoppedText
 			+ ", ticksPerFrame: " + this.ticksPerFrame
 			+ ", bufferSizeInFrames:" + this.bufferSizeInFrames
 			+ ", isCircular: " + this.isCircular;
 
-		console.log(logMessage);
+		System.out.println(logMessage);
 	}
 
 	public void start()

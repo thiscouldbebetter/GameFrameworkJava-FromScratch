@@ -71,7 +71,7 @@ public class Killable implements EntityProperty
 		}
 	}
 
-	public void integrityAdd(number amountToAdd)
+	public void integrityAdd(double amountToAdd)
 	{
 		this.integrity += amountToAdd;
 		this.integrity = NumberHelper.trimToRangeMax
@@ -81,7 +81,7 @@ public class Killable implements EntityProperty
 		);
 	}
 
-	public void integritySubtract(number amountToSubtract)
+	public void integritySubtract(double amountToSubtract)
 	{
 		this.integrityAdd(0 - amountToSubtract);
 	}
@@ -98,8 +98,8 @@ public class Killable implements EntityProperty
 
 	// EntityProperty.
 
-	public void finalize(UniverseWorldPlaceEntities uwpe)
-	public void initialize(UniverseWorldPlaceEntities uwpe)
+	public void finalize(UniverseWorldPlaceEntities uwpe);
+	public void initialize(UniverseWorldPlaceEntities uwpe);
 
 	public void updateForTimerTick
 	(

@@ -2,8 +2,10 @@
 package GameFramework.Controls;
 
 import java.util.*;
+import java.util.function.*
 
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
@@ -32,7 +34,7 @@ public class VenueControls implements Venue
 			: false
 		);
 
-		var buildGamepadInputs = (String inputName) ->
+		Consumer<String,String[]> buildGamepadInputs = (String inputName) ->
 		{
 			var numberOfGamepads = 1; // todo
 
@@ -51,14 +53,14 @@ public class VenueControls implements Venue
 		var inputNames = Input.Names();
 
 		var inactivate = true;
-		this.actionToInputsMappings = new Array<ActionToInputsMapping>
+		this.actionToInputsMappings = new ArrayList<ActionToInputsMapping>
 		(
 			new ActionToInputsMapping
 			(
 				controlActionNames.ControlIncrement,
 				ArrayHelper.addMany(
 					new String[] { inputNames.ArrowDown },
-					buildGamepadInputs(inputNames.GamepadMoveDown)
+					buildGamepadInputs.apply(inputNames.GamepadMoveDown)
 				),
 				inactivate
 			),
@@ -120,7 +122,7 @@ public class VenueControls implements Venue
 
 		if (ignoreKeyboardAndGamepadInputs)
 		{
-			this.actionToInputsMappings.clear();
+			ArrayHelper.clear(this.actionToInputsMappings);
 		}
 
 		var mappingsGet = this.controlRoot.actionToInputsMappings;
@@ -154,7 +156,7 @@ public class VenueControls implements Venue
 		var display = universe.display;
 		var drawLoc = this._drawLoc;
 		drawLoc.pos.clear();
-		var styleOverrideNone = null;
+		ControlStyle styleOverrideNone = null;
 		this.controlRoot.draw(universe, display, drawLoc, styleOverrideNone);
 	}
 
@@ -170,9 +172,9 @@ public class VenueControls implements Venue
 		var inputsPressed = inputHelper.inputsPressed;
 		var inputNames = Input.Names();
 
-		for (var i = 0; i < inputsPressed.length; i++)
+		for (var i = 0; i < inputsPressed.size(); i++)
 		{
-			var inputPressed = inputsPressed[i];
+			var inputPressed = inputsPressed.get(i);
 			if (inputPressed.isActive)
 			{
 				var inputPressedName = inputPressed.name;

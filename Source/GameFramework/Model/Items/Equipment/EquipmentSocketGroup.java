@@ -9,7 +9,7 @@ public class EquipmentSocketGroup
 	public EquipmentSocket[] sockets;
 	public Map<String, EquipmentSocket> socketsByDefnName;
 
-	public constructor(EquipmentSocketDefnGroup defnGroup)
+	public EquipmentSocketGroup(EquipmentSocketDefnGroup defnGroup)
 	{
 		this.defnGroup = defnGroup;
 

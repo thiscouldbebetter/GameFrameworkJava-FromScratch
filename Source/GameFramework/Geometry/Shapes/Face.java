@@ -128,7 +128,7 @@ public class Face implements ShapeBase
 
 	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
 	{
-		var other = (Face)otherAsShapeBase
+		var other = (Face)otherAsShapeBase;
 		ArrayHelper.overwriteWith(this.vertices, other.vertices);
 		return this;
 	}

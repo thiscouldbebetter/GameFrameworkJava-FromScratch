@@ -14,7 +14,7 @@ public class DiceRoll
 		this.offset = offset;
 	}
 
-	public static DiceRoll fromExpression(string expression)
+	public static DiceRoll fromExpression(String expression)
 	{
 		var numberOfDiceAndRemainderAsStrings = expression.split("d");
 		var numberOfDiceAsString = numberOfDiceAndRemainderAsStrings[0];

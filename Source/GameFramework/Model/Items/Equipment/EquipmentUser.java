@@ -1,7 +1,10 @@
 
 package GameFramework.Model.Items.Equipment;
 
+import GameFramework.Controls.*;
+import GameFramework.Geometry.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Items.*;
 
 public class EquipmentUser implements EntityProperty
 {
@@ -282,7 +285,7 @@ public class EquipmentUser implements EntityProperty
 
 	public void useItemInSocketNumbered
 	(
-		UniverseWorldPlaceEntities uwpe, number socketNumber
+		UniverseWorldPlaceEntities uwpe, int socketNumber
 	)
 	{
 		var actor = uwpe.entity;
@@ -508,7 +511,8 @@ public class EquipmentUser implements EntityProperty
 			Coords.create(), // pos
 			sizeBase.clone(), // size
 			// children
-			[
+			new ControlBase[]
+			{
 				new ControlLabel
 				(
 					"labelEquippable",
@@ -550,24 +554,26 @@ public class EquipmentUser implements EntityProperty
 					), // text
 					fontHeightSmall
 				)
-			],
+			},
 
-			[
-				new Action("Back", back),
-				new Action("EquipItemSelectedInQuickSlot0", () -> equipItemSelectedInQuickSlot(0)),
-				new Action("EquipItemSelectedInQuickSlot1", () -> equipItemSelectedInQuickSlot(1)),
-				new Action("EquipItemSelectedInQuickSlot2", () -> equipItemSelectedInQuickSlot(2)),
-				new Action("EquipItemSelectedInQuickSlot3", () -> equipItemSelectedInQuickSlot(3)),
-				new Action("EquipItemSelectedInQuickSlot4", () -> equipItemSelectedInQuickSlot(4)),
-				new Action("EquipItemSelectedInQuickSlot5", () -> equipItemSelectedInQuickSlot(5)),
-				new Action("EquipItemSelectedInQuickSlot6", () -> equipItemSelectedInQuickSlot(6)),
-				new Action("EquipItemSelectedInQuickSlot7", () -> equipItemSelectedInQuickSlot(7)),
-				new Action("EquipItemSelectedInQuickSlot8", () -> equipItemSelectedInQuickSlot(8)),
-				new Action("EquipItemSelectedInQuickSlot9", () -> equipItemSelectedInQuickSlot(9))
-			],
+			new ActorAction[]
+			{
+				new ActorAction("Back", back),
+				new ActorAction("EquipItemSelectedInQuickSlot0", () -> equipItemSelectedInQuickSlot(0)),
+				new ActorAction("EquipItemSelectedInQuickSlot1", () -> equipItemSelectedInQuickSlot(1)),
+				new ActorAction("EquipItemSelectedInQuickSlot2", () -> equipItemSelectedInQuickSlot(2)),
+				new ActorAction("EquipItemSelectedInQuickSlot3", () -> equipItemSelectedInQuickSlot(3)),
+				new ActorAction("EquipItemSelectedInQuickSlot4", () -> equipItemSelectedInQuickSlot(4)),
+				new ActorAction("EquipItemSelectedInQuickSlot5", () -> equipItemSelectedInQuickSlot(5)),
+				new ActorAction("EquipItemSelectedInQuickSlot6", () -> equipItemSelectedInQuickSlot(6)),
+				new ActorAction("EquipItemSelectedInQuickSlot7", () -> equipItemSelectedInQuickSlot(7)),
+				new ActorAction("EquipItemSelectedInQuickSlot8", () -> equipItemSelectedInQuickSlot(8)),
+				new ActorAction("EquipItemSelectedInQuickSlot9", () -> equipItemSelectedInQuickSlot(9))
+			},
 
-			[
-				new ActionToInputsMapping( "Back", [ Input.Names().Escape ], true ),
+			new ActionToInputsMapping[]
+			{
+				new ActionToInputsMapping( "Back", new String[] { Input.Names().Escape }, true ),
 				new ActionToInputsMapping( "EquipItemSelectedInQuickSlot0", new String[] { "_0" }, true ),
 				new ActionToInputsMapping( "EquipItemSelectedInQuickSlot1", new String[] { "_1" }, true ),
 				new ActionToInputsMapping( "EquipItemSelectedInQuickSlot2", new String[] { "_2" }, true ),
@@ -578,7 +584,7 @@ public class EquipmentUser implements EntityProperty
 				new ActionToInputsMapping( "EquipItemSelectedInQuickSlot7", new String[] { "_7" }, true ),
 				new ActionToInputsMapping( "EquipItemSelectedInQuickSlot8", new String[] { "_8" }, true ),
 				new ActionToInputsMapping( "EquipItemSelectedInQuickSlot9", new String[] { "_9" }, true )
-			]
+			}
 
 		);
 

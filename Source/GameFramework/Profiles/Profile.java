@@ -2,10 +2,14 @@
 package GameFramework.Profiles;
 
 import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Media.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
@@ -37,7 +41,7 @@ public class Profile
 		return this.saveStates.stream().filter
 		(
 			x -> x.name == this.saveStateNameSelected
-		)[0];
+		).toList().get(0);
 	}
 
 	// controls
@@ -86,7 +90,7 @@ public class Profile
 
 		var venueToReturnTo = universe.venueCurrent;
 
-		var loadNewWorld = () ->
+		Runnable loadNewWorld = () ->
 		{
 			var world = universe.worldCreate();
 			universe.world = world;
@@ -101,7 +105,7 @@ public class Profile
 			universe.venueNext = venueNext;
 		};
 
-		var loadSelectedSlotFromLocalStorage = () ->
+		Runnable loadSelectedSlotFromLocalStorage = () ->
 		{
 			var saveStateNameSelected = universe.profile.saveStateNameSelected;
 			if (saveStateNameSelected != null)
@@ -272,7 +276,7 @@ public class Profile
 			(
 				venueMessage,
 				saveToLocalStorage,
-				(Universe universe, any result) -> // done
+				(Universe universe, Object result) -> // done
 				{
 					saveToLocalStorageDone(result);
 				}
@@ -282,7 +286,7 @@ public class Profile
 			universe.venueNext = VenueFader.fromVenuesToAndFrom(venueTask, universe.venueCurrent);
 		};
 
-		var saveToFilesystem = () ->
+		Runnable saveToFilesystem = () ->
 		{
 			var venueMessage = VenueMessage.fromText("Saving game...");
 
@@ -429,14 +433,14 @@ public class Profile
 			universe.venueNext = venueFileUpload;
 		};
 
-		var back = () ->
+		Runnable back = () ->
 		{
 			var venueNext = venueToReturnTo;
 			venueNext = VenueFader.fromVenuesToAndFrom(venueNext, universe.venueCurrent);
 			universe.venueNext = venueNext;
 		};
 
-		var deleteSaveSelectedConfirm = () ->
+		Runnable deleteSaveSelectedConfirm = () ->
 		{
 			var saveStateSelected = universe.profile.saveStateSelected();
 
@@ -447,7 +451,7 @@ public class Profile
 			storageHelper.save(profile.name, profile);
 		};
 
-		var deleteSaveSelected = () ->
+		Runnable deleteSaveSelected = () ->
 		{
 			var saveStateSelected = universe.profile.saveStateSelected();
 
@@ -476,7 +480,7 @@ public class Profile
 			universe.venueNext = venueNext;
 		};
 
-		var saveToLocalStorageOverwritingSlotSelected = () ->
+		Runnable saveToLocalStorageOverwritingSlotSelected = () ->
 		{
 			deleteSaveSelectedConfirm();
 			saveToLocalStorageAsNewSlot();
@@ -858,7 +862,7 @@ public class Profile
 					"Cancel",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					() -> // click
 					{
 						Venue venueNext = Profile.toControlProfileSelect
@@ -912,7 +916,7 @@ public class Profile
 
 		Runnable select = () ->
 		{
-			VenueControls venueControls = universe.venueCurrent;
+			Venue venueControls = universe.venueCurrent;
 			var controlRootAsContainer = (ControlContainer)(venueControls.controlRoot);
 			var listProfiles =
 				(ControlList)(controlRootAsContainer.childrenByName.get("listProfiles"));
@@ -932,7 +936,7 @@ public class Profile
 			}
 		};
 
-		var deleteProfileConfirm = () ->
+		Runnable deleteProfileConfirm = () ->
 		{
 			var profileSelected = universe.profile;
 
@@ -943,7 +947,7 @@ public class Profile
 			storageHelper.save("ProfileNames", profileNames);
 		};
 
-		var deleteProfile = () ->
+		Runnable deleteProfile = () ->
 		{
 			var profileSelected = universe.profile;
 			if (profileSelected != null)
@@ -1015,7 +1019,7 @@ public class Profile
 					"New",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					create // click
 				),
 

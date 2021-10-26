@@ -10,8 +10,8 @@ public class DamageType
 		this.name = name;
 	}
 
-	static DamageType_Instances instances;
-	static Instances()
+	private static DamageType_Instances _instances;
+	public static DamageType_Instances Instances()
 	{
 		if (DamageType._instances == null)
 		{

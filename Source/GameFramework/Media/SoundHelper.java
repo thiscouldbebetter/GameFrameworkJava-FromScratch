@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
 public class SoundHelper
@@ -93,7 +94,7 @@ public class SoundHelper
 		{
 			soundToPlay.play(universe, this.musicVolume);
 		}
-		else if (soundAlreadyPlaying.name != soundToPlayName)
+		else if (soundAlreadyPlaying.name() != soundToPlayName)
 		{
 			soundAlreadyPlaying.stop(universe);
 			soundToPlay.play(universe, this.musicVolume);

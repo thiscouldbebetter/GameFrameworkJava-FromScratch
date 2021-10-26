@@ -4,6 +4,7 @@ package GameFramework.Model.Effects;
 import java.util.function.*;
 
 import GameFramework.Display.Visuals.*;
+import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
 public class Effect implements Clonable<Effect>, Namable
