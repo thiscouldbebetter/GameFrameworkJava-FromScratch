@@ -73,9 +73,9 @@ public class DisplayRecorder
 		var recorder = this;
 
 		var framesRecorded = recorder.framesRecordedAsArrayBuffers;
-		while (framesRecorded.length >= recorder.bufferSizeInFrames)
+		while (framesRecorded.size() >= recorder.bufferSizeInFrames)
 		{
-			framesRecorded.removeAt(0);
+			framesRecorded.remove(0);
 		}
 
 		/*
@@ -102,13 +102,13 @@ public class DisplayRecorder
 
 	public void framesRecordedDownload(Universe universe)
 	{
-		var universeName = universe.name.split(" ").join("_");
+		var universeName = String.split(universe.name, " ").join("_");
 		var fileNameToSaveAs = universeName + "-Recording.tar";
 
 		var framesRecordedAsTarFile = TarFile.create(fileNameToSaveAs);
 		var digitsToPadTo = 6; // 2 hours x 24 frames/second = 172,800 frames.
 
-		var frameCount = this.framesRecordedAsArrayBuffers.length;
+		var frameCount = this.framesRecordedAsArrayBuffers.size();
 		for (var i = 0; i < frameCount; i++)
 		{
 			var frameIndex = i;
@@ -187,7 +187,7 @@ public class DisplayRecorder
 			if
 			(
 				this.isCircular == false
-				&& this.framesRecordedAsArrayBuffers.length >= this.bufferSizeInFrames
+				&& this.framesRecordedAsArrayBuffers.size() >= this.bufferSizeInFrames
 			)
 			{
 				this.stop();

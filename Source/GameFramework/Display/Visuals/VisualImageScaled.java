@@ -4,6 +4,7 @@ package GameFramework.Display.Visuals;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Media.*;
 import GameFramework.Model.*;
 
 public class VisualImageScaled implements VisualImage
@@ -76,7 +77,7 @@ public class VisualImageScaled implements VisualImage
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformalbe transform(Transform transformToApply)
+	public Transformable transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

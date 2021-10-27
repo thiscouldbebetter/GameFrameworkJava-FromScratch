@@ -17,6 +17,7 @@ import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 import GameFramework.Model.Places.*;
 import GameFramework.Profiles.*;
+import GameFramework.Storage.*;
 import GameFramework.Utility.*;
 
 public class ControlBuilder
@@ -861,7 +862,7 @@ public class ControlBuilder
 					), // isEnabled
 					() -> // click
 					{
-						var mappingSelected = placeDefn.actionToInputsMappingSelected;
+						var mappingSelected = placeDefn.actionToInputsMappingSelected();
 						if (mappingSelected != null)
 						{
 							var venueInputCapture = new VenueInputCapture
@@ -1189,8 +1190,16 @@ public class ControlBuilder
 
 			new ActorAction[]
 			{
-				new ActorAction( controlActionNames.ControlCancel, goToVenueNext ),
-				new ActorAction( controlActionNames.ControlConfirm, goToVenueNext )
+				new ActorAction
+				(
+					controlActionNames.ControlCancel,
+					(UniverseWorldPlaceEntities uwpe) -> goToVenueNext.run()
+				),
+				new ActorAction
+				(
+					controlActionNames.ControlConfirm,
+					(UniverseWorldPlaceEntities uwpe) -> goToVenueNext.run()
+				)
 			},
 
 			null
@@ -1439,9 +1448,9 @@ public class ControlBuilder
 
 		var controlsForSlides = new ArrayList<ControlBase>();
 
-		Consumer<Double> nextDefn = (Double slideIndexNext) -> // click
+		Function<Integer,Venue> nextDefn = (int slideIndexNext) -> // click
 		{
-			var venueNext;
+			Venue venueNext;
 			if (slideIndexNext < controlsForSlides.size())
 			{
 				var controlForSlideNext = controlsForSlides.get(slideIndexNext);
@@ -1456,6 +1465,7 @@ public class ControlBuilder
 				universe.venueCurrent, venueNext
 			);
 			universe.venueNext = venueNext;
+			return venueNext;
 		};
 
 		Runnable skip = () ->
@@ -1630,7 +1640,7 @@ public class ControlBuilder
 				new ActorAction
 				(
 					ControlActionNames.Instances().ControlConfirm,
-					(UniverseWorldPlaceEntities uwpe) -> start
+					(UniverseWorldPlaceEntities uwpe) -> start.run()
 				)
 			},
 
@@ -1760,7 +1770,6 @@ public class ControlBuilder
 							var venueInstructions =
 								controlInstructions.toVenue();
 
-							var venueMovie = new VenueVideo
 							(
 								"Movie", // videoName
 								venueInstructions // fader implicit
@@ -1986,7 +1995,8 @@ public class ControlBuilder
 						var controlConfirm = universe.controlBuilder.confirm
 						(
 							universe, size, "Abandon the current game?",
-							confirm, cancel
+							(UniverseWorldPlaceEntities uwpe) -> confirm.run(),
+							(UniverseWorldPlaceEntities uwpe) -> cancel.run()
 						);
 						var venueConfirm = controlConfirm.toVenue();
 						universe.venueNext = controlBuilder.venueTransitionalFromTo
@@ -2015,7 +2025,7 @@ public class ControlBuilder
 								universe,
 								size,
 								DataBinding.fromContext("Ready to load from file..."),
-								() -> // acknowledge
+								(UniverseWorldPlaceEntities uwpe) -> // acknowledge
 								{
 									throw new Exception("todo");
 									/*
@@ -2060,7 +2070,7 @@ public class ControlBuilder
 							universe,
 							size,
 							DataBinding.fromContext("No file specified."),
-							() -> // acknowlege
+							(UniverseWorldPlaceEntities uwpe) -> // acknowlege
 							{
 								Venue venueNext = controlBuilder.game
 								(

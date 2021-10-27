@@ -1,5 +1,7 @@
 
-package ThisCouldBeBetter.GameFramework;
+package GameFramework.Storage.TarFiles;
+
+import java.util.*;
 
 public class TarFileEntry
 {

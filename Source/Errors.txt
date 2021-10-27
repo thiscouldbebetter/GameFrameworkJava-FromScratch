@@ -7,6 +7,18 @@ public interface Display extends Platformable
   bad source file: ./GameFramework/Utility/Platformable.java
     file does not contain class GameFramework.Utility.Platformable
     Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+./GameFramework/Controls/ControlBuilder.java:1774: error: ')' expected
+								"Movie", // videoName
+								       ^
+./GameFramework/Controls/ControlBuilder.java:1773: error: not a statement
+							(
+							^
+./GameFramework/Controls/ControlBuilder.java:1775: error: not a statement
+								venueInstructions // fader implicit
+								^
+./GameFramework/Controls/ControlBuilder.java:1775: error: ';' expected
+								venueInstructions // fader implicit
+								                 ^
 ./GameFramework/Input/InputHelper.java:16: error: cannot find symbol
 	implements KeyListener, MouseListener, MouseMotionListener, Platformable
 	                                                            ^
@@ -14,49 +26,13 @@ public interface Display extends Platformable
 ./GameFramework/Input/ActionToInputsMapping.java:6: error: ';' expected
 import GameFramework.Helpers.*:
                               ^
-./GameFramework/Model/EntityProperty.java:6: error: '{' expected
-public interface EntityProperty implements Clonable<EntityProperty>
-                               ^
-./GameFramework/Model/EntityProperty.java:7: error: illegal start of type
-{
-^
-./GameFramework/Model/EntityProperty.java:8: error: illegal start of expression
-	void finalize(UniverseWorldPlaceEntities uwpe);
-	^
-./GameFramework/Model/EntityProperty.java:8: error: ';' expected
-	void finalize(UniverseWorldPlaceEntities uwpe);
-	             ^
-./GameFramework/Model/EntityProperty.java:8: error: ';' expected
-	void finalize(UniverseWorldPlaceEntities uwpe);
-	                                             ^
-./GameFramework/Model/EntityProperty.java:9: error: illegal start of expression
-	void initialize(UniverseWorldPlaceEntities uwpe);
-	^
-./GameFramework/Model/EntityProperty.java:9: error: ';' expected
-	void initialize(UniverseWorldPlaceEntities uwpe);
-	               ^
-./GameFramework/Model/EntityProperty.java:9: error: ';' expected
-	void initialize(UniverseWorldPlaceEntities uwpe);
-	                                               ^
-./GameFramework/Model/EntityProperty.java:10: error: illegal start of expression
-	void updateForTimerTick(UniverseWorldPlaceEntities uwpe);
-	^
-./GameFramework/Model/EntityProperty.java:10: error: ';' expected
-	void updateForTimerTick(UniverseWorldPlaceEntities uwpe);
-	                       ^
-./GameFramework/Model/EntityProperty.java:10: error: ';' expected
-	void updateForTimerTick(UniverseWorldPlaceEntities uwpe);
-	                                                       ^
-./GameFramework/Model/EntityProperty.java:11: error: reached end of file while parsing
-}
- ^
 ./GameFramework/Model/Physics/Movable.java:2: error: ';' expected
 package GameFramework.Model.Physics
                                    ^
-./GameFramework/Model/Physics/Movable.java:125: error: ';' expected
+./GameFramework/Model/Physics/Movable.java:127: error: ';' expected
 		)
 		 ^
-./GameFramework/Model/Physics/Movable.java:192: error: ')' expected
+./GameFramework/Model/Physics/Movable.java:194: error: ')' expected
 				var targetEntity = ((ActorAction)(activity.target());
 				                                                    ^
 ./GameFramework/Model/Playable.java:153: error: ';' expected
@@ -65,262 +41,146 @@ package GameFramework.Model.Physics
 ./GameFramework/Model/Playable.java:355: error: <identifier> expected
 					childSpacing.clone().double()
 					                     ^
-./GameFramework/Model/Physics/Movable.java:33: error: cannot find symbol
-		number accelerationPerTick, number speedMax
-		^
-  symbol:   class number
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:33: error: cannot find symbol
-		number accelerationPerTick, number speedMax
-		                            ^
-  symbol:   class number
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:69: error: cannot find symbol
-		UniverseWorldPlaceEntities uwpe, Coords directionToMove
-		                                 ^
-  symbol:   class Coords
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:111: error: cannot find symbol
-	public static ActorAction actionAccelerateDown()
-	              ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:128: error: cannot find symbol
-	public static ActorAction actionAccelerateLeft()
-	              ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:145: error: cannot find symbol
-	public static ActorAction actionAccelerateRight()
-	              ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:162: error: cannot find symbol
-	public static ActorAction actionAccelerateUp()
-	              ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:181: error: cannot find symbol
-	public static ActivityDefn activityDefnWanderBuild()
-	              ^
-  symbol:   class ActivityDefn
-  location: class Movable
-./GameFramework/Display/Display2D.java:14: error: cannot find symbol
-public class Display2D extends JPanel implements Display, Platformable
-                                                          ^
-  symbol: class Platformable
-./GameFramework/Helpers/ArrayHelper.java:95: error: '(' expected
-	public static <K,E> Map<K,E> addLookupsMultiple<K, E>
-	                                               ^
-./GameFramework/Helpers/ArrayHelper.java:96: error: illegal start of type
-	(
-	^
-./GameFramework/Media/Sound.java:19: error: cannot find symbol
-		this.name = name;
-		    ^
-  symbol: variable name
+./GameFramework/Helpers/ArrayHelper.java:95: error: ';' expected
+	public static <K,E> Map<K,E> addLookupsMultiple()
+	                                                 ^
+./GameFramework/Helpers/ArrayHelper.java:97: error: <identifier> expected
+		List<E> list, Function<E,K[]> getKeysForElement
+		            ^
+./GameFramework/Helpers/ArrayHelper.java:97: error: ';' expected
+		List<E> list, Function<E,K[]> getKeysForElement
+		                                               ^
+./GameFramework/Helpers/ArrayHelper.java:97: error: cannot find symbol
+		List<E> list, Function<E,K[]> getKeysForElement
+		                       ^
+  symbol:   class E
+  location: class ArrayHelper
+./GameFramework/Helpers/ArrayHelper.java:97: error: cannot find symbol
+		List<E> list, Function<E,K[]> getKeysForElement
+		                         ^
+  symbol:   class K
+  location: class ArrayHelper
 error: incompatible types: incompatible parameter types in lambda expression
-./GameFramework/Controls/ControlBuilder.java:792: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:793: error: incompatible types: incompatible parameter types in lambda expression
 						(PlaceDefn c) -> c.actionToInputsMappingSelected,
 						^
-./GameFramework/Controls/ControlBuilder.java:867: error: incompatible types: Object is not a functional interface
+./GameFramework/Controls/ControlBuilder.java:865: error: cannot find symbol
+						var mappingSelected = placeDefn.actionToInputsMappingSelected();
+						                               ^
+  symbol:   method actionToInputsMappingSelected()
+  location: variable placeDefn of type PlaceDefn
+./GameFramework/Controls/ControlBuilder.java:868: error: incompatible types: Object is not a functional interface
 							var venueInputCapture = new VenueInputCapture
 							                        ^
-./GameFramework/Controls/ControlBuilder.java:901: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:902: error: cannot find symbol
 							var mappingDefault = mappingsDefault.stream().filter
 							                                    ^
   symbol:   method stream()
   location: variable mappingsDefault of type ActionToInputsMapping[]
-./GameFramework/Display/Visuals/VisualImageScaled.java:53: error: cannot find symbol
-	public Image2 image(Universe universe)
-	       ^
-  symbol:   class Image2
-  location: class VisualImageScaled
-./GameFramework/Display/Visuals/VisualImageScaled.java:79: error: cannot find symbol
-	public Transformalbe transform(Transform transformToApply)
-	       ^
-  symbol:   class Transformalbe
-  location: class VisualImageScaled
-./GameFramework/Controls/ControlBuilder.java:1192: error: incompatible types: Runnable cannot be converted to Consumer<UniverseWorldPlaceEntities>
-				new ActorAction( controlActionNames.ControlCancel, goToVenueNext ),
-				                                                   ^
-./GameFramework/Controls/ControlBuilder.java:1193: error: incompatible types: Runnable cannot be converted to Consumer<UniverseWorldPlaceEntities>
-				new ActorAction( controlActionNames.ControlConfirm, goToVenueNext )
-				                                                    ^
-./GameFramework/Controls/ControlBuilder.java:1269: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1278: error: incompatible types: incompatible parameter types in lambda expression
 						(SoundHelper c) -> c.musicVolume,
 						^
-./GameFramework/Controls/ControlBuilder.java:1296: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1305: error: incompatible types: incompatible parameter types in lambda expression
 						(SoundHelper c) -> c.soundVolume,
 						^
-./GameFramework/Controls/ControlBuilder.java:1315: error: incompatible types: inference variable C has incompatible equality constraints Object,Coords
+./GameFramework/Controls/ControlBuilder.java:1324: error: incompatible types: inference variable C has incompatible equality constraints Object,Coords
 				new ControlSelect
 				^
   where C,V are type-variables:
     C extends Object declared in method <C,V>fromGet(Function<C,V>)
     V extends Object declared in method <C,V>fromGet(Function<C,V>)
-./GameFramework/Controls/ControlBuilder.java:1352: error: incompatible types: Object cannot be converted to Coords
+./GameFramework/Controls/ControlBuilder.java:1361: error: incompatible types: Object cannot be converted to Coords
 						display.sizeInPixelsSet(displaySizeSpecified);
 						                        ^
-./GameFramework/Controls/ControlBuilder.java:1444: error: cannot infer type for local variable venueNext
-			var venueNext;
-			    ^
-  (cannot use 'var' on variable without initializer)
-./GameFramework/Controls/ControlBuilder.java:1447: error: incompatible types: Double cannot be converted to int
-				var controlForSlideNext = controlsForSlides.get(slideIndexNext);
-				                                                ^
-./GameFramework/Controls/ControlBuilder.java:1475: error: cannot find symbol
-			var next = nextDefn.apply(i + 1);
-			                   ^
-  symbol:   method apply(int)
-  location: variable nextDefn of type Consumer<Double>
-./GameFramework/Utility/VenueTask.java:30: error: ';' expected
-		var returnValue = 0
-		                   ^
-./GameFramework/Utility/VenueTask.java:59: error: ';' expected
-			() -> { this.draw(universe), 1000 }
-			                           ^
-./GameFramework/Utility/VenueTask.java:60: error: ';' expected
+./GameFramework/Controls/ControlBuilder.java:1451: error: incompatible types: incompatible parameter types in lambda expression
+		Function<Integer,Venue> nextDefn = (int slideIndexNext) -> // click
+		                                   ^
+./GameFramework/Controls/ControlBuilder.java:1530: error: incompatible types: Venue cannot be converted to Runnable
+						next
+						^
+./GameFramework/Controls/ControlBuilder.java:1537: error: cannot find symbol
+					new ActorAction( ControlActionNames.Instances().ControlConfirm, (UniverseWorldPlaceEntities uwpe) -> next.run() )
+					                                                                                                         ^
+  symbol:   method run()
+  location: variable next of type Venue
+./GameFramework/Utility/VenueTask.java:61: error: ';' expected
 		)
 		 ^
-./GameFramework/Controls/ControlBuilder.java:1564: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1574: error: incompatible types: incompatible parameter types in lambda expression
 					Profile.toControlProfileSelect(universe, null, universe.venueCurrent),
 					                              ^
-./GameFramework/Controls/ControlBuilder.java:1567: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1577: error: cannot find symbol
 					var venueProfileSelect = result.toVenue();
 					                               ^
   symbol:   method toVenue()
   location: variable result of type Object
-./GameFramework/Controls/ControlBuilder.java:1633: error: incompatible types: lambda body is not compatible with a void functional interface
-					(UniverseWorldPlaceEntities uwpe) -> start
-					                                     ^
-    (consider using a block lambda body, or use a statement expression instead)
-./GameFramework/Controls/ControlBuilder.java:1750: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1760: error: incompatible types: incompatible parameter types in lambda expression
 								() -> // acknowledge
 								^
-./GameFramework/Controls/ControlBuilder.java:1769: error: incompatible types: VenueVideo cannot be converted to Venue
+./GameFramework/Controls/ControlBuilder.java:1778: error: cannot find symbol
 							venueNext = venueMovie;
 							            ^
-./GameFramework/Controls/ControlBuilder.java:1881: error: incompatible types: DataBinding<VenueTask,String> cannot be converted to DataBinding<Object,String>
+  symbol:   variable venueMovie
+  location: class ControlBuilder
+./GameFramework/Controls/ControlBuilder.java:1890: error: incompatible types: DataBinding<VenueTask,String> cannot be converted to DataBinding<Object,String>
 				messageAsDataBinding
 				^
-./GameFramework/Controls/ControlBuilder.java:1969: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1978: error: incompatible types: incompatible parameter types in lambda expression
 						(Profile c) -> c.saveStateSelected(),
 						                                  ^
-./GameFramework/Controls/ControlBuilder.java:1989: error: incompatible types: Runnable cannot be converted to Consumer<UniverseWorldPlaceEntities>
-							confirm, cancel
-							^
-./GameFramework/Controls/ControlBuilder.java:2010: error: cannot find symbol
-						var venueFileUpload = new VenueFileUpload(null, null);
-						                          ^
-  symbol:   class VenueFileUpload
-  location: class ControlBuilder
-./GameFramework/Controls/ControlBuilder.java:2018: error: incompatible types: incompatible parameter types in lambda expression
-								() -> // acknowledge
+./GameFramework/Controls/ControlBuilder.java:2062: error: incompatible types: <null> cannot be converted to boolean
+								null
 								^
-./GameFramework/Controls/ControlBuilder.java:2063: error: incompatible types: incompatible parameter types in lambda expression
-							() -> // acknowlege
-							^
-./GameFramework/Display/DisplayRecorder.java:76: error: cannot find symbol
-		while (framesRecorded.length >= recorder.bufferSizeInFrames)
-		                     ^
-  symbol:   variable length
-  location: variable framesRecorded of type List<Object>
-./GameFramework/Display/DisplayRecorder.java:78: error: cannot find symbol
-			framesRecorded.removeAt(0);
-			              ^
-  symbol:   method removeAt(int)
-  location: variable framesRecorded of type List<Object>
-./GameFramework/Display/DisplayRecorder.java:105: error: cannot find symbol
-		var universeName = universe.name.split(" ").join("_");
-		                                           ^
-  symbol:   method join(String)
-  location: class String[]
-./GameFramework/Storage/TarFiles/TarFile.java:112: error: ';' expected
+./GameFramework/Display/DisplayRecorder.java:105: error: incompatible types: String cannot be converted to int
+		var universeName = String.split(universe.name, " ").join("_");
+		                                               ^
+./GameFramework/Storage/TarFiles/TarFileEntry.java:53: error: ';' expected
 		)
 		 ^
-./GameFramework/Storage/TarFiles/TarFile.java:122: error: illegal start of expression
-			x =>
-			   ^
-./GameFramework/Storage/TarFiles/TarFile.java:134: error: illegal start of expression
-		var entriesAsByteArrays = this.entries.map(x => x.toBytes());
-		                                              ^
-./GameFramework/Storage/TarFiles/TarFile.java:177: error: illegal start of expression
-				var entryFileNameAsBytes = entryFileName.split("").map(x => x.charAt(0));
-				                                                          ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:51: error: ';' expected
+./GameFramework/Storage/TarFiles/TarFileEntry.java:128: error: ';' expected
 		)
 		 ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:126: error: ';' expected
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:236: error: ';' expected
 		)
 		 ^
-./GameFramework/Storage/TarFiles/TarFile.java:9: error: cannot access TarFileEntry
-	public TarFileEntry entries[];
-	       ^
-  bad source file: ./GameFramework/Storage/TarFiles/TarFileEntry.java
-    file does not contain class GameFramework.Storage.TarFiles.TarFileEntry
-    Please remove or make sure it appears in the correct subdirectory of the sourcepath.
-./GameFramework/Storage/TarFiles/TarFileEntry.java:6: error: cannot find symbol
-	public TarFileEntryHeader header;
-	       ^
-  symbol:   class TarFileEntryHeader
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:9: error: cannot find symbol
-	public TarFileEntry(TarFileEntryHeader header, int[] dataAsBytes)
-	                    ^
-  symbol:   class TarFileEntryHeader
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:37: error: cannot find symbol
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:4: error: cannot find symbol
+import GameFramework.Helpers;
+                    ^
+  symbol:   class Helpers
+  location: package GameFramework
+./GameFramework/Storage/TarFiles/TarFileEntry.java:39: error: cannot find symbol
 	public static TarFileEntry fromBytes(int chunkAsBytes[], ByteStream reader)
 	                                                         ^
   symbol:   class ByteStream
   location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:71: error: cannot find symbol
-	public static List<TarFileEntry> manyFromByteArrays
-	              ^
-  symbol:   class List
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:110: error: cannot find symbol
-	public List<Integer> toBytes()
+./GameFramework/Display/Visuals/VisualText.java:8: error: class, interface, or enum expected
+export class VisualText implements Visual
+^
+./GameFramework/Display/Visuals/VisualText.java:36: error: cannot find symbol
+	public static VisualText fromTextAndColor(string text, Color colorFill)
+	                                          ^
+  symbol:   class string
+  location: class VisualText
+./GameFramework/Display/Visuals/VisualText.java:50: error: cannot find symbol
+		string text, Color colorFill, Color colorBorder
+		^
+  symbol:   class string
+  location: class VisualText
+./GameFramework/Display/Visuals/VisualText.java:111: error: cannot find symbol
+	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
 	       ^
-  symbol:   class List
-  location: class TarFileEntry
-./GameFramework/Display/DisplayRecorder.java:111: error: cannot find symbol
-		var frameCount = this.framesRecordedAsArrayBuffers.length;
-		                                                  ^
-  symbol:   variable length
-  location: variable framesRecordedAsArrayBuffers of type List<Object>
-./GameFramework/Helpers/ByteHelper.java:39: error: not a statement
-			var byte = bytesToConvert[i];
-			^
-./GameFramework/Helpers/ByteHelper.java:39: error: ';' expected
-			var byte = bytesToConvert[i];
-			   ^
-./GameFramework/Helpers/ByteHelper.java:39: error: not a statement
-			var byte = bytesToConvert[i];
-			    ^
-./GameFramework/Helpers/ByteHelper.java:39: error: ';' expected
-			var byte = bytesToConvert[i];
-			        ^
-./GameFramework/Helpers/ByteHelper.java:39: error: not a statement
-			var byte = bytesToConvert[i];
-			                         ^
-./GameFramework/Helpers/ByteHelper.java:40: error: '.class' expected
-			var byteAsChar = String.fromCharCode(byte);
-			                                         ^
-./GameFramework/Helpers/ByteHelper.java:41: error: ';' expected
-			returnValue += byteAsChar
-			                         ^
-./GameFramework/Display/DisplayRecorder.java:146: error: cannot find symbol
-			TarFileEntry.fileNew("PngsToGif.sh", scriptAsBytes);
-			^
-  symbol:   variable TarFileEntry
-  location: class DisplayRecorder
-./GameFramework/Display/DisplayRecorder.java:190: error: cannot find symbol
-				&& this.framesRecordedAsArrayBuffers.length >= this.bufferSizeInFrames
-				                                    ^
-  symbol:   variable length
-  location: variable framesRecordedAsArrayBuffers of type List<Object>
+  symbol:   class Coords
+  location: class VisualText
+./GameFramework/Display/Visuals/VisualText.java:113: error: cannot find symbol
+	public Transformable transform(Transform transformToApply)
+	                               ^
+  symbol:   class Transform
+  location: class VisualText
+./GameFramework/Display/Visuals/VisualText.java:113: error: cannot find symbol
+	public Transformable transform(Transform transformToApply)
+	       ^
+  symbol:   class Transformable
+  location: class VisualText
 ./GameFramework/Model/EntityBuilder.java:15: error: cannot find symbol
 		var visual = VisualText.fromTextAndColor(text, color);
 		             ^
@@ -331,7 +191,7 @@ error: incompatible types: incompatible parameter types in lambda expression
 				    ^
   symbol:   class Ephemeral
   location: class EntityBuilder
-./GameFramework/Input/InputHelper.java:14: error: InputHelper is not abstract and does not override abstract method mouseExited(MouseEvent) in MouseListener
+./GameFramework/Input/InputHelper.java:14: error: InputHelper is not abstract and does not override abstract method mouseClicked(MouseEvent) in MouseListener
 public class InputHelper
        ^
 ./GameFramework/Input/InputHelper.java:132: error: cannot find symbol
@@ -600,16 +460,16 @@ error: incompatible types: bad return type in lambda expression
 		                                  ^
   symbol:   variable actionToInputsMappings
   location: variable controlRoot of type ControlBase
-./GameFramework/Controls/VenueControls.java:129: error: cannot find symbol
+./GameFramework/Controls/VenueControls.java:129: error: method addLookupsMultiple in class ArrayHelper cannot be applied to given types;
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		                                                    ^
-  symbol:   method addLookupsMultiple(ActionToInputsMapping[],(ActionToI[...]Names)
-  location: class ArrayHelper
-./GameFramework/Model/Places/Place.java:286: error: cannot find symbol
-					entityProperty.updateForTimerTick(uwpe);
-					              ^
-  symbol:   method updateForTimerTick(UniverseWorldPlaceEntities)
-  location: variable entityProperty of type EntityProperty
+  required: no arguments
+  found: ActionToInputsMapping[],(ActionToI[...]Names
+  reason: cannot infer type-variable(s) K,E
+    (actual and formal argument lists differ in length)
+  where K,E are type-variables:
+    K extends Object declared in method <K,E>addLookupsMultiple()
+    E extends Object declared in method <K,E>addLookupsMultiple()
 ./GameFramework/Model/Places/Place.java:349: error: cannot find symbol
 		return this.entitiesByPropertyName(Movable.class.getName());
 		                                   ^
@@ -623,16 +483,6 @@ error: incompatible types: bad return type in lambda expression
 ./GameFramework/Model/Entity.java:29: error: incompatible types: HashMap<String,Object> cannot be converted to Map<String,EntityProperty>
 		this.propertiesByName = new HashMap<String, Object>();
 		                        ^
-./GameFramework/Model/Entity.java:45: error: cannot find symbol
-			property.finalize(uwpe);
-			        ^
-  symbol:   method finalize(UniverseWorldPlaceEntities)
-  location: variable property of type EntityProperty
-./GameFramework/Model/Entity.java:57: error: cannot find symbol
-			property.initialize(uwpe);
-			        ^
-  symbol:   method initialize(UniverseWorldPlaceEntities)
-  location: variable property of type EntityProperty
 ./GameFramework/Model/Entity.java:69: error: cannot find symbol
 		this.properties.add(propertyToAdd);
 		               ^
@@ -660,16 +510,6 @@ error: incompatible types: bad return type in lambda expression
 			if (property.finalize != null)
 			            ^
   symbol:   variable finalize
-  location: variable property of type EntityProperty
-./GameFramework/Model/Entity.java:117: error: cannot find symbol
-				property.finalize(uwpe);
-				        ^
-  symbol:   method finalize(UniverseWorldPlaceEntities)
-  location: variable property of type EntityProperty
-./GameFramework/Model/Entity.java:132: error: cannot find symbol
-			var propertyCloned = property.clone();
-			                             ^
-  symbol:   method clone()
   location: variable property of type EntityProperty
 ./GameFramework/Model/Entity.java:147: error: cannot find symbol
 			ArrayHelper.areEqual(this.properties, other.properties);
@@ -761,11 +601,16 @@ error: incompatible types: bad return type in lambda expression
   where T#1,T#2 are type-variables:
     T#1 extends Clonable<T#1> declared in method <T#1>clone(T#1[])
     T#2 extends Clonable<T#2> declared in method <T#2>clone(List<T#2>)
-./GameFramework/Model/Places/PlaceDefn.java:50: error: cannot find symbol
+./GameFramework/Model/Places/PlaceDefn.java:50: error: method addLookupsMultiple in class ArrayHelper cannot be applied to given types;
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		                                                    ^
-  symbol:   method addLookupsMultiple(ActionToInputsMapping[],(ActionToI[...]Names)
-  location: class ArrayHelper
+  required: no arguments
+  found: ActionToInputsMapping[],(ActionToI[...]Names
+  reason: cannot infer type-variable(s) K,E
+    (actual and formal argument lists differ in length)
+  where K,E are type-variables:
+    K extends Object declared in method <K,E>addLookupsMultiple()
+    E extends Object declared in method <K,E>addLookupsMultiple()
 ./GameFramework/Model/Places/PlaceDefn.java:63: error: cannot find symbol
 			new ActionToInputMapping[] {}, // actionToInputsMappings,
 			    ^
@@ -816,11 +661,16 @@ error: incompatible types: bad return type in lambda expression
   where T#1,T#2 are type-variables:
     T#1 extends Clonable<T#1> declared in method <T#1>clone(T#1[])
     T#2 extends Clonable<T#2> declared in method <T#2>clone(List<T#2>)
-./GameFramework/Model/Places/PlaceDefn.java:114: error: cannot find symbol
+./GameFramework/Model/Places/PlaceDefn.java:114: error: method addLookupsMultiple in class ArrayHelper cannot be applied to given types;
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		                                                    ^
-  symbol:   method addLookupsMultiple(ActionToInputsMapping[],(ActionToI[...]Names)
-  location: class ArrayHelper
+  required: no arguments
+  found: ActionToInputsMapping[],(ActionToI[...]Names
+  reason: cannot infer type-variable(s) K,E
+    (actual and formal argument lists differ in length)
+  where K,E are type-variables:
+    K extends Object declared in method <K,E>addLookupsMultiple()
+    E extends Object declared in method <K,E>addLookupsMultiple()
 ./GameFramework/Model/Places/PlaceDefn.java:125: error: cannot find symbol
 			this._placeFinalize(uwpe);
 			    ^
@@ -829,6 +679,9 @@ error: incompatible types: bad return type in lambda expression
 			this._placeInitialize(uwpe);
 			    ^
   symbol: method _placeInitialize(UniverseWorldPlaceEntities)
+./GameFramework/Geometry/Collisions/CollisionTracker.java:11: error: CollisionTracker is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class CollisionTracker implements EntityProperty
+       ^
 ./GameFramework/Geometry/Collisions/CollisionTracker.java:30: error: cannot find symbol
 			CollisionTracker.name,
 			                ^
@@ -856,12 +709,6 @@ error: incompatible types: bad return type in lambda expression
 ./GameFramework/Geometry/Collisions/CollisionTracker.java:125: error: cellSource has private access in MapOfCells
 		var cellsAll = (CollisionTrackerMapCell[])this.collisionMap.cellSource;
 		                                                           ^
-./GameFramework/Model/EntityProperty.java:9: error: variable uwpe is already defined in instance initializer of interface EntityProperty
-	void initialize(UniverseWorldPlaceEntities uwpe);
-	                                           ^
-./GameFramework/Model/EntityProperty.java:10: error: variable uwpe is already defined in instance initializer of interface EntityProperty
-	void updateForTimerTick(UniverseWorldPlaceEntities uwpe);
-	                                                   ^
 ./GameFramework/Geometry/Shapes/Maps/MapOfCells.java:49: error: incompatible types: bad type in conditional expression
 			? cellSource
 			  ^
@@ -979,6 +826,12 @@ public class Box implements ShapeBase
 				            ^
   symbol:   variable VenueFader
   location: class ActorAction_Instances
+./GameFramework/Model/Physics/Boundable.java:7: error: Boundable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Boundable implements EntityProperty
+       ^
+./GameFramework/Geometry/Camera.java:14: error: Camera is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Camera implements EntityProperty
+       ^
 ./GameFramework/Geometry/Camera.java:269: error: cannot find symbol
 		cameraCollidable.entitiesAlreadyCollidedWith.length = 0;
 		                                            ^
@@ -1034,6 +887,9 @@ public class Box implements ShapeBase
 		                        ^
   symbol:   variable name
   location: class Camera
+./GameFramework/Model/Physics/Collidable.java:13: error: Collidable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Collidable implements EntityProperty
+       ^
 ./GameFramework/Model/Physics/Collidable.java:47: error: clone() has protected access in Object
 		this.collider = this.colliderAtRest.clone();
 		                                   ^
@@ -1112,6 +968,12 @@ public class Box implements ShapeBase
 ./GameFramework/Model/Physics/Collidable.java:370: error: clone() has protected access in Object
 			this.colliderAtRest.clone(),
 			                   ^
+./GameFramework/Controls/Controllable.java:8: error: Controllable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Controllable implements EntityProperty
+       ^
+./GameFramework/Display/Drawable.java:8: error: Clonable cannot be inherited with different arguments: <GameFramework.Display.Drawable> and <GameFramework.Model.EntityProperty>
+public class Drawable implements Clonable<Drawable>, EntityProperty
+       ^
 ./GameFramework/Display/Drawable.java:17: error: bad operand types for binary operator '=='
 		if (this.isVisible == null)
 		                   ^
@@ -1120,6 +982,9 @@ public class Box implements ShapeBase
 ./GameFramework/Display/Drawable.java:25: error: incompatible types: <null> cannot be converted to boolean
 		return new Drawable(visual, null);
 		                            ^
+./GameFramework/Model/Items/Equipment/EquipmentUser.java:9: error: EquipmentUser is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class EquipmentUser implements EntityProperty
+       ^
 ./GameFramework/Model/Items/Equipment/EquipmentUser.java:28: error: cannot find symbol
 		var itemHolder = entityEquipmentUser.itemHolder();
 		                                    ^
@@ -1420,6 +1285,9 @@ public class Box implements ShapeBase
 			             ^
   symbol:   method push(ControlButton)
   location: variable childControls of type List<ControlBase>
+./GameFramework/Model/Items/Item.java:6: error: Item is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Item implements EntityProperty
+       ^
 ./GameFramework/Model/Items/Item.java:26: error: cannot find symbol
 		return (this.defn(world).use != null);
 		                        ^
@@ -1434,6 +1302,9 @@ public class Box implements ShapeBase
 		        ^
   symbol:   variable use
   location: variable defn of type ItemDefn
+./GameFramework/Model/Items/ItemDefn.java:10: error: ItemDefn is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class ItemDefn implements EntityProperty
+       ^
 ./GameFramework/Model/Items/ItemDefn.java:54: error: incompatible types: <null> cannot be converted to double
 			name, null, null, null, null, null, null, null, null, null
 			                  ^
@@ -1457,6 +1328,9 @@ public class Box implements ShapeBase
 			returnValue = this._use(uwpe);
 			                  ^
   symbol: method _use(UniverseWorldPlaceEntities)
+./GameFramework/Model/Combat/Killable.java:8: error: Killable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Killable implements EntityProperty
+       ^
 ./GameFramework/Model/Combat/Killable.java:44: error: cannot infer type for local variable damageApplied
 		var damageApplied;
 		    ^
@@ -1486,6 +1360,9 @@ public class Box implements ShapeBase
 ./GameFramework/Model/Combat/Killable.java:109: error: 'void' type not allowed here
 		if (this.isAlive() == false)
 		                ^
+./GameFramework/Model/Loadable.java:8: error: Loadable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Loadable implements EntityProperty
+       ^
 ./GameFramework/Model/Loadable.java:21: error: cannot find symbol
 		this._load = load;
 		             ^
@@ -1496,6 +1373,9 @@ public class Box implements ShapeBase
 		               ^
   symbol:   variable unload
   location: class Loadable
+./GameFramework/Model/Physics/Locatable.java:10: error: Locatable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Locatable implements EntityProperty
+       ^
 ./GameFramework/Model/Physics/Locatable.java:16: error: bad operand types for binary operator '||'
 		this.loc = loc || Disposition.create();
 		               ^
@@ -1513,66 +1393,25 @@ public class Box implements ShapeBase
 ./GameFramework/Model/Physics/Locatable.java:51: error: incompatible types: Entity[] cannot be converted to List<Entity>
 		return entitiesToSort;
 		       ^
-./GameFramework/Model/Physics/Movable.java:113: error: cannot find symbol
-		return new ActorAction
-		           ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:122: error: cannot find symbol
-					uwpe, Coords.Instances().ZeroOneZero
-					      ^
-  symbol:   variable Coords
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:130: error: cannot find symbol
-		return new ActorAction
-		           ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:139: error: cannot find symbol
-					uwpe, Coords.Instances().MinusOneZeroZero
-					      ^
-  symbol:   variable Coords
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:147: error: cannot find symbol
-		return new ActorAction
-		           ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:156: error: cannot find symbol
-					uwpe, Coords.Instances().OneZeroZero
-					      ^
-  symbol:   variable Coords
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:164: error: cannot find symbol
-		return new ActorAction
-		           ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:173: error: cannot find symbol
-					uwpe, Coords.Instances().ZeroMinusOneZero
-					      ^
-  symbol:   variable Coords
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:183: error: cannot find symbol
-		var returnValue = new ActivityDefn
-		                      ^
-  symbol:   class ActivityDefn
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:190: error: cannot find symbol
+./GameFramework/Model/Physics/Movable.java:10: error: Movable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Movable implements EntityProperty
+       ^
+./GameFramework/Model/Physics/Movable.java:192: error: cannot find symbol
 				var actor = entityActor.actor();
 				                       ^
   symbol:   method actor()
   location: variable entityActor of type Entity
-./GameFramework/Model/Physics/Movable.java:192: error: cannot find symbol
-				var targetEntity = ((ActorAction)(activity.target());
-				                     ^
-  symbol:   class ActorAction
-  location: class Movable
-./GameFramework/Model/Physics/Movable.java:198: error: cannot find symbol
-					var targetPos = Coords.create().randomize
-					                ^
-  symbol:   variable Coords
-  location: class Movable
+./GameFramework/Model/Physics/Movable.java:208: error: incompatible types: Entity cannot be converted to ActorAction
+					targetEntity = new Entity
+					               ^
+./GameFramework/Model/Physics/Movable.java:217: error: cannot find symbol
+				var targetLocatable = targetEntity.locatable();
+				                                  ^
+  symbol:   method locatable()
+  location: variable targetEntity of type ActorAction
+./GameFramework/Model/Playable.java:12: error: Playable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Playable implements EntityProperty
+       ^
 ./GameFramework/Model/Playable.java:63: error: cannot find symbol
 			controlsForStatusFields.push(labelHealth);
 			                       ^
@@ -1934,6 +1773,9 @@ public class Box implements ShapeBase
 ./GameFramework/Model/Playable.java:481: error: incompatible types: ArrayList<ControlBase> cannot be converted to ControlBase[]
 			childControls,
 			^
+./GameFramework/Model/Selector.java:12: error: Selector is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Selector implements EntityProperty, Clonable<Selector> 
+       ^
 ./GameFramework/Model/Selector.java:38: error: cannot find symbol
 		var visualCursor = new VisualGroup
 		                       ^
@@ -2031,6 +1873,28 @@ public class Box implements ShapeBase
 ./GameFramework/Model/Selector.java:340: error: _isVisible has private access in ControlBase
 			this._control._isVisible = isEntitySelected;
 			             ^
+./GameFramework/Model/Actors/ActivityDefn.java:37: error: cannot find symbol
+		this._perform(uwpe);
+		    ^
+  symbol: method _perform(UniverseWorldPlaceEntities)
+./GameFramework/Model/Actors/ActivityDefn.java:67: error: cannot find symbol
+				var activity = e.actor().activity;
+				                ^
+  symbol:   method actor()
+  location: variable e of type Entity
+./GameFramework/Model/Actors/ActivityDefn.java:84: error: no suitable method found for addLookupsByName(ActivityDefn[])
+		this._AllByName = ArrayHelper.addLookupsByName(this._All);
+		                             ^
+    method ArrayHelper.<E#1>addLookupsByName(E#1[]) is not applicable
+      (inference variable E#1 has incompatible bounds
+        lower bounds: Namable
+        lower bounds: ActivityDefn)
+    method ArrayHelper.<E#2>addLookupsByName(List<E#2>) is not applicable
+      (cannot infer type-variable(s) E#2
+        (argument mismatch; ActivityDefn[] cannot be converted to List<E#2>))
+  where E#1,E#2 are type-variables:
+    E#1 extends Namable declared in method <E#1>addLookupsByName(E#1[])
+    E#2 extends Namable declared in method <E#2>addLookupsByName(List<E#2>)
 ./GameFramework/Model/Combat/Damage.java:29: error: incompatible types: possible lossy conversion from double to int
 		var amountAsDiceRoll = DiceRoll.fromOffset(amount);
 		                                           ^
@@ -2648,28 +2512,6 @@ public class FaceBuilder implements Clonable<FaceBuilder>
 ./GameFramework/Model/WorldDefn.java:73: error: name has private access in Class
 		var defnsByName = this.defnsByNameByTypeName.get(PlaceDefn.class.name);
 		                                                                ^
-./GameFramework/Model/Actors/ActivityDefn.java:37: error: cannot find symbol
-		this._perform(uwpe);
-		    ^
-  symbol: method _perform(UniverseWorldPlaceEntities)
-./GameFramework/Model/Actors/ActivityDefn.java:67: error: cannot find symbol
-				var activity = e.actor().activity;
-				                ^
-  symbol:   method actor()
-  location: variable e of type Entity
-./GameFramework/Model/Actors/ActivityDefn.java:84: error: no suitable method found for addLookupsByName(ActivityDefn[])
-		this._AllByName = ArrayHelper.addLookupsByName(this._All);
-		                             ^
-    method ArrayHelper.<E#1>addLookupsByName(E#1[]) is not applicable
-      (inference variable E#1 has incompatible bounds
-        lower bounds: Namable
-        lower bounds: ActivityDefn)
-    method ArrayHelper.<E#2>addLookupsByName(List<E#2>) is not applicable
-      (cannot infer type-variable(s) E#2
-        (argument mismatch; ActivityDefn[] cannot be converted to List<E#2>))
-  where E#1,E#2 are type-variables:
-    E#1 extends Namable declared in method <E#1>addLookupsByName(E#1[])
-    E#2 extends Namable declared in method <E#2>addLookupsByName(List<E#2>)
 ./GameFramework/Controls/ControlStyle_Instances.java:38: error: cannot find symbol
 		this._AllByName = ArrayHelper.addLookupsByName(this._All);
 		                  ^
@@ -2686,6 +2528,32 @@ public class FaceBuilder implements Clonable<FaceBuilder>
   required: Coords
   found: Coords,boolean
   reason: actual and formal argument lists differ in length
+./GameFramework/Helpers/ArrayHelper.java:95: error: missing method body, or declare abstract
+	public static <K,E> Map<K,E> addLookupsMultiple()
+	                             ^
+./GameFramework/Helpers/ArrayHelper.java:100: error: cannot find symbol
+		var returnLookup = new HashMap<K,E>();
+		                               ^
+  symbol:   class K
+  location: class ArrayHelper
+./GameFramework/Helpers/ArrayHelper.java:100: error: cannot find symbol
+		var returnLookup = new HashMap<K,E>();
+		                                 ^
+  symbol:   class E
+  location: class ArrayHelper
+./GameFramework/Helpers/ArrayHelper.java:101: error: cannot find symbol
+		for (var i = 0; i < list.size(); i++)
+		                    ^
+  symbol:   variable list
+  location: class ArrayHelper
+./GameFramework/Helpers/ArrayHelper.java:103: error: cannot find symbol
+			var element = list.get(i);
+			              ^
+  symbol:   variable list
+  location: class ArrayHelper
+./GameFramework/Helpers/ArrayHelper.java:111: error: return outside method
+		return returnLookup;
+		^
 ./GameFramework/Helpers/ArrayHelper.java:187: error: double cannot be dereferenced
 				var elementCloned = element.clone();
 				                           ^
@@ -2775,11 +2643,16 @@ public class FaceBuilder implements Clonable<FaceBuilder>
 		                                                ^
   symbol:   class Action
   location: class ControlContainer
-./GameFramework/Controls/ControlContainer.java:47: error: cannot find symbol
+./GameFramework/Controls/ControlContainer.java:47: error: method addLookupsMultiple in class ArrayHelper cannot be applied to given types;
 		this._actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		                                                     ^
-  symbol:   method addLookupsMultiple(ActionToInputsMapping[],(x)->x.inputNames)
-  location: class ArrayHelper
+  required: no arguments
+  found: ActionToInputsMapping[],(x)->x.inputNames
+  reason: cannot infer type-variable(s) K,E
+    (actual and formal argument lists differ in length)
+  where K,E are type-variables:
+    K extends Object declared in method <K,E>addLookupsMultiple()
+    E extends Object declared in method <K,E>addLookupsMultiple()
 ./GameFramework/Controls/ControlContainer.java:53: error: no suitable method found for addLookupsByName(ActorAction[])
 		this.actionsByName = ArrayHelper.addLookupsByName(this.actions);
 		                                ^
@@ -3048,182 +2921,282 @@ public class VisualSound implements Visual
 ./GameFramework/Utility/VenueTask.java:57: error: cannot find symbol
 		var timer = setInterval
 		            ^
-  symbol:   method setInterval(()->{ this[...]e); })
+  symbol:   method setInterval(()->this.d[...]erse),int)
   location: class VenueTask
-./GameFramework/Utility/VenueTask.java:63: error: cannot find symbol
+./GameFramework/Utility/VenueTask.java:64: error: cannot find symbol
 		var result = this.perform(universe);
 		                 ^
   symbol: method perform(Universe)
-./GameFramework/Media/VenueVideo.java:26: error: cannot find symbol
+./GameFramework/Storage/VenueFileUpload.java:7: error: VenueFileUpload is not abstract and does not override abstract method initialize(Universe) in Venue
+public class VenueFileUpload implements Venue
+       ^
+./GameFramework/Storage/VenueFileUpload.java:24: error: cannot find symbol
 		var inputNames = Input.Names();
 		                 ^
   symbol:   variable Input
-  location: class VenueVideo
-./GameFramework/Media/VenueVideo.java:27: error: cannot find symbol
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:25: error: cannot find symbol
 		var controlActionNames = ControlActionNames.Instances();
 		                         ^
   symbol:   variable ControlActionNames
-  location: class VenueVideo
-./GameFramework/Media/VenueVideo.java:28: error: cannot find symbol
-		this.actionToInputsMappings = new ActionToInputsMapping[]
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:27: error: cannot find symbol
+		this.actionToInputsMappings = new ActionToInputMapping[]
 		                                  ^
-  symbol:   class ActionToInputsMapping
-  location: class VenueVideo
-./GameFramework/Media/VenueVideo.java:30: error: cannot find symbol
+  symbol:   class ActionToInputMapping
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:29: error: cannot find symbol
 			new ActionToInputsMapping
 			    ^
   symbol:   class ActionToInputsMapping
-  location: class VenueVideo
-./GameFramework/Media/VenueVideo.java:38: error: cannot find symbol
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:40: error: cannot find symbol
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		                                         ^
   symbol:   variable ArrayHelper
-  location: class VenueVideo
-./GameFramework/Media/VenueVideo.java:40: error: cannot find symbol
-			this.actionToInputsMappings, (ActionToInputsMapping x) -> x.inputNames
-			                              ^
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:43: error: cannot find symbol
+			(ActionToInputsMapping x) -> x.inputNames
+			 ^
   symbol:   class ActionToInputsMapping
-  location: class VenueVideo
-./GameFramework/Media/VenueVideo.java:61: error: cannot find symbol
-		if (this.video.isFinished == false)
-		              ^
-  symbol:   variable isFinished
-  location: variable video of type Video
-./GameFramework/Media/VenueVideo.java:73: error: cannot find symbol
-				var controlActionNames = ControlActionNames.Instances();
-				                         ^
-  symbol:   variable ControlActionNames
-  location: class VenueVideo
-./GameFramework/Media/VenueVideo.java:78: error: illegal parenthesized expression
-					if (inputPressed.isActive)
-					   ^
-./GameFramework/Media/VenueVideo.java:101: error: cannot find symbol
-		if (this.video.isFinished)
-		              ^
-  symbol:   variable isFinished
-  location: variable video of type Video
-./GameFramework/Media/VenueVideo.java:101: error: illegal parenthesized expression
-		if (this.video.isFinished)
-		   ^
-./GameFramework/Media/VenueVideo.java:104: error: cannot find symbol
-			var colorBlack = Color.byName("Black");
-			                 ^
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:56: error: cannot find symbol
+		var colorBlack = Color.byName("Black");
+		                 ^
   symbol:   variable Color
-  location: class VenueVideo
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:58: error: cannot find symbol
+		platformHelper.platformableShow(display);
+		              ^
+  symbol:   method platformableShow(Display)
+  location: variable platformHelper of type PlatformHelper
+./GameFramework/Storage/VenueFileUpload.java:65: error: cannot find symbol
+		universe.platformHelper.platformableHide(display);
+		                       ^
+  symbol:   method platformableHide(Display)
+  location: variable platformHelper of type PlatformHelper
+./GameFramework/Storage/VenueFileUpload.java:67: error: cannot find symbol
+		var divFileUpload = document.createElement("div");
+		                    ^
+  symbol:   variable document
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:76: error: cannot find symbol
+		var labelInstructions = document.createElement("label");
+		                        ^
+  symbol:   variable document
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:83: error: cannot find symbol
+		var inputFileUpload = document.createElement("input");
+		                      ^
+  symbol:   variable document
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:85: error: cannot find symbol
+		var divInputFileUpload = document.createElement("div");
+		                         ^
+  symbol:   variable document
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:89: error: cannot find symbol
+		var buttonLoad = document.createElement("button");
+		                 ^
+  symbol:   variable document
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:91: error: cannot find symbol
+		buttonLoad.onclick = this.buttonLoad_Clicked.bind(this, universe);
+		                         ^
+  symbol: variable buttonLoad_Clicked
+./GameFramework/Storage/VenueFileUpload.java:93: error: cannot find symbol
+		var buttonCancel = document.createElement("button");
+		                   ^
+  symbol:   variable document
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:95: error: cannot find symbol
+		buttonCancel.onclick = this.buttonCancel_Clicked.bind(this, universe);
+		                           ^
+  symbol: variable buttonCancel_Clicked
+./GameFramework/Storage/VenueFileUpload.java:97: error: cannot find symbol
+		var divButtons = document.createElement("div");
+		                 ^
+  symbol:   variable document
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:102: error: cannot find symbol
+		this.domElement = divFileUpload;
+		    ^
+  symbol: variable domElement
+./GameFramework/Storage/VenueFileUpload.java:113: error: cannot find symbol
+		for (var i = 0; i < inputsPressed.length; i++)
+		                                 ^
+  symbol:   variable length
+  location: variable inputsPressed of type List<Input>
+./GameFramework/Storage/VenueFileUpload.java:115: error: array required, but List<Input> found
+			var inputPressed = inputsPressed[i];
+			                                ^
+./GameFramework/Storage/VenueFileUpload.java:124: error: cannot find symbol
+					if (actionName == ControlActionNames.Instances().ControlCancel)
+					                  ^
+  symbol:   variable ControlActionNames
+  location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:142: error: cannot find symbol
+		var inputFileUpload = this.domElement.getElementsByTagName("input")[0];
+		                          ^
+  symbol: variable domElement
+./GameFramework/Storage/VenueFileUpload.java:154: error: incompatible types: unexpected return value
+		return this.domElement;
+		           ^
 ./GameFramework/Storage/TarFiles/TarFile.java:25: error: cannot find symbol
 		var reader = new ByteStreamFromBytes(bytes);
 		                 ^
   symbol:   class ByteStreamFromBytes
   location: class TarFile
+./GameFramework/Storage/TarFiles/TarFile.java:67: error: incompatible types: ArrayList<TarFileEntry> cannot be converted to TarFileEntry[]
+		var returnValue = new TarFile(fileName, entries);
+		                                        ^
+./GameFramework/Storage/TarFiles/TarFile.java:78: error: incompatible types: ArrayList<TarFileEntry> cannot be converted to TarFileEntry[]
+			fileName, new ArrayList<TarFileEntry>()
+			          ^
+./GameFramework/Storage/TarFiles/TarFile.java:96: error: cannot find symbol
+				entryNext.header.fileName = entry.dataAsBytes.reduce
+				                                             ^
+  symbol:   method reduce((a,b)->a +[...]de(b),String)
+  location: variable dataAsBytes of type int[]
+./GameFramework/Storage/TarFiles/TarFile.java:101: error: cannot find symbol
+				entries.remove(i);
+				       ^
+  symbol:   method remove(int)
+  location: variable entries of type TarFileEntry[]
 ./GameFramework/Storage/TarFiles/TarFile.java:109: error: cannot find symbol
 		new FileHelper().saveBytesToFileWithName
 		    ^
   symbol:   class FileHelper
   location: class TarFile
-./GameFramework/Storage/TarFiles/TarFile.java:122: error: cannot find symbol
-			x =>
-			^
-  symbol:   variable x
-  location: class TarFile
-./GameFramework/Storage/TarFiles/TarFile.java:123: error: package x.header does not exist
-				x.header.typeFlag.name == typeFlagDirectoryName
-				        ^
+./GameFramework/Storage/TarFiles/TarFile.java:120: error: cannot find symbol
+		return this.entries.stream().filter
+		                   ^
+  symbol:   method stream()
+  location: variable entries of type TarFileEntry[]
 ./GameFramework/Storage/TarFiles/TarFile.java:131: error: unexpected type
 		var fileAsBytes = new ArrayList<int>();
 		                                ^
   required: reference
   found:    int
 ./GameFramework/Storage/TarFiles/TarFile.java:134: error: cannot find symbol
-		var entriesAsByteArrays = this.entries.map(x => x.toBytes());
-		                                           ^
-  symbol:   variable x
-  location: class TarFile
-./GameFramework/Storage/TarFiles/TarFile.java:134: error: cannot find symbol
-		var entriesAsByteArrays = this.entries.map(x => x.toBytes());
-		                                                ^
-  symbol:   variable x
-  location: class TarFile
+		var entriesAsByteArrays = this.entries.map(x -> x.toBytes());
+		                                      ^
+  symbol:   method map((x)->x.toBytes())
+  location: variable entries of type TarFileEntry[]
 ./GameFramework/Storage/TarFiles/TarFile.java:158: error: incompatible types: ArrayList<<any>> cannot be converted to int[]
 		return fileAsBytes;
 		       ^
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:236: error: ';' expected
-		)
-		 ^
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:4: error: cannot find symbol
-import GameFramework.Helpers;
-                    ^
-  symbol:   class Helpers
-  location: package GameFramework
+./GameFramework/Storage/TarFiles/TarFile.java:175: error: cannot find symbol
+			if (entryFileName.length > maxLength)
+			                 ^
+  symbol:   variable length
+  location: variable entryFileName of type String
 ./GameFramework/Storage/TarFiles/TarFile.java:177: error: cannot find symbol
-				var entryFileNameAsBytes = entryFileName.split("").map(x => x.charAt(0));
-				                                                       ^
-  symbol:   variable x
-  location: class TarFile
-./GameFramework/Storage/TarFiles/TarFile.java:177: error: cannot find symbol
-				var entryFileNameAsBytes = entryFileName.split("").map(x => x.charAt(0));
-				                                                            ^
-  symbol:   variable x
-  location: class TarFile
+				var entryFileNameAsBytes = entryFileName.split("").map(x -> x.charAt(0));
+				                                                  ^
+  symbol:   method map((x)->x.charAt(0))
+  location: class String[]
 ./GameFramework/Storage/TarFiles/TarFile.java:187: error: cannot find symbol
 					entryFileName.substring(0, maxLength) + String.fromCharCode(0);
 					                                              ^
   symbol:   method fromCharCode(int)
   location: class String
-./GameFramework/Storage/TarFiles/TarFileEntry.java:21: error: cannot find symbol
-		var header = TarFileEntryHeader.directoryNew(directoryName);
-		             ^
-  symbol:   variable TarFileEntryHeader
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:23: error: cannot find symbol
-		var entry = new TarFileEntry(header, new ArrayList<int>());
-		                                         ^
-  symbol:   class ArrayList
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:23: error: unexpected type
+./GameFramework/Storage/TarFiles/TarFileEntry.java:25: error: unexpected type
 		var entry = new TarFileEntry(header, new ArrayList<int>());
 		                                                   ^
   required: reference
   found:    int
-./GameFramework/Storage/TarFiles/TarFileEntry.java:30: error: cannot find symbol
-		var header = TarFileEntryHeader.fileNew(fileName, fileContentsAsBytes);
-		             ^
-  symbol:   variable TarFileEntryHeader
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:39: error: cannot find symbol
-		var chunkSize = TarFile.ChunkSize;
-		                ^
-  symbol:   variable TarFile
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:41: error: cannot find symbol
-		var header = TarFileEntryHeader.fromBytes
-		             ^
-  symbol:   variable TarFileEntryHeader
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:77: error: cannot find symbol
-		var returnValues = new ArrayList<TarFileEntry>();
-		                       ^
-  symbol:   class ArrayList
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:98: error: cannot find symbol
+./GameFramework/Storage/TarFiles/TarFileEntry.java:90: error: cannot find symbol
+			returnValues.push(entry);
+			            ^
+  symbol:   method push(TarFileEntry)
+  location: variable returnValues of type ArrayList<TarFileEntry>
+./GameFramework/Storage/TarFiles/TarFileEntry.java:100: error: cannot find symbol
 		new FileHelper().saveBytesToFileWithName
 		    ^
   symbol:   class FileHelper
   location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:112: error: cannot find symbol
-		var entryAsBytes = new ArrayList<Integer>();
-		                       ^
-  symbol:   class ArrayList
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:114: error: cannot find symbol
-		var chunkSize = TarFile.ChunkSize;
-		                ^
-  symbol:   variable TarFile
-  location: class TarFileEntry
-./GameFramework/Storage/TarFiles/TarFileEntry.java:151: error: cannot find symbol
+./GameFramework/Storage/TarFiles/TarFileEntry.java:119: error: cannot find symbol
+		entryAsBytes = entryAsBytes.concat(headerAsBytes);
+		                           ^
+  symbol:   method concat(int[])
+  location: variable entryAsBytes of type ArrayList<Integer>
+./GameFramework/Storage/TarFiles/TarFileEntry.java:121: error: cannot find symbol
+		entryAsBytes = entryAsBytes.concat(this.dataAsBytes);
+		                           ^
+  symbol:   method concat(int[])
+  location: variable entryAsBytes of type ArrayList<Integer>
+./GameFramework/Storage/TarFiles/TarFileEntry.java:139: error: cannot find symbol
+			entryAsBytes.push(0);
+			            ^
+  symbol:   method push(int)
+  location: variable entryAsBytes of type ArrayList<Integer>
+./GameFramework/Storage/TarFiles/TarFileEntry.java:153: error: cannot find symbol
 		var dataAsHexadecimalString = ByteHelper.bytesToStringHexadecimal
 		                              ^
   symbol:   variable ByteHelper
   location: class TarFileEntry
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:70: error: cannot find symbol
+		var now = new Date();
+		              ^
+  symbol:   class Date
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:71: error: cannot find symbol
+		var unixEpoch = new Date(1970, 1, 1);
+		                    ^
+  symbol:   class Date
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:77: error: cannot find symbol
+		var secondsSinceUnixEpochAsStringOctal = StringHelper.padEnd
+		                                         ^
+  symbol:   variable StringHelper
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:81: error: cannot find symbol
+		var timeModifiedInUnixFormat = new ArrayList<Integer>();
+		                                   ^
+  symbol:   class ArrayList
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:91: error: cannot find symbol
+			StringHelper.padEnd("", 100, "\0"), // fileName
+			^
+  symbol:   variable StringHelper
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:139: error: cannot find symbol
+		var reader = new ByteStreamFromBytes(bytes);
+		                 ^
+  symbol:   class ByteStreamFromBytes
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:230: error: cannot find symbol
+		var headerAsBytes = new ArrayList<Integer>();
+		                        ^
+  symbol:   class ArrayList
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:231: error: cannot find symbol
+		var writer = new ByteStreamFromBytes(headerAsBytes);
+		                 ^
+  symbol:   class ByteStreamFromBytes
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:235: error: int cannot be dereferenced
+			this.fileSizeInBytes.toString(8) + "\0", 12, "0"
+			                    ^
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:233: error: cannot find symbol
+		var fileSizeInBytesAsStringOctal = StringHelper.padStart
+		                                   ^
+  symbol:   variable StringHelper
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:239: error: int cannot be dereferenced
+			this.checksum.toString(8) + "\0 ", 8, "0"
+			             ^
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:237: error: cannot find symbol
+		var checksumAsStringOctal = StringHelper.padStart
+		                            ^
+  symbol:   variable StringHelper
+  location: class TarFileEntryHeader
+./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:260: error: cannot find symbol
+			StringHelper.padEnd("", 12, "\0"), 12
+			^
+  symbol:   variable StringHelper
+  location: class TarFileEntryHeader
 ./GameFramework/Helpers/ByteHelper.java:8: error: cannot find symbol
 		var bytes = new ArrayList<int>();
 		                ^
@@ -3247,11 +3220,23 @@ import GameFramework.Helpers;
 ./GameFramework/Helpers/ByteHelper.java:26: error: int cannot be dereferenced
 			var byteAsString = byteToConvert.toString(16);
 			                                ^
-./GameFramework/Helpers/ByteHelper.java:40: error: unexpected type
-			var byteAsChar = String.fromCharCode(byte);
-			                                     ^
-  required: value
-  found:    class
+./GameFramework/Helpers/ByteHelper.java:40: error: cannot find symbol
+			var byteAsChar = String.fromCharCode(byteToConvert);
+			                       ^
+  symbol:   method fromCharCode(int)
+  location: class String
+./GameFramework/Display/Visuals/VisualText.java:67: error: cannot infer type for local variable text
+		var text = this.text(uwpe, display);
+		    ^
+  (variable initializer is 'void')
+./GameFramework/Display/Visuals/VisualText.java:94: error: incompatible types: unexpected return value
+		return returnValue;
+		       ^
+./GameFramework/Display/Visuals/VisualText.java:111: error: cannot find symbol
+	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
+	                                                      ^
+  symbol:   class Coords
+  location: class VisualText
 ./GameFramework/Display/Visuals/VisualImageImmediate.java:7: error: VisualImageImmediate is not abstract and does not override abstract method coordsGroupToTranslate() in Transformable
 public class VisualImageImmediate implements VisualImage
        ^
@@ -3293,11 +3278,16 @@ public class VisualImageImmediate implements VisualImage
   symbol:   variable universe
   location: class ControlTabbed
 ./GameFramework/Display/Visuals/VisualDirectional.java:102: error: cannot find symbol
+	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
+	       ^
+  symbol:   class Coords
+  location: class VisualDirectional
+./GameFramework/Display/Visuals/VisualDirectional.java:104: error: cannot find symbol
 	public Transformable transform(Transform transformToApply)
 	                               ^
   symbol:   class Transform
   location: class VisualDirectional
-./GameFramework/Display/Visuals/VisualDirectional.java:102: error: cannot find symbol
+./GameFramework/Display/Visuals/VisualDirectional.java:104: error: cannot find symbol
 	public Transformable transform(Transform transformToApply)
 	       ^
   symbol:   class Transformable
@@ -3567,70 +3557,11 @@ public class VisualPolygon implements Visual
 					                                  ^
   symbol:   variable sizeInPixels
   location: variable display of type Display
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:70: error: cannot find symbol
-		var now = new Date();
-		              ^
-  symbol:   class Date
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:71: error: cannot find symbol
-		var unixEpoch = new Date(1970, 1, 1);
-		                    ^
-  symbol:   class Date
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:77: error: cannot find symbol
-		var secondsSinceUnixEpochAsStringOctal = StringHelper.padEnd
-		                                         ^
-  symbol:   variable StringHelper
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:81: error: cannot find symbol
-		var timeModifiedInUnixFormat = new ArrayList<Integer>();
-		                                   ^
-  symbol:   class ArrayList
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:91: error: cannot find symbol
-			StringHelper.padEnd("", 100, "\0"), // fileName
-			^
-  symbol:   variable StringHelper
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:139: error: cannot find symbol
-		var reader = new ByteStreamFromBytes(bytes);
-		                 ^
-  symbol:   class ByteStreamFromBytes
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:230: error: cannot find symbol
-		var headerAsBytes = new ArrayList<Integer>();
-		                        ^
-  symbol:   class ArrayList
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:231: error: cannot find symbol
-		var writer = new ByteStreamFromBytes(headerAsBytes);
-		                 ^
-  symbol:   class ByteStreamFromBytes
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:235: error: int cannot be dereferenced
-			this.fileSizeInBytes.toString(8) + "\0", 12, "0"
-			                    ^
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:233: error: cannot find symbol
-		var fileSizeInBytesAsStringOctal = StringHelper.padStart
-		                                   ^
-  symbol:   variable StringHelper
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:239: error: int cannot be dereferenced
-			this.checksum.toString(8) + "\0 ", 8, "0"
-			             ^
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:237: error: cannot find symbol
-		var checksumAsStringOctal = StringHelper.padStart
-		                            ^
-  symbol:   variable StringHelper
-  location: class TarFileEntryHeader
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:260: error: cannot find symbol
-			StringHelper.padEnd("", 12, "\0"), 12
-			^
-  symbol:   variable StringHelper
-  location: class TarFileEntryHeader
-./GameFramework/Display/Visuals/VisualDirectional.java:10: error: VisualDirectional is not abstract and does not override abstract method coordsGroupToTranslate() in Transformable
-public class VisualDirectional implements Visual
-       ^
+./GameFramework/Display/Visuals/VisualDirectional.java:102: error: cannot find symbol
+	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
+	                                                      ^
+  symbol:   class Coords
+  location: class VisualDirectional
 ./GameFramework/Display/Visuals/VisualPath.java:44: error: cannot find symbol
 		Transforms.applyTransformToCoordsMany
 		          ^
@@ -3662,4 +3593,4 @@ public class VisualAnimation implements Visual
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-810 errors
+791 errors

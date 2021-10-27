@@ -11,7 +11,7 @@ import GameFramework.Media.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class Display2D extends JPanel implements Display, Platformable
+public class Display2D extends JPanel implements Display
 {
 	public Coords _sizeInPixels;
 	public Coords[] _sizesAvailable;

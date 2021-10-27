@@ -99,6 +99,8 @@ public class VisualDirectional implements Visual
 
 	// Transformable.
 
+	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
+	
 	public Transformable transform(Transform transformToApply)
 	{
 		return this; // todo

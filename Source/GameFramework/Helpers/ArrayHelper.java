@@ -44,7 +44,7 @@ public class ArrayHelper
 		E[] list, Function<E,K> getKeyForElement
 	)
 	{
-		var returnLookup = new HashMap<K, E>();
+		var returnLookup = new HashMap<K,E>();
 		for (var i = 0; i < list.length; i++)
 		{
 			var element = list[i];
@@ -92,7 +92,7 @@ public class ArrayHelper
 		);
 	}
 
-	public static <K,E> Map<K,E> addLookupsMultiple<K, E>
+	public static <K,E> Map<K,E> addLookupsMultiple()
 	(
 		List<E> list, Function<E,K[]> getKeysForElement
 	)

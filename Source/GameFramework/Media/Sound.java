@@ -16,7 +16,7 @@ public class Sound implements MediaLibraryItem
 
 	public Sound(String name, String sourcePath)
 	{
-		this.name = name;
+		this._name = name;
 		this.sourcePath = sourcePath;
 
 		this.offsetInSeconds = 0;

@@ -3,7 +3,7 @@ package GameFramework.Storage.TarFiles;
 
 import java.util.*;
 
-public class TarFile
+public class TarFile //
 {
 	public String fileName;
 	public TarFileEntry entries[];
@@ -109,7 +109,7 @@ public class TarFile
 		new FileHelper().saveBytesToFileWithName
 		(
 			this.toBytes(), fileNameToSaveAs
-		)
+		);
 	}
 
 	public List<TarFileEntry> entriesForDirectories()
@@ -119,7 +119,7 @@ public class TarFile
 
 		return this.entries.stream().filter
 		(
-			x =>
+			x ->
 				x.header.typeFlag.name == typeFlagDirectoryName
 		);
 	}
@@ -131,7 +131,7 @@ public class TarFile
 		var fileAsBytes = new ArrayList<int>();
 
 		// hack - For easier debugging.
-		var entriesAsByteArrays = this.entries.map(x => x.toBytes());
+		var entriesAsByteArrays = this.entries.map(x -> x.toBytes());
 
 		// Now that we've written the bytes for long path entries,
 		// put it back the way it was.
@@ -174,7 +174,7 @@ public class TarFile
 			var entryFileName = entryHeader.fileName;
 			if (entryFileName.length > maxLength)
 			{
-				var entryFileNameAsBytes = entryFileName.split("").map(x => x.charAt(0));
+				var entryFileNameAsBytes = entryFileName.split("").map(x -> x.charAt(0));
 				var entryContainingLongPathToPrepend = TarFileEntry.fileNew
 				(
 					typeFlagLongPath.name, entryFileNameAsBytes

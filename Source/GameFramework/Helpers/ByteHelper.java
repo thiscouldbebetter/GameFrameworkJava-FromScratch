@@ -36,9 +36,9 @@ public class ByteHelper
 
 		for (var i = 0; i < bytesToConvert.length; i++)
 		{
-			var byte = bytesToConvert[i];
-			var byteAsChar = String.fromCharCode(byte);
-			returnValue += byteAsChar
+			var byteToConvert = bytesToConvert[i];
+			var byteAsChar = String.fromCharCode(byteToConvert);
+			returnValue += byteAsChar;
 		}
 
 		return returnValue;

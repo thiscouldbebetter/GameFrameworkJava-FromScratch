@@ -3,7 +3,9 @@ package GameFramework.Model.Physics
 
 import java.util.function.*;
 
+import GameFramework.Geometry.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public class Movable implements EntityProperty
 {
@@ -30,7 +32,7 @@ public class Movable implements EntityProperty
 
 	public static Movable fromAccelerationAndSpeedMax
 	(
-		number accelerationPerTick, number speedMax
+		double accelerationPerTick, double speedMax
 	)
 	{
 		return new Movable(accelerationPerTick, speedMax, null);

@@ -290,6 +290,12 @@ public class InputHelper
 
 	// events - mouse
 
+	public void mouseEntered(MouseEvent event)
+	{}
+
+	public void mouseExited(MouseEvent event)
+	{}
+
 	public void mousePressed(MouseEvent event)
 	{
 		/*

@@ -27,7 +27,7 @@ public class VenueTask implements Venue
 
 	public double secondsSinceStarted()
 	{
-		var returnValue = 0
+		var returnValue = 0;
 		if (this.timeStarted != null)
 		{
 			var now = new Date();
@@ -56,7 +56,8 @@ public class VenueTask implements Venue
 
 		var timer = setInterval
 		(
-			() -> { this.draw(universe), 1000 }
+			() -> this.draw(universe),
+			1000
 		)
 
 		// todo - Make this asynchronous.
