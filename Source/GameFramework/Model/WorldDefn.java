@@ -4,6 +4,7 @@ package GameFramework.Model;
 import java.util.*;
 
 import GameFramework.Model.Actors.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.Items.*;
 import GameFramework.Model.Places.*;
 
@@ -42,35 +43,35 @@ public class WorldDefn
 
 	public ActorAction actionByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(Action.class.name);
+		var defnsByName = this.defnsByNameByTypeName.get(Action.class.getName());
 		var returnValue = ((ActorAction)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public ActivityDefn activityDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(ActivityDefn.class.name);
+		var defnsByName = this.defnsByNameByTypeName.get(ActivityDefn.class.getName());
 		var returnValue = ((ActivityDefn)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public Entity entityDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(Entity.class.name);
+		var defnsByName = this.defnsByNameByTypeName.get(Entity.class.getName());
 		var returnValue = ((Entity)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public ItemDefn itemDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(ItemDefn.class.name);
+		var defnsByName = this.defnsByNameByTypeName.get(ItemDefn.class.getName());
 		var returnValue = ((ItemDefn)(defnsByName.get(defnName)));
 		return returnValue;
 	}
 
 	public PlaceDefn placeDefnByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(PlaceDefn.class.name);
+		var defnsByName = this.defnsByNameByTypeName.get(PlaceDefn.class.getName());
 		var returnValue = ((PlaceDefn)(defnsByName.get(defnName)));
 		return returnValue;
 	}

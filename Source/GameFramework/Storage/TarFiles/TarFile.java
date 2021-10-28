@@ -2,13 +2,17 @@
 package GameFramework.Storage.TarFiles;
 
 import java.util.*;
+import java.util.stream.*;
+
+import GameFramework.Storage.*;
+import GameFramework.Storage.Compressor.*;
 
 public class TarFile //
 {
 	public String fileName;
-	public TarFileEntry entries[];
+	public List<TarFileEntry> entries;
 
-	public TarFile(String fileName, TarFileEntry[] entries)
+	public TarFile(String fileName, List<TarFileEntry> entries)
 	{
 		this.fileName = fileName;
 		this.entries = entries;
@@ -93,9 +97,9 @@ public class TarFile //
 			if (entry.header.typeFlag.name == typeFlagLongPathName)
 			{
 				var entryNext = entries[i + 1];
-				entryNext.header.fileName = entry.dataAsBytes.reduce
+				entryNext.header.fileName = entry.dataAsBytes.stream().reduce
 				(
-					(a, b) -> a += String.fromCharCode(b),
+					(a, b) -> a += "" + (char)b,
 					""
 				);
 				entries.remove(i);
@@ -128,10 +132,11 @@ public class TarFile //
 	{
 		this.toBytes_PrependLongPathEntriesAsNeeded();
 
-		var fileAsBytes = new ArrayList<int>();
+		var fileAsBytes = new ArrayList<Integer>();
 
 		// hack - For easier debugging.
-		var entriesAsByteArrays = this.entries.map(x -> x.toBytes());
+		var entriesAsByteArrays =
+			this.entries.stream().map(x -> x.toBytes());
 
 		// Now that we've written the bytes for long path entries,
 		// put it back the way it was.
@@ -155,7 +160,7 @@ public class TarFile //
 			}
 		}
 
-		return fileAsBytes;
+		return fileAsBytes.toArray(new int[] {});
 	}
 
 	public void toBytes_PrependLongPathEntriesAsNeeded()
@@ -172,9 +177,10 @@ public class TarFile //
 			var entry = entries[i];
 			var entryHeader = entry.header;
 			var entryFileName = entryHeader.fileName;
-			if (entryFileName.length > maxLength)
+			if (entryFileName.length() > maxLength)
 			{
-				var entryFileNameAsBytes = entryFileName.split("").map(x -> x.charAt(0));
+				var entryFileNameAsBytes =
+					entryFileName.split("").stream().map(x -> x.charAt(0));
 				var entryContainingLongPathToPrepend = TarFileEntry.fileNew
 				(
 					typeFlagLongPath.name, entryFileNameAsBytes
@@ -184,7 +190,7 @@ public class TarFile //
 					entryHeader.timeModifiedInUnixFormat;
 				entryContainingLongPathToPrepend.header.checksumCalculate();
 				entryHeader.fileName =
-					entryFileName.substring(0, maxLength) + String.fromCharCode(0);
+					entryFileName.substring(0, maxLength) + "" + (char)0;
 				entries.insert(i, entryContainingLongPathToPrepend);
 				i++;
 			}

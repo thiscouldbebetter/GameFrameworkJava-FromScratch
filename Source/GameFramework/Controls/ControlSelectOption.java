@@ -10,7 +10,7 @@ public class ControlSelectOption
 
 	public double fontHeightInPixels;
 
-	public ControlSelectOption(Object value, Object text)
+	public ControlSelectOption(Object value, String text)
 	{
 		this.value = value;
 		this.text = text;

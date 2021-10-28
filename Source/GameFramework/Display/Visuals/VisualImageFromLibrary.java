@@ -49,7 +49,7 @@ public class VisualImageFromLibrary implements VisualImage
 
 	public Coords sizeInPixels(Universe universe)
 	{
-		return this.image(universe).sizeInPixels;
+		return this.image(universe).sizeInPixels();
 	}
 
 	// visual
@@ -59,7 +59,7 @@ public class VisualImageFromLibrary implements VisualImage
 		var universe = uwpe.universe;
 		var entity = uwpe.entity;
 		var image = this.image(universe);
-		var imageSize = image.sizeInPixels;
+		var imageSize = image.sizeInPixels();
 		var drawPos = this._drawPos.clear().subtract(imageSize).half().add
 		(
 			entity.locatable().loc.pos

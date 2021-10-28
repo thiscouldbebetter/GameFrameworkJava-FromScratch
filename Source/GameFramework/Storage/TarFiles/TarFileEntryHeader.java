@@ -1,7 +1,10 @@
 
 package GameFramework.Storage.TarFiles;
 
-import GameFramework.Helpers;
+import java.util.*;
+
+import GameFramework.Helpers.*;
+import GameFramework.Storage.Compressor.*;
 
 public class TarFileEntryHeader
 {
@@ -76,7 +79,7 @@ public class TarFileEntryHeader
 		);
 		var secondsSinceUnixEpochAsStringOctal = StringHelper.padEnd
 		(
-			secondsSinceUnixEpoch.toString(8), 12, "\0"
+			Integer.toOctalString(secondsSinceUnixEpoch), 12, "\0"
 		);
 		var timeModifiedInUnixFormat = new ArrayList<Integer>();
 		for (var i = 0; i < secondsSinceUnixEpochAsStringOctal.length; i++)
@@ -232,11 +235,11 @@ public class TarFileEntryHeader
 
 		var fileSizeInBytesAsStringOctal = StringHelper.padStart
 		(
-			this.fileSizeInBytes.toString(8) + "\0", 12, "0"
+			Integer.toOctalString(this.fileSizeInBytes) + "\0", 12, "0"
 		)
 		var checksumAsStringOctal = StringHelper.padStart
 		(
-			this.checksum.toString(8) + "\0 ", 8, "0"
+			Integer.toOctalString(this.checksum) + "\0 ", 8, "0"
 		);
 
 		writer.writeStringPaddedToLength(this.fileName, 100);

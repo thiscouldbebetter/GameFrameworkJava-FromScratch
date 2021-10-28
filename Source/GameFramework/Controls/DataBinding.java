@@ -12,8 +12,8 @@ public class DataBinding<C,V>
 	public DataBinding
 	(
 		C context,
-		Function<C,V> _get,
-		BiConsumer<C,V> _set
+		Function<C,V> get,
+		BiConsumer<C,V> set
 	)
 	{
 		this.context = context;
@@ -45,7 +45,7 @@ public class DataBinding<C,V>
 
 	public static DataBinding<Object,Boolean> fromTrue()
 	{
-		return DataBinding.fromContext<Boolean>(true);
+		return DataBinding.fromContext((Boolean)true);
 	}
 
 	public DataBinding<C, V> contextSet(C value)
@@ -56,12 +56,7 @@ public class DataBinding<C,V>
 
 	public V get()
 	{
-		return
-		(
-			this._get == null
-			? this.context
-			: this._get.call(this.context)
-		);
+		return this._get.apply(this.context);
 	}
 
 	public void set(V value)
@@ -72,7 +67,7 @@ public class DataBinding<C,V>
 		}
 		else
 		{
-			this._set.call(this.context, value);
+			this._set.accept(this.context, value);
 		}
 	}
 }

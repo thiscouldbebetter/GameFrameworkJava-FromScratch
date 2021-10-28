@@ -1,9 +1,9 @@
 
 package GameFramework.Display.Visuals;
 
-
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms*;
 import GameFramework.Model.*;
 
 public class VisualLine implements Visual

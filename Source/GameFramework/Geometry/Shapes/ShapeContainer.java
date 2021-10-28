@@ -15,6 +15,13 @@ public class ShapeContainer implements ShapeBase
 
 	// Clonable.
 
+	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
+	{
+		var other = (ShapeContainer)otherAsShapeBase;
+		this.shape.overwriteWith(other.shape);
+		return this;
+	}
+
 	public ShapeContainer clone()
 	{
 		return new ShapeContainer(this.shape.clone());

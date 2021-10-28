@@ -1,6 +1,9 @@
 
 package GameFramework.Display.Visuals;
 
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class VisualAnimation implements Visual
 {

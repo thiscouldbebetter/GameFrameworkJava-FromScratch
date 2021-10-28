@@ -1,12 +1,15 @@
 
 package GameFramework.Input;
 
+import java.util.function.*;
+
+import GameFramework.Input.*;
 import GameFramework.Model.*;
 
 public class VenueInputCapture implements Venue
 {
 	public Venue venueToReturnTo;
-	public Object functionToPassInputCapturedTo;
+	public Consumer<Input> functionToPassInputCapturedTo;
 
 	public boolean isFirstTime;
 
@@ -52,7 +55,7 @@ public class VenueInputCapture implements Venue
 				{
 					if (inputPressed.isActive)
 					{
-						this.functionToPassInputCapturedTo(inputPressed);
+						this.functionToPassInputCapturedTo.accept(inputPressed);
 						universe.venueNext = this.venueToReturnTo;
 					}
 				}

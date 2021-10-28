@@ -1,6 +1,8 @@
 
 package GameFramework.Controls;
 
+import java.util.*;
+
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
@@ -38,7 +40,7 @@ public class ControlTextBox extends ControlBase
 		this.numberOfCharsMax = numberOfCharsMax;
 		this._isEnabled = isEnabled;
 
-		this.cursorPos = null;
+		this.cursorPos = Integer.NaN;
 
 		// Helper variables.
 		this._drawPos = Coords.create();
@@ -57,7 +59,7 @@ public class ControlTextBox extends ControlBase
 
 	public boolean actionHandle(String actionNameToHandle, Universe universe)
 	{
-		var text = this.text(null, null);
+		var text = this.text();
 
 		var controlActionNames = ControlActionNames.Instances();
 		if
@@ -119,7 +121,7 @@ public class ControlTextBox extends ControlBase
 				"z".charAt(0) + 1
 			);
 
-			var charAtCursor = String.fromCharCode(charAtCursor);
+			var charAtCursor = "" + (char)charAtCursor;
 
 			var textEdited = text.substring(0, this.cursorPos)
 				+ charAtCursor
@@ -167,7 +169,7 @@ public class ControlTextBox extends ControlBase
 	public void focusGain()
 	{
 		this.isHighlighted = true;
-		this.cursorPos = this.text().length;
+		this.cursorPos = this.text().length();
 	}
 
 	public void focusLose()
@@ -256,7 +258,7 @@ public class ControlTextBox extends ControlBase
 				new Coords(cursorWidth, this.fontHeightInPixels, 0), // size
 				style.colorFill,
 				style.colorFill, // ?
-				null
+				false
 			);
 
 			display.drawText

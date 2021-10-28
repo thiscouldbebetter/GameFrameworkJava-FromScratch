@@ -2,6 +2,7 @@
 package GameFramework.Geometry.Shapes;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
 public class Path

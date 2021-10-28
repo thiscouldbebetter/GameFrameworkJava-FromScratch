@@ -1,15 +1,19 @@
 
 package GameFramework.Helpers;
 
+import java.util.*;
+
+import GameFramework.Helpers.*;
+
 public class ByteHelper
 {
-	public static int[] StringUTF8ToBytes(String StringToConvert)
+	public static int[] StringUTF8ToBytes(String stringToConvert)
 	{
-		var bytes = new ArrayList<int>();
+		var bytes = new ArrayList<Integer>();
 
-		for (var i = 0; i < StringToConvert.length; i++)
+		for (var i = 0; i < stringToConvert.length(); i++)
 		{
-			var byteRead = StringToConvert.charCodeAt(i);
+			var byteRead = stringToConvert.charAt(i);
 			bytes.push(byteRead);
 		}
 
@@ -23,7 +27,7 @@ public class ByteHelper
 		for (var i = 0; i < bytesToConvert.length; i++)
 		{
 			var byteToConvert = bytesToConvert[i];
-			var byteAsString = byteToConvert.toString(16);
+			var byteAsString = Integer.toHexadecimalString(byteToConvert);
 			returnValue += byteAsString;
 		}
 
@@ -37,7 +41,7 @@ public class ByteHelper
 		for (var i = 0; i < bytesToConvert.length; i++)
 		{
 			var byteToConvert = bytesToConvert[i];
-			var byteAsChar = String.fromCharCode(byteToConvert);
+			var byteAsChar = "" + (char)byteToConvert;
 			returnValue += byteAsChar;
 		}
 

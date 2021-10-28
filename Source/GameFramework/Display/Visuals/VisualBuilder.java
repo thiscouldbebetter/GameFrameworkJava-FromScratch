@@ -124,46 +124,49 @@ public class VisualBuilder
 		var ticksPerStepAsArray = new int[] { ticksPerStep, ticksPerStep };
 
 		var visualLegsFacingDownWalking = new VisualGroup
-		([
-			new VisualOffset
-			(
-				new VisualAnimation
+		(
+			new Visual[]
+			{
+				new VisualOffset
 				(
-					null, // name
-					ticksPerStepAsArray,
-					new Visual[]
-					{
-						visualLegDownLeft,
-						new VisualOffset
-						(
+					new VisualAnimation
+					(
+						null, // name
+						ticksPerStepAsArray,
+						new Visual[]
+						{
 							visualLegDownLeft,
-							new Coords(0, -legLengthHalf, 0)
-						)
-					},
-					isRepeating
+							new VisualOffset
+							(
+								visualLegDownLeft,
+								new Coords(0, -legLengthHalf, 0)
+							)
+						},
+						isRepeating
+					),
+					offsetLegLeft
 				),
-				offsetLegLeft
-			),
-			new VisualOffset
-			(
-				new VisualAnimation
+				new VisualOffset
 				(
-					null, // name
-					ticksPerStepAsArray,
-					new Visual[]
-					{
-						new VisualOffset
-						(
-							visualLegDownRight,
-							new Coords(0, -legLengthHalf, 0)
-						),
-						visualLegDownRight
-					},
-					isRepeating
+					new VisualAnimation
+					(
+						null, // name
+						ticksPerStepAsArray,
+						new Visual[]
+						{
+							new VisualOffset
+							(
+								visualLegDownRight,
+								new Coords(0, -legLengthHalf, 0)
+							),
+							visualLegDownRight
+						},
+						isRepeating
+					),
+					offsetLegRight
 				),
-				offsetLegRight
-			),
-		]);
+			}
+		);
 
 		var visualLegUpLeft = new VisualPath
 		(
@@ -429,7 +432,7 @@ public class VisualBuilder
 				var entityForward = entityLoc.orientation.forward;
 				var entityForwardInTurns = entityForward.headingInTurns();
 				String childNameToSelect;
-				if (entityForwardInTurns == null)
+				if (entityForwardInTurns == -1)
 				{
 					childNameToSelect = "FacingDownStanding";
 				}

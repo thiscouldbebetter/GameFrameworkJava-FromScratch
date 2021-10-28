@@ -13,7 +13,7 @@ public class Polar
 	{
 		this.azimuthInTurns = azimuthInTurns;
 		this.radius = radius;
-		this.elevationInTurns = (elevationInTurns == null ? 0 : elevationInTurns);
+		this.elevationInTurns = elevationInTurns;
 	}
 
 	public static Polar create()
@@ -74,10 +74,7 @@ public class Polar
 	{
 		this.azimuthInTurns = azimuthInTurns;
 		this.radius = radius;
-		if (elevationInTurns != null)
-		{
-			this.elevationInTurns = elevationInTurns;
-		}
+		this.elevationInTurns = elevationInTurns;
 		return this;
 	}
 

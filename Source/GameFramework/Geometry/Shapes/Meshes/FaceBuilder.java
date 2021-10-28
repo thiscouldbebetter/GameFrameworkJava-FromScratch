@@ -46,7 +46,7 @@ public class FaceBuilder implements Clonable<FaceBuilder>
 		return new FaceBuilder(ArrayHelper.clone(this.vertexIndices));
 	}
 
-	public FaceBuilder overwriteWith(Mesh other_FaceBuilder)
+	public FaceBuilder overwriteWith(FaceBuilder other)
 	{
 		ArrayHelper.overwriteWith(this.vertexIndices, other.vertexIndices);
 		return this;

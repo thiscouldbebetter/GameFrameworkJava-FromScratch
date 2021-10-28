@@ -77,7 +77,7 @@ public class BitStream
 		return returnValue;
 	}
 
-	public void readInteger(int numberOfBitsInNumber)
+	public int readInteger(int numberOfBitsInNumber)
 	{
 		var returnValue = 0;
 

@@ -17,7 +17,7 @@ public class ControlLabel extends ControlBase
 	public ControlLabel
 	(
 		String name, Coords pos, Coords size, boolean isTextCentered,
-		Object text, double fontHeightInPixels
+		Object text, Double fontHeightInPixels
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -83,7 +83,7 @@ public class ControlLabel extends ControlBase
 
 	public String text()
 	{
-		return (this._text.get == null ? this._text : this._text.get() );
+		return this._text.get();
 	}
 
 	// drawable
@@ -95,7 +95,7 @@ public class ControlLabel extends ControlBase
 	)
 	{
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
-		var style = (style != null ? style : this.style(universe) );
+		style = (style != null ? style : this.style(universe) );
 		var text = this.text();
 
 		if (text != null)

@@ -1,6 +1,10 @@
 
 package GameFramework.Storage;
 
+import GameFramework.Controls.*;
+import GameFramework.Display.*;
+import GameFramework.Helper.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
@@ -48,6 +52,9 @@ public class VenueFileUpload implements Venue
 
 	public void draw(Universe universe) {}
 
+	public void initialize(Universe universe)
+	{}
+
 	public void finalize(Universe universe)
 	{
 		var platformHelper = universe.platformHelper;
@@ -60,12 +67,14 @@ public class VenueFileUpload implements Venue
 
 	initialize(Universe universe)
 	{
+		/*
 		var display = universe.display;
 
 		universe.platformHelper.platformableHide(display);
 
 		var divFileUpload = document.createElement("div");
-
+		*/
+		
 		/*
 		// todo - Style is read-only?
 		divFileUpload.style =
@@ -73,6 +82,7 @@ public class VenueFileUpload implements Venue
 			+ ";height:" + display.sizeInPixels.y;
 		*/
 
+		/*
 		var labelInstructions = document.createElement("label");
 		labelInstructions.innerHTML =
 			"Choose a file and click Load."
@@ -100,6 +110,7 @@ public class VenueFileUpload implements Venue
 		divFileUpload.appendChild(divButtons);
 
 		this.domElement = divFileUpload;
+		*/
 
 		universe.platformHelper.platformableAdd(this);
 
@@ -112,8 +123,8 @@ public class VenueFileUpload implements Venue
 		var inputsPressed = inputHelper.inputsPressed;
 		for (var i = 0; i < inputsPressed.length; i++)
 		{
-			var inputPressed = inputsPressed[i];
-			if (inputPressed.isActive == true)
+			var inputPressed = inputsPressed.get(i);
+			if (inputPressed.isActive)
 			{
 				var actionToInputsMapping =
 					this.actionToInputsMappingsByInputName.get(inputPressed.name);
@@ -132,27 +143,20 @@ public class VenueFileUpload implements Venue
 
 	// events
 
-	public void buttonCancel_Clicked(Universe universe, any event)
+	public void buttonCancel_Clicked(Universe universe, Object event)
 	{
 		universe.venueNext = this.venueNextIfCancelled;
 	}
 
-	public void buttonLoad_Clicked(Universe universe, any event)
+	public void buttonLoad_Clicked(Universe universe, Object event)
 	{
+		/*
 		var inputFileUpload = this.domElement.getElementsByTagName("input")[0];
 		var fileToLoad = inputFileUpload.files[0];
 		if (fileToLoad != null)
 		{
+		*/
 			universe.venueNext = this.venueNextIfFileSpecified;
-		}
+		//}
 	}
-
-	// platformable
-
-	public void toDomElement()
-	{
-		return this.domElement;
-	}
-}
-
 }

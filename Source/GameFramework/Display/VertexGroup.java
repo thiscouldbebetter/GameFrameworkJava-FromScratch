@@ -1,6 +1,7 @@
 
 package GameFramework.Display;
 
+import GameFramework.Helpers.*;
 import GameFramework.Utility.*;
 
 public class VertexGroup implements Clonable<VertexGroup>

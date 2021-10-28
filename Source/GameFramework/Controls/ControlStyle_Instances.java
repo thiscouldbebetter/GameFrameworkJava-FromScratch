@@ -4,6 +4,7 @@ package GameFramework.Controls;
 import java.util.*;
 
 import GameFramework.Display.*;
+import GameFramework.Helpers.*;
 
 public class ControlStyle_Instances
 {

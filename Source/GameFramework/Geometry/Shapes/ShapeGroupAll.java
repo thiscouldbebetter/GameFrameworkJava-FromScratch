@@ -18,6 +18,13 @@ public class ShapeGroupAll implements ShapeBase
 
 	// Clonable.
 
+	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
+	{
+		var other = (ShapeGroupAll)otherAsShapeBase;
+		ArrayHelper.overwriteWith(this.shapes, other.shapes);
+		return this;
+	}
+
 	public ShapeGroupAll clone()
 	{
 		return new ShapeGroupAll(ArrayHelper.clone(this.shapes));
@@ -55,7 +62,7 @@ public class ShapeGroupAll implements ShapeBase
 
 	public Transformable transform(Transform transformToApply)
 	{
-		this.shapes.stream().forEach
+		Arrays.asList(this.shapes).stream().forEach
 		(
 			(ShapeBase x) -> x.transform(transformToApply)
 		);

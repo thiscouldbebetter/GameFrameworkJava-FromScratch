@@ -26,13 +26,14 @@ public abstract class ControlBase implements Namable
 		String name,
 		Coords pos,
 		Coords size,
-		double fontHeightInPixels
+		Double fontHeightInPixels
 	)
 	{
 		this._name = name;
 		this.pos = pos;
 		this.size = size;
-		this.fontHeightInPixels = fontHeightInPixels;
+		this.fontHeightInPixels =
+			(fontHeightInPixels != null ? fontHeightInPixels : 10);
 
 		this._isVisible = true;
 		this.styleName = null;

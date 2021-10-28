@@ -3,6 +3,8 @@ package GameFramework.Storage.TarFiles;
 
 import java.util.*;
 
+import GameFramework.Storage.*;
+
 public class TarFileEntry
 {
 	public TarFileEntryHeader header;
@@ -22,7 +24,7 @@ public class TarFileEntry
 	{
 		var header = TarFileEntryHeader.directoryNew(directoryName);
 
-		var entry = new TarFileEntry(header, new ArrayList<int>());
+		var entry = new TarFileEntry(header, new ArrayList<Integer>());
 
 		return entry;
 	}
@@ -87,7 +89,7 @@ public class TarFileEntry
 				entryAsBytes
 			);
 
-			returnValues.push(entry);
+			returnValues.add(entry);
 		}
 
 		return returnValues;
@@ -116,9 +118,9 @@ public class TarFileEntry
 		var chunkSize = TarFile.ChunkSize;
 
 		var headerAsBytes = this.header.toBytes();
-		entryAsBytes = entryAsBytes.concat(headerAsBytes);
+		entryAsBytes.addAll(headerAsBytes);
 
-		entryAsBytes = entryAsBytes.concat(this.dataAsBytes);
+		entryAsBytes.addAll(this.dataAsBytes);
 
 		var sizeOfDataEntryInBytesUnpadded = this.header.fileSizeInBytes;
 
@@ -136,7 +138,7 @@ public class TarFileEntry
 
 		for (var i = 0; i < intOfBytesOfPadding; i++)
 		{
-			entryAsBytes.push(0);
+			entryAsBytes.add(0);
 		}
 
 		return entryAsBytes;

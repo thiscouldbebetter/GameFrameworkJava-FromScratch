@@ -4,10 +4,11 @@ package GameFramework.Model.Actors;
 import java.util.function.*;
 
 import GameFramework.Model.*;
+import GameFramework.Utility;
 
-public class ActorAction //
+public class ActorAction implements Namable
 {
-	public String name;
+	public String _name;
 	private Consumer<UniverseWorldPlaceEntities> _perform;
 
 	public ActorAction
@@ -16,7 +17,7 @@ public class ActorAction //
 		Consumer<UniverseWorldPlaceEntities> perform
 	)
 	{
-		this.name = name;
+		this._name = name;
 		this._perform = perform;
 	}
 
@@ -97,5 +98,12 @@ class ActorAction_Instances
 				universe.venueNext = venueNext;
 			}
 		);
+	}
+	
+	// Namable.
+	
+	public String name()
+	{
+		return this._name;
 	}
 }

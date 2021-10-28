@@ -3,6 +3,10 @@ package GameFramework.Display.Visuals;
 
 import java.util.function.*;
 
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
+
 public class VisualDynamic implements Visual
 {
 	Function<UniverseWorldPlaceEntities,Visual> methodForVisual;
@@ -32,7 +36,7 @@ public class VisualDynamic implements Visual
 
 	// Transformable.
 
-	public Coords[] coordsGroupToTranslate() { return new Coords[] {} );
+	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; );
 
 	public Transformable transform(Transform transformToApply)
 	{

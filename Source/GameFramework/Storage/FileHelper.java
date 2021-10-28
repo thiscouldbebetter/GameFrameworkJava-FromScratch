@@ -50,7 +50,7 @@ public class FileHelper
 		var fileAsArrayUnsigned = new Uint8Array(fileAsArrayBuffer);
 		for (var i = 0; i < fileAsBinaryString.length; i++)
 		{
-			fileAsArrayUnsigned[i] = fileAsBinaryString.charCodeAt(i);
+			fileAsArrayUnsigned[i] = fileAsBinaryString.charAt(i);
 		}
 
 		var Object blobTypeAsLookup = {};

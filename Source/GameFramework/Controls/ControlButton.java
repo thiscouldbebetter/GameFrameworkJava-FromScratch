@@ -38,7 +38,7 @@ public class ControlButton extends ControlBase
 		this._isEnabled = isEnabled;
 		this.click = click;
 		this.context = context;
-		this.canBeHeldDown = (canBeHeldDown == null ? false : canBeHeldDown);
+		this.canBeHeldDown = canBeHeldDown;
 
 		// Helper variables.
 		this._drawLoc = Disposition.create();
@@ -80,7 +80,7 @@ public class ControlButton extends ControlBase
 		return new ControlButton
 		(
 			name, pos, size, text, fontHeightInPixels, hasBorder,
-			isEnabled, click, context, null
+			isEnabled, click, context, false
 		);
 	}
 
@@ -96,7 +96,7 @@ public class ControlButton extends ControlBase
 
 	public boolean isEnabled()
 	{
-		return (this._isEnabled.get == null ? this._isEnabled : this._isEnabled.get() );
+		return this._isEnabled.get();
 	}
 
 	// events
@@ -131,7 +131,7 @@ public class ControlButton extends ControlBase
 		var isEnabled = this.isEnabled();
 		var isHighlighted = this.isHighlighted && isEnabled;
 
-		style = style || this.style(universe);
+		style = (style != null ? style : this.style(universe) );
 		var colorFill = style.colorFill;
 		var colorBorder = style.colorBorder;
 

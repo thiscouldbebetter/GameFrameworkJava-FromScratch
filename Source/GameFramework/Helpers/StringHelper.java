@@ -15,7 +15,7 @@ public class StringHelper
 		String stringToPad, int lengthToPadTo, String charToPadWith
 	)
 	{
-		while (stringToPad.length < lengthToPadTo)
+		while (stringToPad.length() < lengthToPadTo)
 		{
 			stringToPad = stringToPad + charToPadWith;
 		}
@@ -27,7 +27,7 @@ public class StringHelper
 		String stringToPad, int lengthToPadTo, String charToPadWith
 	)
 	{
-		while (stringToPad.length < lengthToPadTo)
+		while (stringToPad.length() < lengthToPadTo)
 		{
 			stringToPad = charToPadWith + stringToPad;
 		}

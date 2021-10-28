@@ -110,7 +110,7 @@ public class CollisionTracker implements EntityProperty
 	{
 		return new Entity
 		(
-			CollisionTracker.class.name, new EntityProperty[] { this }
+			CollisionTracker.class.getName(), new EntityProperty[] { this }
 		);
 	}
 

@@ -41,7 +41,8 @@ public class VenueMessage implements Venue
 
 	public static VenueMessage fromMessageAndAcknowledge
 	(
-		DataBinding<Object,String> messageToShow, Runnable acknowledge
+		DataBinding<Object,String> messageToShow,
+		Consumer<UniverseWorldPlaceEntities> acknowledge
 	)
 	{
 		return new VenueMessage(messageToShow, acknowledge, null, null, false);

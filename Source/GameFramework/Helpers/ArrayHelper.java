@@ -92,7 +92,7 @@ public class ArrayHelper
 		);
 	}
 
-	public static <K,E> Map<K,E> addLookupsMultiple()
+	public static <K,E> Map<K,E> addLookupsMultiple
 	(
 		List<E> list, Function<E,K[]> getKeysForElement
 	)
@@ -333,7 +333,7 @@ public class ArrayHelper
 	{
 		for (var i = 0; i < array.length; i++)
 		{
-			var elementThis = list[i];
+			var elementThis = array[i];
 			var elementOther = other[i];
 			elementThis.overwriteWith(elementOther);
 		}

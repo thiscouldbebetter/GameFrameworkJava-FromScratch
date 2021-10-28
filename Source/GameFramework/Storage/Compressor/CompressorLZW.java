@@ -114,7 +114,7 @@ public class CompressorLZW
 		);
 		var byteStream = bitStream.byteStream;
 		var returnValues = ((ByteStreamFromBytes)byteStream).bytes;
-		return returnValues;
+		return returnValues.toArray(new int[] {});
 	}
 
 	public ByteStream decompressByteStream
@@ -131,10 +131,16 @@ public class CompressorLZW
 		var symbolForBitStreamEnd = CompressorLZW.SymbolForBitStreamEnd;
 		var symbolForBitWidthIncrease = CompressorLZW.SymbolForBitWidthIncrease;
 		var symbolWidthInBitsCurrent =
-			Math.ceil(Math.log(symbolForBitWidthIncrease + 1)
-			/ BitStream.NaturalLogarithmOf2);
+			(int)
+			(
+				Math.ceil
+				(
+					Math.log(symbolForBitWidthIncrease + 1)
+					/ BitStream.NaturalLogarithmOf2
+				)
+			);
 		var symbolToDecode = bitStream.readInteger(symbolWidthInBitsCurrent);
-		var symbolDecoded = patternsBySymbol[symbolToDecode];
+		var symbolDecoded = patternsBySymbol.get(symbolToDecode);
 
 		for (var i = 0; i < symbolDecoded.length; i++)
 		{
@@ -142,9 +148,9 @@ public class CompressorLZW
 			byteStreamDecompressed.writeByte(byteToWrite);
 		}
 
-		var pattern;
-		var character;
-		var patternPlusCharacter;
+		String pattern;
+		String character;
+		String patternPlusCharacter;
 
 		while (true)
 		{
@@ -161,7 +167,7 @@ public class CompressorLZW
 			else
 			{
 				symbolToDecode = symbolNext;
-				symbolDecoded = patternsBySymbol[symbolToDecode];
+				symbolDecoded = patternsBySymbol.get(symbolToDecode);
 				if (symbolDecoded == null)
 				{
 					character = pattern[0];
@@ -184,13 +190,13 @@ public class CompressorLZW
 				}
 
 				var symbolNext =
-					symbolsByPattern.size + CompressorLZW.ControlSymbolCount;
+					symbolsByPattern.size() + CompressorLZW.ControlSymbolCount;
 				symbolsByPattern.put(patternPlusCharacter, symbolNext);
 				patternsBySymbol[symbolNext] = patternPlusCharacter;
 			}
 		}
 
-		return byteStreamDecompressed;
+		return byteStreamDecompressed.toArray(new int[] {});
 	}
 
 	public int[] decompressBytes(int[] bytesToDecode)
@@ -203,7 +209,7 @@ public class CompressorLZW
 		);
 		var bytesDecompressed = byteStreamDecompressed.bytes;
 
-		return bytesDecompressed;
+		return bytesDecompressed.toArray(new int[] {});
 	}
 
 	public String decompressString(String stringToDecode)

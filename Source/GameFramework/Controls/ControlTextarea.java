@@ -96,16 +96,16 @@ public class ControlTextarea extends ControlBase
 
 			var charCodeAtCursor =
 			(
-				this.cursorPos < text.length ? text.charCodeAt(this.cursorPos) : "A".charCodeAt(0) - 1
+				this.cursorPos < text.length ? text.charAt(this.cursorPos) : "A".charAt(0) - 1
 			);
 
-			if (charCodeAtCursor == "Z".charCodeAt(0) && direction == 1)
+			if (charCodeAtCursor == "Z".charAt(0) && direction == 1)
 			{
-				charCodeAtCursor = "a".charCodeAt(0);
+				charCodeAtCursor = "a".charAt(0);
 			}
-			else if (charCodeAtCursor == "a".charCodeAt(0) && direction == -1)
+			else if (charCodeAtCursor == "a".charAt(0) && direction == -1)
 			{
-				charCodeAtCursor = "Z".charCodeAt(0);
+				charCodeAtCursor = "Z".charAt(0);
 			}
 			else
 			{
@@ -115,11 +115,11 @@ public class ControlTextarea extends ControlBase
 			charCodeAtCursor = NumberHelper.wrapToRangeMinMax
 			(
 				charCodeAtCursor,
-				"A".charCodeAt(0),
-				"z".charCodeAt(0) + 1
+				"A".charAt(0),
+				"z".charAt(0) + 1
 			);
 
-			var charAtCursor = String.fromCharCode(charCodeAtCursor);
+			var charAtCursor = "" + (char)charCodeAtCursor;
 
 			this.text
 			(

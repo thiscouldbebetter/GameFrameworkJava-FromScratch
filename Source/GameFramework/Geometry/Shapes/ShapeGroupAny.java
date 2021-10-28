@@ -22,6 +22,13 @@ public class ShapeGroupAny implements ShapeBase
 
 	// Clonable.
 
+	public ShapeGroupAny overwriteWith(ShapeBase otherAsShapeBase)
+	{
+		var other = (ShapeGroupAny)otherAsShapeBase;
+		ArrayHelper.overwriteWith(this.shapes, other.shapes);
+		return this;
+	}
+
 	public ShapeGroupAny clone()
 	{
 		return new ShapeGroupAny(ArrayHelper.clone(this.shapes));
@@ -47,7 +54,7 @@ public class ShapeGroupAny implements ShapeBase
 
 	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
 	{
-		var distanceMinSoFar = Integer.POSITIVE_INFINITY;
+		var distanceMinSoFar = Integer.MAX_VALUE;
 		for (var i = 0; i < this.shapes.length; i++)
 		{
 			var shape = this.shapes[i];

@@ -1,6 +1,9 @@
 
 package GameFramework.Display;
 
+import java.util.*;
+
+import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
@@ -18,7 +21,7 @@ public class VenueFader implements Venue
 		Venue venueToFadeTo,
 		Venue venueToFadeFrom,
 		Color backgroundColor,
-		int millisecondsPerFade
+		Integer millisecondsPerFade
 	)
 	{
 		this.venuesToFadeFromAndTo = new Venue[]
@@ -82,7 +85,7 @@ public class VenueFader implements Venue
 			millisecondsSinceFadeStarted
 			/ this.millisecondsPerFade;
 
-		var alphaOfFadeColor;
+		Double alphaOfFadeColor;
 
 		if (this.venueIndexCurrent == 0)
 		{
@@ -134,7 +137,7 @@ public class VenueFader implements Venue
 		return this.venuesToFadeFromAndTo[1];
 	}
 
-	public Venue venueCurrent();
+	public Venue venueCurrent()
 	{
 		return this.venuesToFadeFromAndTo[this.venueIndexCurrent];
 	}

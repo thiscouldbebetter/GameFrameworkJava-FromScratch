@@ -27,7 +27,7 @@ public class Input_Names
 	public String Space;
 	public String Tab;
 
-	public String[] _All[];
+	public String[] _All;
 	public Map<String,String> _AllByName;
 
 	public Input_Names()

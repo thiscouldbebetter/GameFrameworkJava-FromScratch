@@ -275,14 +275,14 @@ public class ControlList extends ControlBase
 		return this.scrollbar.sliderPosInItems();
 	}
 
-	public int indexOfItemSelected()
+	public Integer indexOfItemSelected()
 	{
 		var items = this.items();
-		var returnValue = items.indexOf(this.itemSelected());
+		var returnValue = Array.asList(items).indexOf(this.itemSelected());
 		return returnValue;
 	}
 
-	public int indexOfItemSelected(int valueToSet)
+	public Integer indexOfItemSelected(Integer valueToSet)
 	{
 		var returnValue = valueToSet;
 		var items = this.items();
@@ -293,14 +293,14 @@ public class ControlList extends ControlBase
 
 	public int indexOfLastItemVisible()
 	{
-		return this.indexOfLastRowVisible() * this.widthInItems;
+		return (int)(this.indexOfLastRowVisible() * this.widthInItems);
 	}
 
 	public int indexOfLastRowVisible()
 	{
 		var rowCountVisible = Math.floor(this.scrollbar.windowSizeInItems) - 1;
 		var returnValue = this.indexOfFirstRowVisible() + rowCountVisible;
-		return returnValue;
+		return (int)returnValue;
 	}
 
 	public boolean isEnabled()
@@ -330,12 +330,7 @@ public class ControlList extends ControlBase
 			}
 			else
 			{
-				returnValue =
-				(
-					this.bindingForItemSelected.get == null
-					? this._itemSelected
-					: this.bindingForItemSelected.get()
-				);
+				returnValue = this.bindingForItemSelected.get();
 			}
 		}
 		else
@@ -344,7 +339,7 @@ public class ControlList extends ControlBase
 
 			if (this.bindingForItemSelected != null)
 			{
-				var valueToSet;
+				Object valueToSet;
 				if (this.bindingForItemValue == null)
 				{
 					valueToSet = this._itemSelected;
@@ -386,7 +381,7 @@ public class ControlList extends ControlBase
 		}
 		else
 		{
-			indexOfItemSelected = NumberHelper.trimToRangeMinMax
+			indexOfItemSelected = (int)NumberHelper.trimToRangeMinMax
 			(
 				indexOfItemSelected + direction, 0, numberOfItems - 1
 			);
@@ -401,7 +396,7 @@ public class ControlList extends ControlBase
 		var indexOfFirstItemVisible = this.indexOfFirstItemVisible();
 		var indexOfLastItemVisible = this.indexOfLastItemVisible();
 
-		var indexOfItemSelected = this.indexOfItemSelected();
+		indexOfItemSelected = this.indexOfItemSelected();
 		if (indexOfItemSelected < indexOfFirstItemVisible)
 		{
 			this.scrollbar.scrollUp();

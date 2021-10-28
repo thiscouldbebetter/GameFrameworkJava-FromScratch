@@ -11,7 +11,7 @@ public class ControlScrollbar extends ControlBase
 {
 	public double itemHeight;
 	private DataBinding<Object,Object[]> _items;
-	private int _sliderPosInItems;
+	private double _sliderPosInItems;
 
 	public ControlButton buttonScrollDown;
 	public ControlButton buttonScrollUp;

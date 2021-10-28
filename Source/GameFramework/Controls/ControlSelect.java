@@ -9,12 +9,12 @@ import GameFramework.Utility.*;
 
 public class ControlSelect extends ControlBase
 {
-	private Object _valueSelected;
-	private Object _options;
+	private DataBinding<Object,Object> _valueSelected;
+	private DataBinding<Object,Object[]> _options;
 	public DataBinding<Object,Object> bindingForOptionValues;
 	public DataBinding<Object,String> bindingForOptionText;
 
-	public int indexOfOptionSelected;
+	public Integer indexOfOptionSelected;
 
 	private Coords _drawPos;
 	private Coords _sizeHalf;
@@ -24,8 +24,8 @@ public class ControlSelect extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		Object valueSelected,
-		Object options,
+		DataBinding<Object,Object> valueSelected,
+		DataBinding<Object,Object[]> options,
 		DataBinding<Object,Object> bindingForOptionValues,
 		DataBinding<Object,String> bindingForOptionText,
 		double fontHeightInPixels
@@ -133,7 +133,7 @@ public class ControlSelect extends ControlBase
 		(
 			this._valueSelected == null
 			? null
-			: (this._valueSelected.get == null ? this._valueSelected : this._valueSelected.get() )
+			: this._valueSelected.get()
 		);
 
 		return returnValue;

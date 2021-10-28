@@ -49,7 +49,7 @@ public class VisualGroup implements Visual
 	
 	public Transformable transform(Transform transformToApply)
 	{
-		this.children.stream().forEach(x -> transformToApply.transform(x));
+		Arrays.asList(this.children).stream().forEach(x -> transformToApply.transform(x));
 		return this;
 	}
 }

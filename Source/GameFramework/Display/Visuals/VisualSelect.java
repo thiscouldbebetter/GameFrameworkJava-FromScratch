@@ -6,6 +6,7 @@ import java.util.function.*;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
 public class VisualSelect implements Visual

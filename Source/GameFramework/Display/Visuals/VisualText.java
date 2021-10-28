@@ -3,6 +3,8 @@ package GameFramework.Display.Visuals;
 
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
 export class VisualText implements Visual

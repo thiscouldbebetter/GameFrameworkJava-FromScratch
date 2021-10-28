@@ -21,7 +21,7 @@ public class ControlContainer extends ControlBase
 
 	public List<ControlBase> childrenContainingPos;
 	public List<ControlBase> childrenContainingPosPrev;
-	public int indexOfChildWithFocus;
+	public Integer indexOfChildWithFocus;
 
 	private Coords _childMax;
 	public Coords _drawPos; // hack
@@ -35,14 +35,14 @@ public class ControlContainer extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		ControlBase[] children,
+		List<ControlBase> children,
 		ActorAction[] actions,
 		ActionToInputsMapping[] actionToInputsMappings
 	)
 	{
 		super(name, pos, size, null);
 		this.children = children;
-		this.actions = (actions != null ? actions : new Action[] {});
+		this.actions = (actions != null ? actions : new ActorAction[] {});
 		this._actionToInputsMappings = (actionToInputsMappings != null ? actionToInputsMappings : new ActionToInputsMapping[] {});
 		this._actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
@@ -181,7 +181,7 @@ public class ControlContainer extends ControlBase
 		(
 			this.indexOfChildWithFocus == null
 			? null
-			: this.children[this.indexOfChildWithFocus]
+			: this.children.get(this.indexOfChildWithFocus)
 		);
 	}
 
@@ -224,11 +224,7 @@ public class ControlContainer extends ControlBase
 				else
 				{
 					var child = this.children.get(this.indexOfChildWithFocus);
-					if
-					(
-						child.focusGain != null
-						&& child.isEnabled()
-					)
+					if (child.isEnabled())
 					{
 						break;
 					}
@@ -313,9 +309,9 @@ public class ControlContainer extends ControlBase
 		);
 
 		var wasClickHandled = false;
-		if (childrenContainingPos.length > 0)
+		if (childrenContainingPos.size() > 0)
 		{
-			var child = childrenContainingPos[0];
+			var child = childrenContainingPos.get(0);
 			if (child.mouseClick != null)
 			{
 				var wasClickHandledByChild = child.mouseClick(mouseClickPos);
@@ -344,20 +340,15 @@ public class ControlContainer extends ControlBase
 			true // addFirstChildOnly
 		);
 
-		for (var i = 0; i < childrenContainingPos.length; i++)
+		for (var i = 0; i < childrenContainingPos.size(); i++)
 		{
-			var child = childrenContainingPos[i];
+			var child = childrenContainingPos.get(i);
 
-			if (child.mouseMove != null)
-			{
-				child.mouseMove(mouseMovePos);
-			}
+			child.mouseMove(mouseMovePos);
+				
 			if (this.childrenContainingPosPrev.indexOf(child) == -1)
 			{
-				if (child.mouseEnter != null)
-				{
-					child.mouseEnter();
-				}
+				child.mouseEnter();
 			}
 		}
 
@@ -366,10 +357,7 @@ public class ControlContainer extends ControlBase
 			var child = this.childrenContainingPosPrev.get(i);
 			if (childrenContainingPos.indexOf(child) == -1)
 			{
-				if (child.mouseExit != null)
-				{
-					child.mouseExit();
-				}
+				child.mouseExit();
 			}
 		}
 
@@ -381,9 +369,9 @@ public class ControlContainer extends ControlBase
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
 
-		for (var i = 0; i < this.children.length; i++)
+		for (var i = 0; i < this.children.size(); i++)
 		{
-			var child = this.children[i];
+			var child = this.children.get(i);
 			if (child.scalePosAndSize == null)
 			{
 				child.pos.multiply(scaleFactor);
@@ -404,9 +392,9 @@ public class ControlContainer extends ControlBase
 
 	public void shiftChildPositions(Coords displacement)
 	{
-		for (var i = 0; i < this.children.length; i++)
+		for (var i = 0; i < this.children.size(); i++)
 		{
-			var child = this.children[i];
+			var child = this.children.get(i);
 			child.pos.add(displacement);
 		}
 	}
@@ -432,9 +420,9 @@ public class ControlContainer extends ControlBase
 		);
 
 		var children = this.children;
-		for (var i = 0; i < children.length; i++)
+		for (var i = 0; i < children.size(); i++)
 		{
-			var child = children[i];
+			var child = children.get(i);
 			child.draw(universe, display, drawLoc, style);
 		}
 	}

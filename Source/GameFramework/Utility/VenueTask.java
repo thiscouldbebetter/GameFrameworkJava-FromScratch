@@ -1,6 +1,7 @@
 
 package GameFramework.Utility;
 
+import java.util.*;
 import java.util.function.*;
 
 import GameFramework.Model.*;
@@ -54,14 +55,16 @@ public class VenueTask implements Venue
 
 		this.timeStarted = new Date();
 
+		/*
 		var timer = setInterval
 		(
 			() -> this.draw(universe),
 			1000
 		)
+		*/
 
 		// todo - Make this asynchronous.
-		var result = this.perform(universe);
+		var result = this.perform.apply(universe);
 
 		clearInterval(timer);
 
