@@ -154,9 +154,9 @@ public class Entity //
 
 	// Convenience methods for properties.
 
-	//public Actor actor() { return (Actor)(this.propertyByName(Actor.class.name) ); }
+	public Actor actor() { return (Actor)(this.propertyByName(Actor.class.name) ); }
 	//public Animatable animatable() { return (Animatable2)(this.propertyByName(Animatable2.class.name) ); }
-	//public Audible audible() { return (Audible)(this.propertyByName(Audible.class.name) ); }
+	public Audible audible() { return (Audible)(this.propertyByName(Audible.class.name) ); }
 	public Boundable boundable() { return (Boundable)(this.propertyByName(Boundable.class.name) ); }
 	public Camera camera() { return (Camera)(this.propertyByName(Camera.class.name) ); }
 	public Collidable collidable() { return (Collidable)(this.propertyByName(Collidable.class.name) ); }
@@ -165,17 +165,17 @@ public class Entity //
 	//public Damager damager() { return this.propertyByName(Damager.class.name) as Damager; }
 	//public Device device() { return this.propertyByName(Device.class.name) as Device; }
 	public Drawable drawable() { return (Drawable)(this.propertyByName(Drawable.class.name) ); }
-	//public Effectable effectable() { return this.propertyByName(Effectable.class.name) as Effectable; }
+	public Effectable effectable() { return (Effectable)this.propertyByName(Effectable.class.name); }
 	//public Ephemeral ephemeral() { return this.propertyByName(Ephemeral.class.name) as Ephemeral; }
 	public EquipmentUser equipmentUser() { return (EquipmentUser)this.propertyByName(EquipmentUser.class.name); }
-	//public Equippable equippable() { return this.propertyByName(Equippable.class.name) as Equippable; }
+	public Equippable equippable() { return (Equippable)this.propertyByName(Equippable.class.name); }
 	//public Enemy enemy() { return this.propertyByName(Enemy.class.name) as Enemy; }
 	//public ForceField forceField() { return this.propertyByName(ForceField.class.name) as ForceField; }
 	public Item item() { return (Item)(this.propertyByName(Item.class.name) ); }
 	//public ItemContainer itemContainer() { return this.propertyByName(ItemContainer.class.name) as ItemContainer; }
 	//public ItemCrafter itemCrafter() { return this.propertyByName(ItemCrafter.class.name) as ItemCrafter; }
 	public ItemDefn itemDefn() { return (ItemDefn)(this.propertyByName(ItemDefn.class.name) ); }
-	//public ItemHolder itemHolder() { return this.propertyByName(ItemHolder.class.name) as ItemHolder; }
+	public ItemHolder itemHolder() { return (ItemHolder)this.propertyByName(ItemHolder.class.name); }
 	//public ItemStore itemStore() { return this.propertyByName(ItemStore.class.name) as ItemStore; }
 	//public JournalKeeper journalKeeper() { return this.propertyByName(JournalKeeper.class.name) as JournalKeeper; }
 	public Killable killable() { return (Killable)(this.propertyByName(Killable.class.name) ); }
@@ -190,12 +190,12 @@ public class Entity //
 	public Playable playable() { return (Playable)this.propertyByName(Playable.class.name); }
 	//public Portal portal() { return this.propertyByName(Portal.class.name) as Portal; }
 	//public ProjectileGenerator projectileGenerator() { return this.propertyByName(ProjectileGenerator.class.name) as ProjectileGenerator; }
-	//public Selectable selectable() { return this.propertyByName(Selectable.class.name) as Selectable; }
+	public Selectable selectable() { return (Selectable)this.propertyByName(Selectable.class.name); }
 	public Selector selector() { return (Selector)this.propertyByName(Selector.class.name); }
 	//public SkillLearner skillLearner() { return this.propertyByName(SkillLearner.class.name) as SkillLearner; }
-	//public Starvable s	tarvable() { return this.propertyByName(Starvable.class.name) as Starvable; }
+	public Starvable s	tarvable() { (Starvable)return this.propertyByName(Starvable.class.name); }
 	//public Talker talker() { return this.propertyByName(Talker.class.name) as Talker; }
-	//public Tirable tirable() { return this.propertyByName(Tirable.class.name) as Tirable; }
+	public Tirable tirable() { return (Tirable)this.propertyByName(Tirable.class.name); }
 	//public Traversable traversable() { return this.propertyByName(Traversable.class.name) as Traversable; }
 	//public Usable usable() { return this.propertyByName(Usable.class.name) as Usable; }
 }

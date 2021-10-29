@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
@@ -32,7 +33,7 @@ public class ControlTabbed extends ControlBase
 	public ControlTabbed
 	(
 		String name, Coords pos, Coords size, Coords tabButtonSize,
-		ControlBase childrenForTabs[], number fontHeightInPixels,
+		ControlBase childrenForTabs[], double fontHeightInPixels,
 		Consumer<Universe> cancel
 	)
 	{
@@ -64,7 +65,7 @@ public class ControlTabbed extends ControlBase
 			this.isChildSelectedActive = true;
 			b.isHighlighted = true;
 			*/
-		}
+		};
 
 		for (var i = 0; i < this.childrenForTabs.length; i++)
 		{
@@ -205,7 +206,7 @@ public class ControlTabbed extends ControlBase
 		return returnValue;
 	}
 
-	public ControlBase childSelectNextInDirection(number direction)
+	public ControlBase childSelectNextInDirection(int direction)
 	{
 		while (true)
 		{

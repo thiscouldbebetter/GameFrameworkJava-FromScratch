@@ -415,14 +415,14 @@ public class VisualBuilder
 			// childrenByName
 			new HashMap<String,Visual>()
 			{{
-				put("FacingRightStanding", visualLegsFacingRightStanding),
-				put("FacingDownStanding", visualLegsFacingDownStanding), 
-				put("FacingLeftStanding", visualLegsFacingLeftStanding), 
-				put("FacingUpStanding", visualLegsFacingUpStanding), 
-				put("FacingRightWalking", visualLegsFacingRightWalking), 
-				put("FacingDownWalking", visualLegsFacingDownWalking), 
-				put("FacingLeftWalking", visualLegsFacingLeftWalking), 
-				put("FacingUpWalking", visualLegsFacingUpWalking)
+				put("FacingRightStanding", visualLegsFacingRightStanding);
+				put("FacingDownStanding", visualLegsFacingDownStanding);
+				put("FacingLeftStanding", visualLegsFacingLeftStanding); 
+				put("FacingUpStanding", visualLegsFacingUpStanding);
+				put("FacingRightWalking", visualLegsFacingRightWalking); 
+				put("FacingDownWalking", visualLegsFacingDownWalking);
+				put("FacingLeftWalking", visualLegsFacingLeftWalking); 
+				put("FacingUpWalking", visualLegsFacingUpWalking);
 			}},
 			// selectChildNames
 			(UniverseWorldPlaceEntities uwpe, Display d) ->
@@ -708,21 +708,27 @@ public class VisualBuilder
 				VisualPolygon.fromPathAndColorFill
 				(
 					new Path
-					([
-						new Coords(0, -dimension * 2, 0),
-						new Coords(dimension, 0, 0),
-						new Coords(-dimension, 0, 0),
-					]),
+					(
+						new Coords[]
+						{
+							new Coords(0, -dimension * 2, 0),
+							new Coords(dimension, 0, 0),
+							new Coords(-dimension, 0, 0),
+						}
+					),
 					Color.byName("Orange")
 				),
 				VisualPolygon.fromPathAndColorFill
 				(
 					new Path
-					([
-						new Coords(0, -dimension, 0),
-						new Coords(dimensionHalf, 0, 0),
-						new Coords(-dimensionHalf, 0, 0),
-					]),
+					(
+						new Coords[]
+						{
+							new Coords(0, -dimension, 0),
+							new Coords(dimensionHalf, 0, 0),
+							new Coords(-dimensionHalf, 0, 0),
+						}
+					),
 					Color.byName("Yellow")
 				)
 			}
@@ -733,10 +739,13 @@ public class VisualBuilder
 			new Transform_Scale(new Coords(1, .8, 1))
 		) as VisualGroup;
 
-		var flameVisualStaticLarge = flameVisualStatic.clone().transform
+		var flameVisualStaticLarge = (VisualGroup)
 		(
-			new Transform_Scale(new Coords(1, 1.2, 1))
-		) as VisualGroup;
+			flameVisualStatic.clone().transform
+			(
+				new Transform_Scale(new Coords(1, 1.2, 1))
+			)
+		);
 
 		var ticksPerFrame = 3;
 		var flameVisual = new VisualAnimation
@@ -818,7 +827,7 @@ public class VisualBuilder
 					color, rayThickness
 				),
 
-				VisualCircle.fromRadiusAndColorFill(dimension / 2, color),
+				VisualCircle.fromRadiusAndColorFill(dimension / 2, color)
 			}
 		);
 

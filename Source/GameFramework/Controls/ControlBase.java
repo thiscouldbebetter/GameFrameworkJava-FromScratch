@@ -16,7 +16,7 @@ public abstract class ControlBase implements Namable
 	public Coords pos;
 	public Coords size;
 
-	private boolean _isVisible;
+	public boolean _isVisible;
 	public String styleName;
 
 	public boolean isHighlighted;

@@ -2,6 +2,7 @@
 package GameFramework.Display.Visuals;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Tirable.*;
 
 public class VisualOffset implements Visual
 {

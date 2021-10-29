@@ -34,7 +34,7 @@ public class ActivityDefn
 
 	public void perform(UniverseWorldPlaceEntities uwpe)
 	{
-		this._perform(uwpe);
+		this._perform.accept(uwpe);
 	}
 }
 

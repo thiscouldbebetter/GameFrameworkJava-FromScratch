@@ -2,6 +2,8 @@ package GameFramework.Model.Combat;
 
 import java.util.*;
 
+import GameFramework.Helpers.*;
+
 public class DamageType_Instances
 {
 	DamageType _Unspecified;

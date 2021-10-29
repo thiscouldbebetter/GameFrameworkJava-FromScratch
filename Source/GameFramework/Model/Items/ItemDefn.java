@@ -75,7 +75,7 @@ public class ItemDefn implements EntityProperty
 	)
 	{
 		var returnValue = ItemDefn.fromName(name);
-		returnValue.use = use;
+		returnValue._use = use;
 		return returnValue;
 	}
 
@@ -86,13 +86,13 @@ public class ItemDefn implements EntityProperty
 	{
 		return new ItemDefn
 		(
-			name, null, null, mass, tradeValue, null, null, null, visual, null
+			name, null, null, mass, tradeValue, 0, null, null, visual, null
 		);
 	}
 
 	public Entity toEntity(UniverseWorldPlaceEntities uwpe, Item item)
 	{
-		var returnValue;
+		Entity returnValue;
 		if (this._toEntity == null)
 		{
 			returnValue = new Entity(this.name, new EntityProperty[] { item } );
@@ -107,14 +107,14 @@ public class ItemDefn implements EntityProperty
 
 	public Object use(UniverseWorldPlaceEntities uwpe)
 	{
-		var returnValue;
+		Object returnValue;
 		if (this._use == null)
 		{
 			returnValue = "Can't use " + this.appearance + ".";
 		}
 		else
 		{
-			returnValue = this._use(uwpe);
+			returnValue = this._use.apply(uwpe);
 		}
 
 		return returnValue;
@@ -125,4 +125,9 @@ public class ItemDefn implements EntityProperty
 	public void finalize(UniverseWorldPlaceEntities uwpe) {}
 	public void initialize(UniverseWorldPlaceEntities uwpe) {}
 	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe) {}
+	
+	// Clonable.
+	
+	public ItemDefn clone() { return this; }
+	public ItemDefn overwriteWith(ItemDefn other) { return this; }
 }

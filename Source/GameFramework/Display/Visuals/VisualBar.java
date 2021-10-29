@@ -4,6 +4,7 @@ package GameFramework.Display.Visuals;
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
 public class VisualBar implements Visual
@@ -14,7 +15,7 @@ public class VisualBar implements Visual
 	public DataBinding<Entity,Double> amountCurrent;
 	public DataBinding<Entity,Double> amountThreshold;
 	public DataBinding<Entity,Double> amountMax;
-	public double fractionBelowWhichToShow;
+	public Double fractionBelowWhichToShow;
 	public ValueBreakGroup colorForBorderAsValueBreakGroup;
 	public DataBinding<Object,String> text;
 
@@ -30,7 +31,7 @@ public class VisualBar implements Visual
 		DataBinding<Entity,Double> amountCurrent,
 		DataBinding<Entity,Double> amountThreshold,
 		DataBinding<Entity,Double> amountMax,
-		double fractionBelowWhichToShow,
+		Double fractionBelowWhichToShow,
 		ValueBreakGroup colorForBorderAsValueBreakGroup,
 		DataBinding<Object,String> text
 	)
@@ -94,7 +95,7 @@ public class VisualBar implements Visual
 
 			if (this.amountThreshold != null)
 			{
-				var thresholdFraction = this.amountThreshold.contextSet(entity).get() as double;
+				var thresholdFraction = this.amountThreshold.contextSet(entity).get();
 				this._sizeCurrent.x = thresholdFraction * this.size.x;
 				display.drawRectangle
 				(

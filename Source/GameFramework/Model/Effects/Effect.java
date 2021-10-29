@@ -61,7 +61,7 @@ public class Effect implements Clonable<Effect>, Namable
 
 	public Object updateForTimerTick(UniverseWorldPlaceEntities uwpe)
 	{
-		var returnValue = null;
+		Object returnValue = null;
 
 		if (this._updateForCycle != null)
 		{
@@ -82,7 +82,7 @@ public class Effect implements Clonable<Effect>, Namable
 	{
 		return new Effect
 		(
-			this.name,
+			this._name,
 			this.ticksPerCycle,
 			this.cyclesToLive,
 			this.visual,

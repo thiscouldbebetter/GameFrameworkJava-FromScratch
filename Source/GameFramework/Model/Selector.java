@@ -3,10 +3,15 @@ package GameFramework.Model;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Display.*;
+import GameFramework.Display.Visuals*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.Actors.*;
+import GameFramework.Model.Physics.*;
 import GameFramework.Utility.*;
 
 public class Selector implements EntityProperty, Clonable<Selector> 
@@ -119,7 +124,7 @@ public class Selector implements EntityProperty, Clonable<Selector>
 
 		if (this._entityDeselect != null)
 		{
-			this._entityDeselect(uwpe);
+			this._entityDeselect.accept(uwpe);
 		}
 
 		var selectable = entityToDeselect.selectable();
@@ -132,11 +137,11 @@ public class Selector implements EntityProperty, Clonable<Selector>
 	public void entitySelect(UniverseWorldPlaceEntities uwpe)
 	{
 		var entityToSelect = uwpe.entity2;
-		this.entitiesSelected.push(entityToSelect);
+		this.entitiesSelected.add(entityToSelect);
 
 		if (this._entitySelect != null)
 		{
-			this._entitySelect(uwpe);
+			this._entitySelect.accept(uwpe);
 		}
 
 		var selectable = entityToSelect.selectable();
@@ -157,7 +162,7 @@ public class Selector implements EntityProperty, Clonable<Selector>
 
 		var entitiesInPlace = place.entities;
 		var range = this.cursorDimension / 2;
-		var entityToSelect = entitiesInPlace.filter
+		var entityToSelect = entitiesInPlace.stream().filter
 		(
 			x ->
 			{
@@ -255,7 +260,7 @@ public class Selector implements EntityProperty, Clonable<Selector>
 
 	public ControlBase toControl(Coords size, Coords pos)
 	{
-		var fontHeightInPixels = 12;
+		var fontHeightInPixels = 12.0;
 		var margin = fontHeightInPixels / 2;
 
 		var labelSize = Coords.fromXY(size.x, fontHeightInPixels);
@@ -288,9 +293,9 @@ public class Selector implements EntityProperty, Clonable<Selector>
 						this,
 						(Selector c) ->
 							(
-								c.entitiesSelected.length == 0
+								c.entitiesSelected.size() == 0
 								? "-"
-								: c.entitiesSelected[0].name
+								: c.entitiesSelected.get(0).name
 							)
 					),
 					fontHeightInPixels

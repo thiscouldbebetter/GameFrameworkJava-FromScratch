@@ -4,6 +4,7 @@ package GameFramework.Model.Items.Equipment;
 import GameFramework.Controls.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 import GameFramework.Model.Items.*;
 
 public class EquipmentUser implements EntityProperty
@@ -559,16 +560,16 @@ public class EquipmentUser implements EntityProperty
 			new ActorAction[]
 			{
 				new ActorAction("Back", (UniverseWorldPlaceEntities uwpe) -> back.run() ),
-				new ActorAction("EquipItemSelectedInQuickSlot0", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(0)),
-				new ActorAction("EquipItemSelectedInQuickSlot1", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(1)),
-				new ActorAction("EquipItemSelectedInQuickSlot2", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(2)),
-				new ActorAction("EquipItemSelectedInQuickSlot3", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(3)),
-				new ActorAction("EquipItemSelectedInQuickSlot4", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(4)),
-				new ActorAction("EquipItemSelectedInQuickSlot5", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(5)),
-				new ActorAction("EquipItemSelectedInQuickSlot6", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(6)),
-				new ActorAction("EquipItemSelectedInQuickSlot7", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(7)),
-				new ActorAction("EquipItemSelectedInQuickSlot8", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(8)),
-				new ActorAction("EquipItemSelectedInQuickSlot9", (UniverseWorldPlaceEntities uwpe) -> equipItemSelectedInQuickSlot.accept(9))
+				new ActorAction("EquipItemSelectedInQuickSlot0", (UniverseWorldPlaceEntities uwpe0) -> equipItemSelectedInQuickSlot.accept(0)),
+				new ActorAction("EquipItemSelectedInQuickSlot1", (UniverseWorldPlaceEntities uwpe1) -> equipItemSelectedInQuickSlot.accept(1)),
+				new ActorAction("EquipItemSelectedInQuickSlot2", (UniverseWorldPlaceEntities uwpe2) -> equipItemSelectedInQuickSlot.accept(2)),
+				new ActorAction("EquipItemSelectedInQuickSlot3", (UniverseWorldPlaceEntities uwpe3) -> equipItemSelectedInQuickSlot.accept(3)),
+				new ActorAction("EquipItemSelectedInQuickSlot4", (UniverseWorldPlaceEntities uwpe4) -> equipItemSelectedInQuickSlot.accept(4)),
+				new ActorAction("EquipItemSelectedInQuickSlot5", (UniverseWorldPlaceEntities uwpe5) -> equipItemSelectedInQuickSlot.accept(5)),
+				new ActorAction("EquipItemSelectedInQuickSlot6", (UniverseWorldPlaceEntities uwpe6) -> equipItemSelectedInQuickSlot.accept(6)),
+				new ActorAction("EquipItemSelectedInQuickSlot7", (UniverseWorldPlaceEntities uwpe7) -> equipItemSelectedInQuickSlot.accept(7)),
+				new ActorAction("EquipItemSelectedInQuickSlot8", (UniverseWorldPlaceEntities uwpe8) -> equipItemSelectedInQuickSlot.accept(8)),
+				new ActorAction("EquipItemSelectedInQuickSlot9", (UniverseWorldPlaceEntities uwpe9) -> equipItemSelectedInQuickSlot.accept(9))
 			},
 
 			new ActionToInputsMapping[]

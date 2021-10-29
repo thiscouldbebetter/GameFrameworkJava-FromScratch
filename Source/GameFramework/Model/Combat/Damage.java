@@ -49,18 +49,18 @@ public class Damage
 
 	public Effect[] effectsOccurring(Randomizer randomizer)
 	{
-		var effectsOccurring = new ListArray<Effect>();
+		var effectsOccurring = new ArrayList<Effect>();
 
 		if (this.effectsAndChances != null)
 		{
 			for (var i = 0; i < this.effectsAndChances.length; i++)
 			{
-				var effectAndChance = this.effectsAndChances[i];
-				var chance = effectAndChance[1];
+				var effectAndChance = this.effectsAndChances.get(i);
+				var chance = effectAndChance.second;
 				var roll = randomizer.getNextRandom();
 				if (roll <= chance)
 				{
-					var effect = effectAndChance[0];
+					var effect = effectAndChance.first;
 					effectsOccurring.push(effect);
 				}
 			}
@@ -71,7 +71,9 @@ public class Damage
 
 	public String toString()
 	{
-		return this.amount + " " + (this.typeName == null ? "" : this.typeName);
+		return
+			this.amountAsDiceRoll.toString()
+			+ " " + (this.typeName == null ? "" : this.typeName);
 	}
 
 	public DamageType type()

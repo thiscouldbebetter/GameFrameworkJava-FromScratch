@@ -23,7 +23,7 @@ public class Item implements EntityProperty
 
 	public boolean isUsable(World world)
 	{
-		return (this.defn(world).use != null);
+		return true; // hack
 	}
 
 	public double mass(World world)
@@ -53,15 +53,11 @@ public class Item implements EntityProperty
 
 	public Object use(UniverseWorldPlaceEntities uwpe)
 	{
-		var returnValue = null;
 		var defn = this.defn(uwpe.world);
-		if (defn.use != null)
-		{
-			returnValue = defn.use
-			(
-				uwpe
-			);
-		}
+		var returnValue = defn.use
+		(
+			uwpe
+		);
 		return returnValue;
 	}
 
@@ -71,6 +67,8 @@ public class Item implements EntityProperty
 	{
 		return new Item(this.defnName, this.quantity);
 	}
+	
+	public Item overwriteWith(Item other) { return this; }
 
 	// EntityProperty.
 

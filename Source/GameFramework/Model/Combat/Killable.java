@@ -3,6 +3,7 @@ package GameFramework.Model.Combat;
 
 import java.util.function.*;
 
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
 public class Killable implements EntityProperty
@@ -41,7 +42,7 @@ public class Killable implements EntityProperty
 		var entityKillable = uwpe.entity;
 		var entityDamager = uwpe.entity2;
 
-		var damageApplied;
+		double damageApplied;
 		if (this._damageApply == null)
 		{
 			var randomizer = universe.randomizer;
@@ -91,15 +92,15 @@ public class Killable implements EntityProperty
 		this.integrity = 0;
 	}
 
-	public void isAlive()
+	public boolean isAlive()
 	{
 		return (this.integrity > 0);
 	}
 
 	// EntityProperty.
 
-	public void finalize(UniverseWorldPlaceEntities uwpe);
-	public void initialize(UniverseWorldPlaceEntities uwpe);
+	public void finalize(UniverseWorldPlaceEntities uwpe) {}
+	public void initialize(UniverseWorldPlaceEntities uwpe) {}
 
 	public void updateForTimerTick
 	(
@@ -120,5 +121,10 @@ public class Killable implements EntityProperty
 	public Killable clone()
 	{
 		return new Killable(this.integrityMax, this._damageApply, this._die);
+	}
+	
+	public Killable overwriteWith(Killable other)
+	{
+		return this;
 	}
 }

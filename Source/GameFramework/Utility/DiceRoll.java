@@ -5,9 +5,9 @@ public class DiceRoll
 {
 	public int numberOfDice;
 	public int sidesPerDie;
-	public int offset;
+	public double offset;
 
-	public DiceRoll(int numberOfDice, int sidesPerDie, int offset)
+	public DiceRoll(int numberOfDice, int sidesPerDie, double offset)
 	{
 		this.numberOfDice = numberOfDice;
 		this.sidesPerDie = sidesPerDie;
@@ -53,19 +53,19 @@ public class DiceRoll
 				sidesPerDieAndOffsetMagnitudeAsStrings[1];
 
 			sidesPerDie = parseInt(sidesPerDieAsString);
-			var offsetMagnitude = parseInt(offsetMagnitudeAsString);
+			var offsetMagnitude = Integer.parse(offsetMagnitudeAsString);
 			offset = 0 - offsetMagnitude;
 		}
 		else
 		{
 			var sidesPerDieAsString = expressionRemainder;
-			sidesPerDie = parseInt(sidesPerDieAsString);
+			sidesPerDie = Integer.parse(sidesPerDieAsString);
 		}
 
 		return new DiceRoll(numberOfDice, sidesPerDie, offset);
 	}
 
-	public static DiceRoll fromOffset(int offset)
+	public static DiceRoll fromOffset(double offset)
 	{
 		return new DiceRoll(0, 0, offset);
 	}
@@ -79,9 +79,9 @@ public class DiceRoll
 		return returnValue;
 	}
 
-	public int roll(Randomizer randomizer)
+	public double roll(Randomizer randomizer)
 	{
-		var totalSoFar = 0;
+		double totalSoFar = 0;
 
 		for (var d = 0; d < this.numberOfDice; d++)
 		{

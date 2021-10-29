@@ -7,6 +7,7 @@ import java.util.function.*;
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
+import GameFramework.Helpers.*;
 import GameFramework.Geometry.*;
 
 public class Playable implements EntityProperty
@@ -18,7 +19,7 @@ public class Playable implements EntityProperty
 	{
 		var controlsForTabs = new ArrayList<ControlBase>();
 
-		var fontHeight = 12;
+		var fontHeight = 12.0;
 		var labelSize = Coords.fromXY(300, fontHeight * 1.25);
 		var marginX = fontHeight;
 
@@ -88,7 +89,7 @@ public class Playable implements EntityProperty
 			(
 				universe, tabPageSize, entity, venuePrev, includeTitleAndDoneButtonFalse
 			);
-			controlsForTabs.push(equipmentUserAsControl);
+			controlsForTabs.add(equipmentUserAsControl);
 		}
 
 		var itemCrafter = entity.itemCrafter();
@@ -136,7 +137,7 @@ public class Playable implements EntityProperty
 		(
 			universe, tabPageSize, universe.venueCurrent, false // includeResumeButton
 		);
-		controlsForTabs.push(gameAndSettingsMenuAsControl);
+		controlsForTabs.add(gameAndSettingsMenuAsControl);
 
 		var statusAsControl = ControlContainer.from4
 		(
@@ -146,9 +147,9 @@ public class Playable implements EntityProperty
 			// children
 			controlsForStatusFields
 		);
-		controlsForTabs.splice(0, 0, statusAsControl);
+		controlsForTabs.insert(0, statusAsControl);
 
-		var back = () ->
+		Runnable back = () ->
 		{
 			var Venue venueNext = venuePrev;
 			venueNext = VenueFader.fromVenuesToAndFrom(venueNext, universe.venueCurrent);
@@ -285,7 +286,7 @@ public class Playable implements EntityProperty
 		var timerTicksPerGameDay =
 			minutesPerDay * universe.timerHelper.ticksPerSecond;
 
-		Function<Integer,String> ticksToHH_MM = (int ticks) ->
+		Function<Integer,String> ticksToHH_MM = (Integer ticks) ->
 		{
 			var ticksIntoDay = world.timerTicksSoFar % timerTicksPerGameDay;
 			var fractionOfDay = ticksIntoDay / timerTicksPerGameDay;
@@ -370,7 +371,7 @@ public class Playable implements EntityProperty
 			DataBinding.fromContext(playerVisualStatusInfo)
 		);
 
-		childControls.push(controlPlayerStatusInfo);
+		childControls.add(controlPlayerStatusInfo);
 
 		// Selection.
 
@@ -400,7 +401,7 @@ public class Playable implements EntityProperty
 			buttonMargin, size.y - margin - buttonSize.y
 		);
 
-		Consumer<Integer> useItemInQuickSlot = (int slotNumber) ->
+		Consumer<Integer> useItemInQuickSlot = (Integer slotNumber) ->
 		{
 			var uwpe = new UniverseWorldPlaceEntities
 			(
@@ -489,6 +490,11 @@ public class Playable implements EntityProperty
 		return controlOverlayTransparent;
 	}
 
+	// Clonable.
+	
+	public Playable clone() { return this; }
+	public Playable overwriteWith(Playable other) { return this; }
+	
 	// EntityProperty.
 
 	public void finalize(UniverseWorldPlaceEntities uwpe) {}

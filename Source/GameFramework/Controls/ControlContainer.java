@@ -35,13 +35,13 @@ public class ControlContainer extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		List<ControlBase> children,
+		ControlBase[] children,
 		ActorAction[] actions,
 		ActionToInputsMapping[] actionToInputsMappings
 	)
 	{
 		super(name, pos, size, null);
-		this.children = children;
+		this.children = Arrays.asList(children);
 		this.actions = (actions != null ? actions : new ActorAction[] {});
 		this._actionToInputsMappings = (actionToInputsMappings != null ? actionToInputsMappings : new ActionToInputsMapping[] {});
 		this._actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple

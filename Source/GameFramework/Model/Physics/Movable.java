@@ -191,7 +191,7 @@ public class Movable implements EntityProperty
 
 				var actor = entityActor.actor();
 				var activity = actor.activity;
-				var targetEntity = ((ActorAction)(activity.target());
+				var targetEntity = ((Entity)(activity.target());
 				if (targetEntity == null)
 				{
 					var place = uwpe.place;

@@ -13,7 +13,7 @@ public class Locatable implements EntityProperty
 
 	public Locatable(Disposition loc)
 	{
-		this.loc = loc || Disposition.create();
+		this.loc = (loc != null ? loc Disposition.create() );
 	}
 
 	public static Locatable create()
@@ -26,7 +26,7 @@ public class Locatable implements EntityProperty
 		return new Locatable(Disposition.fromPos(pos));
 	}
 
-	public static List<Entity> entitiesSortByZThenY(Entity entitiesToSort[])
+	public static List<Entity> entitiesSortByZThenY(List<Entity> entitiesToSort)
 	{
 		entitiesToSort.sort
 		(
@@ -34,7 +34,7 @@ public class Locatable implements EntityProperty
 			{
 				var aPos = a.locatable().loc.pos;
 				var bPos = b.locatable().loc.pos;
-				var returnValue;
+				Double returnValue;
 				if (aPos.z != bPos.z)
 				{
 					returnValue = bPos.z - aPos.z;

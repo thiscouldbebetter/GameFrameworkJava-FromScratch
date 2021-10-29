@@ -13,8 +13,8 @@ public class Loadable implements EntityProperty
 
 	public Loadable
 	(
-		Consumer<UniverseWorldPlaceEntities> _load,
-		Consumer<UniverseWorldPlaceEntities> _unload
+		Consumer<UniverseWorldPlaceEntities> load,
+		Consumer<UniverseWorldPlaceEntities> unload
 	)
 	{
 		this.isLoaded = false;
@@ -60,4 +60,8 @@ public class Loadable implements EntityProperty
 	{
 		// Do nothing.
 	}
+	
+	// Clonable.
+	public Loadable clone() { return this; }
+	public Loadable overwriteWith(Loadable other) { return this; }
 }
