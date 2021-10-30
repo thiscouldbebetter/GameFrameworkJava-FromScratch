@@ -1,5 +1,5 @@
 
-package GameFramework.Model.Physics
+package GameFramework.Model.Physics;
 
 import java.util.function.*;
 
@@ -124,7 +124,7 @@ public class Movable implements EntityProperty
 					uwpe, Coords.Instances().ZeroOneZero
 				);
 			}
-		)
+		);
 	}
 
 	public static ActorAction actionAccelerateLeft()
@@ -191,7 +191,7 @@ public class Movable implements EntityProperty
 
 				var actor = entityActor.actor();
 				var activity = actor.activity;
-				var targetEntity = ((Entity)(activity.target());
+				var targetEntity = ((Entity)(activity.target()));
 				if (targetEntity == null)
 				{
 					var place = uwpe.place;

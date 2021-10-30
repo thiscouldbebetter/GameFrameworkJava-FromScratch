@@ -3,12 +3,13 @@ package GameFramework.Model.Actors;
 
 import java.util.function.*;
 
+import GameFramework.Display.*;
 import GameFramework.Model.*;
-import GameFramework.Utility;
+import GameFramework.Utility.*;
 
 public class ActorAction implements Namable
 {
-	public String _name;
+	private String _name;
 	private Consumer<UniverseWorldPlaceEntities> _perform;
 
 	public ActorAction
@@ -69,7 +70,7 @@ class ActorAction_Instances
 				var actor = uwpe.entity;
 				var control = actor.controllable().toControl
 				(
-					universe, universe.display.sizeInPixels, actor,
+					universe, universe.display.sizeInPixels(), actor,
 					universe.venueCurrent, true
 				);
 				Venue venueNext = control.toVenue();

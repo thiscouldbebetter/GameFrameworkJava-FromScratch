@@ -266,17 +266,22 @@ public class Camera implements EntityProperty
 	{
 		var cameraCollidable = cameraEntity.collidable();
 		//cameraCollidable.isDisabled = false;
-		cameraCollidable.entitiesAlreadyCollidedWith.length = 0;
+		ArrayHelper.clear(cameraCollidable.entitiesAlreadyCollidedWith);
 		var collisions = collisionTracker.entityCollidableAddAndFindCollisions
 		(
 			cameraEntity, collisionHelper, new ArrayList<Collision>()
 		);
 		var entitiesCollidedWith = collisions.map(x -> x.entitiesColliding[1]);
-		var entitiesInView = entitiesCollidedWith.filter(x -> x.drawable() != null);
+		// todo - Should entitiesInView be cleared out first?
+		entitiesInView.addAll
+		(
+			entitiesCollidedWith.stream().filter(x -> x.drawable() != null)
+		);
 		//cameraCollidable.isDisabled = true;
 
 		var drawablesAll = place.drawables();
-		var drawablesUnboundable = drawablesAll.filter(x -> x.boundable() == null);
+		var drawablesUnboundable =
+			drawablesAll.stream().filter(x -> x.boundable() == null);
 		entitiesInView.addAll(drawablesUnboundable);
 
 		return entitiesInView;
@@ -289,13 +294,13 @@ public class Camera implements EntityProperty
 		List<Entity> entitiesInView
 	)
 	{
-		entitiesInView.length = 0;
+		ArrayHelper.clear(entitiesInView);
 
 		var placeEntitiesDrawable = place.drawables();
 
-		for (var i = 0; i < placeEntitiesDrawable.length; i++)
+		for (var i = 0; i < placeEntitiesDrawable.size(); i++)
 		{
-			var entity = placeEntitiesDrawable[i];
+			var entity = placeEntitiesDrawable.get(i);
 			var drawable = entity.drawable();
 			if (drawable.isVisible)
 			{
@@ -340,9 +345,9 @@ public class Camera implements EntityProperty
 	{
 		this.entitiesInViewSort(entitiesInView);
 
-		for (var i = 0; i < entitiesInView.length; i++)
+		for (var i = 0; i < entitiesInView.size(); i++)
 		{
-			var entity = entitiesInView[i];
+			var entity = entitiesInView.get(i);
 			uwpe.entity = entity;
 
 			var visual = entity.drawable().visual;
@@ -369,7 +374,7 @@ public class Camera implements EntityProperty
 		}
 		else
 		{
-			entitiesSorted = this._entitiesInViewSort(entitiesToSort);
+			entitiesSorted = this._entitiesInViewSort.apply(entitiesToSort);
 		}
 
 		return entitiesSorted;
@@ -377,9 +382,21 @@ public class Camera implements EntityProperty
 
 	public Entity toEntity()
 	{
-		return new Entity(Camera.name, new EntityProperty[] { this } );
+		return new Entity(Camera.class.getName(), new EntityProperty[] { this } );
 	}
 
+	// Clonable.
+	
+	public Camera clone()
+	{
+		return this; // todo
+	}
+	
+	public Camera overwriteWith(Camera other)
+	{
+		return this; // todo	
+	}
+	
 	// EntityProperty.
 
 	public void finalize(UniverseWorldPlaceEntities uwpe) {}

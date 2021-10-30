@@ -1770,6 +1770,7 @@ public class ControlBuilder
 							var venueInstructions =
 								controlInstructions.toVenue();
 
+							var venueMovie = new VenueVideo
 							(
 								"Movie", // videoName
 								venueInstructions // fader implicit

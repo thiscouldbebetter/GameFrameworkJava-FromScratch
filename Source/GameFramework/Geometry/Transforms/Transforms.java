@@ -25,7 +25,7 @@ public class Transforms
 		}
 	}
 
-	public static applyTransformToCoordsMany
+	public static void applyTransformToCoordsMany
 	(
 		Transform transformToApply, Coords[] coordsSetToTransform
 	)

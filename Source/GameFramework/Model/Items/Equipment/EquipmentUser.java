@@ -1,8 +1,11 @@
 
 package GameFramework.Model.Items.Equipment;
 
+import java.util.*;
+
 import GameFramework.Controls.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 import GameFramework.Model.Items.*;
@@ -75,15 +78,16 @@ public class EquipmentUser implements EntityProperty
 		var socketDefnGroup = this.socketGroup.defnGroup;
 		var itemToEquip = itemEntityToEquip.item();
 		var itemDefn = itemToEquip.defn(world);
-
+		var categoryNames = Arrays.asList(itemDefn.categoryNames);
+		
 		var socketFound = sockets.filter
 		(
 			(EquipmentSocket socket) ->
 			{
 				var socketDefn = socket.defn(socketDefnGroup);
-				var isItemAllowedInSocket = socketDefn.categoriesAllowedNames.some
+				var isItemAllowedInSocket = socketDefn.categoriesAllowedNames.anyMatch
 				(
-					(String y) -> itemDefn.categoryNames.indexOf(y) >= 0
+					(String y) -> categoryNames.indexOf(y) >= 0
 				);
 				return isItemAllowedInSocket;
 			}
@@ -114,7 +118,7 @@ public class EquipmentUser implements EntityProperty
 	{
 		var itemEntityToEquip = uwpe.entity2;
 		var itemToEquipDefnName = itemEntityToEquip.item().defnName;
-		var socketFound = null;
+		EquipmentSocket socketFound = null;
 
 		var itemQuickSlotCount = 10;
 		for (var i = 0; i < itemQuickSlotCount; i++)
@@ -212,7 +216,7 @@ public class EquipmentUser implements EntityProperty
 
 	public Object unequipItemFromSocketWithName(World world, String socketName)
 	{
-		var message;
+		String message;
 		var socketToUnequipFrom = this.socketGroup.socketsByDefnName.get(socketName);
 		if (socketToUnequipFrom == null)
 		{

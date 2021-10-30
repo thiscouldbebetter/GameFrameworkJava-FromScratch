@@ -6,7 +6,7 @@ import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
-import GameFramework.Combat.*;
+import GameFramework.Model.Combat.*;
 
 public class Effect_Instances
 {

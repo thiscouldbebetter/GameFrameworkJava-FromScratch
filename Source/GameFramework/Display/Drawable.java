@@ -5,7 +5,7 @@ import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class Drawable implements Clonable<Drawable>, EntityProperty
+public class Drawable implements EntityProperty
 {
 	public Visual visual;
 	public boolean isVisible;
@@ -14,15 +14,11 @@ public class Drawable implements Clonable<Drawable>, EntityProperty
 	{
 		this.visual = visual;
 		this.isVisible = isVisible;
-		if (this.isVisible == null)
-		{
-			this.isVisible = true;
-		}
 	}
 
 	public static Drawable fromVisual(Visual visual)
 	{
-		return new Drawable(visual, null);
+		return new Drawable(visual, true);
 	}
 
 	public static Drawable  fromVisualAndIsVisible(Visual visual, boolean isVisible)

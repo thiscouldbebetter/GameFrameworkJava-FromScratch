@@ -49,7 +49,7 @@ public class PlaceDefn
 
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this.actionToInputsMappings,
+			Arrays.asList(this.actionToInputsMappings),
 			(ActionToInputsMapping x) -> x.inputNames
 		);
 	}
@@ -113,7 +113,7 @@ public class PlaceDefn
 		);
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this.actionToInputsMappings,
+			Arrays.asList(this.actionToInputsMappings),
 			(ActionToInputsMapping x) -> x.inputNames
 		);
 	}
@@ -122,7 +122,7 @@ public class PlaceDefn
 	{
 		if (this._placeFinalize != null)
 		{
-			this._placeFinalize(uwpe);
+			this._placeFinalize.accept(uwpe);
 		}
 	}
 
@@ -130,7 +130,7 @@ public class PlaceDefn
 	{
 		if (this._placeInitialize != null)
 		{
-			this._placeInitialize(uwpe);
+			this._placeInitialize.accept(uwpe);
 		}
 	}
 }

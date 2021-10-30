@@ -12,7 +12,7 @@ import GameFramework.Model.*;
 public class Collision implements Comparable<Collision>
 {
 	public Coords pos;
-	public double distanceToCollision;
+	public Double distanceToCollision;
 	public List<ShapeBase> colliders;
 	public Map<String,ShapeBase> collidersByName;
 	public List<Entity> entitiesColliding;
@@ -23,7 +23,7 @@ public class Collision implements Comparable<Collision>
 	public Collision
 	(
 		Coords pos,
-		double distanceToCollision,
+		Double distanceToCollision,
 		List<ShapeBase> colliders,
 		List<Entity> entitiesColliding
 	)
@@ -65,7 +65,7 @@ public class Collision implements Comparable<Collision>
 		this.isActive = false;
 		ArrayHelper.clear(this.entitiesColliding);
 		ArrayHelper.clear(this.colliders);
-		this.normals.stream().forEach(x -> x.clear());
+		Arrays.asList(this.normals).stream().forEach(x -> x.clear());
 		this.collidersByName.clear();
 		this.distanceToCollision = null;
 		return this;
@@ -111,7 +111,7 @@ public class Collision implements Comparable<Collision>
 
 	// Comparable.
 
-	public int compareTo(Collision other)
+	public double compareTo(Collision other)
 	{
 		return this.distanceToCollision - other.distanceToCollision;
 	}

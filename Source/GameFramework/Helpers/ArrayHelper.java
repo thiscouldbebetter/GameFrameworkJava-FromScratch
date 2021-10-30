@@ -251,10 +251,11 @@ public class ArrayHelper
 	{
 		return (list.indexOf(elementToFind) >= 0);
 	}
+	*/
 
-	static equals(list: any[], other: any[]): boolean
+	public static <T> boolean equals(T[] list, T[] other)
 	{
-		var areEqualSoFar;
+		var areEqualSoFar = true;
 
 		if (list.length != other.length)
 		{
@@ -275,6 +276,30 @@ public class ArrayHelper
 		return areEqualSoFar;
 	}
 
+	public static boolean <T> equals(List<T> list, List<T> other)
+	{
+		var areEqualSoFar = true;
+
+		if (list.size() != other.size())
+		{
+			areEqualSoFar = false;
+		}
+		else
+		{
+			for (var i = 0; i < list.size(); i++)
+			{
+				areEqualSoFar = list.get(i).equals(other.get(i));
+				if (areEqualSoFar == false)
+				{
+					break;
+				}
+			}
+		}
+
+		return areEqualSoFar;
+	}
+
+	/*
 	static insertElementAfterOther
 	(
 		list: any[], elementToInsert: any, other: any

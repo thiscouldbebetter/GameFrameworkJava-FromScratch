@@ -3,6 +3,7 @@ package GameFramework.Input;
 
 import java.awt.event.*;
 import java.util.*;
+import java.util.stream.*;
 import javax.swing.*;
 
 import GameFramework.*;
@@ -289,6 +290,9 @@ public class InputHelper
 	}
 
 	// events - mouse
+
+	public void mouseClicked(MouseEvent event)
+	{}
 
 	public void mouseEntered(MouseEvent event)
 	{}

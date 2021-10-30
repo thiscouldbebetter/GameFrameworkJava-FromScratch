@@ -156,7 +156,7 @@ public class Box implements ShapeBase
 			}
 		}
 
-		var returnValue = null;
+		Box returnValue = null;
 
 		if (doAllDimensionsOverlapSoFar)
 		{
@@ -385,13 +385,13 @@ public class Box implements ShapeBase
 
 	// ShapeBase.
 
-	public double dimensionForSurfaceClosestToPoint
+	public int dimensionForSurfaceClosestToPoint
 	(
 		Coords posToCheck, Coords displacementOverSizeHalf
 	)
 	{
-		var greatestAbsoluteDisplacementDimensionSoFar = -1;
-		var dimensionIndex = null;
+		Integer greatestAbsoluteDisplacementDimensionSoFar = null;
+		Integer dimensionIndex = null;
 
 		for (var d = 0; d < 3; d++) // dimension
 		{
@@ -460,7 +460,7 @@ public class Box implements ShapeBase
 
 	public Transformable transform(Transform transformToApply)
 	{
-		Transforms.applyTransformToCoordsMObject
+		Transforms.applyTransformToCoordsMany
 		(
 			transformToApply, this.coordsGroupToTranslate()
 		);

@@ -3,11 +3,12 @@ package GameFramework.Input;
 
 import java.util.*;
 
-import GameFramework.Helpers.*:
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
+import GameFramework.Utility.*;
 
-public class ActionToInputsMapping
+public class ActionToInputsMapping implements Clonable<ActionToInputsMapping>
 {
 	public String actionName;
 	public List<String> inputNames;

@@ -48,7 +48,7 @@ public class Equippable implements EntityProperty
 
 	// Clonable.
 
-	public Equippable clone(): Equippable
+	public Equippable clone()
 	{
 		return this;
 	}

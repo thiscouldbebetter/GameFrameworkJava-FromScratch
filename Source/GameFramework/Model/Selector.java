@@ -7,7 +7,7 @@ import java.util.stream.*;
 
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
-import GameFramework.Display.Visuals*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.Actors.*;

@@ -12,8 +12,8 @@ import GameFramework.Model.*;
 
 public class Collidable implements EntityProperty
 {
-	public int ticksToWaitBetweenCollisions;
-	public Object colliderAtRest;
+	public Integer ticksToWaitBetweenCollisions;
+	public ShapeBase colliderAtRest;
 	public String[] entityPropertyNamesToCollideWith;
 	BiConsumer<UniverseWorldPlaceEntities,Collision> _collideEntities;
 
@@ -24,13 +24,13 @@ public class Collidable implements EntityProperty
 	public boolean isDisabled;
 
 	private List<CollisionTrackerMapCell> _collisionTrackerMapCellsOccupied;
-	private List<Collision> collisions;
+	private List<Collision> _collisions;
 
 	public Collidable
 	(
-		int ticksToWaitBetweenCollisions,
+		Integer ticksToWaitBetweenCollisions,
 		ShapeBase colliderAtRest,
-		String entityPropertyNamesToCollideWith[],
+		String[] entityPropertyNamesToCollideWith,
 		BiConsumer<UniverseWorldPlaceEntities,Collision> collideEntities
 	)
 	{
@@ -78,7 +78,7 @@ public class Collidable implements EntityProperty
 	{
 		if (this._collideEntities != null)
 		{
-			this._collideEntities.apply(uwpe, collision);
+			this._collideEntities.accept(uwpe, collision);
 		}
 		return collision;
 	}
@@ -95,8 +95,8 @@ public class Collidable implements EntityProperty
 	)
 	{
 		var entitiesColliding = collision.entitiesColliding;
-		var entity = entitiesColliding[0];
-		var entityOther = entitiesColliding[1];
+		var entity = entitiesColliding.get(0);
+		var entityOther = entitiesColliding.get(1);
 
 		uwpe.entity = entity;
 		uwpe.entity2 = entityOther;
@@ -157,7 +157,7 @@ public class Collidable implements EntityProperty
 		(
 			collisionTracker == null
 			|| entityBoundable == null
-			|| entityBoundable.bounds.constructor.name != Box.name
+			|| entityBoundable.bounds.getClass().getName() != Box.class.getName()
 		)
 		{
 			collisionsSoFar = this.collisionsFindForEntity_WithoutTracker
@@ -174,6 +174,14 @@ public class Collidable implements EntityProperty
 		}
 
 		return collisionsSoFar;
+	}
+	
+	public void collisionTrackerMapCellOccupy
+	(
+		CollisionTrackerMapCell cellToOccupy
+	)
+	{
+		this._collisionTrackerMapCellsOccupied.add(cellToOccupy);
 	}
 
 	public List<Collision> collisionsFindForEntity_WithTracker
@@ -196,15 +204,15 @@ public class Collidable implements EntityProperty
 		(
 			entity, universe.collisionHelper, collisionsSoFar
 		);
-		collisionsSoFar = collisionsSoFar.filter
+		collisionsSoFar = collisionsSoFar.stream().filter
 		(
 			collision ->
-				this.entityPropertyNamesToCollideWith.some
+				this.entityPropertyNamesToCollideWith.anyMatch
 				(
 					propertyName ->
 						collision.entitiesColliding[1].propertyByName(propertyName) != null
 				)
-		);
+		).toList();
 		return collisionsSoFar;
 	}
 
@@ -226,9 +234,9 @@ public class Collidable implements EntityProperty
 			var entitiesWithProperty = place.entitiesByPropertyName(entityPropertyName);
 			if (entitiesWithProperty != null)
 			{
-				for (var e = 0; e < entitiesWithProperty.length; e++)
+				for (var e = 0; e < entitiesWithProperty.size(); e++)
 				{
-					var entityOther = entitiesWithProperty[e];
+					var entityOther = entitiesWithProperty.get(e);
 					if (entityOther != entity)
 					{
 						var doEntitiesCollide = this.doEntitiesCollide
@@ -242,7 +250,7 @@ public class Collidable implements EntityProperty
 							(
 								entity, entityOther, Collision.create()
 							);
-							collisionsSoFar.push(collision);
+							collisionsSoFar.add(collision);
 						}
 					}
 				}
@@ -312,8 +320,8 @@ public class Collidable implements EntityProperty
 			else
 			{
 				this.ticksUntilCanCollide = this.ticksToWaitBetweenCollisions;
-				collidable0EntitiesAlreadyCollidedWith.push(entity1);
-				collidable1EntitiesAlreadyCollidedWith.push(entity0);
+				collidable0EntitiesAlreadyCollidedWith.add(entity1);
+				collidable1EntitiesAlreadyCollidedWith.add(entity0);
 			}
 		}
 		else if (wereEntitiesAlreadyColliding)
@@ -371,5 +379,10 @@ public class Collidable implements EntityProperty
 			this.entityPropertyNamesToCollideWith,
 			this._collideEntities
 		);
+	}
+	
+	public Collidable overwriteWith(Coords other)
+	{
+		return this; // todo
 	}
 }

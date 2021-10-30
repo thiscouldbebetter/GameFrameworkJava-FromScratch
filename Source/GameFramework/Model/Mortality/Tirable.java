@@ -3,6 +3,8 @@ package GameFramework.Model.Mortality;
 
 import java.util.function.*;
 
+import GameFramework.Model.*;
+
 public class Tirable implements EntityProperty
 {
 	public double staminaMaxAfterSleep;

@@ -12,7 +12,7 @@ public class ItemCategory
 
 	// EntityProperty.
 
-	public void finalize(uwpe: UniverseWorldPlaceEntities) {}
-	public void initialize(uwpe: UniverseWorldPlaceEntities) {}
-	public void updateForTimerTick(uwpe: UniverseWorldPlaceEntities) {}
+	public void finalize(UniverseWorldPlaceEntities uwpe) {}
+	public void initialize(UniverseWorldPlaceEntities uwpe) {}
+	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe) {}
 }

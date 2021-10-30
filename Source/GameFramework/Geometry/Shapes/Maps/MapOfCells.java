@@ -6,6 +6,7 @@ import java.util.function.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
@@ -105,12 +106,12 @@ public class MapOfCells<T>
 
 	public T cellCreate()
 	{
-		return this._cellCreate.call();
+		return this._cellCreate.get();
 	}
 
 	public int cellsCount()
 	{
-		return this.sizeInCells.x * this.sizeInCells.y;
+		return (int)(this.sizeInCells.x * this.sizeInCells.y);
 	}
 
 	public List<T> cellsInBoxAddToList(Box box, List<T> cellsInBox)
@@ -156,7 +157,7 @@ public class MapOfCells<T>
 		return cellsInBox;
 	}
 
-	public Entity[] cellsAsEntities
+	public List<Entity> cellsAsEntities
 	(
 		BiFunction<MapOfCells<T>,Coords,Entity> mapAndCellPosToEntity
 	)
@@ -175,7 +176,8 @@ public class MapOfCells<T>
 			{
 				cellPosInCells.x = x;
 
-				var cellAsEntity = mapAndCellPosToEntity(this, cellPosInCells);
+				var cellAsEntity =
+					mapAndCellPosToEntity.apply(this, cellPosInCells);
 
 				returnValues.add(cellAsEntity);
 			}

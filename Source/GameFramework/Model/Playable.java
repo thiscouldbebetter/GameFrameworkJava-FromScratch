@@ -151,7 +151,7 @@ public class Playable implements EntityProperty
 
 		Runnable back = () ->
 		{
-			var Venue venueNext = venuePrev;
+			Venue venueNext = venuePrev;
 			venueNext = VenueFader.fromVenuesToAndFrom(venueNext, universe.venueCurrent);
 			universe.venueNext = venueNext;
 		};
@@ -353,7 +353,7 @@ public class Playable implements EntityProperty
 				new VisualOffset
 				(
 					playerVisualStaminaBarPlusIcon,
-					childSpacing.clone().double()
+					childSpacing.clone().doublify()
 				),
 				new VisualOffset
 				(
