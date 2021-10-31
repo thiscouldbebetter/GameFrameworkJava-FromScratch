@@ -16,7 +16,7 @@ public class VenueInputCapture implements Venue
 	public VenueInputCapture
 	(
 		Venue venueToReturnTo,
-		Object functionToPassInputCapturedTo
+		Consumer<Input> functionToPassInputCapturedTo
 	)
 	{
 		this.venueToReturnTo = venueToReturnTo;

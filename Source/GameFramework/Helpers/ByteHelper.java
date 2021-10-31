@@ -7,14 +7,14 @@ import GameFramework.Helpers.*;
 
 public class ByteHelper
 {
-	public static int[] StringUTF8ToBytes(String stringToConvert)
+	public static int[] stringUTF8ToBytes(String stringToConvert)
 	{
 		var bytes = new ArrayList<Integer>();
 
 		for (var i = 0; i < stringToConvert.length(); i++)
 		{
 			var byteRead = stringToConvert.charAt(i);
-			bytes.push(byteRead);
+			bytes.add(byteRead);
 		}
 
 		return bytes.toArray(new int[] {});
@@ -27,7 +27,7 @@ public class ByteHelper
 		for (var i = 0; i < bytesToConvert.length; i++)
 		{
 			var byteToConvert = bytesToConvert[i];
-			var byteAsString = Integer.toHexadecimalString(byteToConvert);
+			var byteAsString = Integer.toHex(byteToConvert);
 			returnValue += byteAsString;
 		}
 

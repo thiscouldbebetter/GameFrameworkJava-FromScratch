@@ -10,12 +10,12 @@ public class VisualCircle implements Visual
 	public Color colorBorder;
 	public double borderThickness;
 
-	public VisualCircle(double radius, Color colorFill, Color colorBorder, double borderThickness)
+	public VisualCircle(double radius, Color colorFill, Color colorBorder, Double borderThickness)
 	{
 		this.radius = radius;
 		this.colorFill = colorFill;
 		this.colorBorder = colorBorder;
-		this.borderThickness = borderThickness;
+		this.borderThickness = (borderThickness != null ? borderThickness : 1);
 	}
 
 	public static VisualCircle fromRadiusAndColorFill(double radius, Color colorFill)

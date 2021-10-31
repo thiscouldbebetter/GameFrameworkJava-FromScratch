@@ -72,6 +72,8 @@ public class VisualImageImmediate implements VisualImage
 
 	// Transformable.
 
+	public Coords[] coordsGroupToTranslate() { return null; } // todo
+
 	public Transformable transform(Transform transformToApply)
 	{
 		return this; // todo

@@ -121,7 +121,7 @@ public class Profile
 				var messageAsDataBinding2 = DataBinding.fromContextAndGet
 				(
 					null, (Object c) -> "Loading game..."
-				)
+				);
 
 				var venueMessage = VenueMessage.fromMessage
 				(

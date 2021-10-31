@@ -16,6 +16,7 @@ import GameFramework.Model.Items.Equipment.*;
 import GameFramework.Model.Mortality.*;
 import GameFramework.Model.Physics.*;
 import GameFramework.Model.Places.*;
+import GameFramework.Model.Usables.*;
 import GameFramework.Utility.*;
 
 public class Entity //
@@ -32,9 +33,9 @@ public class Entity //
 		this.properties = Arrays.asList(properties);
 
 		this.propertiesByName = new HashMap<String,EntityProperty>();
-		for (var i = 0; i < this.properties.length; i++)
+		for (var i = 0; i < this.properties.size(); i++)
 		{
-			var property = this.properties[i];
+			var property = this.properties.get(i);
 			var propertyName = property.getClass().getName();
 			this.propertiesByName.put(propertyName, property);
 		}
@@ -44,9 +45,9 @@ public class Entity //
 	{
 		uwpe.entity = this;
 		var entityProperties = this.properties;
-		for (var p = 0; p < entityProperties.length; p++)
+		for (var p = 0; p < entityProperties.size(); p++)
 		{
-			var property = entityProperties[p];
+			var property = entityProperties.get(p);
 			property.finalize(uwpe);
 		}
 		return this;
@@ -56,9 +57,9 @@ public class Entity //
 	{
 		uwpe.entity = this;
 		var entityProperties = this.properties;
-		for (var p = 0; p < entityProperties.length; p++)
+		for (var p = 0; p < entityProperties.size(); p++)
 		{
-			var property = entityProperties[p];
+			var property = entityProperties.get(p);
 			property.initialize(uwpe);
 		}
 		return this;
@@ -114,9 +115,9 @@ public class Entity //
 		uwpe.entity = this;
 
 		var entityProperties = this.properties;
-		for (var p = 0; p < entityProperties.length; p++)
+		for (var p = 0; p < entityProperties.size(); p++)
 		{
-			var property = entityProperties[p];
+			var property = entityProperties.get(p);
 			property.finalize(uwpe);
 		}
 		return this;
@@ -127,10 +128,10 @@ public class Entity //
 	public Entity clone()
 	{
 		var nameCloned = this.name; // + IDHelper.Instance().idNext();
-		var propertiesCloned = new EntityProperty[this.properties.length];
-		for (var i = 0; i < this.properties.length; i++)
+		var propertiesCloned = new EntityProperty[this.properties.size()];
+		for (var i = 0; i < this.properties.size(); i++)
 		{
-			var property = this.properties[i];
+			var property = this.properties.get(i);
 			var propertyCloned = property.clone();
 			propertiesCloned[i] = propertyCloned;
 		}
@@ -199,5 +200,5 @@ public class Entity //
 	//public Talker talker() { return this.propertyByName(Talker.class.getName()) as Talker; }
 	public Tirable tirable() { return (Tirable)this.propertyByName(Tirable.class.getName()); }
 	//public Traversable traversable() { return this.propertyByName(Traversable.class.getName()) as Traversable; }
-	//public Usable usable() { return this.propertyByName(Usable.class.getName()) as Usable; }
+	public Usable usable() { return (Usable)this.propertyByName(Usable.class.getName()); }
 }

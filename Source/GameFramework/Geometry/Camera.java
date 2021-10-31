@@ -8,6 +8,7 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Collisions.*;
 import GameFramework.Geometry.Shapes.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Places.*;
 
@@ -280,8 +281,10 @@ public class Camera implements EntityProperty
 		//cameraCollidable.isDisabled = true;
 
 		var drawablesAll = place.drawables();
-		var drawablesUnboundable =
-			drawablesAll.stream().filter(x -> x.boundable() == null);
+		var drawablesUnboundable = drawablesAll.stream().filter
+		(
+			x -> x.boundable() == null
+		).collect(Collectors.toList());
 		entitiesInView.addAll(drawablesUnboundable);
 
 		return entitiesInView;
@@ -366,7 +369,7 @@ public class Camera implements EntityProperty
 
 	private List<Entity> entitiesInViewSort(List<Entity> entitiesToSort)
 	{
-		var entitiesSorted = null;
+		List<Entity> entitiesSorted = null;
 
 		if (this._entitiesInViewSort == null)
 		{
@@ -386,15 +389,15 @@ public class Camera implements EntityProperty
 	}
 
 	// Clonable.
-	
+
 	public Camera clone()
 	{
 		return this; // todo
 	}
-	
-	public Camera overwriteWith(Camera other)
+
+	public EntityProperty overwriteWith(EntityProperty otherAsProperty)
 	{
-		return this; // todo	
+		return this; // todo
 	}
 	
 	// EntityProperty.

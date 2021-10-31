@@ -79,7 +79,7 @@ public class VisualBar implements Visual
 			this._sizeCurrent.x = widthCurrent;
 			display.drawRectangle
 			(
-				pos, this._sizeCurrent, this.color, null, null
+				pos, this._sizeCurrent, this.color, null, false
 			);
 
 			Color colorForBorder = null;
@@ -107,7 +107,7 @@ public class VisualBar implements Visual
 
 			display.drawRectangle
 			(
-				pos, this.size, null, colorForBorder, null
+				pos, this.size, null, colorForBorder, false
 			);
 
 			pos.add(this._sizeHalf);

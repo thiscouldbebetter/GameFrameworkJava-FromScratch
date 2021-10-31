@@ -44,12 +44,12 @@ public class Actor implements EntityProperty
 
 	// Clonable.
 
-	public void clone()
+	public Actor clone()
 	{
 		return new Actor(this.activity.clone());
 	}
 
-	public void overwriteWith(Actor other)
+	public Actor overwriteWith(Actor other)
 	{
 		this.activity.overwriteWith(other.activity);
 		return this;

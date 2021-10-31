@@ -10,6 +10,8 @@ import GameFramework.Geometry.Collisions.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Items.*;
+import GameFramework.Model.Physics.*;
+import GameFramework.Model.Usables.*;
 import GameFramework.Utility.*;
 
 public class Place implements Namable
@@ -147,9 +149,9 @@ public class Place implements Namable
 	public void entityRemove(Entity entity)
 	{
 		var entityProperties = entity.properties;
-		for (var p = 0; p < entityProperties.length; p++)
+		for (var p = 0; p < entityProperties.size(); p++)
 		{
-			var property = entityProperties[p];
+			var property = entityProperties.get(p);
 			var propertyName = property.getClass().getName();
 			var entitiesWithProperty =
 				this.entitiesByPropertyName(propertyName);

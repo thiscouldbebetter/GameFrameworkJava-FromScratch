@@ -388,8 +388,8 @@ public class Collidable implements EntityProperty
 			this._collideEntities
 		);
 	}
-	
-	public Collidable overwriteWith(Coords other)
+
+	public EntityProperty overwriteWith(EntityProperty otherAsProperty)
 	{
 		return this; // todo
 	}

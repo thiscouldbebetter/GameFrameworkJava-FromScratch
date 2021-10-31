@@ -94,7 +94,7 @@ public class ArrayHelper
 
 	public static <K,E> Map<K,E> addLookupsMultiple
 	(
-		List<E> list, Function<E,K[]> getKeysForElement
+		List<E> list, Function<E,List<K>> getKeysForElement
 	)
 	{
 		var returnLookup = new HashMap<K,E>();
@@ -102,9 +102,9 @@ public class ArrayHelper
 		{
 			var element = list.get(i);
 			var keys = getKeysForElement.apply(element);
-			for (var k = 0; k < keys.length; k++)
+			for (var k = 0; k < keys.size(); k++)
 			{
-				var key = keys[k];
+				var key = keys.get(k);
 				returnLookup.put(key, element);
 			}
 		}
@@ -122,50 +122,43 @@ public class ArrayHelper
 		}
 		return list;
 	}
+	*/
 
-	static areEqual(list0: any[], list1: any[]): boolean
+	public static <T> boolean areEqual(List<T> list0, List<T> list1)
 	{
 		var areListsEqual = true;
 
-		if (list0.length != list1.length)
+		if (list0.size() != list1.size())
 		{
 			areListsEqual = false;
 		}
 		else
 		{
-			for (var i = 0; i < list0.length; i++)
+			for (var i = 0; i < list0.size(); i++)
 			{
-				var element0 = list0[i];
-				var element1 = list1[i];
+				var element0 = list0.get(i);
+				var element1 = list1.get(i);
 				if (element0 == element1)
 				{
 					// Do nothing.
 				}
 				else if
 				(
-					element0.equals != null
-					&& element1.equals != null
-					&& element0.equals(element1)
+					element0.equals(element1)
 				)
 				{
 					// Do nothing.
 				}
 				else
 				{
-					var element0AsJson = JSON.stringify(element0);
-					var element1AsJson = JSON.stringify(element1);
-					if (element0AsJson != element1AsJson)
-					{
-						areListsEqual = false;
-						break;
-					}
+					// todo - Serialize them?
+					areListsEqual = false;
 				}
 			}
 		}
 
 		return areListsEqual;
 	}
-	*/
 
 	public static <T> List<T> clear(List<T> list)
 	{
@@ -180,12 +173,11 @@ public class ArrayHelper
 		if (arrayToClone != null)
 		{
 			returnValues = new double[arrayToClone.length];
-				
+
 			for (var i = 0; i < arrayToClone.length; i++)
 			{
 				var element = arrayToClone[i];
-				var elementCloned = element.clone();
-				returnValues[i] = elementCloned;
+				returnValues[i] = element;
 			}
 		}
 
@@ -199,7 +191,6 @@ public class ArrayHelper
 		if (arrayToClone != null)
 		{
 			returnValues =
-				//new T[arrayToClone.length];
 				(T[]) Array.newInstance(T.getClass(), arrayToClone.length);
 
 			for (var i = 0; i < arrayToClone.length; i++)
@@ -232,10 +223,8 @@ public class ArrayHelper
 		return returnValue;
 	}
 
-	public static <T> List<T> clone(List<T> list)
+	public static <T> List<T> cloneNonClonables(List<T> list)
 	{
-		// If the above overload doesn't catch it,
-		// it means that it's not a Clonable.
 		List<T> returnValue = null;
 
 		if (list != null)
@@ -398,11 +387,8 @@ public class ArrayHelper
 		return list;
 	}
 
-	public static <T> List<T> overwriteWith(List<T> list, List<T> other)
+	public static <T> List<T> overwriteWithNonClonables(List<T> list, List<T> other)
 	{
-		// If the above overload doesn't catch it,
-		// that means it's not a Clonable.
-		
 		for (var i = 0; i < list.size(); i++)
 		{
 			var elementOther = other.get(i);

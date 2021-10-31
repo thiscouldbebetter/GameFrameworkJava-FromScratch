@@ -18,7 +18,7 @@ public class VisualPath implements Visual
 
 	public VisualPath
 	(
-		Path verticesAsPath, Color color, number lineThickness, boolean isClosed
+		Path verticesAsPath, Color color, double lineThickness, boolean isClosed
 	)
 	{
 		this.verticesAsPath = verticesAsPath;

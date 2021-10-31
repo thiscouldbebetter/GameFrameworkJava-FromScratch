@@ -33,14 +33,20 @@ public class FileHelper
 		*/
 	}
 
-	loadFile_FileLoaded(Object fileLoadedEvent, Object callback, Object contextForCallback, String fileName)
+	loadFile_FileLoaded
+	(
+		Object fileLoadedEvent,
+		Object callback,
+		Object contextForCallback,
+		String fileName
+	)
 	{
 		/*
 		var fileReader = fileLoadedEvent.target;
 		var contentsOfFileLoaded = fileReader.result;
-		*/
 
 		callback.call(contextForCallback, contentsOfFileLoaded);
+		*/
 	}
 
 	public void saveBinaryStringToFileWithName

@@ -3,18 +3,19 @@ package GameFramework.Storage.TarFiles;
 
 import java.util.*;
 
+import GameFramework.Helpers.*;
 import GameFramework.Storage.*;
 import GameFramework.Storage.Compressor.*;
 
-public class TarFileEntry
+public class TarFileEntry //
 {
 	public TarFileEntryHeader header;
-	public int[] dataAsBytes;
+	public List<Integer> dataAsBytes;
 
 	public TarFileEntry(TarFileEntryHeader header, int[] dataAsBytes)
 	{
 		this.header = header;
-		this.dataAsBytes = dataAsBytes;
+		this.dataAsBytes = Arrays.asList(dataAsBytes);
 	}
 
 	// methods

@@ -32,7 +32,7 @@ public class VenueControls implements Venue
 		{
 			var numberOfGamepads = 1; // todo
 
-			var returnValues = new ArrayList<Input>();
+			var returnValues = new ArrayList<String>();
 
 			for (var i = 0; i < numberOfGamepads; i++)
 			{
@@ -53,7 +53,7 @@ public class VenueControls implements Venue
 			(
 				controlActionNames.ControlIncrement,
 				ArrayHelper.addMany(
-					new String[] { inputNames.ArrowDown },
+					Arrays.asList(new String[] { inputNames.ArrowDown }),
 					buildGamepadInputs.apply(inputNames.GamepadMoveDown)
 				),
 				inactivate
@@ -73,7 +73,7 @@ public class VenueControls implements Venue
 				controlActionNames.ControlNext,
 				ArrayHelper.addMany
 				(
-					new String[] { inputNames.ArrowRight },
+					Arrays.asList(new String[] { inputNames.ArrowRight }),
 					ArrayHelper.addMany
 					(
 						new String[] { inputNames.ArrowRight, inputNames.Tab },
@@ -87,7 +87,7 @@ public class VenueControls implements Venue
 				controlActionNames.ControlDecrement,
 				ArrayHelper.addMany
 				(
-					new String[] { inputNames.ArrowUp },
+					Arrays.asList(new String[] { inputNames.ArrowUp }),
 					buildGamepadInputs.apply(inputNames.GamepadMoveUp)
 				),
 				inactivate
@@ -107,7 +107,7 @@ public class VenueControls implements Venue
 				controlActionNames.ControlCancel,
 				ArrayHelper.addMany
 				(
-					new String[] { inputNames.Escape },
+					Arrays.asList(new String[] { inputNames.Escape }),
 					buildGamepadInputs.apply(inputNames.GamepadButton0)
 				),
 				inactivate

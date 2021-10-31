@@ -15,7 +15,7 @@ public class ControlTextBox extends ControlBase
 	public int numberOfCharsMax;
 	public DataBinding<Object,Boolean> _isEnabled;
 
-	public int cursorPos;
+	public Integer cursorPos;
 
 	private Coords _drawPos;
 	private Coords _drawPosText;
@@ -40,7 +40,7 @@ public class ControlTextBox extends ControlBase
 		this.numberOfCharsMax = numberOfCharsMax;
 		this._isEnabled = isEnabled;
 
-		this.cursorPos = Integer.NaN;
+		this.cursorPos = null;
 
 		// Helper variables.
 		this._drawPos = Coords.create();
@@ -68,7 +68,7 @@ public class ControlTextBox extends ControlBase
 			|| actionNameToHandle == Input.Names().Backspace
 		)
 		{
-			this.text(text.substring(0, text.length() - 1), null);
+			this._text.set(null, text.substring(0, text.length() - 1));
 
 			this.cursorPos = NumberHelper.wrapToRangeMinMax
 			(

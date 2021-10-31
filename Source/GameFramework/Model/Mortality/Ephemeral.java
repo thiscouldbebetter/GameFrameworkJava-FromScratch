@@ -31,7 +31,7 @@ public class Ephemeral implements EntityProperty
 			uwpe.place.entityToRemoveAdd(entityEphemeral);
 			if (this.expire != null)
 			{
-				this.expire(uwpe);
+				this.expire.accept(uwpe);
 			}
 		}
 	}
@@ -43,8 +43,10 @@ public class Ephemeral implements EntityProperty
 		return new Ephemeral(this.ticksToLive, this.expire);
 	}
 
-	public Ephemeral overwriteWith(Ephemeral other)
+	public EntityProperty overwriteWith(EntityProperty otherAsEntityProperty)
 	{
+		var other = (Ephemeral)otherAsEntityProperty;
 		this.ticksToLive = other.ticksToLive;
+		return this;
 	}
 }

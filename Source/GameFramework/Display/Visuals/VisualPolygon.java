@@ -1,10 +1,10 @@
 
 package GameFramework.Display.Visuals;
 
-public GameFramework.Display.*;
-public GameFramework.Geometry.*;
-public GameFramework.Geometry.Shapes.*;
-public GameFramework.Geometry.Transforms.*;
+import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class VisualPolygon implements Visual
 {

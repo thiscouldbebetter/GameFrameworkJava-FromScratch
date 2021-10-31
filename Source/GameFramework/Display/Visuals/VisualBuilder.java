@@ -7,10 +7,14 @@ import GameFramework.Display.*;
 import GameFramework.Display.Visuals.Animation.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
+import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
 public class VisualBuilder
 {
+	public VisualBuilder()
+	{}
+
 	public static VisualBuilder _instance;
 	public static VisualBuilder Instance()
 	{
@@ -692,7 +696,7 @@ public class VisualBuilder
 			"EyesBlinking",
 			new int[] { 50, 5 }, // ticksToHoldFrames
 			new Visual[] { visualEyes, new VisualNone() },
-			null
+			true // isRepeating?
 		);
 
 		return visualEyesBlinking;
@@ -734,10 +738,13 @@ public class VisualBuilder
 			}
 		);
 
-		var flameVisualStaticSmall = flameVisualStatic.clone().transform
+		var flameVisualStaticSmall = (VisualGroup)
 		(
-			new Transform_Scale(new Coords(1, .8, 1))
-		) as VisualGroup;
+			flameVisualStatic.clone().transform
+			(
+				new Transform_Scale(new Coords(1, .8, 1))
+			)
+		);
 
 		var flameVisualStaticLarge = (VisualGroup)
 		(
@@ -765,7 +772,7 @@ public class VisualBuilder
 		return flameVisual;
 	}
 
-	ice(double dimension)
+	public Visual ice(double dimension)
 	{
 		var dimensionHalf = dimension / 2;
 		var color = Color.byName("Cyan");

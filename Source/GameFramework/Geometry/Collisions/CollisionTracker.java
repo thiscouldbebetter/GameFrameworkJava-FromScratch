@@ -31,9 +31,7 @@ public class CollisionTracker implements EntityProperty
 			CollisionTracker.class.getName(),
 			collisionMapSizeInCells,
 			collisionMapCellSize,
-			() -> new CollisionTrackerMapCell(),
-			null, // cellAtPosInCells,
-			new ArrayList<CollisionTrackerMapCell>() // cellSource
+			new MapOfCellsCellSourceArray<CollisionTrackerMapCell>()
 		);
 
 		this._cells = new ArrayList<CollisionTrackerMapCell>();
@@ -56,13 +54,13 @@ public class CollisionTracker implements EntityProperty
 		var entityBoundable = entity.boundable();
 		var entityCollidable = entity.collidable();
 
-		var entityBounds = entityBoundable.bounds;
+		var entityBounds = (Box)(entityBoundable.bounds);
 		var cellsToAddEntityTo = this.collisionMap.cellsInBoxAddToList
 		(
 			entityBounds, ArrayHelper.clear(this._cells)
 		);
 
-		entityCollidable._collisionTrackerMapCellsOccupied.addAll
+		entityCollidable._collisionTrackerMapCellsOccupy
 		(
 			cellsToAddEntityTo
 		);
@@ -115,6 +113,12 @@ public class CollisionTracker implements EntityProperty
 			CollisionTracker.class.getName(), new EntityProperty[] { this }
 		);
 	}
+
+	// Clonable.
+
+	public CollisionTracker clone() { return this; } // todo
+
+	public EntityProperty overwriteWith(EntityProperty other) { return this; } // todo
 
 	// EntityProperty.
 

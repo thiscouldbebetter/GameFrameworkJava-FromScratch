@@ -26,7 +26,7 @@ public class TarFile //
 
 	public static TarFile fromBytes(String fileName, int[] bytes)
 	{
-		var reader = new ByteStreamFromBytes(bytes);
+		var reader = new ByteStreamFromBytes(Arrays.asList(bytes));
 
 		var entries = new ArrayList<TarFileEntry>();
 
@@ -91,12 +91,12 @@ public class TarFile //
 		// by prepending them with a entry of type "L" whose data contains the path.
 		var typeFlagLongPathName = TarFileTypeFlag.Instances().LongFilePath.name;
 		var entries = this.entries;
-		for (var i = 0; i < entries.length; i++)
+		for (var i = 0; i < entries.size(); i++)
 		{
-			var entry = entries[i];
+			var entry = entries.get(i);
 			if (entry.header.typeFlag.name == typeFlagLongPathName)
 			{
-				var entryNext = entries[i + 1];
+				var entryNext = entries.get(i + 1);
 				entryNext.header.fileName = entry.dataAsBytes.stream().reduce
 				(
 					(a, b) -> a += "" + (char)b,
@@ -125,7 +125,7 @@ public class TarFile //
 		(
 			x ->
 				x.header.typeFlag.name == typeFlagDirectoryName
-		);
+		).collect(Collectors.toList());
 	}
 
 	public int[] toBytes()
@@ -142,9 +142,9 @@ public class TarFile //
 		// put it back the way it was.
 		this.consolidateLongPathEntries();
 
-		for (var i = 0; i < entriesAsByteArrays.length; i++)
+		for (var i = 0; i < entriesAsByteArrays.size(); i++)
 		{
-			var entryAsBytes = entriesAsByteArrays[i];
+			var entryAsBytes = entriesAsByteArrays.get(i);
 			fileAsBytes = fileAsBytes.concat(entryAsBytes);
 		}
 
@@ -156,7 +156,7 @@ public class TarFile //
 		{
 			for (var b = 0; b < chunkSize; b++)
 			{
-				fileAsBytes.push(0);
+				fileAsBytes.add(0);
 			}
 		}
 
@@ -172,9 +172,9 @@ public class TarFile //
 		var maxLength = TarFileEntryHeader.FileNameMaxLength;
 
 		var entries = this.entries;
-		for (var i = 0; i < entries.length; i++)
+		for (var i = 0; i < entries.size(); i++)
 		{
-			var entry = entries[i];
+			var entry = entries.get(i);
 			var entryHeader = entry.header;
 			var entryFileName = entryHeader.fileName;
 			if (entryFileName.length() > maxLength)
@@ -205,9 +205,9 @@ public class TarFile //
 
 		var returnValue = "[TarFile]" + newline;
 
-		for (var i = 0; i < this.entries.length; i++)
+		for (var i = 0; i < this.entries.size(); i++)
 		{
-			var entry = this.entries[i];
+			var entry = this.entries.get(i);
 			var entryAsString = entry.toString();
 			returnValue += entryAsString;
 		}

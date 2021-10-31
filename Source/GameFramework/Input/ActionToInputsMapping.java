@@ -50,7 +50,7 @@ public class ActionToInputsMapping implements Clonable<ActionToInputsMapping>
 		return new ActionToInputsMapping
 		(
 			this.actionName,
-			ArrayHelper.clone(this.inputNames),
+			ArrayHelper.cloneNonClonables(this.inputNames),
 			this.inactivateInputWhenActionPerformed
 		);
 	}
@@ -58,7 +58,7 @@ public class ActionToInputsMapping implements Clonable<ActionToInputsMapping>
 	public ActionToInputsMapping overwriteWith(ActionToInputsMapping other)
 	{
 		this.actionName = other.actionName;
-		ArrayHelper.overwriteWith(this.inputNames, other.inputNames);
+		ArrayHelper.overwriteWithNonClonables(this.inputNames, other.inputNames);
 		this.inactivateInputWhenActionPerformed =
 			other.inactivateInputWhenActionPerformed;
 		return this;

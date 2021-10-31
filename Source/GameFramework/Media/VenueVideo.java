@@ -3,8 +3,12 @@ package GameFramework.Media;
 
 import java.util.*;
 
-import GameFramework.Input;
-import GameFramework.Model;
+import GameFramework.Controls.*;
+import GameFramework.Display.*;
+import GameFramework.Helpers.*;
+import GameFramework.Input.*;
+import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public class VenueVideo implements Venue
 {

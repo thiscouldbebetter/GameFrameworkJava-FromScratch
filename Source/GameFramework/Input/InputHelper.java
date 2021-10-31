@@ -371,6 +371,11 @@ public class InputHelper
 
 	// Platformable.
 
+	public boolean isKeyListener()
+	{
+		return true;
+	}
+
 	public JComponent toJComponent()
 	{
 		return this;

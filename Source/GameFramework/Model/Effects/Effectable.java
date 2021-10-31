@@ -29,7 +29,7 @@ public class Effectable implements EntityProperty
 			? VisualNone.Instance
 			: new VisualGroup
 			(
-				this.effects.stream().map(x -> x.visual).collect(Collectors.toList()
+				this.effects.stream().map(x -> x.visual).collect(Collectors.toList())
 			)
 		);
 		return returnValue;

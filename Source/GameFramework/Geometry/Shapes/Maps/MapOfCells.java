@@ -16,8 +16,7 @@ public class MapOfCells<T>
 	public Coords sizeInCells;
 	public Coords cellSize;
 	private Supplier<T> _cellCreate;
-	private Function<Triple<MapOfCells<T>,Coords,T>,T> _cellAtPosInCells;
-	private Clonable cellSource;
+	private MapOfCellsCellSource<T> cellSource;
 
 	public Coords cellSizeHalf;
 	public Coords size;
@@ -34,16 +33,13 @@ public class MapOfCells<T>
 		String name,
 		Coords sizeInCells,
 		Coords cellSize,
-		Supplier<T> cellCreate,
-		Function<Triple<MapOfCells<T>,Coords,T>,T> cellAtPosInCells,
-		Object cellSource
+		MapOfCellsCellSource<T> cellSource
 	)
 	{
 		this.name = name;
 		this.sizeInCells = sizeInCells;
 		this.cellSize = cellSize;
 		this._cellCreate = cellCreate;
-		this._cellAtPosInCells = cellAtPosInCells;
 		this.cellSource =
 		(
 			cellSource != null
@@ -82,26 +78,10 @@ public class MapOfCells<T>
 
 	public T cellAtPosInCells(Coords cellPosInCells)
 	{
-		return this._cellAtPosInCells.apply
+		return this.cellSource.cellAtPosInCells
 		(
-			new Triple(this, cellPosInCells, this._cell)
+			this, cellPosInCells, this._cell
 		);
-	}
-
-	public T cellAtPosInCellsDefault(Triple<MapOfCells<T>,Coords,T> mapPosCell)
-	{
-		var map = mapPosCell.first;
-		var cellPosInCells = mapPosCell.second;
-		var cell = mapPosCell.third;
-
-		var cellIndex = cellPosInCells.y * this.sizeInCells.x + cellPosInCells.x;
-		var cell = ((T)(this.cellSource[cellIndex]));
-		if (cell == null)
-		{
-			cell = this.cellCreate();
-			this.cellSource[cellIndex] = cell;
-		}
-		return cell;
 	}
 
 	public T cellCreate()

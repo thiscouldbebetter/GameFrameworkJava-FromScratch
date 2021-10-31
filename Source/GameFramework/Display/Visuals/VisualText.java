@@ -21,21 +21,21 @@ public class VisualText implements Visual
 	(
 		DataBinding<Object,String> text,
 		boolean shouldTextContextBeReset,
-		double heightInPixels,
+		Double heightInPixels,
 		Color colorFill,
 		Color colorBorder
 	)
 	{
 		this._text = text;
 		this.shouldTextContextBeReset = shouldTextContextBeReset;
-		this.heightInPixels = heightInPixels;
+		this.heightInPixels = (heightInPixels != null ? heightInPixels : 10);
 		this.colorFill = colorFill;
 		this.colorBorder = colorBorder;
 
 		this._universeWorldPlaceEntities = UniverseWorldPlaceEntities.create();
 	}
 
-	public static VisualText fromTextAndColor(string text, Color colorFill)
+	public static VisualText fromTextAndColor(String text, Color colorFill)
 	{
 		return new VisualText
 		(
@@ -80,7 +80,7 @@ public class VisualText implements Visual
 		);
 	}
 
-	public void text(UniverseWorldPlaceEntities uwpe, Display display)
+	public String text(UniverseWorldPlaceEntities uwpe, Display display)
 	{
 		if (this.shouldTextContextBeReset)
 		{

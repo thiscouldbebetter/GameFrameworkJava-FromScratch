@@ -73,7 +73,7 @@ public class TarFileEntryHeader
 		var now = new Date();
 		var unixEpoch = new Date(1970, 1, 1);
 		var millisecondsSinceUnixEpoch = now.getTime() - unixEpoch.getTime();
-		var secondsSinceUnixEpoch = Math.floor
+		var secondsSinceUnixEpoch = (int)Math.floor
 		(
 			millisecondsSinceUnixEpoch / 1000
 		);
@@ -96,7 +96,7 @@ public class TarFileEntryHeader
 			"0000000", // userIDOfOwner
 			"0000000", // userIDOfGroup
 			0, // fileSizeInBytes
-			timeModifiedInUnixFormat,
+			timeModifiedInUnixFormat.toArray(new int[] {}),
 			0, // checksum
 			TarFileTypeFlag.Instances().Normal,
 			"", // nameOfLinkedFile,
@@ -139,7 +139,7 @@ public class TarFileEntryHeader
 
 	public static TarFileEntryHeader fromBytes(int[] bytes)
 	{
-		var reader = new ByteStreamFromBytes(bytes);
+		var reader = new ByteStreamFromBytes(Arrays.asList(bytes));
 
 		var fileName = reader.readStringOfLength(100).trim();
 		var fileMode = reader.readStringOfLength(8);
@@ -263,7 +263,7 @@ public class TarFileEntryHeader
 			StringHelper.padEnd("", 12, "\0"), 12
 		); // reserved
 
-		return headerAsBytes;
+		return headerAsBytes.toArray(new int[] {});
 	}
 
 	// Strings

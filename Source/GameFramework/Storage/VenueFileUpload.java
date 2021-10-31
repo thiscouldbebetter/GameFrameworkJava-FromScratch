@@ -3,12 +3,12 @@ package GameFramework.Storage;
 
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
-import GameFramework.Helper.*;
+import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
-public class VenueFileUpload implements Venue
+public class VenueFileUpload implements Venue, Platformable
 {
 	public Venue venueNextIfFileSpecified;
 	public Venue venueNextIfCancelled;
@@ -110,11 +110,11 @@ public class VenueFileUpload implements Venue
 		divFileUpload.appendChild(divButtons);
 
 		this.domElement = divFileUpload;
-		*/
 
 		universe.platformHelper.platformableAdd(this);
 
 		inputFileUpload.focus();
+		*/
 	}
 
 	public void updateForTimerTick(Universe universe)

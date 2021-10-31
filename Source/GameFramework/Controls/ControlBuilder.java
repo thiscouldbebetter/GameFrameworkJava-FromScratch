@@ -792,7 +792,10 @@ public class ControlBuilder
 					(
 						placeDefn,
 						(PlaceDefn c) -> c.actionToInputsMappingSelected,
-						(PlaceDefn c, ActionToInputsMapping v) -> { c.actionToInputsMappingSelected = v; }
+						(PlaceDefn c, ActionToInputsMapping v) ->
+						{
+							c.actionToInputsMappingSelected = v;
+						}
 					), // bindingForItemSelected
 					DataBinding.fromGet( (ActionToInputsMapping c) -> c ) // bindingForItemValue
 				),
@@ -863,7 +866,8 @@ public class ControlBuilder
 					), // isEnabled
 					() -> // click
 					{
-						var mappingSelected = placeDefn.actionToInputsMappingSelected();
+						var mappingSelected =
+							placeDefn.actionToInputsMappingSelected;
 						if (mappingSelected != null)
 						{
 							Venue venueInputCapture = new VenueInputCapture
@@ -906,9 +910,9 @@ public class ControlBuilder
 							).stream().filter
 							(
 								(ActionToInputsMapping x) -> (x.actionName == mappingSelected.actionName)
-							).collect(Collectors.asList()).get(0);
+							).collect(Collectors.toList()).get(0);
 							mappingSelected.inputNames =
-								ArrayHelper.clone(mappingDefault.inputNames);
+								ArrayHelper.cloneNonClonables(mappingDefault.inputNames);
 						}
 					}
 				),
@@ -1280,7 +1284,7 @@ public class ControlBuilder
 					(
 						universe.soundHelper,
 						(SoundHelper c) -> c.musicVolume,
-						(SoundHelper c, double v) -> c.musicVolume = v
+						(SoundHelper c, Double v) -> c.musicVolume = v
 					), // valueSelected
 					SoundHelper.controlSelectOptionsVolume(), // options
 					DataBinding.fromGet((ControlSelectOption c) -> c.value), // bindingForOptionValues,
@@ -1330,12 +1334,15 @@ public class ControlBuilder
 					"selectDisplaySize",
 					Coords.fromXY(70, row2PosY), // pos
 					Coords.fromXY(65, buttonHeight), // size
-					Databinding.fromContext
+					DataBinding.fromContext
 					(
 						universe.display.sizeInPixels()
 					), // valueSelected
 					// options
-					universe.display.sizesAvailable(),
+					DataBinding.fromContext
+					(
+						universe.display.sizesAvailable()
+					),
 					DataBinding.fromGet( (Coords c) -> c ), // bindingForOptionValues,
 					DataBinding.fromGet( (Coords c) -> c.toStringXY() ), // bindingForOptionText
 					fontHeight
@@ -1359,7 +1366,7 @@ public class ControlBuilder
 						var selectDisplaySize =
 							(ControlSelect)(controlRootAsContainer.childrenByName.get("selectDisplaySize"));
 						var displaySizeSpecified =
-							selectDisplaySize.optionSelected();
+							(Coords)(selectDisplaySize.optionSelected());
 
 						var displayAsDisplay = universe.display;
 						var display = (Display2D)displayAsDisplay;
@@ -1577,10 +1584,14 @@ public class ControlBuilder
 			var venueTask = new VenueTask
 			(
 				venueMessage,
-				() ->
-					Profile.toControlProfileSelect(universe, null, universe.venueCurrent),
-				(Universe universe2, Object result) -> // done
+				(Universe universe2) -> // perform
+					Profile.toControlProfileSelect
+					(
+						universe, null, universe.venueCurrent
+					),
+				(Universe universe2, Object resultAsObject) -> // done
 				{
+					var result = (ControlBase)resultAsObject;
 					var venueProfileSelect = result.toVenue();
 
 					universe2.venueNext = controlBuilder.venueTransitionalFromTo
@@ -1764,7 +1775,7 @@ public class ControlBuilder
 								universe,
 								size,
 								DataBinding.fromContext(instructions),
-								() -> // acknowledge
+								(UniverseWorldPlaceEntities uwpe) -> // acknowledge
 								{
 									universe.venueNext = controlBuilder.venueTransitionalFromTo
 									(
@@ -1983,7 +1994,7 @@ public class ControlBuilder
 					new DataBinding
 					(
 						universe.profile,
-						(Profile c) -> c.saveStateSelected(),
+						(Profile c) -> c.saveStateNameSelected,
 						(Profile c, SaveState v) -> { c.saveStateNameSelected = v.name; }
 					), // bindingForOptionSelected
 					DataBinding.fromGet( (String c) -> c ) // value
@@ -2067,7 +2078,7 @@ public class ControlBuilder
 									);
 									*/
 								},
-								null
+								false // ?
 							);
 
 						var venueMessageReadyToLoad =

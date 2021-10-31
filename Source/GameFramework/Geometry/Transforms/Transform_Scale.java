@@ -1,6 +1,8 @@
 
 package GameFramework.Geometry.Transforms;
 
+import GameFramework.Geometry.*;
+
 public class Transform_Scale implements Transform
 {
 	public Coords scaleFactors;

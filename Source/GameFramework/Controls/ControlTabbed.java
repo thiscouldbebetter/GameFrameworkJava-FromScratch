@@ -111,7 +111,7 @@ public class ControlTabbed extends ControlBase
 				this.fontHeightInPixels,
 				true, // hasBorder
 				DataBinding.fromTrue(), // isEnabled
-				() -> this.cancel.accept(universe) // click
+				() -> this.cancel.accept(null) // click
 			);
 			buttonsForChildren.add(button);
 		}
