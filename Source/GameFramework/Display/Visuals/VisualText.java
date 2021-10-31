@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-export class VisualText implements Visual
+public class VisualText implements Visual
 {
 	public DataBinding<Object,String> _text;
 	public boolean shouldTextContextBeReset;
@@ -49,7 +49,7 @@ export class VisualText implements Visual
 
 	public static VisualText fromTextAndColors
 	(
-		string text, Color colorFill, Color colorBorder
+		String text, Color colorFill, Color colorBorder
 	)
 	{
 		return new VisualText

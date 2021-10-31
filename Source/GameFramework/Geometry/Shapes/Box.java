@@ -369,8 +369,9 @@ public class Box implements ShapeBase
 		return returnValue;
 	}
 
-	public Box overwriteWith(Box other)
+	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
 	{
+		var other = (Box)otherAsShapeBase;
 		this.center.overwriteWith(other.center);
 		this.size.overwriteWith(other.size);
 		return this;
@@ -390,7 +391,7 @@ public class Box implements ShapeBase
 		Coords posToCheck, Coords displacementOverSizeHalf
 	)
 	{
-		Integer greatestAbsoluteDisplacementDimensionSoFar = null;
+		Double greatestAbsoluteDisplacementDimensionSoFar = null;
 		Integer dimensionIndex = null;
 
 		for (var d = 0; d < 3; d++) // dimension

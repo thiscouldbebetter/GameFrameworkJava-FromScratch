@@ -1,6 +1,10 @@
 
 package GameFramework.Model.Actors;
 
+import java.util.*;
+
+import GameFramework.Model.*;
+
 public class Activity
 {
 	public String defnName;

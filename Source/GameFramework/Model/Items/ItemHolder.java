@@ -6,6 +6,7 @@ import java.util.function.*;
 import java.util.stream.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Places.*;

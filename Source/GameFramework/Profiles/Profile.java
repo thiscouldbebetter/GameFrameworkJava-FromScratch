@@ -12,6 +12,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Media.*;
 import GameFramework.Model.*;
+import GameFramework.Storage.*;
 import GameFramework.Utility.*;
 
 public class Profile
@@ -110,15 +111,21 @@ public class Profile
 			var saveStateNameSelected = universe.profile.saveStateNameSelected;
 			if (saveStateNameSelected != null)
 			{
+				VenueTask messageAsDataBindingContext = null;
 				var messageAsDataBinding = DataBinding.fromContextAndGet
 				(
-					null, // Will be set below.
+					messageAsDataBindingContext, // Will be set below.
 					(VenueTask c) -> "Loading game..."
 				);
 
+				var messageAsDataBinding2 = DataBinding.fromContextAndGet
+				(
+					null, (Object c) -> "Loading game..."
+				)
+
 				var venueMessage = VenueMessage.fromMessage
 				(
-					messageAsDataBinding
+					messageAsDataBinding2
 				);
 
 				var venueTask = new VenueTask
@@ -150,7 +157,7 @@ public class Profile
 			}
 		};
 
-		Consumer<SaveState> saveToLocalStorage = (SaveState saveState) ->
+		Function<SaveState,Boolean> saveToLocalStorage = (SaveState saveState) ->
 		{
 			var profile = universe.profile;
 			var world = universe.world;
@@ -179,8 +186,12 @@ public class Profile
 				imageSnapshotFull, Coords.Instances().Zeroes, imageSizeThumbnail
 			);
 			var imageThumbnailFromDisplay = displayThumbnail.toImage();
-			var imageThumbnailAsDataUrl = imageThumbnailFromDisplay.systemImage.toDataURL();
+			/*
+			var imageThumbnailAsDataUrl =
+				imageThumbnailFromDisplay.systemImage.toDataURL();
 			var imageThumbnail = new Image2("Snapshot", imageThumbnailAsDataUrl).unload();
+			*/
+			Image2 imageThumbnail = null; // todo
 
 			var saveStateName = "Save-" + nowAsString;
 			var saveState2 = new SaveState
@@ -205,7 +216,7 @@ public class Profile
 					profile.saveStates.add(saveState2);
 					storageHelper.save(profile.name, profile);
 				}
-				var profileNames = (String[])storageHelper.load("ProfileNames");
+				var profileNames = (List<String>)storageHelper.load("ProfileNames");
 				if (Arrays.asList(profileNames).indexOf(profile.name) == -1)
 				{
 					profileNames.add(profile.name);
@@ -275,8 +286,8 @@ public class Profile
 			var venueTask = new VenueTask
 			(
 				venueMessage,
-				saveToLocalStorage,
-				(Universe universe2, Object result) -> // done
+				(UniverseWorldPlaceEntities uwpe2) -> saveToLocalStorage.apply(null), // todo
+				(UniverseWorldPlaceEntities uwpe2, Boolean result) -> // done
 				{
 					saveToLocalStorageDone.accept(result);
 				}
@@ -335,7 +346,7 @@ public class Profile
 							);
 							universe2.venueNext = venueNext;
 						},
-						null
+						false // ?
 					);
 
 					var venueMessage2 = controlMessage.toVenue();
@@ -361,9 +372,9 @@ public class Profile
 				universe,
 				size,
 				DataBinding.fromContext("Ready to load from file..."),
-				() -> // acknowledge
+				(UniverseWorldPlaceEntities uwpe) -> // acknowledge
 				{
-					var callback = (String fileContentsAsString) ->
+					Consumer<String> callback = (String fileContentsAsString) ->
 					{
 						var worldAsStringCompressed = fileContentsAsString;
 						var compressor = universe.storageHelper.compressor;
@@ -371,9 +382,12 @@ public class Profile
 						(
 							worldAsStringCompressed
 						);
-						var worldDeserialized = universe.serializer.deserialize
+						var worldDeserialized = (World)
 						(
-							worldSerialized
+							universe.serializer.deserialize
+							(
+								worldSerialized
+							)
 						);
 						universe.world = worldDeserialized;
 
@@ -410,7 +424,7 @@ public class Profile
 				universe,
 				size,
 				DataBinding.fromContext("No file specified."),
-				() -> // acknowlege
+				(UniverseWorldPlaceEntities uwpe) -> // acknowlege
 				{
 					Venue venueNext = controlBuilder.game
 					(
@@ -499,7 +513,7 @@ public class Profile
 					"labelProfileName",
 					Coords.fromXY(100, 10), // pos
 					Coords.fromXY(120, fontHeight), // size
-					DataBinding.fromTrue(), // isTextCentered
+					true, // isTextCentered
 					"Profile: " + universe.profile.name,
 					fontHeight
 				),
@@ -634,13 +648,13 @@ public class Profile
 								? null
 								: saveState.imageSnapshot.load()
 							);
-							var returnValue =
+							var returnValue2 =
 							(
-								saveStateImageSnapshot == null || saveStateImageSnapshot.isLoaded == false
+								(saveStateImageSnapshot == null) || saveStateImageSnapshot.isLoaded == false
 								? new VisualNone()
 								: new VisualImageImmediate(saveStateImageSnapshot, true) // isScaled
 							);
-							return returnValue;
+							return returnValue2;
 						}
 					),
 					Color.byName("White")
@@ -694,7 +708,7 @@ public class Profile
 						(Profile c) ->
 						{
 							var saveState = c.saveStateSelected();
-							var returnValue =
+							var returnValue2 =
 							(
 								saveState == null
 								? ""
@@ -705,7 +719,7 @@ public class Profile
 									: saveState.timeSaved.toStringYYYY_MM_DD()
 								)
 							);
-							return returnValue;
+							return returnValue2;
 						}
 					),
 					fontHeight
@@ -814,7 +828,7 @@ public class Profile
 					DataBinding.fromContextAndGet
 					(
 						universe.profile,
-						(Profile c) -> { return c.name.length > 0; }
+						(Profile c) -> { return c.name.length() > 0; }
 					),
 					() -> // click
 					{
@@ -832,7 +846,8 @@ public class Profile
 						var storageHelper = universe.storageHelper;
 
 						var profile = new Profile(profileName, null);
-						var profileNames = storageHelper.load("ProfileNames");
+						var profileNames =
+							(List<String>)storageHelper.load("ProfileNames");
 						if (profileNames == null)
 						{
 							profileNames = new ArrayList<String>();
@@ -898,13 +913,13 @@ public class Profile
 		var buttonHeightBase = controlBuilder.buttonHeightBase;
 
 		var storageHelper = universe.storageHelper;
-		List<String> profileNames = storageHelper.load("ProfileNames");
+		var profileNames = (List<String>)storageHelper.load("ProfileNames");
 		if (profileNames == null)
 		{
 			profileNames = new ArrayList<String>();
 			storageHelper.save("ProfileNames", profileNames);
 		}
-		var profiles = profileNames.map(x -> storageHelper.load(x));
+		var profiles = profileNames.stream().map(x -> storageHelper.load(x));
 
 		Runnable create = () ->
 		{
@@ -916,8 +931,9 @@ public class Profile
 
 		Runnable select = () ->
 		{
-			Venue venueControls = universe.venueCurrent;
-			var controlRootAsContainer = (ControlContainer)(venueControls.controlRoot);
+			var venueControls = (VenueControls)universe.venueCurrent;
+			var controlRootAsContainer =
+				(ControlContainer)(venueControls.controlRoot);
 			var listProfiles =
 				(ControlList)(controlRootAsContainer.childrenByName.get("listProfiles"));
 			var profileSelected = (Profile)(listProfiles.itemSelected());
@@ -942,7 +958,7 @@ public class Profile
 
 			var storageHelper2 = universe.storageHelper;
 			storageHelper2.delete(profileSelected.name);
-			var profileNames2 = storageHelper2.load("ProfileNames");
+			var profileNames2 = (List<String>)storageHelper2.load("ProfileNames");
 			ArrayHelper.remove(profileNames2, profileSelected.name);
 			storageHelper2.save("ProfileNames", profileNames2);
 		};
@@ -960,7 +976,8 @@ public class Profile
 						+ profileSelected.name
 						+ "\"?",
 					universe.venueCurrent,
-					deleteProfileConfirm,
+					(UniverseWorldPlaceEntities uwpe) ->
+						deleteProfileConfirm.run(),
 					null // cancel
 				);
 
@@ -1048,7 +1065,7 @@ public class Profile
 					"Skip",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					// click
 					() ->
 					{
@@ -1064,7 +1081,7 @@ public class Profile
 					"X",
 					fontHeight,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					deleteProfile // click
 				),
 

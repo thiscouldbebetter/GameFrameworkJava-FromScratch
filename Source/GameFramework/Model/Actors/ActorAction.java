@@ -24,7 +24,7 @@ public class ActorAction implements Namable
 
 	public void perform(UniverseWorldPlaceEntities uwpe)
 	{
-		this._perform(uwpe);
+		this._perform.accept(uwpe);
 	}
 
 	public void performForUniverse(Universe universe)
@@ -41,6 +41,14 @@ public class ActorAction implements Namable
 		}
 		return ActorAction._instances;
 	}
+	
+	// Namable.
+	
+	public String name()
+	{
+		return this._name;
+	}
+
 }
 
 class ActorAction_Instances
@@ -99,12 +107,5 @@ class ActorAction_Instances
 				universe.venueNext = venueNext;
 			}
 		);
-	}
-	
-	// Namable.
-	
-	public String name()
-	{
-		return this._name;
 	}
 }

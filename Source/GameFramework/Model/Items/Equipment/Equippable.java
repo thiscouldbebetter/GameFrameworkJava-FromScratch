@@ -64,5 +64,3 @@ public class Equippable implements EntityProperty
 	public void initialize(UniverseWorldPlaceEntities uwpe) {}
 	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe) {}
 }
-
-}

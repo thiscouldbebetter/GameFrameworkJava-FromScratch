@@ -28,7 +28,7 @@ public class VenueControls implements Venue
 	{
 		this.controlRoot = controlRoot;
 
-		Function<String,String[]> buildGamepadInputs = (String inputName) ->
+		Function<String,List<String>> buildGamepadInputs = (String inputName) ->
 		{
 			var numberOfGamepads = 1; // todo
 
@@ -97,7 +97,7 @@ public class VenueControls implements Venue
 				controlActionNames.ControlConfirm,
 				ArrayHelper.addMany
 				(
-					new String[] { inputNames.Enter },
+					Arrays.asList(new String[] { inputNames.Enter }),
 					buildGamepadInputs.apply(inputNames.GamepadButton1)
 				),
 				inactivate

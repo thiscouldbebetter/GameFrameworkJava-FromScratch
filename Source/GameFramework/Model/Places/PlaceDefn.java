@@ -60,7 +60,7 @@ public class PlaceDefn
 		(
 			"Default", // name,
 			new ActorAction[] {}, // actions,
-			new ActionToInputMapping[] {}, // actionToInputsMappings,
+			new ActionToInputsMapping[] {}, // actionToInputsMappings,
 			new String[] {}, // propertyNamesToProcess,
 			null, // placeInitialize
 			null // placeFinalize

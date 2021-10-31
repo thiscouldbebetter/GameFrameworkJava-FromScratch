@@ -13,7 +13,7 @@ public class Locatable implements EntityProperty
 
 	public Locatable(Disposition loc)
 	{
-		this.loc = (loc != null ? loc Disposition.create() );
+		this.loc = (loc != null ? loc : Disposition.create() );
 	}
 
 	public static Locatable create()

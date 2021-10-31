@@ -2,6 +2,7 @@
 package GameFramework.Model.Mortality;
 
 import java.util.*;
+import java.util.function.*;
 
 import GameFramework.Model.*;
 

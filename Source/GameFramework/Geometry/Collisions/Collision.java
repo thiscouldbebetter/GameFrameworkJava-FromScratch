@@ -51,7 +51,7 @@ public class Collision implements Comparable<Collision>
 	{
 		return new Collision
 		(
-			Coords.create(), 0, new ArrayList<ShapeBase>(), new ArrayList<Entity>()
+			Coords.create(), null, new ArrayList<ShapeBase>(), new ArrayList<Entity>()
 		);
 	}
 
@@ -111,8 +111,10 @@ public class Collision implements Comparable<Collision>
 
 	// Comparable.
 
-	public double compareTo(Collision other)
+	public int compareTo(Collision other)
 	{
-		return this.distanceToCollision - other.distanceToCollision;
+		var difference = (this.distanceToCollision > other.distanceToCollision);
+		var returnValue = (difference == 0 ? 0 : (int)( difference / Math.abs(difference) ) );
+		return returnValue;
 	}
 }

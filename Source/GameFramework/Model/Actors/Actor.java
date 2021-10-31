@@ -14,7 +14,7 @@ public class Actor implements EntityProperty
 	public Actor(Activity activity)
 	{
 		this.activity = activity;
-		this.actions = new ArrayList<ActorAction>;
+		this.actions = new ArrayList<ActorAction>();
 	}
 
 	public static Actor create()

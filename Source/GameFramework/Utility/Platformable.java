@@ -1,4 +1,4 @@
-package GameFramework.Utility.*;
+package GameFramework.Utility;
 
 import java.awt.*;
 import java.awt.event.*;

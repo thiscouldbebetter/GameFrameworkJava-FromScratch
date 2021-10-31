@@ -6,13 +6,14 @@ import java.util.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Shapes.Maps.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
 public class CollisionTracker implements EntityProperty
 {
 	public MapOfCells<CollisionTrackerMapCell> collisionMap;
 
-	private CollisionTrackerMapCell _cells[];
+	private List<CollisionTrackerMapCell> _cells;
 
 	public CollisionTracker(Coords size, Coords collisionMapSizeInCells)
 	{
@@ -27,7 +28,7 @@ public class CollisionTracker implements EntityProperty
 
 		this.collisionMap = new MapOfCells
 		(
-			CollisionTracker.name,
+			CollisionTracker.class.getName(),
 			collisionMapSizeInCells,
 			collisionMapCellSize,
 			() -> new CollisionTrackerMapCell(),
@@ -79,7 +80,8 @@ public class CollisionTracker implements EntityProperty
 					if (entityOther == entity)
 					{
 						// This shouldn't happen!
-						Debug.doNothing();
+						//Debug.doNothing();
+						throw new Exception("todo");
 					}
 					else
 					{

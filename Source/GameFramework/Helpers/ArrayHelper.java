@@ -232,6 +232,26 @@ public class ArrayHelper
 		return returnValue;
 	}
 
+	public static <T> List<T> clone(List<T> list)
+	{
+		// If the above overload doesn't catch it,
+		// it means that it's not a Clonable.
+		List<T> returnValue = null;
+
+		if (list != null)
+		{
+			returnValue = new ArrayList<T>();
+
+			for (var i = 0; i < list.size(); i++)
+			{
+				var element = list.get(i);
+				returnValue.add(element);
+			}
+		}
+
+		return returnValue;
+	}
+
 	/*
 	public static <T> List<T> flattenListOfLists(listOfLists: List<List<T>>)
 	{
@@ -276,7 +296,7 @@ public class ArrayHelper
 		return areEqualSoFar;
 	}
 
-	public static boolean <T> equals(List<T> list, List<T> other)
+	public static <T> boolean equals(List<T> list, List<T> other)
 	{
 		var areEqualSoFar = true;
 
@@ -373,6 +393,20 @@ public class ArrayHelper
 			var elementThis = list.get(i);
 			var elementOther = other.get(i);
 			elementThis.overwriteWith(elementOther);
+		}
+
+		return list;
+	}
+
+	public static <T> List<T> overwriteWith(List<T> list, List<T> other)
+	{
+		// If the above overload doesn't catch it,
+		// that means it's not a Clonable.
+		
+		for (var i = 0; i < list.size(); i++)
+		{
+			var elementOther = other.get(i);
+			this.set(i, elementOther);
 		}
 
 		return list;

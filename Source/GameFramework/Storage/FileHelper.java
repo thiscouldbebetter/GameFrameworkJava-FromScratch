@@ -3,6 +3,9 @@ package GameFramework.Storage;
 
 public class FileHelper
 {
+	public FileHelper()
+	{}
+	
 	public void loadFileAsBinaryString
 	(
 		Object systemFileToLoad, Object callback, Object contextForCallback

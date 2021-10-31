@@ -4,6 +4,7 @@ package GameFramework.Storage.TarFiles;
 import java.util.*;
 
 import GameFramework.Storage.*;
+import GameFramework.Storage.Compressor.*;
 
 public class TarFileEntry
 {
@@ -38,7 +39,7 @@ public class TarFileEntry
 		return entry;
 	}
 
-	public static TarFileEntry fromBytes(int chunkAsBytes[], ByteStream reader)
+	public static TarFileEntry fromBytes(int[] chunkAsBytes, ByteStream reader)
 	{
 		var chunkSize = TarFile.ChunkSize;
 
@@ -52,7 +53,7 @@ public class TarFileEntry
 		var intOfChunksOccupiedByDataEntry = Math.ceil
 		(
 			sizeOfDataEntryInBytesUnpadded / chunkSize
-		)
+		);
 
 		var sizeOfDataEntryInBytesPadded =
 			intOfChunksOccupiedByDataEntry
@@ -127,7 +128,7 @@ public class TarFileEntry
 		var intOfChunksOccupiedByDataEntry = Math.ceil
 		(
 			sizeOfDataEntryInBytesUnpadded / chunkSize
-		)
+		);
 
 		var sizeOfDataEntryInBytesPadded =
 			intOfChunksOccupiedByDataEntry

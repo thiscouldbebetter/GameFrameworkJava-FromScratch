@@ -6,8 +6,11 @@ import java.util.*;
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Media.*;
+import GameFramework.Model.Actors.*;
 import GameFramework.Model.Combat.*;
+import GameFramework.Model.Effects.*;
 import GameFramework.Model.Items.*;
 import GameFramework.Model.Items.Equipment.*;
 import GameFramework.Model.Mortality.*;
@@ -19,16 +22,16 @@ public class Entity //
 {
 	public int id;
 	public String name;
-	public EntityProperty[] properties;
+	public List<EntityProperty> properties;
 	public Map<String, EntityProperty> propertiesByName;
 
 	public Entity(String name, EntityProperty[] properties)
 	{
 		this.id = IDHelper.Instance().idNext();
 		this.name = name;
-		this.properties = properties;
+		this.properties = Arrays.asList(properties);
 
-		this.propertiesByName = new HashMap<String, Object>();
+		this.propertiesByName = new HashMap<String,EntityProperty>();
 		for (var i = 0; i < this.properties.length; i++)
 		{
 			var property = this.properties[i];
@@ -96,7 +99,7 @@ public class Entity //
 	)
 	{
 		ArrayHelper.remove(this.properties, propertyToRemove);
-		this.propertiesByName.delete(propertyToRemove.getClass().getName());
+		this.propertiesByName.remove(propertyToRemove.getClass().getName());
 		if (place != null)
 		{
 			var propertyName = propertyToRemove.getClass().getName();
@@ -114,10 +117,7 @@ public class Entity //
 		for (var p = 0; p < entityProperties.length; p++)
 		{
 			var property = entityProperties[p];
-			if (property.finalize != null)
-			{
-				property.finalize(uwpe);
-			}
+			property.finalize(uwpe);
 		}
 		return this;
 	}

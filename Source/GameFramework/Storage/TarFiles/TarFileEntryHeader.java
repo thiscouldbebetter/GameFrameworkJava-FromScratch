@@ -236,7 +236,7 @@ public class TarFileEntryHeader
 		var fileSizeInBytesAsStringOctal = StringHelper.padStart
 		(
 			Integer.toOctalString(this.fileSizeInBytes) + "\0", 12, "0"
-		)
+		);
 		var checksumAsStringOctal = StringHelper.padStart
 		(
 			Integer.toOctalString(this.checksum) + "\0 ", 8, "0"

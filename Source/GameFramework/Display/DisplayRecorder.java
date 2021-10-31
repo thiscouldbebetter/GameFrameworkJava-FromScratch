@@ -102,7 +102,11 @@ public class DisplayRecorder
 
 	public void framesRecordedDownload(Universe universe)
 	{
-		var universeName = String.split(universe.name, " ").join("_");
+		var universeName = String.join
+		(
+			"_",
+			universe.name.split(" ")
+		);
 		var fileNameToSaveAs = universeName + "-Recording.tar";
 
 		var framesRecordedAsTarFile = TarFile.create(fileNameToSaveAs);

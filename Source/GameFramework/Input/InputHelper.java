@@ -11,6 +11,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
+import GameFramework.Utility.*;
 
 public class InputHelper
 	extends JComponent
@@ -292,6 +293,9 @@ public class InputHelper
 	// events - mouse
 
 	public void mouseClicked(MouseEvent event)
+	{}
+
+	public void mouseDragged(MouseEvent event)
 	{}
 
 	public void mouseEntered(MouseEvent event)

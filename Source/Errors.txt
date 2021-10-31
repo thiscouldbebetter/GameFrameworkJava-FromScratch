@@ -1,338 +1,146 @@
-./GameFramework/Utility/Platformable.java:1: error: <identifier> expected
-package GameFramework.Utility.*;
-                              ^
-./GameFramework/Display/Display.java:12: error: cannot access Platformable
-public interface Display extends Platformable
-                                 ^
-  bad source file: ./GameFramework/Utility/Platformable.java
-    file does not contain class GameFramework.Utility.Platformable
-    Please remove or make sure it appears in the correct subdirectory of the sourcepath.
-./GameFramework/Input/InputHelper.java:17: error: cannot find symbol
-	implements KeyListener, MouseListener, MouseMotionListener, Platformable
-	                                                            ^
-  symbol: class Platformable
-./GameFramework/Model/Entity.java:159: error: cannot find symbol
-	public Actor actor() { return (Actor)(this.propertyByName(Actor.class.getName()) ); }
-	       ^
-  symbol:   class Actor
-  location: class Entity
-./GameFramework/Model/Entity.java:170: error: cannot find symbol
-	public Effectable effectable() { return (Effectable)this.propertyByName(Effectable.class.getName()); }
-	       ^
-  symbol:   class Effectable
-  location: class Entity
-./GameFramework/Model/Items/Equipment/Equippable.java:68: error: class, interface, or enum expected
-}
-^
-./GameFramework/Model/Physics/Locatable.java:16: error: : expected
-		this.loc = (loc != null ? loc Disposition.create() );
-		                             ^
-./GameFramework/Helpers/ArrayHelper.java:279: error: <identifier> expected
-	public static boolean <T> equals(List<T> list, List<T> other)
-	                     ^
-./GameFramework/Helpers/ArrayHelper.java:279: error: invalid method declaration; return type required
-	public static boolean <T> equals(List<T> list, List<T> other)
+./GameFramework/Profiles/Profile.java:124: error: ';' expected
+				)
+				 ^
+./GameFramework/Model/Effects/Effectable.java:34: error: ')' expected
+		);
+		 ^
+./GameFramework/Helpers/ArrayHelper.java:235: error: name clash: <T#1>clone(List<T#1>) and <T#2>clone(List<T#2>) have the same erasure
+	public static <T> List<T> clone(List<T> list)
 	                          ^
-./GameFramework/Controls/ControlBuilder.java:214: error: incompatible types: ControlContainerTransparent cannot be converted to ControlContainer
-			returnValue = new ControlContainerTransparent(returnValue);
-			              ^
-./GameFramework/Controls/ControlBuilder.java:272: error: incompatible types: int cannot be converted to Double
-					fontHeight
-					^
+  where T#1,T#2 are type-variables:
+    T#1 extends Object declared in method <T#1>clone(List<T#1>)
+    T#2 extends Clonable<T#2> declared in method <T#2>clone(List<T#2>)
+./GameFramework/Helpers/ArrayHelper.java:401: error: name clash: <T#1>overwriteWith(List<T#1>,List<T#1>) and <T#2>overwriteWith(List<T#2>,List<T#2>) have the same erasure
+	public static <T> List<T> overwriteWith(List<T> list, List<T> other)
+	                          ^
+  where T#1,T#2 are type-variables:
+    T#1 extends Object declared in method <T#1>overwriteWith(List<T#1>,List<T#1>)
+    T#2 extends Clonable<T#2> declared in method <T#2>overwriteWith(List<T#2>,List<T#2>)
 error: incompatible types: incompatible parameter types in lambda expression
-./GameFramework/Controls/ControlBuilder.java:793: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:794: error: incompatible types: incompatible parameter types in lambda expression
 						(PlaceDefn c) -> c.actionToInputsMappingSelected,
 						^
-./GameFramework/Controls/ControlBuilder.java:865: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:866: error: cannot find symbol
 						var mappingSelected = placeDefn.actionToInputsMappingSelected();
 						                               ^
   symbol:   method actionToInputsMappingSelected()
   location: variable placeDefn of type PlaceDefn
-./GameFramework/Controls/ControlBuilder.java:868: error: incompatible types: Object is not a functional interface
-							var venueInputCapture = new VenueInputCapture
-							                        ^
-./GameFramework/Controls/ControlBuilder.java:902: error: cannot find symbol
-							var mappingDefault = mappingsDefault.stream().filter
-							                                    ^
-  symbol:   method stream()
-  location: variable mappingsDefault of type ActionToInputsMapping[]
-./GameFramework/Controls/ControlBuilder.java:1278: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:869: error: incompatible types: Object is not a functional interface
+							Venue venueInputCapture = new VenueInputCapture
+							                          ^
+./GameFramework/Controls/ControlBuilder.java:909: error: cannot find symbol
+							).collect(Collectors.asList()).get(0);
+							                    ^
+  symbol:   method asList()
+  location: class Collectors
+./GameFramework/Controls/ControlBuilder.java:1282: error: incompatible types: incompatible parameter types in lambda expression
 						(SoundHelper c) -> c.musicVolume,
 						^
-./GameFramework/Controls/ControlBuilder.java:1305: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1309: error: incompatible types: incompatible parameter types in lambda expression
 						(SoundHelper c) -> c.soundVolume,
 						^
-./GameFramework/Controls/ControlBuilder.java:1329: error: incompatible types: Coords cannot be converted to DataBinding<Object,Object>
-					universe.display.sizeInPixels(), // valueSelected
-					                             ^
-./GameFramework/Controls/ControlBuilder.java:1361: error: incompatible types: Object cannot be converted to Coords
+./GameFramework/Controls/ControlBuilder.java:1333: error: cannot find symbol
+					Databinding.fromContext
+					^
+  symbol:   variable Databinding
+  location: class ControlBuilder
+./GameFramework/Controls/ControlBuilder.java:1368: error: incompatible types: Object cannot be converted to Coords
 						display.sizeInPixelsSet(displaySizeSpecified);
 						                        ^
-./GameFramework/Controls/ControlBuilder.java:1451: error: incompatible types: incompatible parameter types in lambda expression
-		Function<Integer,Venue> nextDefn = (int slideIndexNext) -> // click
-		                                   ^
-./GameFramework/Controls/ControlBuilder.java:1530: error: incompatible types: Venue cannot be converted to Runnable
-						next
-						^
-./GameFramework/Controls/ControlBuilder.java:1537: error: cannot find symbol
-					new ActorAction( ControlActionNames.Instances().ControlConfirm, (UniverseWorldPlaceEntities uwpe) -> next.run() )
-					                                                                                                         ^
-  symbol:   method run()
-  location: variable next of type Venue
-./GameFramework/Controls/ControlBuilder.java:1574: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1581: error: incompatible types: incompatible parameter types in lambda expression
 					Profile.toControlProfileSelect(universe, null, universe.venueCurrent),
 					                              ^
-./GameFramework/Controls/ControlBuilder.java:1577: error: cannot find symbol
+./GameFramework/Controls/ControlBuilder.java:1584: error: cannot find symbol
 					var venueProfileSelect = result.toVenue();
 					                               ^
   symbol:   method toVenue()
   location: variable result of type Object
-./GameFramework/Controls/ControlBuilder.java:1760: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1767: error: incompatible types: incompatible parameter types in lambda expression
 								() -> // acknowledge
 								^
-./GameFramework/Controls/ControlBuilder.java:1779: error: incompatible types: VenueVideo cannot be converted to Venue
+./GameFramework/Controls/ControlBuilder.java:1786: error: incompatible types: VenueVideo cannot be converted to Venue
 							venueNext = venueMovie;
 							            ^
-./GameFramework/Controls/ControlBuilder.java:1891: error: incompatible types: DataBinding<VenueTask,String> cannot be converted to DataBinding<Object,String>
+./GameFramework/Controls/ControlBuilder.java:1898: error: incompatible types: DataBinding<VenueTask,String> cannot be converted to DataBinding<Object,String>
 				messageAsDataBinding
 				^
-./GameFramework/Controls/ControlBuilder.java:1979: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlBuilder.java:1986: error: incompatible types: incompatible parameter types in lambda expression
 						(Profile c) -> c.saveStateSelected(),
 						                                  ^
-./GameFramework/Controls/ControlBuilder.java:2063: error: incompatible types: <null> cannot be converted to boolean
+./GameFramework/Controls/ControlBuilder.java:2070: error: incompatible types: <null> cannot be converted to boolean
 								null
 								^
-./GameFramework/Display/DisplayRecorder.java:105: error: incompatible types: String cannot be converted to int
-		var universeName = String.split(universe.name, " ").join("_");
-		                                               ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:55: error: ';' expected
-		)
-		 ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:130: error: ';' expected
-		)
-		 ^
-./GameFramework/Storage/TarFiles/TarFileEntryHeader.java:239: error: ';' expected
-		)
-		 ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:41: error: cannot find symbol
-	public static TarFileEntry fromBytes(int chunkAsBytes[], ByteStream reader)
-	                                                         ^
-  symbol:   class ByteStream
-  location: class TarFileEntry
-./GameFramework/Display/Visuals/VisualText.java:10: error: class, interface, or enum expected
-export class VisualText implements Visual
-^
+./GameFramework/Display/DisplayRecorder.java:148: error: cannot find symbol
+		var scriptAsBytes = ByteHelper.stringUTF8ToBytes(script);
+		                              ^
+  symbol:   method stringUTF8ToBytes(String)
+  location: class ByteHelper
 ./GameFramework/Display/Visuals/VisualText.java:38: error: cannot find symbol
 	public static VisualText fromTextAndColor(string text, Color colorFill)
 	                                          ^
   symbol:   class string
   location: class VisualText
-./GameFramework/Display/Visuals/VisualText.java:52: error: cannot find symbol
-		string text, Color colorFill, Color colorBorder
-		^
-  symbol:   class string
-  location: class VisualText
-./GameFramework/Model/EntityBuilder.java:15: error: cannot find symbol
-		var visual = VisualText.fromTextAndColor(text, color);
-		             ^
-  symbol:   variable VisualText
-  location: class EntityBuilder
-./GameFramework/Model/EntityBuilder.java:25: error: cannot find symbol
-				new Ephemeral(ticksToLive, null),
-				    ^
-  symbol:   class Ephemeral
-  location: class EntityBuilder
-./GameFramework/Input/InputHelper.java:15: error: InputHelper is not abstract and does not override abstract method mouseDragged(MouseEvent) in MouseMotionListener
+./GameFramework/Input/InputHelper.java:16: error: InputHelper is not abstract and does not override abstract method isKeyListener() in Platformable
 public class InputHelper
        ^
-./GameFramework/Profiles/Profile.java:121: error: incompatible types: DataBinding<VenueTask,String> cannot be converted to DataBinding<Object,String>
-					messageAsDataBinding
-					^
-./GameFramework/Profiles/Profile.java:182: error: cannot find symbol
-			var imageThumbnailAsDataUrl = imageThumbnailFromDisplay.systemImage.toDataURL();
-			                                                       ^
-  symbol:   variable systemImage
-  location: variable imageThumbnailFromDisplay of type Image2
-./GameFramework/Profiles/Profile.java:183: error: cannot infer type for local variable imageThumbnail
-			var imageThumbnail = new Image2("Snapshot", imageThumbnailAsDataUrl).unload();
-			    ^
-  (variable initializer is 'void')
-./GameFramework/Profiles/Profile.java:211: error: cannot find symbol
-					profileNames.add(profile.name);
-					            ^
-  symbol:   method add(String)
-  location: variable profileNames of type String[]
-./GameFramework/Profiles/Profile.java:222: error: incompatible types: bad return type in lambda expression
-			return wasSaveSuccessful;
-			       ^
+./GameFramework/Profiles/Profile.java:136: error: incompatible types: bad return type in lambda expression
+						return universe.storageHelper.load(saveStateNameSelected);
+						                                  ^
     unexpected return value
-./GameFramework/Profiles/Profile.java:278: error: incompatible types: Consumer<SaveState> cannot be converted to Consumer<Universe>
-				saveToLocalStorage,
-				^
-./GameFramework/Profiles/Profile.java:281: error: incompatible types: Object cannot be converted to Boolean
-					saveToLocalStorageDone.accept(result);
-					                              ^
+./GameFramework/Profiles/Profile.java:289: error: incompatible types: incompatible parameter types in lambda expression
+				(UniverseWorldPlaceEntities uwpe2) -> saveToLocalStorage.apply(null), // todo
+				                                                              ^
 error: incompatible types: bad return type in lambda expression
     unexpected return value
-./GameFramework/Profiles/Profile.java:316: error: cannot find symbol
-					new FileHelper().saveBytesToFileWithName
-					    ^
-  symbol:   class FileHelper
-  location: class Profile
-./GameFramework/Profiles/Profile.java:338: error: incompatible types: <null> cannot be converted to boolean
-						null
-						^
-./GameFramework/Profiles/Profile.java:357: error: cannot find symbol
-			var venueFileUpload = new VenueFileUpload(null, null);
-			                          ^
-  symbol:   class VenueFileUpload
-  location: class Profile
-./GameFramework/Profiles/Profile.java:364: error: incompatible types: incompatible parameter types in lambda expression
-				() -> // acknowledge
+./GameFramework/Profiles/Profile.java:417: error: incompatible types: <null> cannot be converted to boolean
+				null
 				^
-./GameFramework/Profiles/Profile.java:366: error: cannot infer type for local variable callback
-					var callback = (String fileContentsAsString) ->
-					    ^
-  (lambda expression needs an explicit target-type)
-./GameFramework/Profiles/Profile.java:413: error: incompatible types: incompatible parameter types in lambda expression
-				() -> // acknowlege
-				^
-./GameFramework/Profiles/Profile.java:502: error: incompatible types: DataBinding<Object,Boolean> cannot be converted to boolean
-					DataBinding.fromTrue(), // isTextCentered
-					                    ^
-./GameFramework/Profiles/Profile.java:544: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Profiles/Profile.java:558: error: incompatible types: incompatible parameter types in lambda expression
 						(Profile c) -> c.saveStateSelected(),
 						                                  ^
-./GameFramework/Profiles/Profile.java:568: error: incompatible types: inference variable C has incompatible equality constraints Object,Profile
+./GameFramework/Profiles/Profile.java:582: error: incompatible types: inference variable C has incompatible equality constraints Object,Profile
 				new ControlButton
 				^
   where C,V are type-variables:
     C extends Object declared in method <C,V>fromContextAndGet(C,Function<C,V>)
     V extends Object declared in method <C,V>fromContextAndGet(C,Function<C,V>)
-./GameFramework/Profiles/Profile.java:620: error: incompatible types: inference variable C has incompatible equality constraints Object,Profile
+./GameFramework/Profiles/Profile.java:634: error: incompatible types: inference variable C has incompatible equality constraints Object,Profile
 				ControlVisual.from5
 				             ^
   where C,V are type-variables:
     C extends Object declared in method <C,V>fromContextAndGet(C,Function<C,V>)
     V extends Object declared in method <C,V>fromContextAndGet(C,Function<C,V>)
-./GameFramework/Profiles/Profile.java:637: error: variable returnValue is already defined in method toControlSaveStateLoadOrSave(Universe,Coords,Venue,boolean)
-							var returnValue =
-							    ^
-./GameFramework/Profiles/Profile.java:639: error: cannot find symbol
-								saveStateImageSnapshot == null || saveStateImageSnapshot.isLoaded == false
-								                                                        ^
+./GameFramework/Profiles/Profile.java:653: error: cannot find symbol
+								(saveStateImageSnapshot == null) || saveStateImageSnapshot.isLoaded == false
+								                                                          ^
   symbol:   variable isLoaded
   location: variable saveStateImageSnapshot of type Image2
-./GameFramework/Profiles/Profile.java:697: error: variable returnValue is already defined in method toControlSaveStateLoadOrSave(Universe,Coords,Venue,boolean)
-							var returnValue =
-							    ^
-./GameFramework/Profiles/Profile.java:797: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Profiles/Profile.java:811: error: incompatible types: incompatible parameter types in lambda expression
 						(Profile c) -> c.name,
 						^
-./GameFramework/Profiles/Profile.java:817: error: cannot find symbol
-						(Profile c) -> { return c.name.length > 0; }
-						                              ^
-  symbol:   variable length
-  location: variable name of type String
-./GameFramework/Profiles/Profile.java:840: error: cannot find symbol
-						profileNames.add(profileName);
-						            ^
-  symbol:   method add(String)
-  location: variable profileNames of type Object
-./GameFramework/Profiles/Profile.java:901: error: incompatible types: Object cannot be converted to List<String>
-		List<String> profileNames = storageHelper.load("ProfileNames");
-		                                              ^
-./GameFramework/Profiles/Profile.java:907: error: cannot find symbol
-		var profiles = profileNames.map(x -> storageHelper.load(x));
-		                           ^
-  symbol:   method map((x)->stora[...]ad(x))
-  location: variable profileNames of type List<String>
-./GameFramework/Profiles/Profile.java:920: error: cannot find symbol
-			var controlRootAsContainer = (ControlContainer)(venueControls.controlRoot);
-			                                                             ^
-  symbol:   variable controlRoot
-  location: variable venueControls of type Venue
-./GameFramework/Profiles/Profile.java:920: error: illegal parenthesized expression
-			var controlRootAsContainer = (ControlContainer)(venueControls.controlRoot);
-			                                               ^
-./GameFramework/Profiles/Profile.java:946: error: method remove in class ArrayHelper cannot be applied to given types;
-			ArrayHelper.remove(profileNames2, profileSelected.name);
-			           ^
-  required: List<T>,T
-  found: Object,String
-  reason: cannot infer type-variable(s) T
-    (argument mismatch; Object cannot be converted to List<T>)
-  where T is a type-variable:
-    T extends Object declared in method <T>remove(List<T>,T)
-./GameFramework/Profiles/Profile.java:963: error: incompatible types: Runnable cannot be converted to Consumer<UniverseWorldPlaceEntities>
-					deleteProfileConfirm,
-					^
-./GameFramework/Profiles/Profile.java:1005: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Profiles/Profile.java:1022: error: incompatible types: incompatible parameter types in lambda expression
 						(Universe c) -> c.profile,
 						^
-./GameFramework/Profiles/Profile.java:1043: error: method from8 in class ControlButton cannot be applied to given types;
-				ControlButton.from8
-				             ^
-  required: String,Coords,Coords,String,double,boolean,DataBinding<T,Boolean>,Runnable
-  found: String,Coords,Coords,String,double,boolean,boolean,()->{ univ[...]e); }
-  reason: cannot infer type-variable(s) T
-    (argument mismatch; boolean cannot be converted to DataBinding<T,Boolean>)
-  where T is a type-variable:
-    T extends Object declared in method <T>from8(String,Coords,Coords,String,double,boolean,DataBinding<T,Boolean>,Runnable)
-./GameFramework/Profiles/Profile.java:1059: error: method from8 in class ControlButton cannot be applied to given types;
-				ControlButton.from8
-				             ^
-  required: String,Coords,Coords,String,double,boolean,DataBinding<T,Boolean>,Runnable
-  found: String,Coords,Coords,String,double,boolean,boolean,Runnable
-  reason: cannot infer type-variable(s) T
-    (argument mismatch; boolean cannot be converted to DataBinding<T,Boolean>)
-  where T is a type-variable:
-    T extends Object declared in method <T>from8(String,Coords,Coords,String,double,boolean,DataBinding<T,Boolean>,Runnable)
-./GameFramework/Profiles/Profile.java:1103: error: incompatible types: DataBinding<VenueTask,String> cannot be converted to DataBinding<Object,String>
+./GameFramework/Profiles/Profile.java:1120: error: incompatible types: DataBinding<VenueTask,String> cannot be converted to DataBinding<Object,String>
 			VenueMessage.fromMessage(messageAsDataBinding);
 			                         ^
-./GameFramework/Input/ActionToInputsMapping.java:53: error: no suitable method found for clone(List<String>)
-			ArrayHelper.clone(this.inputNames),
-			           ^
-    method ArrayHelper.clone(double[]) is not applicable
-      (argument mismatch; List<String> cannot be converted to double[])
-    method ArrayHelper.<T#1>clone(T#1[]) is not applicable
-      (cannot infer type-variable(s) T#1
-        (argument mismatch; List<String> cannot be converted to T#1[]))
-    method ArrayHelper.<T#2>clone(List<T#2>) is not applicable
-      (inference variable T#2 has incompatible bounds
-        equality constraints: String
-        lower bounds: Clonable<T#2>)
-  where T#1,T#2 are type-variables:
-    T#1 extends Clonable<T#1> declared in method <T#1>clone(T#1[])
-    T#2 extends Clonable<T#2> declared in method <T#2>clone(List<T#2>)
-./GameFramework/Input/ActionToInputsMapping.java:61: error: no suitable method found for overwriteWith(List<String>,List<String>)
-		ArrayHelper.overwriteWith(this.inputNames, other.inputNames);
-		           ^
-    method ArrayHelper.overwriteWith(double[],double[]) is not applicable
-      (argument mismatch; List<String> cannot be converted to double[])
-    method ArrayHelper.<T#1>overwriteWith(T#1[],T#1[]) is not applicable
-      (cannot infer type-variable(s) T#1
-        (argument mismatch; List<String> cannot be converted to T#1[]))
-    method ArrayHelper.<T#2>overwriteWith(List<T#2>,List<T#2>) is not applicable
-      (inference variable T#2 has incompatible bounds
-        equality constraints: String
-        lower bounds: Clonable<T#2>)
-  where T#1,T#2 are type-variables:
-    T#1 extends Clonable<T#1> declared in method <T#1>overwriteWith(T#1[],T#1[])
-    T#2 extends Clonable<T#2> declared in method <T#2>overwriteWith(List<T#2>,List<T#2>)
+./GameFramework/Input/ActionToInputsMapping.java:50: error: incompatible types: no instance(s) of type variable(s) T exist so that List<T> conforms to String[]
+		return new ActionToInputsMapping
+		       ^
+  where T is a type-variable:
+    T extends Object declared in method <T>clone(List<T>)
 ./GameFramework/Controls/VenueControls.java:40: error: incompatible types: String cannot be converted to Input
 				returnValues.add(inputNameForGamepad);
 				                 ^
 ./GameFramework/Controls/VenueControls.java:43: error: incompatible types: bad return type in lambda expression
 			return returnValues;
 			       ^
-    ArrayList<Input> cannot be converted to String[]
+    ArrayList<Input> cannot be converted to List<String>
 ./GameFramework/Controls/VenueControls.java:55: error: method addMany in class ArrayHelper cannot be applied to given types;
 				ArrayHelper.addMany(
 				           ^
   required: List<T>,List<U>
-  found: String[],String[]
+  found: String[],List<String>
   reason: cannot infer type-variable(s) T,U
     (argument mismatch; String[] cannot be converted to List<T>)
   where T,U are type-variables:
@@ -347,7 +155,7 @@ error: incompatible types: bad return type in lambda expression
 					ArrayHelper.addMany
 					           ^
   required: List<T>,List<U>
-  found: String[],String[]
+  found: String[],List<String>
   reason: cannot infer type-variable(s) T,U
     (argument mismatch; String[] cannot be converted to List<T>)
   where T,U are type-variables:
@@ -357,41 +165,29 @@ error: incompatible types: bad return type in lambda expression
 				ArrayHelper.addMany
 				           ^
   required: List<T>,List<U>
-  found: String[],String[]
+  found: String[],List<String>
   reason: cannot infer type-variable(s) T,U
     (argument mismatch; String[] cannot be converted to List<T>)
   where T,U are type-variables:
     T extends Object declared in method <T,U>addMany(List<T>,List<U>)
     U extends T declared in method <T,U>addMany(List<T>,List<U>)
-./GameFramework/Controls/VenueControls.java:98: error: method addMany in class ArrayHelper cannot be applied to given types;
-				ArrayHelper.addMany
-				           ^
-  required: List<T>,List<U>
-  found: String[],String[]
-  reason: cannot infer type-variable(s) T,U
-    (argument mismatch; String[] cannot be converted to List<T>)
-  where T,U are type-variables:
-    T extends Object declared in method <T,U>addMany(List<T>,List<U>)
-    U extends T declared in method <T,U>addMany(List<T>,List<U>)
+./GameFramework/Controls/VenueControls.java:95: error: incompatible types: no instance(s) of type variable(s) T#1,U,T#2 exist so that List<T#1> conforms to String[]
+			new ActionToInputsMapping
+			^
+  where T#1,U,T#2 are type-variables:
+    T#1 extends Object declared in method <T#1,U>addMany(List<T#1>,List<U>)
+    U extends T#1 declared in method <T#1,U>addMany(List<T#1>,List<U>)
+    T#2 extends Object declared in method <T#2>asList(T#2...)
 ./GameFramework/Controls/VenueControls.java:108: error: method addMany in class ArrayHelper cannot be applied to given types;
 				ArrayHelper.addMany
 				           ^
   required: List<T>,List<U>
-  found: String[],String[]
+  found: String[],List<String>
   reason: cannot infer type-variable(s) T,U
     (argument mismatch; String[] cannot be converted to List<T>)
   where T,U are type-variables:
     T extends Object declared in method <T,U>addMany(List<T>,List<U>)
     U extends T declared in method <T,U>addMany(List<T>,List<U>)
-./GameFramework/Controls/VenueControls.java:50: error: no suitable constructor found for ArrayList(ActionToInputsMapping,ActionToInputsMapping,ActionToInputsMapping,ActionToInputsMapping,ActionToInputsMapping,ActionToInputsMapping)
-		this.actionToInputsMappings = new ArrayList<ActionToInputsMapping>
-		                              ^
-    constructor ArrayList.ArrayList(int) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ArrayList.ArrayList() is not applicable
-      (actual and formal argument lists differ in length)
-    constructor ArrayList.ArrayList(Collection<? extends ActionToInputsMapping>) is not applicable
-      (actual and formal argument lists differ in length)
 ./GameFramework/Controls/VenueControls.java:119: error: method clear in class ArrayHelper cannot be applied to given types;
 			ArrayHelper.clear(this.actionToInputsMappings);
 			           ^
@@ -416,6 +212,22 @@ error: incompatible types: bad return type in lambda expression
   where E,K are type-variables:
     E extends Object declared in method <K,E>addLookupsMultiple(List<E>,Function<E,K[]>)
     K extends Object declared in method <K,E>addLookupsMultiple(List<E>,Function<E,K[]>)
+./GameFramework/Model/Places/Place.java:150: error: cannot find symbol
+		for (var p = 0; p < entityProperties.length; p++)
+		                                    ^
+  symbol:   variable length
+  location: variable entityProperties of type List<EntityProperty>
+./GameFramework/Model/Places/Place.java:152: error: array required, but List<EntityProperty> found
+			var property = entityProperties[p];
+			                               ^
+./GameFramework/Model/Places/Place.java:184: error: cannot find symbol
+		for (var i = 0; i < entityProperties.length; i++)
+		                                    ^
+  symbol:   variable length
+  location: variable entityProperties of type List<EntityProperty>
+./GameFramework/Model/Places/Place.java:186: error: array required, but List<EntityProperty> found
+			var property = entityProperties[i];
+			                               ^
 ./GameFramework/Model/Places/Place.java:349: error: cannot find symbol
 		return this.entitiesByPropertyName(Movable.class.getName());
 		                                   ^
@@ -426,59 +238,56 @@ error: incompatible types: bad return type in lambda expression
 		                                   ^
   symbol:   class Usable
   location: class Place
-./GameFramework/Model/Entity.java:31: error: incompatible types: HashMap<String,Object> cannot be converted to Map<String,EntityProperty>
-		this.propertiesByName = new HashMap<String, Object>();
-		                        ^
-./GameFramework/Model/Entity.java:71: error: cannot find symbol
-		this.properties.add(propertyToAdd);
-		               ^
-  symbol:   method add(EntityProperty)
-  location: variable properties of type EntityProperty[]
-./GameFramework/Model/Entity.java:98: error: cannot find symbol
-		ArrayHelper.remove(this.properties, propertyToRemove);
-		^
-  symbol:   variable ArrayHelper
-  location: class Entity
-./GameFramework/Model/Entity.java:99: error: cannot find symbol
-		this.propertiesByName.delete(propertyToRemove.getClass().getName());
-		                     ^
-  symbol:   method delete(String)
-  location: variable propertiesByName of type Map<String,EntityProperty>
-./GameFramework/Model/Entity.java:104: error: cannot find symbol
-			ArrayHelper.remove(entitiesWithProperty, this);
-			^
-  symbol:   variable ArrayHelper
-  location: class Entity
+./GameFramework/Model/Entity.java:35: error: cannot find symbol
+		for (var i = 0; i < this.properties.length; i++)
+		                                   ^
+  symbol:   variable length
+  location: variable properties of type List<EntityProperty>
+./GameFramework/Model/Entity.java:37: error: array required, but List<EntityProperty> found
+			var property = this.properties[i];
+			                              ^
+./GameFramework/Model/Entity.java:47: error: cannot find symbol
+		for (var p = 0; p < entityProperties.length; p++)
+		                                    ^
+  symbol:   variable length
+  location: variable entityProperties of type List<EntityProperty>
+./GameFramework/Model/Entity.java:49: error: array required, but List<EntityProperty> found
+			var property = entityProperties[p];
+			                               ^
+./GameFramework/Model/Entity.java:59: error: cannot find symbol
+		for (var p = 0; p < entityProperties.length; p++)
+		                                    ^
+  symbol:   variable length
+  location: variable entityProperties of type List<EntityProperty>
+./GameFramework/Model/Entity.java:61: error: array required, but List<EntityProperty> found
+			var property = entityProperties[p];
+			                               ^
 ./GameFramework/Model/Entity.java:117: error: cannot find symbol
-			if (property.finalize != null)
-			            ^
-  symbol:   variable finalize
-  location: variable property of type EntityProperty
+		for (var p = 0; p < entityProperties.length; p++)
+		                                    ^
+  symbol:   variable length
+  location: variable entityProperties of type List<EntityProperty>
+./GameFramework/Model/Entity.java:119: error: array required, but List<EntityProperty> found
+			var property = entityProperties[p];
+			                               ^
+./GameFramework/Model/Entity.java:130: error: cannot find symbol
+		var propertiesCloned = new EntityProperty[this.properties.length];
+		                                                         ^
+  symbol:   variable length
+  location: variable properties of type List<EntityProperty>
+./GameFramework/Model/Entity.java:131: error: cannot find symbol
+		for (var i = 0; i < this.properties.length; i++)
+		                                   ^
+  symbol:   variable length
+  location: variable properties of type List<EntityProperty>
+./GameFramework/Model/Entity.java:133: error: array required, but List<EntityProperty> found
+			var property = this.properties[i];
+			                              ^
 ./GameFramework/Model/Entity.java:149: error: cannot find symbol
 			ArrayHelper.areEqual(this.properties, other.properties);
-			^
-  symbol:   variable ArrayHelper
-  location: class Entity
-./GameFramework/Model/Entity.java:159: error: cannot find symbol
-	public Actor actor() { return (Actor)(this.propertyByName(Actor.class.getName()) ); }
-	                               ^
-  symbol:   class Actor
-  location: class Entity
-./GameFramework/Model/Entity.java:159: error: cannot find symbol
-	public Actor actor() { return (Actor)(this.propertyByName(Actor.class.getName()) ); }
-	                                                          ^
-  symbol:   class Actor
-  location: class Entity
-./GameFramework/Model/Entity.java:170: error: cannot find symbol
-	public Effectable effectable() { return (Effectable)this.propertyByName(Effectable.class.getName()); }
-	                                         ^
-  symbol:   class Effectable
-  location: class Entity
-./GameFramework/Model/Entity.java:170: error: cannot find symbol
-	public Effectable effectable() { return (Effectable)this.propertyByName(Effectable.class.getName()); }
-	                                                                        ^
-  symbol:   class Effectable
-  location: class Entity
+			           ^
+  symbol:   method areEqual(List<EntityProperty>,List<EntityProperty>)
+  location: class ArrayHelper
 ./GameFramework/Model/Places/PlaceDefn.java:50: error: method addLookupsMultiple in class ArrayHelper cannot be applied to given types;
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		                                                    ^
@@ -491,11 +300,6 @@ error: incompatible types: bad return type in lambda expression
     E extends Object declared in method <K,E>addLookupsMultiple(List<E>,Function<E,K[]>)
     K extends Object declared in method <K,E>addLookupsMultiple(List<E>,Function<E,K[]>)
     T extends Object declared in method <T>asList(T...)
-./GameFramework/Model/Places/PlaceDefn.java:63: error: cannot find symbol
-			new ActionToInputMapping[] {}, // actionToInputsMappings,
-			    ^
-  symbol:   class ActionToInputMapping
-  location: class PlaceDefn
 ./GameFramework/Model/Places/PlaceDefn.java:114: error: method addLookupsMultiple in class ArrayHelper cannot be applied to given types;
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		                                                    ^
@@ -508,31 +312,16 @@ error: incompatible types: bad return type in lambda expression
     E extends Object declared in method <K,E>addLookupsMultiple(List<E>,Function<E,K[]>)
     K extends Object declared in method <K,E>addLookupsMultiple(List<E>,Function<E,K[]>)
     T extends Object declared in method <T>asList(T...)
-./GameFramework/Geometry/Collisions/CollisionTracker.java:11: error: CollisionTracker is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+./GameFramework/Geometry/Collisions/CollisionTracker.java:12: error: CollisionTracker is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
 public class CollisionTracker implements EntityProperty
        ^
-./GameFramework/Geometry/Collisions/CollisionTracker.java:30: error: cannot find symbol
-			CollisionTracker.name,
-			                ^
-  symbol:   variable name
-  location: class CollisionTracker
-./GameFramework/Geometry/Collisions/CollisionTracker.java:38: error: incompatible types: ArrayList<CollisionTrackerMapCell> cannot be converted to CollisionTrackerMapCell[]
-		this._cells = new ArrayList<CollisionTrackerMapCell>();
-		              ^
-./GameFramework/Geometry/Collisions/CollisionTracker.java:61: error: cannot find symbol
+./GameFramework/Geometry/Collisions/CollisionTracker.java:62: error: incompatible types: ShapeBase cannot be converted to Box
 			entityBounds, ArrayHelper.clear(this._cells)
-			              ^
-  symbol:   variable ArrayHelper
-  location: class CollisionTracker
-./GameFramework/Geometry/Collisions/CollisionTracker.java:64: error: _collisionTrackerMapCellsOccupied has private access in Collidable
+			^
+./GameFramework/Geometry/Collisions/CollisionTracker.java:65: error: _collisionTrackerMapCellsOccupied has private access in Collidable
 		entityCollidable._collisionTrackerMapCellsOccupied.addAll
 		                ^
-./GameFramework/Geometry/Collisions/CollisionTracker.java:82: error: cannot find symbol
-						Debug.doNothing();
-						^
-  symbol:   variable Debug
-  location: class CollisionTracker
-./GameFramework/Geometry/Collisions/CollisionTracker.java:125: error: cellSource has private access in MapOfCells
+./GameFramework/Geometry/Collisions/CollisionTracker.java:127: error: cellSource has private access in MapOfCells
 		var cellsAll = (CollisionTrackerMapCell[])this.collisionMap.cellSource;
 		                                                           ^
 ./GameFramework/Geometry/Shapes/Maps/MapOfCells.java:50: error: incompatible types: bad type in conditional expression
@@ -567,50 +356,44 @@ public class CollisionTracker implements EntityProperty
 ./GameFramework/Geometry/Shapes/Maps/MapOfCells.java:102: error: array required, but Clonable found
 			this.cellSource[cellIndex] = cell;
 			               ^
-./GameFramework/Geometry/Collisions/Collision.java:12: error: Collision is not abstract and does not override abstract method compareTo(Collision) in Comparable
-public class Collision implements Comparable<Collision>
-       ^
-./GameFramework/Geometry/Collisions/Collision.java:114: error: compareTo(Collision) in Collision cannot implement compareTo(T) in Comparable
-	public double compareTo(Collision other)
-	              ^
-  return type double is not compatible with int
-  where T is a type-variable:
-    T extends Object declared in interface Comparable
-./GameFramework/Geometry/Collisions/Collision.java:54: error: incompatible types: int cannot be converted to Double
-			Coords.create(), 0, new ArrayList<ShapeBase>(), new ArrayList<Entity>()
-			                 ^
-./GameFramework/Geometry/Collisions/Collision.java:86: error: method equals in class ArrayHelper cannot be applied to given types;
-					&& ArrayHelper.equals(this.colliders, other.colliders)
-					              ^
-  required: T[],T[]
-  found: List<ShapeBase>,List<ShapeBase>
-  reason: cannot infer type-variable(s) T
-    (argument mismatch; List<ShapeBase> cannot be converted to T[])
-  where T is a type-variable:
-    T extends Object declared in method <T>equals(T[],T[])
-./GameFramework/Geometry/Shapes/Box.java:10: error: Box is not abstract and does not override abstract method overwriteWith(ShapeBase) in Clonable
-public class Box implements ShapeBase
-       ^
-./GameFramework/Geometry/Shapes/Box.java:410: error: incompatible types: double cannot be converted to Integer
-					displacementDimensionOverSizeHalfAbsolute;
-					^
-./GameFramework/Model/Actors/ActorAction.java:10: error: ActorAction is not abstract and does not override abstract method name() in Namable
-public class ActorAction implements Namable
-       ^
-./GameFramework/Model/Actors/ActorAction.java:27: error: cannot find symbol
-		this._perform(uwpe);
-		    ^
-  symbol: method _perform(UniverseWorldPlaceEntities)
-./GameFramework/Model/Actors/ActorAction.java:71: error: method toControl in class Controllable cannot be applied to given types;
+./GameFramework/Geometry/Collisions/Collision.java:117: error: incomparable types: boolean and int
+		var returnValue = (difference == 0 ? 0 : (int)( difference / Math.abs(difference) ) );
+		                              ^
+./GameFramework/Geometry/Collisions/Collision.java:117: error: no suitable method found for abs(boolean)
+		var returnValue = (difference == 0 ? 0 : (int)( difference / Math.abs(difference) ) );
+		                                                                 ^
+    method Math.abs(int) is not applicable
+      (argument mismatch; boolean cannot be converted to int)
+    method Math.abs(long) is not applicable
+      (argument mismatch; boolean cannot be converted to long)
+    method Math.abs(float) is not applicable
+      (argument mismatch; boolean cannot be converted to float)
+    method Math.abs(double) is not applicable
+      (argument mismatch; boolean cannot be converted to double)
+./GameFramework/Geometry/Shapes/Box.java:452: error: incompatible types: ShapeBase cannot be converted to Box
+		return boxOut.overwriteWith(this);
+		                           ^
+./GameFramework/Model/Actors/ActorAction.java:79: error: method toControl in class Controllable cannot be applied to given types;
 				var control = actor.controllable().toControl
 				                                  ^
   required: UniverseWorldPlaceEntities
   found: Universe,Coords,Entity,Venue,boolean
   reason: actual and formal argument lists differ in length
-./GameFramework/Model/Actors/ActorAction.java:108: error: cannot find symbol
-		return this._name;
-		           ^
-  symbol: variable _name
+./GameFramework/Model/Actors/Actor.java:8: error: Actor is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Actor implements EntityProperty
+       ^
+./GameFramework/Model/Actors/Actor.java:47: error: clone() in Actor cannot implement clone() in Clonable
+	public void clone()
+	            ^
+  return type void is not compatible with EntityProperty
+  where T is a type-variable:
+    T extends Object declared in interface Clonable
+./GameFramework/Model/Actors/Actor.java:49: error: incompatible types: unexpected return value
+		return new Actor(this.activity.clone());
+		       ^
+./GameFramework/Model/Actors/Actor.java:55: error: incompatible types: unexpected return value
+		return this;
+		       ^
 ./GameFramework/Media/Audible.java:6: error: Audible is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
 public class Audible implements EntityProperty
        ^
@@ -645,15 +428,15 @@ public class Camera implements EntityProperty
 ./GameFramework/Model/Physics/Collidable.java:13: error: Collidable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
 public class Collidable implements EntityProperty
        ^
-./GameFramework/Model/Physics/Collidable.java:210: error: cannot find symbol
+./GameFramework/Model/Physics/Collidable.java:218: error: cannot find symbol
 				this.entityPropertyNamesToCollideWith.anyMatch
 				                                     ^
   symbol:   method anyMatch((propertyN[...] null)
   location: variable entityPropertyNamesToCollideWith of type String[]
-./GameFramework/Model/Physics/Collidable.java:213: error: array required, but List<Entity> found
+./GameFramework/Model/Physics/Collidable.java:221: error: array required, but List<Entity> found
 						collision.entitiesColliding[1].propertyByName(propertyName) != null
 						                           ^
-./GameFramework/Model/Physics/Collidable.java:215: error: cannot find symbol
+./GameFramework/Model/Physics/Collidable.java:223: error: cannot find symbol
 		).toList();
 		 ^
   symbol:   method toList()
@@ -664,6 +447,24 @@ public class Controllable implements EntityProperty
 ./GameFramework/Display/Drawable.java:8: error: Drawable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
 public class Drawable implements EntityProperty
        ^
+./GameFramework/Model/Effects/Effectable.java:10: error: Effectable is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Effectable implements EntityProperty
+       ^
+./GameFramework/Model/Effects/Effectable.java:21: error: cannot find symbol
+		this.effects.push(effectToAdd);
+		            ^
+  symbol:   method push(Effect)
+  location: variable effects of type List<Effect>
+./GameFramework/Model/Effects/Effectable.java:30: error: incompatible types: inference variable R has incompatible bounds
+			: new VisualGroup
+			  ^
+    equality constraints: List<T#2>
+    lower bounds: Visual[],Object
+  where R,A,T#1,T#2 are type-variables:
+    R extends Object declared in method <R,A>collect(Collector<? super T#1,A,R>)
+    A extends Object declared in method <R,A>collect(Collector<? super T#1,A,R>)
+    T#1 extends Object declared in interface Stream
+    T#2 extends Object declared in method <T#2>toList()
 ./GameFramework/Model/Items/Equipment/EquipmentUser.java:13: error: EquipmentUser is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
 public class EquipmentUser implements EntityProperty
        ^
@@ -868,408 +669,399 @@ public class ItemDefn implements EntityProperty
 ./GameFramework/Model/Items/ItemDefn.java:54: error: incompatible types: <null> cannot be converted to double
 			name, null, null, null, null, null, null, null, null, null
 			                  ^
-./GameFramework/Model/Items/ItemHolder.java:13: error: ItemHolder is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+./GameFramework/Model/Items/ItemHolder.java:14: error: ItemHolder is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
 public class ItemHolder implements EntityProperty
        ^
-./GameFramework/Model/Items/ItemHolder.java:48: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:49: error: cannot find symbol
 		this.items.length = 0;
 		          ^
   symbol:   variable length
   location: variable items of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:83: error: incompatible types: Object cannot be converted to String
+./GameFramework/Model/Items/ItemHolder.java:84: error: incompatible types: Object cannot be converted to String
 			this.statusMessage = message;
 			                     ^
-./GameFramework/Model/Items/ItemHolder.java:107: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:108: error: cannot find symbol
 		return this.items.stream().map(x -> x.toEntity(uwpe)).toList();
 		                                                     ^
   symbol:   method toList()
   location: interface Stream<Entity>
-./GameFramework/Model/Items/ItemHolder.java:112: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:113: error: cannot find symbol
 		itemsToAdd.forEach( (Item x) -> this.itemAdd(x));
 		          ^
   symbol:   method forEach((Item x)->[...]dd(x))
   location: variable itemsToAdd of type Item[]
-./GameFramework/Model/Items/ItemHolder.java:117: error: incompatible types: List<Item> cannot be converted to Item[]
+./GameFramework/Model/Items/ItemHolder.java:118: error: incompatible types: List<Item> cannot be converted to Item[]
 		this.itemsTransferTo(this.items, other);
 		                         ^
-./GameFramework/Model/Items/ItemHolder.java:125: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:126: error: cannot find symbol
 		).toList();
 		 ^
   symbol:   method toList()
   location: interface Stream<Item>
-./GameFramework/Model/Items/ItemHolder.java:130: error: incomparable types: Item[] and List<Item>
+./GameFramework/Model/Items/ItemHolder.java:131: error: incomparable types: Item[] and List<Item>
 		if (itemsToTransfer == this.items)
 		                    ^
-./GameFramework/Model/Items/ItemHolder.java:133: error: incompatible types: ArrayList<Item> cannot be converted to Item[]
+./GameFramework/Model/Items/ItemHolder.java:134: error: incompatible types: ArrayList<Item> cannot be converted to Item[]
 			itemsToTransfer = new ArrayList<Item>();
 			                  ^
-./GameFramework/Model/Items/ItemHolder.java:134: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:135: error: cannot find symbol
 			itemsToTransfer.addAll(this.items);
 			               ^
   symbol:   method addAll(List<Item>)
   location: variable itemsToTransfer of type Item[]
-./GameFramework/Model/Items/ItemHolder.java:146: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:147: error: cannot find symbol
 		var itemsMatching = this.items.filter
 		                              ^
   symbol:   method filter((x)->x.def[...]nName)
   location: variable items of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:157: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:158: error: cannot find symbol
 				ArrayHelper.remove(this.items, itemToJoin);
 				^
   symbol:   variable ArrayHelper
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:184: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:185: error: cannot find symbol
 		var entityItemClosest = entityItemsInPlace.filter
 		                                          ^
   symbol:   method filter((x)->x.loc[...]adius)
   location: variable entityItemsInPlace of type List<Entity>
-./GameFramework/Model/Items/ItemHolder.java:227: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:228: error: cannot find symbol
 			ArrayHelper.remove(this.items, itemToRemove);
 			^
   symbol:   variable ArrayHelper
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:233: error: cannot infer type for local variable itemSplitted
+./GameFramework/Model/Items/ItemHolder.java:234: error: cannot infer type for local variable itemSplitted
 		var itemSplitted = null;
 		    ^
   (variable initializer is 'null')
-./GameFramework/Model/Items/ItemHolder.java:242: error: bad operand types for binary operator '||'
+./GameFramework/Model/Items/ItemHolder.java:243: error: bad operand types for binary operator '||'
 				quantityToSplit || Math.floor(itemToSplit.quantity / 2);
 				                ^
   first type:  double
   second type: double
-./GameFramework/Model/Items/ItemHolder.java:254: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:255: error: cannot find symbol
 				ArrayHelper.insertElementAfterOther
 				^
   symbol:   variable ArrayHelper
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:267: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:268: error: cannot find symbol
 		ArrayHelper.remove(this.items, item);
 		^
   symbol:   variable ArrayHelper
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:282: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:283: error: cannot find symbol
 		return this.itemsByDefnName(defnName).map
 		                                     ^
   symbol:   method map((y)->y.quantity)
   location: interface List<Item>
-./GameFramework/Model/Items/ItemHolder.java:305: error: array required, but List<Item> found
+./GameFramework/Model/Items/ItemHolder.java:306: error: array required, but List<Item> found
 		var itemExisting = this.itemsByDefnName(itemDefnName)[0];
 		                                                     ^
-./GameFramework/Model/Items/ItemHolder.java:311: error: array required, but List<Item> found
+./GameFramework/Model/Items/ItemHolder.java:312: error: array required, but List<Item> found
 				var itemExisting = this.itemsByDefnName(itemDefnName)[0];
 				                                                     ^
-./GameFramework/Model/Items/ItemHolder.java:312: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:313: error: cannot find symbol
 				ArrayHelper.remove(this.items, itemExisting);
 				^
   symbol:   variable ArrayHelper
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:340: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:341: error: cannot find symbol
 		var massTotal = this.items.reduce
 		                          ^
   symbol:   method reduce((sumSoFar,[...]orld),int)
   location: variable items of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:356: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:357: error: cannot find symbol
 		var tradeValueTotal = this.items.reduce
 		                                ^
   symbol:   method reduce((sumSoFar,[...]orld),int)
   location: variable items of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:404: error: cannot find symbol
-			venueNext = VenueFader.fromVenuesToAndFrom
-			            ^
-  symbol:   variable VenueFader
-  location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:420: error: variable world is already defined in method toControl(Universe,Coords,Entity,Venue,boolean)
+./GameFramework/Model/Items/ItemHolder.java:421: error: variable world is already defined in method toControl(Universe,Coords,Entity,Venue,boolean)
 				var world = universe.world;
 				    ^
-./GameFramework/Model/Items/ItemHolder.java:431: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:432: error: cannot find symbol
 					itemLocatable = Locatable.create();
 					                ^
   symbol:   variable Locatable
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:435: error: cannot find symbol
-						Drawable.fromVisual(itemToDropDefn.visual)
-						^
-  symbol:   variable Drawable
-  location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:487: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:488: error: cannot find symbol
 				if (itemToUse.use != null)
 				             ^
   symbol:   variable use
   location: variable itemToUse of type Item
-./GameFramework/Model/Items/ItemHolder.java:490: error: incompatible types: Object cannot be converted to String
+./GameFramework/Model/Items/ItemHolder.java:491: error: incompatible types: Object cannot be converted to String
 						itemToUse.use(uwpe);
 						             ^
-./GameFramework/Model/Items/ItemHolder.java:506: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:507: error: cannot find symbol
 				itemsAll.splice(index, 1);
 				        ^
   symbol:   method splice(int,int)
   location: variable itemsAll of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:507: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:508: error: cannot find symbol
 				itemsAll.splice(index - 1, 0, itemToMove);
 				        ^
   symbol:   method splice(int,int,Item)
   location: variable itemsAll of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:516: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:517: error: cannot find symbol
 			if (index < itemsAll.length - 1)
 			                    ^
   symbol:   variable length
   location: variable itemsAll of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:518: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:519: error: cannot find symbol
 				itemsAll.splice(index, 1);
 				        ^
   symbol:   method splice(int,int)
   location: variable itemsAll of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:519: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:520: error: cannot find symbol
 				itemsAll.splice(index + 1, 0, itemToMove);
 				        ^
   symbol:   method splice(int,int,Item)
   location: variable itemsAll of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:523: error: variable uwpe is already defined in method toControl(Universe,Coords,Entity,Venue,boolean)
+./GameFramework/Model/Items/ItemHolder.java:524: error: variable uwpe is already defined in method toControl(Universe,Coords,Entity,Venue,boolean)
 		Runnable split = (UniverseWorldPlaceEntities uwpe) ->
 		                                             ^
-./GameFramework/Model/Items/ItemHolder.java:525: error: incompatible types: <null> cannot be converted to double
+./GameFramework/Model/Items/ItemHolder.java:526: error: incompatible types: <null> cannot be converted to double
 			itemHolder.itemSplit(itemHolder.itemSelected, null);
 			                                              ^
-./GameFramework/Model/Items/ItemHolder.java:523: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Model/Items/ItemHolder.java:524: error: incompatible types: incompatible parameter types in lambda expression
 		Runnable split = (UniverseWorldPlaceEntities uwpe) ->
 		                 ^
-./GameFramework/Model/Items/ItemHolder.java:540: error: bad operand types for binary operator '>'
+./GameFramework/Model/Items/ItemHolder.java:541: error: bad operand types for binary operator '>'
 				(x, y) -> (x.defnName > y.defnName ? 1 : -1)
 				                      ^
   first type:  String
   second type: String
-./GameFramework/Model/Items/ItemHolder.java:545: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:546: error: cannot find symbol
 		var visualNone = new VisualNone();
 		                     ^
   symbol:   class VisualNone
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:595: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Model/Items/ItemHolder.java:596: error: incompatible types: incompatible parameter types in lambda expression
 					(ItemHolder c) -> c.itemSelected,
 					^
-./GameFramework/Model/Items/ItemHolder.java:657: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:658: error: cannot find symbol
 							&& c.items.indexOf(c.itemSelected) < c.items.length - 1
 							                                            ^
   symbol:   variable length
   location: variable items of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:705: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:706: error: cannot find symbol
 							c.items.filter
 							       ^
   symbol:   method filter((Item x)->[...]nName)
   location: variable items of type List<Item>
-./GameFramework/Model/Items/ItemHolder.java:725: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:726: error: cannot find symbol
 					(ItemHolder c) -> (c.itemEntities.length > 1)
 					                    ^
   symbol:   variable itemEntities
   location: variable c of type ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:772: error: cannot find symbol
-				Color.byName("Black") // colorBackground
-				^
-  symbol:   variable Color
-  location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:832: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:759: error: incompatible types: inference variable C has incompatible equality constraints Object,ItemHolder
+			ControlVisual.from5
+			             ^
+  where C,V are type-variables:
+    C extends Object declared in method <C,V>fromContextAndGet(C,Function<C,V>)
+    V extends Object declared in method <C,V>fromContextAndGet(C,Function<C,V>)
+./GameFramework/Model/Items/ItemHolder.java:833: error: cannot find symbol
 			new ActorAction[]
 			    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:834: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:835: error: cannot find symbol
 				new ActorAction("Back", back),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:836: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:837: error: cannot find symbol
 				new ActorAction("Up", up),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:837: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:838: error: cannot find symbol
 				new ActorAction("Down", down),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:838: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:839: error: cannot find symbol
 				new ActorAction("Split", split),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:839: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:840: error: cannot find symbol
 				new ActorAction("Join", join),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:840: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:841: error: cannot find symbol
 				new ActorAction("Sort", sort),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:841: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:842: error: cannot find symbol
 				new ActorAction("Drop", drop),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:842: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:843: error: cannot find symbol
 				new ActorAction("Use", use),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:844: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:845: error: cannot find symbol
 				new ActorAction("Item0", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, null) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:844: error: incompatible types: <null> cannot be converted to double
+./GameFramework/Model/Items/ItemHolder.java:845: error: incompatible types: <null> cannot be converted to double
 				new ActorAction("Item0", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, null) ),
 				                                                                                              ^
-./GameFramework/Model/Items/ItemHolder.java:845: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:846: error: cannot find symbol
 				new ActorAction("Item1", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 1) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:846: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:847: error: cannot find symbol
 				new ActorAction("Item2", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 2) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:847: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:848: error: cannot find symbol
 				new ActorAction("Item3", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 3) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:848: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:849: error: cannot find symbol
 				new ActorAction("Item4", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 4) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:849: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:850: error: cannot find symbol
 				new ActorAction("Item5", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 5) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:850: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:851: error: cannot find symbol
 				new ActorAction("Item6", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 6) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:851: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:852: error: cannot find symbol
 				new ActorAction("Item7", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 7) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:852: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:853: error: cannot find symbol
 				new ActorAction("Item8", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 8) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:853: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:854: error: cannot find symbol
 				new ActorAction("Item9", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 9) ),
 				    ^
   symbol:   class ActorAction
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:856: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:857: error: cannot find symbol
 			new ActionToInputsMapping[]
 			    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:858: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:859: error: cannot find symbol
 				new ActionToInputsMapping( "Back", new String[] { Input.Names().Escape }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:858: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:859: error: cannot find symbol
 				new ActionToInputsMapping( "Back", new String[] { Input.Names().Escape }, true ),
 				                                                  ^
   symbol:   variable Input
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:860: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:861: error: cannot find symbol
 				new ActionToInputsMapping( "Up", new String[] { "new String[] {" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:861: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:862: error: cannot find symbol
 				new ActionToInputsMapping( "Down", new String[] { "}" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:862: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:863: error: cannot find symbol
 				new ActionToInputsMapping( "Sort", new String[] { "\\" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:863: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:864: error: cannot find symbol
 				new ActionToInputsMapping( "Split", new String[] { "/" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:864: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:865: error: cannot find symbol
 				new ActionToInputsMapping( "Join", new String[] { "=" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:865: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:866: error: cannot find symbol
 				new ActionToInputsMapping( "Drop", new String[] { "d" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:866: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:867: error: cannot find symbol
 				new ActionToInputsMapping( "Use", new String[] { "e" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:868: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:869: error: cannot find symbol
 				new ActionToInputsMapping( "Item0", new String[] { "_0" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:869: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:870: error: cannot find symbol
 				new ActionToInputsMapping( "Item1", new String[] { "_1" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:870: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:871: error: cannot find symbol
 				new ActionToInputsMapping( "Item2", new String[] { "_2" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:871: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:872: error: cannot find symbol
 				new ActionToInputsMapping( "Item3", new String[] { "_3" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:872: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:873: error: cannot find symbol
 				new ActionToInputsMapping( "Item4", new String[] { "_4" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:873: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:874: error: cannot find symbol
 				new ActionToInputsMapping( "Item5", new String[] { "_5" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:874: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:875: error: cannot find symbol
 				new ActionToInputsMapping( "Item6", new String[] { "_6" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:875: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:876: error: cannot find symbol
 				new ActionToInputsMapping( "Item7", new String[] { "_7" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:876: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:877: error: cannot find symbol
 				new ActionToInputsMapping( "Item8", new String[] { "_8" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:877: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:878: error: cannot find symbol
 				new ActionToInputsMapping( "Item9", new String[] { "_9" }, true ),
 				    ^
   symbol:   class ActionToInputsMapping
   location: class ItemHolder
-./GameFramework/Model/Items/ItemHolder.java:883: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:884: error: cannot find symbol
 			childControls.insert
 			             ^
   symbol:   method insert(int,ControlLabel)
   location: variable childControls of type ControlBase[]
-./GameFramework/Model/Items/ItemHolder.java:898: error: method from8 in class ControlButton cannot be applied to given types;
+./GameFramework/Model/Items/ItemHolder.java:899: error: method from8 in class ControlButton cannot be applied to given types;
 				ControlButton.from8
 				             ^
   required: String,Coords,Coords,String,double,boolean,DataBinding<T,Boolean>,Runnable
@@ -1278,7 +1070,7 @@ public class ItemHolder implements EntityProperty
     (argument mismatch; boolean cannot be converted to DataBinding<T,Boolean>)
   where T is a type-variable:
     T extends Object declared in method <T>from8(String,Coords,Coords,String,double,boolean,DataBinding<T,Boolean>,Runnable)
-./GameFramework/Model/Items/ItemHolder.java:928: error: cannot find symbol
+./GameFramework/Model/Items/ItemHolder.java:929: error: cannot find symbol
 			ArrayHelper.clone(this.items),
 			^
   symbol:   variable ArrayHelper
@@ -1605,6 +1397,11 @@ error: incompatible types: bad return type in lambda expression
 ./GameFramework/Geometry/Shapes/Plane.java:7: error: Plane is not abstract and does not override abstract method overwriteWith(ShapeBase) in Clonable
 public class Plane implements ShapeBase
        ^
+./GameFramework/Model/Actors/Activity.java:87: error: cannot find symbol
+		this.targetsByName.delete(name);
+		                  ^
+  symbol:   method delete(String)
+  location: variable targetsByName of type Map<String,Object>
 ./GameFramework/Utility/DateTime.java:51: error: cannot find symbol
 		return DateTime.fromSystemDate(new Date());
 		               ^
@@ -1800,9 +1597,13 @@ public class ShapeGroupAny implements ShapeBase
     method ArrayHelper.<T#2>clone(List<T#2>) is not applicable
       (cannot infer type-variable(s) T#2
         (argument mismatch; int[] cannot be converted to List<T#2>))
-  where T#1,T#2 are type-variables:
+    method ArrayHelper.<T#3>clone(List<T#3>) is not applicable
+      (cannot infer type-variable(s) T#3
+        (argument mismatch; int[] cannot be converted to List<T#3>))
+  where T#1,T#2,T#3 are type-variables:
     T#1 extends Clonable<T#1> declared in method <T#1>clone(T#1[])
     T#2 extends Clonable<T#2> declared in method <T#2>clone(List<T#2>)
+    T#3 extends Object declared in method <T#3>clone(List<T#3>)
 ./GameFramework/Geometry/Shapes/Meshes/FaceBuilder.java:51: error: no suitable method found for overwriteWith(int[],int[])
 		ArrayHelper.overwriteWith(this.vertexIndices, other.vertexIndices);
 		           ^
@@ -1815,9 +1616,13 @@ public class ShapeGroupAny implements ShapeBase
     method ArrayHelper.<T#2>overwriteWith(List<T#2>,List<T#2>) is not applicable
       (cannot infer type-variable(s) T#2
         (argument mismatch; int[] cannot be converted to List<T#2>))
-  where T#1,T#2 are type-variables:
+    method ArrayHelper.<T#3>overwriteWith(List<T#3>,List<T#3>) is not applicable
+      (cannot infer type-variable(s) T#3
+        (argument mismatch; int[] cannot be converted to List<T#3>))
+  where T#1,T#2,T#3 are type-variables:
     T#1 extends Clonable<T#1> declared in method <T#1>overwriteWith(T#1[],T#1[])
     T#2 extends Clonable<T#2> declared in method <T#2>overwriteWith(List<T#2>,List<T#2>)
+    T#3 extends Object declared in method <T#3>overwriteWith(List<T#3>,List<T#3>)
 ./GameFramework/Model/WorldDefn.java:26: error: no suitable method found for addLookupsByName(Object[])
 			var defnsByName = ArrayHelper.addLookupsByName(defnsOfType);
 			                             ^
@@ -1851,9 +1656,13 @@ public class ShapeGroupAny implements ShapeBase
     method ArrayHelper.<T#2>clone(List<T#2>) is not applicable
       (cannot infer type-variable(s) T#2
         (argument mismatch; int[] cannot be converted to List<T#2>))
-  where T#1,T#2 are type-variables:
+    method ArrayHelper.<T#3>clone(List<T#3>) is not applicable
+      (cannot infer type-variable(s) T#3
+        (argument mismatch; int[] cannot be converted to List<T#3>))
+  where T#1,T#2,T#3 are type-variables:
     T#1 extends Clonable<T#1> declared in method <T#1>clone(T#1[])
     T#2 extends Clonable<T#2> declared in method <T#2>clone(List<T#2>)
+    T#3 extends Object declared in method <T#3>clone(List<T#3>)
 ./GameFramework/Display/Display2D.java:53: error: method fromSize in class Display2D cannot be applied to given types;
 		return Display2D.fromSize(sizeInPixels, isInvisible);
 		                ^
@@ -1871,9 +1680,15 @@ public class ShapeGroupAny implements ShapeBase
 ./GameFramework/Helpers/ArrayHelper.java:203: error: non-static method getClass() cannot be referenced from a static context
 				(T[]) Array.newInstance(T.getClass(), arrayToClone.length);
 				                         ^
-./GameFramework/Helpers/ArrayHelper.java:299: error: incompatible types: unexpected return value
-		return areEqualSoFar;
-		       ^
+./GameFramework/Helpers/ArrayHelper.java:409: error: non-static variable this cannot be referenced from a static context
+			this.set(i, elementOther);
+			^
+./GameFramework/Helpers/ArrayHelper.java:409: error: cannot find symbol
+			this.set(i, elementOther);
+			    ^
+  symbol: method set(int,T)
+  where T is a type-variable:
+    T extends Object declared in method <T>overwriteWith(List<T>,List<T>)
 ./GameFramework/Helpers/StringHelper.java:44: error: cannot find symbol
 		return stringToReplaceWithin.split(stringToBeReplaced).join(stringToReplaceWith);
 		                                                      ^
@@ -2067,11 +1882,17 @@ public class VisualSound implements Visual
 		                                         ^
   symbol:   variable ArrayHelper
   location: class VenueFileUpload
+./GameFramework/Storage/VenueFileUpload.java:61: error: incompatible types: VenueFileUpload cannot be converted to Platformable
+		platformHelper.platformableRemove(this);
+		                                  ^
 ./GameFramework/Storage/VenueFileUpload.java:65: error: cannot find symbol
 		platformHelper.platformableShow(display);
 		              ^
   symbol:   method platformableShow(Display)
   location: variable platformHelper of type PlatformHelper
+./GameFramework/Storage/VenueFileUpload.java:115: error: incompatible types: VenueFileUpload cannot be converted to Platformable
+		universe.platformHelper.platformableAdd(this);
+		                                        ^
 ./GameFramework/Storage/VenueFileUpload.java:117: error: cannot find symbol
 		inputFileUpload.focus();
 		^
@@ -2096,22 +1917,6 @@ public class VisualSound implements Visual
 ./GameFramework/Storage/TarFiles/TarFile.java:99: error: array required, but List<TarFileEntry> found
 				var entryNext = entries[i + 1];
 				                       ^
-./GameFramework/Storage/FileHelper.java:21: error: invalid method declaration; return type required
-	loadFileAsText(Object systemFileToLoad, Object callback, Object contextForCallback)
-	^
-./GameFramework/Storage/FileHelper.java:33: error: invalid method declaration; return type required
-	loadFile_FileLoaded(Object fileLoadedEvent, Object callback, Object contextForCallback, String fileName)
-	^
-./GameFramework/Storage/FileHelper.java:105: error: class, interface, or enum expected
-}
-^
-./GameFramework/Storage/TarFiles/TarFile.java:113: error: no suitable constructor found for FileHelper(no arguments)
-		new FileHelper().saveBytesToFileWithName
-		^
-    constructor FileHelper.FileHelper(Object,Object,Object) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor FileHelper.FileHelper(Object,Object,Object,String) is not applicable
-      (actual and formal argument lists differ in length)
 ./GameFramework/Storage/TarFiles/TarFile.java:125: error: incompatible types: Stream<TarFileEntry> cannot be converted to List<TarFileEntry>
 		(
 		^
@@ -2157,23 +1962,19 @@ public class VisualSound implements Visual
 ./GameFramework/Storage/TarFiles/TarFile.java:210: error: array required, but List<TarFileEntry> found
 			var entry = this.entries[i];
 			                        ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:27: error: incompatible types: ArrayList<Integer> cannot be converted to int[]
+./GameFramework/Storage/TarFiles/TarFileEntry.java:28: error: incompatible types: ArrayList<Integer> cannot be converted to int[]
 		var entry = new TarFileEntry(header, new ArrayList<Integer>());
 		                                     ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:102: error: no suitable constructor found for FileHelper(no arguments)
-		new FileHelper().saveBytesToFileWithName
-		^
-    constructor FileHelper.FileHelper(Object,Object,Object) is not applicable
-      (actual and formal argument lists differ in length)
-    constructor FileHelper.FileHelper(Object,Object,Object,String) is not applicable
-      (actual and formal argument lists differ in length)
-./GameFramework/Storage/TarFiles/TarFileEntry.java:121: error: incompatible types: int[] cannot be converted to Collection<? extends Integer>
+./GameFramework/Storage/TarFiles/TarFileEntry.java:63: error: incompatible types: possible lossy conversion from double to int
+			reader.readBytes(sizeOfDataEntryInBytesPadded);
+			                 ^
+./GameFramework/Storage/TarFiles/TarFileEntry.java:122: error: incompatible types: int[] cannot be converted to Collection<? extends Integer>
 		entryAsBytes.addAll(headerAsBytes);
 		                    ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:123: error: incompatible types: int[] cannot be converted to Collection<? extends Integer>
+./GameFramework/Storage/TarFiles/TarFileEntry.java:124: error: incompatible types: int[] cannot be converted to Collection<? extends Integer>
 		entryAsBytes.addAll(this.dataAsBytes);
 		                        ^
-./GameFramework/Storage/TarFiles/TarFileEntry.java:155: error: cannot find symbol
+./GameFramework/Storage/TarFiles/TarFileEntry.java:156: error: cannot find symbol
 		var dataAsHexadecimalString = ByteHelper.bytesToStringHexadecimal
 		                              ^
   symbol:   variable ByteHelper
@@ -2213,6 +2014,9 @@ public class VisualSound implements Visual
 			                          ^
   symbol:   method toHexadecimalString(int)
   location: class Integer
+./GameFramework/Display/Visuals/VisualText.java:59: error: incompatible types: <null> cannot be converted to double
+			null, // heightInPixels
+			^
 ./GameFramework/Display/Visuals/VisualText.java:69: error: cannot infer type for local variable text
 		var text = this.text(uwpe, display);
 		    ^
@@ -2220,6 +2024,18 @@ public class VisualSound implements Visual
 ./GameFramework/Display/Visuals/VisualText.java:96: error: incompatible types: unexpected return value
 		return returnValue;
 		       ^
+./GameFramework/Model/Mortality/Ephemeral.java:9: error: Ephemeral is not abstract and does not override abstract method overwriteWith(EntityProperty) in Clonable
+public class Ephemeral implements EntityProperty
+       ^
+./GameFramework/Model/Mortality/Ephemeral.java:34: error: cannot find symbol
+				this.expire(uwpe);
+				    ^
+  symbol: method expire(UniverseWorldPlaceEntities)
+./GameFramework/Storage/FileHelper.java:43: error: cannot find symbol
+		callback.call(contextForCallback, contentsOfFileLoaded);
+		                                  ^
+  symbol:   variable contentsOfFileLoaded
+  location: class FileHelper
 ./GameFramework/Display/Visuals/VisualImageImmediate.java:9: error: VisualImageImmediate is not abstract and does not override abstract method coordsGroupToTranslate() in Transformable
 public class VisualImageImmediate implements VisualImage
        ^
@@ -2457,11 +2273,6 @@ public class VisualPolygon implements Visual
 					                                  ^
   symbol:   variable sizeInPixels
   location: variable display of type Display
-./GameFramework/Storage/FileHelper.java:40: error: cannot find symbol
-		callback.call(contextForCallback, contentsOfFileLoaded);
-		                                  ^
-  symbol:   variable contentsOfFileLoaded
-  location: class FileHelper
 ./GameFramework/Geometry/Shapes/Path.java:34: error: cannot find symbol
 		Transforms.applyTransformToCoordsMObject(transformToApply, this.points);
 		          ^
@@ -2488,4 +2299,4 @@ Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-531 errors
+491 errors

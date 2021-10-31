@@ -197,7 +197,7 @@ public class ControlBuilder
 			};
 		}
 
-		var returnValue = new ControlContainer
+		ControlBase returnValue = new ControlContainer
 		(
 			"containerChoice",
 			containerPosScaled,
@@ -211,7 +211,8 @@ public class ControlBuilder
 
 		if (showMessageOnly)
 		{
-			returnValue = new ControlContainerTransparent(returnValue);
+			returnValue =
+				new ControlContainerTransparent((ControlContainer)returnValue);
 		}
 
 		return returnValue;
@@ -232,9 +233,9 @@ public class ControlBuilder
 
 		size = (size != null ? size : universe.display.sizeDefault());
 
-		var marginWidth = 10;
+		var marginWidth = 10.0;
 		var marginSize = Coords.fromXY(1, 1).multiplyScalar(marginWidth);
-		var fontHeight = 20;
+		var fontHeight = 20.0;
 		var labelSize = Coords.fromXY(size.x - marginSize.x * 2, fontHeight);
 		var buttonSize = Coords.fromXY(labelSize.x, fontHeight * 2);
 		var listSize = Coords.fromXY
@@ -865,7 +866,7 @@ public class ControlBuilder
 						var mappingSelected = placeDefn.actionToInputsMappingSelected();
 						if (mappingSelected != null)
 						{
-							var venueInputCapture = new VenueInputCapture
+							Venue venueInputCapture = new VenueInputCapture
 							(
 								universe.venueCurrent,
 								(Input inputCaptured) ->
@@ -899,10 +900,13 @@ public class ControlBuilder
 						{
 							var mappingsDefault =
 								placeDefn.actionToInputsMappingsDefault;
-							var mappingDefault = mappingsDefault.stream().filter
+							var mappingDefault = Arrays.asList
+							(
+								mappingsDefault
+							).stream().filter
 							(
 								(ActionToInputsMapping x) -> (x.actionName == mappingSelected.actionName)
-							)[0];
+							).collect(Collectors.asList()).get(0);
 							mappingSelected.inputNames =
 								ArrayHelper.clone(mappingDefault.inputNames);
 						}
@@ -1326,7 +1330,10 @@ public class ControlBuilder
 					"selectDisplaySize",
 					Coords.fromXY(70, row2PosY), // pos
 					Coords.fromXY(65, buttonHeight), // size
-					universe.display.sizeInPixels(), // valueSelected
+					Databinding.fromContext
+					(
+						universe.display.sizeInPixels()
+					), // valueSelected
 					// options
 					universe.display.sizesAvailable(),
 					DataBinding.fromGet( (Coords c) -> c ), // bindingForOptionValues,
@@ -1432,7 +1439,7 @@ public class ControlBuilder
 	(
 		Universe universe,
 		Coords size,
-		String imageNamesAndMessagesForSlides[][],
+		String[][] imageNamesAndMessagesForSlides,
 		Venue venueAfterSlideshow
 	)
 	{
@@ -1448,7 +1455,7 @@ public class ControlBuilder
 
 		var controlsForSlides = new ArrayList<ControlBase>();
 
-		Function<Integer,Venue> nextDefn = (int slideIndexNext) -> // click
+		Function<Integer,Venue> nextDefn = (Integer slideIndexNext) -> // click
 		{
 			Venue venueNext;
 			if (slideIndexNext < controlsForSlides.size())
@@ -1482,7 +1489,7 @@ public class ControlBuilder
 			var imageName = imageNameAndMessage[0];
 			var message = imageNameAndMessage[1];
 
-			var next = nextDefn.apply(i + 1);
+			Runnable next = () -> nextDefn.apply(i + 1);
 
 			var containerSlide = new ControlContainer
 			(

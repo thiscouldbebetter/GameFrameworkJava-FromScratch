@@ -184,6 +184,14 @@ public class Collidable implements EntityProperty
 		this._collisionTrackerMapCellsOccupied.add(cellToOccupy);
 	}
 
+	public void collisionTrackerMapCellsOccupy
+	(
+		List<CollisionTrackerMapCell> cellsToOccupy
+	)
+	{
+		this._collisionTrackerMapCellsOccupied.addAll(cellsToOccupy);
+	}
+
 	public List<Collision> collisionsFindForEntity_WithTracker
 	(
 		UniverseWorldPlaceEntities uwpe,
