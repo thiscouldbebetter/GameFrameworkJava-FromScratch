@@ -8,7 +8,7 @@ public class ShapeHelper
 {
 	private Transform_Locate _transformLocate;
 
-	public constructor()
+	public ShapeHelper()
 	{
 		this._transformLocate = new Transform_Locate(null);
 	}

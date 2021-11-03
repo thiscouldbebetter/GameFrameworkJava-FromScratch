@@ -6,7 +6,7 @@ import java.util.function.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
-public class Starvable implements EntityProperty
+public class Starvable implements EntityProperty<Starvable>
 {
 	public double satietyMax;
 	public double satietyLostPerTick;

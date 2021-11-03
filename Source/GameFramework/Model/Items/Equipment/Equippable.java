@@ -5,7 +5,7 @@ import java.util.function.*;
 
 import GameFramework.Model.*;
 
-public class Equippable implements EntityProperty
+public class Equippable implements EntityProperty<Equippable>
 {
 	public Consumer<UniverseWorldPlaceEntities> _equip;
 	public Consumer<UniverseWorldPlaceEntities> _unequip;
@@ -32,7 +32,7 @@ public class Equippable implements EntityProperty
 	{
 		if (this._equip != null)
 		{
-			this._equip(uwpe);
+			this._equip.consume(uwpe);
 		}
 		this.isEquipped = true;
 	}
@@ -41,7 +41,7 @@ public class Equippable implements EntityProperty
 	{
 		if (this._unequip != null)
 		{
-			this._unequip(uwpe);
+			this._unequip.consume(uwpe);
 		}
 		this.isEquipped = false;
 	}

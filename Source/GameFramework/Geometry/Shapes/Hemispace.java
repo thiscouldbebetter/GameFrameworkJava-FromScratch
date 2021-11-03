@@ -4,7 +4,7 @@ package GameFramework.Geometry.Shapes;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class Hemispace implements ShapeBase
+public class Hemispace implements ShapeBase<Hemispace>
 {
 	// A hemispace is that infinitely large half of all space
 	// that lies beneath a specified plane.
@@ -88,6 +88,8 @@ public class Hemispace implements ShapeBase
 	}
 
 	// Transformable.
+
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public Transformable transform(Transform transformToApply)
 	{

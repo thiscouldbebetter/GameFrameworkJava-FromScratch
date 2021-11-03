@@ -1,13 +1,14 @@
 
 package GameFramework.Geometry.Shapes;
 
+import java.util.*;
 import java.util.stream.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
-public class ShapeGroupAll implements ShapeBase
+public class ShapeGroupAll implements ShapeBase<ShapeGroupAll>
 {
 	public ShapeBase[] shapes;
 
@@ -59,6 +60,8 @@ public class ShapeGroupAll implements ShapeBase
 	}
 
 	// Transformable.
+
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public Transformable transform(Transform transformToApply)
 	{

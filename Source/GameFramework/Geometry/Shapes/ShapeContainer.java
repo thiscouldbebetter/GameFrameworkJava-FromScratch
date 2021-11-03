@@ -4,7 +4,7 @@ package GameFramework.Geometry.Shapes;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class ShapeContainer implements ShapeBase
+public class ShapeContainer implements ShapeBase<ShapeContainer>
 {
 	public ShapeBase shape;
 
@@ -15,16 +15,9 @@ public class ShapeContainer implements ShapeBase
 
 	// Clonable.
 
-	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
-	{
-		var other = (ShapeContainer)otherAsShapeBase;
-		this.shape.overwriteWith(other.shape);
-		return this;
-	}
-
 	public ShapeContainer clone()
 	{
-		return new ShapeContainer(this.shape.clone());
+		return new ShapeContainer((ShapeBase)(this.shape.clone()));
 	}
 
 	public ShapeContainer overwriteWith(ShapeContainer other)
@@ -57,6 +50,11 @@ public class ShapeContainer implements ShapeBase
 	}
 
 	// Transformable.
+
+	public Coords[] coordsGroupToTranslate()
+	{
+		return null;
+	}
 
 	public Transformable transform(Transform transformToApply)
 	{

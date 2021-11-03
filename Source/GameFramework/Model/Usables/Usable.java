@@ -5,7 +5,7 @@ import java.util.function.*;
 
 import GameFramework.Model.*;
 
-public class Usable implements EntityProperty
+public class Usable implements EntityProperty<Usable>
 {
 	public Function<UniverseWorldPlaceEntities,String> _use;
 

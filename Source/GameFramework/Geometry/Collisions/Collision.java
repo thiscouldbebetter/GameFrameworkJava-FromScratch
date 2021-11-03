@@ -113,8 +113,10 @@ public class Collision implements Comparable<Collision>
 
 	public int compareTo(Collision other)
 	{
-		var difference = (this.distanceToCollision > other.distanceToCollision);
-		var returnValue = (difference == 0 ? 0 : (int)( difference / Math.abs(difference) ) );
+		var difference =
+			(this.distanceToCollision - other.distanceToCollision);
+		var returnValue =
+			(difference == 0 ? 0 : (int)( difference / Math.abs(difference) ) );
 		return returnValue;
 	}
 }

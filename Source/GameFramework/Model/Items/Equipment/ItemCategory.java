@@ -1,6 +1,8 @@
 
 package GameFramework.Model.Items.Equipment;
 
+import GameFramework.Model.*;
+
 public class ItemCategory
 {
 	public String name;

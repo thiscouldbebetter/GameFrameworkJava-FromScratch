@@ -5,7 +5,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class MapLocated<T> implements ShapeBase
+public class MapLocated<T> implements ShapeBase<MapLocated<T>>
 {
 	public MapOfCells<T> map;
 	public Disposition loc;

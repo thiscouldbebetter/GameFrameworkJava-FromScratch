@@ -3,7 +3,7 @@ package GameFramework.Media;
 
 import GameFramework.Model.*;
 
-public class Audible implements EntityProperty
+public class Audible implements EntityProperty<Audible>
 {
 	public boolean hasBeenHeard;
 

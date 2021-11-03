@@ -5,7 +5,7 @@ import java.util.*;
 
 import GameFramework.Model.*;
 
-public class Actor implements EntityProperty
+public class Actor implements EntityProperty<Actor>
 {
 	public Activity activity;
 

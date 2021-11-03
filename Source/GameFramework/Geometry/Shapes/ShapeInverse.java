@@ -4,23 +4,23 @@ package GameFramework.Geometry.Shapes;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class ShapeInverse implements ShapeBase
+public class ShapeInverse<T extends ShapeBase<T>> implements ShapeBase<ShapeInverse<T>>
 {
-	public ShapeBase shape;
+	public T shape;
 
-	public ShapeInverse(ShapeBase shape)
+	public ShapeInverse(T shape)
 	{
 		this.shape = shape;
 	}
 
 	// Clonable.
 
-	public ShapeInverse clone()
+	public ShapeInverse<T> clone()
 	{
-		return new ShapeInverse(this.shape.clone());
+		return new ShapeInverse<T>(this.shape.clone());
 	}
 
-	public ShapeInverse overwriteWith(ShapeInverse other)
+	public ShapeInverse<T> overwriteWith(ShapeInverse<T> other)
 	{
 		this.shape.overwriteWith(other.shape);
 		return this;
@@ -47,6 +47,8 @@ public class ShapeInverse implements ShapeBase
 	public Box toBox(Box boxOut) { throw new Exception("Not implemented!"); }
 
 	// Transformable.
+
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public Transformable transform(Transform transformToApply)
 	{

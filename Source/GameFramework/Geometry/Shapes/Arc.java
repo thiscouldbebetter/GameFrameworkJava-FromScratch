@@ -2,7 +2,7 @@
 package GameFramework.Geometry.Shapes;
 {
 
-public class Arc implements ShapeBase
+public class Arc implements ShapeBase<Arc>
 {
 	public Shell shell;
 	public Wedge wedge;

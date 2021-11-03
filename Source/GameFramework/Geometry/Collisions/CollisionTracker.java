@@ -9,7 +9,7 @@ import GameFramework.Geometry.Shapes.Maps.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
-public class CollisionTracker implements EntityProperty
+public class CollisionTracker implements EntityProperty<CollisionTracker>
 {
 	public MapOfCells<CollisionTrackerMapCell> collisionMap;
 
@@ -60,20 +60,20 @@ public class CollisionTracker implements EntityProperty
 			entityBounds, ArrayHelper.clear(this._cells)
 		);
 
-		entityCollidable._collisionTrackerMapCellsOccupy
+		entityCollidable.collisionTrackerMapCellsOccupy
 		(
 			cellsToAddEntityTo
 		);
 
-		for (var c = 0; c < cellsToAddEntityTo.length; c++)
+		for (var c = 0; c < cellsToAddEntityTo.size(); c++)
 		{
-			var cell = cellsToAddEntityTo[c];
+			var cell = cellsToAddEntityTo.get(c);
 			var cellEntitiesPresent = cell.entitiesPresent;
-			if (cellEntitiesPresent.length > 0)
+			if (cellEntitiesPresent.size() > 0)
 			{
-				for (var e = 0; e < cellEntitiesPresent.length; e++)
+				for (var e = 0; e < cellEntitiesPresent.size(); e++)
 				{
-					var entityOther = cellEntitiesPresent[e];
+					var entityOther = cellEntitiesPresent.get(e);
 
 					if (entityOther == entity)
 					{
@@ -118,7 +118,7 @@ public class CollisionTracker implements EntityProperty
 
 	public CollisionTracker clone() { return this; } // todo
 
-	public EntityProperty overwriteWith(EntityProperty other) { return this; } // todo
+	public CollisionTracker overwriteWith(CollisionTracker other) { return this; } // todo
 
 	// EntityProperty.
 

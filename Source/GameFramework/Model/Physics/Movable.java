@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 
-public class Movable implements EntityProperty
+public class Movable implements EntityProperty<Movable>
 {
 	public double accelerationPerTick;
 	public double speedMax;

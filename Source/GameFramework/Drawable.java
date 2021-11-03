@@ -4,7 +4,7 @@ import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
 
-public class Drawable implements EntityProperty
+public class Drawable implements EntityProperty<Drawable>
 {
 	public Visual visual;
 

@@ -41,8 +41,9 @@ public class Drawable implements EntityProperty
 		return new Drawable(this.visual, this.isVisible);
 	}
 
-	public Drawable overwriteWith(Drawable other)
+	public Drawable overwriteWith(EntityProperty otherAsProperty)
 	{
+		var other = (Drawable)otherAsProperty;
 		this.visual.overwriteWith(other.visual);
 		this.isVisible = other.isVisible;
 		return this;

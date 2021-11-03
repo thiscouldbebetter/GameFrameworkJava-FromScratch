@@ -50,7 +50,8 @@ public class Display2D extends JPanel implements Display
 		Coords sizeInPixels, boolean isInvisible
 	)
 	{
-		return Display2D.fromSize(sizeInPixels, isInvisible);
+		return Display2D.fromSize(sizeInPixels);
+		// todo - isInvisible.
 	}
 
 	public void drawRectangle(Coords pos, Coords size)

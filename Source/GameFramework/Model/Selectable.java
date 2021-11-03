@@ -5,7 +5,7 @@ import java.util.function.*;
 
 import GameFramework.Model.*;
 
-public class Selectable implements EntityProperty
+public class Selectable implements EntityProperty<Selectable>
 {
 	private Consumer<UniverseWorldPlaceEntities> _select;
 	private Consumer<UniverseWorldPlaceEntities> _deselect;

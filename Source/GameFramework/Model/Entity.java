@@ -132,7 +132,7 @@ public class Entity //
 		for (var i = 0; i < this.properties.size(); i++)
 		{
 			var property = this.properties.get(i);
-			var propertyCloned = property.clone();
+			var propertyCloned = (EntityProperty)(property.clone());
 			propertiesCloned[i] = propertyCloned;
 		}
 		var returnValue = new Entity

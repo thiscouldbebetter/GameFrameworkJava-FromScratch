@@ -6,7 +6,7 @@ import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 import GameFramework.Utility.*;
 
-public class BoxRotated implements ShapeBase
+public class BoxRotated implements ShapeBase<BoxRotated>
 {
 	public Box box;
 	public double angleInTurns;

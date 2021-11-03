@@ -7,15 +7,15 @@ import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
 
-public class ItemDefn implements EntityProperty
+public class ItemDefn implements EntityProperty<ItemDefn>
 {
 	public String name;
 	public String appearance;
 	public String description;
 	public double mass;
-	public double tradeValue;
-	public double stackSizeMax;
-	public String categoryNames[];
+	public Double tradeValue;
+	public Double stackSizeMax;
+	public String[] categoryNames;
 	public Function<UniverseWorldPlaceEntities,String> _use;
 	public Visual visual;
 	private BiFunction<UniverseWorldPlaceEntities,Item,Entity> _toEntity;
@@ -26,9 +26,9 @@ public class ItemDefn implements EntityProperty
 		String appearance,
 		String description,
 		double mass,
-		double tradeValue,
-		double stackSizeMax,
-		String categoryNames[],
+		Double tradeValue,
+		Double stackSizeMax,
+		String[] categoryNames,
 		Function<UniverseWorldPlaceEntities,String> use,
 		Visual visual,
 		BiFunction<UniverseWorldPlaceEntities,Item,Entity> toEntity
@@ -51,7 +51,16 @@ public class ItemDefn implements EntityProperty
 	{
 		return new ItemDefn
 		(
-			name, null, null, null, null, null, null, null, null, null
+			name,
+			name, // appearance
+			name, // description
+			0, // mass
+			0, // tradeValue
+			null, // stackSizeMax
+			null, // categoryNames
+			null, // use
+			null, // visual
+			null // toEntity
 		);
 	}
 

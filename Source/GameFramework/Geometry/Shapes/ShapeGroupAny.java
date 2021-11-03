@@ -1,11 +1,13 @@
 
 package GameFramework.Geometry.Shapes;
 
+import java.util.stream.*;
+
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
-public class ShapeGroupAny implements ShapeBase
+public class ShapeGroupAny implements ShapeBase<ShapeGroupAny>
 {
 	public ShapeBase shapes[];
 
@@ -21,13 +23,6 @@ public class ShapeGroupAny implements ShapeBase
 	}
 
 	// Clonable.
-
-	public ShapeGroupAny overwriteWith(ShapeBase otherAsShapeBase)
-	{
-		var other = (ShapeGroupAny)otherAsShapeBase;
-		ArrayHelper.overwriteWith(this.shapes, other.shapes);
-		return this;
-	}
 
 	public ShapeGroupAny clone()
 	{
@@ -54,7 +49,7 @@ public class ShapeGroupAny implements ShapeBase
 
 	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
 	{
-		var distanceMinSoFar = Integer.MAX_VALUE;
+		Double distanceMinSoFar = Double.POSITIVE_INFINITY;
 		for (var i = 0; i < this.shapes.length; i++)
 		{
 			var shape = this.shapes[i];
@@ -82,6 +77,8 @@ public class ShapeGroupAny implements ShapeBase
 	public Box toBox(Box boxOut) { throw new Exception("Not implemented!"); }
 
 	// Transformable.
+
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public Transformable transform(Transform transformToApply)
 	{

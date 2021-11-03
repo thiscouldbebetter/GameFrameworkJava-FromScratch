@@ -12,7 +12,7 @@ import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Places.*;
 
-public class Camera implements EntityProperty
+public class Camera implements EntityProperty<Camera>
 {
 	public Coords viewSize;
 	public double focalLength;

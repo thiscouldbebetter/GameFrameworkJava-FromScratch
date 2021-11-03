@@ -2,15 +2,19 @@
 package GameFramework.Model.Items.Equipment;
 
 import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
 import GameFramework.Model.Items.*;
 
-public class EquipmentUser implements EntityProperty
+public class EquipmentUser implements EntityProperty<EquipmentUser>
 {
 	public EquipmentSocketGroup socketGroup;
 	public EquipmentSocketDefnGroup socketDefnGroup;
@@ -39,14 +43,14 @@ public class EquipmentUser implements EntityProperty
 			{
 				var socketDefn = socket.defn(this.socketGroup.defnGroup);
 				var categoriesEquippableNames = socketDefn.categoriesAllowedNames;
-				var itemsEquippable = itemsNotYetEquipped.filter
+				var itemsEquippable = itemsNotYetEquipped.stream().filter
 				(
 					(Item x) ->
 						ArrayHelper.intersectArrays
 						(
 							x.defn(world).categoryNames, categoriesEquippableNames
 						).length > 0
-				);
+				).collect(Collectors.toList());
 
 				if (itemsEquippable.length > 0)
 				{
@@ -80,7 +84,7 @@ public class EquipmentUser implements EntityProperty
 		var itemDefn = itemToEquip.defn(world);
 		var categoryNames = Arrays.asList(itemDefn.categoryNames);
 		
-		var socketFound = sockets.filter
+		var socketFound = sockets.stream().find
 		(
 			(EquipmentSocket socket) ->
 			{
@@ -91,7 +95,7 @@ public class EquipmentUser implements EntityProperty
 				);
 				return isItemAllowedInSocket;
 			}
-		)[0];
+		);
 
 		var message = "";
 		if (socketFound == null)
@@ -256,10 +260,10 @@ public class EquipmentUser implements EntityProperty
 				var socketItemDefnName = socketItem.defnName;
 				if (itemsHeld.indexOf(socketItem) == -1)
 				{
-					var itemOfSameTypeStillHeld = itemsHeld.filter
+					var itemOfSameTypeStillHeld = itemsHeld.find
 					(
 						x -> x.defnName == socketItemDefnName
-					)[0];
+					);
 					if (itemOfSameTypeStillHeld == null)
 					{
 						socket.itemEntityEquipped = null;
@@ -338,7 +342,7 @@ public class EquipmentUser implements EntityProperty
 		var sockets = this.socketGroup.sockets;
 		var socketDefnGroup = this.socketGroup.defnGroup;
 
-		var itemCategoriesForAllSockets = new ArrayList<ItemCategory>();
+		var itemCategoriesForAllSockets = new ArrayList<String>();
 		for (var i = 0; i < sockets.length; i++)
 		{
 			var socket = sockets[i];
@@ -366,13 +370,10 @@ public class EquipmentUser implements EntityProperty
 		(
 			uwpe
 		);
-		var itemEntitiesEquippable = itemEntities.filter
+		var itemEntitiesEquippable = itemEntities.stream().filter
 		(
 			x -> x.equippable() != null
-		);
-
-		var world = universe.world;
-		var place = world.placeCurrent;
+		).collect(Collectors.toList());
 
 		var listHeight = 100;
 
@@ -381,7 +382,7 @@ public class EquipmentUser implements EntityProperty
 			var itemEntityToEquip = equipmentUser.itemEntitySelected;
 			uwpe.entity2 = itemEntityToEquip;
 			var message = equipmentUser.equipEntityWithItem(uwpe);
-			equipmentUser.statusMessage = message;
+			equipmentUser.statusMessage = (String)message;
 		};
 
 		var listEquippables = new ControlList
@@ -412,18 +413,18 @@ public class EquipmentUser implements EntityProperty
 			var itemEntityToEquip = equipmentUser.itemEntitySelected;
 			uwpe.entity2 = itemEntityToEquip;
 
-			var message;
+			String message;
 			var socketSelected = equipmentUser.socketSelected;
 			if (socketSelected == null)
 			{
-				message = equipmentUser.equipEntityWithItem
+				message = (String)equipmentUser.equipEntityWithItem
 				(
 					uwpe
 				);
 			}
 			else
 			{
-				message = equipmentUser.equipItemEntityInSocketWithName
+				message = (String)equipmentUser.equipItemEntityInSocketWithName
 				(
 					uwpe,
 					socketSelected.defnName, true // includeSocketNameInMessage
@@ -432,7 +433,7 @@ public class EquipmentUser implements EntityProperty
 			equipmentUser.statusMessage = message;
 		};
 
-		Consumer<Integer> equipItemSelectedInQuickSlot = (int quickSlotNumber) ->
+		Consumer<Integer> equipItemSelectedInQuickSlot = (Integer quickSlotNumber) ->
 		{
 			uwpe.entity2 = equipmentUser.itemEntitySelected;
 			equipmentUser.equipItemEntityInSocketWithName
@@ -451,7 +452,7 @@ public class EquipmentUser implements EntityProperty
 			">", // text
 			fontHeight * 0.8,
 			true, // hasBorder
-			true, // isEnabled - todo
+			DataBinding.fromTrue(), // isEnabled - todo
 			equipItemSelectedToSocketSelected
 		);
 
@@ -462,7 +463,7 @@ public class EquipmentUser implements EntityProperty
 			(
 				world, socketToUnequipFrom.defnName
 			);
-			equipmentUser.statusMessage = message;
+			equipmentUser.statusMessage = (String)message;
 		};
 
 		var buttonUnequip = ControlButton.from8
@@ -473,7 +474,7 @@ public class EquipmentUser implements EntityProperty
 			"<", // text
 			fontHeight * 0.8,
 			true, // hasBorder
-			true, // isEnabled - todo
+			DataBinding.fromTrue(), // isEnabled - todo
 			unequipFromSocketSelected
 		);
 
@@ -563,7 +564,7 @@ public class EquipmentUser implements EntityProperty
 
 			new ActorAction[]
 			{
-				new ActorAction("Back", (UniverseWorldPlaceEntities uwpe) -> back.run() ),
+				new ActorAction("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
 				new ActorAction("EquipItemSelectedInQuickSlot0", (UniverseWorldPlaceEntities uwpe0) -> equipItemSelectedInQuickSlot.accept(0)),
 				new ActorAction("EquipItemSelectedInQuickSlot1", (UniverseWorldPlaceEntities uwpe1) -> equipItemSelectedInQuickSlot.accept(1)),
 				new ActorAction("EquipItemSelectedInQuickSlot2", (UniverseWorldPlaceEntities uwpe2) -> equipItemSelectedInQuickSlot.accept(2)),
@@ -597,9 +598,9 @@ public class EquipmentUser implements EntityProperty
 		{
 			var childControls = returnValue.children;
 
-			childControls.splice
+			childControls.insert
 			(
-				0, 0,
+				0,
 				new ControlLabel
 				(
 					"labelEquipment",
@@ -610,7 +611,8 @@ public class EquipmentUser implements EntityProperty
 					fontHeightLarge
 				)
 			);
-			childControls.push
+
+			childControls.add
 			(
 				ControlButton.from8
 				(

@@ -183,9 +183,9 @@ public class Place implements Namable
 		this.entitiesByName.put(entity.name, entity);
 
 		var entityProperties = entity.properties;
-		for (var i = 0; i < entityProperties.length; i++)
+		for (var i = 0; i < entityProperties.size(); i++)
 		{
-			var property = entityProperties[i];
+			var property = entityProperties.get(i);
 			var propertyName = property.getClass().getName();
 			var entitiesWithProperty = this.entitiesByPropertyName(propertyName);
 			entitiesWithProperty.add(entity);

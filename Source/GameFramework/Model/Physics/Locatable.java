@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Model.*;
 
-public class Locatable implements EntityProperty
+public class Locatable implements EntityProperty<Locatable>
 {
 	public Disposition loc;
 

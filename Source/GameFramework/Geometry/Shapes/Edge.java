@@ -5,7 +5,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
-public class Edge implements ShapeBase
+public class Edge implements ShapeBase<Edge>
 {
 	public Coords[] vertices;
 
@@ -106,16 +106,9 @@ public class Edge implements ShapeBase
 
 	// Cloneable.
 
-	public ShapeBase clone()
+	public Edge clone()
 	{
 		return new Edge(ArrayHelper.clone(this.vertices));
-	}
-
-	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
-	{
-		var other = (Edge)otherAsShapeBase;
-		ArrayHelper.overwriteWith(this.vertices, other.vertices);
-		return this;
 	}
 
 	public Edge overwriteWith(Edge other)

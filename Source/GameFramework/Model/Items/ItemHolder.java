@@ -7,11 +7,14 @@ import java.util.stream.*;
 
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
+import GameFramework.Display.Visual.*;
 import GameFramework.Geometry.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 import GameFramework.Model.Places.*;
 
-public class ItemHolder implements EntityProperty
+public class ItemHolder implements EntityProperty<ItemHolder>
 {
 	public List<Item> items;
 	public Double massMax;
@@ -46,7 +49,7 @@ public class ItemHolder implements EntityProperty
 
 	public ItemHolder clear()
 	{
-		this.items.length = 0;
+		this.items.clear();
 		this.itemSelected = null;
 		this.statusMessage = "";
 
@@ -81,7 +84,7 @@ public class ItemHolder implements EntityProperty
 			(
 				uwpe, socketName, includeSocketNameInMessage
 			);
-			this.statusMessage = message;
+			this.statusMessage = (String)message;
 		}
 	}
 
@@ -105,12 +108,15 @@ public class ItemHolder implements EntityProperty
 
 	public List<Entity> itemEntities(UniverseWorldPlaceEntities uwpe)
 	{
-		return this.items.stream().map(x -> x.toEntity(uwpe)).toList();
+		return this.items.stream().map
+		(
+			x -> x.toEntity(uwpe)
+		).collect(Collectors.toList());
 	}
 
 	public void itemsAdd(Item[] itemsToAdd)
 	{
-		itemsToAdd.forEach( (Item x) -> this.itemAdd(x));
+		itemsToAdd.stream().forEach( (Item x) -> this.itemAdd(x));
 	}
 
 	public void itemsAllTransferTo(ItemHolder other)
@@ -123,10 +129,10 @@ public class ItemHolder implements EntityProperty
 		return this.items.stream().filter
 		(
 			x -> x.defnName == defnName
-		).toList();
+		).collect(Collectors.toList());
 	}
 
-	public void itemsTransferTo(Item itemsToTransfer[], ItemHolder other)
+	public void itemsTransferTo(List<Item> itemsToTransfer, ItemHolder other)
 	{
 		if (itemsToTransfer == this.items)
 		{
@@ -135,25 +141,25 @@ public class ItemHolder implements EntityProperty
 			itemsToTransfer.addAll(this.items);
 		}
 
-		for (var i = 0; i < itemsToTransfer.length; i++)
+		for (var i = 0; i < itemsToTransfer.size(); i++)
 		{
-			var item = itemsToTransfer[i];
+			var item = itemsToTransfer.get(i);
 			this.itemTransferTo(item, other);
 		}
 	}
 
 	public Item itemsWithDefnNameJoin(String defnName)
 	{
-		var itemsMatching = this.items.filter
+		var itemsMatching = this.items.stream().filter
 		(
 			x -> x.defnName == defnName
-		);
-		var itemJoined = itemsMatching[0];
+		).collect(Collectors.toList());
+		var itemJoined = itemsMatching.get(0);
 		if (itemJoined != null)
 		{
-			for (var i = 1; i < itemsMatching.length; i++)
+			for (var i = 1; i < itemsMatching.size(); i++)
 			{
-				var itemToJoin = itemsMatching[i];
+				var itemToJoin = itemsMatching.get(i);
 				itemJoined.quantity += itemToJoin.quantity;
 				ArrayHelper.remove(this.items, itemToJoin);
 			}
@@ -842,16 +848,16 @@ public class ItemHolder implements EntityProperty
 				new ActorAction("Drop", drop),
 				new ActorAction("Use", use),
 
-				new ActorAction("Item0", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, null) ),
-				new ActorAction("Item1", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 1) ),
-				new ActorAction("Item2", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 2) ),
-				new ActorAction("Item3", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 3) ),
-				new ActorAction("Item4", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 4) ),
-				new ActorAction("Item5", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 5) ),
-				new ActorAction("Item6", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 6) ),
-				new ActorAction("Item7", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 7) ),
-				new ActorAction("Item8", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 8) ),
-				new ActorAction("Item9", () -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 9) ),
+				new ActorAction("Item0", (UniverseWorldPlaceEntities uwpe0) -> itemHolder.equipItemInNumberedSlot(uwpe.universe, entityItemHolder, null) ),
+				new ActorAction("Item1", (UniverseWorldPlaceEntities uwpe1) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 1) ),
+				new ActorAction("Item2", (UniverseWorldPlaceEntities uwpe2) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 2) ),
+				new ActorAction("Item3", (UniverseWorldPlaceEntities uwpe3) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 3) ),
+				new ActorAction("Item4", (UniverseWorldPlaceEntities uwpe4) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 4) ),
+				new ActorAction("Item5", (UniverseWorldPlaceEntities uwpe5) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 5) ),
+				new ActorAction("Item6", (UniverseWorldPlaceEntities uwpe6) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 6) ),
+				new ActorAction("Item7", (UniverseWorldPlaceEntities uwpe7) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 7) ),
+				new ActorAction("Item8", (UniverseWorldPlaceEntities uwpe8) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 8) ),
+				new ActorAction("Item9", (UniverseWorldPlaceEntities uwpe9) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 9) ),
 			},
 
 			new ActionToInputsMapping[]

@@ -8,7 +8,7 @@ import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
-public class Mesh implements ShapeBase
+public class Mesh implements ShapeBase<Mesh>
 {
 	public Coords center;
 	public Coords[] vertexOffsets;
@@ -140,7 +140,7 @@ public class Mesh implements ShapeBase
 				}
 				else
 				{
-					vertexIndicesTopOrBottom.insert(0, vertexIndex);
+					vertexIndicesTopOrBottom.add(0, new Integer(vertexIndex));
 				}
 
 				var vertex = faceVertices[v].clone().add
@@ -153,7 +153,7 @@ public class Mesh implements ShapeBase
 
 			var faceBuilderTopOrBottom = new FaceBuilder
 			(
-				vertexIndicesTopOrBottom.toArray(new int[] {})
+				vertexIndicesTopOrBottom.toArray(new Integer[] {})
 			);
 			faceBuilders.add(faceBuilderTopOrBottom);
 		}
@@ -242,7 +242,6 @@ public class Mesh implements ShapeBase
 
 	// clonable
 
-	/*
 	public Mesh clone()
 	{
 		return new Mesh
@@ -252,7 +251,6 @@ public class Mesh implements ShapeBase
 			ArrayHelper.clone(this.faceBuilders)
 		);
 	}
-	*/
 
 	public Mesh overwriteWith(Mesh other)
 	{
@@ -262,6 +260,7 @@ public class Mesh implements ShapeBase
 		return this;
 	}
 
+	/*
 	// Clonable<ShapeBase>.
 
 	public ShapeBase clone()
@@ -275,6 +274,7 @@ public class Mesh implements ShapeBase
 		this.overwriteWith(otherAsMesh);
 		return (ShapeBase)this;
 	}
+	*/
 
 	// transformable
 

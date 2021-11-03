@@ -6,7 +6,7 @@ import java.util.function.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
-public class Killable implements EntityProperty
+public class Killable implements EntityProperty<Killable>
 {
 	public double integrityMax;
 	public BiFunction<UniverseWorldPlaceEntities, Damage, Double> _damageApply;

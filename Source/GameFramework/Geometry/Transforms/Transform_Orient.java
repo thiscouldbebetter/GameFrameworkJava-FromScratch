@@ -45,5 +45,3 @@ public class Transform_Orient implements Transform
 		return coordsToTransform;
 	}
 }
-
-}

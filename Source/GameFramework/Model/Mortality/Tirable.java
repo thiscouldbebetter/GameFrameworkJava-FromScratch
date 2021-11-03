@@ -5,7 +5,7 @@ import java.util.function.*;
 
 import GameFramework.Model.*;
 
-public class Tirable implements EntityProperty
+public class Tirable implements EntityProperty<Tirable>
 {
 	public double staminaMaxAfterSleep;
 	public double staminaRecoveredPerTick;

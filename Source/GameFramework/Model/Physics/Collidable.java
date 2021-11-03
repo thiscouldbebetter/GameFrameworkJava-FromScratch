@@ -10,7 +10,7 @@ import GameFramework.Geometry.Shapes.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
-public class Collidable implements EntityProperty
+public class Collidable implements EntityProperty<Collidable>
 {
 	public Integer ticksToWaitBetweenCollisions;
 	public ShapeBase colliderAtRest;

@@ -5,7 +5,7 @@ import java.util.function.*;
 
 import GameFramework.Model.*;
 
-public class Loadable implements EntityProperty
+public class Loadable implements EntityProperty<Loadable>
 {
 	public boolean isLoaded;
 	private Consumer<UniverseWorldPlaceEntities> _load;

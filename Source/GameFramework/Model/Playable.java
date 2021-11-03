@@ -10,7 +10,7 @@ import GameFramework.Display.Visuals.*;
 import GameFramework.Helpers.*;
 import GameFramework.Geometry.*;
 
-public class Playable implements EntityProperty
+public class Playable implements EntityProperty<Playable>
 {
 	public static ControlBase toControlMenu
 	(

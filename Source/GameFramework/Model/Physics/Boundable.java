@@ -4,7 +4,7 @@ package GameFramework.Model.Physics;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Model.*;
 
-public class Boundable implements EntityProperty
+public class Boundable implements EntityProperty<Boundable>
 {
 	public ShapeBase bounds;
 

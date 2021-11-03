@@ -3,7 +3,7 @@ package GameFramework.Model.Items;
 
 import GameFramework.Model.*;
 
-public class Item implements EntityProperty
+public class Item implements EntityProperty<Item>
 {
 	public String defnName;
 	public double quantity;
@@ -67,7 +67,7 @@ public class Item implements EntityProperty
 	{
 		return new Item(this.defnName, this.quantity);
 	}
-	
+
 	public Item overwriteWith(Item other) { return this; }
 
 	// EntityProperty.

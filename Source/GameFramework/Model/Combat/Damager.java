@@ -3,7 +3,7 @@ package GameFramework.Model.Combat;
 
 import GameFramework.Model.*;
 
-public class Damager implements EntityProperty
+public class Damager implements EntityProperty<Damager>
 {
 	public Damage damagePerHit;
 

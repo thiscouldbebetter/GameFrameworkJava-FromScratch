@@ -7,9 +7,9 @@ import java.util.stream.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
 
-public class Effectable implements EntityProperty
+public class Effectable implements EntityProperty<Effectable>
 {
-	List<Effect> effects;
+	public List<Effect> effects;
 
 	public Effectable(List<Effect> effects)
 	{

@@ -21,7 +21,7 @@ public class Image2 implements MediaLibraryItem, Namable
 
 	public Coords sizeInPixels()
 	{
-		throw new Exception("todo");
+		return null; // todo
 	}
 	
 	// Loadable.

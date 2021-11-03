@@ -4,7 +4,7 @@ package GameFramework.Geometry.Shapes;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class Sphere implements ShapeBase
+public class Sphere implements ShapeBase<Sphere>
 {
 	public Coords center;
 	public double radius;

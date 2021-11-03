@@ -6,7 +6,7 @@ import java.util.function.*;
 
 import GameFramework.Model.*;
 
-public class Ephemeral implements EntityProperty
+public class Ephemeral implements EntityProperty<Ephemeral>
 {
 	public int ticksToLive;
 	public Consumer<UniverseWorldPlaceEntities> expire;

@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
-public class Face implements ShapeBase
+public class Face implements ShapeBase<Face>
 {
 	public Coords[] vertices;
 
@@ -41,9 +41,9 @@ public class Face implements ShapeBase
 		var isPosWithinAllEdgesOfFaceSoFar = true;
 
 		var edges = face.edges();
-		for (var e = 0; e < edges.length; e++)
+		for (var e = 0; e < edges.size(); e++)
 		{
-			var edgeFromFace = edges[e];
+			var edgeFromFace = edges.get(e);
 			var edgeFromFaceVertex0 = edgeFromFace.vertices[0];
 
 			displacementFromVertex0ToCollision.overwriteWith
@@ -121,14 +121,13 @@ public class Face implements ShapeBase
 
 	// Cloneable.
 
-	public ShapeBase clone()
+	public Face clone()
 	{
 		return new Face(ArrayHelper.clone(this.vertices));
 	}
 
-	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
+	public Face overwriteWith(Face other)
 	{
-		var other = (Face)otherAsShapeBase;
 		ArrayHelper.overwriteWith(this.vertices, other.vertices);
 		return this;
 	}
@@ -160,9 +159,11 @@ public class Face implements ShapeBase
 
 	// Transformable.
 
+	public Coords[] coordsGroupToTranslate() { return null; }
+
 	public Transformable transform(Transform transformToApply)
 	{
-		Transforms.applyTransformToCoordsMObject(transformToApply, this.vertices);
+		Transforms.applyTransformToCoordsMany(transformToApply, this.vertices);
 		return this;
 	}
 }

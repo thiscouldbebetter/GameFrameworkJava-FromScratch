@@ -4,7 +4,7 @@ package GameFramework.Geometry.Shapes;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class Plane implements ShapeBase
+public class Plane implements ShapeBase<Plane>
 {
 	public Coords normal;
 	public double distanceFromOrigin;
@@ -124,6 +124,8 @@ public class Plane implements ShapeBase
 	}
 
 	// Transformable.
+
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public Transformable transform(Transform transformToApply)
 	{

@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Utility.*;
 
-public class Box implements ShapeBase
+public class Box implements ShapeBase<Box>
 {
 	public Coords center;
 	public Coords size;
@@ -369,9 +369,8 @@ public class Box implements ShapeBase
 		return returnValue;
 	}
 
-	public ShapeBase overwriteWith(ShapeBase otherAsShapeBase)
+	public Box overwriteWith(Box other)
 	{
-		var other = (Box)otherAsShapeBase;
 		this.center.overwriteWith(other.center);
 		this.size.overwriteWith(other.size);
 		return this;
