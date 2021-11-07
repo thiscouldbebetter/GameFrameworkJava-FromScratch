@@ -2,15 +2,20 @@
 package GameFramework.Display.Visuals;
 
 import GameFramework.Display.*;
+import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
-public class VisualCircle implements Visual
+public class VisualCircle implements Visual<VisualCircle>
 {
 	public double radius;
 	public Color colorFill;
 	public Color colorBorder;
 	public double borderThickness;
 
-	public VisualCircle(double radius, Color colorFill, Color colorBorder, Double borderThickness)
+	public VisualCircle
+	(
+		double radius, Color colorFill, Color colorBorder, Double borderThickness
+	)
 	{
 		this.radius = radius;
 		this.colorFill = colorFill;
@@ -46,7 +51,7 @@ public class VisualCircle implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualCircle clone()
 	{
 		return new VisualCircle
 		(
@@ -54,9 +59,8 @@ public class VisualCircle implements Visual
 		);
 	}
 
-	public Visual overwriteWith(Visual otherAsVisual)
+	public VisualCircle overwriteWith(VisualCircle other)
 	{
-		var other = (VisualCircle)otherAsVisual;
 		this.radius = other.radius;
 		this.colorFill = other.colorFill;
 		this.colorBorder = other.colorBorder;
@@ -68,7 +72,7 @@ public class VisualCircle implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public VisualCircle transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

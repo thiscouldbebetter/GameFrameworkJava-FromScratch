@@ -3,17 +3,18 @@ package GameFramework.Model;
 
 import java.util.*;
 
-import GameFramework.Model.Actors.*;
 import GameFramework.Helpers.*;
+import GameFramework.Model.Actors.*;
 import GameFramework.Model.Items.*;
 import GameFramework.Model.Places.*;
+import GameFramework.Utility.*;
 
 public class WorldDefn
 {
 	public Map<String,Object[]> defnArraysByTypeName;
 	public Map<String,Map<String, Object>> defnsByNameByTypeName;
 
-	public WorldDefn(Object[][] defnArrays)
+	public WorldDefn(Namable[][] defnArrays)
 	{
 		defnArrays = (defnArrays != null ? defnArrays : new Object[][] {});
 
@@ -27,7 +28,7 @@ public class WorldDefn
 			if (defnsOfType.length > 0)
 			{
 				var itemFirst = defnsOfType[0];
-				var itemTypeName = itemFirst.getClass().name;
+				var itemTypeName = itemFirst.getClass().getName();
 				this.defnArraysByTypeName.put(itemTypeName, defnsOfType);
 				this.defnsByNameByTypeName.put(itemTypeName, defnsByName);
 			}
@@ -43,7 +44,7 @@ public class WorldDefn
 
 	public ActorAction actionByName(String defnName)
 	{
-		var defnsByName = this.defnsByNameByTypeName.get(Action.class.getName());
+		var defnsByName = this.defnsByNameByTypeName.get(ActorAction.class.getName());
 		var returnValue = ((ActorAction)(defnsByName.get(defnName)));
 		return returnValue;
 	}

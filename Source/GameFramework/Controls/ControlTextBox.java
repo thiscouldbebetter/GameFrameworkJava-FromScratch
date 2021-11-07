@@ -68,7 +68,10 @@ public class ControlTextBox extends ControlBase
 			|| actionNameToHandle == Input.Names().Backspace
 		)
 		{
-			this._text.set(null, text.substring(0, text.length() - 1));
+			this._text.set
+			(
+				text.substring(0, text.length() - 1)
+			);
 
 			this.cursorPos = NumberHelper.wrapToRangeMinMax
 			(
@@ -97,7 +100,7 @@ public class ControlTextBox extends ControlBase
 			var charAtCursor =
 			(
 				this.cursorPos < text.length()
-				? text[this.cursorPos]
+				? text.charAt(this.cursorPos)
 				: "A".charAt(0) - 1
 			);
 
@@ -127,7 +130,7 @@ public class ControlTextBox extends ControlBase
 				+ charAtCursor
 				+ text.substring(this.cursorPos + 1);
 
-			this.text(textEdited, null);
+			this._text.set(textEdited);
 		}
 		else if (actionNameToHandle.length() == 1 || actionNameToHandle.startsWith("_") ) // printable character
 		{
@@ -154,7 +157,8 @@ public class ControlTextBox extends ControlBase
 						+ actionNameToHandle
 						+ text.substring(this.cursorPos);
 
-				text = this.text(textEdited, null);
+				this._text.set(textEdited);
+				var text = this.text();
 
 				this.cursorPos = NumberHelper.wrapToRangeMinMax
 				(

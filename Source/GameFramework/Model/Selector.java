@@ -14,7 +14,7 @@ import GameFramework.Model.Actors.*;
 import GameFramework.Model.Physics.*;
 import GameFramework.Utility.*;
 
-public class Selector implements EntityProperty, Clonable<Selector> 
+public class Selector implements EntityProperty<Selector>, Clonable<Selector> 
 {
 	public double cursorDimension;
 	private Consumer<UniverseWorldPlaceEntities> _entitySelect;
@@ -49,7 +49,7 @@ public class Selector implements EntityProperty, Clonable<Selector>
 					cursorRadius, // radius
 					null, // colorFill
 					Color.Instances().White, // colorBorder
-					1 // borderWidth
+					1.0 // borderWidth
 				),
 				VisualCrosshairs.fromRadiiOuterAndInner
 				(
@@ -96,7 +96,8 @@ public class Selector implements EntityProperty, Clonable<Selector>
 		return new ActorAction
 		(
 			"Recording Start/Stop",
-			Selector.actionEntityAtMouseClickPosSelectPerform
+			(UniverseWorldPlaceEntities uwpe) ->
+				Selector.actionEntityAtMouseClickPosSelectPerform(uwpe)
 		);
 	}
 
@@ -278,7 +279,7 @@ public class Selector implements EntityProperty, Clonable<Selector>
 					Coords.fromXY(1, 0).multiplyScalar(margin), // pos
 					labelSize,
 					false, // isTextCentered
-					"Selected:",
+					DataBinding.fromContext("Selected:"),
 					fontHeightInPixels
 				),
 
@@ -328,7 +329,7 @@ public class Selector implements EntityProperty, Clonable<Selector>
 		var mousePosAbsolute = this.mouseMovePosAbsoluteGet(uwpe);
 		cursorPos.overwriteWith(mousePosAbsolute);
 
-		var entitySelected = this.entitiesSelected[0];
+		var entitySelected = this.entitiesSelected.get(0);
 		var isEntitySelected = (entitySelected != null);
 		if (isEntitySelected)
 		{

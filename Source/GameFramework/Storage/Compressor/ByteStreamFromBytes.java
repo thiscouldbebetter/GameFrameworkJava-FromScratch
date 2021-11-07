@@ -45,7 +45,7 @@ public class ByteStreamFromBytes implements ByteStream
 			var byteRead = this.readByte();
 			bytesRead.add(byteRead);
 		}
-		return (int[])( bytesRead.toArray(new int[] {}) );
+		return (int[])( bytesRead.toArray(new Integer[] {}) );
 	}
 
 	public String readStringOfLength(int lengthOfString)

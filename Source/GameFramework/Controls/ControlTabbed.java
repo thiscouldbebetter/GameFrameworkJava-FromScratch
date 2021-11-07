@@ -442,7 +442,7 @@ public class ControlTabbed extends ControlBase
 			drawPos, this.size,
 			style.colorBackground,
 			style.colorBorder,
-			null
+			false // areColorsReversed
 		);
 
 		var buttons = this.buttonsForChildren;

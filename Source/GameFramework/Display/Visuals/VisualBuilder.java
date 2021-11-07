@@ -637,8 +637,8 @@ public class VisualBuilder
 		(
 			new HashMap<String,Visual>()
 			{{
-				put("Visible", visualArmAndWieldableDirectionalOffset),
-				put("Hidden", visualNone)
+				put("Visible", visualArmAndWieldableDirectionalOffset);
+				put("Hidden", visualNone);
 			}},
 			(UniverseWorldPlaceEntities uwpe, Display d) -> // selectChildNames
 			{

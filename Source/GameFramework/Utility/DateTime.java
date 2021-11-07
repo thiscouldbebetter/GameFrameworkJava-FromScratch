@@ -29,7 +29,6 @@ public class DateTime
 
 	// static methods
 
-	/*
 	static fromSystemDate(Date systemDate)
 	{
 		var returnValue = new DateTime
@@ -44,7 +43,6 @@ public class DateTime
 
 		return returnValue;
 	}
-	*/
 
 	public static DateTime now()
 	{
@@ -86,7 +84,7 @@ public class DateTime
 	public String toStringHH_MM_SS()
 	{
 		var returnValue =
-			+ StringHelper.padStart("" + this.hours, 2, "0")
+			StringHelper.padStart("" + this.hours, 2, "0")
 			+ ":"
 			+ StringHelper.padStart("" + this.minutes, 2, "0")
 			+ ":"

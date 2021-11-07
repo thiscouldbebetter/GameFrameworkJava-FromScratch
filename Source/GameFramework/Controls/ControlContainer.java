@@ -46,7 +46,8 @@ public class ControlContainer extends ControlBase
 		this._actionToInputsMappings = (actionToInputsMappings != null ? actionToInputsMappings : new ActionToInputsMapping[] {});
 		this._actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this._actionToInputsMappings, x -> x.inputNames
+			Arrays.asList(this._actionToInputsMappings),
+			x -> x.inputNames
 		);
 
 		this.childrenByName = ArrayHelper.addLookupsByName(this.children);
@@ -167,7 +168,7 @@ public class ControlContainer extends ControlBase
 	public void childAdd(ControlBase childToAdd)
 	{
 		this.children.add(childToAdd);
-		this.childrenByName.put(childToAdd.name, childToAdd);
+		this.childrenByName.put(childToAdd.name(), childToAdd);
 	}
 
 	public ControlBase childByName(String childName)
@@ -312,13 +313,10 @@ public class ControlContainer extends ControlBase
 		if (childrenContainingPos.size() > 0)
 		{
 			var child = childrenContainingPos.get(0);
-			if (child.mouseClick != null)
+			var wasClickHandledByChild = child.mouseClick(mouseClickPos);
+			if (wasClickHandledByChild)
 			{
-				var wasClickHandledByChild = child.mouseClick(mouseClickPos);
-				if (wasClickHandledByChild)
-				{
-					wasClickHandled = true;
-				}
+				wasClickHandled = true;
 			}
 		}
 
@@ -372,6 +370,7 @@ public class ControlContainer extends ControlBase
 		for (var i = 0; i < this.children.size(); i++)
 		{
 			var child = this.children.get(i);
+			/*
 			if (child.scalePosAndSize == null)
 			{
 				child.pos.multiply(scaleFactor);
@@ -383,8 +382,10 @@ public class ControlContainer extends ControlBase
 			}
 			else
 			{
-				child.scalePosAndSize(scaleFactor);
-			}
+			*/
+
+			child.scalePosAndSize(scaleFactor);
+
 		}
 
 		return this;

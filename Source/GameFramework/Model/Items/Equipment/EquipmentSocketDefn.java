@@ -1,14 +1,21 @@
 
 package GameFramework.Model.Items.Equipment;
 
-public class EquipmentSocketDefn //
+public class EquipmentSocketDefn implements Namable;
 {
-	public String name;
+	public String _name;
 	public String[] categoriesAllowedNames;
 
 	public EquipmentSocketDefn(String name, String[] categoriesAllowedNames)
 	{
-		this.name = name;
+		this._name = name;
 		this.categoriesAllowedNames = categoriesAllowedNames;
+	}
+
+	// Namable.
+
+	public String name()
+	{
+		return this._name;
 	}
 }

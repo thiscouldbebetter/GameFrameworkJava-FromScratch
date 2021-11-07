@@ -1,13 +1,15 @@
 
 package GameFramework.Model.Combat;
 
-public class DamageType
+import GameFramework.Utility.*;
+
+public class DamageType implements Namable
 {
-	public String name;
+	public String _name;
 
 	public DamageType(String name)
 	{
-		this.name = name;
+		this._name = name;
 	}
 
 	private static DamageType_Instances _instances;
@@ -26,5 +28,12 @@ public class DamageType
 		var damageType = damageTypes._AllByName.get(name);
 		damageType = (damageType != null ? damageType : damageTypes._Unspecified);
 		return damageType;
+	}
+
+	// Namable.
+
+	public String name()
+	{
+		return this._name;
 	}
 }

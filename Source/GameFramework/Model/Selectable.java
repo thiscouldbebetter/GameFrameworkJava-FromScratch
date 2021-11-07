@@ -24,7 +24,7 @@ public class Selectable implements EntityProperty<Selectable>
 	{
 		if (this._deselect != null)
 		{
-			this._deselect(uwpe);
+			this._deselect.accept(uwpe);
 		}
 	}
 
@@ -32,7 +32,7 @@ public class Selectable implements EntityProperty<Selectable>
 	{
 		if (this._select != null)
 		{
-			this._select(uwpe);
+			this._select.accept(uwpe);
 		}
 	}
 

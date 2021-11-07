@@ -6,7 +6,7 @@ import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Model.*;
 
-public class VisualSound implements Visual
+public class VisualSound implements Visual<VisualSound>
 {
 	// Yes, obviously sounds aren't really visual.
 
@@ -59,12 +59,12 @@ public class VisualSound implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualSound clone()
 	{
 		return new VisualSound(this.soundNameToPlay, this.isMusic);
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualSound overwriteWith(VisualSound other)
 	{
 		this.soundNameToPlay = other.soundNameToPlay;
 		this.isMusic = other.isMusic;
@@ -73,7 +73,9 @@ public class VisualSound implements Visual
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Coords coordsGroupToTranslate() { return null; }
+
+	public VisualSound transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

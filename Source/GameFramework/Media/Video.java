@@ -1,6 +1,7 @@
 
 package GameFramework.Media;
 
+import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
 public class Video implements MediaLibraryItem, Namable
@@ -22,4 +23,11 @@ public class Video implements MediaLibraryItem, Namable
 	{
 		return this.id;
 	}
+
+	public void play(Universe universe)
+	{}
+
+	public void stop(PlatformHelper platformHelper)
+	{}
+
 }

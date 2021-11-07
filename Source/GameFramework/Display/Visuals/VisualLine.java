@@ -6,7 +6,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class VisualLine implements Visual
+public class VisualLine implements Visual<VisualLine>
 {
 	public Coords fromPos;
 	public Coords toPos;
@@ -60,7 +60,7 @@ public class VisualLine implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualLine clone()
 	{
 		return new VisualLine
 		(
@@ -69,9 +69,8 @@ public class VisualLine implements Visual
 		);
 	}
 
-	public Visual overwriteWith(Visual otherAsVisual)
+	public VisualLine overwriteWith(VisualLine other)
 	{
-		var other = (VisualLine)otherAsVisual;
 		this.fromPos.overwriteWith(other.fromPos);
 		this.toPos.overwriteWith(other.toPos);
 		this.color.overwriteWith(other.color);
@@ -83,7 +82,7 @@ public class VisualLine implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public VisualLine transform(Transform transformToApply)
 	{
 		transformToApply.transformCoords(this.fromPos);
 		transformToApply.transformCoords(this.toPos);

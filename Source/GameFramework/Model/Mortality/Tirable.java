@@ -48,7 +48,7 @@ public class Tirable implements EntityProperty<Tirable>
 
 		if (this._fallAsleep != null)
 		{
-			this._fallAsleep(uwpe);
+			this._fallAsleep.accept(uwpe);
 		}
 	}
 
@@ -60,7 +60,7 @@ public class Tirable implements EntityProperty<Tirable>
 	public void staminaAdd(double amountToAdd)
 	{
 		this.stamina += amountToAdd;
-		this.stamina = doubleHelper.trimToRangeMax
+		this.stamina = NumberHelper.trimToRangeMax
 		(
 			this.stamina, this.staminaMaxRemainingBeforeSleep
 		);
@@ -102,4 +102,6 @@ public class Tirable implements EntityProperty<Tirable>
 			this._fallAsleep
 		);
 	}
+
+	public Tirable overwriteWith(Tirable other) { return this; }
 }

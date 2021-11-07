@@ -6,15 +6,16 @@ import java.util.function.*;
 
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
-public class ActivityDefn
+public class ActivityDefn implements Namable
 {
-	public String name;
+	public String _name;
 	private Consumer<UniverseWorldPlaceEntities> _perform;
 
 	public ActivityDefn
 	(
-		String name,
+		String _name,
 		Consumer<UniverseWorldPlaceEntities> perform
 	)
 	{
@@ -82,5 +83,12 @@ class ActivityDefn_Instances
 		};
 
 		this._AllByName = ArrayHelper.addLookupsByName(this._All);
+	}
+
+	// Namable.
+
+	public String name()
+	{
+		return this._name;
 	}
 }

@@ -6,7 +6,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class VisualAnchor implements Visual
+public class VisualAnchor implements Visual<VisualAnchor>
 {
 	public Visual child;
 	public Coords posToAnchorAt;
@@ -56,12 +56,12 @@ public class VisualAnchor implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualAnchor clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualAnchor overwriteWith(VisualAnchor other)
 	{
 		return this; // todo
 	}
@@ -70,7 +70,7 @@ public class VisualAnchor implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 	
-	public Transformable transform(Transform transformToApply)
+	public VisualAnchor transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

@@ -9,7 +9,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class VisualSelect implements Visual
+public class VisualSelect implements Visual<VisualSelect>
 {
 	public Map<String,Visual> childrenByName;
 	public BiFunction<UniverseWorldPlaceEntities,Display,String[]> _selectChildNames;
@@ -50,12 +50,12 @@ public class VisualSelect implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualSelect clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualSelect overwriteWith(VisualSelect other)
 	{
 		return this; // todo
 	}
@@ -64,7 +64,7 @@ public class VisualSelect implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 	
-	public Transformable transform(Transform transformToApply)
+	public VisualSelect transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

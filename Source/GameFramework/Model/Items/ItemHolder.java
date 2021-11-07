@@ -838,15 +838,15 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			childControls,
 			new ActorAction[]
 			{
-				new ActorAction("Back", back),
+				new ActorAction("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
 
-				new ActorAction("Up", up),
-				new ActorAction("Down", down),
-				new ActorAction("Split", split),
-				new ActorAction("Join", join),
-				new ActorAction("Sort", sort),
-				new ActorAction("Drop", drop),
-				new ActorAction("Use", use),
+				new ActorAction("Up", (UniverseWorldPlaceEntities uwpeUp) -> up.run() ),
+				new ActorAction("Down", (UniverseWorldPlaceEntities uwpeDown) -> down.run() ),
+				new ActorAction("Split", (UniverseWorldPlaceEntities uwpeSplit) -> split.run() ),
+				new ActorAction("Join", (UniverseWorldPlaceEntities uwpeJoin) -> join.run() ),
+				new ActorAction("Sort", (UniverseWorldPlaceEntities uwpeSort) -> sort.run() ),
+				new ActorAction("Drop", (UniverseWorldPlaceEntities uwpeDrop) -> drop.run() ),
+				new ActorAction("Use", (UniverseWorldPlaceEntities uwpeUse) -> use.run() ),
 
 				new ActorAction("Item0", (UniverseWorldPlaceEntities uwpe0) -> itemHolder.equipItemInNumberedSlot(uwpe.universe, entityItemHolder, null) ),
 				new ActorAction("Item1", (UniverseWorldPlaceEntities uwpe1) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 1) ),

@@ -5,8 +5,9 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Utility.*;
 
-public class VisualPolygon implements Visual
+public class VisualPolygon implements Visual<VisualPolygon>
 {
 	public Path verticesAsPath;
 	public Color colorFill;
@@ -39,7 +40,7 @@ public class VisualPolygon implements Visual
 	{
 		var returnValue = new VisualPolygon
 		(
-			path, colorFill, null, null // shouldUseEntityOrientation
+			path, colorFill, null, false // shouldUseEntityOrientation
 		);
 		return returnValue;
 	}
@@ -104,17 +105,16 @@ public class VisualPolygon implements Visual
 		);
 	}
 
-	public Visual overwriteWith(Visual otherAsVisual)
+	public VisualPolygon overwriteWith(VisualPolygon other)
 	{
-		var otherAsVisualPolygon = (VisualPolygon)other;
-		this.verticesAsPath.overwriteWith(otherAsVisualPolygon.verticesAsPath);
+		this.verticesAsPath.overwriteWith(other.verticesAsPath);
 		if (this.colorFill != null)
 		{
-			this.colorFill.overwriteWith(otherAsVisualPolygon.colorFill);
+			this.colorFill.overwriteWith(other.colorFill);
 		}
 		if (this.colorBorder != null)
 		{
-			this.colorBorder.overwriteWith(otherAsVisualPolygon.colorBorder);
+			this.colorBorder.overwriteWith(other.colorBorder);
 		}
 		this.shouldUseEntityOrientation = other.shouldUseEntityOrientation;
 		return this;
@@ -122,7 +122,9 @@ public class VisualPolygon implements Visual
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Coords[] coordsGroupToTranslate() { return null; }
+
+	public VisualPolygon transform(Transform transformToApply)
 	{
 		this.verticesAsPath.transform(transformToApply);
 		return this;

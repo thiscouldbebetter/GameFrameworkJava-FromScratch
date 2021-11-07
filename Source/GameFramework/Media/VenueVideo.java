@@ -39,13 +39,15 @@ public class VenueVideo implements Venue
 			),
 		};
 
-		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
-		(
-			this.actionToInputsMappings, (ActionToInputsMapping x) -> x.inputNames
-		);
+		this.actionToInputsMappingsByInputName =
+			ArrayHelper.addLookupsMultiple
+			(
+				Arrays.asList(this.actionToInputsMappings),
+				(ActionToInputsMapping x) -> x.inputNames
+			);
 	}
 
-	public void draw()
+	public void draw(Universe universe)
 	{
 		// do nothing
 	}
@@ -57,7 +59,7 @@ public class VenueVideo implements Venue
 	{
 		if (this.video == null)
 		{
-			universe.platformHelper.platformableHide(universe.display);
+			//universe.platformHelper.platformableHide(universe.display);
 			this.video = universe.videoHelper.videosByName.get(this.videoName);
 			this.video.play(universe);
 		}
@@ -67,7 +69,7 @@ public class VenueVideo implements Venue
 			var shouldVideoBeStopped = false;
 
 			var inputHelper = universe.inputHelper;
-			if (inputHelper.isMouseClicked(null))
+			if (inputHelper.isMouseClicked())
 			{
 				inputHelper.isMouseClicked(false);
 				shouldVideoBeStopped = true;
@@ -76,9 +78,9 @@ public class VenueVideo implements Venue
 			{
 				var controlActionNames = ControlActionNames.Instances();
 				var inputsPressed = inputHelper.inputsPressed;
-				for (var i = 0; i < inputsPressed.length; i++)
+				for (var i = 0; i < inputsPressed.size(); i++)
 				{
-					var inputPressed = inputsPressed[i];
+					var inputPressed = inputsPressed.get(i);
 					if (inputPressed.isActive)
 					{
 						var actionToInputsMapping =
@@ -98,7 +100,7 @@ public class VenueVideo implements Venue
 
 			if (shouldVideoBeStopped)
 			{
-				this.video.stop(universe.platformHelper);
+				//this.video.stop(universe.platformHelper);
 			}
 		}
 
@@ -107,7 +109,7 @@ public class VenueVideo implements Venue
 			var display = universe.display;
 			var colorBlack = Color.byName("Black");
 			display.drawBackground(colorBlack, colorBlack);
-			universe.platformHelper.platformableShow(display);
+			//universe.platformHelper.platformableShow(display);
 			universe.venueNext =
 				universe.controlBuilder.venueTransitionalFromTo
 				(

@@ -209,7 +209,7 @@ public class ArrayHelper
 		if (arrayToClone != null)
 		{
 			returnValues =
-				(T[]) Array.newInstance(T.getClass(), arrayToClone.length);
+				(T[]) Array.newInstance(T.class, arrayToClone.length);
 
 			for (var i = 0; i < arrayToClone.length; i++)
 			{
@@ -410,7 +410,7 @@ public class ArrayHelper
 		for (var i = 0; i < list.size(); i++)
 		{
 			var elementOther = other.get(i);
-			this.set(i, elementOther);
+			list.set(i, elementOther);
 		}
 
 		return list;

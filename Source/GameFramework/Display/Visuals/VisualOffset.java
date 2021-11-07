@@ -1,10 +1,11 @@
 
 package GameFramework.Display.Visuals;
 
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
-import GameFramework.Geometry.Tirable.*;
+import GameFramework.Model.*;
 
-public class VisualOffset implements Visual
+public class VisualOffset implements Visual<VisualOffset>
 {
 	public Visual child;
 	public Coords offset;
@@ -40,12 +41,12 @@ public class VisualOffset implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualOffset clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualOffset overwriteWith(VisualOffset other)
 	{
 		return this; // todo
 	}
@@ -54,7 +55,7 @@ public class VisualOffset implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 	
-	public Transformable transform(Transform transformToApply)
+	public VisualOffset transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

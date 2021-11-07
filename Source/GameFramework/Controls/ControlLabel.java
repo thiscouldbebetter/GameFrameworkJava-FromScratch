@@ -8,7 +8,7 @@ import GameFramework.Model.*;
 public class ControlLabel extends ControlBase
 {
 	public boolean isTextCentered;
-	private Object _text;
+	private DataBinding<Object,String> _text;
 
 	public ControlBase parent;
 
@@ -16,8 +16,12 @@ public class ControlLabel extends ControlBase
 
 	public ControlLabel
 	(
-		String name, Coords pos, Coords size, boolean isTextCentered,
-		Object text, Double fontHeightInPixels
+		String name,
+		Coords pos,
+		Coords size,
+		boolean isTextCentered,
+		DataBinding<Object,String> text,
+		Double fontHeightInPixels
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -38,7 +42,7 @@ public class ControlLabel extends ControlBase
 			null, // size
 			false, // isTextCentered
 			text,
-			10 // fontHeightInPixels
+			10.0 // fontHeightInPixels
 		);
 	}
 
@@ -112,7 +116,7 @@ public class ControlLabel extends ControlBase
 					drawPos,
 					style.colorBorder,
 					style.colorFill, // colorOutline
-					null, // areColorsReversed
+					false, // areColorsReversed
 					this.isTextCentered,
 					widthMaxInPixels
 				);

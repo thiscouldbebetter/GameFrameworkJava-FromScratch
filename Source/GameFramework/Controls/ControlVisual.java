@@ -5,6 +5,7 @@ import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Media.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Places.*;
 import GameFramework.Model.Physics.*;
@@ -107,7 +108,7 @@ public class ControlVisual extends ControlBase
 		if (visualToDraw != null)
 		{
 			var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
-			var style = (style != null ? style : this.style(universe));
+			style = (style != null ? style : this.style(universe));
 
 			var colorFill =
 			(
@@ -123,7 +124,7 @@ public class ControlVisual extends ControlBase
 			);
 			display.drawRectangle
 			(
-				drawPos, this.size, colorFill, colorBorder, null
+				drawPos, this.size, colorFill, colorBorder, false
 			);
 
 			this._sizeHalf.overwriteWith(this.size).half();

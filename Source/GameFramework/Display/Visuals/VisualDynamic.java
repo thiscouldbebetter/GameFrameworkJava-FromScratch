@@ -8,7 +8,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class VisualDynamic implements Visual
+public class VisualDynamic implements Visual<VisualDynamic>
 {
 	Function<UniverseWorldPlaceEntities,Visual> methodForVisual;
 
@@ -25,12 +25,12 @@ public class VisualDynamic implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualDynamic clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualDynamic overwriteWith(VisualDynamic other)
 	{
 		return this; // todo
 	}
@@ -39,7 +39,7 @@ public class VisualDynamic implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
 
-	public Transformable transform(Transform transformToApply)
+	public VisualDynamic transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

@@ -93,4 +93,9 @@ public class Starvable implements EntityProperty<Starvable>
 			this.satietyMax, this.satietyLostPerTick, this._starve
 		);
 	}
+
+	public Starvable overwriteWith(Starvable other)
+	{
+		return this;
+	}
 }

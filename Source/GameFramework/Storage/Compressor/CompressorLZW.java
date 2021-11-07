@@ -90,7 +90,7 @@ public class CompressorLZW
 			new ByteStreamFromBytes(Arrays.asList(bytesToCompress)),
 			bitStreamCompressed
 		);
-		return byteStreamCompressed.bytes;
+		return Arrays.asList(byteStreamCompressed.bytes);
 	}
 
 	public String compressString(String stringToCompress)
@@ -114,7 +114,7 @@ public class CompressorLZW
 		);
 		var byteStream = bitStream.byteStream;
 		var returnValues = ((ByteStreamFromBytes)byteStream).bytes;
-		return returnValues.toArray(new int[] {});
+		return returnValues.toArray(new Integer[] {});
 	}
 
 	public ByteStream decompressByteStream
@@ -142,7 +142,7 @@ public class CompressorLZW
 		var symbolToDecode = bitStream.readInteger(symbolWidthInBitsCurrent);
 		var symbolDecoded = patternsBySymbol.get(symbolToDecode);
 
-		for (var i = 0; i < symbolDecoded.length; i++)
+		for (var i = 0; i < symbolDecoded.length(); i++)
 		{
 			var byteToWrite = symbolDecoded.charAt(i);
 			byteStreamDecompressed.writeByte(byteToWrite);
@@ -170,9 +170,9 @@ public class CompressorLZW
 				symbolDecoded = patternsBySymbol.get(symbolToDecode);
 				if (symbolDecoded == null)
 				{
-					character = pattern[0];
+					character = pattern.charAt(0);
 					patternPlusCharacter = pattern + character;
-					for (var i = 0; i < patternPlusCharacter.length; i++)
+					for (var i = 0; i < patternPlusCharacter.length(); i++)
 					{
 						var byteToWrite = patternPlusCharacter.charAt(i);
 						byteStreamDecompressed.writeByte(byteToWrite);
@@ -180,19 +180,19 @@ public class CompressorLZW
 				}
 				else
 				{
-					for (var i = 0; i < symbolDecoded.length; i++)
+					for (var i = 0; i < symbolDecoded.length(); i++)
 					{
 						var byteToWrite = symbolDecoded.charAt(i);
 						byteStreamDecompressed.writeByte(byteToWrite);
 					}
-					character = symbolDecoded[0];
+					character = symbolDecoded.charAt(0);
 					patternPlusCharacter = pattern + character;
 				}
 
-				var symbolNext =
+				symbolNext =
 					symbolsByPattern.size() + CompressorLZW.ControlSymbolCount;
 				symbolsByPattern.put(patternPlusCharacter, symbolNext);
-				patternsBySymbol[symbolNext] = patternPlusCharacter;
+				patternsBySymbol.put(symbolNext, patternPlusCharacter);
 			}
 		}
 
@@ -209,7 +209,7 @@ public class CompressorLZW
 		);
 		var bytesDecompressed = byteStreamDecompressed.bytes;
 
-		return bytesDecompressed.toArray(new int[] {});
+		return bytesDecompressed.toArray(new Integer[] {});
 	}
 
 	public String decompressString(String stringToDecode)

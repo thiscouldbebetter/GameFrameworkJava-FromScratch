@@ -40,7 +40,7 @@ public class ByteStreamFromString implements ByteStream
 			var byteRead = this.readByte();
 			bytesRead.add(byteRead);
 		}
-		return bytesRead.toArray(new int[] {});
+		return bytesRead.toArray(new Integer[] {});
 	}
 
 	public String readStringOfLength(int lengthOfString)
@@ -68,9 +68,9 @@ public class ByteStreamFromString implements ByteStream
 		this.byteIndexCurrent++;
 	}
 
-	public void writeBytes(int bytesToWrite[])
+	public void writeBytes(int[] bytesToWrite)
 	{
-		bytesToWrite.stream().forEach(x -> this.writeByte(x));
+		Arrays.asList(bytesToWrite).stream().forEach(x -> this.writeByte(x));
 	}
 
 	public void writeStringPaddedToLength(String stringToWrite, int lengthPadded)

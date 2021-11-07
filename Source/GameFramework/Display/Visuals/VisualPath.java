@@ -5,8 +5,9 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Model.*;
 
-public class VisualPath implements Visual
+public class VisualPath implements Visual<VisualPath>
 {
 	public Path verticesAsPath;
 	public Color color;
@@ -58,12 +59,12 @@ public class VisualPath implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualPath clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualPath overwriteWith(VisualPath other)
 	{
 		return this; // todo
 	}
@@ -72,7 +73,7 @@ public class VisualPath implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 	
-	public Transformable transform(Transform transformToApply)
+	public VisualPath transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

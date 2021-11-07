@@ -1,6 +1,8 @@
 
 package GameFramework.Storage;
 
+import java.util.*;
+
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
 import GameFramework.Helpers.*;
@@ -28,7 +30,7 @@ public class VenueFileUpload implements Venue, Platformable
 		var inputNames = Input.Names();
 		var controlActionNames = ControlActionNames.Instances();
 
-		this.actionToInputsMappings = new ActionToInputMapping[]
+		this.actionToInputsMappings = new ActionToInputsMapping[]
 		{
 			new ActionToInputsMapping
 			(
@@ -43,7 +45,7 @@ public class VenueFileUpload implements Venue, Platformable
 
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this.actionToInputsMappings,
+			Arrays.asList(this.actionToInputsMappings),
 			(ActionToInputsMapping x) -> x.inputNames
 		);
 	}
@@ -57,17 +59,20 @@ public class VenueFileUpload implements Venue, Platformable
 
 	public void finalize(Universe universe)
 	{
+		/*
 		var platformHelper = universe.platformHelper;
 		platformHelper.platformableRemove(this);
 		var display = universe.display;
 		var colorBlack = Color.byName("Black");
 		display.drawBackground(colorBlack, null);
 		platformHelper.platformableShow(display);
+		*/
 	}
+
+	/*
 
 	initialize(Universe universe)
 	{
-		/*
 		var display = universe.display;
 
 		universe.platformHelper.platformableHide(display);
@@ -114,14 +119,14 @@ public class VenueFileUpload implements Venue, Platformable
 		universe.platformHelper.platformableAdd(this);
 
 		inputFileUpload.focus();
-		*/
 	}
+	*/
 
 	public void updateForTimerTick(Universe universe)
 	{
 		var inputHelper = universe.inputHelper;
 		var inputsPressed = inputHelper.inputsPressed;
-		for (var i = 0; i < inputsPressed.length; i++)
+		for (var i = 0; i < inputsPressed.size(); i++)
 		{
 			var inputPressed = inputsPressed.get(i);
 			if (inputPressed.isActive)

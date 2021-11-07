@@ -17,7 +17,7 @@ public class ControlList extends ControlBase
 	public DataBinding<Object,Object> bindingForItemValue;
 	public DataBinding<Object,Boolean> bindingForIsEnabled;
 	public Consumer<Universe> _confirm;
-	public double widthInItems;
+	public int widthInItems;
 
 	public boolean isHighlighted;
 	public Coords _itemSpacing;
@@ -41,7 +41,7 @@ public class ControlList extends ControlBase
 		DataBinding<Object,Object> bindingForItemValue,
 		DataBinding<Object,Boolean> bindingForIsEnabled,
 		Consumer<Universe> confirm,
-		double widthInItems
+		int widthInItems
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -278,7 +278,7 @@ public class ControlList extends ControlBase
 	public Integer indexOfItemSelected()
 	{
 		var items = this.items();
-		var returnValue = Array.asList(items).indexOf(this.itemSelected());
+		var returnValue = Arrays.asList(items).indexOf(this.itemSelected());
 		return returnValue;
 	}
 

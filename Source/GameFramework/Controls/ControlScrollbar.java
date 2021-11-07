@@ -129,7 +129,7 @@ public class ControlScrollbar extends ControlBase
 		return slideSizeInPixels;
 	}
 
-	public int sliderPosInItems()
+	public double sliderPosInItems()
 	{
 		return this._sliderPosInItems;
 	}

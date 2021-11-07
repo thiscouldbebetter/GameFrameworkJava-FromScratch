@@ -53,7 +53,7 @@ public class Damage
 
 		if (this.effectsAndChances != null)
 		{
-			for (var i = 0; i < this.effectsAndChances.length; i++)
+			for (var i = 0; i < this.effectsAndChances.size(); i++)
 			{
 				var effectAndChance = this.effectsAndChances.get(i);
 				var chance = effectAndChance.second;
@@ -61,7 +61,7 @@ public class Damage
 				if (roll <= chance)
 				{
 					var effect = effectAndChance.first;
-					effectsOccurring.push(effect);
+					effectsOccurring.add(effect);
 				}
 			}
 		}

@@ -84,7 +84,7 @@ public class Activity
 
 	public Activity targetClearByName(String name)
 	{
-		this.targetsByName.delete(name);
+		this.targetsByName.remove(name);
 		return this;
 	}
 

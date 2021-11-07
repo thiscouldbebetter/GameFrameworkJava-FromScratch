@@ -42,7 +42,8 @@ public class VenueLayered implements Venue
 				var display = universe.display;
 				display.drawRectangle
 				(
-					Coords.Instances().Zeroes, display.sizeInPixels,
+					Coords.Instances().Zeroes,
+					display.sizeInPixels(),
 					this.colorToOverlayBetweenChildren, null, null
 				);
 			}

@@ -61,7 +61,7 @@ public class Playable implements EntityProperty<Playable>
 				"Health: " + entity.killable().integrity + "/" + entity.killable().integrityMax,
 				fontHeight
 			);
-			controlsForStatusFields.push(labelHealth);
+			controlsForStatusFields.add(labelHealth);
 		}
 
 		var tabButtonSize = Coords.fromXY(36, 20);
@@ -147,7 +147,7 @@ public class Playable implements EntityProperty<Playable>
 			// children
 			controlsForStatusFields
 		);
-		controlsForTabs.insert(0, statusAsControl);
+		controlsForTabs.add(0, statusAsControl);
 
 		Runnable back = () ->
 		{
@@ -162,7 +162,7 @@ public class Playable implements EntityProperty<Playable>
 			Coords.create(), // pos
 			size,
 			tabButtonSize,
-			controlsForTabs,
+			controlsForTabs.toArray(new ControlBase[] {}),
 			fontHeight,
 			back
 		);

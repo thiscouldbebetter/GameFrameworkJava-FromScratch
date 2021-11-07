@@ -38,8 +38,9 @@ public class DiceRoll
 			var offsetMagnitudeAsString =
 				sidesPerDieAndOffsetMagnitudeAsStrings[1];
 
-			sidesPerDie = parseInt(sidesPerDieAsString);
-			var offsetMagnitude = parseInt(offsetMagnitudeAsString);
+			sidesPerDie = Integer.parseInt(sidesPerDieAsString);
+			var offsetMagnitude =
+				Integer.parseInt(offsetMagnitudeAsString);
 			offset = offsetMagnitude;
 		}
 		else if (expressionHasMinus)
@@ -53,13 +54,13 @@ public class DiceRoll
 				sidesPerDieAndOffsetMagnitudeAsStrings[1];
 
 			sidesPerDie = parseInt(sidesPerDieAsString);
-			var offsetMagnitude = Integer.parse(offsetMagnitudeAsString);
+			var offsetMagnitude = Integer.parseInt(offsetMagnitudeAsString);
 			offset = 0 - offsetMagnitude;
 		}
 		else
 		{
 			var sidesPerDieAsString = expressionRemainder;
-			sidesPerDie = Integer.parse(sidesPerDieAsString);
+			sidesPerDie = Integer.parseInt(sidesPerDieAsString);
 		}
 
 		return new DiceRoll(numberOfDice, sidesPerDie, offset);
@@ -72,7 +73,7 @@ public class DiceRoll
 
 	// static methods
 
-	public static int roll(String expression, Randomizer randomizer)
+	public static double roll(String expression, Randomizer randomizer)
 	{
 		var diceRoll = DiceRoll.fromExpression(expression);
 		var returnValue = diceRoll.roll(randomizer);

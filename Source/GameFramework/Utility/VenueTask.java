@@ -31,7 +31,7 @@ public class VenueTask implements Venue
 		var returnValue = 0;
 		if (this.timeStarted != null)
 		{
-			var now = new Date();
+			var now = new DateTime();
 			var millisecondsSinceStarted = now.getTime() - this.timeStarted.getTime();
 			returnValue = Math.floor(millisecondsSinceStarted / 1000);
 		}
@@ -68,6 +68,6 @@ public class VenueTask implements Venue
 
 		clearInterval(timer);
 
-		this.done.apply(universe, result);
+		this.done.accept(universe, result);
 	}
 }

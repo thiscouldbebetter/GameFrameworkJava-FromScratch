@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class VisualText implements Visual
+public class VisualText implements Visual<VisualText>
 {
 	public DataBinding<Object,String> _text;
 	public boolean shouldTextContextBeReset;
@@ -98,12 +98,12 @@ public class VisualText implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualText clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualText overwriteWith(VisualText other)
 	{
 		return this; // todo
 	}
@@ -112,7 +112,7 @@ public class VisualText implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
 
-	public Transformable transform(Transform transformToApply)
+	public VisualText transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

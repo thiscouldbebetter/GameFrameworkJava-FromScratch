@@ -5,6 +5,9 @@ import java.util.*;
 import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Shapes.*;
+import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Combat.*;
 

@@ -3,6 +3,8 @@ package GameFramework.Model.Items.Equipment;
 
 import java.util.*;
 
+import GameFramework.Helpers.*;
+
 public class EquipmentSocketGroup
 {
 	public EquipmentSocketDefnGroup defnGroup;

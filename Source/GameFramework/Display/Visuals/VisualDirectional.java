@@ -9,7 +9,7 @@ import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
-public class VisualDirectional implements Visual
+public class VisualDirectional implements Visual<VisualDirectional>
 {
 	public Visual visualForNoDirection;
 	public Visual[] visualsForDirections;
@@ -89,12 +89,12 @@ public class VisualDirectional implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualDirectional clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualDirectional overwriteWith(VisualDirectional other)
 	{
 		return this; // todo
 	}
@@ -103,7 +103,7 @@ public class VisualDirectional implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
 	
-	public Transformable transform(Transform transformToApply)
+	public VisualDirectional transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

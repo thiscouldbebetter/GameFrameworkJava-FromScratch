@@ -7,7 +7,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class VisualBar implements Visual
+public class VisualBar implements Visual<VisualBar>
 {
 	public String abbreviation;
 	public Coords size;
@@ -102,7 +102,7 @@ public class VisualBar implements Visual
 					this._sizeCurrent, // pos
 					new Coords(1, this.size.y, 0), // size
 					this.color, null, false
-				)
+				);
 			}
 
 			display.drawRectangle
@@ -138,19 +138,19 @@ public class VisualBar implements Visual
 				Color.byName("Black"), // colorOutline,
 				false, // areColorsReversed
 				true, // isCentered
-				null, // widthMaxInPixels
+				null // widthMaxInPixels
 			);
 		}
 	}
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualBar clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualBar overwriteWith(VisualBar other)
 	{
 		return this; // todo
 	}
@@ -159,7 +159,7 @@ public class VisualBar implements Visual
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 	
-	public Transformable transform(Transform transformToApply)
+	public VisualBar transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

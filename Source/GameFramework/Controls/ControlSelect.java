@@ -38,17 +38,17 @@ public class ControlSelect extends ControlBase
 		this.bindingForOptionText = bindingForOptionText;
 
 		this.indexOfOptionSelected = null;
-		var valueSelected = this.valueSelected();
-		var options = this.options();
+		var valueSelectedActual = this.valueSelected();
+		var optionsActual = this.options();
 		for (var i = 0; i < options.length; i++)
 		{
-			var option = options[i];
+			var option = optionsActual[i];
 			var optionValue = this.bindingForOptionValues.contextSet
 			(
 				option
 			).get();
 
-			if (optionValue == valueSelected)
+			if (optionValue == valueSelectedActual)
 			{
 				this.indexOfOptionSelected = i;
 				break;

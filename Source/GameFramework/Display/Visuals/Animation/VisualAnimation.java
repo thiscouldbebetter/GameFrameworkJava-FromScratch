@@ -1,12 +1,12 @@
 
-package GameFramework.Display.Visuals;
+package GameFramework.Display.Visuals.Animation;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class VisualAnimation implements Visual
+public class VisualAnimation implements Visual<VisualAnimation>
 {
 	public String name;
 	public int[] ticksToHoldFrames;
@@ -118,19 +118,21 @@ public class VisualAnimation implements Visual
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualAnimation clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualAnimation overwriteWith(VisualAnimation other)
 	{
 		return this; // todo
 	}
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Coords[] coordsGroupForTranslate() { return null; }
+
+	public VisualAnimation transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

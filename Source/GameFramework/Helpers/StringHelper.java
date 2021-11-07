@@ -41,7 +41,11 @@ public class StringHelper
 		String stringToReplaceWith
 	)
 	{
-		return stringToReplaceWithin.split(stringToBeReplaced).join(stringToReplaceWith);
+		return stringToReplaceWithin.replace
+		(
+			stringToBeReplaced,
+			stringToReplaceWith
+		);
 	}
 
 	public static String toTitleCase(String value)

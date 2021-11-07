@@ -30,7 +30,7 @@ public class ShapeHelper
 	{
 		this._transformLocate.loc = loc;
 
-		Transforms.applyTransformToCoordsMObject
+		Transforms.applyTransformToCoordsMany
 		(
 			this._transformLocate,
 			shape.coordsGroupToTranslate()
