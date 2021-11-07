@@ -63,7 +63,7 @@ public class ShapeGroupAll implements ShapeBase<ShapeGroupAll>
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public ShapeGroupAll transform(Transform transformToApply)
 	{
 		Arrays.asList(this.shapes).stream().forEach
 		(

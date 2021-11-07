@@ -43,9 +43,8 @@ public class Ephemeral implements EntityProperty<Ephemeral>
 		return new Ephemeral(this.ticksToLive, this.expire);
 	}
 
-	public EntityProperty overwriteWith(EntityProperty otherAsEntityProperty)
+	public Ephemeral overwriteWith(Ephemeral other)
 	{
-		var other = (Ephemeral)otherAsEntityProperty;
 		this.ticksToLive = other.ticksToLive;
 		return this;
 	}

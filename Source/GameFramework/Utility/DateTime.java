@@ -29,7 +29,7 @@ public class DateTime
 
 	// static methods
 
-	static fromSystemDate(Date systemDate)
+	public static DateTime fromSystemDate(Date systemDate)
 	{
 		var returnValue = new DateTime
 		(

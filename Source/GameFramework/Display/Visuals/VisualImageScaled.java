@@ -77,7 +77,7 @@ public class VisualImageScaled implements VisualImage
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public VisualImageScaled transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

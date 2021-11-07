@@ -353,15 +353,17 @@ public class ArrayHelper
 		return list;
 	}
 
-	static intersectLists(list0: any[], list1: any[]): any[]
+	*/
+
+	public static <T> List<T> intersectArrays(T[] array0, T[] array1)
 	{
-		var elementsInBothLists = new List<any>();
+		var elementsInBothLists = new List<T>();
 
-		for (var i = 0; i < list0.length; i++)
+		for (var i = 0; i < array0.length; i++)
 		{
-			var element = list0[i];
+			var element = array0[i];
 
-			var isElementInList1 = (list1.indexOf(element) >= 0);
+			var isElementInList1 = (array1.indexOf(element) >= 0);
 			if (isElementInList1)
 			{
 				elementsInBothLists.add(element);
@@ -369,7 +371,6 @@ public class ArrayHelper
 		}
 		return elementsInBothLists;
 	}
-	*/
 
 	public static double[] overwriteWith(double[] arrayToOverwrite, double[] other)
 	{

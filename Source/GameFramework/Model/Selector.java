@@ -176,7 +176,7 @@ public class Selector implements EntityProperty<Selector>, Clonable<Selector>
 				);
 				return entityNotAlreadySelectedInRange;
 			}
-		).sort
+		).sorted
 		(
 			(Entity a, Entity b) ->
 				a.locatable().distanceFromPos(mousePosAbsolute)
@@ -291,7 +291,7 @@ public class Selector implements EntityProperty<Selector>, Clonable<Selector>
 					false, // isTextCentered
 					DataBinding.fromContextAndGet
 					(
-						this,
+						selector,
 						(Selector c) ->
 							(
 								c.entitiesSelected.size() == 0

@@ -50,7 +50,7 @@ public class ShapeInverse<T extends ShapeBase<T>> implements ShapeBase<ShapeInve
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public ShapeInverse transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

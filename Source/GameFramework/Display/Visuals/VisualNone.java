@@ -36,7 +36,7 @@ public class VisualNone implements Visual<VisualNone>
 
 	// Visual
 
-	public void draw(UniverseWorldPlaceEntity uwpe, Display display)
+	public void draw(UniverseWorldPlaceEntities uwpe, Display display)
 	{
 		// Do nothing.
 	}

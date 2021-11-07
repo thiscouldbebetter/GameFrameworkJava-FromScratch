@@ -95,7 +95,7 @@ public class ItemDefn implements EntityProperty<ItemDefn>
 	{
 		return new ItemDefn
 		(
-			name, null, null, mass, tradeValue, 0, null, null, visual, null
+			name, null, null, mass, tradeValue, 0.0, null, null, visual, null
 		);
 	}
 

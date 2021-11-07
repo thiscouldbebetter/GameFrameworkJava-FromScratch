@@ -128,7 +128,7 @@ public class Sphere implements ShapeBase<Sphere>
 		return this._centerAsArray;
 	}
 
-	public Transformable transform(Transform transformToApply)
+	public Sphere transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

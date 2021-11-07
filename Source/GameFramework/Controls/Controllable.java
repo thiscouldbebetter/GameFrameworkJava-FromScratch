@@ -26,7 +26,7 @@ public class Controllable implements EntityProperty<Controllable>
 		return this; // todo
 	}
 
-	public EntityProperty overwriteWith(EntityProperty other) { return this; }
+	public Controllable overwriteWith(Controllable other) { return this; }
 
 	// EntityProperty.
 

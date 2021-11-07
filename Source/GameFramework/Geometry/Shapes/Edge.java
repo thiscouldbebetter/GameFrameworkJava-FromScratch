@@ -141,7 +141,7 @@ public class Edge implements ShapeBase<Edge>
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Edge transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

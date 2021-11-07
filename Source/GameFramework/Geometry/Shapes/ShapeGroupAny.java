@@ -80,7 +80,7 @@ public class ShapeGroupAny implements ShapeBase<ShapeGroupAny>
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public ShapeGroupAny transform(Transform transformToApply)
 	{
 		this.shapes.stream().forEach
 		(

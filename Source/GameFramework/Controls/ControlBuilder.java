@@ -269,7 +269,7 @@ public class ControlBuilder
 					Coords.fromXY(size.x / 2, marginSize.y + fontHeight / 2),
 					labelSize,
 					true, // isTextCentered
-					message,
+					DataBinding.fromContext(message),
 					fontHeight
 				),
 
@@ -773,7 +773,7 @@ public class ControlBuilder
 					Coords.fromXY(100, 15), // pos
 					Coords.fromXY(100, 20), // size
 					true, // isTextCentered
-					"Actions:",
+					DataBinding.fromContext("Actions:"),
 					fontHeight
 				),
 
@@ -782,7 +782,11 @@ public class ControlBuilder
 					"listActions",
 					Coords.fromXY(50, 25), // pos
 					Coords.fromXY(100, 40), // size
-					DataBinding.fromContext(placeDefn.actionToInputsMappingsEdited), // items
+					DataBinding.fromContextAndGet
+					(
+						placeDefn,
+						(PlaceDefn c) -> c.actionToInputsMappingsEdited
+					), // items
 					DataBinding.fromGet
 					(
 						(ActionToInputsMapping c) -> { return c.actionName; }
@@ -806,7 +810,7 @@ public class ControlBuilder
 					Coords.fromXY(100, 70), // pos
 					Coords.fromXY(100, 15), // size
 					true, // isTextCentered
-					"Inputs:",
+					DataBinding.fromContext("Inputs:"),
 					fontHeight
 				),
 

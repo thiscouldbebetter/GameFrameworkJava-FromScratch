@@ -13,7 +13,7 @@ public  class Transform_None implements Transform
 		return this;
 	}
 
-	public Transformable transform(Transformable transformable)
+	public T transform<T> extends Transformable<T>>(T transformable)
 	{
 		return transformable;
 	}
@@ -22,6 +22,4 @@ public  class Transform_None implements Transform
 	{
 		return coordsToTransform;
 	}
-}
-
 }

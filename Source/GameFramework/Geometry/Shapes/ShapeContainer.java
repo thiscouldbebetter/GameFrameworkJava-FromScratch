@@ -56,7 +56,7 @@ public class ShapeContainer implements ShapeBase<ShapeContainer>
 		return null;
 	}
 
-	public Transformable transform(Transform transformToApply)
+	public ShapeContainer transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

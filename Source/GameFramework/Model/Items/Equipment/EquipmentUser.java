@@ -52,9 +52,9 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 						).length > 0
 				).collect(Collectors.toList());
 
-				if (itemsEquippable.length > 0)
+				if (itemsEquippable.size() > 0)
 				{
-					var itemToEquip = itemsEquippable[0];
+					var itemToEquip = itemsEquippable.get(0);
 					var itemToEquipAsEntity = itemToEquip.toEntity
 					(
 						uwpe
@@ -84,12 +84,14 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		var itemDefn = itemToEquip.defn(world);
 		var categoryNames = Arrays.asList(itemDefn.categoryNames);
 		
-		var socketFound = sockets.stream().find
+		var socketFound = Arrays.asList(sockets).stream().find
 		(
 			(EquipmentSocket socket) ->
 			{
 				var socketDefn = socket.defn(socketDefnGroup);
-				var isItemAllowedInSocket = socketDefn.categoriesAllowedNames.anyMatch
+				var categoriesAllowedNames =
+					Arrays.asList(socketDefn.categoriesAllowedNames);
+				var isItemAllowedInSocket = categoriesAllowedNames.stream().anyMatch
 				(
 					(String y) -> categoryNames.indexOf(y) >= 0
 				);
@@ -260,7 +262,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 				var socketItemDefnName = socketItem.defnName;
 				if (itemsHeld.indexOf(socketItem) == -1)
 				{
-					var itemOfSameTypeStillHeld = itemsHeld.find
+					var itemOfSameTypeStillHeld = itemsHeld.stream().find
 					(
 						x -> x.defnName == socketItemDefnName
 					);
@@ -282,7 +284,10 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 
 	public void unequipItem(Item itemToUnequip)
 	{
-		var socket = this.socketGroup.sockets.filter
+		var socket = Arrays.asList
+		(
+			this.socketGroup.sockets
+		).stream().filter
 		(
 			x -> x.itemEntityEquipped.item() == itemToUnequip
 		)[0];
@@ -390,7 +395,10 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			"listEquippables",
 			Coords.fromXY(10, 15), // pos
 			Coords.fromXY(70, listHeight), // size
-			DataBinding.fromContext(itemEntitiesEquippable), // items
+			DataBinding.fromContext
+			(
+				itemEntitiesEquippable
+			), // items
 			DataBinding.fromGet
 			(
 				(Entity c) -> c.item().toString(world)
@@ -398,7 +406,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			fontHeightSmall,
 			new DataBinding
 			(
-				this,
+				equipmentUser,
 				(EquipmentUser c) -> c.itemEntitySelected,
 				(EquipmentUser c, Entity v) -> c.itemEntitySelected = v
 			), // bindingForItemSelected
@@ -525,7 +533,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 					Coords.fromXY(10, 5), // pos
 					Coords.fromXY(70, 25), // size
 					false, // isTextCentered
-					"Equippable:",
+					DataBinding.fromContext("Equippable:"),
 					fontHeightSmall
 				),
 
@@ -541,7 +549,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 					Coords.fromXY(100, 5), // pos
 					Coords.fromXY(100, 25), // size
 					false, // isTextCentered
-					"Equipped:",
+					DataBinding.fromContext("Equipped:"),
 					fontHeightSmall
 				),
 
@@ -638,4 +646,10 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 
 		return returnValue;
 	}
+
+	// Clonable.
+
+	public EquipmentUser clone() { return this; }
+	public EquipmentUser overwriteWith(EquipmentUser other) { return this; }
+
 }

@@ -107,7 +107,7 @@ public class BoxRotated implements ShapeBase<BoxRotated>
 		return new Coords[] { this.box.center };
 	}
 
-	public Transformable transform(Transform transformToApply)
+	public BoxRotated transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

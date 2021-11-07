@@ -55,7 +55,7 @@ public class VenueControls implements Venue
 				ArrayHelper.addMany(
 					Arrays.asList(new String[] { inputNames.ArrowDown }),
 					buildGamepadInputs.apply(inputNames.GamepadMoveDown)
-				),
+				).toArray(new String[] {}),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -65,7 +65,7 @@ public class VenueControls implements Venue
 				(
 					new String[] { inputNames.ArrowLeft },
 					buildGamepadInputs(inputNames.GamepadMoveLeft)
-				),
+				).toArray(new String[] {}),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -79,7 +79,7 @@ public class VenueControls implements Venue
 						new String[] { inputNames.ArrowRight, inputNames.Tab },
 						buildGamepadInputs.apply(inputNames.GamepadMoveRight)
 					)
-				),
+				).toArray(new String[] {}),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -89,7 +89,7 @@ public class VenueControls implements Venue
 				(
 					Arrays.asList(new String[] { inputNames.ArrowUp }),
 					buildGamepadInputs.apply(inputNames.GamepadMoveUp)
-				),
+				).toArray(new String[] {}),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -99,7 +99,7 @@ public class VenueControls implements Venue
 				(
 					Arrays.asList(new String[] { inputNames.Enter }),
 					buildGamepadInputs.apply(inputNames.GamepadButton1)
-				),
+				).toArray(new String[] {}),
 				inactivate
 			),
 			new ActionToInputsMapping

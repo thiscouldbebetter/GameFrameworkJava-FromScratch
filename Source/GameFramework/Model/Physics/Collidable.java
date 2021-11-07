@@ -3,6 +3,7 @@ package GameFramework.Model.Physics;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Collisions.*;
@@ -44,7 +45,7 @@ public class Collidable implements EntityProperty<Collidable>
 		);
 		this._collideEntities = collideEntities;
 
-		this.collider = this.colliderAtRest.clone();
+		this.collider = (ShapeBase)this.colliderAtRest.clone();
 		this.locPrev = Disposition.create();
 		this.ticksUntilCanCollide = 0;
 		this.entitiesAlreadyCollidedWith = new ArrayList<Entity>();
@@ -215,12 +216,12 @@ public class Collidable implements EntityProperty<Collidable>
 		collisionsSoFar = collisionsSoFar.stream().filter
 		(
 			collision ->
-				this.entityPropertyNamesToCollideWith.anyMatch
+				this.entityPropertyNamesToCollideWith.stream().anyMatch
 				(
 					propertyName ->
-						collision.entitiesColliding[1].propertyByName(propertyName) != null
+						collision.entitiesColliding.get(1).propertyByName(propertyName) != null
 				)
-		).toList();
+		).collect(Collectors.toList());
 		return collisionsSoFar;
 	}
 
@@ -383,13 +384,13 @@ public class Collidable implements EntityProperty<Collidable>
 		return new Collidable
 		(
 			this.ticksToWaitBetweenCollisions,
-			this.colliderAtRest.clone(),
+			(ShapeBase)(this.colliderAtRest.clone() ),
 			this.entityPropertyNamesToCollideWith,
 			this._collideEntities
 		);
 	}
 
-	public EntityProperty overwriteWith(EntityProperty otherAsProperty)
+	public Collidable overwriteWith(Collidable otherAsProperty)
 	{
 		return this; // todo
 	}

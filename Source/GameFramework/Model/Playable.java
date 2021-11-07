@@ -26,7 +26,7 @@ public class Playable implements EntityProperty<Playable>
 		var timePlayingAsString =
 			universe.world.timePlayingAsStringLong(universe);
 
-		var controlsForStatusFields = new ControlBase[]
+		var controlsForStatusFields = Arrays.asList(new ControlBase[]
 		{
 			new ControlLabel
 			(
@@ -34,7 +34,7 @@ public class Playable implements EntityProperty<Playable>
 				Coords.fromXY(marginX, labelSize.y), // pos
 				labelSize.clone(),
 				false, // isTextCentered
-				"Profile: " + universe.profile.name,
+				DataBinding.fromContext("Profile: " + universe.profile.name),
 				fontHeight
 			),
 
@@ -44,10 +44,10 @@ public class Playable implements EntityProperty<Playable>
 				Coords.fromXY(marginX, labelSize.y * 2), // pos
 				labelSize.clone(),
 				false, // isTextCentered
-				"Time Playing: " + timePlayingAsString,
+				DataBinding.fromContext("Time Playing: " + timePlayingAsString),
 				fontHeight
 			)
-		};
+		});
 
 		var killable = entity.killable();
 		if (killable != null)
@@ -58,7 +58,11 @@ public class Playable implements EntityProperty<Playable>
 				Coords.fromXY(marginX, labelSize.y * 3), // pos
 				labelSize.clone(),
 				false, // isTextCentered
-				"Health: " + entity.killable().integrity + "/" + entity.killable().integrityMax,
+				DataBinding.fromContext
+				(
+					"Health: " + entity.killable().integrity
+					+ "/" + entity.killable().integrityMax
+				),
 				fontHeight
 			);
 			controlsForStatusFields.add(labelHealth);
@@ -79,7 +83,7 @@ public class Playable implements EntityProperty<Playable>
 			(
 				universe, tabPageSize, entity, venuePrev, includeTitleAndDoneButtonFalse
 			);
-			controlsForTabs.push(itemHolderAsControl);
+			controlsForTabs.add(itemHolderAsControl);
 		}
 
 		var equipmentUser = entity.equipmentUser();
@@ -99,7 +103,7 @@ public class Playable implements EntityProperty<Playable>
 			(
 				universe, tabPageSize, entity, entity, venuePrev, includeTitleAndDoneButtonFalse
 			);
-			controlsForTabs.push(crafterAsControl);
+			controlsForTabs.add(crafterAsControl);
 		}
 
 		var skillLearner = entity.skillLearner();
@@ -109,7 +113,7 @@ public class Playable implements EntityProperty<Playable>
 			(
 				universe, tabPageSize, entity, venuePrev, includeTitleAndDoneButtonFalse
 			);
-			controlsForTabs.push(skillLearnerAsControl);
+			controlsForTabs.add(skillLearnerAsControl);
 
 			var labelExperience = new ControlLabel
 			(
@@ -117,10 +121,13 @@ public class Playable implements EntityProperty<Playable>
 				Coords.fromXY(marginX, labelSize.y * 4), // pos
 				labelSize.clone(),
 				false, // isTextCentered
-				"Experience: " + entity.skillLearner().learningAccumulated,
+				DataBinding.fromContext
+				(
+					"Experience: " + entity.skillLearner().learningAccumulated
+				),
 				fontHeight
 			);
-			controlsForStatusFields.push(labelExperience);
+			controlsForStatusFields.add(labelExperience);
 		}
 
 		var journalKeeper = entity.journalKeeper();
@@ -130,7 +137,7 @@ public class Playable implements EntityProperty<Playable>
 			(
 				universe, tabPageSize, entity, venuePrev, includeTitleAndDoneButtonFalse
 			);
-			controlsForTabs.push(journalKeeperAsControl);
+			controlsForTabs.add(journalKeeperAsControl);
 		}
 
 		var gameAndSettingsMenuAsControl = universe.controlBuilder.gameAndSettings

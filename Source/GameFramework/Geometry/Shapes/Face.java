@@ -161,7 +161,7 @@ public class Face implements ShapeBase<Face>
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public Face transform(Transform transformToApply)
 	{
 		Transforms.applyTransformToCoordsMany(transformToApply, this.vertices);
 		return this;

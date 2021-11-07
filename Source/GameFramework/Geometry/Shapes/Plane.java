@@ -127,7 +127,7 @@ public class Plane implements ShapeBase<Plane>
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public Plane transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

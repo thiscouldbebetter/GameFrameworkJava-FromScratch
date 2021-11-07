@@ -21,7 +21,7 @@ public class Actor implements EntityProperty<Actor>
 	{
 		return Actor.fromActivityDefnName
 		(
-			ActivityDefn.Instances().DoNothing.name
+			ActivityDefn.Instances().DoNothing.name()
 		);
 	}
 

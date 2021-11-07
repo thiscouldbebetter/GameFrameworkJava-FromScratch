@@ -1,7 +1,9 @@
 
 package GameFramework.Model.Items.Equipment;
 
-public class EquipmentSocketDefn implements Namable;
+import GameFramework.Utility.*;
+
+public class EquipmentSocketDefn implements Namable
 {
 	public String _name;
 	public String[] categoriesAllowedNames;

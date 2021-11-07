@@ -2,6 +2,7 @@
 package GameFramework.Display.Visuals;
 
 import GameFramework.Display.*;
+import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
 public class VisualCrosshairs implements Visual<VisualCrosshairs>

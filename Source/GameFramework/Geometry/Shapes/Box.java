@@ -458,7 +458,7 @@ public class Box implements ShapeBase<Box>
 		return new Coords[] { this.center };
 	}
 
-	public Transformable transform(Transform transformToApply)
+	public Box transform(Transform transformToApply)
 	{
 		Transforms.applyTransformToCoordsMany
 		(

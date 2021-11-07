@@ -227,7 +227,7 @@ public class Mesh implements ShapeBase<Mesh>
 
 	// transformable
 
-	public Transformable transform(Transform transformToApply)
+	public Mesh transform(Transform transformToApply)
 	{
 		for (var v = 0; v < this.vertexOffsets.length; v++)
 		{

@@ -3,11 +3,12 @@ package GameFramework.Controls;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Model.*;
 
 public class ControlTextarea extends ControlBase
 {
 	private DataBinding<Object,String> _text;
-	private DataBinding<Object,Boolean>; _isEnabled
+	private DataBinding<Object,Boolean> _isEnabled;
 
 	public int charCountMax;
 	public int cursorPos;
@@ -48,7 +49,7 @@ public class ControlTextarea extends ControlBase
 			this.lineSpacing, // itemHeight
 			DataBinding.fromContextAndGet
 			(
-				this, (ControlTextarea c) => c.textAsLines()
+				this, (ControlTextarea c) -> c.textAsLines()
 			),
 			0 // sliderPosInItems
 		);

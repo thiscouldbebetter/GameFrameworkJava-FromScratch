@@ -54,7 +54,7 @@ public class FaceBuilder implements Clonable<FaceBuilder>
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public FaceBuilder transform(Transform transformToApply)
 	{
 		throw new Error("Not implemented!");
 	}

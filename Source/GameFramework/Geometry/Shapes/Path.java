@@ -5,7 +5,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
-public class Path extends Transformable
+public class Path extends Transformable<Path>
 {
 	public Coords[] points;
 
@@ -29,7 +29,7 @@ public class Path extends Transformable
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Path transform(Transform transformToApply)
 	{
 		Transforms.applyTransformToCoordsMany(transformToApply, this.points);
 		return this;

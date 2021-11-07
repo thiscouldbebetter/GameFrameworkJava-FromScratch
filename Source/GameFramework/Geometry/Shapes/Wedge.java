@@ -210,7 +210,7 @@ public class Wedge implements ShapeBase
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Wedge transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

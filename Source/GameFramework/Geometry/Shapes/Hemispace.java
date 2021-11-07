@@ -91,7 +91,7 @@ public class Hemispace implements ShapeBase<Hemispace>
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Transformable transform(Transform transformToApply)
+	public Hemispace transform(Transform transformToApply)
 	{
 		this.plane.transform(transformToApply);
 		return this;

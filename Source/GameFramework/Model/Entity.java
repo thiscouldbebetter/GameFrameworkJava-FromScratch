@@ -12,10 +12,13 @@ import GameFramework.Model.Actors.*;
 import GameFramework.Model.Combat.*;
 import GameFramework.Model.Effects.*;
 import GameFramework.Model.Items.*;
+import GameFramework.Model.Items.Crafting.*;
 import GameFramework.Model.Items.Equipment.*;
+import GameFramework.Model.Journal.*;
 import GameFramework.Model.Mortality.*;
 import GameFramework.Model.Physics.*;
 import GameFramework.Model.Places.*;
+import GameFramework.Model.Skills.*;
 import GameFramework.Model.Usables.*;
 import GameFramework.Utility.*;
 
@@ -158,29 +161,29 @@ public class Entity //
 	// Convenience methods for properties.
 
 	public Actor actor() { return (Actor)(this.propertyByName(Actor.class.getName()) ); }
-	//public Animatable animatable() { return (Animatable2)(this.propertyByName(Animatable2.class.getName()) ); }
+	public Animatable2 animatable() { return (Animatable2)(this.propertyByName(Animatable2.class.getName()) ); }
 	public Audible audible() { return (Audible)(this.propertyByName(Audible.class.getName()) ); }
 	public Boundable boundable() { return (Boundable)(this.propertyByName(Boundable.class.getName()) ); }
 	public Camera camera() { return (Camera)(this.propertyByName(Camera.class.getName()) ); }
 	public Collidable collidable() { return (Collidable)(this.propertyByName(Collidable.class.getName()) ); }
 	//public Constrainable constrainable() { return this.propertyByName(Constrainable.class.getName()) as Constrainable; }
 	public Controllable controllable() { return (Controllable)(this.propertyByName(Controllable.class.getName()) ); }
-	//public Damager damager() { return this.propertyByName(Damager.class.getName()) as Damager; }
+	public Damager damager() { return (Damager)this.propertyByName(Damager.class.getName() ); }
 	//public Device device() { return this.propertyByName(Device.class.getName()) as Device; }
 	public Drawable drawable() { return (Drawable)(this.propertyByName(Drawable.class.getName()) ); }
 	public Effectable effectable() { return (Effectable)this.propertyByName(Effectable.class.getName()); }
-	//public Ephemeral ephemeral() { return this.propertyByName(Ephemeral.class.getName()) as Ephemeral; }
+	public Ephemeral ephemeral() { return (Ephemeral)this.propertyByName(Ephemeral.class.getName() ); }
 	public EquipmentUser equipmentUser() { return (EquipmentUser)this.propertyByName(EquipmentUser.class.getName()); }
 	public Equippable equippable() { return (Equippable)this.propertyByName(Equippable.class.getName()); }
 	//public Enemy enemy() { return this.propertyByName(Enemy.class.getName()) as Enemy; }
 	//public ForceField forceField() { return this.propertyByName(ForceField.class.getName()) as ForceField; }
 	public Item item() { return (Item)(this.propertyByName(Item.class.getName()) ); }
 	//public ItemContainer itemContainer() { return this.propertyByName(ItemContainer.class.getName()) as ItemContainer; }
-	//public ItemCrafter itemCrafter() { return this.propertyByName(ItemCrafter.class.getName()) as ItemCrafter; }
+	public ItemCrafter itemCrafter() { return (ItemCrafter)this.propertyByName(ItemCrafter.class.getName() ); }
 	public ItemDefn itemDefn() { return (ItemDefn)(this.propertyByName(ItemDefn.class.getName()) ); }
 	public ItemHolder itemHolder() { return (ItemHolder)this.propertyByName(ItemHolder.class.getName()); }
 	//public ItemStore itemStore() { return this.propertyByName(ItemStore.class.getName()) as ItemStore; }
-	//public JournalKeeper journalKeeper() { return this.propertyByName(JournalKeeper.class.getName()) as JournalKeeper; }
+	public JournalKeeper journalKeeper() { return (JournalKeeper)this.propertyByName(JournalKeeper.class.getName() ); }
 	public Killable killable() { return (Killable)(this.propertyByName(Killable.class.getName()) ); }
 	public Loadable loadable() { return (Loadable)(this.propertyByName(Loadable.class.getName()) ); }
 	public Locatable locatable() { return (Locatable)(this.propertyByName(Locatable.class.getName()) ); }
@@ -195,7 +198,7 @@ public class Entity //
 	//public ProjectileGenerator projectileGenerator() { return this.propertyByName(ProjectileGenerator.class.getName()) as ProjectileGenerator; }
 	public Selectable selectable() { return (Selectable)this.propertyByName(Selectable.class.getName()); }
 	public Selector selector() { return (Selector)this.propertyByName(Selector.class.getName()); }
-	//public SkillLearner skillLearner() { return this.propertyByName(SkillLearner.class.getName()) as SkillLearner; }
+	public SkillLearner skillLearner() { return (SkillLearner)this.propertyByName(SkillLearner.class.getName() ); }
 	public Starvable starvable() { return (Starvable)this.propertyByName(Starvable.class.getName() ); }
 	//public Talker talker() { return this.propertyByName(Talker.class.getName()) as Talker; }
 	public Tirable tirable() { return (Tirable)this.propertyByName(Tirable.class.getName()); }

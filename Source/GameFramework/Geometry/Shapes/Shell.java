@@ -108,7 +108,7 @@ public class Shell implements ShapeBase
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Shell transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

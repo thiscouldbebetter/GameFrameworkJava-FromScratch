@@ -13,17 +13,17 @@ public class Effectable implements EntityProperty<Effectable>
 
 	public Effectable(List<Effect> effects)
 	{
-		this.effects = effects != null ? effects : new ArrayList<Effect>();
+		this.effects = (effects != null ? effects : new ArrayList<Effect>());
 	}
 
 	public void effectAdd(Effect effectToAdd)
 	{
-		this.effects.push(effectToAdd);
+		this.effects.add(effectToAdd);
 	}
 
 	public Visual effectsAsVisual()
 	{
-		var returnValue =
+		Visual returnValue =
 		(
 			this.effects.size() == 0
 			? VisualNone.Instance
@@ -51,5 +51,17 @@ public class Effectable implements EntityProperty<Effectable>
 		(
 			x -> x.isDone() == false
 		).collect(Collectors.toList());
+	}
+
+	// Clonable.
+
+	public Effectable clone()
+	{
+		return this;
+	}
+
+	public Effectable overwriteWith(Effectable other)
+	{
+		return this;
 	}
 }

@@ -71,7 +71,7 @@ public class VenueFader implements Venue
 	{
 		this.draw(universe);
 
-		var now = new Date();
+		var now = new DateTime();
 
 		if (this.timeFadeStarted == null)
 		{
@@ -119,7 +119,7 @@ public class VenueFader implements Venue
 		var fadeColor = this.backgroundColor.clone();
 		fadeColor.alpha
 		(
-			alphaOfFadeColor * this.backgroundColor.alpha(null)
+			alphaOfFadeColor * this.backgroundColor.alpha()
 		);
 
 		var display = universe.display;
@@ -128,7 +128,7 @@ public class VenueFader implements Venue
 			Coords.create(),
 			display.sizeDefault(), // Scaled automatically.
 			fadeColor,
-			null, null
+			null, false
 		);
 	}
 

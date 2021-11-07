@@ -7,8 +7,9 @@ import java.util.stream.*;
 
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
-import GameFramework.Display.Visual.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
@@ -116,7 +117,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 	public void itemsAdd(Item[] itemsToAdd)
 	{
-		itemsToAdd.stream().forEach( (Item x) -> this.itemAdd(x));
+		Arrays.asList(itemsToAdd).stream().forEach( (Item x) -> this.itemAdd(x));
 	}
 
 	public void itemsAllTransferTo(ItemHolder other)
@@ -188,11 +189,11 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		var entityItemHolder = uwpe.entity;
 
 		var entityItemsInPlace = place.items();
-		var entityItemClosest = entityItemsInPlace.filter
+		var entityItemClosest = entityItemsInPlace.stream().filter
 		(
 			x ->
 				x.locatable().distanceFromEntity(entityItemHolder) < this.reachRadius
-		).sort
+		).sorted
 		(
 			(a, b) ->
 				a.locatable().distanceFromEntity(entityItemHolder)
@@ -237,7 +238,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 	public Item itemSplit(Item itemToSplit, double quantityToSplit)
 	{
-		var itemSplitted = null;
+		Item itemSplitted = null;
 
 		if (itemToSplit.quantity <= 1)
 		{
@@ -246,7 +247,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		else
 		{
 			quantityToSplit =
-				quantityToSplit || Math.floor(itemToSplit.quantity / 2);
+				(quantityToSplit != null ? quantityToSplit : Math.floor(itemToSplit.quantity / 2));
 			if (quantityToSplit >= itemToSplit.quantity)
 			{
 				itemSplitted = itemToSplit;
@@ -286,12 +287,12 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 	public double itemQuantityByDefnName(String defnName)
 	{
-		return this.itemsByDefnName(defnName).map
+		return this.itemsByDefnName(defnName).stream().map
 		(
 			y -> y.quantity
 		).reduce
 		(
-			(a,b) -> a + b, 0
+			0, (a,b) -> a + b,
 		);
 	}
 
@@ -309,13 +310,13 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 	)
 	{
 		this.itemsWithDefnNameJoin(itemDefnName);
-		var itemExisting = this.itemsByDefnName(itemDefnName)[0];
+		var itemExisting = this.itemsByDefnName(itemDefnName).get(0);
 		if (itemExisting != null)
 		{
 			itemExisting.quantity -= quantityToSubtract;
 			if (itemExisting.quantity <= 0)
 			{
-				var itemExisting = this.itemsByDefnName(itemDefnName)[0];
+				var itemExisting = this.itemsByDefnName(itemDefnName).get(0);
 				ArrayHelper.remove(this.items, itemExisting);
 			}
 		}
@@ -344,7 +345,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 	public double massOfAllItems(World world)
 	{
-		var massTotal = this.items.reduce
+		var massTotal = this.items.stream().reduce
 		(
 			(sumSoFar, item) -> sumSoFar + item.mass(world),
 			0 // sumSoFar
@@ -360,7 +361,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 	public double tradeValueOfAllItems(World world)
 	{
-		var tradeValueTotal = this.items.reduce
+		var tradeValueTotal = this.items.stream().reduce
 		(
 			(sumSoFar, item) -> sumSoFar + item.tradeValue(world),
 			0 // sumSoFar
@@ -491,14 +492,11 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			if (itemEntityToUse != null)
 			{
 				var itemToUse = itemEntityToUse.item();
-				if (itemToUse.use != null)
+				itemHolder.statusMessage =
+					(String)(itemToUse.use(uwpe) );
+				if (itemToUse.quantity <= 0)
 				{
-					itemHolder.statusMessage =
-						itemToUse.use(uwpe);
-					if (itemToUse.quantity <= 0)
-					{
-						itemHolder.itemSelected = null;
-					}
+					itemHolder.itemSelected = null;
 				}
 			}
 		};
@@ -510,8 +508,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			var index = itemsAll.indexOf(itemToMove);
 			if (index > 0)
 			{
-				itemsAll.splice(index, 1);
-				itemsAll.splice(index - 1, 0, itemToMove);
+				itemsAll.remove(index);
+				itemsAll.add(index - 1, itemToMove);
 			}
 		};
 
@@ -520,14 +518,14 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			var itemToMove = itemHolder.itemSelected;
 			var itemsAll = itemHolder.items;
 			var index = itemsAll.indexOf(itemToMove);
-			if (index < itemsAll.length - 1)
+			if (index < itemsAll.size() - 1)
 			{
-				itemsAll.splice(index, 1);
-				itemsAll.splice(index + 1, 0, itemToMove);
+				itemsAll.remove(index);
+				itemsAll.add(index + 1, itemToMove);
 			}
 		};
 
-		Runnable split = (UniverseWorldPlaceEntities uwpe) ->
+		Runnable split = () ->
 		{
 			itemHolder.itemSplit(itemHolder.itemSelected, null);
 		};
@@ -544,7 +542,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		{
 			itemHolder.items.sort
 			(
-				(x, y) -> (x.defnName > y.defnName ? 1 : -1)
+				(x, y) -> (x.defnName.compareTo(y.defnName) > 0 ? 1 : -1)
 			);
 		};
 
@@ -581,7 +579,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				Coords.fromXY(10, 5), // pos
 				Coords.fromXY(70, 25), // size
 				false, // isTextCentered
-				"Items Held:",
+				DataBinding.fromContext("Items Held:"),
 				fontHeightSmall
 			),
 
@@ -598,7 +596,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				fontHeightSmall,
 				new DataBinding
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) -> c.itemSelected,
 					(ItemHolder c, Item v) -> c.itemSelected = v
 				), // bindingForItemSelected
@@ -615,7 +613,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				false, // isTextCentered
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) -> "Weight: " + c.massOfAllItemsOverMax(world)
 				),
 				fontHeightSmall
@@ -631,7 +629,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // hasBorder
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) ->
 					{
 						var returnValue =
@@ -655,13 +653,13 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // hasBorder
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) ->
 					{
 						var returnValue =
 						(
 							c.itemSelected != null
-							&& c.items.indexOf(c.itemSelected) < c.items.length - 1
+							&& c.items.indexOf(c.itemSelected) < c.items.size() - 1
 						);
 						return returnValue;
 					}
@@ -679,7 +677,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // hasBorder
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) ->
 					{
 						var item = c.itemSelected;
@@ -704,7 +702,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // hasBorder
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) ->
 						c.itemSelected != null
 						&&
@@ -752,7 +750,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // isTextCentered
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) ->
 					{
 						var i = c.itemSelected;
@@ -769,7 +767,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				Coords.fromXY(50, 50), // size
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) ->
 					{
 						var i = c.itemSelected;
@@ -787,7 +785,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // isTextCentered
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) -> c.statusMessage
 				), // text
 				fontHeightSmall
@@ -803,7 +801,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // hasBorder
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) ->
 					{
 						var item = c.itemSelected;
@@ -823,7 +821,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // hasBorder
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) -> (c.itemSelected != null)
 				), // isEnabled
 				drop // click
@@ -910,7 +908,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 					"Done",
 					fontHeightSmall,
 					true, // hasBorder
-					true, // isEnabled
+					DataBinding.fromTrue(), // isEnabled
 					back // click
 				)
 			);

@@ -3,6 +3,7 @@ package GameFramework.Geometry;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
@@ -272,11 +273,12 @@ public class Camera implements EntityProperty<Camera>
 		(
 			cameraEntity, collisionHelper, new ArrayList<Collision>()
 		);
-		var entitiesCollidedWith = collisions.map(x -> x.entitiesColliding[1]);
+		var entitiesCollidedWith =
+			collisions.stream().map(x -> x.entitiesColliding.get(1) );
 		// todo - Should entitiesInView be cleared out first?
 		entitiesInView.addAll
 		(
-			entitiesCollidedWith.stream().filter(x -> x.drawable() != null)
+			entitiesCollidedWith.filter(x -> x.drawable() != null)
 		);
 		//cameraCollidable.isDisabled = true;
 
@@ -395,7 +397,7 @@ public class Camera implements EntityProperty<Camera>
 		return this; // todo
 	}
 
-	public EntityProperty overwriteWith(EntityProperty otherAsProperty)
+	public Camera overwriteWith(Camera other)
 	{
 		return this; // todo
 	}

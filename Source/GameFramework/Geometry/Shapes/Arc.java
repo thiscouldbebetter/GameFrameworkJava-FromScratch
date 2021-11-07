@@ -1,6 +1,5 @@
 
 package GameFramework.Geometry.Shapes;
-{
 
 public class Arc implements ShapeBase<Arc>
 {
@@ -102,10 +101,8 @@ public class Arc implements ShapeBase<Arc>
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public Arc transform(Transform transformToApply)
 	{
 		throw new Error("Not implemented!");
 	}
-}
-
 }

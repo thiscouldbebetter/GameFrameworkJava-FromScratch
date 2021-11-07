@@ -61,7 +61,7 @@ public class MapLocated<T> implements ShapeBase<MapLocated<T>>
 
 	// Transformable.
 
-	public Transformable transform(Transform transformToApply)
+	public MapLocated transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");
 	}

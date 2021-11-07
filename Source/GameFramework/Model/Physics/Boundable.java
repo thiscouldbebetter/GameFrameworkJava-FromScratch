@@ -32,12 +32,11 @@ public class Boundable implements EntityProperty<Boundable>
 
 	public Boundable clone()
 	{
-		return new Boundable(this.bounds.clone());
+		return new Boundable((ShapeBase)this.bounds.clone());
 	}
 
-	public EntityProperty overwriteWith(EntityProperty otherAsProperty)
+	public Boundable overwriteWith(Boundable other)
 	{
-		var other = (Boundable)otherAsProperty;
 		this.bounds.overwriteWith(other.bounds);
 		return this;
 	}
