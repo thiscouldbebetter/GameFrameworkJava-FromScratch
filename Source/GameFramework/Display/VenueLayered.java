@@ -44,7 +44,7 @@ public class VenueLayered implements Venue
 				(
 					Coords.Instances().Zeroes,
 					display.sizeInPixels(),
-					this.colorToOverlayBetweenChildren, null, null
+					this.colorToOverlayBetweenChildren, null, false // ?
 				);
 			}
 		}

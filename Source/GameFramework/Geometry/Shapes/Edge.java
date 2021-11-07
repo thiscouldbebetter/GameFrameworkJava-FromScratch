@@ -141,6 +141,8 @@ public class Edge implements ShapeBase<Edge>
 
 	// Transformable.
 
+	public Coords[] coordsGroupToTranslate() { return null; }
+
 	public Edge transform(Transform transformToApply)
 	{
 		throw new Exception("Not implemented!");

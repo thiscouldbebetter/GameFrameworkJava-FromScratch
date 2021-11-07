@@ -60,12 +60,12 @@ public class VisualImageImmediate implements VisualImage
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualImageImmediate clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualImageImmediate overwriteWith(VisualImageImmediate other)
 	{
 		return this; // todo
 	}

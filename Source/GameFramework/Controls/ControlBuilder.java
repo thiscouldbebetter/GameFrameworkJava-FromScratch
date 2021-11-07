@@ -757,7 +757,7 @@ public class ControlBuilder
 
 		// hack - Should do ALL placeDefns, not just the current one.
 		var placeCurrent = world.placeCurrent;
-		var placeDefn = placeCurrent.defn(world);
+		PlaceDefn placeDefn = placeCurrent.defn(world);
 
 		var returnValue = ControlContainer.from4
 		(
@@ -1532,7 +1532,7 @@ public class ControlBuilder
 						Coords.fromXY(100, this.fontHeightInPixelsBase * 2), // pos
 						this.sizeBase.clone(), // size
 						true, // isTextCentered,
-						message,
+						DataBinding.fromContext(message),
 						this.fontHeightInPixelsBase
 					),
 
@@ -1715,7 +1715,7 @@ public class ControlBuilder
 					Coords.fromXY(100, 40), // pos
 					Coords.fromXY(100, 20), // size
 					true, // isTextCentered
-					"Profile: " + universe.profile.name,
+					DataBinding.fromContext("Profile: " + universe.profile.name),
 					fontHeight
 				),
 				new ControlLabel
@@ -1724,7 +1724,7 @@ public class ControlBuilder
 					Coords.fromXY(100, 55), // pos
 					Coords.fromXY(150, 25), // size
 					true, // isTextCentered
-					"World: " + world.name,
+					DataBinding.fromContext("World: " + world.name),
 					fontHeight
 				),
 				new ControlLabel
@@ -1733,7 +1733,7 @@ public class ControlBuilder
 					Coords.fromXY(100, 70), // pos
 					Coords.fromXY(150, 25), // size
 					true, // isTextCentered
-					"Started:" + dateCreated.toStringTimestamp(),
+					DataBinding.fromContext("Started:" + dateCreated.toStringTimestamp()),
 					fontHeight
 				),
 				new ControlLabel
@@ -1742,12 +1742,15 @@ public class ControlBuilder
 					Coords.fromXY(100, 85), // pos
 					Coords.fromXY(150, 25), // size
 					true, // isTextCentered
-					"Saved:" +
-						(
-							dateSaved == null
-							? "[never]"
-							: dateSaved.toStringTimestamp()
-						),
+					DataBinding.fromContext
+					(
+						"Saved:" +
+							(
+								dateSaved == null
+								? "[never]"
+								: dateSaved.toStringTimestamp()
+							)
+					),
 					fontHeight
 				),
 
@@ -1969,7 +1972,7 @@ public class ControlBuilder
 					Coords.fromXY(100, 25), // pos
 					Coords.fromXY(120, 25), // size
 					true, // isTextCentered
-					"Profile: " + universe.profile.name,
+					DataBinding.fromContext("Profile: " + universe.profile.name),
 					fontHeight
 				),
 
@@ -1979,7 +1982,7 @@ public class ControlBuilder
 					Coords.fromXY(100, 40), // pos
 					Coords.fromXY(100, 25), // size
 					true, // isTextCentered
-					"Select a Save:",
+					DataBinding.fromContext("Select a Save:"),
 					fontHeight
 				),
 

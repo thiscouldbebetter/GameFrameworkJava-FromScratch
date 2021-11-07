@@ -79,7 +79,7 @@ public class VenueFader implements Venue
 		}
 
 		var millisecondsSinceFadeStarted =
-			now.getTime() - this.timeFadeStarted.getTime();
+			now.totalMilliseconds() - this.timeFadeStarted.totalMilliseconds();
 
 		var fractionOfFadeCompleted =
 			millisecondsSinceFadeStarted
@@ -96,10 +96,7 @@ public class VenueFader implements Venue
 				this.timeFadeStarted = null;
 
 				var venueToFadeTo = this.venuesToFadeFromAndTo[1];
-				if (venueToFadeTo.draw == null)
-				{
-					universe.venueNext = venueToFadeTo;
-				}
+				universe.venueNext = venueToFadeTo;
 
 			}
 			alphaOfFadeColor = fractionOfFadeCompleted;

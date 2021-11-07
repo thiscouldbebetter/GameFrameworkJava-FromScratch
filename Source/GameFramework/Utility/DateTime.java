@@ -14,6 +14,17 @@ public class DateTime
 	public int minutes;
 	public int seconds;
 
+	public DateTime()
+	{
+		var systemDate = new Date();
+		this.year = systemDate.getFullYear();
+		this.month = systemDate.getMonth() + 1;
+		this.day = systemDate.getDate();
+		this.hours = systemDate.getHours();
+		this.minutes = systemDate.getMinutes();
+		this.seconds = systemDate.getSeconds();
+	}
+
 	public DateTime
 	(
 		int year, int month, int day, int hours, int minutes, int seconds
@@ -65,6 +76,13 @@ public class DateTime
 
 		return returnValue;
 	}
+
+	public long totalMilliseconds()
+	{
+		return 0; // todo
+	}
+
+	// Strings.
 
 	public String toStringMMDD_HHMM_SS()
 	{

@@ -55,7 +55,7 @@ public class ItemDefn implements EntityProperty<ItemDefn>
 			name, // appearance
 			name, // description
 			0, // mass
-			0, // tradeValue
+			0.0, // tradeValue
 			null, // stackSizeMax
 			null, // categoryNames
 			null, // use

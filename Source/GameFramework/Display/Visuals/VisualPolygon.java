@@ -50,7 +50,7 @@ public class VisualPolygon implements Visual<VisualPolygon>
 		Path verticesAsPath, Color colorFill, Color colorBorder
 	)
 	{
-		return new VisualPolygon(verticesAsPath, colorFill, colorBorder, null);
+		return new VisualPolygon(verticesAsPath, colorFill, colorBorder, false);
 	}
 
 	public static VisualPolygon fromVerticesAndColorFill
@@ -94,7 +94,7 @@ public class VisualPolygon implements Visual<VisualPolygon>
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualPolygon clone()
 	{
 		return new VisualPolygon
 		(

@@ -23,7 +23,7 @@ public class FaceBuilder implements Clonable<FaceBuilder>
 		{
 			var vertexIndex = this.vertexIndices[vi];
 			var meshVertex = meshVertices[vertexIndex];
-			faceVertices.add(meshVertex);
+			faceVertices[vi] = meshVertex;
 		}
 		var returnValue = new Face(faceVertices);
 		return returnValue;

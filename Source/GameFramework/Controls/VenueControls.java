@@ -64,7 +64,7 @@ public class VenueControls implements Venue
 				ArrayHelper.addMany
 				(
 					new String[] { inputNames.ArrowLeft },
-					buildGamepadInputs(inputNames.GamepadMoveLeft)
+					buildGamepadInputs.apply(inputNames.GamepadMoveLeft)
 				).toArray(new String[] {}),
 				inactivate
 			),
@@ -76,7 +76,10 @@ public class VenueControls implements Venue
 					Arrays.asList(new String[] { inputNames.ArrowRight }),
 					ArrayHelper.addMany
 					(
-						new String[] { inputNames.ArrowRight, inputNames.Tab },
+						Arrays.asList
+						(
+							new String[] { inputNames.ArrowRight, inputNames.Tab }
+						),
 						buildGamepadInputs.apply(inputNames.GamepadMoveRight)
 					)
 				).toArray(new String[] {}),
@@ -116,7 +119,7 @@ public class VenueControls implements Venue
 
 		if (ignoreKeyboardAndGamepadInputs)
 		{
-			ArrayHelper.clear(this.actionToInputsMappings);
+			// ArrayHelper.clear(this.actionToInputsMappings);
 		}
 
 		var mappingsGet = this.controlRoot.actionToInputsMappings;
@@ -128,7 +131,7 @@ public class VenueControls implements Venue
 
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			this.actionToInputsMappings,
+			Arrays.asList(this.actionToInputsMappings),
 			(ActionToInputsMapping x) -> x.inputNames
 		);
 

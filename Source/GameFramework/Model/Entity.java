@@ -5,6 +5,7 @@ import java.util.*;
 
 import GameFramework.Controls.*;
 import GameFramework.Display.*;
+import GameFramework.Display.Animation.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Media.*;

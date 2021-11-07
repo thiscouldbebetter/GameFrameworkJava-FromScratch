@@ -49,7 +49,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 						ArrayHelper.intersectArrays
 						(
 							x.defn(world).categoryNames, categoriesEquippableNames
-						).length > 0
+						).size() > 0
 				).collect(Collectors.toList());
 
 				if (itemsEquippable.size() > 0)
@@ -84,7 +84,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		var itemDefn = itemToEquip.defn(world);
 		var categoryNames = Arrays.asList(itemDefn.categoryNames);
 		
-		var socketFound = Arrays.asList(sockets).stream().find
+		var socketFound = Arrays.asList(sockets).stream().findFirst
 		(
 			(EquipmentSocket socket) ->
 			{
@@ -262,7 +262,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 				var socketItemDefnName = socketItem.defnName;
 				if (itemsHeld.indexOf(socketItem) == -1)
 				{
-					var itemOfSameTypeStillHeld = itemsHeld.stream().find
+					var itemOfSameTypeStillHeld = itemsHeld.stream().findFirst
 					(
 						x -> x.defnName == socketItemDefnName
 					);
@@ -287,10 +287,10 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		var socket = Arrays.asList
 		(
 			this.socketGroup.sockets
-		).stream().filter
+		).stream().findFirst
 		(
 			x -> x.itemEntityEquipped.item() == itemToUnequip
-		)[0];
+		);
 		if (socket != null)
 		{
 			socket.itemEntityEquipped = null;
@@ -325,10 +325,15 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 
 	public ControlBase toControl
 	(
-		Universe universe, Coords size, Entity entityEquipmentUser,
-		Venue venuePrev, boolean includeTitleAndDoneButton
+		Universe universe,
+		Coords size,
+		Entity entityEquipmentUser,
+		Venue venuePrev,
+		boolean includeTitleAndDoneButton
 	)
 	{
+		var equipmentUser = this;
+
 		this.statusMessage = "Equip items in available slots.";
 
 		if (size == null)
@@ -563,7 +568,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 					true, // isTextCentered
 					DataBinding.fromContextAndGet
 					(
-						this,
+						equipmentUser,
 						(EquipmentUser c) -> c.statusMessage
 					), // text
 					fontHeightSmall
@@ -615,7 +620,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 					Coords.fromXY(100, -5), // pos
 					Coords.fromXY(100, 25), // size
 					true, // isTextCentered
-					"Equip",
+					DataBinding.fromContext("Equip"),
 					fontHeightLarge
 				)
 			);

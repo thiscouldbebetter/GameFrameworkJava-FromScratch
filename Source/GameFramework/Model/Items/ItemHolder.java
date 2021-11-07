@@ -13,6 +13,7 @@ import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Actors.*;
+import GameFramework.Model.Physics.*;
 import GameFramework.Model.Places.*;
 
 public class ItemHolder implements EntityProperty<ItemHolder>
@@ -23,6 +24,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 	public Item itemSelected;
 	public String statusMessage;
+
+	public List<Entity> itemEntities;
 
 	public ItemHolder
 	(
@@ -196,8 +199,11 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		).sorted
 		(
 			(a, b) ->
-				a.locatable().distanceFromEntity(entityItemHolder)
-				- b.locatable().distanceFromEntity(entityItemHolder)
+				(int)
+				(
+					a.locatable().distanceFromEntity(entityItemHolder) * 1000000
+					- b.locatable().distanceFromEntity(entityItemHolder) * 1000000
+				)
 		)[0];
 
 		return entityItemClosest;
@@ -236,7 +242,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		}
 	}
 
-	public Item itemSplit(Item itemToSplit, double quantityToSplit)
+	public Item itemSplit(Item itemToSplit, Double quantityToSplit)
 	{
 		Item itemSplitted = null;
 
@@ -292,7 +298,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			y -> y.quantity
 		).reduce
 		(
-			0, (a,b) -> a + b,
+			0.0, (a,b) -> a + b
 		);
 	}
 
@@ -347,8 +353,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 	{
 		var massTotal = this.items.stream().reduce
 		(
-			(sumSoFar, item) -> sumSoFar + item.mass(world),
-			0 // sumSoFar
+			0.0, // sumSoFar
+			(sumSoFar, item) -> sumSoFar + item.mass(world)
 		);
 
 		return massTotal;
@@ -707,10 +713,13 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 						c.itemSelected != null
 						&&
 						(
-							c.items.filter
+							c.items.stream().filter
 							(
 								(Item x) -> x.defnName == c.itemSelected.defnName
-							).length > 1
+							).collect
+							(
+								Collectors.toList()
+							).size() > 1
 						)
 				), // isEnabled
 				join
@@ -726,7 +735,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				true, // hasBorder
 				DataBinding.fromContextAndGet
 				(
-					this,
+					itemHolder,
 					(ItemHolder c) -> (c.itemEntities.length > 1)
 				), // isEnabled
 				sort
@@ -738,7 +747,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				Coords.fromXY(150, 10), // pos
 				Coords.fromXY(100, 15), // size
 				true, // isTextCentered
-				"Item Selected:",
+				DataBinding.fromContext("Item Selected:"),
 				fontHeightSmall
 			),
 

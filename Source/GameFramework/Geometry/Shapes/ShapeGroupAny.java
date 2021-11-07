@@ -82,7 +82,10 @@ public class ShapeGroupAny implements ShapeBase<ShapeGroupAny>
 
 	public ShapeGroupAny transform(Transform transformToApply)
 	{
-		this.shapes.stream().forEach
+		Arrays.asList
+		(
+			this.shapes
+		).stream().forEach
 		(
 			(ShapeBase x) -> x.transform(transformToApply)
 		);

@@ -32,7 +32,7 @@ public class Equippable implements EntityProperty<Equippable>
 	{
 		if (this._equip != null)
 		{
-			this._equip.consume(uwpe);
+			this._equip.accept(uwpe);
 		}
 		this.isEquipped = true;
 	}
@@ -41,7 +41,7 @@ public class Equippable implements EntityProperty<Equippable>
 	{
 		if (this._unequip != null)
 		{
-			this._unequip.consume(uwpe);
+			this._unequip.accept(uwpe);
 		}
 		this.isEquipped = false;
 	}

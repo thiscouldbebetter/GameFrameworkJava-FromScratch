@@ -6,7 +6,7 @@ import java.util.*;
 import GameFramework.Helpers.*;
 import GameFramework.Utility.*;
 
-public class Color implements Interpolatable<Color>, Namable
+public class Color implements Clonable<Color>, Interpolatable<Color>, Namable
 {
 	public String _name;
 	public String code;

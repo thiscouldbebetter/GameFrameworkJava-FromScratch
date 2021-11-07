@@ -326,16 +326,15 @@ public class ArrayHelper
 		return areEqualSoFar;
 	}
 
-	/*
-	static insertElementAfterOther
+	public static <T> insertElementAfterOther
 	(
-		list: any[], elementToInsert: any, other: any
-	): any[]
+		List<T> list, T elementToInsert, T other: any
+	)
 	{
 		var index = list.indexOf(other);
 		if (index >= 0)
 		{
-			list.splice(index + 1, 0, elementToInsert);
+			list.add(index + 1, elementToInsert);
 		}
 		else
 		{
@@ -343,6 +342,8 @@ public class ArrayHelper
 		}
 		return list;
 	}
+
+	/*
 
 	static insertElementAt
 	(
@@ -373,6 +374,16 @@ public class ArrayHelper
 	}
 
 	public static double[] overwriteWith(double[] arrayToOverwrite, double[] other)
+	{
+		for (var i = 0; i < arrayToOverwrite.length; i++)
+		{
+			arrayToOverwrite[i] = other[i];
+		}
+
+		return arrayToOverwrite;
+	}
+
+	public static int[] overwriteWith(int[] arrayToOverwrite, int[] other)
 	{
 		for (var i = 0; i < arrayToOverwrite.length; i++)
 		{

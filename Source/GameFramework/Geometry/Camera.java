@@ -278,7 +278,13 @@ public class Camera implements EntityProperty<Camera>
 		// todo - Should entitiesInView be cleared out first?
 		entitiesInView.addAll
 		(
-			entitiesCollidedWith.filter(x -> x.drawable() != null)
+			entitiesCollidedWith.filter
+			(
+				x -> x.drawable() != null
+			).collect
+			(
+				Collectors.toList()
+			)
 		);
 		//cameraCollidable.isDisabled = true;
 

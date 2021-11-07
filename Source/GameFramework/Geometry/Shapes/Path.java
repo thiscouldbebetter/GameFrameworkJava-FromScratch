@@ -5,7 +5,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
 
-public class Path extends Transformable<Path>
+public class Path implements Transformable<Path>
 {
 	public Coords[] points;
 
