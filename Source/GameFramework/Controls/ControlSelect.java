@@ -7,12 +7,12 @@ import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class ControlSelect extends ControlBase
+public class ControlSelect<TContext,TValue,TItem> extends ControlBase
 {
-	private DataBinding<Object,Object> _valueSelected;
-	private DataBinding<Object,Object[]> _options;
-	public DataBinding<Object,Object> bindingForOptionValues;
-	public DataBinding<Object,String> bindingForOptionText;
+	private DataBinding<TContext,TValue> _valueSelected;
+	private DataBinding<TContext,TItem[]> _options;
+	public DataBinding<TItem,TValue> bindingForOptionValues;
+	public DataBinding<TItem,String> bindingForOptionText;
 
 	public Integer indexOfOptionSelected;
 
@@ -24,10 +24,10 @@ public class ControlSelect extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Object> valueSelected,
-		DataBinding<Object,Object[]> options,
-		DataBinding<Object,Object> bindingForOptionValues,
-		DataBinding<Object,String> bindingForOptionText,
+		DataBinding<TContext,TValue> valueSelected,
+		DataBinding<TContext,TItem[]> options,
+		DataBinding<TItem,TValue> bindingForOptionValues,
+		DataBinding<TItem,String> bindingForOptionText,
 		double fontHeightInPixels
 	)
 	{
@@ -84,7 +84,7 @@ public class ControlSelect extends ControlBase
 		return true; // wasClickHandled
 	}
 
-	public Object optionSelected()
+	public TItem optionSelected()
 	{
 		var optionSelected =
 		(
@@ -115,7 +115,7 @@ public class ControlSelect extends ControlBase
 		this._valueSelected.set(valueToSelect);
 	}
 
-	public Object[] options()
+	public TItem[] options()
 	{
 		return this._options.get();
 	}
@@ -127,7 +127,7 @@ public class ControlSelect extends ControlBase
 		this.fontHeightInPixels *= scaleFactor.y;
 	}
 
-	public Object valueSelected()
+	public TValue valueSelected()
 	{
 		var returnValue =
 		(

@@ -326,7 +326,7 @@ public class ArrayHelper
 		return areEqualSoFar;
 	}
 
-	public static <T> insertElementAfterOther
+	public static <T> List<T> insertElementAfterOther
 	(
 		List<T> list, T elementToInsert, T other
 	)

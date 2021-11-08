@@ -2,6 +2,7 @@
 package GameFramework.Display.Animation;
 
 import GameFramework.Geometry.*;
+import GameFramework.Geometry.Transforms.*;
 
 public class Transform_Animate
 {
@@ -61,7 +62,7 @@ public class Transform_Animate
 		return this; // todo
 	}
 
-	public transform(Transformable transformable)
+	public Transformable transform(Transformable transformable)
 	{
 		var frameCurrent = this.frameCurrent();
 

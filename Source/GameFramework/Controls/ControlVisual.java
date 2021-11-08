@@ -10,9 +10,9 @@ import GameFramework.Model.*;
 import GameFramework.Model.Places.*;
 import GameFramework.Model.Physics.*;
 
-public class ControlVisual extends ControlBase
+public class ControlVisual<TContext,TVisual extends Visual> extends ControlBase
 {
-	public DataBinding<Object,Visual> visual;
+	public DataBinding<TContext,TVisual> visual;
 	public Color colorBackground;
 	public Color colorBorder;
 
@@ -25,7 +25,7 @@ public class ControlVisual extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object, Visual> visual,
+		DataBinding<TContext,TVisual> visual,
 		Color colorBackground,
 		Color colorBorder
 	)
@@ -50,23 +50,23 @@ public class ControlVisual extends ControlBase
 		this._sizeHalf = Coords.create();
 	}
 
-	public static ControlVisual from4
+	public static <TContext,TVisual> ControlVisual from4
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Visual> visual
+		DataBinding<TContext,TVisual> visual
 	)
 	{
 		return new ControlVisual(name, pos, size, visual, null, null);
 	}
 
-	public static ControlVisual from5
+	public static <TContext, TVisual> ControlVisual from5
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object, Visual> visual,
+		DataBinding<TContext,TVisual> visual,
 		Color colorBackground
 	)
 	{

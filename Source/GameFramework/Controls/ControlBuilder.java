@@ -93,11 +93,11 @@ public class ControlBuilder
 
 	// Controls.
 
-	public ControlBase choice
+	public <TContext> ControlBase choice
 	(
 		Universe universe,
 		Coords size,
-		DataBinding<Object, String> message,
+		DataBinding<TContext, String> message,
 		String[] optionNames,
 		List<Consumer<UniverseWorldPlaceEntities>> optionConsumers,
 		boolean showMessageOnly
@@ -312,9 +312,14 @@ public class ControlBuilder
 	{
 		return this.choice
 		(
-			universe, size, DataBinding.fromContext(message),
+			universe,
+			size,
+			DataBinding.fromContext(message),
 			new String[] { "Confirm", "Cancel" },
-			new ArrayList<Consumer<UniverseWorldPlaceEntities>>(List.of(confirm, cancel)),
+			new ArrayList<Consumer<UniverseWorldPlaceEntities>>
+			(
+				List.of(confirm, cancel)
+			),
 			false // showMessageOnly
 		);
 	}
@@ -479,7 +484,10 @@ public class ControlBuilder
 						var venueCurrent = universe.venueCurrent;
 						Venue venueNext2 = new VenueMessage
 						(
-							DataBinding.fromContext(universe.name + "\nv" + universe.version),
+							DataBinding.fromContext
+							(
+								universe.name + "\nv" + universe.version
+							),
 							() -> // acknowledge
 							{
 								var venueNext3 = controlBuilder.venueTransitionalFromTo
@@ -789,10 +797,10 @@ public class ControlBuilder
 					), // items
 					DataBinding.fromGet
 					(
-						(ActionToInputsMapping c) -> { return c.actionName; }
+						(ActionToInputsMapping c) -> c.actionName
 					), // bindingForItemText
 					fontHeight,
-					new DataBinding
+					new DataBinding<PlaceDefn, ActionToInputsMapping>
 					(
 						placeDefn,
 						(PlaceDefn c) -> c.actionToInputsMappingSelected,
@@ -1275,7 +1283,7 @@ public class ControlBuilder
 					Coords.fromXY(30, row1PosY + labelPadding), // pos
 					Coords.fromXY(75, buttonHeight), // size
 					false, // isTextCentered
-					"Music:",
+					DataBinding.fromContext("Music:"),
 					fontHeight
 				),
 
@@ -1284,15 +1292,24 @@ public class ControlBuilder
 					"selectMusicVolume",
 					Coords.fromXY(70, row1PosY), // pos
 					Coords.fromXY(30, buttonHeight), // size
-					new DataBinding
+					new DataBinding<SoundHelper,Double>
 					(
 						universe.soundHelper,
 						(SoundHelper c) -> c.musicVolume,
 						(SoundHelper c, Double v) -> c.musicVolume = v
 					), // valueSelected
-					SoundHelper.controlSelectOptionsVolume(), // options
-					DataBinding.fromGet((ControlSelectOption c) -> c.value), // bindingForOptionValues,
-					DataBinding.fromGet((ControlSelectOption c) -> { return c.text; }), // bindingForOptionText
+					DataBinding.fromContext
+					(
+						SoundHelper.controlSelectOptionsVolume()
+					), // options
+					DataBinding.fromGet
+					(
+						(ControlSelectOption c) -> c.value
+					), // bindingForOptionValues,
+					DataBinding.fromGet
+					(
+						(ControlSelectOption c) -> { return c.text; }
+					), // bindingForOptionText
 					fontHeight
 				),
 
@@ -1302,7 +1319,7 @@ public class ControlBuilder
 					Coords.fromXY(105, row1PosY + labelPadding), // pos
 					Coords.fromXY(75, buttonHeight), // size
 					false, // isTextCentered
-					"Sound:",
+					DataBinding.fromContext("Sound:"),
 					fontHeight
 				),
 
@@ -1311,11 +1328,11 @@ public class ControlBuilder
 					"selectSoundVolume",
 					Coords.fromXY(140, row1PosY), // pos
 					Coords.fromXY(30, buttonHeight), // size
-					new DataBinding
+					new DataBinding<SoundHelper,Double>
 					(
 						universe.soundHelper,
 						(SoundHelper c) -> c.soundVolume,
-						(SoundHelper c, double v) -> { c.soundVolume = v; }
+						(SoundHelper c, Double v) -> { c.soundVolume = v; }
 					), // valueSelected
 					SoundHelper.controlSelectOptionsVolume(), // options
 					DataBinding.fromGet( (ControlSelectOption c) -> c.value ), // bindingForOptionValues,
@@ -1329,7 +1346,7 @@ public class ControlBuilder
 					Coords.fromXY(30, row2PosY + labelPadding), // pos
 					Coords.fromXY(75, buttonHeight), // size
 					false, // isTextCentered
-					"Display:",
+					DataBinding.fromContext("Display:"),
 					fontHeight
 				),
 
@@ -1905,9 +1922,11 @@ public class ControlBuilder
 		{
 			var storageHelper = universe.storageHelper;
 
+			VenueTask nullAsVenueTask = null;
+
 			var messageAsDataBinding = DataBinding.fromContextAndGet
 			(
-				null, // Will be set below.
+				nullAsVenueTask, // Will be set below.
 				(VenueTask c) -> "Loading game..."
 			);
 
@@ -1998,7 +2017,7 @@ public class ControlBuilder
 					), // items
 					DataBinding.fromGet( (SaveState c) -> c.name ), // bindingForOptionText
 					fontHeight,
-					new DataBinding
+					new DataBinding<Profile,String>
 					(
 						universe.profile,
 						(Profile c) -> c.saveStateNameSelected,

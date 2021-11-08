@@ -36,7 +36,7 @@ public class PlatformHelper
 
 	public void platformableRemove(Platformable platformableToRemove)
 	{
-		throw new Exception("todo");
+		// Do nothing.
 	}
 
 	public void resizeForPlatformables()

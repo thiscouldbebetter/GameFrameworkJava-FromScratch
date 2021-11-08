@@ -63,7 +63,7 @@ public class VenueControls implements Venue
 				controlActionNames.ControlPrev,
 				ArrayHelper.addMany
 				(
-					new String[] { inputNames.ArrowLeft },
+					Arrays.asList(new String[] { inputNames.ArrowLeft }),
 					buildGamepadInputs.apply(inputNames.GamepadMoveLeft)
 				).toArray(new String[] {}),
 				inactivate
@@ -122,7 +122,8 @@ public class VenueControls implements Venue
 			// ArrayHelper.clear(this.actionToInputsMappings);
 		}
 
-		var mappingsGet = this.controlRoot.actionToInputsMappings;
+		var control = (ControlContainer)this.controlRoot;
+		var mappingsGet = control.actionToInputsMappings;
 		if (mappingsGet != null)
 		{
 			var mappings = mappingsGet.call(this.controlRoot);

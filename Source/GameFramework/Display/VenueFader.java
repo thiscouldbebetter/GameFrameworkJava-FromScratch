@@ -4,6 +4,7 @@ package GameFramework.Display;
 import java.util.*;
 
 import GameFramework.Geometry.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
@@ -109,7 +110,7 @@ public class VenueFader implements Venue
 				universe.venueNext = this.venueCurrent();
 			}
 
-			alphaOfFadeColor = 1 - fractionOfFadeCompleted;
+			alphaOfFadeColor = 1.0 - fractionOfFadeCompleted;
 		}
 
 		alphaOfFadeColor *= alphaOfFadeColor;

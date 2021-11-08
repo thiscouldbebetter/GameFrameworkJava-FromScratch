@@ -84,7 +84,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		var itemDefn = itemToEquip.defn(world);
 		var categoryNames = Arrays.asList(itemDefn.categoryNames);
 		
-		var socketFound = Arrays.asList(sockets).stream().findFirst
+		var socketFound = Arrays.asList(sockets).stream().filter
 		(
 			(EquipmentSocket socket) ->
 			{
@@ -97,7 +97,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 				);
 				return isItemAllowedInSocket;
 			}
-		);
+		).findFirst();
 
 		var message = "";
 		if (socketFound == null)
@@ -262,10 +262,10 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 				var socketItemDefnName = socketItem.defnName;
 				if (itemsHeld.indexOf(socketItem) == -1)
 				{
-					var itemOfSameTypeStillHeld = itemsHeld.stream().findFirst
+					var itemOfSameTypeStillHeld = itemsHeld.stream().filter
 					(
 						x -> x.defnName == socketItemDefnName
-					);
+					).findFirst();
 					if (itemOfSameTypeStillHeld == null)
 					{
 						socket.itemEntityEquipped = null;
@@ -287,10 +287,10 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		var socket = Arrays.asList
 		(
 			this.socketGroup.sockets
-		).stream().findFirst
+		).stream().filter
 		(
 			x -> x.itemEntityEquipped.item() == itemToUnequip
-		);
+		).findFirst();
 		if (socket != null)
 		{
 			socket.itemEntityEquipped = null;
@@ -408,7 +408,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 				(Entity c) -> c.item().toString(world)
 			), // bindingForItemText
 			fontHeightSmall,
-			new DataBinding
+			new DataBinding<EquipmentUser,Entity>
 			(
 				equipmentUser,
 				(EquipmentUser c) -> c.itemEntitySelected,
@@ -416,7 +416,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			equipItemSelectedToSocketDefault,
+			(UniverseWorldPlaceEntities uwpe) -> equipItemSelectedToSocketDefault.run(),
 			null
 		);
 
@@ -501,15 +501,15 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 				(EquipmentSocket c) -> c.toString(world)
 			), // bindingForItemText
 			fontHeightSmall,
-			new DataBinding
+			new DataBinding<EquipmentUser,EquipmentSocket>
 			(
-				this,
+				equipmentUser,
 				(EquipmentUser c) -> c.socketSelected,
 				(EquipmentUser c, EquipmentSocket v) -> c.socketSelected = v
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			unequipFromSocketSelected, // confirm
+			(UniverseWorldPlaceEntities uwpe) -> unequipFromSocketSelected.run(), // confirm
 			null
 		);
 

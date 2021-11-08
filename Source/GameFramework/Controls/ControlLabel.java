@@ -5,10 +5,10 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
-public class ControlLabel extends ControlBase
+public class ControlLabel<TContext> extends ControlBase
 {
 	public boolean isTextCentered;
-	private DataBinding<Object,String> _text;
+	private DataBinding<TContext,String> _text;
 
 	public ControlBase parent;
 
@@ -20,7 +20,7 @@ public class ControlLabel extends ControlBase
 		Coords pos,
 		Coords size,
 		boolean isTextCentered,
-		DataBinding<Object,String> text,
+		DataBinding<TContext,String> text,
 		Double fontHeightInPixels
 	)
 	{
@@ -33,7 +33,11 @@ public class ControlLabel extends ControlBase
 		this._drawPos = Coords.create();
 	}
 
-	public static ControlLabel fromPosAndText(Coords pos, Object text)
+	public static <TContext> ControlLabel<TContext> fromPosAndText
+	(
+		Coords pos,
+		DataBinding<TContext,String> text
+	)
 	{
 		return new ControlLabel
 		(
@@ -41,15 +45,18 @@ public class ControlLabel extends ControlBase
 			pos,
 			null, // size
 			false, // isTextCentered
-			text,
+			DataBinding.fromContext(text),
 			10.0 // fontHeightInPixels
 		);
 	}
 
-	public static ControlLabel from5
+	public static <TContext> ControlLabel from5
 	(
-		String name, Coords pos, Coords size, boolean isTextCentered,
-		Object text
+		String name,
+		Coords pos,
+		Coords size,
+		boolean isTextCentered,
+		DataBinding<TContext,String> text
 	)
 	{
 		return new ControlLabel

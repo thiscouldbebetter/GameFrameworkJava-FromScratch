@@ -9,13 +9,13 @@ import GameFramework.Helpers.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
-public class ControlList extends ControlBase
+public class ControlList<TContext,TItem,TValue> extends ControlBase
 {
-	public DataBinding<Object,Object[]> _items;
-	public DataBinding<Object,String> bindingForItemText;
-	public DataBinding<Object,Object> bindingForItemSelected;
-	public DataBinding<Object,Object> bindingForItemValue;
-	public DataBinding<Object,Boolean> bindingForIsEnabled;
+	public DataBinding<TContext,TItem[]> _items;
+	public DataBinding<TItem,String> bindingForItemText;
+	public DataBinding<TContext,TItem> bindingForItemSelected;
+	public DataBinding<TItem,TValue> bindingForItemValue;
+	public DataBinding<TContext,Boolean> bindingForIsEnabled;
 	public Consumer<Universe> _confirm;
 	public int widthInItems;
 
@@ -34,12 +34,12 @@ public class ControlList extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Object[]> items,
-		DataBinding<Object,String> bindingForItemText,
+		DataBinding<TContext,TItem[]> items,
+		DataBinding<TItem,String> bindingForItemText,
 		double fontHeightInPixels,
-		DataBinding<Object,Object> bindingForItemSelected,
-		DataBinding<Object,Object> bindingForItemValue,
-		DataBinding<Object,Boolean> bindingForIsEnabled,
+		DataBinding<TContext,TItem> bindingForItemSelected,
+		DataBinding<TItem,TValue> bindingForItemValue,
+		DataBinding<TContext,Boolean> bindingForIsEnabled,
 		Consumer<Universe> confirm,
 		int widthInItems
 	)
@@ -99,12 +99,12 @@ public class ControlList extends ControlBase
 		return returnValue;
 	}
 
-	public static ControlList fromPosSizeItemsAndBindingForItemText
+	public static <TContext,TItem> ControlList fromPosSizeItemsAndBindingForItemText
 	(
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Object[]> items,
-		DataBinding<Object,String> bindingForItemText
+		DataBinding<TContext,TItem[]> items,
+		DataBinding<TItem,String> bindingForItemText
 	)
 	{
 		var returnValue = new ControlList
@@ -125,13 +125,13 @@ public class ControlList extends ControlBase
 		return returnValue;
 	}
 
-	public static ControlList from6
+	public static <TContext,TItem> ControlList from6
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Object[]> items,
-		DataBinding<Object,String> bindingForItemText,
+		DataBinding<TContext,TItem[]> items,
+		DataBinding<TItem,String> bindingForItemText,
 		double fontHeightInPixels
 	)
 	{
@@ -146,15 +146,15 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	public static ControlList from7
+	public static <TContext,TItem> ControlList from7
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object, Object[]> items,
-		DataBinding<Object, String> bindingForItemText,
+		DataBinding<TContext,TItem[]> items,
+		DataBinding<TItem, String> bindingForItemText,
 		double fontHeightInPixels,
-		DataBinding<Object, Object> bindingForItemSelected
+		DataBinding<TContext,TItem> bindingForItemSelected
 	)
 	{
 		return new ControlList
@@ -168,68 +168,79 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	public static ControlList from8
+	public static <TContext,TItem,TValue> ControlList from8
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Object[]> items,
-		DataBinding<Object,String> bindingForItemText,
+		DataBinding<TContext,TItem[]> items,
+		DataBinding<TItem,String> bindingForItemText,
 		double fontHeightInPixels,
-		DataBinding<Object,Object> bindingForItemSelected,
-		DataBinding<Object,Object> bindingForItemValue
+		DataBinding<TContext,TItem> bindingForItemSelected,
+		DataBinding<TContext,TValue> bindingForItemValue
 	)
 	{
 		return new ControlList
 		(
-			name, pos, size, items, bindingForItemText, fontHeightInPixels,
-			bindingForItemSelected, bindingForItemValue,
+			name, pos, size, items,
+			bindingForItemText,
+			fontHeightInPixels,
+			bindingForItemSelected,
+			bindingForItemValue,
 			DataBinding.fromTrue(),
 			null, // confirm
 			1 // widthInItems
 		);
 	}
 
-	public static ControlList from9
+	public static <TContext,TItem,TValue> ControlList from9
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Object[]> items,
-		DataBinding<Object,String> bindingForItemText,
+		DataBinding<TContext,TItem[]> items,
+		DataBinding<TItem,String> bindingForItemText,
 		double fontHeightInPixels,
-		DataBinding<Object,Object> bindingForItemSelected,
-		DataBinding<Object,Object> bindingForItemValue,
-		DataBinding<Object,Boolean> bindingForIsEnabled
+		DataBinding<TContext,TItem> bindingForItemSelected,
+		DataBinding<TItem,TValue> bindingForItemValue,
+		DataBinding<TContext,Boolean> bindingForIsEnabled
 	)
 	{
 		return new ControlList
 		(
-			name, pos, size, items, bindingForItemText, fontHeightInPixels,
-			bindingForItemSelected, bindingForItemValue, bindingForIsEnabled,
+			name, pos, size, items,
+			bindingForItemText,
+			fontHeightInPixels,
+			bindingForItemSelected,
+			bindingForItemValue,
+			bindingForIsEnabled,
 			null, // confirm
 			1 // widthInItems
 		);
 	}
 
-	public static ControlList from10
+	public static <TContext,TItem,TValue> ControlList from10
 	(
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,Object[]> items,
-		DataBinding<Object,String> bindingForItemText,
+		DataBinding<TContext,TItem[]> items,
+		DataBinding<TItem,String> bindingForItemText,
 		double fontHeightInPixels,
-		DataBinding<Object,Object> bindingForItemSelected,
-		DataBinding<Object,Object> bindingForItemValue,
-		DataBinding<Object,Boolean> bindingForIsEnabled,
+		DataBinding<TContext,TItem> bindingForItemSelected,
+		DataBinding<TItem,TValue> bindingForItemValue,
+		DataBinding<TContext,Boolean> bindingForIsEnabled,
 		Consumer<Universe> confirm
 	)
 	{
 		return new ControlList
 		(
-			name, pos, size, items, bindingForItemText, fontHeightInPixels,
-			bindingForItemSelected, bindingForItemValue, bindingForIsEnabled,
+			name, pos, size, items,
+			bindingForItemText,
+			fontHeightInPixels,
+			bindingForItemSelected,
+			bindingForItemValue,
+			bindingForIsEnabled,
 			confirm,
 			1 // widthInItems
 		);
@@ -313,12 +324,12 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	public Object itemSelected()
+	public TItem itemSelected()
 	{
 		return this.itemSelected(null);
 	}
 
-	public Object itemSelected(Object itemToSet)
+	public TItem itemSelected(TItem itemToSet)
 	{
 		var returnValue = itemToSet;
 
@@ -358,7 +369,7 @@ public class ControlList extends ControlBase
 		return returnValue;
 	}
 
-	public Object itemSelectedNextInDirection(int direction)
+	public TItem itemSelectedNextInDirection(int direction)
 	{
 		var items = this.items();
 		var numberOfItems = items.length;
@@ -424,7 +435,7 @@ public class ControlList extends ControlBase
 		);
 	}
 
-	public Object[] items()
+	public TItem[] items()
 	{
 		return this._items.get();
 	}

@@ -4,6 +4,7 @@ package GameFramework.Model.Journal;
 import java.util.function.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Input.*;
@@ -40,7 +41,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 		var journalKeeper = this;
 
 		var world = universe.world;
-		var journalKeeper = entityJournalKeeper.journalKeeper();
+		//var journalKeeper = entityJournalKeeper.journalKeeper();
 
 		this.statusMessage = "Read and edit journal entries.";
 
@@ -64,7 +65,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 
 		var buttonSize = Coords.fromXY(20, 10);
 
-		var childControls = new ControlBase[]
+		var childControls = Arrays.asList(new ControlBase[]
 		{
 			new ControlLabel
 			(
@@ -72,7 +73,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 				Coords.fromXY(10, 5), // pos
 				Coords.fromXY(70, 25), // size
 				false, // isTextCentered
-				"Journal Entries:",
+				DataBinding.fromContext("Journal Entries:"),
 				fontHeightSmall
 			),
 
@@ -115,7 +116,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					(JournalEntry c) -> c.toString(universe)
 				), // bindingForItemText
 				fontHeightSmall,
-				new DataBinding
+				new DataBinding<JournalKeeper,JournalEntry>
 				(
 					journalKeeper,
 					(JournalKeeper c) -> c.journalEntrySelected,
@@ -126,8 +127,8 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					}
 				), // bindingForItemSelected
 				DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
-				DataBinding.fromTrue(), // isEnabled
-				(Universe universe) -> // confirm
+				DataBinding.fromTrue(journalKeeper), // isEnabled
+				(Universe universe2) -> // confirm
 				{
 					// todo
 				},
@@ -140,7 +141,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 				Coords.fromXY(105, 5), // pos
 				Coords.fromXY(100, 15), // size
 				false, // isTextCentered
-				"Entry Selected:",
+				DataBinding.fromContext("Entry Selected:"),
 				fontHeightSmall
 			),
 
@@ -212,7 +213,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					var controlConfirm = universe.controlBuilder.confirmAndReturnToVenue
 					(
 						universe,
-						universe.display.sizeInPixels, // size
+						universe.display.sizeInPixels(), // size
 						"Are you sure you want to delete this entry?",
 						universe.venueCurrent,
 						() -> // confirm
@@ -341,7 +342,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 				), // text
 				fontHeightSmall
 			)
-		};
+		});
 
 		var returnValue = new ControlContainer
 		(
@@ -351,7 +352,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 			childControls,
 			new ActorAction[]
 			{
-				new Action("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
+				new ActorAction("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
 			},
 
 			new ActionToInputsMapping[]
@@ -375,6 +376,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					fontHeightLarge
 				)
 			);
+
 			childControls.add
 			(
 				ControlButton.from8
@@ -401,4 +403,8 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 		return returnValue;
 	}
 
+	// Clonable.
+
+	public JournalKeeper clone() { return this; }
+	public JournalKeeper overwriteWith(JournalKeeper other) { return this; }
 }

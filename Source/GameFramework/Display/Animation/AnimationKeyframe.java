@@ -5,6 +5,7 @@ import java.util.*;
 
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
+import GameFramework.Utility.*;
 
 public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 {
@@ -55,6 +56,4 @@ public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 
 		return returnValue;
 	}
-}
-
 }

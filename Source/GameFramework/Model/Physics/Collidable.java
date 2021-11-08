@@ -216,7 +216,10 @@ public class Collidable implements EntityProperty<Collidable>
 		collisionsSoFar = collisionsSoFar.stream().filter
 		(
 			collision ->
-				this.entityPropertyNamesToCollideWith.stream().anyMatch
+				Arrays.asList
+				(
+					this.entityPropertyNamesToCollideWith
+				).stream().anyMatch
 				(
 					propertyName ->
 						collision.entitiesColliding.get(1).propertyByName(propertyName) != null

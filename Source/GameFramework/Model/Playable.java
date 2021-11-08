@@ -152,7 +152,7 @@ public class Playable implements EntityProperty<Playable>
 			Coords.create(), // pos
 			size.clone().addDimensions(0, -32, 0), // size
 			// children
-			controlsForStatusFields
+			controlsForStatusFields.toArray(new ControlBase[] {})
 		);
 		controlsForTabs.add(0, statusAsControl);
 
@@ -171,7 +171,7 @@ public class Playable implements EntityProperty<Playable>
 			tabButtonSize,
 			controlsForTabs.toArray(new ControlBase[] {}),
 			fontHeight,
-			back
+			(Universe u) -> back.run()
 		);
 		return returnValue;
 	}
@@ -314,12 +314,12 @@ public class Playable implements EntityProperty<Playable>
 			Color.Instances().Cyan,
 			DataBinding.fromGet
 			(
-				(Object c) -> world.timerTicksSoFar % timerTicksPerGameDay
+				(World c) -> world.timerTicksSoFar % timerTicksPerGameDay
 			),
 			null, // threshold
 			DataBinding.fromGet
 			(
-				(Object c) -> timerTicksPerGameDay
+				(World c) -> timerTicksPerGameDay
 			),
 			null, // fractionBelowWhichToShow
 			null, // colorForBorderAsValueBreakGroup
@@ -486,7 +486,7 @@ public class Playable implements EntityProperty<Playable>
 			"containerPlayer",
 			Coords.create(), // pos,
 			universe.display.sizeInPixels().clone(),
-			childControls,
+			childControls.toArray(new ControlBase[] {}),
 			null, null
 		);
 		var controlOverlayTransparent

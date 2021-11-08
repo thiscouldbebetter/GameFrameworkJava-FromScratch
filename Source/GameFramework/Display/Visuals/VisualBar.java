@@ -8,17 +8,17 @@ import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class VisualBar implements Visual<VisualBar>
+public class VisualBar<TContext> implements Visual<VisualBar>
 {
 	public String abbreviation;
 	public Coords size;
 	public Color color;
-	public DataBinding<Entity,Double> amountCurrent;
-	public DataBinding<Entity,Double> amountThreshold;
-	public DataBinding<Entity,Double> amountMax;
+	public DataBinding<TContext,Double> amountCurrent;
+	public DataBinding<TContext,Double> amountThreshold;
+	public DataBinding<TContext,Double> amountMax;
 	public Double fractionBelowWhichToShow;
 	public ValueBreakGroup colorForBorderAsValueBreakGroup;
-	public DataBinding<Object,String> text;
+	public DataBinding<TContext,String> text;
 
 	private Coords _drawPos;
 	private Coords _sizeCurrent;
@@ -29,12 +29,12 @@ public class VisualBar implements Visual<VisualBar>
 		String abbreviation,
 		Coords size,
 		Color color,
-		DataBinding<Entity,Double> amountCurrent,
-		DataBinding<Entity,Double> amountThreshold,
-		DataBinding<Entity,Double> amountMax,
+		DataBinding<TContext,Double> amountCurrent,
+		DataBinding<TContext,Double> amountThreshold,
+		DataBinding<TContext,Double> amountMax,
 		Double fractionBelowWhichToShow,
 		ValueBreakGroup colorForBorderAsValueBreakGroup,
-		DataBinding<Object,String> text
+		DataBinding<TContext,String> text
 	)
 	{
 		this.abbreviation = abbreviation;

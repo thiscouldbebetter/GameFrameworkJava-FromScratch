@@ -53,7 +53,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 			skillCheapest = skillsAvailable.sorted
 			(
 				(Skill x, Skill y) -> x.learningRequired - y.learningRequired
-			)[0];
+			).findFirst().get();
 		}
 		return skillCheapest;
 	}
@@ -190,9 +190,9 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 	{
 		var returnValues = new ArrayList<Skill>();
 
-		for (var i = 0; i < this.skillsKnownNames.length; i++)
+		for (var i = 0; i < this.skillsKnownNames.size(); i++)
 		{
-			var skillName = this.skillsKnownNames[i];
+			var skillName = this.skillsKnownNames.get(i);
 			var skill = skillsAllByName.get(skillName);
 			returnValues.add(skill);
 		}
@@ -261,7 +261,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					Coords.fromXY(margin, 40), // pos,
 					Coords.fromXY(size.x - margin * 2, labelHeight), // size,
 					false, // isTextCentered,
-					"Skills Known:", //text
+					DataBinding.fromContext("Skills Known:"), //text
 					labelHeight // fontHeightInPixels
 				),
 

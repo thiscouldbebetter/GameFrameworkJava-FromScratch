@@ -28,21 +28,22 @@ public class Locatable implements EntityProperty<Locatable>
 
 	public static List<Entity> entitiesSortByZThenY(List<Entity> entitiesToSort)
 	{
-		entitiesToSort.sort
+		entitiesToSort.sorted
 		(
 			(Entity a, Entity b) ->
 			{
 				var aPos = a.locatable().loc.pos;
 				var bPos = b.locatable().loc.pos;
-				Double returnValue;
+				double difference;
 				if (aPos.z != bPos.z)
 				{
-					returnValue = bPos.z - aPos.z;
+					difference = bPos.z - aPos.z;
 				}
 				else
 				{
-					returnValue = aPos.y - bPos.y;
+					difference = aPos.y - bPos.y;
 				}
+				var returnValue = (int)(1000000 * difference);
 
 				return returnValue;
 			}

@@ -3,17 +3,17 @@ package GameFramework.Controls;
 
 import java.util.function.*;
 
-public class DataBinding<C,V>
+public class DataBinding<TContext,TValue>
 {
-	public C context;
-	public Function<C,V> _get;
-	public BiConsumer<C,V> _set;
+	public TContext context;
+	public Function<TContext,TValue> _get;
+	public BiConsumer<TContext,TValue> _set;
 
 	public DataBinding
 	(
-		C context,
-		Function<C,V> get,
-		BiConsumer<C,V> set
+		TContext context,
+		Function<TContext,TValue> get,
+		BiConsumer<TContext,TValue> set
 	)
 	{
 		this.context = context;
@@ -21,49 +21,71 @@ public class DataBinding<C,V>
 		this._set = set;
 	}
 
-	public static <C> DataBinding<Object, C> fromContext(C context)
-	{
-		return new DataBinding<Object, C>(context, null, null);
-	}
-
-	public static <C,V> DataBinding<C,V> fromContextAndGet
+	public static <TContext> DataBinding<TContext,TContext> fromContext
 	(
-		C context,
-		Function<C,V> get
+		TContext context
 	)
 	{
-		return new DataBinding(context, get, null);
+		return new DataBinding<TContext, TContext>
+		(
+			context,
+			(TContext context2) -> context,
+			(TContext context3, TContext value) -> {} // set
+		);
 	}
 
-	public static <C,V> DataBinding<C,V> fromGet
+	public static <TContext,TValue> DataBinding<TContext,TValue> fromContextAndGet
 	(
-		Function<C,V> get
+		TContext context,
+		Function<TContext,TValue> get
 	)
 	{
-		return new DataBinding(null, get, null);
+		return new DataBinding<TContext,TValue>
+		(
+			context, get, (TContext context2, TValue value) -> {}
+		);
 	}
 
-	public static DataBinding<Object,Boolean> fromTrue()
+	public static <TContext,TValue> DataBinding<TContext,TValue> fromGet
+	(
+		Function<TContext,TValue> get
+	)
+	{
+		return new DataBinding<TContext,TValue>
+		(
+			null, get, (TContext context, TValue value) -> {}
+		);
+	}
+
+	public static <TContext> DataBinding<TContext,Boolean> fromTrue(TContext context)
+	{
+		return DataBinding.fromGet
+		(
+			(TContext context2) -> (Boolean)true
+		);
+	}
+
+	public static DataBinding fromTrue()
 	{
 		return DataBinding.fromContext((Boolean)true);
 	}
 
-	public DataBinding<C, V> contextSet(C value)
+	public DataBinding<TContext,TValue> contextSet(TContext value)
 	{
 		this.context = value;
 		return this;
 	}
 
-	public V get()
+	public TValue get()
 	{
 		return this._get.apply(this.context);
 	}
 
-	public void set(V value)
+	public void set(TValue value)
 	{
 		if (this._set == null)
 		{
-			this.context = (C)value;
+			this.context = (TContext)value;
 		}
 		else
 		{

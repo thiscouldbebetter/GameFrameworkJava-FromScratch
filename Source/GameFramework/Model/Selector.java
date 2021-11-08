@@ -179,9 +179,13 @@ public class Selector implements EntityProperty<Selector>, Clonable<Selector>
 		).sorted
 		(
 			(Entity a, Entity b) ->
+			(
 				a.locatable().distanceFromPos(mousePosAbsolute)
-				- b.locatable().distanceFromPos(mousePosAbsolute)
-		)[0];
+					> b.locatable().distanceFromPos(mousePosAbsolute)
+				? 1
+				: -1
+			) 
+		).findFirst().get();
 
 		this.entitiesDeselectAll(uwpe);
 		if (entityToSelect != null)
@@ -261,6 +265,8 @@ public class Selector implements EntityProperty<Selector>, Clonable<Selector>
 
 	public ControlBase toControl(Coords size, Coords pos)
 	{
+		var selector = this;
+
 		var fontHeightInPixels = 12.0;
 		var margin = fontHeightInPixels / 2;
 

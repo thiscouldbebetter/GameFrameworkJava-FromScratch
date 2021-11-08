@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.function.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
 import GameFramework.Input.*;
@@ -89,7 +90,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 	public String recipeProgressAsString(Universe universe)
 	{
 		String returnValue = null;
-		var recipeInProgress = this.recipesQueued[0];
+		var recipeInProgress = this.recipesQueued.get(0);
 		if (recipeInProgress == null)
 		{
 			returnValue = "-";
@@ -202,7 +203,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					Coords.fromXY(10, 5), // pos
 					Coords.fromXY(70, 25), // size
 					false, // isTextCentered
-					"Recipes:",
+					DataBinding.fromContext("Recipes:"),
 					fontHeightSmall
 				),
 
@@ -221,7 +222,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 						(CraftingRecipe c) -> c.name
 					), // bindingForItemText
 					fontHeightSmall,
-					new DataBinding
+					new DataBinding<ItemCrafter,CraftingRecipe>
 					(
 						crafter,
 						(ItemCrafter c) -> c.recipeAvailableSelected,
@@ -233,7 +234,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 						(CraftingRecipe c) -> c
 					), // bindingForItemValue
 					DataBinding.fromTrue(), // isEnabled
-					addToQueue, // confirm
+					(UniverseWorldPlaceEntities uwpe) -> addToQueue.run(), // confirm
 					null
 				),
 
@@ -393,7 +394,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 
 			new ActorAction[]
 			{
-				new Action("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
+				new ActorAction("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
 			},
 
 			new ActionToInputsMapping[]
@@ -413,7 +414,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					Coords.fromXY(100, -5), // pos
 					Coords.fromXY(100, 25), // size
 					true, // isTextCentered
-					"Craft",
+					DataBinding.fromContext("Craft"),
 					fontHeightLarge
 				)
 			);
@@ -450,5 +451,10 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 	public ItemCrafter clone()
 	{
 		return new ItemCrafter(ArrayHelper.clone(this.recipesAvailable) );
+	}
+
+	public ItemCrafter overwriteWith(ItemCrafter other)
+	{
+		return this;
 	}
 }

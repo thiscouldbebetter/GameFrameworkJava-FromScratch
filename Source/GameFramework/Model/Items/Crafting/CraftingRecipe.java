@@ -1,6 +1,9 @@
 
-package GameFramework.Model.Items.Crafting
+package GameFramework.Model.Items.Crafting;
 
+import java.util.*;
+
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Model.Items.*;
 import GameFramework.Utility.*;
@@ -37,7 +40,7 @@ public class CraftingRecipe implements Clonable<CraftingRecipe>
 			var itemStaged = itemsStaged.stream().filter
 			(
 				x -> x.defnName == itemRequired.defnName
-			)[0];
+			).findFirst().get();
 			var isRequirementFulfilled =
 			(
 				itemStaged != null
@@ -87,7 +90,9 @@ public class CraftingRecipe implements Clonable<CraftingRecipe>
 	{
 		return new CraftingRecipe
 		(
-			this.name, this.ticksToComplete, ArrayHelper.clone(this.itemsIn),
+			this.name,
+			this.ticksToComplete,
+			ArrayHelper.clone(this.itemsIn),
 			ArrayHelper.clone(this.itemsOut)
 		);
 	}

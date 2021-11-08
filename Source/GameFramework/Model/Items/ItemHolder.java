@@ -204,7 +204,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 					a.locatable().distanceFromEntity(entityItemHolder) * 1000000
 					- b.locatable().distanceFromEntity(entityItemHolder) * 1000000
 				)
-		)[0];
+		).findFirst().get();
 
 		return entityItemClosest;
 	}
@@ -287,7 +287,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 	public void itemTransferSingleTo(Item item, ItemHolder other)
 	{
-		var itemSingle = this.itemSplit(item, 1);
+		var itemSingle = this.itemSplit(item, 1.0);
 		this.itemTransferTo(itemSingle, other);
 	}
 
@@ -322,8 +322,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			itemExisting.quantity -= quantityToSubtract;
 			if (itemExisting.quantity <= 0)
 			{
-				var itemExisting = this.itemsByDefnName(itemDefnName).get(0);
-				ArrayHelper.remove(this.items, itemExisting);
+				var itemExisting2 = this.itemsByDefnName(itemDefnName).get(0);
+				ArrayHelper.remove(this.items, itemExisting2);
 			}
 		}
 	}
@@ -354,7 +354,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		var massTotal = this.items.stream().reduce
 		(
 			0.0, // sumSoFar
-			(sumSoFar, item) -> sumSoFar + item.mass(world)
+			(Double sumSoFar, Item item) -> sumSoFar + item.mass(world)
 		);
 
 		return massTotal;
@@ -369,8 +369,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 	{
 		var tradeValueTotal = this.items.stream().reduce
 		(
-			(sumSoFar, item) -> sumSoFar + item.tradeValue(world),
-			0 // sumSoFar
+			0.0, // sumSoFar
+			(Double sumSoFar, Item item) -> sumSoFar + item.tradeValue(world)
 		);
 
 		return tradeValueTotal;
@@ -431,8 +431,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			var itemToKeep = itemHolder.itemSelected;
 			if (itemToKeep != null)
 			{
-				var world = universe.world;
-				var place = world.placeCurrent;
+				var world2 = universe.world;
+				var place = world2.placeCurrent;
 
 				var itemToDrop = itemToKeep.clone();
 				itemToDrop.quantity = 1;
@@ -575,7 +575,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		);
 		*/
 
-		var childControls = new ControlBase[]
+		var childControls = Arrays.asList(new ControlBase[]
 		{
 			//controlVisualBackground,
 
@@ -607,7 +607,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 					(ItemHolder c, Item v) -> c.itemSelected = v
 				), // bindingForItemSelected
 				DataBinding.fromGet( (Item c) -> c ), // bindingForItemValue
-				DataBinding.fromTrue(), // isEnabled
+				DataBinding.fromTrue(itemHolder), // isEnabled
 				use
 			),
 
@@ -620,7 +620,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				DataBinding.fromContextAndGet
 				(
 					itemHolder,
-					(ItemHolder c) -> "Weight: " + c.massOfAllItemsOverMax(world)
+					(ItemHolder c) ->
+						"Weight: " + c.massOfAllItemsOverMax(world)
 				),
 				fontHeightSmall
 			),
@@ -736,7 +737,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				DataBinding.fromContextAndGet
 				(
 					itemHolder,
-					(ItemHolder c) -> (c.itemEntities.length > 1)
+					(ItemHolder c) -> (c.itemEntities.size() > 1)
 				), // isEnabled
 				sort
 			),
@@ -835,7 +836,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				), // isEnabled
 				drop // click
 			)
-		};
+		});
 
 		var returnValue = new ControlContainer
 		(
@@ -894,7 +895,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 
 		if (includeTitleAndDoneButton)
 		{
-			childControls.insert
+			childControls.add
 			(
 				0, // indexToInsertAt
 				new ControlLabel
@@ -903,10 +904,11 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 					Coords.fromXY(100, -5), // pos
 					Coords.fromXY(100, 25), // size
 					true, // isTextCentered
-					"Items",
+					DataBinding.fromContext("Items"),
 					fontHeightLarge
 				)
 			);
+
 			childControls.add
 			(
 				ControlButton.from8
@@ -939,7 +941,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 	{
 		return new ItemHolder
 		(
-			ArrayHelper.clone(this.items),
+			ArrayHelper.clone(this.items).toArray(new Item[] {}),
 			this.massMax,
 			this.reachRadius
 		);

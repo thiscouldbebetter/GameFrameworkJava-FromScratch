@@ -6,11 +6,11 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
-public class ControlButton extends ControlBase
+public class ControlButton<TContext> extends ControlBase
 {
 	public String text;
 	public boolean hasBorder;
-	public DataBinding<Object,Boolean> _isEnabled;
+	public DataBinding<TContext,Boolean> _isEnabled;
 	public Runnable click;
 	public Object context;
 	public boolean canBeHeldDown;
@@ -26,7 +26,7 @@ public class ControlButton extends ControlBase
 		String text,
 		double fontHeightInPixels,
 		boolean hasBorder,
-		DataBinding<Object,Boolean> isEnabled,
+		DataBinding<TContext,Boolean> isEnabled,
 		Runnable click,
 		Object context,
 		boolean canBeHeldDown
@@ -45,7 +45,7 @@ public class ControlButton extends ControlBase
 		this._sizeHalf = Coords.create();
 	}
 
-	public static <T> ControlButton from8
+	public static <TContext> ControlButton from8
 	(
 		String name,
 		Coords pos,
@@ -53,7 +53,7 @@ public class ControlButton extends ControlBase
 		String text,
 		double fontHeightInPixels,
 		boolean hasBorder,
-		DataBinding<Object,Boolean> isEnabled,
+		DataBinding<TContext,Boolean> isEnabled,
 		Runnable click
 	)
 	{
@@ -64,7 +64,7 @@ public class ControlButton extends ControlBase
 		);
 	}
 
-	public static ControlButton from9
+	public static <TContext> ControlButton from9
 	(
 		String name,
 		Coords pos,
@@ -72,7 +72,7 @@ public class ControlButton extends ControlBase
 		String text,
 		double fontHeightInPixels,
 		boolean hasBorder,
-		DataBinding<Object,Boolean> isEnabled,
+		DataBinding<TContext,Boolean> isEnabled,
 		Runnable click,
 		Object context
 	)

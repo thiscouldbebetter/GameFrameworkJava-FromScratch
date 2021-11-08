@@ -6,7 +6,7 @@ import java.util.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class Animatable2<T extends Transformable> implements EntityProperty<Animatable2>
+public class Animatable2<T extends Transformable> implements EntityProperty<Animatable2<T>>
 {
 	public AnimationDefnGroup animationDefnGroup;
 	public T transformableAtRest;
@@ -24,7 +24,7 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 		this.transformableAtRest = transformableAtRest;
 		this.transformableTransformed = transformableTransformed;
 
-		this.ticksStartedByAnimationName = new Map();
+		this.ticksStartedByAnimationName = new HashMap<String,Integer>();
 	}
 
 	public static Animatable2 create()
@@ -34,15 +34,15 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 
 	public void animationStartByName(String name, World world)
 	{
-		if (this.ticksStartedByAnimationName.has(name) == false)
+		if (this.ticksStartedByAnimationName.containsKey(name) == false)
 		{
-			this.ticksStartedByAnimationName.set(name, world.timerTicksSoFar);
+			this.ticksStartedByAnimationName.put(name, world.timerTicksSoFar);
 		}
 	}
 
 	public void animationStopByName(String name)
 	{
-		this.ticksStartedByAnimationName.delete(name);
+		this.ticksStartedByAnimationName.remove(name);
 	}
 
 	public Integer animationWithNameStartIfNecessary(String animationName, World world)
@@ -57,7 +57,7 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 	public List<AnimationDefn> animationDefnsRunning()
 	{
 		var animationsRunningNames = this.animationsRunningNames();
-		var returnValues = animationsRunningNames.map
+		var returnValues = animationsRunningNames.stream().map
 		(
 			x -> this.animationDefnGroup.animationDefnsByName.get(x)
 		);
@@ -67,9 +67,12 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 	public List<String> animationsRunningNames()
 	{
 		var animationsRunningNames = 
-		this.ticksStartedByAnimationName.keySet().filter
+		this.ticksStartedByAnimationName.keySet().stream().filter
 		(
-			x -> this.ticksStartedByAnimationName.has(x)
+			x -> this.ticksStartedByAnimationName.containsKey(x)
+		).collect
+		(
+			Collectors.toList()
 		);
 		return animationsRunningNames;
 	}
@@ -79,7 +82,7 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 		this.ticksStartedByAnimationName.clear();
 	}
 
-	public void transformableReset()
+	public Transformable transformableReset()
 	{
 		this.transformableTransformed.overwriteWith(this.transformableAtRest);
 	}

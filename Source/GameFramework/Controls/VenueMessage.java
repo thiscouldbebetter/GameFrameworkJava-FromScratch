@@ -8,9 +8,9 @@ import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
-public class VenueMessage implements Venue
+public class VenueMessage<TContext> implements Venue
 {
-	public DataBinding<Object,String> messageToShow;
+	public DataBinding<TContext,String> messageToShow;
 	public Consumer<UniverseWorldPlaceEntities> acknowledge;
 	public Venue venuePrev;
 	public Coords _sizeInPixels;
@@ -20,7 +20,7 @@ public class VenueMessage implements Venue
 
 	public VenueMessage
 	(
-		DataBinding<Object,String> messageToShow,
+		DataBinding<TContext,String> messageToShow,
 		Consumer<UniverseWorldPlaceEntities> acknowledge,
 		Venue venuePrev,
 		Coords sizeInPixels,
@@ -34,14 +34,17 @@ public class VenueMessage implements Venue
 		this.showMessageOnly = showMessageOnly;
 	}
 
-	public static VenueMessage fromMessage(DataBinding<Object,String> message)
+	public static <TContext> VenueMessage fromMessage
+	(
+		DataBinding<TContext,String> message
+	)
 	{
 		return VenueMessage.fromMessageAndAcknowledge(message, null);
 	}
 
-	public static VenueMessage fromMessageAndAcknowledge
+	public static <TContext> VenueMessage fromMessageAndAcknowledge
 	(
-		DataBinding<Object,String> messageToShow,
+		DataBinding<TContext,String> messageToShow,
 		Consumer<UniverseWorldPlaceEntities> acknowledge
 	)
 	{

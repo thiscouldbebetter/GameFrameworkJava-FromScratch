@@ -1,6 +1,7 @@
 
 package GameFramework.Media;
 
+import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Display.*;
 import GameFramework.Display.Visuals.*;
