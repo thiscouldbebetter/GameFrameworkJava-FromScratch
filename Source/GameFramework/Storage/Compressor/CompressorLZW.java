@@ -170,7 +170,7 @@ public class CompressorLZW
 				symbolDecoded = patternsBySymbol.get(symbolToDecode);
 				if (symbolDecoded == null)
 				{
-					character = pattern.charAt(0);
+					character = "" + pattern.charAt(0);
 					patternPlusCharacter = pattern + character;
 					for (var i = 0; i < patternPlusCharacter.length(); i++)
 					{

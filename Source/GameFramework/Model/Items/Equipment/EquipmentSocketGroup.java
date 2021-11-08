@@ -22,7 +22,7 @@ public class EquipmentSocketGroup
 		{
 			var socketDefn = socketDefns[i];
 
-			var socket = new EquipmentSocket(socketDefn.name, null);
+			var socket = new EquipmentSocket(socketDefn.name(), null);
 
 			this.sockets[i] = socket;
 		}

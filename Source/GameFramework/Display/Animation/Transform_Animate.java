@@ -1,6 +1,8 @@
 
 package GameFramework.Display.Animation;
 
+import GameFramework.Geometry.*;
+
 public class Transform_Animate
 {
 	public AnimationDefn animationDefn;

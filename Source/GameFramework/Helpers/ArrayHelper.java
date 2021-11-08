@@ -328,7 +328,7 @@ public class ArrayHelper
 
 	public static <T> insertElementAfterOther
 	(
-		List<T> list, T elementToInsert, T other: any
+		List<T> list, T elementToInsert, T other
 	)
 	{
 		var index = list.indexOf(other);

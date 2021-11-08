@@ -6,7 +6,9 @@ import java.util.function.*;
 import GameFramework.Controls.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 
 public class JournalKeeper implements EntityProperty<JournalKeeper>
 {
@@ -55,15 +57,15 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 
 		Runnable back = () ->
 		{
-			var Venue venueNext = venuePrev;
+			Venue venueNext = venuePrev;
 			venueNext = VenueFader.fromVenuesToAndFrom(venueNext, universe.venueCurrent);
 			universe.venueNext = venueNext;
 		};
 
 		var buttonSize = Coords.fromXY(20, 10);
 
-		var ControlBase childControls[] =
-		[
+		var childControls = new ControlBase[]
+		{
 			new ControlLabel
 			(
 				"labelJournalEntries",
@@ -94,9 +96,9 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					(
 						world.timerTicksSoFar,
 						"-", // title
-						"", // body
+						"" // body
 					);
-					journal.entries.push(entryNew);
+					journal.entries.add(entryNew);
 				}, // click
 				null, // context
 				false // canBeHeldDown
@@ -164,7 +166,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					journalKeeper.isJournalEntrySelectedEditable = false;
 				}, // click
 				null, // context
-				false, // canBeHeldDown
+				false // canBeHeldDown
 			),
 
 			new ControlButton
@@ -189,7 +191,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					journalKeeper.isJournalEntrySelectedEditable = true;
 				}, // click
 				null, // context
-				false, // canBeHeldDown
+				false // canBeHeldDown
 			),
 
 			new ControlButton
@@ -223,7 +225,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 						null // cancel
 					);
 
-					var Venue venueNext = controlConfirm.toVenue();
+					Venue venueNext = controlConfirm.toVenue();
 					venueNext = VenueFader.fromVenuesToAndFrom(venueNext, universe.venueCurrent);
 					universe.venueNext = venueNext;
 
@@ -339,7 +341,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 				), // text
 				fontHeightSmall
 			)
-		];
+		};
 
 		var returnValue = new ControlContainer
 		(
@@ -347,13 +349,15 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 			Coords.create(), // pos
 			sizeBase.clone(), // size
 			childControls,
-			[
-				new Action("Back", back),
-			],
+			new ActorAction[]
+			{
+				new Action("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
+			},
 
-			[
-				new ActionToInputsMapping( "Back", [ Input.Names().Escape ], true ),
-			]
+			new ActionToInputsMapping[]
+			{
+				new ActionToInputsMapping( "Back", new String[] { Input.Names().Escape }, true ),
+			}
 		);
 
 		if (includeTitleAndDoneButton)
@@ -371,7 +375,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 					fontHeightLarge
 				)
 			);
-			childControls.push
+			childControls.add
 			(
 				ControlButton.from8
 				(
@@ -396,7 +400,5 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 
 		return returnValue;
 	}
-
-}
 
 }

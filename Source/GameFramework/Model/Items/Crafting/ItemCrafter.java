@@ -2,10 +2,14 @@
 package GameFramework.Model.Items.Crafting;
 
 import java.util.*;
+import java.util.function.*;
 
 import GameFramework.Controls.*;
+import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Actors.*;
 import GameFramework.Model.Items.*;
 
 public class ItemCrafter implements EntityProperty<ItemCrafter>
@@ -45,7 +49,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 
 	public boolean isRecipeInProgressFulfilled()
 	{
-		var recipeInProgress = this.recipesQueued[0];
+		var recipeInProgress = this.recipesQueued.get(0);
 		var returnValue =
 		(
 			recipeInProgress == null
@@ -68,7 +72,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 
 	public void recipeInProgressFinish(Entity entityCrafter)
 	{
-		var recipe = this.recipesQueued[0];
+		var recipe = this.recipesQueued.get(0);
 
 		var itemsOut = recipe.itemsOut;
 		for (var i = 0; i < itemsOut.length; i++)
@@ -77,14 +81,14 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 			entityCrafter.itemHolder().itemAdd(itemOut);
 		}
 
-		this.itemHolderStaged.items.length = 0;
+		this.itemHolderStaged.items.clear();
 		this.recipeInProgressTicksSoFar = 0;
-		this.recipesQueued.splice(0, 1);
+		this.recipesQueued.remove(0);
 	}
 
 	public String recipeProgressAsString(Universe universe)
 	{
-		var returnValue = null;
+		String returnValue = null;
 		var recipeInProgress = this.recipesQueued[0];
 		if (recipeInProgress == null)
 		{
@@ -110,9 +114,9 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 
 	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe)
 	{
-		if (this.recipesQueued.length > 0)
+		if (this.recipesQueued.size() > 0)
 		{
-			var recipeInProgress = this.recipesQueued[0];
+			var recipeInProgress = this.recipesQueued.get(0);
 			if (this.isRecipeInProgressFulfilled())
 			{
 				if (this.recipeInProgressTicksSoFar >= recipeInProgress.ticksToComplete)
@@ -128,7 +132,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 			else
 			{
 				this.recipeInProgressTicksSoFar = 0;
-				this.recipesQueued.splice(0, 1);
+				this.recipesQueued.remove(0);
 			}
 		}
 	}
@@ -161,14 +165,14 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 		var itemHolder = entityItemHolder.itemHolder();
 		var crafter = this;
 
-		Runnable back = () =>
+		Runnable back = () ->
 		{
 			var venueNext = venuePrev;
 			venueNext = VenueFader.fromVenuesToAndFrom(venueNext, universe.venueCurrent);
 			universe.venueNext = venueNext;
 		};
 
-		Runnable addToQueue = () =>
+		Runnable addToQueue = () ->
 		{
 			if (crafter.isRecipeAvailableSelectedFulfilled( entityCrafter.itemHolder() ) )
 			{
@@ -180,7 +184,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					var itemIn = itemsIn[i];
 					itemHolder.itemTransferTo(itemIn, this.itemHolderStaged);
 				}
-				crafter.recipesQueued.push(crafter.recipeAvailableSelected);
+				crafter.recipesQueued.add(crafter.recipeAvailableSelected);
 			}
 		};
 
@@ -190,7 +194,8 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 			Coords.create(), // pos
 			sizeBase.clone(), // size
 			// children
-			[
+			new ControlBase[]
+			{
 				new ControlLabel
 				(
 					"labelRecipes",
@@ -209,23 +214,23 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						crafter,
-						(ItemCrafter c) => c.recipesAvailable
+						(ItemCrafter c) -> c.recipesAvailable
 					), // items
 					DataBinding.fromGet
 					(
-						(CraftingRecipe c) => c.name
+						(CraftingRecipe c) -> c.name
 					), // bindingForItemText
 					fontHeightSmall,
 					new DataBinding
 					(
 						crafter,
-						(ItemCrafter c) => c.recipeAvailableSelected,
-						(ItemCrafter c, CraftingRecipe v) =>
+						(ItemCrafter c) -> c.recipeAvailableSelected,
+						(ItemCrafter c, CraftingRecipe v) ->
 							c.recipeAvailableSelected = v
 					), // bindingForItemSelected
 					DataBinding.fromGet
 					(
-						(CraftingRecipe c) => c
+						(CraftingRecipe c) -> c
 					), // bindingForItemValue
 					DataBinding.fromTrue(), // isEnabled
 					addToQueue, // confirm
@@ -254,7 +259,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						this,
-						(ItemCrafter c) =>
+						(ItemCrafter c) ->
 							c.isRecipeAvailableSelectedFulfilled(entityCrafter.itemHolder())
 					), // isEnabled
 					addToQueue, // click
@@ -270,7 +275,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						this,
-						(ItemCrafter c) =>
+						(ItemCrafter c) ->
 							(
 								(c.recipeAvailableSelected == null)
 								? "-"
@@ -288,7 +293,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						this,
-						(ItemCrafter c) =>
+						(ItemCrafter c) ->
 							(
 								c.recipeAvailableSelected == null
 								? []
@@ -297,11 +302,11 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					), // items
 					DataBinding.fromGet
 					(
-						(string c) => c
+						(string c) -> c
 					), // bindingForItemText
 					fontHeightSmall,
 					null, // bindingForItemSelected
-					DataBinding.fromGet( (Entity c) => c ) // bindingForItemValue
+					DataBinding.fromGet( (Entity c) -> c ) // bindingForItemValue
 				),
 
 				new ControlLabel
@@ -325,7 +330,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						this,
-						(ItemCrafter c) => (c.recipesQueued.length > 0)
+						(ItemCrafter c) -> (c.recipesQueued.length > 0)
 					), // isEnabled
 					crafter.recipeInProgressCancel // click
 				),
@@ -339,7 +344,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						this,
-						(ItemCrafter c) => c.recipeProgressAsString(universe)
+						(ItemCrafter c) -> c.recipeProgressAsString(universe)
 					),
 					fontHeightSmall
 				),
@@ -352,21 +357,21 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						this,
-						(ItemCrafter c) => c.recipesQueued
+						(ItemCrafter c) -> c.recipesQueued
 					), // items
 					DataBinding.fromGet
 					(
-						(CraftingRecipe c) => c.name
+						(CraftingRecipe c) -> c.name
 					), // bindingForItemText
 					fontHeightSmall,
 					new DataBinding
 					(
 						this,
-						(ItemCrafter c) => c.recipeQueuedSelected,
-						(ItemCrafter c, CraftingRecipe v) =>
+						(ItemCrafter c) -> c.recipeQueuedSelected,
+						(ItemCrafter c, CraftingRecipe v) ->
 							c.recipeQueuedSelected = v
 					), // bindingForItemSelected
-					DataBinding.fromGet( (Entity c) => c ) // bindingForItemValue
+					DataBinding.fromGet( (Entity c) -> c ) // bindingForItemValue
 				),
 
 				new ControlLabel
@@ -378,13 +383,13 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 					DataBinding.fromContextAndGet
 					(
 						this,
-						(ItemCrafter c) => c.statusMessage
+						(ItemCrafter c) -> c.statusMessage
 					), // text
 					fontHeightSmall
 				)
 				*/
 
-			], // end children
+			}, // end children
 
 			new ActorAction[]
 			{

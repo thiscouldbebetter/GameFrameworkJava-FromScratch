@@ -1,6 +1,8 @@
 
 package GameFramework.Model.Journal;
 
+import GameFramework.Model.*;
+
 public class JournalEntry
 {
 	public int tickRecorded;
@@ -16,7 +18,7 @@ public class JournalEntry
 
 	public String timeRecordedAsStringH_M_S(Universe universe)
 	{
-		return universe.timerHelper.ticksToStringH_M_S(this.tickRecorded)
+		return universe.timerHelper.ticksToStringH_M_S(this.tickRecorded);
 	}
 
 	public String toString(Universe universe)

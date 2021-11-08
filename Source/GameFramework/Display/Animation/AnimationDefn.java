@@ -1,13 +1,13 @@
 
 package GameFramework.Display.Animation;
 
-import java.util.*:
+import java.util.*;
 
 import GameFramework.Utility.*;
 
 public class AnimationDefn implements Namable
 {
-	public String name;
+	private String _name;
 	public AnimationKeyframe[] keyframes;
 	public int intOfFramesTotal;
 
@@ -46,7 +46,7 @@ public class AnimationDefn implements Namable
 		}
 
 		keyframe = null;
-		var keyframePrev = null;
+		AnimationKeyframe keyframePrev = null;
 
 		for (var f = 0; f < this.keyframes.length; f++)
 		{
@@ -55,12 +55,12 @@ public class AnimationDefn implements Namable
 
 			var transformsByPropertyName = keyframe.transformsByPropertyName;
 
-			for (var p = 0; p < propertyNamesAll.length; p++)
+			for (var p = 0; p < propertyNamesAll.size(); p++)
 			{
-				var propertyName = propertyNamesAll[p];
+				var propertyName = propertyNamesAll.get(p);
 				if (transformsByPropertyName.get(propertyName) == null)
 				{
-					var keyframeNext = null;
+					AnimationKeyframe keyframeNext = null;
 
 					for (var g = f + 1; g < this.keyframes.length; g++)
 					{

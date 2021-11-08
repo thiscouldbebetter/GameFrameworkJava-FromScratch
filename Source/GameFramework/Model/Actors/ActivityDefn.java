@@ -19,7 +19,7 @@ public class ActivityDefn implements Namable
 		Consumer<UniverseWorldPlaceEntities> perform
 	)
 	{
-		this.name = name;
+		this._name = name;
 		this._perform = perform;
 	}
 
@@ -36,6 +36,13 @@ public class ActivityDefn implements Namable
 	public void perform(UniverseWorldPlaceEntities uwpe)
 	{
 		this._perform.accept(uwpe);
+	}
+
+	// Namable.
+
+	public String name()
+	{
+		return this._name;
 	}
 }
 
@@ -83,12 +90,5 @@ class ActivityDefn_Instances
 		};
 
 		this._AllByName = ArrayHelper.addLookupsByName(this._All);
-	}
-
-	// Namable.
-
-	public String name()
-	{
-		return this._name;
 	}
 }

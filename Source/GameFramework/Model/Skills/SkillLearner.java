@@ -4,6 +4,7 @@ package GameFramework.Model.Skills;
 import java.util.*;
 import java.util.stream.*;
 
+import GameFramework.Controls.*;
 import GameFramework.Geometry.*;
 import GameFramework.Model.*;
 
@@ -44,12 +45,12 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 
 	public Skill skillCheapestAvailable(Skill[] skillsAll)
 	{
-		var Skill skillCheapest = null;
+		Skill skillCheapest = null;
 
 		var skillsAvailable = this.skillsAvailableToLearn(skillsAll);
 		if (skillsAvailable.length > 0)
 		{
-			skillCheapest = skillsAvailable.sort
+			skillCheapest = skillsAvailable.sorted
 			(
 				(Skill x, Skill y) -> x.learningRequired - y.learningRequired
 			)[0];
@@ -64,7 +65,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 		double amountToIncrement
 	)
 	{
-		var message = null;
+		String message = null;
 
 		var skillBeingLearned = this.skillBeingLearned(skillsByName);
 
@@ -75,7 +76,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 			{
 				skillBeingLearned = skillCheapest;
 				this.skillBeingLearnedName = skillCheapest.name;
-				message = "Now learning '" + this.skillBeingLearnedName + "'."
+				message = "Now learning '" + this.skillBeingLearnedName + "'.";
 			}
 		}
 
@@ -87,7 +88,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 			if (this.learningAccumulated >= learningRequired)
 			{
 				message = "Learned skill '" + this.skillBeingLearnedName + "'.";
-				this.skillsKnownNames.push
+				this.skillsKnownNames.add
 				(
 					this.skillBeingLearnedName
 				);
@@ -107,7 +108,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 		return this.learningAccumulated + "/" + this.learningRequired(skillsAllByName);
 	}
 
-	public double learningRequired(Map skillsAllByName<String, Skill>)
+	public double learningRequired(Map<String,Skill> skillsAllByName)
 	{
 		var skillBeingLearned = this.skillBeingLearned(skillsAllByName);
 		var returnValue =
@@ -141,7 +142,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 			var skillName = skill.name;
 
 			var isAlreadyKnown =
-				this.skillsKnownNames.stream.anyMatch(x -> x == skillName);
+				this.skillsKnownNames.stream().anyMatch(x -> x == skillName);
 
 			if (isAlreadyKnown == false)
 			{
@@ -149,11 +150,11 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 			}
 		}
 
-		var skillsUnknownWithKnownPrerequisites = [];
+		var skillsUnknownWithKnownPrerequisites = new ArrayList<Skill>();
 
-		for (var i = 0; i < skillsUnknown.length; i++)
+		for (var i = 0; i < skillsUnknown.size(); i++)
 		{
-			var skill = skillsUnknown[i];
+			var skill = skillsUnknown.get(i);
 			var prerequisites = skill.namesOfPrerequisiteSkills;
 
 			var areAllPrerequisitesKnown = true;
@@ -163,7 +164,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 				var prerequisite = prerequisites[p];
 				var isPrerequisiteKnown =
 				(
-					this.skillsKnownNames.some(x -> x == prerequisite)
+					this.skillsKnownNames.stream().anyMatch(x -> x == prerequisite)
 				);
 
 				if (isPrerequisiteKnown == false)
@@ -175,7 +176,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 
 			if (areAllPrerequisitesKnown)
 			{
-				skillsUnknownWithKnownPrerequisites.push
+				skillsUnknownWithKnownPrerequisites.add
 				(
 					skill
 				);
@@ -185,21 +186,21 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 		return skillsUnknownWithKnownPrerequisites;
 	}
 
-	skillsKnown(Map skillsAllByName<String, Skill>): Skill[]
+	public List<Skill> skillsKnown(Map<String,Skill> skillsAllByName)
 	{
-		var returnValues = [];
+		var returnValues = new ArrayList<Skill>();
 
 		for (var i = 0; i < this.skillsKnownNames.length; i++)
 		{
 			var skillName = this.skillsKnownNames[i];
 			var skill = skillsAllByName.get(skillName);
-			returnValues.push(skill);
+			returnValues.add(skill);
 		}
 
 		return returnValues;
 	}
 
-	skillBeingLearned(Map skillsAllByName<String, Skill>): Skill
+	public Skill skillBeingLearned(Map<String,Skill> skillsAllByName)
 	{
 		var returnValue = skillsAllByName.get(this.skillBeingLearnedName);
 
@@ -208,25 +209,28 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 
 	// EntityProperty.
 
-	finalize(UniverseWorldPlaceEntities uwpe): void {}
-	initialize(UniverseWorldPlaceEntities uwpe): void {}
+	public void finalize(UniverseWorldPlaceEntities uwpe){}
+	public void initialize(UniverseWorldPlaceEntities uwpe){}
 
-	updateForTimerTick(UniverseWorldPlaceEntities uwpe): void
+	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe)
 	{
 		// Do nothing.
 	}
 
 	// controls
 
-	toControl
+	public ControlBase toControl
 	(
-		Universe universe, Coords size, Entity entity,
-		Venue venueToReturnTo, boolean includeTitle
-	): ControlBase
+		Universe universe,
+		Coords size,
+		Entity entity,
+		Venue venueToReturnTo,
+		boolean includeTitle
+	)
 	{
 		var display = universe.display;
 		//var size = display.sizeInPixels.clone();
-		var labelHeight = display.fontHeightInPixels * 1.2;
+		var labelHeight = display.fontHeightInPixels() * 1.2;
 		var margin = 20;
 		var labelHeightLarge = labelHeight * 2;
 
@@ -239,8 +243,9 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 
 		var defns = universe.world.defn;
 		var skillLearner = this;
-		var skillsAll = defns.defnArraysByTypeName.get(Skill.name); // todo - Just use the -ByName lookup.
-		var skillsAllByName = defns.defnsByNameByTypeName.get(Skill.name);
+		var skillClassName = Skill.class.getName();
+		var skillsAll = defns.defnArraysByTypeName.get(skillClassName); // todo - Just use the -ByName lookup.
+		var skillsAllByName = defns.defnsByNameByTypeName.get(skillClassName);
 
 		var returnValue = ControlContainer.from4
 		(
@@ -337,7 +342,8 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					false, // isTextCentered,
 					DataBinding.fromContextAndGet
 					(
-						this, (SkillLearner c) -> (c.skillSelectedName || "-")
+						skillLearner,
+						(SkillLearner c) -> (c.skillSelectedName != null ? c.skillSelectedName : "-")
 					)
 				),
 
@@ -435,4 +441,9 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 
 		return returnValue;
 	}
+
+	// Clonable.
+
+	public SkillLearner clone() { return this; }
+	public SkillLearner overwriteWith(SkillLearner other) { return this; }
 }

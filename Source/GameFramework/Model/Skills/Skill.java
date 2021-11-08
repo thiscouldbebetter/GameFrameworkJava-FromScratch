@@ -24,8 +24,8 @@ public class Skill
 
 	public static Skill[] skillsDemo()
 	{
-		var returnValues =
-		[
+		var returnValues = new Skill[]
+		{
 			// Skill(name, cost, prerequisites, description)
 
 			new Skill
@@ -82,7 +82,7 @@ public class Skill
 				"Teleporting", 32, new String[] { "Dashing", "HidingLonger" },
 				"Fzamph!  Now you're over here."
 			),
-		];
+		};
 
 		return returnValues;
 	}

@@ -53,7 +53,7 @@ public class DiceRoll
 			var offsetMagnitudeAsString =
 				sidesPerDieAndOffsetMagnitudeAsStrings[1];
 
-			sidesPerDie = parseInt(sidesPerDieAsString);
+			sidesPerDie = Integer.parseInt(sidesPerDieAsString);
 			var offsetMagnitude = Integer.parseInt(offsetMagnitudeAsString);
 			offset = 0 - offsetMagnitude;
 		}

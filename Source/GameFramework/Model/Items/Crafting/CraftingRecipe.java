@@ -1,6 +1,7 @@
 
-package GameFramework.Model.Items.CraftingRecipe
+package GameFramework.Model.Items.Crafting
 
+import GameFramework.Model.*;
 import GameFramework.Model.Items.*;
 import GameFramework.Utility.*;
 
@@ -33,9 +34,9 @@ public class CraftingRecipe implements Clonable<CraftingRecipe>
 		for (var i = 0; i < this.itemsIn.length; i++)
 		{
 			var itemRequired = this.itemsIn[i];
-			var itemStaged = itemsStaged.filter
+			var itemStaged = itemsStaged.stream().filter
 			(
-				x => x.defnName == itemRequired.defnName
+				x -> x.defnName == itemRequired.defnName
 			)[0];
 			var isRequirementFulfilled =
 			(
@@ -55,9 +56,12 @@ public class CraftingRecipe implements Clonable<CraftingRecipe>
 
 	public String[] itemsInHeldOverRequiredForItemHolder(ItemHolder itemHolder)
 	{
-		return this.itemsIn.map
+		return Arrays.asList
 		(
-			x =>
+			this.itemsIn
+		).stream().map
+		(
+			x ->
 				x.defnName
 				+ " ("
 				+ itemHolder.itemQuantityByDefnName(x.defnName)

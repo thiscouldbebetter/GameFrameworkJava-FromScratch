@@ -348,7 +348,6 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		var fontHeightLarge = fontHeight * 1.5;
 
 		var itemHolder = entityEquipmentUser.itemHolder();
-		var equipmentUser = this;
 		var sockets = this.socketGroup.sockets;
 		var socketDefnGroup = this.socketGroup.defnGroup;
 
@@ -611,7 +610,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		{
 			var childControls = returnValue.children;
 
-			childControls.insert
+			childControls.add
 			(
 				0,
 				new ControlLabel

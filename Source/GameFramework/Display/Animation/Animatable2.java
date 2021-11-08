@@ -4,7 +4,7 @@ package GameFramework.Display.Animation;
 import java.util.*;
 
 import GameFramework.Geometry.Transforms.*;
-import GameFramework.Model.*:
+import GameFramework.Model.*;
 
 public class Animatable2<T extends Transformable> implements EntityProperty<Animatable2>
 {
@@ -119,7 +119,7 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 		return this; // todo
 	}
 
-	public Animatable2 overwriteWith(Animatable other2)
+	public Animatable2 overwriteWith(Animatable2 other)
 	{
 		return this; // todo
 	}

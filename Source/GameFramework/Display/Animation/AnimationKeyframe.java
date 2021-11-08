@@ -1,15 +1,18 @@
 
 package GameFramework.Display.Animation;
 
-import GameFramework.Helper.*:
+import java.util.*;
+
+import GameFramework.Geometry.Transforms.*;
+import GameFramework.Helpers.*;
 
 public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 {
 	public int frameIndex;
-	public Transform_Interpolatable transforms[];
-	public Map transformsByPropertyName<string, Transform_Interpolatable>;
+	public Transform_Interpolatable[] transforms;
+	public Map<String,Transform_Interpolatable> transformsByPropertyName;
 
-	public AnimationKeyframe(int frameIndex, Transform transforms_Interpolatable[])
+	public AnimationKeyframe(int frameIndex, Transform_Interpolatable transforms[])
 	{
 		this.frameIndex = frameIndex;
 		this.transforms = transforms;
@@ -19,7 +22,10 @@ public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 		);
 	}
 
-	public interpolateWith(AnimationKeyframe other, double fractionOfProgressTowardOther)
+	public AnimationKeyframe interpolateWith
+	(
+		AnimationKeyframe other, double fractionOfProgressTowardOther
+	)
 	{
 		var transformsInterpolated =
 			new Transform_Interpolatable[this.transforms.length];
@@ -38,7 +44,7 @@ public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 				fractionOfProgressTowardOther
 			);
 
-			transformsInterpolated.push(transformInterpolated);
+			transformsInterpolated[i] = transformInterpolated;
 		}
 
 		var returnValue = new AnimationKeyframe
