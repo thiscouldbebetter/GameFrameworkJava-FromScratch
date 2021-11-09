@@ -286,7 +286,8 @@ public class Profile
 			var venueTask = new VenueTask
 			(
 				venueMessage,
-				(UniverseWorldPlaceEntities uwpe2) -> saveToLocalStorage.apply(null), // todo
+				(UniverseWorldPlaceEntities uwpe2) ->
+					saveToLocalStorage.apply(null), // todo
 				(UniverseWorldPlaceEntities uwpe2, Boolean result) -> // done
 				{
 					saveToLocalStorageDone.accept(result);
@@ -414,7 +415,7 @@ public class Profile
 					);
 					*/
 				},
-				null
+				false // ?
 			);
 
 			var venueMessageReadyToLoad = controlMessageReadyToLoad.toVenue();
@@ -514,7 +515,7 @@ public class Profile
 					Coords.fromXY(100, 10), // pos
 					Coords.fromXY(120, fontHeight), // size
 					true, // isTextCentered
-					"Profile: " + universe.profile.name,
+					"Profile: " + universe.profile.name.get(),
 					fontHeight
 				),
 
@@ -524,7 +525,12 @@ public class Profile
 					Coords.fromXY(100, 20), // pos
 					Coords.fromXY(150, 25), // size
 					true, // isTextCentered
-					"Choose a State to " + (isLoadNotSave ? "Restore" : "Overwrite") + ":",
+					DataBinding.fromContext
+					(
+						"Choose a State to "
+						+ (isLoadNotSave ? "Restore" : "Overwrite")
+						+ ":"
+					),
 					fontHeight
 				),
 
@@ -552,7 +558,7 @@ public class Profile
 						}
 					), // bindingForOptionText
 					fontHeight,
-					new DataBinding
+					new DataBinding<Profile,SaveState>
 					(
 						universe.profile,
 						(Profile c) -> c.saveStateSelected(),
@@ -591,7 +597,7 @@ public class Profile
 					DataBinding.fromContextAndGet
 					(
 						universe.profile,
-						(Profile c) -> (c.saveStateNameSelected != null)
+						(Profile c) -> (new Boolean(c.saveStateNameSelected != null))
 					),
 					(isLoadNotSave ? loadSelectedSlotFromLocalStorage : saveToLocalStorageOverwritingSlotSelected), // click
 					null, null
@@ -650,7 +656,7 @@ public class Profile
 							);
 							var returnValue2 =
 							(
-								(saveStateImageSnapshot == null) || saveStateImageSnapshot.isLoaded == false
+								(saveStateImageSnapshot == null) || saveStateImageSnapshot.isLoaded() == false
 								? new VisualNone()
 								: new VisualImageImmediate(saveStateImageSnapshot, true) // isScaled
 							);
@@ -796,7 +802,7 @@ public class Profile
 					Coords.fromXY(100, 40), // pos
 					Coords.fromXY(100, 20), // size
 					true, // isTextCentered
-					"Profile Name:",
+					DataBinding.fromContext("Profile Name:"),
 					fontHeight
 				),
 
@@ -805,7 +811,7 @@ public class Profile
 					"textBoxName",
 					Coords.fromXY(50, 50), // pos
 					Coords.fromXY(100, 20), // size
-					new DataBinding
+					new DataBinding<Profile,String>
 					(
 						universe.profile,
 						(Profile c) -> c.name,
@@ -1004,7 +1010,7 @@ public class Profile
 					Coords.fromXY(100, 40), // pos
 					Coords.fromXY(100, 25), // size
 					true, // isTextCentered
-					"Select a Profile:",
+					DataBinding.fromContext("Select a Profile:"),
 					fontHeight
 				),
 
@@ -1016,7 +1022,7 @@ public class Profile
 					DataBinding.fromContext(profiles), // items
 					DataBinding.fromGet( (Profile c) -> c.name ), // bindingForItemText
 					fontHeight,
-					new DataBinding
+					new DataBinding<Universe,Profile>
 					(
 						universe,
 						(Universe c) -> c.profile,
@@ -1122,8 +1128,8 @@ public class Profile
 		var venueTask = new VenueTask
 		(
 			venueMessage,
-			() -> universe.worldCreate(), // perform
-			(Universe universe2, World world) -> // done
+			(Universe universe2) -> universe.worldCreate(), // perform
+			(Universe universe3, World world) -> // done
 			{
 				universe2.world = world;
 

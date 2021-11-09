@@ -26,7 +26,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 
 	private Disposition _drawLoc;
 	private Coords _drawPos;
-	private Object _itemSelected;
+	private TItem _itemSelected;
 	private Coords _mouseClickPos;
 
 	public ControlList
@@ -283,7 +283,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 
 	public int indexOfFirstRowVisible()
 	{
-		return this.scrollbar.sliderPosInItems();
+		return (int)this.scrollbar.sliderPosInItems();
 	}
 
 	public Integer indexOfItemSelected()

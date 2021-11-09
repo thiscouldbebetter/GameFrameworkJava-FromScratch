@@ -6,17 +6,19 @@ import java.util.function.*;
 
 import GameFramework.Model.*;
 
-public class VenueTask implements Venue
+public class VenueTask<TResult> implements Venue
 {
 	public Venue venueInner;
-	public Consumer<Universe> perform;
-	public BiConsumer<Universe,Object> done;
+	public Function<Universe,TResult> perform;
+	public BiConsumer<Universe,TResult> done;
 
 	public DateTime timeStarted;
 
 	public VenueTask
 	(
-		Venue venueInner, Consumer<Universe> perform, BiConsumer<Universe,Object> done
+		Venue venueInner,
+		Function<Universe,TResult> perform,
+		BiConsumer<Universe,TResult> done
 	)
 	{
 		this.venueInner = venueInner;
@@ -53,7 +55,7 @@ public class VenueTask implements Venue
 	{
 		this.venueInner.updateForTimerTick(universe);
 
-		this.timeStarted = new Date();
+		this.timeStarted = new DateTime();
 
 		/*
 		var timer = setInterval
@@ -64,9 +66,9 @@ public class VenueTask implements Venue
 		*/
 
 		// todo - Make this asynchronous.
-		var result = this.perform.apply(universe);
+		var result = this.perform.accept(universe);
 
-		clearInterval(timer);
+		//clearInterval(timer);
 
 		this.done.accept(universe, result);
 	}

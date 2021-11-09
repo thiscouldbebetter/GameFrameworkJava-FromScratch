@@ -7,7 +7,7 @@ import GameFramework.Geometry.Transforms.*;
 import GameFramework.Media.*;
 import GameFramework.Model.*;
 
-public class VisualImageFromLibrary implements VisualImage
+public class VisualImageFromLibrary implements VisualImage<VisualImageFromLibrary>
 {
 	public String imageName;
 
@@ -69,12 +69,12 @@ public class VisualImageFromLibrary implements VisualImage
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualImageFromLibrary clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualImageFromLibrary overwriteWith(VisualImageFromLibrary other)
 	{
 		return this; // todo
 	}

@@ -48,11 +48,12 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 		Skill skillCheapest = null;
 
 		var skillsAvailable = this.skillsAvailableToLearn(skillsAll);
-		if (skillsAvailable.length > 0)
+		if (skillsAvailable.size() > 0)
 		{
-			skillCheapest = Arrays.asList(skillsAvailable).stream().sorted
+			skillCheapest = skillsAvailable.stream().sorted
 			(
-				(Skill x, Skill y) -> x.learningRequired - y.learningRequired
+				(Skill x, Skill y) ->
+					(x.learningRequired > y.learningRequired) ? 1 : -1
 			).findFirst().get();
 		}
 		return skillCheapest;
@@ -244,8 +245,12 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 		var defns = universe.world.defn;
 		var skillLearner = this;
 		var skillClassName = Skill.class.getName();
-		var skillsAll = defns.defnArraysByTypeName.get(skillClassName); // todo - Just use the -ByName lookup.
-		var skillsAllByName = defns.defnsByNameByTypeName.get(skillClassName);
+		var skillsAll =
+			//(Skill[])( defns.defnArraysByTypeName.get(skillClassName) ); // todo - Just use the -ByName lookup.
+			defns.skills();
+		var skillsAllByName =
+			//(Map<Name,Skill>)defns.defnsByNameByTypeName.get(skillClassName);
+			defns.skillsByName();
 
 		var returnValue = ControlContainer.from4
 		(
@@ -271,8 +276,14 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					Coords.fromXY(margin, 60), // pos
 					listSize,
 					// items
-					DataBinding.fromContext(this.skillsKnownNames),
-					DataBinding.fromContext(null), // bindingForItemText
+					DataBinding.fromContext
+					(
+						this.skillsKnownNames.toArray(new String[] {})
+					),
+					DataBinding.fromGet
+					(
+						(String skillName) -> skillName
+					), // bindingForItemText
 					labelHeight // fontHeightInPixels
 				),
 
@@ -303,7 +314,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 						(Skill c) -> c.name
 					), // bindingForItemText
 					labelHeight, // fontHeightInPixels
-					new DataBinding
+					new DataBinding<SkillLearner,Skill>
 					(
 						skillLearner,
 						(SkillLearner c) ->
@@ -331,7 +342,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					Coords.fromXY(margin, 220), // pos,
 					Coords.fromXY(size.x - margin * 2, labelHeight), // size,
 					false, // isTextCentered,
-					"Selected:" // text
+					DataBinding.fromContext("Selected:") // text
 				),
 
 				ControlLabel.from5
@@ -384,9 +395,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					(
 						skillLearner,
 						(SkillLearner c) ->
-						{
-							return (c.skillBeingLearnedName || "-");
-						}
+							(c.skillBeingLearnedName != null ? c.skillBeingLearnedName : "-")
 					),
 					null
 				),
@@ -397,7 +406,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					Coords.fromXY(margin, size.y - margin - labelHeight), // pos,
 					Coords.fromXY(size.x - margin * 2, labelHeight), // size,
 					false, // isTextCentered,
-					"Learning Accumulated:" // text
+					DataBinding.fromContext("Learning Accumulated:") // text
 				),
 
 				ControlLabel.from5
@@ -427,7 +436,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					Coords.fromXY(200, 20), // pos
 					Coords.fromXY(120, 25), // size
 					true, // isTextCentered
-					"Skills",
+					DataBinding.fromContext("Skills"),
 					labelHeightLarge
 				)
 			);

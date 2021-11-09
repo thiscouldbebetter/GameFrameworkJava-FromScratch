@@ -596,7 +596,11 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				"listItems",
 				Coords.fromXY(10, 15), // pos
 				Coords.fromXY(70, 100), // size
-				DataBinding.fromContext(this.items), // items
+				DataBinding.fromContextAndGet
+				(
+					itemHolder,
+					(ItemHolder c) -> c.items
+				), // items
 				DataBinding.fromGet
 				(
 					(Item c) -> c.toString(world)

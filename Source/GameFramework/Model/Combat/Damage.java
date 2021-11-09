@@ -66,7 +66,7 @@ public class Damage
 			}
 		}
 
-		return effectsOccurring;
+		return effectsOccurring.toArray(new Effect[] {});
 	}
 
 	public String toString()

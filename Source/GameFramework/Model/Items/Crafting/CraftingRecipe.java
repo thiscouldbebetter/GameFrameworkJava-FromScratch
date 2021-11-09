@@ -71,7 +71,7 @@ public class CraftingRecipe implements Clonable<CraftingRecipe>
 				+ "/"
 				+ x.quantity
 				+ ")"
-		);
+		).collect(Collectors.toList()).toArray(new String[] {});
 	}
 
 	public String nameAndSecondsToCompleteAsString(Universe universe)

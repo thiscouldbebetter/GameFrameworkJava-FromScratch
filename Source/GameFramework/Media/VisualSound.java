@@ -74,7 +74,7 @@ public class VisualSound implements Visual<VisualSound>
 
 	// Transformable.
 
-	public Coords coordsGroupToTranslate() { return null; }
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public VisualSound transform(Transform transformToApply)
 	{

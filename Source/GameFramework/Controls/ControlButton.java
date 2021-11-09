@@ -60,7 +60,7 @@ public class ControlButton<TContext> extends ControlBase
 		return new ControlButton
 		(
 			name, pos, size, text, fontHeightInPixels, hasBorder,
-			isEnabled, click, null, null
+			isEnabled, click, null, false
 		);
 	}
 

@@ -234,7 +234,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 						(CraftingRecipe c) -> c
 					), // bindingForItemValue
 					DataBinding.fromTrue(), // isEnabled
-					(UniverseWorldPlaceEntities uwpe) ->
+					(Universe u) ->
 					{
 						addToQueue.run();
 					}, // confirm

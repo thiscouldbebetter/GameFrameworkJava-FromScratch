@@ -3,6 +3,7 @@ package GameFramework.Model.Mortality;
 
 import java.util.function.*;
 
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 
 public class Tirable implements EntityProperty<Tirable>

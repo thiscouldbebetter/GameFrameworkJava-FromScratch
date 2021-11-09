@@ -79,13 +79,10 @@ public class ControlContainerTransparent extends ControlBase
 		if (childrenContainingPos.size() > 0)
 		{
 			var child = childrenContainingPos.get(0);
-			if (child.mouseClick != null)
+			var wasClickHandledByChild = child.mouseClick(mouseClickPos);
+			if (wasClickHandledByChild)
 			{
-				var wasClickHandledByChild = child.mouseClick(mouseClickPos);
-				if (wasClickHandledByChild)
-				{
-					wasClickHandled = true;
-				}
+				wasClickHandled = true;
 			}
 		}
 

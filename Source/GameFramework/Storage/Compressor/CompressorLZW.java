@@ -185,7 +185,7 @@ public class CompressorLZW
 						var byteToWrite = symbolDecoded.charAt(i);
 						byteStreamDecompressed.writeByte(byteToWrite);
 					}
-					character = symbolDecoded.charAt(0);
+					character = "" + symbolDecoded.charAt(0);
 					patternPlusCharacter = pattern + character;
 				}
 
@@ -201,7 +201,8 @@ public class CompressorLZW
 
 	public int[] decompressBytes(int[] bytesToDecode)
 	{
-		var byteStreamToDecode = new ByteStreamFromBytes(bytesToDecode);
+		var byteStreamToDecode =
+			new ByteStreamFromBytes(Arrays.asList(bytesToDecode));
 		var byteStreamDecompressed = new ByteStreamFromBytes();
 		this.decompressByteStream
 		(

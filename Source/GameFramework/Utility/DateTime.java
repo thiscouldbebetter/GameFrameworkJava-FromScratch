@@ -77,6 +77,11 @@ public class DateTime
 		return returnValue;
 	}
 
+	public long getTime()
+	{
+		return this.totalMilliseconds(); // hack
+	}
+
 	public long totalMilliseconds()
 	{
 		return 0; // todo

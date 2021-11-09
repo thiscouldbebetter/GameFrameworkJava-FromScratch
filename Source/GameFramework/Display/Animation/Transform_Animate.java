@@ -17,7 +17,7 @@ public class Transform_Animate
 
 	public AnimationKeyframe frameCurrent()
 	{
-		var returnValue = null;
+		AnimationKeyframe returnValue = null;
 
 		var animationDefn = this.animationDefn;
 
@@ -25,12 +25,12 @@ public class Transform_Animate
 			this.ticksSinceStarted
 			% animationDefn.intOfFramesTotal;
 
-		var i;
+		int i;
 
 		var keyframes = animationDefn.keyframes;
 		for (i = keyframes.length - 1; i >= 0; i--)
 		{
-			keyframe = keyframes[i];
+			var keyframe = keyframes[i];
 
 			if (keyframe.frameIndex <= framesSinceBeginningOfCycle)
 			{

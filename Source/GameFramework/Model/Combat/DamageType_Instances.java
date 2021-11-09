@@ -6,10 +6,10 @@ import GameFramework.Helpers.*;
 
 public class DamageType_Instances
 {
-	DamageType _Unspecified;
-	DamageType Cold;
-	DamageType Heat;
-	
+	public DamageType _Unspecified;
+	public DamageType Cold;
+	public DamageType Heat;
+
 	public DamageType _All[];
 	public Map<String,DamageType> _AllByName;
 

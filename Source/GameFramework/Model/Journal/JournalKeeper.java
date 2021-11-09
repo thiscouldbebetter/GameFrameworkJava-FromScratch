@@ -269,7 +269,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 				"textTitle",
 				Coords.fromXY(105, 25), // pos
 				Coords.fromXY(85, 10), // size
-				new DataBinding
+				new DataBinding<JournalKeeper,String>
 				(
 					journalKeeper,
 					(JournalKeeper c) ->
@@ -301,7 +301,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 				"textareaEntryBody",
 				Coords.fromXY(105, 40), // pos
 				Coords.fromXY(85, 70), // size
-				new DataBinding
+				new DataBinding<JournalKeeper,String>
 				(
 					journalKeeper,
 					(JournalKeeper c) ->
@@ -350,7 +350,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 			"Notes",
 			Coords.create(), // pos
 			sizeBase.clone(), // size
-			childControls,
+			childControls.toArray(new ControlBase[] {}),
 			new ActorAction[]
 			{
 				new ActorAction("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),

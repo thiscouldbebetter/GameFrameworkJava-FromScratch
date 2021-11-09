@@ -15,7 +15,7 @@ public class ActivityDefn implements Namable
 
 	public ActivityDefn
 	(
-		String _name,
+		String name,
 		Consumer<UniverseWorldPlaceEntities> perform
 	)
 	{

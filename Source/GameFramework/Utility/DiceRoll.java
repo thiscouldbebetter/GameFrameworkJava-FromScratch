@@ -18,7 +18,7 @@ public class DiceRoll
 	{
 		var numberOfDiceAndRemainderAsStrings = expression.split("d");
 		var numberOfDiceAsString = numberOfDiceAndRemainderAsStrings[0];
-		var numberOfDice = parseInt(numberOfDiceAsString);
+		var numberOfDice = Integer.parseInt(numberOfDiceAsString);
 
 		var expressionRemainder = numberOfDiceAndRemainderAsStrings[1];
 

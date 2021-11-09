@@ -416,7 +416,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			(UniverseWorldPlaceEntities uwpe2) ->
+			(Universe u2) ->
 			{
 				equipItemSelectedToSocketDefault.run();
 			},
@@ -512,8 +512,10 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			(UniverseWorldPlaceEntities uwpe2) ->
-				unequipFromSocketSelected.run(), // confirm
+			(Universe uwpe2) ->
+			{
+				unequipFromSocketSelected.run()
+			}, // confirm
 			null
 		);
 

@@ -1,6 +1,8 @@
 
 package GameFramework.Controls;
 
+import java.util.*;
+
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
 import GameFramework.Helpers.*;
@@ -21,7 +23,7 @@ public class ControlTextarea extends ControlBase
 	private Disposition _drawLoc;
 	private int _indexOfLineSelected;
 	private Coords _mouseClickPos;
-	private Object _textAsLines;
+	private List<String> _textAsLines;
 
 	public ControlTextarea
 	(
@@ -132,7 +134,11 @@ public class ControlTextarea extends ControlBase
 			);
 		}
 		*/
-		else if (actionNameToHandle.length == 1 || actionNameToHandle.startsWith("_") ) // printable character
+		else if
+		(
+			actionNameToHandle.length() == 1
+			|| actionNameToHandle.startsWith("_")
+		) // printable character
 		{
 			if (actionNameToHandle.startsWith("_"))
 			{
@@ -179,17 +185,17 @@ public class ControlTextarea extends ControlBase
 
 	public int indexOfFirstLineVisible()
 	{
-		return this.scrollbar.sliderPosInItems();
+		return (int)this.scrollbar.sliderPosInItems();
 	}
 
 	public int indexOfLastLineVisible()
 	{
 		return
 			this.indexOfFirstLineVisible()
-			+ Math.floor(this.scrollbar.windowSizeInItems) - 1;
+			+ Math.floor(this.scrollbar.windowSizeInItems) - 1.0;
 	}
 
-	public int indexOfLineSelected(int valueToSet)
+	public int indexOfLineSelected(Integer valueToSet)
 	{
 		var returnValue = valueToSet;
 		if (valueToSet == null)
@@ -223,9 +229,9 @@ public class ControlTextarea extends ControlBase
 		this._textAsLines = new ArrayList<String>();
 
 		var charWidthInPixels = this.fontHeightInPixels / 2; // hack
-		var charsPerLine = Math.floor(this.size.x / charWidthInPixels);
+		var charsPerLine = (int)Math.floor(this.size.x / charWidthInPixels);
 		var textComplete = this.text(null);
-		var textLength = textComplete.length;
+		var textLength = textComplete.length();
 		var i = 0;
 		while (i < textLength)
 		{
@@ -278,7 +284,7 @@ public class ControlTextarea extends ControlBase
 					);
 
 			var lines = this.textAsLines();
-			if (indexOfLineClicked < lines.length)
+			if (indexOfLineClicked < lines.size())
 			{
 				this.indexOfLineSelected((int)indexOfLineClicked);
 			}
@@ -326,7 +332,7 @@ public class ControlTextarea extends ControlBase
 
 		var lines = this.textAsLines();
 
-		if (lines == null || lines.length == 0)
+		if (lines == null || lines.size() == 0)
 		{
 			return;
 		}
@@ -335,9 +341,9 @@ public class ControlTextarea extends ControlBase
 		{
 			// todo - Cursor positioning.
 
-			var lineIndexFinal = lines.length - 1;
-			var lineFinal = lines[lineIndexFinal];
-			lines[lineIndexFinal] = lineFinal + "_";
+			var lineIndexFinal = lines.size() - 1;
+			var lineFinal = lines.get(lineIndexFinal);
+			lines.set(lineIndexFinal, lineFinal + "_");
 		}
 
 		var numberOfLinesVisible = Math.floor(this.size.y / itemSizeY);

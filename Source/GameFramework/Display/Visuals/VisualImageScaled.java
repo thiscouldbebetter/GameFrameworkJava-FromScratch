@@ -7,7 +7,7 @@ import GameFramework.Geometry.Transforms.*;
 import GameFramework.Media.*;
 import GameFramework.Model.*;
 
-public class VisualImageScaled implements VisualImage
+public class VisualImageScaled implements VisualImage<VisualImageScaled>
 {
 	public VisualImage visualImage;
 	public Coords sizeToDraw;
@@ -63,12 +63,12 @@ public class VisualImageScaled implements VisualImage
 
 	// Clonable.
 
-	public Visual clone()
+	public VisualImageScaled clone()
 	{
 		return this; // todo
 	}
 
-	public Visual overwriteWith(Visual other)
+	public VisualImageScaled overwriteWith(VisualImageScaled other)
 	{
 		return this; // todo
 	}

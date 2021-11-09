@@ -202,24 +202,23 @@ public class ArrayHelper
 		return returnValues;
 	}
 
-	public static <T extends Clonable<T>> T[] clone(T[] arrayToClone)
+	public static <T extends Clonable<T>> List<T> clone(T[] arrayToClone)
 	{
-		T[] returnValues = null;
+		List<T> returnValuesAsList = null;
 
 		if (arrayToClone != null)
 		{
-			returnValues =
-				(T[]) Array.newInstance(T.class, arrayToClone.length);
+			returnValuesAsList = new ArrayList<T>();
 
 			for (var i = 0; i < arrayToClone.length; i++)
 			{
 				var element = arrayToClone[i];
 				var elementCloned = element.clone();
-				returnValues[i] = elementCloned;
+				returnValues.add(elementCloned);
 			}
 		}
 
-		return returnValues;
+		return returnValuesAsList;
 	}
 
 	public static <T extends Clonable<T>> List<T> clone(List<T> list)
@@ -358,7 +357,7 @@ public class ArrayHelper
 
 	public static <T> List<T> intersectArrays(T[] array0, T[] array1)
 	{
-		var elementsInBothLists = new List<T>();
+		var elementsInBothLists = new ArrayList<T>();
 
 		for (var i = 0; i < array0.length; i++)
 		{

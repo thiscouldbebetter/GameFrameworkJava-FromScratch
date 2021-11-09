@@ -23,9 +23,14 @@ public class Image2 implements MediaLibraryItem, Namable
 	{
 		return null; // todo
 	}
-	
+
 	// Loadable.
-	
+
+	public boolean isLoaded()
+	{
+		return true;
+	}
+
 	public Image2 load()
 	{
 		// todo

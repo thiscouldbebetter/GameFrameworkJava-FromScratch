@@ -30,7 +30,7 @@ public class ControlVisual<TContext,TVisual extends Visual> extends ControlBase
 		Color colorBorder
 	)
 	{
-		super(name, pos, size, -1);
+		super(name, pos, size, null);
 		this.visual = visual;
 		this.colorBackground = colorBackground;
 		this.colorBorder = colorBorder;
