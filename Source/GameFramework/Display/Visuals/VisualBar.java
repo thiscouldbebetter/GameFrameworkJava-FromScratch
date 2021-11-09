@@ -62,9 +62,9 @@ public class VisualBar<TContext> implements Visual<VisualBar>
 			entity.locatable().loc.pos
 		).subtract(this._sizeHalf);
 		var _amountCurrent =
-			(double)(this.amountCurrent.contextSet(entity).get());
+			(Double)(this.amountCurrent.get());
 		var _amountMax =
-			(double)(this.amountMax.contextSet(entity).get());
+			(Double)(this.amountMax.get());
 		var fractionCurrent = _amountCurrent / _amountMax;
 
 		var shouldShow =
@@ -96,7 +96,7 @@ public class VisualBar<TContext> implements Visual<VisualBar>
 
 			if (this.amountThreshold != null)
 			{
-				var thresholdFraction = this.amountThreshold.contextSet(entity).get();
+				var thresholdFraction = this.amountThreshold.get();
 				this._sizeCurrent.x = thresholdFraction * this.size.x;
 				display.drawRectangle
 				(

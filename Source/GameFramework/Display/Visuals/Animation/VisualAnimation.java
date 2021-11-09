@@ -2,6 +2,7 @@
 package GameFramework.Display.Visuals.Animation;
 
 import GameFramework.Display.*;
+import GameFramework.Display.Visuals.*;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
@@ -130,7 +131,7 @@ public class VisualAnimation implements Visual<VisualAnimation>
 
 	// Transformable.
 
-	public Coords[] coordsGroupForTranslate() { return null; }
+	public Coords[] coordsGroupToTranslate() { return null; }
 
 	public VisualAnimation transform(Transform transformToApply)
 	{

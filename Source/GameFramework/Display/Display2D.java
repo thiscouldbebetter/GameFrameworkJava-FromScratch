@@ -177,7 +177,7 @@ public class Display2D extends JPanel implements Display
 	(
 		String text, double fontHeightInPixels, Coords pos,
 		Color colorFill, Color colorOutline, boolean areColorsReversed,
-		boolean isCentered, double widthMaxInPixels
+		boolean isCentered, Double widthMaxInPixels
 	){}
 	public void drawWedge
 	(

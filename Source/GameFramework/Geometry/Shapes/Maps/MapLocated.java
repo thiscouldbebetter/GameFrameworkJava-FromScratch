@@ -4,8 +4,9 @@ package GameFramework.Geometry.Shapes.Maps;
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
+import GameFramework.Utility.*;
 
-public class MapLocated<T extends Clonable> implements ShapeBase<T>
+public class MapLocated<T extends Clonable<T>> implements ShapeBase<MapLocated<T>>
 {
 	public MapOfCells<T> map;
 	public Disposition loc;
@@ -33,13 +34,6 @@ public class MapLocated<T extends Clonable> implements ShapeBase<T>
 		return this;
 	}
 
-	// translatable
-
-	public Coords[] coordsGroupToTranslate()
-	{
-		return new Coords[] { this.loc.pos };
-	}
-
 	// Shape.
 
 	public ShapeBase locate(Disposition loc)
@@ -63,6 +57,11 @@ public class MapLocated<T extends Clonable> implements ShapeBase<T>
 	public Box toBox(Box boxOut) { return null; }
 
 	// Transformable.
+
+	public Coords[] coordsGroupToTranslate()
+	{
+		return new Coords[] { this.loc.pos };
+	}
 
 	public MapLocated<T> transform(Transform transformToApply)
 	{

@@ -9,6 +9,7 @@ import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Shapes.Maps.*;
 import GameFramework.Geometry.Shapes.Meshes.*;
 import GameFramework.Model.*;
+import GameFramework.Model.Physics.*;
 
 public class CollisionHelper
 {
@@ -742,7 +743,7 @@ public class CollisionHelper
 
 	public Collision collisionOfBoxAndMapLocated
 	(
-		Box box, MapLocated<Blockable> mapLocated, Collision collision
+		Box box, MapLocated<Traversable> mapLocated, Collision collision
 	)
 	{
 		var doBoundsCollide =
@@ -775,7 +776,7 @@ public class CollisionHelper
 
 				cell = map.cellAtPosInCells(cellPosInCells);
 
-				if (cell.isBlocking())
+				if (cell.isBlocking)
 				{
 					cellAsBox.center.overwriteWith(cellPosAbsolute);
 					var doCellAndBoxCollide =
@@ -1278,7 +1279,7 @@ public class CollisionHelper
 
 	public Collision collisionOfMapLocatedAndSphere
 	(
-		MapLocated<Blockable> mapLocated, Sphere sphere, Collision collision
+		MapLocated<Traversable> mapLocated, Sphere sphere, Collision collision
 	)
 	{
 		var doBoundsCollide =
@@ -1311,7 +1312,7 @@ public class CollisionHelper
 
 				cell = map.cellAtPosInCells(cellPosInCells);
 
-				if (cell.isBlocking())
+				if (cell.isBlocking)
 				{
 					cellAsBox.center.overwriteWith(cellPosAbsolute);
 					var doCellAndSphereCollide =
@@ -1858,7 +1859,7 @@ public class CollisionHelper
 
 	public boolean doMapLocatedAndMapLocatedCollide
 	(
-		MapLocated<Blockable> mapLocated0, MapLocated<Blockable> mapLocated1
+		MapLocated<Traversable> mapLocated0, MapLocated<Traversable> mapLocated1
 	)
 	{
 		var returnValue = false;
@@ -1907,7 +1908,7 @@ public class CollisionHelper
 
 				cell0 = map0.cellAtPosInCells(cell0PosInCells);
 
-				if (cell0.isBlocking())
+				if (cell0.isBlocking)
 				{
 					cell1PosInCellsMin.overwriteWith
 					(
@@ -1950,7 +1951,7 @@ public class CollisionHelper
 							{
 								cell1 = map1.cellAtPosInCells(cell1PosInCells);
 
-								if (cell1.isBlocking())
+								if (cell1.isBlocking)
 								{
 									returnValue = true;
 
@@ -1971,7 +1972,7 @@ public class CollisionHelper
 
 	public boolean doMapLocatedAndSphereCollide
 	(
-		MapLocated<Blockable> mapLocated, Sphere sphere
+		MapLocated<Traversable> mapLocated, Sphere sphere
 	)
 	{
 		var returnValue = false;
@@ -2006,7 +2007,7 @@ public class CollisionHelper
 
 				cell = map.cellAtPosInCells(cellPosInCells);
 
-				if (cell.isBlocking())
+				if (cell.isBlocking)
 				{
 					cellAsBox.center.overwriteWith(cellPosAbsolute);
 					var doCellAndSphereCollide =

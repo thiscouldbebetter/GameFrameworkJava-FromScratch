@@ -108,7 +108,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		{
 			var socketFoundName = socketFound.defnName;
 
-			message = this.equipItemEntityInSocketWithName
+			message = (String)this.equipItemEntityInSocketWithName
 			(
 				uwpe, socketFoundName, false
 			);
@@ -290,7 +290,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 		).stream().filter
 		(
 			x -> x.itemEntityEquipped.item() == itemToUnequip
-		).findFirst();
+		).findFirst().get();
 		if (socket != null)
 		{
 			socket.itemEntityEquipped = null;
@@ -417,7 +417,9 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
 			(UniverseWorldPlaceEntities uwpe2) ->
-				equipItemSelectedToSocketDefault.run(),
+			{
+				equipItemSelectedToSocketDefault.run();
+			},
 			null
 		);
 

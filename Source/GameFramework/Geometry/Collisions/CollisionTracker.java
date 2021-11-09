@@ -2,6 +2,7 @@
 package GameFramework.Geometry.Collisions;
 
 import java.util.*;
+import java.util.stream.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;

@@ -151,9 +151,19 @@ public class Mesh implements ShapeBase<Mesh>
 				meshVertices.add(vertex);
 			}
 
+			var vertexIndicesTopOrBottomAsArray =
+				new int[vertexIndicesTopOrBottom.size()];
+
+			// It's oddly difficult to convert an Integer[] to an int[].
+			for (var vi = 0; vi < vertexIndicesTopOrBottom.size(); vi++)
+			{
+				vertexIndicesTopOrBottomAsArray[vi] =
+					vertexIndicesTopOrBottom.get(vi);
+			}
+
 			var faceBuilderTopOrBottom = new FaceBuilder
 			(
-				vertexIndicesTopOrBottom.toArray(new Integer[] {})
+				vertexIndicesTopOrBottomAsArray
 			);
 			faceBuilders.add(faceBuilderTopOrBottom);
 		}

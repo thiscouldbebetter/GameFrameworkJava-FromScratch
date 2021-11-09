@@ -73,7 +73,7 @@ public interface Display extends Platformable
 	(
 		String text, double fontHeightInPixels, Coords pos,
 		Color colorFill, Color colorOutline, boolean areColorsReversed,
-		boolean isCentered, double widthMaxInPixels
+		boolean isCentered, Double widthMaxInPixels
 	);
 	void drawWedge
 	(

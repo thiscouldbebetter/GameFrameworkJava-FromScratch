@@ -124,7 +124,7 @@ public class VenueControls implements Venue
 
 		var control = (ControlContainer)this.controlRoot;
 		var mappings = control.actionToInputsMappings();
-		actionToInputsMappings.addAll(mappings);
+		actionToInputsMappings.addAll(Arrays.asList(mappings));
 
 		this.actionToInputsMappings =
 			actionToInputsMappings.toArray(new ActionToInputsMapping[] {});

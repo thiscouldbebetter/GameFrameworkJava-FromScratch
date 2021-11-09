@@ -6,10 +6,11 @@ import java.util.function.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
+import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class MapOfCells<T extends Clonable>
+public class MapOfCells<T extends Clonable<T>>
 {
 	public String name;
 	public Coords sizeInCells;
@@ -66,7 +67,7 @@ public class MapOfCells<T extends Clonable>
 		this._posInCellsMin = Coords.create();
 	}
 
-	public static <T extends Clonable> MapOfCells<T> fromNameSizeInCellsAndCellSize
+	public static <T extends Clonable<T>> MapOfCells<T> fromNameSizeInCellsAndCellSize
 	(
 		String name, Coords sizeInCells, Coords cellSize
 	)
@@ -82,13 +83,12 @@ public class MapOfCells<T extends Clonable>
 
 	public T cellAtPosInCells(Coords cellPosInCells)
 	{
-		return this._cellAtPosInCells.apply
+		var argument = new Triple
 		(
-			new Triple
-			(
-				this, cellPosInCells, this._cell
-			)
+			this, cellPosInCells, this._cell
 		);
+		var returnValue = this._cellAtPosInCells.apply(argument);
+		return returnValue;
 	}
 
 	public T cellAtPosInCellsDefault
@@ -179,7 +179,7 @@ public class MapOfCells<T extends Clonable>
 				var cellAsEntity =
 					mapAndCellPosToEntity.apply(this, cellPosInCells);
 
-				returnValues.push(cellAsEntity);
+				returnValues.add(cellAsEntity);
 			}
 		}
 

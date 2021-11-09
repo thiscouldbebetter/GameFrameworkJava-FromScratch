@@ -68,9 +68,9 @@ public class Transform_Animate
 
 		var transforms = frameCurrent.transforms;
 
-		for (var i = 0; i < transforms.length; i++)
+		for (var i = 0; i < transforms.size(); i++)
 		{
-			var transformToApply = transforms[i];
+			var transformToApply = transforms.get(i);
 			transformToApply.transform(transformable);
 		}
 

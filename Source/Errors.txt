@@ -1,113 +1,25 @@
-./GameFramework/Geometry/Shapes/Maps/MapLocated.java:8: error: cannot find symbol
-public class MapLocated<T extends Clonable> implements ShapeBase<T>
-                                  ^
-  symbol: class Clonable
 error: incompatible types: incompatible parameter types in lambda expression
-./GameFramework/Controls/VenueControls.java:127: error: incompatible types: ActionToInputsMapping[] cannot be converted to Collection<? extends ActionToInputsMapping>
-		actionToInputsMappings.addAll(mappings);
-		                              ^
-./GameFramework/Geometry/Collisions/CollisionTracker.java:141: error: cannot find symbol
-				Collectors.toList()
-				^
-  symbol:   variable Collectors
-  location: class CollisionTracker
-./GameFramework/Geometry/Shapes/Maps/MapOfCells.java:86: error: incompatible types: Clonable cannot be converted to T
-		(
-		^
+./GameFramework/Geometry/Shapes/Maps/MapOfCells.java:91: error: incompatible types: Clonable cannot be converted to T
+		return returnValue;
+		       ^
   where T is a type-variable:
-    T extends Clonable declared in class MapOfCells
-./GameFramework/Geometry/Shapes/Maps/MapOfCells.java:182: error: cannot find symbol
-				returnValues.push(cellAsEntity);
-				            ^
-  symbol:   method push(Entity)
-  location: variable returnValues of type ArrayList<Entity>
-./GameFramework/Geometry/Shapes/Maps/MapOfCells.java:206: error: cannot find symbol
-		ArrayHelper.overwriteWith(this.cellSource, other.cellSource);
-		^
-  symbol:   variable ArrayHelper
-  location: class MapOfCells<T>
+    T extends Clonable<T> declared in class MapOfCells
+./GameFramework/Display/Animation/Animatable2.java:12: error: clone() in Object cannot implement clone() in Clonable
+public class Animatable2<T extends Clonable<T> & Transformable<T>> implements EntityProperty<Animatable2<T>>
+                         ^
+  attempting to assign weaker access privileges; was public
   where T is a type-variable:
-    T extends Clonable declared in class MapOfCells
-./GameFramework/Geometry/Shapes/Maps/MapLocated.java:8: error: MapLocated is not abstract and does not override abstract method clone() in Clonable
-public class MapLocated<T extends Clonable> implements ShapeBase<T>
-       ^
-  where T is a type-variable:
-    T declared in class MapLocated
-./GameFramework/Geometry/Shapes/Maps/MapLocated.java:25: error: clone() in MapLocated cannot implement clone() in Clonable
-	public MapLocated<T> clone()
-	                     ^
-  return type MapLocated<T#1> is not compatible with T#1
-  where T#1,T#2 are type-variables:
-    T#1 declared in class MapLocated
-    T#2 extends Object declared in interface Clonable
-./GameFramework/Geometry/Shapes/Maps/MapLocated.java:67: error: transform(Transform) in MapLocated cannot implement transform(Transform) in Transformable
-	public MapLocated<T> transform(Transform transformToApply)
-	                     ^
-  return type MapLocated<T#1> is not compatible with T#1
-  where T#1,T#2 are type-variables:
-    T#1 declared in class MapLocated
-    T#2 extends Transformable declared in interface Transformable
-./GameFramework/Geometry/Shapes/Meshes/Mesh.java:154: error: incompatible types: inference variable T has incompatible bounds
-			var faceBuilderTopOrBottom = new FaceBuilder
-			                             ^
-    lower bounds: int,Object
-    lower bounds: Integer
-  where T is a type-variable:
-    T extends Object declared in method <T>toArray(T[])
-./GameFramework/Display/Animation/Animatable2.java:91: error: cannot find symbol
-		this.transformableTransformed.overwriteWith(this.transformableAtRest);
-		                             ^
-  symbol:   method overwriteWith(T)
-  location: variable transformableTransformed of type T
-  where T is a type-variable:
-    T extends Transformable declared in class Animatable2
-./GameFramework/Display/Animation/Animatable2.java:114: error: cannot find symbol
-			this.transformableTransformed.overwriteWith
-			                             ^
-  symbol:   method overwriteWith(T)
-  location: variable transformableTransformed of type T
-  where T is a type-variable:
-    T extends Transformable declared in class Animatable2
-./GameFramework/Model/Items/Equipment/EquipmentUser.java:112: error: incompatible types: Object cannot be converted to String
-			(
+    T extends Object declared in interface Clonable
+./GameFramework/Model/Items/Equipment/EquipmentUser.java:419: error: incompatible types: incompatible parameter types in lambda expression
+			(UniverseWorldPlaceEntities uwpe2) ->
 			^
-./GameFramework/Model/Items/Equipment/EquipmentUser.java:296: error: cannot find symbol
-			socket.itemEntityEquipped = null;
-			      ^
-  symbol:   variable itemEntityEquipped
-  location: variable socket of type Optional<EquipmentSocket>
-./GameFramework/Model/Items/Equipment/EquipmentUser.java:420: error: incompatible types: incompatible parameter types in lambda expression
-				equipItemSelectedToSocketDefault.run(),
-				                                    ^
-./GameFramework/Model/Items/Equipment/EquipmentUser.java:514: error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Model/Items/Equipment/EquipmentUser.java:516: error: incompatible types: incompatible parameter types in lambda expression
 				unequipFromSocketSelected.run(), // confirm
 				                             ^
 ./GameFramework/Model/Items/Crafting/ItemCrafter.java:237: error: incompatible types: incompatible parameter types in lambda expression
-					(UniverseWorldPlaceEntities uwpe) -> addToQueue.run(), // confirm
-					                                                   ^
-./GameFramework/Model/Items/ItemHolder.java:354: error: no suitable method found for reduce(double,(Double su[...]orld))
-		var massTotal = this.items.stream().reduce
-		                                   ^
-    method Stream.reduce(Item,BinaryOperator<Item>) is not applicable
-      (argument mismatch; double cannot be converted to Item)
-    method Stream.<U>reduce(U,BiFunction<U,? super Item,U>,BinaryOperator<U>) is not applicable
-      (cannot infer type-variable(s) U
-        (actual and formal argument lists differ in length))
-  where U,T are type-variables:
-    U extends Object declared in method <U>reduce(U,BiFunction<U,? super T,U>,BinaryOperator<U>)
-    T extends Object declared in interface Stream
-./GameFramework/Model/Items/ItemHolder.java:370: error: no suitable method found for reduce(double,(Double su[...]orld))
-		var tradeValueTotal = this.items.stream().reduce
-		                                         ^
-    method Stream.reduce(Item,BinaryOperator<Item>) is not applicable
-      (argument mismatch; double cannot be converted to Item)
-    method Stream.<U>reduce(U,BiFunction<U,? super Item,U>,BinaryOperator<U>) is not applicable
-      (cannot infer type-variable(s) U
-        (actual and formal argument lists differ in length))
-  where U,T are type-variables:
-    U extends Object declared in method <U>reduce(U,BiFunction<U,? super T,U>,BinaryOperator<U>)
-    T extends Object declared in interface Stream
-./GameFramework/Model/Items/ItemHolder.java:606: error: incompatible types: incompatible parameter types in lambda expression
+					(UniverseWorldPlaceEntities uwpe) ->
+					^
+./GameFramework/Model/Items/ItemHolder.java:608: error: incompatible types: incompatible parameter types in lambda expression
 					(ItemHolder c) -> c.itemSelected,
 					^
 ./GameFramework/Model/Journal/JournalKeeper.java:132: error: incompatible types: incompatible parameter types in lambda expression
@@ -117,7 +29,7 @@ error: incompatible types: incompatible parameter types in lambda expression
 ./GameFramework/Model/Journal/JournalKeeper.java:278: error: incompatible types: incompatible parameter types in lambda expression
 						return (j == null ? "" : j.title);
 						                  ^
-./GameFramework/Controls/ControlTextarea.java:219: error: cannot find symbol
+./GameFramework/Controls/ControlTextarea.java:221: error: cannot find symbol
 	public List<String> textAsLines()
 	       ^
   symbol:   class List
@@ -264,12 +176,6 @@ error: incompatible types: bad return type in lambda expression
 			         ^
   symbol:   variable mouseClick
   location: variable child of type ControlBase
-./GameFramework/Controls/ControlList.java:69: error: incompatible types: DataBinding<TContext,TItem[]> cannot be converted to DataBinding<Object,Object[]>
-			this._items,
-			    ^
-  where TContext,TItem are type-variables:
-    TContext extends Object declared in class ControlList
-    TItem extends Object declared in class ControlList
 ./GameFramework/Controls/ControlList.java:286: error: incompatible types: possible lossy conversion from double to int
 		return this.scrollbar.sliderPosInItems();
 		                                      ^
@@ -335,6 +241,12 @@ error: incompatible types: bad return type in lambda expression
 ./GameFramework/Display/Visuals/VisualImageScaled.java:10: error: VisualImageScaled is not abstract and does not override abstract method overwriteWith(Object) in Clonable
 public class VisualImageScaled implements VisualImage
        ^
+./GameFramework/Display/Visuals/VisualImage.java:9: error: type argument T#1 is not within bounds of type-variable T#2
+public interface VisualImage<T> extends Visual<T>
+                                               ^
+  where T#1,T#2 are type-variables:
+    T#1 extends Object declared in interface VisualImage
+    T#2 extends Visual declared in interface Visual
 ./GameFramework/Display/Visuals/VisualImageFromLibrary.java:10: error: VisualImageFromLibrary is not abstract and does not override abstract method overwriteWith(Object) in Clonable
 public class VisualImageFromLibrary implements VisualImage
        ^
@@ -434,172 +346,45 @@ public class VisualSound implements Visual<VisualSound>
 			    ^
   symbol:   variable keyframe
   location: class Transform_Animate
-./GameFramework/Display/Animation/Transform_Animate.java:71: error: cannot find symbol
-		for (var i = 0; i < transforms.length; i++)
-		                              ^
-  symbol:   variable length
-  location: variable transforms of type List<Transform_Interpolatable>
-./GameFramework/Display/Animation/Transform_Animate.java:73: error: array required, but List<Transform_Interpolatable> found
-			var transformToApply = transforms[i];
-			                                 ^
-./GameFramework/Controls/ControlTextBox.java:127: error: variable charAtCursor is already defined in method actionHandle(String,Universe)
-			var charAtCursor = "" + (char)charAtCursor;
-			    ^
-./GameFramework/Controls/ControlTextBox.java:161: error: variable text is already defined in method actionHandle(String,Universe)
-				var text = this.text();
-				    ^
-./GameFramework/Controls/ControlTextarea.java:38: error: incompatible types: <null> cannot be converted to int
-		this.charCountMax = null; // todo
-		                    ^
-./GameFramework/Controls/ControlTextarea.java:39: error: incompatible types: <null> cannot be converted to int
-		this.cursorPos = null;
-		                 ^
-./GameFramework/Controls/ControlTextarea.java:44: error: incompatible types: inference variable TContext has incompatible equality constraints Object,ControlTextarea
-		this.scrollbar = new ControlScrollbar
-		                 ^
-  where TContext,TValue are type-variables:
-    TContext extends Object declared in method <TContext,TValue>fromContextAndGet(TContext,Function<TContext,TValue>)
-    TValue extends Object declared in method <TContext,TValue>fromContextAndGet(TContext,Function<TContext,TValue>)
-./GameFramework/Controls/ControlTextarea.java:71: error: cannot find symbol
-			|| actionNameToHandle == Input.Names().Backspace
-			                         ^
-  symbol:   variable Input
-  location: class ControlTextarea
-./GameFramework/Controls/ControlTextarea.java:76: error: cannot find symbol
-			this.cursorPos = NumberHelper.wrapToRangeMinMax
-			                 ^
-  symbol:   variable NumberHelper
-  location: class ControlTextarea
-./GameFramework/Controls/ControlTextarea.java:83: error: cannot find symbol
-			this.cursorPos = NumberHelper.wrapToRangeMinMax
-			                 ^
-  symbol:   variable NumberHelper
-  location: class ControlTextarea
-./GameFramework/Controls/ControlTextarea.java:133: error: cannot find symbol
+./GameFramework/Controls/ControlTextBox.java:127: error: incompatible types: String cannot be converted to int
+			charAtCursor = "" + (char)charAtCursor;
+			                  ^
+./GameFramework/Controls/ControlTextarea.java:135: error: cannot find symbol
 		else if (actionNameToHandle.length == 1 || actionNameToHandle.startsWith("_") ) // printable character
 		                           ^
   symbol:   variable length
   location: variable actionNameToHandle of type String
-./GameFramework/Controls/ControlTextarea.java:147: error: bad operand types for binary operator '=='
-			if (this.charCountMax == null || text.length() < this.charCountMax)
-			                      ^
-  first type:  int
-  second type: <null>
-./GameFramework/Controls/ControlTextarea.java:156: error: cannot find symbol
-				this.cursorPos = NumberHelper.wrapToRangeMinMax
-				                 ^
-  symbol:   variable NumberHelper
-  location: class ControlTextarea
-./GameFramework/Controls/ControlTextarea.java:169: error: cannot find symbol
+./GameFramework/Controls/ControlTextarea.java:171: error: cannot find symbol
 		this.cursorPos = this.text(null).length;
 		                                ^
   symbol:   variable length
   location: class String
-./GameFramework/Controls/ControlTextarea.java:175: error: incompatible types: <null> cannot be converted to int
-		this.cursorPos = null;
-		                 ^
-./GameFramework/Controls/ControlTextarea.java:180: error: incompatible types: possible lossy conversion from double to int
+./GameFramework/Controls/ControlTextarea.java:182: error: incompatible types: possible lossy conversion from double to int
 		return this.scrollbar.sliderPosInItems();
 		                                      ^
-./GameFramework/Controls/ControlTextarea.java:187: error: incompatible types: possible lossy conversion from double to int
+./GameFramework/Controls/ControlTextarea.java:189: error: incompatible types: possible lossy conversion from double to int
 			+ Math.floor(this.scrollbar.windowSizeInItems) - 1;
 			                                               ^
-./GameFramework/Controls/ControlTextarea.java:193: error: bad operand types for binary operator '=='
+./GameFramework/Controls/ControlTextarea.java:195: error: bad operand types for binary operator '=='
 		if (valueToSet == null)
 		               ^
   first type:  int
   second type: <null>
-./GameFramework/Controls/ControlTextarea.java:221: error: cannot find symbol
+./GameFramework/Controls/ControlTextarea.java:223: error: cannot find symbol
 		this._textAsLines = new ArrayList<String>();
 		                        ^
   symbol:   class ArrayList
   location: class ControlTextarea
-./GameFramework/Controls/ControlTextarea.java:226: error: cannot find symbol
+./GameFramework/Controls/ControlTextarea.java:228: error: cannot find symbol
 		var textLength = textComplete.length;
 		                             ^
   symbol:   variable length
   location: variable textComplete of type String
-./GameFramework/Controls/ControlTextarea.java:230: error: incompatible types: possible lossy conversion from double to int
+./GameFramework/Controls/ControlTextarea.java:232: error: incompatible types: possible lossy conversion from double to int
 			var line = textComplete.substring(i, charsPerLine);
 			                                     ^
-./GameFramework/Controls/ControlTextarea.java:281: error: incompatible types: possible lossy conversion from double to int
-				this.indexOfLineSelected(indexOfLineClicked);
-				                         ^
-./GameFramework/Controls/ControlTextarea.java:308: error: variable style is already defined in method draw(Universe,Display,Disposition,ControlStyle)
-		var style = style || this.style(universe);
-		    ^
-./GameFramework/Display/Visuals/VisualBar.java:65: error: incompatible types: Entity cannot be converted to TContext
-			(double)(this.amountCurrent.contextSet(entity).get());
-			                                       ^
-  where TContext is a type-variable:
-    TContext extends Object declared in class VisualBar
-./GameFramework/Display/Visuals/VisualBar.java:67: error: incompatible types: Entity cannot be converted to TContext
-			(double)(this.amountMax.contextSet(entity).get());
-			                                   ^
-  where TContext is a type-variable:
-    TContext extends Object declared in class VisualBar
-./GameFramework/Display/Visuals/VisualBar.java:99: error: incompatible types: Entity cannot be converted to TContext
-				var thresholdFraction = this.amountThreshold.contextSet(entity).get();
-				                                                        ^
-  where TContext is a type-variable:
-    TContext extends Object declared in class VisualBar
-./GameFramework/Display/Visuals/VisualBar.java:142: error: incompatible types: <null> cannot be converted to double
-				null // widthMaxInPixels
-				^
-./GameFramework/Display/Visuals/Animation/VisualAnimation.java:9: error: cannot find symbol
-public class VisualAnimation implements Visual<VisualAnimation>
-                                        ^
-  symbol: class Visual
-./GameFramework/Display/Visuals/Animation/VisualAnimation.java:13: error: cannot find symbol
-	public Visual[] frames;
-	       ^
-  symbol:   class Visual
-  location: class VisualAnimation
-./GameFramework/Display/Visuals/Animation/VisualAnimation.java:20: error: cannot find symbol
-		String name, int[] ticksToHoldFrames, Visual[] frames, boolean isRepeating
-		                                      ^
-  symbol:   class Visual
-  location: class VisualAnimation
-./GameFramework/Display/Visuals/Animation/VisualAnimation.java:55: error: cannot find symbol
-	public Visual frameCurrent(World world, int tickStarted)
-	       ^
-  symbol:   class Visual
-  location: class VisualAnimation
-./GameFramework/Display/Visuals/VisualBuilder.java:136: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:155: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:222: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:241: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:292: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:311: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:362: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:381: error: incompatible types: VisualAnimation cannot be converted to Visual
-					new VisualAnimation
-					^
-./GameFramework/Display/Visuals/VisualBuilder.java:702: error: incompatible types: VisualAnimation cannot be converted to Visual
-		return visualEyesBlinking;
-		       ^
-./GameFramework/Display/Visuals/VisualBuilder.java:772: error: incompatible types: VisualAnimation cannot be converted to Visual
-		return flameVisual;
-		       ^
 ./GameFramework/Display/Visuals/VisualCrosshairs.java:8: error: VisualCrosshairs is not abstract and does not override abstract method coordsGroupToTranslate() in Transformable
 public class VisualCrosshairs implements Visual<VisualCrosshairs>
-       ^
-./GameFramework/Geometry/Shapes/Path.java:8: error: Path is not abstract and does not override abstract method coordsGroupToTranslate() in Transformable
-public class Path implements Transformable<Path>
        ^
 ./GameFramework/Display/Visuals/VisualPolygon.java:99: error: incompatible types: no instance(s) of type variable(s) T exist so that Clonable<T> conforms to Color
 		return new VisualPolygon
@@ -641,4 +426,4 @@ Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-146 errors
+99 errors

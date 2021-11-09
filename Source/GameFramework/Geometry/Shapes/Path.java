@@ -29,6 +29,8 @@ public class Path implements Transformable<Path>
 
 	// Transformable.
 
+	public Coords[] coordsGroupToTranslate() { return null; }
+
 	public Path transform(Transform transformToApply)
 	{
 		Transforms.applyTransformToCoordsMany(transformToApply, this.points);

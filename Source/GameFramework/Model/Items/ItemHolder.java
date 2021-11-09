@@ -354,7 +354,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		var massTotal = this.items.stream().reduce
 		(
 			0.0, // sumSoFar
-			(Double sumSoFar, Item item) -> sumSoFar + item.mass(world)
+			(Double sumSoFar, Item item) -> sumSoFar + item.mass(world),
+			Double::sum
 		);
 
 		return massTotal;
@@ -370,7 +371,8 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 		var tradeValueTotal = this.items.stream().reduce
 		(
 			0.0, // sumSoFar
-			(Double sumSoFar, Item item) -> sumSoFar + item.tradeValue(world)
+			(Double sumSoFar, Item item) -> sumSoFar + item.tradeValue(world),
+			Double::sum
 		);
 
 		return tradeValueTotal;

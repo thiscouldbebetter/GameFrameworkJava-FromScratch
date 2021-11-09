@@ -6,8 +6,10 @@ import java.util.stream.*;
 
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
-public class Animatable2<T extends Transformable> implements EntityProperty<Animatable2<T>>
+//public class Animatable2<T extends Clonable<T> & Transformable<T>> implements EntityProperty<Animatable2<T>>
+public class Animatable2<T extends Clonable<T> & Transformable<T>> implements EntityProperty<Animatable2<T>>
 {
 	public AnimationDefnGroup animationDefnGroup;
 	public T transformableAtRest;
@@ -86,7 +88,7 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 		this.ticksStartedByAnimationName.clear();
 	}
 
-	public Transformable transformableReset()
+	public T transformableReset()
 	{
 		this.transformableTransformed.overwriteWith(this.transformableAtRest);
 	}
@@ -121,12 +123,12 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 
 	// Clonable.
 
-	public Animatable2 clone()
+	public Animatable2<T> clone()
 	{
 		return this; // todo
 	}
 
-	public Animatable2 overwriteWith(Animatable2 other)
+	public Animatable2<T> overwriteWith(Animatable2<T> other)
 	{
 		return this; // todo
 	}

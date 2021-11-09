@@ -124,7 +124,7 @@ public class ControlTextBox<TContext> extends ControlBase
 				"z".charAt(0) + 1
 			);
 
-			var charAtCursor = "" + (char)charAtCursor;
+			charAtCursor = "" + (char)charAtCursor;
 
 			var textEdited = text.substring(0, this.cursorPos)
 				+ charAtCursor
@@ -158,7 +158,7 @@ public class ControlTextBox<TContext> extends ControlBase
 						+ text.substring(this.cursorPos);
 
 				this._text.set(textEdited);
-				var text = this.text();
+				text = this.text();
 
 				this.cursorPos = NumberHelper.wrapToRangeMinMax
 				(

@@ -3,6 +3,8 @@ package GameFramework.Controls;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
+import GameFramework.Helpers.*;
+import GameFramework.Input.*;
 import GameFramework.Model.*;
 
 public class ControlTextarea extends ControlBase
@@ -10,8 +12,8 @@ public class ControlTextarea extends ControlBase
 	private DataBinding<Object,String> _text;
 	private DataBinding<Object,Boolean> _isEnabled;
 
-	public int charCountMax;
-	public int cursorPos;
+	public Integer charCountMax;
+	public Integer cursorPos;
 	public double lineSpacing;
 	public ControlScrollbar scrollbar;
 
@@ -35,7 +37,7 @@ public class ControlTextarea extends ControlBase
 		this._text = text;
 		this._isEnabled = isEnabled;
 
-		this.charCountMax = null; // todo
+		this.charCountMax = null;
 		this.cursorPos = null;
 
 		this.lineSpacing = 1.2 * this.fontHeightInPixels; // hack
@@ -278,7 +280,7 @@ public class ControlTextarea extends ControlBase
 			var lines = this.textAsLines();
 			if (indexOfLineClicked < lines.length)
 			{
-				this.indexOfLineSelected(indexOfLineClicked);
+				this.indexOfLineSelected((int)indexOfLineClicked);
 			}
 		}
 
@@ -305,7 +307,7 @@ public class ControlTextarea extends ControlBase
 		drawLoc = this._drawLoc.overwriteWith(drawLoc);
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
 
-		var style = style || this.style(universe);
+		style = style != null ? style : this.style(universe);
 		var colorFore = (this.isHighlighted ? style.colorFill : style.colorBorder);
 		var colorBack = (this.isHighlighted ? style.colorBorder : style.colorFill);
 

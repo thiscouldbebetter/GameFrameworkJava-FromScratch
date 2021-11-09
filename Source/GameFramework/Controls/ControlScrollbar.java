@@ -7,10 +7,10 @@ import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class ControlScrollbar extends ControlBase
+public class ControlScrollbar<TContext,TItem> extends ControlBase
 {
 	public double itemHeight;
-	private DataBinding<Object,Object[]> _items;
+	private DataBinding<TContext,TItem[]> _items;
 	private double _sliderPosInItems;
 
 	public ControlButton buttonScrollDown;
@@ -26,7 +26,7 @@ public class ControlScrollbar extends ControlBase
 		Coords size,
 		double fontHeightInPixels,
 		double itemHeight,
-		DataBinding<Object,Object[]> items,
+		DataBinding<TContext,TItem[]> items,
 		double sliderPosInItems
 	)
 	{
@@ -77,7 +77,7 @@ public class ControlScrollbar extends ControlBase
 		return (this.windowSizeInItems < this.items().length);
 	}
 
-	public Object[] items()
+	public TItem[] items()
 	{
 		return this._items.get();
 	}
