@@ -754,7 +754,7 @@ public class CollisionHelper
 		}
 
 		var map = mapLocated.map;
-		var cell = map.cellCreate();
+		var cell = map.cellCreate.get();
 		var cellPosAbsolute = Coords.create();
 		var cellPosInCells = Coords.create();
 		var mapSizeInCells = map.sizeInCells;
@@ -1290,7 +1290,7 @@ public class CollisionHelper
 		}
 
 		var map = mapLocated.map;
-		var cell = map.cellCreate();
+		var cell = map.cellCreate.get();
 		var cellPosAbsolute = Coords.create();
 		var cellPosInCells = Coords.create();
 		var mapSizeInCells = map.sizeInCells;
@@ -1874,8 +1874,8 @@ public class CollisionHelper
 		var map0 = mapLocated0.map;
 		var map1 = mapLocated1.map;
 
-		var cell0 = map0.cellCreate();
-		var cell1 = map1.cellCreate();
+		var cell0 = map0.cellCreate.get();
+		var cell1 = map1.cellCreate.get();
 
 		var cell0PosAbsolute = Coords.create();
 
@@ -1985,7 +1985,7 @@ public class CollisionHelper
 		}
 
 		var map = mapLocated.map;
-		var cell = map.cellCreate();
+		var cell = map.cellCreate.get();
 		var cellPosAbsolute = Coords.create();
 		var cellPosInCells = Coords.create();
 		var mapSizeInCells = map.sizeInCells;

@@ -5,7 +5,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
 import GameFramework.Geometry.Transforms.*;
 
-public class MapLocated<T> implements ShapeBase<MapLocated<T>>
+public class MapLocated<T extends Clonable> implements ShapeBase<T>
 {
 	public MapOfCells<T> map;
 	public Disposition loc;
@@ -52,17 +52,20 @@ public class MapLocated<T> implements ShapeBase<MapLocated<T>>
 		return normalOut.overwriteWith(posToCheck).subtract(this.loc.pos).normalize();
 	}
 
-	public Coords surfacePointNearPos(Coords posToCheck, Coords surfacePointOut)
+	public Coords surfacePointNearPos
+	(
+		Coords posToCheck, Coords surfacePointOut
+	)
 	{
 		return surfacePointOut.overwriteWith(posToCheck); // todo
 	}
 
-	public Box toBox(Box boxOut) { throw new Error("Not implemented!"); }
+	public Box toBox(Box boxOut) { return null; }
 
 	// Transformable.
 
-	public MapLocated transform(Transform transformToApply)
+	public MapLocated<T> transform(Transform transformToApply)
 	{
-		throw new Exception("Not implemented!");
+		return null;
 	}
 }

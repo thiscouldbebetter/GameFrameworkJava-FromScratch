@@ -10,16 +10,17 @@ import GameFramework.Utility.*;
 public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 {
 	public int frameIndex;
-	public Transform_Interpolatable[] transforms;
+	public List<Transform_Interpolatable> transforms;
 	public Map<String,Transform_Interpolatable> transformsByPropertyName;
 
 	public AnimationKeyframe(int frameIndex, Transform_Interpolatable transforms[])
 	{
 		this.frameIndex = frameIndex;
-		this.transforms = transforms;
+		this.transforms = Arrays.asList(transforms);
 		this.transformsByPropertyName = ArrayHelper.addLookups
 		(
-			this.transforms, (Transform_Interpolatable x) -> x.propertyName
+			this.transforms,
+			(Transform_Interpolatable x) -> x.propertyName()
 		);
 	}
 
@@ -29,14 +30,14 @@ public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 	)
 	{
 		var transformsInterpolated =
-			new Transform_Interpolatable[this.transforms.length];
+			new ArrayList<Transform_Interpolatable>();
 
-		for (var i = 0; i < this.transforms.length; i++)
+		for (var i = 0; i < this.transforms.size(); i++)
 		{
-			var transformThis = this.transforms[i];
+			var transformThis = this.transforms.get(i);
 			var transformOther = other.transformsByPropertyName.get
 			(
-				transformThis.propertyName
+				transformThis.propertyName()
 			);
 
 			var transformInterpolated = transformThis.interpolateWith
@@ -45,13 +46,13 @@ public class AnimationKeyframe implements Interpolatable<AnimationKeyframe>
 				fractionOfProgressTowardOther
 			);
 
-			transformsInterpolated[i] = transformInterpolated;
+			transformsInterpolated.add(transformInterpolated);
 		}
 
 		var returnValue = new AnimationKeyframe
 		(
 			0, // frameIndex
-			transformsInterpolated
+			transformsInterpolated.toArray(new Transform_Interpolatable[] {})
 		);
 
 		return returnValue;

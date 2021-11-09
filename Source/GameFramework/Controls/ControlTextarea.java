@@ -149,7 +149,7 @@ public class ControlTextarea extends ControlBase
 				var textEdited =
 					text.substring(0, this.cursorPos)
 						+ actionNameToHandle
-						+ text.substring(this.cursorPos)
+						+ text.substring(this.cursorPos);
 
 				text = this.text(textEdited);
 

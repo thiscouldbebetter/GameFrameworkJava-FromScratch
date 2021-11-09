@@ -6,17 +6,17 @@ import java.util.function.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
-import GameFramework.Helpers.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-public class MapOfCells<T>
+public class MapOfCells<T extends Clonable>
 {
 	public String name;
 	public Coords sizeInCells;
 	public Coords cellSize;
-	private Supplier<T> _cellCreate;
-	private MapOfCellsCellSource<T> cellSource;
+	public Supplier<T> cellCreate;
+	public Function<Triple<MapOfCells<T>,Coords,T>,T> _cellAtPosInCells;
+	public List<T> cellSource;
 
 	public Coords cellSizeHalf;
 	public Coords size;
@@ -33,19 +33,23 @@ public class MapOfCells<T>
 		String name,
 		Coords sizeInCells,
 		Coords cellSize,
-		MapOfCellsCellSource<T> cellSource
+		Supplier<T> cellCreate,
+		Function<Triple<MapOfCells<T>,Coords,T>,T> cellAtPosInCells,
+		List<T> cellSource
 	)
 	{
 		this.name = name;
 		this.sizeInCells = sizeInCells;
 		this.cellSize = cellSize;
-		this._cellCreate = cellCreate;
-		this.cellSource =
+		this.cellCreate = cellCreate;
+		this._cellAtPosInCells =
 		(
-			cellSource != null
-			? cellSource
-			: new ArrayList<T>()
+			cellAtPosInCells != null
+			? cellAtPosInCells
+			: (Triple<MapOfCells<T>,Coords,T> x) ->
+				this.cellAtPosInCellsDefault(x.first, x.second, x.third)
 		);
+		this.cellSource = cellSource;
 
 		this.sizeInCellsMinusOnes = this.sizeInCells.clone().subtract
 		(
@@ -56,13 +60,13 @@ public class MapOfCells<T>
 		this.cellSizeHalf = this.cellSize.clone().half();
 
 		// Helper variables.
-		this._cell = this.cellCreate();
+		this._cell = cellCreate.get();
 		this._posInCells = Coords.create();
 		this._posInCellsMax = Coords.create();
 		this._posInCellsMin = Coords.create();
 	}
 
-	public static <T> MapOfCells<T> fromNameSizeInCellsAndCellSize
+	public static <T extends Clonable> MapOfCells<T> fromNameSizeInCellsAndCellSize
 	(
 		String name, Coords sizeInCells, Coords cellSize
 	)
@@ -78,15 +82,31 @@ public class MapOfCells<T>
 
 	public T cellAtPosInCells(Coords cellPosInCells)
 	{
-		return this.cellSource.cellAtPosInCells
+		return this._cellAtPosInCells.apply
 		(
-			this, cellPosInCells, this._cell
+			new Triple
+			(
+				this, cellPosInCells, this._cell
+			)
 		);
 	}
 
-	public T cellCreate()
+	public T cellAtPosInCellsDefault
+	(
+		MapOfCells<T> map, Coords cellPosInCells, T cell
+	)
 	{
-		return this._cellCreate.get();
+		var cellIndex = (int)
+		(
+			cellPosInCells.y * this.sizeInCells.x + cellPosInCells.x
+		);
+		cell = this.cellSource.get(cellIndex);
+		if (cell == null)
+		{
+			cell = this.cellCreate.get();
+			this.cellSource.add(cellIndex, cell);
+		}
+		return cell;
 	}
 
 	public int cellsCount()
@@ -96,7 +116,7 @@ public class MapOfCells<T>
 
 	public List<T> cellsInBoxAddToList(Box box, List<T> cellsInBox)
 	{
-		ArrayHelper.clear(cellsInBox);
+		cellsInBox.clear();
 
 		var minPosInCells = this._posInCellsMin.overwriteWith
 		(
@@ -159,7 +179,7 @@ public class MapOfCells<T>
 				var cellAsEntity =
 					mapAndCellPosToEntity.apply(this, cellPosInCells);
 
-				returnValues.add(cellAsEntity);
+				returnValues.push(cellAsEntity);
 			}
 		}
 
@@ -175,7 +195,7 @@ public class MapOfCells<T>
 			this.name,
 			this.sizeInCells,
 			this.cellSize,
-			this._cellCreate,
+			this.cellCreate,
 			this._cellAtPosInCells,
 			this.cellSource
 		);
@@ -183,7 +203,7 @@ public class MapOfCells<T>
 
 	public MapOfCells<T> overwriteWith(MapOfCells<T> other)
 	{
-		this.cellSource.overwriteWith(other.cellSource);
+		ArrayHelper.overwriteWith(this.cellSource, other.cellSource);
 		return this;
 	}
 }

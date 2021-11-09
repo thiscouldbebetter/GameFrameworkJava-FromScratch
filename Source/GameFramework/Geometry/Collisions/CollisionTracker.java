@@ -31,7 +31,9 @@ public class CollisionTracker implements EntityProperty<CollisionTracker>
 			CollisionTracker.class.getName(),
 			collisionMapSizeInCells,
 			collisionMapCellSize,
-			new MapOfCellsCellSourceArray<CollisionTrackerMapCell>()
+			null, // cellCreate?
+			null, // cellAtPos?
+			new ArrayList<CollisionTrackerMapCell>()
 		);
 
 		this._cells = new ArrayList<CollisionTrackerMapCell>();
@@ -128,12 +130,15 @@ public class CollisionTracker implements EntityProperty<CollisionTracker>
 
 	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe)
 	{
-		var cellsAll = (CollisionTrackerMapCell[])this.collisionMap.cellSource;
+		var cellsAll = this.collisionMap.cellSource;
 		cellsAll.forEach(x ->
 		{
 			x.entitiesPresent = x.entitiesPresent.stream().filter
 			(
 				y -> y.collidable().isEntityStationary(y)
+			).collect
+			(
+				Collectors.toList()
 			);
 		});
 	}

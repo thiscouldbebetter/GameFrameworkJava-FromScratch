@@ -83,8 +83,8 @@ public class VenueFader implements Venue
 			now.totalMilliseconds() - this.timeFadeStarted.totalMilliseconds();
 
 		var fractionOfFadeCompleted =
-			millisecondsSinceFadeStarted
-			/ this.millisecondsPerFade;
+			(double)millisecondsSinceFadeStarted
+			/ (double)this.millisecondsPerFade;
 
 		Double alphaOfFadeColor;
 

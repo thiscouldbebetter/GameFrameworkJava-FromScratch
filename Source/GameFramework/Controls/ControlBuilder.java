@@ -97,7 +97,7 @@ public class ControlBuilder
 	(
 		Universe universe,
 		Coords size,
-		DataBinding<TContext, String> message,
+		DataBinding<TContext,String> message,
 		String[] optionNames,
 		List<Consumer<UniverseWorldPlaceEntities>> optionConsumers,
 		boolean showMessageOnly
@@ -1023,11 +1023,11 @@ public class ControlBuilder
 		return returnValue;
 	}
 
-	public ControlBase message
+	public <T> ControlBase message
 	(
 		Universe universe,
 		Coords size,
-		DataBinding<Object, String> message,
+		DataBinding<T,String> message,
 		Consumer<UniverseWorldPlaceEntities> acknowledge,
 		boolean showMessageOnly
 	)
@@ -1334,7 +1334,10 @@ public class ControlBuilder
 						(SoundHelper c) -> c.soundVolume,
 						(SoundHelper c, Double v) -> { c.soundVolume = v; }
 					), // valueSelected
-					SoundHelper.controlSelectOptionsVolume(), // options
+					DataBinding.fromContext
+					(
+						SoundHelper.controlSelectOptionsVolume()
+					), // options
 					DataBinding.fromGet( (ControlSelectOption c) -> c.value ), // bindingForOptionValues,
 					DataBinding.fromGet( (ControlSelectOption c) -> c.text ), // bindingForOptionText
 					fontHeight
@@ -1942,7 +1945,8 @@ public class ControlBuilder
 				{
 					var profile = universe.profile;
 					var saveStateSelected = profile.saveStateSelected();
-					return storageHelper.load(saveStateSelected.name);
+					var returnValue = storageHelper.load(saveStateSelected.name);
+					// return returnValue;
 				},
 				(Universe universe2, SaveState saveStateReloaded) -> // done
 				{
@@ -2013,17 +2017,17 @@ public class ControlBuilder
 					DataBinding.fromContextAndGet
 					(
 						universe.profile,
-						(Profile c) -> c.saveStates
+						(Profile c) -> c.saveStates.toArray(new SaveState[] {})
 					), // items
 					DataBinding.fromGet( (SaveState c) -> c.name ), // bindingForOptionText
 					fontHeight,
-					new DataBinding<Profile,String>
+					new DataBinding<Profile,SaveState>
 					(
 						universe.profile,
-						(Profile c) -> c.saveStateNameSelected,
+						(Profile c) -> c.saveStateSelected(),
 						(Profile c, SaveState v) -> { c.saveStateNameSelected = v.name; }
 					), // bindingForOptionSelected
-					DataBinding.fromGet( (String c) -> c ) // value
+					DataBinding.fromGet( (SaveState c) -> c.name ) // bindingForItemValue
 				),
 
 				ControlButton.from8

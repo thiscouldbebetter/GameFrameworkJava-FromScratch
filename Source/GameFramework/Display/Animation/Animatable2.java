@@ -2,6 +2,7 @@
 package GameFramework.Display.Animation;
 
 import java.util.*;
+import java.util.stream.*;
 
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
@@ -60,6 +61,9 @@ public class Animatable2<T extends Transformable> implements EntityProperty<Anim
 		var returnValues = animationsRunningNames.stream().map
 		(
 			x -> this.animationDefnGroup.animationDefnsByName.get(x)
+		).collect
+		(
+			Collectors.toList()
 		);
 		return returnValues;
 	}

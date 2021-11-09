@@ -50,7 +50,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 		var skillsAvailable = this.skillsAvailableToLearn(skillsAll);
 		if (skillsAvailable.length > 0)
 		{
-			skillCheapest = skillsAvailable.sorted
+			skillCheapest = Arrays.asList(skillsAvailable).stream().sorted
 			(
 				(Skill x, Skill y) -> x.learningRequired - y.learningRequired
 			).findFirst().get();
@@ -132,7 +132,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 		return returnValue;
 	}
 
-	public Skill[] skillsAvailableToLearn(Skill skillsAll[])
+	public List<Skill> skillsAvailableToLearn(Skill skillsAll[])
 	{
 		var skillsUnknown = new ArrayList<Skill>();
 

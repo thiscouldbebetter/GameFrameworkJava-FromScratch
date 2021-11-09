@@ -1,6 +1,7 @@
 
 package GameFramework.Model.Journal;
 
+import java.util.*;
 import java.util.function.*;
 
 import GameFramework.Controls.*;

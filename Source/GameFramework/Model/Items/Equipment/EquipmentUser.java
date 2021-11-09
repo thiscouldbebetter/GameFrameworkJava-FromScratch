@@ -97,7 +97,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 				);
 				return isItemAllowedInSocket;
 			}
-		).findFirst();
+		).findFirst().get();
 
 		var message = "";
 		if (socketFound == null)
@@ -265,7 +265,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 					var itemOfSameTypeStillHeld = itemsHeld.stream().filter
 					(
 						x -> x.defnName == socketItemDefnName
-					).findFirst();
+					).findFirst().get();
 					if (itemOfSameTypeStillHeld == null)
 					{
 						socket.itemEntityEquipped = null;
@@ -416,7 +416,8 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			(UniverseWorldPlaceEntities uwpe) -> equipItemSelectedToSocketDefault.run(),
+			(UniverseWorldPlaceEntities uwpe2) ->
+				equipItemSelectedToSocketDefault.run(),
 			null
 		);
 
@@ -509,7 +510,8 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			(UniverseWorldPlaceEntities uwpe) -> unequipFromSocketSelected.run(), // confirm
+			(UniverseWorldPlaceEntities uwpe2) ->
+				unequipFromSocketSelected.run(), // confirm
 			null
 		);
 

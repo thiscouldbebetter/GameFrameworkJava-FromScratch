@@ -2,6 +2,7 @@
 package GameFramework.Model.Physics;
 
 import java.util.*;
+import java.util.stream.*;
 
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Shapes.*;
@@ -28,7 +29,7 @@ public class Locatable implements EntityProperty<Locatable>
 
 	public static List<Entity> entitiesSortByZThenY(List<Entity> entitiesToSort)
 	{
-		entitiesToSort.sorted
+		entitiesToSort = entitiesToSort.stream().sorted
 		(
 			(Entity a, Entity b) ->
 			{
@@ -47,7 +48,7 @@ public class Locatable implements EntityProperty<Locatable>
 
 				return returnValue;
 			}
-		);
+		).collect(Collectors.toList());
 
 		return entitiesToSort;
 	}

@@ -47,8 +47,8 @@ public class VenueControls implements Venue
 		var inputNames = Input.Names();
 
 		var inactivate = true;
-		this.actionToInputsMappings = new ArrayList<ActionToInputsMapping>
-		(
+		var actionToInputsMappings = Arrays.asList(new ActionToInputsMapping[]
+		{
 			new ActionToInputsMapping
 			(
 				controlActionNames.ControlIncrement,
@@ -112,10 +112,10 @@ public class VenueControls implements Venue
 				(
 					Arrays.asList(new String[] { inputNames.Escape }),
 					buildGamepadInputs.apply(inputNames.GamepadButton0)
-				),
+				).toArray(new String[] {}),
 				inactivate
 			)
-		);
+		});
 
 		if (ignoreKeyboardAndGamepadInputs)
 		{
@@ -123,12 +123,11 @@ public class VenueControls implements Venue
 		}
 
 		var control = (ControlContainer)this.controlRoot;
-		var mappingsGet = control.actionToInputsMappings;
-		if (mappingsGet != null)
-		{
-			var mappings = mappingsGet.call(this.controlRoot);
-			this.actionToInputsMappings.addAll(mappings);
-		}
+		var mappings = control.actionToInputsMappings();
+		actionToInputsMappings.addAll(mappings);
+
+		this.actionToInputsMappings =
+			actionToInputsMappings.toArray(new ActionToInputsMapping[] {});
 
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(

@@ -843,7 +843,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 			"Items",
 			Coords.create(), // pos
 			sizeBase.clone(), // size
-			childControls,
+			childControls.toArray(new ControlBase[] {}),
 			new ActorAction[]
 			{
 				new ActorAction("Back", (UniverseWorldPlaceEntities uwpeBack) -> back.run() ),
@@ -856,7 +856,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				new ActorAction("Drop", (UniverseWorldPlaceEntities uwpeDrop) -> drop.run() ),
 				new ActorAction("Use", (UniverseWorldPlaceEntities uwpeUse) -> use.run() ),
 
-				new ActorAction("Item0", (UniverseWorldPlaceEntities uwpe0) -> itemHolder.equipItemInNumberedSlot(uwpe.universe, entityItemHolder, null) ),
+				new ActorAction("Item0", (UniverseWorldPlaceEntities uwpe0) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 0) ),
 				new ActorAction("Item1", (UniverseWorldPlaceEntities uwpe1) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 1) ),
 				new ActorAction("Item2", (UniverseWorldPlaceEntities uwpe2) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 2) ),
 				new ActorAction("Item3", (UniverseWorldPlaceEntities uwpe3) -> itemHolder.equipItemInNumberedSlot(universe, entityItemHolder, 3) ),

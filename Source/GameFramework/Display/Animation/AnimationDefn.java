@@ -33,10 +33,10 @@ public class AnimationDefn implements Namable
 			var keyframe = this.keyframes[f];
 			var transforms = keyframe.transforms;
 
-			for (var t = 0; t < transforms.length; t++)
+			for (var t = 0; t < transforms.size(); t++)
 			{
-				var transform = transforms[t];
-				var propertyName = transform.propertyName;
+				var transform = transforms.get(t);
+				var propertyName = transform.propertyName();
 				if (propertyNameLookup.get(propertyName) == null)
 				{
 					propertyNameLookup.put(propertyName, propertyName);
@@ -45,7 +45,7 @@ public class AnimationDefn implements Namable
 			}
 		}
 
-		keyframe = null;
+		AnimationKeyframe keyframe = null;
 		AnimationKeyframe keyframePrev = null;
 
 		for (var f = 0; f < this.keyframes.length; f++)
@@ -95,7 +95,7 @@ public class AnimationDefn implements Namable
 							transformNext,
 							fractionOfProgressFromPrevToNext
 						);
-						transformsByPropertyName.set(propertyName, transformNew);
+						transformsByPropertyName.put(propertyName, transformNew);
 						keyframe.transforms.add(transformNew);
 					}
 				}

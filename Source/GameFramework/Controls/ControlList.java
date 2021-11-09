@@ -177,7 +177,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		DataBinding<TItem,String> bindingForItemText,
 		double fontHeightInPixels,
 		DataBinding<TContext,TItem> bindingForItemSelected,
-		DataBinding<TContext,TValue> bindingForItemValue
+		DataBinding<TItem,TValue> bindingForItemValue
 	)
 	{
 		return new ControlList

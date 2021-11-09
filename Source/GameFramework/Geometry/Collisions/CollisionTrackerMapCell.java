@@ -5,8 +5,9 @@ import java.util.*;
 
 import GameFramework.Geometry.Shapes.Maps.*;
 import GameFramework.Model.*;
+import GameFramework.Utility.*;
 
-public class CollisionTrackerMapCell implements MapCell
+public class CollisionTrackerMapCell implements Clonable<CollisionTrackerMapCell>, MapCell
 {
 	public List<Entity> entitiesPresent;
 
@@ -14,4 +15,9 @@ public class CollisionTrackerMapCell implements MapCell
 	{
 		this.entitiesPresent = new ArrayList<Entity>();
 	}
+
+	// Clonable.
+	public CollisionTrackerMapCell clone() { return this; }
+	public CollisionTrackerMapCell overwriteWith(CollisionTrackerMapCell other) { return this; }
+
 }

@@ -40,7 +40,7 @@ public class Activity
 
 	public Activity clear()
 	{
-		this.defnName = ActivityDefn.Instances().DoNothing.name;
+		this.defnName = ActivityDefn.Instances().DoNothing.name();
 		this.targetClear();
 		return this;
 	}

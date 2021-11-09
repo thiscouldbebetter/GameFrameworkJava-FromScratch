@@ -9,11 +9,11 @@ import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 
-public class ControlTextBox extends ControlBase
+public class ControlTextBox<TContext> extends ControlBase
 {
-	public DataBinding<Object,String> _text;
+	public DataBinding<TContext,String> _text;
 	public int numberOfCharsMax;
-	public DataBinding<Object,Boolean> _isEnabled;
+	public DataBinding<TContext,Boolean> _isEnabled;
 
 	public Integer cursorPos;
 
@@ -28,10 +28,10 @@ public class ControlTextBox extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,String> text,
+		DataBinding<TContext,String> text,
 		double fontHeightInPixels,
 		int numberOfCharsMax,
-		DataBinding<Object,Boolean> isEnabled
+		DataBinding<TContext,Boolean> isEnabled
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -207,7 +207,10 @@ public class ControlTextBox extends ControlBase
 
 	// drawable
 
-	public void draw(Universe universe, Display display, Disposition drawLoc)
+	public void draw
+	(
+		Universe universe, Display display, Disposition drawLoc
+	)
 	{
 		var drawPos = this._drawPos.overwriteWith(drawLoc.pos).add(this.pos);
 		var style = this.style(universe);

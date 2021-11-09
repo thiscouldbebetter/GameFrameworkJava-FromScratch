@@ -17,7 +17,7 @@ public class DateTime
 	public DateTime()
 	{
 		var systemDate = new Date();
-		this.year = systemDate.getFullYear();
+		this.year = systemDate.getYear();
 		this.month = systemDate.getMonth() + 1;
 		this.day = systemDate.getDate();
 		this.hours = systemDate.getHours();
@@ -44,7 +44,7 @@ public class DateTime
 	{
 		var returnValue = new DateTime
 		(
-			systemDate.getFullYear(),
+			systemDate.getYear(),
 			systemDate.getMonth() + 1,
 			systemDate.getDate(),
 			systemDate.getHours(),
