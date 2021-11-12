@@ -17,7 +17,7 @@ public class Collision implements Comparable<Collision>
 	public Map<String,ShapeBase> collidersByName;
 	public List<Entity> entitiesColliding;
 
-	public Coords[] normals;
+	public List<Coords> normals;
 	public boolean isActive;
 
 	public Collision
@@ -42,7 +42,10 @@ public class Collision implements Comparable<Collision>
 		);
 
 		this.collidersByName = new HashMap<String,ShapeBase>();
-		this.normals = new Coords[] { Coords.create(), Coords.create() };
+		this.normals = Arrays.asList
+		(
+			new Coords[] { Coords.create(), Coords.create() }
+		);
 
 		this.isActive = false;
 	}

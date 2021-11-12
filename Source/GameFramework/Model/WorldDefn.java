@@ -85,7 +85,13 @@ public class WorldDefn
 
 	public Map<String,Skill> skillsByName()
 	{
-		return (Map<String,Skill>)this.defnsByNameByTypeName.get(Skill.class.getName());
+		var returnMap = new HashMap<String,Skill>();
+		var mapToClone = this.defnsByNameByTypeName.get(Skill.class.getName());
+		mapToClone.entrySet().stream().forEach
+		(
+			x -> returnMap.put(x.getKey(), (Skill)(x.getValue()) )
+		);
+		return returnMap;
 	}
 
 }

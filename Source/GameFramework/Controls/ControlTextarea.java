@@ -9,10 +9,10 @@ import GameFramework.Helpers.*;
 import GameFramework.Input.*;
 import GameFramework.Model.*;
 
-public class ControlTextarea extends ControlBase
+public class ControlTextarea<TContext> extends ControlBase
 {
-	private DataBinding<Object,String> _text;
-	private DataBinding<Object,Boolean> _isEnabled;
+	private DataBinding<TContext,String> _text;
+	private DataBinding<TContext,Boolean> _isEnabled;
 
 	public Integer charCountMax;
 	public Integer cursorPos;
@@ -30,9 +30,9 @@ public class ControlTextarea extends ControlBase
 		String name,
 		Coords pos,
 		Coords size,
-		DataBinding<Object,String> text,
+		DataBinding<TContext,String> text,
 		double fontHeightInPixels,
-		DataBinding<Object,Boolean> isEnabled
+		DataBinding<TContext,Boolean> isEnabled
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -193,7 +193,7 @@ public class ControlTextarea extends ControlBase
 		var returnValue = (int)
 		(
 			this.indexOfFirstLineVisible()
-			+ Math.floor(this.scrollbar.windowSizeInItems) - 1.0;
+			+ Math.floor(this.scrollbar.windowSizeInItems) - 1.0
 		);
 		return returnValue;
 	}

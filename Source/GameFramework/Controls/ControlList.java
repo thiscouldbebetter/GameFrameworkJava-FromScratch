@@ -41,7 +41,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		DataBinding<TItem,TValue> bindingForItemValue,
 		DataBinding<TContext,Boolean> bindingForIsEnabled,
 		Consumer<Universe> confirm,
-		int widthInItems
+		Integer widthInItems
 	)
 	{
 		super(name, pos, size, fontHeightInPixels);
@@ -52,7 +52,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		this.bindingForIsEnabled =
 			(bindingForIsEnabled != null ? bindingForIsEnabled : DataBinding.fromTrue());
 		this._confirm = confirm;
-		this.widthInItems = (widthInItems > 0 ? widthInItems : 1);
+		this.widthInItems = (widthInItems != null ? widthInItems : 1);
 
 		var itemSpacingY = 1.2 * this.fontHeightInPixels; // hack
 		this._itemSpacing = new Coords(0, itemSpacingY, 0);
@@ -350,19 +350,17 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 
 			if (this.bindingForItemSelected != null)
 			{
-				TItem valueToSet;
-				if (this.bindingForItemValue == null)
-				{
-					valueToSet = this._itemSelected;
-				}
-				else
+				this.bindingForItemSelected.set(this._itemSelected);
+
+				TValue valueToSet;
+				if (this.bindingForItemValue != null)
 				{
 					valueToSet = this.bindingForItemValue.contextSet
 					(
 						this._itemSelected
 					).get();
+					this.bindingForItemValue.set(valueToSet);
 				}
-				this.bindingForItemSelected.set(valueToSet);
 			}
 		}
 

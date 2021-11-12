@@ -105,7 +105,7 @@ public class CompressorLZW
 		return returnValue;
 	}
 
-	public int[] compressStringToBytes(String stringToCompress)
+	public Integer[] compressStringToBytes(String stringToCompress)
 	{
 		var bitStream = new BitStream(new ByteStreamFromBytes());
 		this.compressByteStreamToBitStream
@@ -114,7 +114,7 @@ public class CompressorLZW
 		);
 		var byteStream = bitStream.byteStream;
 		var returnBytesAsList = ((ByteStreamFromBytes)byteStream).bytes;
-		var returnBytes = new int[returnBytesAsList.size()];
+		var returnBytes = new Integer[returnBytesAsList.size()];
 		for (var i = 0; i < returnBytesAsList.size(); i++)
 		{
 			returnBytes[i] = returnBytesAsList.get(i);

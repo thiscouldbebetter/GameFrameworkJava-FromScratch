@@ -128,13 +128,14 @@ public class Profile
 					messageAsDataBinding2
 				);
 
-				var venueTask = new VenueTask
+				var venueTask = new VenueTask<SaveState>
 				(
 					venueMessage,
-					() -> // perform
-					{
-						return universe.storageHelper.load(saveStateNameSelected);
-					},
+					(Universe universe2) -> // perform
+						universe2.storageHelper.load<SaveState>
+						(
+							saveStateNameSelected
+						),
 					(Universe universe2, SaveState saveStateSelected) -> // done
 					{
 						var worldSelected = saveStateSelected.world;
@@ -283,11 +284,11 @@ public class Profile
 				messageAsDataBinding
 			);
 
-			var venueTask = new VenueTask
+			var venueTask = new VenueTask<Boolean>
 			(
 				venueMessage,
 				(UniverseWorldPlaceEntities uwpe2) ->
-					saveToLocalStorage.apply(null), // todo
+					saveToLocalStorage.apply((SaveState)null), // perform
 				(UniverseWorldPlaceEntities uwpe2, Boolean result) -> // done
 				{
 					saveToLocalStorageDone.accept(result);
@@ -302,7 +303,7 @@ public class Profile
 		{
 			var venueMessage = VenueMessage.fromText("Saving game...");
 
-			var venueTask = new VenueTask
+			var venueTask = new VenueTask<Integer[]>
 			(
 				venueMessage,
 				() -> // perform
@@ -313,7 +314,8 @@ public class Profile
 					var worldSerialized = universe.serializer.serialize(world, false);
 
 					var compressor = universe.storageHelper.compressor;
-					var worldCompressedAsBytes = compressor.compressStringToBytes(worldSerialized);
+					var worldCompressedAsBytes =
+						compressor.compressStringToBytes(worldSerialized);
 
 					return worldCompressedAsBytes;
 				},
@@ -515,7 +517,7 @@ public class Profile
 					Coords.fromXY(100, 10), // pos
 					Coords.fromXY(120, fontHeight), // size
 					true, // isTextCentered
-					"Profile: " + universe.profile.name,
+					DataBinding.fromContext("Profile: " + universe.profile.name),
 					fontHeight
 				),
 
@@ -542,7 +544,8 @@ public class Profile
 					DataBinding.fromContextAndGet
 					(
 						universe.profile,
-						(Profile c) -> c.saveStates
+						(Profile c) ->
+							c.saveStates.toArray(new SaveState[] {})
 					), // items
 					DataBinding.fromGet
 					(
@@ -996,6 +999,9 @@ public class Profile
 			}
 		};
 
+		Consumer<Universe> listProfilesConfirm =
+			(Universe u2) -> select.run();
+
 		var returnValue = ControlContainer.from4
 		(
 			"containerProfileSelect",
@@ -1030,7 +1036,7 @@ public class Profile
 					), // bindingForOptionSelected
 					DataBinding.fromGet( (Profile c) -> c ), // value
 					null, // bindingForIsEnabled
-					(Universe u2) -> select.run(), // confirm
+					listProfilesConfirm, // confirm
 					null // widthInItems
 				),
 
@@ -1128,7 +1134,7 @@ public class Profile
 		var venueTask = new VenueTask
 		(
 			venueMessage,
-			(Universe universe2) -> universe2.worldCreate(universe2), // perform
+			(Universe universe2) -> universe2.worldCreate(), // perform
 			(Universe universe3, World world) -> // done
 			{
 				universe3.world = world;

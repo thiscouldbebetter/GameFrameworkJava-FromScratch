@@ -8,8 +8,7 @@ import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 import GameFramework.Utility.*;
 
-//public class Animatable2<T extends Clonable<T> & Transformable<T>> implements EntityProperty<Animatable2<T>>
-public class Animatable2<T extends Clonable<T> & Transformable<T>> implements EntityProperty<Animatable2<T>>
+public class Animatable2<T extends Clonable<T> & Transformable<T>> implements Clonable<Animatable2<T>>, EntityProperty<Animatable2<T>>
 {
 	public AnimationDefnGroup animationDefnGroup;
 	public T transformableAtRest;

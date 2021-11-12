@@ -45,9 +45,9 @@ public class StorageHelper
 		*/
 	}
 
-	public Object load(String propertyName)
+	public <T> T load(String propertyName)
 	{
-		Object returnValue;
+		T returnValue;
 
 		var propertyNamePrefixed =
 			this.propertyNamePrefix + propertyName;
@@ -68,7 +68,7 @@ public class StorageHelper
 			(
 				returnValueAsStringCompressed
 			);
-			returnValue = this.serializer.deserialize
+			returnValue = this.serializer.deserialize<T>
 			(
 				returnValueDecompressed
 			);

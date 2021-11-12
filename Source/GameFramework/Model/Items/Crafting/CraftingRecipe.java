@@ -2,6 +2,7 @@
 package GameFramework.Model.Items.Crafting;
 
 import java.util.*;
+import java.util.stream.*;
 
 import GameFramework.Helpers.*;
 import GameFramework.Model.*;
@@ -92,8 +93,8 @@ public class CraftingRecipe implements Clonable<CraftingRecipe>
 		(
 			this.name,
 			this.ticksToComplete,
-			ArrayHelper.clone(this.itemsIn),
-			ArrayHelper.clone(this.itemsOut)
+			ArrayHelper.clone(this.itemsIn).toArray(new Item[] {}),
+			ArrayHelper.clone(this.itemsOut).toArray(new Item[] {})
 		);
 	}
 

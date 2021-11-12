@@ -307,7 +307,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					(
 						skillLearner,
 						(SkillLearner c) ->
-							c.skillsAvailableToLearn(skillsAll)
+							c.skillsAvailableToLearn(skillsAll).toArray(new Skill[] {})
 					),
 					DataBinding.fromGet
 					(
@@ -382,7 +382,7 @@ public class SkillLearner implements EntityProperty<SkillLearner>
 					Coords.fromXY(margin, size.y - margin - labelHeight * 2), // pos,
 					Coords.fromXY(size.x - margin * 2, labelHeight), // size,
 					false, // isTextCentered,
-					"Skill Being Learned:" // text
+					DataBinding.fromContext("Skill Being Learned:") // text
 				),
 
 				new ControlLabel

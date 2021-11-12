@@ -214,7 +214,7 @@ public class ArrayHelper
 			{
 				var element = arrayToClone[i];
 				var elementCloned = element.clone();
-				returnValues.add(elementCloned);
+				returnValuesAsList.add(elementCloned);
 			}
 		}
 
@@ -359,11 +359,13 @@ public class ArrayHelper
 	{
 		var elementsInBothLists = new ArrayList<T>();
 
+		var array1AsList = Arrays.asList(array1);
+
 		for (var i = 0; i < array0.length; i++)
 		{
 			var element = array0[i];
 
-			var isElementInList1 = (array1.indexOf(element) >= 0);
+			var isElementInList1 = array1AsList.contains(element);
 			if (isElementInList1)
 			{
 				elementsInBothLists.add(element);

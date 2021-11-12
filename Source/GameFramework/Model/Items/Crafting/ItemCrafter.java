@@ -189,6 +189,11 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 			}
 		};
 
+		Consumer<Universe> listRecipesConfirm = (Universe u) ->
+		{
+			addToQueue.run();
+		};
+
 		var returnValue = new ControlContainer
 		(
 			"Craft",
@@ -234,10 +239,7 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 						(CraftingRecipe c) -> c
 					), // bindingForItemValue
 					DataBinding.fromTrue(), // isEnabled
-					(Universe u) ->
-					{
-						addToQueue.run();
-					}, // confirm
+					listRecipesConfirm,
 					null
 				),
 
@@ -453,7 +455,10 @@ public class ItemCrafter implements EntityProperty<ItemCrafter>
 
 	public ItemCrafter clone()
 	{
-		return new ItemCrafter(ArrayHelper.clone(this.recipesAvailable) );
+		return new ItemCrafter
+		(
+			ArrayHelper.clone(this.recipesAvailable).toArray(new CraftingRecipe[] {})
+		);
 	}
 
 	public ItemCrafter overwriteWith(ItemCrafter other)

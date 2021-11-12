@@ -36,7 +36,7 @@ public class VisualGroup implements Visual<VisualGroup>
 	{
 		return new VisualGroup
 		(
-			(Visual[])ArrayHelper.clone(this.children)
+			ArrayHelper.clone(this.children).toArray(new Visual[] {})
 		);
 	}
 

@@ -108,7 +108,10 @@ public class Edge implements ShapeBase<Edge>
 
 	public Edge clone()
 	{
-		return new Edge(ArrayHelper.clone(this.vertices));
+		return new Edge
+		(
+			ArrayHelper.clone(this.vertices).toArray(new Coords[] {})
+		);
 	}
 
 	public Edge overwriteWith(Edge other)

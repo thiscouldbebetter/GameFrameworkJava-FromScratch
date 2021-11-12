@@ -793,7 +793,11 @@ public class ControlBuilder
 					DataBinding.fromContextAndGet
 					(
 						placeDefn,
-						(PlaceDefn c) -> c.actionToInputsMappingsEdited
+						(PlaceDefn c) ->
+							c.actionToInputsMappingsEdited.toArray
+							(
+								new ActionToInputsMapping[] {}
+							)
 					), // items
 					DataBinding.fromGet
 					(
@@ -809,7 +813,10 @@ public class ControlBuilder
 							c.actionToInputsMappingSelected = v;
 						}
 					), // bindingForItemSelected
-					DataBinding.fromGet( (ActionToInputsMapping c) -> c ) // bindingForItemValue
+					DataBinding.fromGet
+					(
+						(ActionToInputsMapping c) -> c
+					) // bindingForItemValue
 				),
 
 				new ControlLabel
@@ -916,13 +923,11 @@ public class ControlBuilder
 						{
 							var mappingsDefault =
 								placeDefn.actionToInputsMappingsDefault;
-							var mappingDefault = Arrays.asList
+							var mappingDefault = mappingsDefault.stream().filter
 							(
-								mappingsDefault
-							).stream().filter
-							(
-								(ActionToInputsMapping x) -> (x.actionName == mappingSelected.actionName)
-							).collect(Collectors.toList()).get(0);
+								(ActionToInputsMapping x) ->
+									(x.actionName == mappingSelected.actionName)
+							).findFirst().get();
 							mappingSelected.inputNames =
 								ArrayHelper.cloneNonClonables(mappingDefault.inputNames);
 						}
@@ -997,7 +1002,7 @@ public class ControlBuilder
 						(PlaceDefn c) ->
 						{
 							var mappings = c.actionToInputsMappingsEdited;
-							var doAnyActionsLackInputs = Arrays.stream(mappings).anyMatch
+							var doAnyActionsLackInputs = mappings.stream().anyMatch
 							(
 								(ActionToInputsMapping x) -> (x.inputNames.size() == 0)
 							);
@@ -1605,7 +1610,7 @@ public class ControlBuilder
 		{
 			var venueMessage = VenueMessage.fromText("Loading profiles...");
 
-			var venueTask = new VenueTask
+			var venueTask = new VenueTask<ControlBase>
 			(
 				venueMessage,
 				(Universe universe2) -> // perform
@@ -1613,9 +1618,8 @@ public class ControlBuilder
 					(
 						universe, null, universe.venueCurrent
 					),
-				(Universe universe2, Object resultAsObject) -> // done
+				(Universe universe2, ControlBase result) -> // done
 				{
-					var result = (ControlBase)resultAsObject;
 					var venueProfileSelect = result.toVenue();
 
 					universe2.venueNext = controlBuilder.venueTransitionalFromTo

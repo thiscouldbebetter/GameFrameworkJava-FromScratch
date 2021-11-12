@@ -123,12 +123,18 @@ public class Face implements ShapeBase<Face>
 
 	public Face clone()
 	{
-		return new Face(ArrayHelper.clone(this.vertices));
+		return new Face
+		(
+			ArrayHelper.clone(this.vertices).toArray(new Coords[] {})
+		);
 	}
 
 	public Face overwriteWith(Face other)
 	{
-		ArrayHelper.overwriteWith(this.vertices, other.vertices);
+		ArrayHelper.overwriteWith
+		(
+			this.vertices, other.vertices
+		);
 		return this;
 	}
 

@@ -3,7 +3,7 @@ package GameFramework.Storage;
 
 public class Serializer
 {
-	public Object deserialize(String StringToDeserialize)
+	public <T> T deserialize(String stringToDeserialize)
 	{
 		throw new Exception("todo");
 
@@ -14,10 +14,10 @@ public class Serializer
 		nodeRoot.prototypesAssign();
 		var returnValue = nodeRoot.unwrap(typeNames, []);
 		return returnValue;
-		*/		
+		*/
 	}
 
-	public String serialize(Object objectToSerialize, boolean prettyPrint)
+	public <T> String serialize(T objectToSerialize, boolean prettyPrint)
 	{
 		throw new Exception("todo");
 		/*

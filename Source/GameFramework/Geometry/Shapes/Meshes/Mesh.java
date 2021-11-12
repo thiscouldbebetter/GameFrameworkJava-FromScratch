@@ -257,8 +257,14 @@ public class Mesh implements ShapeBase<Mesh>
 		return new Mesh
 		(
 			this.center.clone(),
-			ArrayHelper.clone(this.vertexOffsets),
-			ArrayHelper.clone(this.faceBuilders)
+			ArrayHelper.clone
+			(
+				Arrays.asList(this.vertexOffsets)
+			).toArray(new Coords[] {}),
+			ArrayHelper.clone
+			(
+				this.faceBuilders
+			).toArray(new FaceBuilder[] {})
 		);
 	}
 

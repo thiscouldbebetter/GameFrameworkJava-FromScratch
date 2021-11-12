@@ -394,6 +394,11 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			equipmentUser.statusMessage = (String)message;
 		};
 
+		Consumer<Universe> listEquippablesConfirm = (Universe u2) ->
+		{
+			equipItemSelectedToSocketDefault.run();
+		};
+
 		var listEquippables = new ControlList
 		(
 			"listEquippables",
@@ -416,10 +421,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			(Universe u2) ->
-			{
-				equipItemSelectedToSocketDefault.run();
-			},
+			listEquippablesConfirm,
 			null
 		);
 
@@ -493,6 +495,11 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			unequipFromSocketSelected
 		);
 
+		Consumer<Universe> listEquippedConfirm = (Universe uwpe2) ->
+		{
+			unequipFromSocketSelected.run(); // confirm
+		};
+
 		var listEquipped = new ControlList
 		(
 			"listEquipped",
@@ -512,10 +519,7 @@ public class EquipmentUser implements EntityProperty<EquipmentUser>
 			), // bindingForItemSelected
 			DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 			null, // bindingForIsEnabled
-			(Universe uwpe2) ->
-			{
-				unequipFromSocketSelected.run()
-			}, // confirm
+			listEquippedConfirm,
 			null
 		);
 

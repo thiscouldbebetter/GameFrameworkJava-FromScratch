@@ -83,7 +83,7 @@ public class MapOfCells<T extends Clonable<T>>
 
 	public T cellAtPosInCells(Coords cellPosInCells)
 	{
-		var argument = new Triple
+		var argument = new Triple<MapOfCells<T>,Coords,T>
 		(
 			this, cellPosInCells, this._cell
 		);

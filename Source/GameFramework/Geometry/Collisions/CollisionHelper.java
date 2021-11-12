@@ -974,8 +974,9 @@ public class CollisionHelper
 			collisionPos = displacementToSphere.add(rectangleCenter);
 
 			var normals = collision.normals;
-			boxRotated.normalAtPos(collision.pos, normals[0]);
-			normals[1].overwriteWith(normals[0]).invert();
+			var normal0 = normals.get(0);
+			boxRotated.normalAtPos(collision.pos, normal0);
+			normals.get(1).overwriteWith(normal0).invert();
 
 			var colliders = collision.colliders;
 			colliders.set(0, boxRotated);

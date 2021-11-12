@@ -599,14 +599,14 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				DataBinding.fromContextAndGet
 				(
 					itemHolder,
-					(ItemHolder c) -> c.items
+					(ItemHolder c) -> c.items.toArray(new Item[] {})
 				), // items
 				DataBinding.fromGet
 				(
 					(Item c) -> c.toString(world)
 				), // bindingForItemText
 				fontHeightSmall,
-				new DataBinding
+				new DataBinding<ItemHolder,Item>
 				(
 					itemHolder,
 					(ItemHolder c) -> c.itemSelected,
@@ -614,7 +614,7 @@ public class ItemHolder implements EntityProperty<ItemHolder>
 				), // bindingForItemSelected
 				DataBinding.fromGet( (Item c) -> c ), // bindingForItemValue
 				DataBinding.fromTrue(itemHolder), // isEnabled
-				use
+				(Universe u) -> use.run()
 			),
 
 			new ControlLabel

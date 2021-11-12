@@ -28,7 +28,15 @@ public class ShapeGroupAll implements ShapeBase<ShapeGroupAll>
 
 	public ShapeGroupAll clone()
 	{
-		return new ShapeGroupAll(ArrayHelper.clone(this.shapes));
+		var shapesCloned = Arrays.asList(this.shapes).stream().map
+		(
+			x -> x.clone()
+		).collect(Collectors.toList());
+
+		return new ShapeGroupAll
+		(
+			shapesCloned.toArray(new ShapeBase[] {})
+		);
 	}
 
 	public ShapeGroupAll overwriteWith(ShapeGroupAll other)

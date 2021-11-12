@@ -14,15 +14,15 @@ public class PlaceDefn
 	public String name;
 	public ActorAction[] actions;
 	public Map<String,ActorAction> actionsByName;
-	public ActionToInputsMapping[] actionToInputsMappings;
+	public List<ActionToInputsMapping> actionToInputsMappings;
 	public String[] propertyNamesToProcess;
 	private Consumer<UniverseWorldPlaceEntities>_placeInitialize;
 	private Consumer<UniverseWorldPlaceEntities>_placeFinalize;
 
 	public Map<String,ActionToInputsMapping> actionToInputsMappingsByInputName;
 	public ActionToInputsMapping actionToInputsMappingSelected;
-	public ActionToInputsMapping[] actionToInputsMappingsDefault;
-	public ActionToInputsMapping[] actionToInputsMappingsEdited;
+	public List<ActionToInputsMapping> actionToInputsMappingsDefault;
+	public List<ActionToInputsMapping> actionToInputsMappingsEdited;
 
 	public PlaceDefn
 	(
@@ -37,7 +37,8 @@ public class PlaceDefn
 		this.name = name;
 		this.actions = actions;
 		this.actionsByName = ArrayHelper.addLookupsByName(this.actions);
-		this.actionToInputsMappingsDefault = actionToInputsMappings;
+		this.actionToInputsMappingsDefault =
+			Arrays.asList(actionToInputsMappings);
 		this.propertyNamesToProcess = propertyNamesToProcess;
 		this._placeInitialize = placeInitialize;
 		this._placeFinalize = placeFinalize;
@@ -49,7 +50,7 @@ public class PlaceDefn
 
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			Arrays.asList(this.actionToInputsMappings),
+			this.actionToInputsMappings,
 			(ActionToInputsMapping x) -> x.inputNames
 		);
 	}
@@ -113,7 +114,7 @@ public class PlaceDefn
 		);
 		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
-			Arrays.asList(this.actionToInputsMappings),
+			this.actionToInputsMappings,
 			(ActionToInputsMapping x) -> x.inputNames
 		);
 	}

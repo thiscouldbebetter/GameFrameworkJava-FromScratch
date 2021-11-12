@@ -66,6 +66,11 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 
 		var buttonSize = Coords.fromXY(20, 10);
 
+		Consumer<Universe> listEntriesConfirm = (Universe universe2) ->
+		{
+			// todo
+		};
+
 		var childControls = Arrays.asList(new ControlBase[]
 		{
 			new ControlLabel
@@ -129,10 +134,7 @@ public class JournalKeeper implements EntityProperty<JournalKeeper>
 				), // bindingForItemSelected
 				DataBinding.fromGet( (Entity c) -> c ), // bindingForItemValue
 				DataBinding.fromTrue(journalKeeper), // isEnabled
-				(Universe universe2) -> // confirm
-				{
-					// todo
-				},
+				listEntriesConfirm,
 				null
 			),
 
