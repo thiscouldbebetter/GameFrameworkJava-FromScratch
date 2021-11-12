@@ -39,8 +39,8 @@ public class ControlSelect<TContext,TValue,TItem> extends ControlBase
 
 		this.indexOfOptionSelected = null;
 		var valueSelectedActual = this.valueSelected();
-		var optionsActual = this.options.get();
-		for (var i = 0; i < options.length; i++)
+		var optionsActual = this._options.get();
+		for (var i = 0; i < optionsActual.length; i++)
 		{
 			var option = optionsActual[i];
 			var optionValue = this.bindingForOptionValues.contextSet

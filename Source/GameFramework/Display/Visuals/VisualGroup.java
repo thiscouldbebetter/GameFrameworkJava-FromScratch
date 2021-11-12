@@ -34,7 +34,10 @@ public class VisualGroup implements Visual<VisualGroup>
 
 	public VisualGroup clone()
 	{
-		return new VisualGroup(ArrayHelper.clone(this.children) );
+		return new VisualGroup
+		(
+			(Visual[])ArrayHelper.clone(this.children)
+		);
 	}
 
 	public VisualGroup overwriteWith(VisualGroup other)

@@ -3,6 +3,7 @@ package GameFramework.Display.Visuals;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import GameFramework.Display.*;
 import GameFramework.Geometry.*;
@@ -38,7 +39,10 @@ public class VisualSelect implements Visual<VisualSelect>
 	{
 		var childrenToSelectNames =
 			this.selectChildNames(uwpe, display);
-		var childrenSelected = childrenToSelectNames.map
+		var childrenSelected = Arrays.asList
+		(
+			childrenToSelectNames
+		).stream().map
 		(
 			childToSelectName -> this.childrenByName.get(childToSelectName)
 		);

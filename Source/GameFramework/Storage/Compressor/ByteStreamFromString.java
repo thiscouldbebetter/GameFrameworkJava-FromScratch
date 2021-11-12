@@ -34,13 +34,13 @@ public class ByteStreamFromString implements ByteStream
 
 	public int[] readBytes(int byteCount)
 	{
-		var bytesRead = new ArrayList<Integer>();
+		var bytesRead = new int[byteCount];
 		for (var i = 0; i < byteCount; i++)
 		{
 			var byteRead = this.readByte();
-			bytesRead.add(byteRead);
+			bytesRead[i] = byteRead;
 		}
-		return bytesRead.toArray(new Integer[] {});
+		return bytesRead;
 	}
 
 	public String readStringOfLength(int lengthOfString)
@@ -70,10 +70,17 @@ public class ByteStreamFromString implements ByteStream
 
 	public void writeBytes(int[] bytesToWrite)
 	{
-		Arrays.asList(bytesToWrite).stream().forEach(x -> this.writeByte(x));
+		for (var i = 0; i < bytesToWrite.length; i++)
+		{
+			var byteToWrite = bytesToWrite[i];
+			this.writeByte(byteToWrite);
+		}
 	}
 
-	public void writeStringPaddedToLength(String stringToWrite, int lengthPadded)
+	public void writeStringPaddedToLength
+	(
+		String stringToWrite, int lengthPadded
+	)
 	{
 		for (var i = 0; i < stringToWrite.length(); i++)
 		{

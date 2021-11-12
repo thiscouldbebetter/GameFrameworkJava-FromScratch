@@ -6,7 +6,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Media.*;
 import GameFramework.Model.*;
 
-public interface VisualImage<T> extends Visual<T>
+public interface VisualImage<T extends Visual> extends Visual<T>
 {
 	Image2 image(Universe u);
 	Coords sizeInPixels(Universe u);

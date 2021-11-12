@@ -30,7 +30,7 @@ public class VenueTask<TResult> implements Venue
 
 	public double secondsSinceStarted()
 	{
-		var returnValue = 0;
+		var returnValue = 0.0;
 		if (this.timeStarted != null)
 		{
 			var now = new DateTime();
@@ -66,7 +66,7 @@ public class VenueTask<TResult> implements Venue
 		*/
 
 		// todo - Make this asynchronous.
-		var result = this.perform.accept(universe);
+		var result = this.perform.apply(universe);
 
 		//clearInterval(timer);
 

@@ -19,7 +19,9 @@ public class VisualPolygon implements Visual<VisualPolygon>
 
 	public VisualPolygon
 	(
-		Path verticesAsPath, Color colorFill, Color colorBorder,
+		Path verticesAsPath,
+		Color colorFill,
+		Color colorBorder,
 		boolean shouldUseEntityOrientation
 	)
 	{

@@ -105,7 +105,10 @@ public class Color implements Clonable<Color>, Interpolatable<Color>, Namable
 
 	public Color clone()
 	{
-		return new Color(this.name(), this.code, ArrayHelper.clone(this.componentsRGBA));
+		return new Color
+		(
+			this.name(), this.code, ArrayHelper.clone(this.componentsRGBA)
+		);
 	}
 
 	public Color overwriteWith(Color other)

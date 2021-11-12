@@ -78,9 +78,20 @@ public class Animatable2<T extends Clonable<T> & Transformable<T>> implements En
 				(Universe universe2) -> // confirm
 				^
 error: incompatible types: incompatible parameter types in lambda expression
+./GameFramework/Controls/ControlTextarea.java:196: error: ')' expected
+			+ Math.floor(this.scrollbar.windowSizeInItems) - 1.0;
+			                                                    ^
+./GameFramework/Controls/ControlTextarea.java:197: error: illegal start of expression
+		);
+		^
 ./GameFramework/Model/Journal/JournalKeeper.java:304: error: incompatible types: DataBinding<JournalKeeper,String> cannot be converted to DataBinding<Object,String>
 				new DataBinding<JournalKeeper,String>
 				^
+./GameFramework/Display/Visuals/VisualCrosshairs.java:77: error: cannot find symbol
+	public Coords[] coordsGroupToTranslate() { return null; }
+	       ^
+  symbol:   class Coords
+  location: class VisualCrosshairs
 ./GameFramework/Model/Skills/SkillLearner.java:300: error: method from10 in class ControlList<TContext#2,TItem#2,TValue#2> cannot be applied to given types;
 				ControlList.from10
 				           ^
@@ -135,10 +146,11 @@ error: incompatible types: bad return type in lambda expression
   location: variable array1 of type T[]
   where T is a type-variable:
     T extends Object declared in method <T>intersectArrays(T[],T[])
-./GameFramework/Controls/ControlList.java:365: error: incompatible types: Object cannot be converted to TItem
-				this.bindingForItemSelected.set(valueToSet);
-				                                ^
-  where TItem is a type-variable:
+./GameFramework/Controls/ControlList.java:363: error: incompatible types: TValue cannot be converted to TItem
+					).get();
+					     ^
+  where TValue,TItem are type-variables:
+    TValue extends Object declared in class ControlList
     TItem extends Object declared in class ControlList
 ./GameFramework/Profiles/Profile.java:136: error: incompatible types: incompatible parameter types in lambda expression
 						return universe.storageHelper.load(saveStateNameSelected);
@@ -147,72 +159,41 @@ error: incompatible types: bad return type in lambda expression
 					saveToLocalStorage.apply(null), // todo
 					                        ^
 error: incompatible types: incompatible parameter types in lambda expression
-./GameFramework/Profiles/Profile.java:518: error: cannot find symbol
-					"Profile: " + universe.profile.name.get(),
-					                                   ^
-  symbol:   method get()
-  location: variable name of type String
-./GameFramework/Profiles/Profile.java:571: error: incompatible types: bad type in conditional expression
-						? saveToLocalStorageOverwritingSlotSelected
-						  ^
-    Runnable cannot be converted to Consumer<Universe>
-./GameFramework/Profiles/Profile.java:603: error: incompatible types: <null> cannot be converted to boolean
-					null, null
-					      ^
-./GameFramework/Profiles/Profile.java:821: error: incompatible types: <null> cannot be converted to int
-					null, // charCountMax
-					^
-./GameFramework/Profiles/Profile.java:1033: error: incompatible types: Runnable cannot be converted to Consumer
-					select, // confirm
-					^
+./GameFramework/Profiles/Profile.java:518: error: incompatible types: String cannot be converted to DataBinding
+					"Profile: " + universe.profile.name,
+					            ^
+./GameFramework/Profiles/Profile.java:537: error: method from10 in class ControlList<TContext#2,TItem#2,TValue#2> cannot be applied to given types;
+				ControlList.from10
+				           ^
+  required: String,Coords,Coords,DataBinding<TContext#1,TItem#1[]>,DataBinding<TItem#1,String>,double,DataBinding<TContext#1,TItem#1>,DataBinding<TItem#1,TValue#1>,DataBinding<TContext#1,Boolean>,Consumer<Universe>
+  found: String,Coords,Coords,DataBinding<Profile,List<SaveState>>,DataBinding<SaveState,String>,double,DataBinding<Profile,SaveState>,DataBinding<String,String>,<null>,isLoadNotS[...]run()
+  reason: inference variable TValue#3 has incompatible bounds
+    equality constraints: TItem#1[]
+    lower bounds: List<SaveState>
+  where TContext#1,TItem#1,TValue#1,TContext#2,TItem#2,TValue#2,TValue#3,TContext#3 are type-variables:
+    TContext#1 extends Object declared in method <TContext#1,TItem#1,TValue#1>from10(String,Coords,Coords,DataBinding<TContext#1,TItem#1[]>,DataBinding<TItem#1,String>,double,DataBinding<TContext#1,TItem#1>,DataBinding<TItem#1,TValue#1>,DataBinding<TContext#1,Boolean>,Consumer<Universe>)
+    TItem#1 extends Object declared in method <TContext#1,TItem#1,TValue#1>from10(String,Coords,Coords,DataBinding<TContext#1,TItem#1[]>,DataBinding<TItem#1,String>,double,DataBinding<TContext#1,TItem#1>,DataBinding<TItem#1,TValue#1>,DataBinding<TContext#1,Boolean>,Consumer<Universe>)
+    TValue#1 extends Object declared in method <TContext#1,TItem#1,TValue#1>from10(String,Coords,Coords,DataBinding<TContext#1,TItem#1[]>,DataBinding<TItem#1,String>,double,DataBinding<TContext#1,TItem#1>,DataBinding<TItem#1,TValue#1>,DataBinding<TContext#1,Boolean>,Consumer<Universe>)
+    TContext#2 extends Object declared in class ControlList
+    TItem#2 extends Object declared in class ControlList
+    TValue#2 extends Object declared in class ControlList
+    TValue#3 extends Object declared in method <TContext#3,TValue#3>fromContextAndGet(TContext#3,Function<TContext#3,TValue#3>)
+    TContext#3 extends Object declared in method <TContext#3,TValue#3>fromContextAndGet(TContext#3,Function<TContext#3,TValue#3>)
+./GameFramework/Profiles/Profile.java:1033: error: incompatible types: incompatible parameter types in lambda expression
+					(Universe u2) -> select.run(), // confirm
+					                           ^
 ./GameFramework/Profiles/Profile.java:1131: error: incompatible types: incompatible parameter types in lambda expression
-			(Universe universe2) -> universe.worldCreate(), // perform
-			                                            ^
-./GameFramework/Profiles/Profile.java:1134: error: cannot find symbol
-				universe2.world = world;
-				^
-  symbol:   variable universe2
-  location: class Profile
-./GameFramework/Display/Visuals/VisualGroup.java:37: error: incompatible types: List cannot be converted to Visual[]
-		return new VisualGroup(ArrayHelper.clone(this.children) );
-		                                        ^
-./GameFramework/Display/Visuals/VisualImage.java:9: error: type argument T#1 is not within bounds of type-variable T#2
-public interface VisualImage<T> extends Visual<T>
-                                               ^
-  where T#1,T#2 are type-variables:
-    T#1 extends Object declared in interface VisualImage
-    T#2 extends Visual declared in interface Visual
-./GameFramework/Display/Visuals/VisualImageFromLibrary.java:10: error: VisualImageFromLibrary is not abstract and does not override abstract method transform(Transform) in Transformable
-public class VisualImageFromLibrary implements VisualImage<VisualImageFromLibrary>
-       ^
-./GameFramework/Display/Visuals/VisualImageFromLibrary.java:86: error: transform(Transform) in VisualImageFromLibrary cannot implement transform(Transform) in Transformable
-	public Visual transform(Transform transformToApply)
-	              ^
-  return type Visual is not compatible with VisualImageFromLibrary
-  where T is a type-variable:
-    T extends Transformable declared in interface Transformable
-./GameFramework/Controls/ControlSelect.java:42: error: cannot find symbol
-		var optionsActual = this.options.get();
-		                        ^
-  symbol: variable options
-./GameFramework/Controls/ControlSelect.java:43: error: cannot find symbol
-		for (var i = 0; i < options.length; i++)
-		                           ^
-  symbol:   variable length
-  location: variable options of type DataBinding<TContext,TItem[]>
-  where TContext,TItem are type-variables:
-    TContext extends Object declared in class ControlSelect
-    TItem extends Object declared in class ControlSelect
-./GameFramework/Utility/VenueTask.java:38: error: incompatible types: possible lossy conversion from double to int
-			returnValue = Math.floor(millisecondsSinceStarted / 1000);
-			                        ^
-./GameFramework/Utility/VenueTask.java:69: error: cannot find symbol
-		var result = this.perform.accept(universe);
-		                         ^
-  symbol:   method accept(Universe)
-  location: variable perform of type Function<Universe,TResult>
-  where TResult is a type-variable:
-    TResult extends Object declared in class VenueTask
+			(Universe universe2) -> universe2.worldCreate(universe2), // perform
+			                                             ^
+./GameFramework/Profiles/Profile.java:1131: error: method worldCreate in class Universe cannot be applied to given types;
+			(Universe universe2) -> universe2.worldCreate(universe2), // perform
+			                                 ^
+  required: no arguments
+  found: Universe
+  reason: actual and formal argument lists differ in length
+./GameFramework/Display/Visuals/VisualGroup.java:39: error: incompatible types: List cannot be converted to Visual[]
+			(Visual[])ArrayHelper.clone(this.children)
+			                           ^
 ./GameFramework/Storage/Compressor/CompressorLZW.java:90: error: incompatible types: inference variable T has incompatible bounds
 			new ByteStreamFromBytes(Arrays.asList(bytesToCompress)),
 			^
@@ -225,102 +206,9 @@ public class VisualImageFromLibrary implements VisualImage<VisualImageFromLibrar
 		                    ^
   where T is a type-variable:
     T extends Object declared in method <T>asList(T...)
-./GameFramework/Storage/Compressor/CompressorLZW.java:117: error: incompatible types: inference variable T has incompatible bounds
-		return returnValues.toArray(new Integer[] {});
-		                           ^
-    lower bounds: int,Object
-    lower bounds: Integer
-  where T is a type-variable:
-    T extends Object declared in method <T>toArray(T[])
-./GameFramework/Storage/Compressor/CompressorLZW.java:199: error: cannot find symbol
-		return byteStreamDecompressed.toArray(new int[] {});
-		                             ^
-  symbol:   method toArray(int[])
-  location: variable byteStreamDecompressed of type ByteStream
-./GameFramework/Storage/Compressor/CompressorLZW.java:205: error: incompatible types: inference variable T has incompatible bounds
-			new ByteStreamFromBytes(Arrays.asList(bytesToDecode));
-			^
-    equality constraints: Integer
-    lower bounds: int[]
-  where T is a type-variable:
-    T extends Object declared in method <T>asList(T...)
-./GameFramework/Storage/Compressor/CompressorLZW.java:213: error: incompatible types: inference variable T has incompatible bounds
-		return bytesDecompressed.toArray(new Integer[] {});
-		                                ^
-    lower bounds: int,Object
-    lower bounds: Integer
-  where T is a type-variable:
-    T extends Object declared in method <T>toArray(T[])
-./GameFramework/Controls/ControlTextBox.java:127: error: incompatible types: String cannot be converted to int
-			charAtCursor = "" + (char)charAtCursor;
-			                  ^
-./GameFramework/Controls/ControlTextarea.java:177: error: cannot find symbol
-		this.cursorPos = this.text(null).length;
-		                                ^
-  symbol:   variable length
-  location: class String
-./GameFramework/Controls/ControlTextarea.java:195: error: incompatible types: possible lossy conversion from double to int
-			+ Math.floor(this.scrollbar.windowSizeInItems) - 1.0;
-			                                               ^
-./GameFramework/Controls/ControlTextarea.java:352: error: cannot find symbol
-		if (indexEnd >= lines.length)
-		                     ^
-  symbol:   variable length
-  location: variable lines of type List<String>
-./GameFramework/Controls/ControlTextarea.java:354: error: cannot find symbol
-			indexEnd = lines.length - 1;
-			                ^
-  symbol:   variable length
-  location: variable lines of type List<String>
-./GameFramework/Controls/ControlTextarea.java:361: error: array required, but List<String> found
-			var line = lines[i];
-			                ^
-./GameFramework/Display/Visuals/VisualCrosshairs.java:8: error: VisualCrosshairs is not abstract and does not override abstract method coordsGroupToTranslate() in Transformable
-public class VisualCrosshairs implements Visual<VisualCrosshairs>
-       ^
-./GameFramework/Geometry/Shapes/Path.java:21: error: incompatible types: no instance(s) of type variable(s) T exist so that List<T> conforms to Coords[]
-		return new Path(ArrayHelper.clone(this.points) );
-		       ^
-  where T is a type-variable:
-    T extends Clonable<T> declared in method <T>clone(T[])
-./GameFramework/Display/Visuals/VisualPolygon.java:99: error: incompatible types: no instance(s) of type variable(s) T exist so that Clonable<T> conforms to Color
-		return new VisualPolygon
-		       ^
-  where T is a type-variable:
-    T extends Object declared in method <T>clone(Clonable<T>)
-./GameFramework/Display/Visuals/VisualImageImmediate.java:9: error: VisualImageImmediate is not abstract and does not override abstract method overwriteWith(Visual) in Visual
-public class VisualImageImmediate implements VisualImage
-       ^
-./GameFramework/Storage/Compressor/ByteStreamFromBytes.java:48: error: incompatible types: Integer[] cannot be converted to int[]
-		return (int[])( bytesRead.toArray(new Integer[] {}) );
-		              ^
-./GameFramework/Storage/Compressor/ByteStreamFromBytes.java:77: error: incompatible types: int[] cannot be converted to int
-		Arrays.asList(bytesToWrite).stream().forEach(x -> this.writeByte(x));
-		                                                                 ^
-./GameFramework/Storage/Compressor/ByteStreamFromString.java:43: error: incompatible types: inference variable T has incompatible bounds
-		return bytesRead.toArray(new Integer[] {});
-		                        ^
-    lower bounds: int,Object
-    lower bounds: Integer
-  where T is a type-variable:
-    T extends Object declared in method <T>toArray(T[])
-./GameFramework/Storage/Compressor/ByteStreamFromString.java:73: error: incompatible types: int[] cannot be converted to int
-		Arrays.asList(bytesToWrite).stream().forEach(x -> this.writeByte(x));
-		                                                                 ^
-./GameFramework/Display/Visuals/VisualSelect.java:41: error: cannot find symbol
-		var childrenSelected = childrenToSelectNames.map
-		                                            ^
-  symbol:   method map((childToSe[...]Name))
-  location: variable childrenToSelectNames of type String[]
-./GameFramework/Utility/ClonableHelper.java:8: error: incompatible types: bad type in conditional expression
-		return (clonableToClone == null ? null : clonableToClone.clone() );
-		                                                              ^
-    T cannot be converted to Clonable<T>
-  where T is a type-variable:
-    T extends Object declared in method <T>clone(Clonable<T>)
 Note: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-71 errors
+45 errors

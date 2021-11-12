@@ -83,7 +83,7 @@ public class VisualImageFromLibrary implements VisualImage<VisualImageFromLibrar
 
 	public Coords[] coordsGroupToTranslate() { return null; }
 
-	public Visual transform(Transform transformToApply)
+	public VisualImageFromLibrary transform(Transform transformToApply)
 	{
 		return this; // todo
 	}

@@ -113,8 +113,13 @@ public class CompressorLZW
 			new ByteStreamFromString(stringToCompress), bitStream
 		);
 		var byteStream = bitStream.byteStream;
-		var returnValues = ((ByteStreamFromBytes)byteStream).bytes;
-		return returnValues.toArray(new Integer[] {});
+		var returnBytesAsList = ((ByteStreamFromBytes)byteStream).bytes;
+		var returnBytes = new int[returnBytesAsList.size()];
+		for (var i = 0; i < returnBytesAsList.size(); i++)
+		{
+			returnBytes[i] = returnBytesAsList.get(i);
+		}
+		return returnBytes;
 	}
 
 	public ByteStream decompressByteStream
@@ -196,13 +201,19 @@ public class CompressorLZW
 			}
 		}
 
-		return byteStreamDecompressed.toArray(new int[] {});
+		return byteStreamDecompressed;
 	}
 
 	public int[] decompressBytes(int[] bytesToDecode)
 	{
+		var bytesToDecodeAsList = new ArrayList<Integer>();
+		for (var i = 0; i < bytesToDecode.length; i++)
+		{
+			bytesToDecodeAsList.add(bytesToDecode[i]);
+		}
+
 		var byteStreamToDecode =
-			new ByteStreamFromBytes(Arrays.asList(bytesToDecode));
+			new ByteStreamFromBytes(bytesToDecodeAsList);
 		var byteStreamDecompressed = new ByteStreamFromBytes();
 		this.decompressByteStream
 		(
@@ -210,7 +221,12 @@ public class CompressorLZW
 		);
 		var bytesDecompressed = byteStreamDecompressed.bytes;
 
-		return bytesDecompressed.toArray(new Integer[] {});
+		var returnBytes = new int[bytesDecompressed.size()];
+		for (var i = 0; i < bytesDecompressed.size(); i++)
+		{
+			returnBytes[i] = bytesDecompressed.get(i);
+		}
+		return returnBytes;
 	}
 
 	public String decompressString(String stringToDecode)

@@ -12,7 +12,7 @@ import GameFramework.Model.*;
 public class ControlTextBox<TContext> extends ControlBase
 {
 	public DataBinding<TContext,String> _text;
-	public int numberOfCharsMax;
+	public Integer numberOfCharsMax;
 	public DataBinding<TContext,Boolean> _isEnabled;
 
 	public Integer cursorPos;
@@ -30,7 +30,7 @@ public class ControlTextBox<TContext> extends ControlBase
 		Coords size,
 		DataBinding<TContext,String> text,
 		double fontHeightInPixels,
-		int numberOfCharsMax,
+		Integer numberOfCharsMax,
 		DataBinding<TContext,Boolean> isEnabled
 	)
 	{
@@ -124,10 +124,10 @@ public class ControlTextBox<TContext> extends ControlBase
 				"z".charAt(0) + 1
 			);
 
-			charAtCursor = "" + (char)charAtCursor;
+			var charAtCursorAsString = Character.toString(charAtCursor);
 
 			var textEdited = text.substring(0, this.cursorPos)
-				+ charAtCursor
+				+ charAtCursorAsString
 				+ text.substring(this.cursorPos + 1);
 
 			this._text.set(textEdited);
@@ -148,7 +148,7 @@ public class ControlTextBox<TContext> extends ControlBase
 
 			if
 			(
-				this.numberOfCharsMax == 0 // 0 = infinity
+				this.numberOfCharsMax == null
 				|| text.length() < this.numberOfCharsMax
 			)
 			{

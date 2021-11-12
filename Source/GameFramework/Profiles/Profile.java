@@ -515,7 +515,7 @@ public class Profile
 					Coords.fromXY(100, 10), // pos
 					Coords.fromXY(120, fontHeight), // size
 					true, // isTextCentered
-					"Profile: " + universe.profile.name.get(),
+					"Profile: " + universe.profile.name,
 					fontHeight
 				),
 
@@ -568,8 +568,8 @@ public class Profile
 					null,
 					(
 						isLoadNotSave
-						? saveToLocalStorageOverwritingSlotSelected
-						: loadSelectedSlotFromLocalStorage
+						? (Universe u) -> saveToLocalStorageOverwritingSlotSelected.run()
+						: (Universe u) -> loadSelectedSlotFromLocalStorage.run()
 					) // confirm
 				),
 
@@ -600,7 +600,7 @@ public class Profile
 						(Profile c) -> (new Boolean(c.saveStateNameSelected != null))
 					),
 					(isLoadNotSave ? loadSelectedSlotFromLocalStorage : saveToLocalStorageOverwritingSlotSelected), // click
-					null, null
+					null, false // ?
 				),
 
 				ControlButton.from8
@@ -1030,7 +1030,7 @@ public class Profile
 					), // bindingForOptionSelected
 					DataBinding.fromGet( (Profile c) -> c ), // value
 					null, // bindingForIsEnabled
-					select, // confirm
+					(Universe u2) -> select.run(), // confirm
 					null // widthInItems
 				),
 
@@ -1128,15 +1128,15 @@ public class Profile
 		var venueTask = new VenueTask
 		(
 			venueMessage,
-			(Universe universe2) -> universe.worldCreate(), // perform
+			(Universe universe2) -> universe2.worldCreate(universe2), // perform
 			(Universe universe3, World world) -> // done
 			{
-				universe2.world = world;
+				universe3.world = world;
 
 				var profile = Profile.anonymous();
 				universe.profile = profile;
 
-				Venue venueNext = universe.world.toVenue();
+				Venue venueNext = world.toVenue();
 				venueNext = VenueFader.fromVenuesToAndFrom
 				(
 					venueNext, universe.venueCurrent

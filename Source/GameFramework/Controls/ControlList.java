@@ -350,7 +350,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 
 			if (this.bindingForItemSelected != null)
 			{
-				Object valueToSet;
+				TItem valueToSet;
 				if (this.bindingForItemValue == null)
 				{
 					valueToSet = this._itemSelected;

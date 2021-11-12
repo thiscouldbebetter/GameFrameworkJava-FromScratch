@@ -74,6 +74,8 @@ public class VisualCrosshairs implements Visual<VisualCrosshairs>
 
 	// Transformable.
 
+	public Coords[] coordsGroupToTranslate() { return null; }
+
 	public VisualCrosshairs transform(Transform transformToApply)
 	{
 		return this; // todo

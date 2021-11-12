@@ -174,7 +174,7 @@ public class ControlTextarea extends ControlBase
 	public void focusGain()
 	{
 		this.isHighlighted = true;
-		this.cursorPos = this.text(null).length;
+		this.cursorPos = this.text(null).length();
 	}
 
 	public void focusLose()
@@ -190,9 +190,12 @@ public class ControlTextarea extends ControlBase
 
 	public int indexOfLastLineVisible()
 	{
-		return
+		var returnValue = (int)
+		(
 			this.indexOfFirstLineVisible()
 			+ Math.floor(this.scrollbar.windowSizeInItems) - 1.0;
+		);
+		return returnValue;
 	}
 
 	public int indexOfLineSelected(Integer valueToSet)
@@ -349,16 +352,16 @@ public class ControlTextarea extends ControlBase
 		var numberOfLinesVisible = Math.floor(this.size.y / itemSizeY);
 		var indexStart = this.indexOfFirstLineVisible();
 		var indexEnd = indexStart + numberOfLinesVisible - 1;
-		if (indexEnd >= lines.length)
+		if (indexEnd >= lines.size())
 		{
-			indexEnd = lines.length - 1;
+			indexEnd = lines.size() - 1;
 		}
 
 		var drawPos2 = new Coords(drawPos.x + textMarginLeft, itemPosY, 0);
 
 		for (var i = indexStart; i <= indexEnd; i++)
 		{
-			var line = lines[i];
+			var line = lines.get(i);
 
 			display.drawText
 			(

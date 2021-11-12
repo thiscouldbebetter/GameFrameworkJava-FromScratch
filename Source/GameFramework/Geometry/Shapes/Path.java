@@ -1,6 +1,8 @@
 
 package GameFramework.Geometry.Shapes;
 
+import java.util.*;
+
 import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Helpers.*;
@@ -18,7 +20,16 @@ public class Path implements Transformable<Path>
 
 	public Path clone()
 	{
-		return new Path(ArrayHelper.clone(this.points) );
+		return new Path
+		(
+			ArrayHelper.clone
+			(
+				Arrays.asList(this.points)
+			).toArray
+			(
+				new Coords[] {}
+			)
+		);
 	}
 
 	public Path overwriteWith(Path other)

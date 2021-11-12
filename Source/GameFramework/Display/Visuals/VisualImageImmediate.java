@@ -6,7 +6,7 @@ import GameFramework.Geometry.*;
 import GameFramework.Geometry.Transforms.*;
 import GameFramework.Model.*;
 
-public class VisualImageImmediate implements VisualImage
+public class VisualImageImmediate implements VisualImage<VisualImageImmediate>
 {
 	public Image2 _image;
 	public boolean isScaled;
