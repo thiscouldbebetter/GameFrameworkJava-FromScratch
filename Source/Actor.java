@@ -10,6 +10,10 @@ public class Actor implements EntityProperty
 
 	// EntityProperty.
 
+	public static String nameStatic() { return "Actor"; }
+
+	public String name() { return Actor.nameStatic(); }
+
 	public void updateForTimerTick
 	(
 		Universe universe, World world, Place place, Entity entity

@@ -24,28 +24,31 @@ public class GameFrameworkDemo
 		(
 			"Player",
 
-			new Actor
-			(
-				new ActivityUserInputAccept()
-			),
-
-			new Drawable
-			(
-				new VisualRectangle
+			new EntityProperty[]
+			{
+				new Actor
 				(
-					Color.Instances().Blue.name,
-					new Coords(40, 30) // size
-				)
-			),
+					new ActivityUserInputAccept()
+				),
 
-			new Locatable
-			(
-				new Location
+				new Drawable
 				(
-					displaySize.clone().half(), // pos
-					new Coords(0, 0) // vel
+					new VisualRectangle
+					(
+						Color.Instances().Blue.name,
+						new Coords(40, 30) // size
+					)
+				),
+
+				new Locatable
+				(
+					new Location
+					(
+						displaySize.clone().half(), // pos
+						new Coords(0, 0) // vel
+					)
 				)
-			)
+			}
 		);
 
 		var place0 = new Place

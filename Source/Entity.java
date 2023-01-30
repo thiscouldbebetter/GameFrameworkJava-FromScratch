@@ -3,32 +3,16 @@ public class Entity
 {
 	public String name;
 
-	public Actor _actor;
-	public Drawable _drawable;
-	public Locatable _locatable;
-
 	public EntityProperty[] properties;
 
 	public Entity
 	(
 		String name,
-		Actor actor,
-		Drawable drawable,
-		Locatable locatable
+		EntityProperty[] properties
 	)
 	{
 		this.name = name;
-
-		this._actor = actor;
-		this._drawable = drawable;
-		this._locatable = locatable;
-
-		this.properties = new EntityProperty[]
-		{
-			this._actor,
-			this._drawable,
-			this._locatable
-		};
+		this.properties = properties;
 	}
 
 	public void updateForTimerTick
@@ -45,18 +29,36 @@ public class Entity
 
 	// EntityProperties.
 
+	private EntityProperty propertyByName(String propertyNameToFind)
+	{
+		EntityProperty returnValue = null; 
+
+		for (var i = 0; i < this.properties.length; i++)
+		{
+			var property = this.properties[i];
+			var propertyName = property.name();
+			if (propertyName == propertyNameToFind)
+			{
+				returnValue = property;
+				break;
+			}
+		}
+
+		return returnValue;
+	}
+
 	public Actor actor()
 	{
-		return this._actor;
+		return (Actor)this.propertyByName(Actor.nameStatic());
 	}
 
 	public Drawable drawable()
 	{
-		return this._drawable;
+		return (Drawable)this.propertyByName(Drawable.nameStatic());
 	}
 
 	public Locatable locatable()
 	{
-		return this._locatable;
+		return (Locatable)this.propertyByName(Locatable.nameStatic());
 	}
 }

@@ -8,6 +8,12 @@ public class Locatable implements EntityProperty
 		this.loc = loc;
 	}
 
+	// EntityProperty
+
+	public static String nameStatic() { return "Locatable"; }
+
+	public String name() { return Locatable.nameStatic(); }
+
 	public void updateForTimerTick
 	(
 		Universe universe, World world, Place place, Entity entity

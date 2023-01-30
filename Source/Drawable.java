@@ -8,6 +8,12 @@ public class Drawable implements EntityProperty
 		this.visual = visual;
 	}
 
+	// EntityProperty.
+
+	public static String nameStatic() { return "Drawable"; }
+	
+	public String name() { return Drawable.nameStatic(); }
+
 	public void updateForTimerTick
 	(
 		Universe universe, World world, Place place, Entity entity
