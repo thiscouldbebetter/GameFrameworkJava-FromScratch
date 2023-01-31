@@ -1,4 +1,6 @@
-package Main;
+package Model;
+
+import Main.*;
 
 public interface EntityProperty
 {

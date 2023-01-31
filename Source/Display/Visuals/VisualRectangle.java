@@ -1,6 +1,8 @@
-package Main;
+package Display.Visuals;
 
+import Display.*;
 import Geometry.*;
+import Model.*;
 
 public class VisualRectangle implements Visual
 {

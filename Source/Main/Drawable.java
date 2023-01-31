@@ -1,5 +1,8 @@
 package Main;
 
+import Display.*;
+import Model.*;
+
 public class Drawable implements EntityProperty
 {
 	public Visual visual;

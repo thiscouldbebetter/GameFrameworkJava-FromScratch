@@ -1,4 +1,4 @@
-package Main;
+package Display;
 
 public class Color
 {
@@ -25,14 +25,4 @@ public class Color
 	{
 		return Color.Instances().Blue; // todo
 	}
-}
-
-class Color_Instances
-{
-	public static Color Blue = new Color("Blue", java.awt.Color.BLUE);
-
-	public static Color[] _All = new Color[]
-	{
-		Blue
-	};
 }

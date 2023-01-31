@@ -1,5 +1,7 @@
 package Main;
 
+import Model.*;
+
 public class Actor implements EntityProperty
 {
 	public Activity activity;

@@ -1,6 +1,7 @@
 package Main;
 
 import Geometry.*;
+import Model.*;
 
 import java.awt.event.*;
 

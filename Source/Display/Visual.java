@@ -1,4 +1,6 @@
-package Main;
+package Display;
+
+import Model.*;
 
 public interface Visual
 {

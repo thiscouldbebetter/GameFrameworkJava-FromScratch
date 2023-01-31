@@ -1,4 +1,6 @@
-package Main;
+package Utility;
+
+import Model.*;
 
 public class TimerHelper
 {

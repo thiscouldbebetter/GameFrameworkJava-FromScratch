@@ -1,6 +1,7 @@
 package Main;
 
 import Geometry.*;
+import Model.*;
 
 public class Locatable implements EntityProperty
 {

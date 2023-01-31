@@ -1,4 +1,10 @@
-package Main;
+package Model;
+
+import Display.*;
+import Input.*;
+import Main.*;
+import Media.*;
+import Utility.*;
 
 public class Universe
 {

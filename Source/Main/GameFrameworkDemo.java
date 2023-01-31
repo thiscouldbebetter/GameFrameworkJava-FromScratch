@@ -1,6 +1,12 @@
 package Main;
 
+import Display.*;
+import Display.Visuals.*;
 import Geometry.*;
+import Input.*;
+import Media.*;
+import Model.*;
+import Utility.*;
 
 public class GameFrameworkDemo
 {

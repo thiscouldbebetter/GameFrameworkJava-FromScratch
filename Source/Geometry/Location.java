@@ -1,6 +1,4 @@
-package Main;
-
-import Geometry.*;
+package Geometry;
 
 public class Location
 {

@@ -1,6 +1,8 @@
-package Main;
+package Display;
 
 import Geometry.*;
+import Main.*;
+import Model.*;
 
 import java.awt.*;
 import java.awt.image.*;

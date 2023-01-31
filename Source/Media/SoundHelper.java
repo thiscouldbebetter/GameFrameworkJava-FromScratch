@@ -1,4 +1,6 @@
-package Main;
+package Media;
+
+import Model.*;
 
 public class SoundHelper
 {
