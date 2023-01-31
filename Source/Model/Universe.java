@@ -13,8 +13,10 @@ public class Universe
 	public PlatformHelper platformHelper;
 	public SoundHelper soundHelper;
 	public TimerHelper timerHelper;
-
 	public World world;
+
+	public Venue venueCurrent;
+	public Venue venueNext;
 
 	public Universe
 	(
@@ -37,6 +39,9 @@ public class Universe
 
 	public void initialize()
 	{
+		var venueInitial = this.world.toVenue(this);
+		this.venueTransitionTo(venueInitial);
+
 		this.platformHelper.initialize();
 
 		this.display.initialize(this);
@@ -48,10 +53,42 @@ public class Universe
 
 	public void updateForTimerTick()
 	{
+		/*
 		this.display.clear();
 
 		this.world.updateForTimerTick(this);
 
 		this.display.updateForTimerTick(this);
+		*/
+
+		this.inputHelper.updateForTimerTick(this);
+
+		if (this.venueNext != null)
+		{
+			if (this.venueCurrent != null)
+			{
+				this.venueCurrent.finalize(this);
+			}
+
+			this.venueCurrent = this.venueNext;
+			this.venueNext = null;
+
+			this.venueCurrent.initialize(this);
+		}
+		this.venueCurrent.updateForTimerTick(this);
+
+		//this.displayRecorder.updateForTimerTick(this);
 	}
+
+	public void venueTransitionTo(Venue venueToTransitionTo)
+	{
+		this.venueNext = venueToTransitionTo;
+		/*
+		this.controlBuilder.venueTransitionalFromTo
+		(
+			this.venueCurrent, venueToTransitionTo
+		);
+		*/
+	}
+
 }

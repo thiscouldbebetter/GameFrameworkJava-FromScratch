@@ -15,6 +15,16 @@ public class World
 		this.placeCurrent = this.places[0];
 	}
 
+	public void draw(Universe universe)
+	{
+		this.placeCurrent.draw(universe, this);
+	}
+
+	public Venue toVenue(Universe universe)
+	{
+		return new VenueWorld(this);
+	}
+
 	public void updateForTimerTick(Universe universe)
 	{
 		this.placeCurrent.updateForTimerTick(universe, this);

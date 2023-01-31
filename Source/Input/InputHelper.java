@@ -20,6 +20,11 @@ public class InputHelper extends JComponent implements KeyListener, Platformable
 		this.keyCodesPressed = new ArrayList<Integer>();
 	}
 
+	public void updateForTimerTick(Universe universe)
+	{
+		// todo
+	}
+
 	// KeyListener.
 
 	public void keyPressed(KeyEvent e)
