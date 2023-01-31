@@ -1,3 +1,7 @@
+package Main;
+
+import Geometry.*;
+
 import java.awt.event.*;
 
 public class ActivityUserInputAccept implements Activity

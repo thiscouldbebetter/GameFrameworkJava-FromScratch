@@ -1,3 +1,7 @@
+package Main;
+
+import Geometry.*;
+
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;

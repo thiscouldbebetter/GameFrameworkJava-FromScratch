@@ -1,4 +1,4 @@
 #! /bin/sh 
 
-javac -cp . GameFrameworkDemo.java
-java GameFrameworkDemo
+javac Main/GameFrameworkDemo.java
+java Main/GameFrameworkDemo

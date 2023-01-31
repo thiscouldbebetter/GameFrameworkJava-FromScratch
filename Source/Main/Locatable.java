@@ -1,3 +1,6 @@
+package Main;
+
+import Geometry.*;
 
 public class Locatable implements EntityProperty
 {

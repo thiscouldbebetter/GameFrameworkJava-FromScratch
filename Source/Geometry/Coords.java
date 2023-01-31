@@ -1,3 +1,5 @@
+package Geometry;
+
 import java.awt.*;
 
 public class Coords

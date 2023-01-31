@@ -1,3 +1,6 @@
+package Main;
+
+import Geometry.*;
 
 public class VisualRectangle implements Visual
 {
