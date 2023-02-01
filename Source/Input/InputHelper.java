@@ -1,7 +1,7 @@
 package Input;
 
-import Main.*;
 import Model.*;
+import Utility.*;
 
 import java.awt.*;
 import java.awt.event.*;

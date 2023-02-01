@@ -8,4 +8,9 @@ public class SoundHelper
 	{
 		// todo
 	}
+
+	public void soundsAllStop(Universe universe)
+	{
+		// todo
+	}
 }

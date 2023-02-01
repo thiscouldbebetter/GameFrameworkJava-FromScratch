@@ -6,11 +6,13 @@ public class Coords
 {
 	public double x;
 	public double y;
+	public double z;
 
-	public Coords(double x, double y)
+	public Coords(double x, double y, double z)
 	{
 		this.x = x;
 		this.y = y;
+		this.z = z;
 	}
 
 	public static Coords create()
@@ -20,18 +22,19 @@ public class Coords
 
 	public static Coords fromXY(double x, double y)
 	{
-		return new Coords(x, y);
+		return new Coords(x, y, 0);
 	}
 
 	public static Coords zeroes()
 	{
-		return new Coords(0, 0);
+		return new Coords(0, 0, 0);
 	}
 
 	public Coords add(Coords other)
 	{
 		this.x += other.x;
 		this.y += other.y;
+		this.z += other.z;
 		return this;
 	}
 
@@ -39,6 +42,15 @@ public class Coords
 	{
 		this.x = 0;
 		this.y = 0;
+		this.z = 0;
+		return this;
+	}
+
+	public Coords divide(Coords other)
+	{
+		this.x /= other.x;
+		this.y /= other.y;
+		this.z /= other.z;
 		return this;
 	}
 
@@ -46,6 +58,7 @@ public class Coords
 	{
 		this.x /= scalar;
 		this.y /= scalar;
+		this.z /= scalar;
 		return this;
 	}
 
@@ -58,6 +71,7 @@ public class Coords
 	{
 		this.x *= scalar;
 		this.y *= scalar;
+		this.z *= scalar;
 		return this;
 	}
 
@@ -65,6 +79,7 @@ public class Coords
 	{
 		this.x -= other.x;
 		this.y -= other.y;
+		this.z -= other.z;
 		return this;
 	}
 
@@ -77,13 +92,14 @@ public class Coords
 
 	public Coords clone()
 	{
-		return new Coords(this.x, this.y);
+		return new Coords(this.x, this.y, this.z);
 	}
 
 	public Coords overwriteWith(Coords other)
 	{
 		this.x = other.x;
 		this.y = other.y;
+		this.z = other.z;
 		return this;
 	}
 }

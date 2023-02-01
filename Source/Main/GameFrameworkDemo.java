@@ -18,8 +18,8 @@ public class GameFrameworkDemo
 
 	public void run()
 	{
-		var displaySize = new Coords(400, 300);
-		var display = new Display(displaySize);
+		var displaySize = Coords.fromXY(400, 300);
+		var display = new Display2D(displaySize);
 
 		var inputHelper = new InputHelper();
 
@@ -59,7 +59,7 @@ public class GameFrameworkDemo
 					new Location
 					(
 						displaySize.clone().half(), // pos
-						new Coords(0, 0) // vel
+						Coords.zeroes() // vel
 					)
 				)
 			}

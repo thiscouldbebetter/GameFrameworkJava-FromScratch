@@ -22,19 +22,19 @@ public class ActivityUserInputAccept implements Activity
 
 			if (keyCode == KeyEvent.VK_A)
 			{
-				directionToAccelerate = new Coords(-1, 0);
+				directionToAccelerate = Coords.fromXY(-1, 0);
 			}
 			else if (keyCode == KeyEvent.VK_D)
 			{
-				directionToAccelerate = new Coords(1, 0);
+				directionToAccelerate = Coords.fromXY(1, 0);
 			}
 			else if (keyCode == KeyEvent.VK_S)
 			{
-				directionToAccelerate = new Coords(0, 1);
+				directionToAccelerate = Coords.fromXY(0, 1);
 			}
 			else if (keyCode == KeyEvent.VK_W)
 			{
-				directionToAccelerate = new Coords(0, -1);
+				directionToAccelerate = Coords.fromXY(0, -1);
 			}
 
 			if (directionToAccelerate != null)

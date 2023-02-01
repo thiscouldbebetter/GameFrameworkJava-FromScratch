@@ -1,5 +1,6 @@
 package Model;
 
+import Controls.*;
 import Display.*;
 import Input.*;
 import Main.*;
@@ -14,6 +15,8 @@ public class Universe
 	public SoundHelper soundHelper;
 	public TimerHelper timerHelper;
 	public World world;
+
+	public ControlBuilder controlBuilder;
 
 	public Venue venueCurrent;
 	public Venue venueNext;
@@ -33,8 +36,9 @@ public class Universe
 		this.platformHelper = platformHelper;
 		this.soundHelper = soundHelper;
 		this.timerHelper = timerHelper;
-
 		this.world = world;
+
+		this.controlBuilder = ControlBuilder._default();
 	}
 
 	public void initialize()

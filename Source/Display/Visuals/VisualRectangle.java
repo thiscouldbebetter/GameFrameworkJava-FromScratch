@@ -2,9 +2,10 @@ package Display.Visuals;
 
 import Display.*;
 import Geometry.*;
+import Geometry.Transforms.*;
 import Model.*;
 
-public class VisualRectangle implements Visual //Visual<VisualRectangle>
+public class VisualRectangle implements Visual<VisualRectangle>
 {
 	public Coords size;
 	public Color colorFill;
@@ -80,7 +81,7 @@ public class VisualRectangle implements Visual //Visual<VisualRectangle>
 
 		display.drawRectangle
 		(
-			drawPos, this.size, this.colorFill, this.colorBorder
+			drawPos, this.size, this.colorFill, this.colorBorder, false
 		);
 	}
 
@@ -98,10 +99,10 @@ public class VisualRectangle implements Visual //Visual<VisualRectangle>
 
 	// Transformable.
 
-	/*
-	public VisualRectangle transform(TransformBase transformToApply)
+	public Coords[] coordsGroupToTranslate() { return null; }
+
+	public VisualRectangle transform(Transform transformToApply)
 	{
 		return this; // todo
 	}
-	*/
 }

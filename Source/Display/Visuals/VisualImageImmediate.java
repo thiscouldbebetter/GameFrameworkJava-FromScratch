@@ -2,10 +2,11 @@ package Display.Visuals;
 
 import Display.*;
 import Geometry.*;
+import Geometry.Transforms.*;
 import Media.*;
 import Model.*;
 
-public class VisualImageImmediate implements Visual
+public class VisualImageImmediate implements VisualImage<VisualImageImmediate>
 {
 	private Image2 _image;
 	public boolean isScaled;
@@ -76,10 +77,7 @@ public class VisualImageImmediate implements Visual
 
 	// Transformable.
 
-	/*
-	private VisualImageImmediate transform(TransformBase transformToApply)
-	{
-		return this; // todo
-	}
-	*/
+	public Coords[] coordsGroupToTranslate() { return null; }
+
+	public VisualImageImmediate transform(Transform t) { return this; }
 }
