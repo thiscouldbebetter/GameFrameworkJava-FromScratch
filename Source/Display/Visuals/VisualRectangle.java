@@ -71,7 +71,7 @@ public class VisualRectangle implements Visual //Visual<VisualRectangle>
 		var drawPos = this._drawPos.overwriteWith
 		(
 			entity.locatable().loc.pos
-		)
+		);
 
 		if (this.isCentered)
 		{

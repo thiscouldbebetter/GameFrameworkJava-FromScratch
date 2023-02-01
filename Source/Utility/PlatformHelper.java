@@ -1,5 +1,6 @@
 package Utility;
 
+import Geometry.*;
 import Main.*;
 
 import java.awt.*;
@@ -9,6 +10,14 @@ import javax.swing.*;
 public class PlatformHelper
 {
 	private JFrame frame;
+
+	public Coords imageSizeGet(Image image)
+	{
+		return Coords.fromXY
+		(
+			image.getWidth(this.frame), image.getHeight(this.frame)
+		);
+	}
 
 	public void initialize()
 	{

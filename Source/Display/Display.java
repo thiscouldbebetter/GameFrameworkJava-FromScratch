@@ -2,6 +2,7 @@ package Display;
 
 import Geometry.*;
 import Main.*;
+import Media.*;
 import Model.*;
 
 import java.awt.*;
@@ -73,6 +74,16 @@ public class Display extends JPanel implements Platformable
 	}
 
 	// Draw methods.
+
+	public void drawImage(Image2 image, Coords pos)
+	{
+		this.graphics.drawImage(image.systemImage, (int)pos.x, (int)pos.y, this);
+	}
+
+	public void drawImageScaled(Image2 image, Coords pos, Coords size)
+	{
+		this.drawImage(image, pos); // todo - Scaling.
+	}
 
 	public void drawRectangle(Coords pos, Coords size, Color colorFill, Color colorBorder)
 	{

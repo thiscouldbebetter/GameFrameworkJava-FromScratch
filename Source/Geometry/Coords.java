@@ -35,6 +35,13 @@ public class Coords
 		return this;
 	}
 
+	public Coords clear()
+	{
+		this.x = 0;
+		this.y = 0;
+		return this;
+	}
+
 	public Coords divideScalar(double scalar)
 	{
 		this.x /= scalar;

@@ -29,6 +29,15 @@ public class GameFrameworkDemo
 
 		var timerHelper = new TimerHelper(20); // ticksPerSecond
 
+		var visualImage = Image2.fromSourcePath
+		(
+			"../Content/Images/Friendly.png"
+		).load(platformHelper);
+
+		var visual2 = VisualImageImmediate.fromImage(visualImage);
+
+		var visual = VisualRectangle.fromSize(Coords.fromXY(40, 30) );
+
 		var entity0 = new Entity
 		(
 			"Player",
@@ -42,10 +51,7 @@ public class GameFrameworkDemo
 
 				new Drawable
 				(
-					VisualRectangle.fromSize
-					(
-						Coords.fromXY(40, 30) // size
-					)
+					visual2
 				),
 
 				new Locatable
