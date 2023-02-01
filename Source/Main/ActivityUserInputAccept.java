@@ -7,11 +7,11 @@ import java.awt.event.*;
 
 public class ActivityUserInputAccept implements Activity
 {
-	public void perform
-	(
-		Universe universe, World world, Place place, Entity entity
-	)
+	public void perform(UniverseWorldPlaceEntities uwpe)
 	{
+		var universe = uwpe.universe;
+		var entity = uwpe.entity;
+
 		var inputHelper = universe.inputHelper;
 		var keyCodesPressed = inputHelper.keyCodesPressed;
 		for (var i = 0; i < keyCodesPressed.size(); i++)

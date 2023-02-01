@@ -29,16 +29,6 @@ public class Display extends JPanel implements Platformable
 		);
 	}
 
-	public void drawRectangle(Coords pos, Coords size)
-	{
-		this.graphics.setColor(java.awt.Color.BLUE);
-
-		this.graphics.drawRect
-		(
-			(int)pos.x, (int)pos.y, (int)size.x, (int)size.y
-		);
-	}
-
 	public void paintComponent(Graphics graphics)
 	{
 		super.paintComponent(graphics);
@@ -81,4 +71,30 @@ public class Display extends JPanel implements Platformable
 	{
 		return this;
 	}
+
+	// Draw methods.
+
+	public void drawRectangle(Coords pos, Coords size, Color colorFill, Color colorBorder)
+	{
+		if (colorFill != null)
+		{
+			this.graphics.setColor(colorFill.systemColor);
+
+			this.graphics.fillRect
+			(
+				(int)pos.x, (int)pos.y, (int)size.x, (int)size.y
+			);
+		}
+
+		if (colorBorder != null)
+		{
+			this.graphics.setColor(colorBorder.systemColor);
+
+			this.graphics.drawRect
+			(
+				(int)pos.x, (int)pos.y, (int)size.x, (int)size.y
+			);
+		}
+	}
+
 }

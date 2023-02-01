@@ -18,11 +18,8 @@ public class Drawable implements EntityProperty
 	
 	public String name() { return Drawable.nameStatic(); }
 
-	public void updateForTimerTick
-	(
-		Universe universe, World world, Place place, Entity entity
-	)
+	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe)
 	{
-		this.visual.draw(universe, world, place, entity);
+		this.visual.draw(uwpe, uwpe.universe.display);
 	}
 }

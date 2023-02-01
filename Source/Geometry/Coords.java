@@ -13,6 +13,16 @@ public class Coords
 		this.y = y;
 	}
 
+	public static Coords create()
+	{
+		return Coords.zeroes();
+	}
+
+	public static Coords fromXY(double x, double y)
+	{
+		return new Coords(x, y);
+	}
+
 	public static Coords zeroes()
 	{
 		return new Coords(0, 0);
@@ -44,6 +54,13 @@ public class Coords
 		return this;
 	}
 
+	public Coords subtract(Coords other)
+	{
+		this.x -= other.x;
+		this.y -= other.y;
+		return this;
+	}
+
 	public Dimension toDimension()
 	{
 		return new Dimension((int)this.x, (int)this.y);
@@ -54,5 +71,12 @@ public class Coords
 	public Coords clone()
 	{
 		return new Coords(this.x, this.y);
+	}
+
+	public Coords overwriteWith(Coords other)
+	{
+		this.x = other.x;
+		this.y = other.y;
+		return this;
 	}
 }

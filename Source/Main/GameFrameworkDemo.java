@@ -42,10 +42,9 @@ public class GameFrameworkDemo
 
 				new Drawable
 				(
-					new VisualRectangle
+					VisualRectangle.fromSize
 					(
-						Color.Instances().Blue.name,
-						new Coords(40, 30) // size
+						Coords.fromXY(40, 30) // size
 					)
 				),
 

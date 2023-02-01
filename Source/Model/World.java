@@ -17,7 +17,10 @@ public class World
 
 	public void draw(Universe universe)
 	{
-		this.placeCurrent.draw(universe, this);
+		if (this.placeCurrent != null)
+		{
+			this.placeCurrent.draw(universe, this, universe.display);
+		}
 	}
 
 	public Venue toVenue(Universe universe)

@@ -18,15 +18,14 @@ public class Entity
 		this.properties = properties;
 	}
 
-	public void updateForTimerTick
-	(
-		Universe universe, World world, Place place
-	)
+	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe)
 	{
+		uwpe.entity = this;
+
 		for (var i = 0; i < this.properties.length; i++)
 		{
 			var property = this.properties[i];
-			property.updateForTimerTick(universe, world, place, this);
+			property.updateForTimerTick(uwpe);
 		}
 	}
 

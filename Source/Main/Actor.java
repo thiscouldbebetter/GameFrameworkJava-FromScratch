@@ -17,11 +17,8 @@ public class Actor implements EntityProperty
 
 	public String name() { return Actor.nameStatic(); }
 
-	public void updateForTimerTick
-	(
-		Universe universe, World world, Place place, Entity entity
-	)
+	public void updateForTimerTick(UniverseWorldPlaceEntities uwpe)
 	{
-		this.activity.perform(universe, world, place, entity);
+		this.activity.perform(uwpe);
 	}
 }

@@ -4,25 +4,104 @@ import Display.*;
 import Geometry.*;
 import Model.*;
 
-public class VisualRectangle implements Visual
+public class VisualRectangle implements Visual //Visual<VisualRectangle>
 {
-	public String colorName;
 	public Coords size;
+	public Color colorFill;
+	public Color colorBorder;
+	public boolean isCentered;
 
-	public VisualRectangle(String colorName, Coords size)
-	{
-		this.colorName = colorName;
-		this.size = size;
-	}
+	private Coords sizeHalf;
 
-	public void draw
+	private Coords _drawPos;
+
+	public VisualRectangle
 	(
-		Universe universe, World world, Place place, Entity entity
+		Coords size,
+		Color colorFill,
+		Color colorBorder,
+		boolean isCentered
 	)
 	{
-		var pos = entity.locatable().loc.pos;
+		this.size = size;
+		this.colorFill = colorFill;
+		this.colorBorder = colorBorder;
+		this.isCentered = isCentered;
 
-		var display = universe.display;
-		display.drawRectangle(pos, this.size);
+		this.sizeHalf = this.size.clone().half();
+
+		this._drawPos = Coords.create();
 	}
+
+	public static VisualRectangle default_()
+	{
+		// For rapid prototyping.
+		return VisualRectangle.fromColorFill(Color.Instances().Cyan);
+	}
+
+	public static VisualRectangle fromColorFill(Color colorFill)
+	{
+		// For rapid prototyping.
+		return new VisualRectangle
+		(
+			Coords.fromXY(1, 1).multiplyScalar(10), null, colorFill, true
+		);
+	}
+
+	public static VisualRectangle fromSize(Coords size)
+	{
+		// For rapid prototyping.
+		return new VisualRectangle
+		(
+			size, null, Color.Instances().Cyan, true
+		);
+	}
+
+	public static VisualRectangle fromSizeAndColorFill
+	(
+		Coords size, Color colorFill
+	)
+	{
+		return new VisualRectangle(size, colorFill, null, true);
+	}
+
+	public void draw(UniverseWorldPlaceEntities uwpe, Display display)
+	{
+		var entity = uwpe.entity;
+		var drawPos = this._drawPos.overwriteWith
+		(
+			entity.locatable().loc.pos
+		)
+
+		if (this.isCentered)
+		{
+			drawPos.subtract(this.sizeHalf);
+		}
+
+		display.drawRectangle
+		(
+			drawPos, this.size, this.colorFill, this.colorBorder
+		);
+	}
+
+	// Clonable.
+
+	public VisualRectangle clone()
+	{
+		return this; // todo
+	}
+
+	public VisualRectangle overwriteWith(VisualRectangle other)
+	{
+		return this; // todo
+	}
+
+	// Transformable.
+
+	/*
+	public VisualRectangle transform(TransformBase transformToApply)
+	{
+		return this; // todo
+	}
+	*/
 }

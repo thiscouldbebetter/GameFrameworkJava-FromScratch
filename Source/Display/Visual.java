@@ -4,8 +4,5 @@ import Model.*;
 
 public interface Visual
 {
-	void draw
-	(
-		Universe universe, World world, Place place, Entity entity
-	);
+	void draw(UniverseWorldPlaceEntities uwpe, Display display);
 }
