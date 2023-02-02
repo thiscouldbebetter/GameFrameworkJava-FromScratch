@@ -25,6 +25,7 @@ public class ArrayHelper
 		return list;
 	}
 
+	/*
 	public static <U extends T, T> List<U> addManyWithCast
 	(
 		List<U> list, List<T> elements
@@ -38,6 +39,7 @@ public class ArrayHelper
 		}
 		return list;
 	}
+	*/
 
 	public static <K,E> HashMap<K,E> addLookups
 	(

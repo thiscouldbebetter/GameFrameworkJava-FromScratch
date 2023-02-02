@@ -65,7 +65,7 @@ public class Color_Instances
 		this.Pink = new Color("Pink", "p", new double[] { 1, 0.5, 0.5, 1 } );
 		this.Red = new Color("Red", "r", new double[] { 1, 0, 0, 1 } );
 		this.RedDark = new Color("RedDark", "R", new double[] { .5, 0, 0, 1 } );
-		this.Tan = null; // todo - Color.fromSystemColor("Tan");
+		// this.Tan = null; // todo - Color.fromSystemColor("Tan");
 		this.Violet = new Color("Violet", "v", new double[] { 1, 0, 1, 1 } );
 		this.White = new Color("White", "w", new double[] { 1, 1, 1, 1 } );
 		this.Yellow = new Color("Yellow", "y", new double[] { 1, 1, 0, 1 } );
@@ -96,14 +96,16 @@ public class Color_Instances
 			this.Pink,
 			this.Red,
 			this.RedDark,
-			this.Tan,
+			//this.Tan,
 			this.Violet,
 			this.White,
 			this.Yellow,
 			this.YellowDark,
 		};
 
-		this._AllByCode = ArrayHelper.addLookups(this._All, (Color x) -> x.code);
+		this._AllByCode =
+			ArrayHelper.addLookups(this._All, (Color x) -> x.code);
+
 		this._AllByName = ArrayHelper.addLookupsByName(this._All);
 	}
 }
