@@ -56,10 +56,9 @@ public class GameFrameworkDemo
 
 				new Locatable
 				(
-					new Disposition
+					Disposition.fromPos
 					(
-						displaySize.clone().half(), // pos
-						Coords.zeroes() // vel
+						displaySize.clone().half()
 					)
 				)
 			}
@@ -74,9 +73,12 @@ public class GameFrameworkDemo
 			}
 		);
 
+		var worldDefn = new WorldDefn();
+
 		var world = new World
 		(
 			"World0",
+			worldDefn,
 			new Place[]
 			{
 				place0

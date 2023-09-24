@@ -9,7 +9,7 @@ import Helpers.*;
 import Input.*;
 import Media.*;
 import Model.*;
-// import Model.Actors.*;
+import Model.Actors.*;
 // import Model.Places.*;
 // import Profiles.*;
 // import Storage.*;
@@ -160,6 +160,8 @@ public class ControlBuilder
 
 			for (var i = 0; i < numberOfOptions; i++)
 			{
+				var optionConsumer = optionConsumers.get(i);
+
 				var button = ControlButton.from9
 				(
 					"buttonOption" + i,
@@ -173,8 +175,8 @@ public class ControlBuilder
 					optionNames[i],
 					fontHeight,
 					true, // hasBorder
-					DataBinding.fromTrue(), // isEnabled
-					() -> optionConsumers.get(i).accept(null),
+					DataBinding.fromGet(x -> true), // isEnabled
+					() -> optionConsumer.accept(null), // click
 					universe
 				);
 

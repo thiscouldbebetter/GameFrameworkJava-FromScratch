@@ -30,6 +30,11 @@ public class Place
 		}
 	}
 
+	public void entitySpawn(UniverseWorldPlaceEntities uwpe)
+	{
+		// todo
+	}
+
 	public void updateForTimerTick(Universe universe, World world)
 	{
 		var uwpe = UniverseWorldPlaceEntities.fromUniverseWorldAndPlace

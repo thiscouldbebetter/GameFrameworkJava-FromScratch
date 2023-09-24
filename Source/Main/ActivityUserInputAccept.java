@@ -47,4 +47,9 @@ public class ActivityUserInputAccept implements Activity
 			}
 		}
 	}
+
+	public Activity clone()
+	{
+		return this;
+	}
 }

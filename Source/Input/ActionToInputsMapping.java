@@ -57,7 +57,7 @@ public class ActionToInputsMapping
 	) 
 	{
 		this.actionName = other.actionName;
-		this.inputNames = other.inputNames.slice();
+		this.inputNames = ArrayHelper.clone(other.inputNames);
 		this.inactivateInputWhenActionPerformed =
 			other.inactivateInputWhenActionPerformed;
 		return this;

@@ -12,6 +12,13 @@ public class Drawable implements EntityProperty
 		this.visual = visual;
 	}
 
+	// Clonable.
+
+	public EntityProperty cloneAsEntityProperty()
+	{
+		return this; // todo
+	}
+
 	// EntityProperty.
 
 	public static String nameStatic() { return "Drawable"; }

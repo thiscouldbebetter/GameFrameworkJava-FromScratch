@@ -135,7 +135,7 @@ public class Display2D extends JPanel implements Display
 		}
 	}
 
-	void drawText
+	public void drawText
 	(
 		String text, double fontHeightInPixels, Coords pos,
 		Color colorFill, Color colorOutline, boolean areColorsReversed,

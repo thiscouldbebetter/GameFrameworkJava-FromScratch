@@ -204,6 +204,24 @@ public class ArrayHelper
 		return returnValues;
 	}
 
+	public static String[] clone(String[] arrayToClone)
+	{
+		String[] returnValues = null;
+
+		if (arrayToClone != null)
+		{
+			returnValues = new String[arrayToClone.length];
+
+			for (var i = 0; i < arrayToClone.length; i++)
+			{
+				var element = arrayToClone[i];
+				returnValues[i] = element;
+			}
+		}
+
+		return returnValues;
+	}
+
 	public static <T extends Clonable<T>> List<T> clone(T[] arrayToClone)
 	{
 		List<T> returnValuesAsList = null;

@@ -46,7 +46,7 @@ public class ControlButton<TContext> extends ControlBase
 		this._sizeHalf = Coords.create();
 	}
 
-	public static <TContext> ControlButton from8
+	public static <TContext> ControlButton<TContext> from8
 	(
 		String name,
 		Coords pos,
@@ -58,14 +58,14 @@ public class ControlButton<TContext> extends ControlBase
 		Runnable click
 	)
 	{
-		return new ControlButton
+		return new ControlButton<TContext>
 		(
 			name, pos, size, text, fontHeightInPixels, hasBorder,
 			isEnabled, click, null, false
 		);
 	}
 
-	public static <TContext> ControlButton from9
+	public static <TContext> ControlButton<TContext> from9
 	(
 		String name,
 		Coords pos,
@@ -78,7 +78,7 @@ public class ControlButton<TContext> extends ControlBase
 		Object context
 	)
 	{
-		return new ControlButton
+		return new ControlButton<TContext>
 		(
 			name, pos, size, text, fontHeightInPixels, hasBorder,
 			isEnabled, click, context, false
@@ -116,6 +116,7 @@ public class ControlButton<TContext> extends ControlBase
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
 		this.fontHeightInPixels *= scaleFactor.y;
+		return this;
 	}
 
 	// drawable

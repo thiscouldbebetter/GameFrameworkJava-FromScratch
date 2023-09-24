@@ -85,6 +85,7 @@ public class DataBinding<TContext,TValue>
 	{
 		if (this._set == null)
 		{
+			// todo - Causes lint warning.  Probably should refactor so _set is never null.
 			this.context = (TContext)value;
 		}
 		else

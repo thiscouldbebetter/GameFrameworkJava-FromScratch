@@ -30,6 +30,16 @@ public class Coords
 		return new Coords(0, 0, 0);
 	}
 
+	private static Coords_Instances _instances;
+	public static Coords_Instances Instances()
+	{
+		if (Coords._instances == null)
+		{
+			Coords._instances = new Coords_Instances();
+		}
+		return Coords._instances;
+	}
+
 	public Coords add(Coords other)
 	{
 		this.x += other.x;
@@ -52,6 +62,39 @@ public class Coords
 		return this;
 	}
 
+	public Coords crossProduct(Coords other)
+	{
+		return this.overwriteWithDimensions
+		(
+			this.y * other.z - this.z * other.y,
+			this.z * other.x - this.x * other.z,
+			this.x * other.y - this.y * other.x
+		);
+	}
+
+	public double dimensionGet(int dimensionIndex)
+	{
+		double returnValue;
+		if (dimensionIndex == 0)
+		{
+			returnValue = this.x;
+		}
+		else if (dimensionIndex == 1)
+		{
+			returnValue = this.y;
+		}
+		else if (dimensionIndex == 2)
+		{
+			returnValue = this.z;
+		}
+		else
+		{
+			returnValue = 0; // hack
+			// throw new Exception("Invalid dimensionIndex: " + dimensionIndex);
+		}
+		return returnValue;
+	}
+
 	public Coords divide(Coords other)
 	{
 		this.x /= other.x;
@@ -66,6 +109,11 @@ public class Coords
 		this.y /= scalar;
 		this.z /= scalar;
 		return this;
+	}
+
+	public double dotProduct(Coords other)
+	{
+		return this.x * other.x + this.y * other.y + this.z * other.z;
 	}
 
 	public Coords half()
@@ -96,6 +144,11 @@ public class Coords
 		return this;
 	}
 
+	public double magnitude()
+	{
+		return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+	}
+
 	public Coords multiplyScalar(double scalar)
 	{
 		this.x *= scalar;
@@ -104,11 +157,29 @@ public class Coords
 		return this;
 	}
 
-	public Coords overwriteWith(Coords other)
+	public Coords normalize()
 	{
-		this.x = other.x;
-		this.y = other.y;
-		this.z = other.z;
+		var magnitude = this.magnitude();
+		if (magnitude > 0)
+		{
+			this.divideScalar(magnitude);
+		}
+		return this;
+	}
+
+	public Coords overwriteWithDimensions(double x, double y, double z)
+	{
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		return this;
+	}
+
+	public Coords round()
+	{
+		this.x = Math.round(this.x);
+		this.y = Math.round(this.y);
+		this.z = Math.round(this.z);
 		return this;
 	}
 
@@ -123,6 +194,16 @@ public class Coords
 	public Dimension toDimension()
 	{
 		return new Dimension((int)this.x, (int)this.y);
+	}
+
+	public Coords trimToMagnitudeMax(double magnitudeMax)
+	{
+		var magnitude = this.magnitude();
+		if (magnitude > magnitudeMax)
+		{
+			this.divideScalar(magnitude).multiplyScalar(magnitudeMax);
+		}
+		return this;
 	}
 
 	// Clonable.

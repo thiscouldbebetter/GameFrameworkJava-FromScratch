@@ -39,13 +39,13 @@ public class ControlLabel<TContext> extends ControlBase
 		DataBinding<TContext,String> text
 	)
 	{
-		return new ControlLabel
+		return new ControlLabel<TContext>
 		(
 			null, //name
 			pos,
 			null, // size
 			false, // isTextCentered
-			DataBinding.fromContext(text),
+			text,
 			10.0 // fontHeightInPixels
 		);
 	}
@@ -59,7 +59,7 @@ public class ControlLabel<TContext> extends ControlBase
 		DataBinding<TContext,String> text
 	)
 	{
-		return new ControlLabel
+		return new ControlLabel<TContext>
 		(
 			name,
 			pos,
@@ -90,6 +90,7 @@ public class ControlLabel<TContext> extends ControlBase
 		this.pos.multiply(scaleFactor);
 		this.size.multiply(scaleFactor);
 		this.fontHeightInPixels *= scaleFactor.y;
+		return this;
 	}
 
 	public String text()

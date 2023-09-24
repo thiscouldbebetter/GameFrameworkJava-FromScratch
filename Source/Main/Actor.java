@@ -11,6 +11,13 @@ public class Actor implements EntityProperty
 		this.activity = activity;
 	}
 
+	// Clonable.
+
+	public EntityProperty cloneAsEntityProperty()
+	{
+		return new Actor(this.activity.clone() );
+	}
+
 	// EntityProperty.
 
 	public static String nameStatic() { return "Actor"; }

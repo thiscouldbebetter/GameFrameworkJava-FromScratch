@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.*;
+
+import Helpers.*;
 import Main.*;
 
 public class Entity
@@ -62,5 +65,22 @@ public class Entity
 	public Locatable locatable()
 	{
 		return (Locatable)this.propertyByName(Locatable.nameStatic());
+	}
+
+	// Clonable.
+
+	public Entity clone()
+	{
+		return new Entity
+		(
+			this.name,
+			Arrays.asList
+			(
+				this.properties
+			).stream().map
+			(
+				x -> x.cloneAsEntityProperty()
+			).toArray(EntityProperty[]::new)
+		);
 	}
 }
