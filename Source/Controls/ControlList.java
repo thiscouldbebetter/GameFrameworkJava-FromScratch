@@ -50,7 +50,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		this.bindingForItemSelected = bindingForItemSelected;
 		this.bindingForItemValue = bindingForItemValue;
 		this.bindingForIsEnabled =
-			(bindingForIsEnabled != null ? bindingForIsEnabled : DataBinding.fromTrue());
+			(bindingForIsEnabled != null ? bindingForIsEnabled : DataBinding.fromGet(x -> true));
 		this._confirm = confirm;
 		this.widthInItems = (widthInItems != null ? widthInItems : 1);
 
@@ -76,12 +76,13 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		this._mouseClickPos = Coords.create();
 	}
 
+	/*
 	public static ControlList fromPosSizeAndItems
 	(
 		Coords pos, Coords size, DataBinding<Object, Object[]> items
 	)
 	{
-		var returnValue = new ControlList
+		var returnValue = new ControlList<TContext,TItem,TValue>
 		(
 			"", // name,
 			pos,
@@ -91,13 +92,14 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 			10, // fontHeightInPixels,
 			null, // bindingForItemSelected,
 			null, // bindingForItemValue,
-			DataBinding.fromTrue(), // isEnabled
+			DataBinding.fromGet(x -> true), // isEnabled
 			null, // confirm
 			1 // widthInItems
 		);
 
 		return returnValue;
 	}
+	*/
 
 	public static <TContext,TItem> ControlList fromPosSizeItemsAndBindingForItemText
 	(
@@ -107,7 +109,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		DataBinding<TItem,String> bindingForItemText
 	)
 	{
-		var returnValue = new ControlList
+		var returnValue = new ControlList<TContext,TItem,String>
 		(
 			"", // name,
 			pos,
@@ -117,7 +119,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 			10, // fontHeightInPixels,
 			null, // bindingForItemSelected,
 			null, // bindingForItemValue,
-			DataBinding.fromTrue(), // isEnabled
+			DataBinding.fromGet(x -> true), // isEnabled
 			null, // confirm
 			1 // widthInItems
 		);
@@ -135,12 +137,12 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		double fontHeightInPixels
 	)
 	{
-		return new ControlList
+		return new ControlList<TContext,TItem,String>
 		(
 			name, pos, size, items, bindingForItemText, fontHeightInPixels,
 			null, // bindingForItemSelected
 			null, // bindingForItemValue
-			DataBinding.fromTrue(), // isEnabled
+			DataBinding.fromGet(x -> true), // isEnabled
 			null, // confirm
 			1 // widthInItems
 		);
@@ -157,12 +159,12 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		DataBinding<TContext,TItem> bindingForItemSelected
 	)
 	{
-		return new ControlList
+		return new ControlList<TContext,TItem,String>
 		(
 			name, pos, size, items, bindingForItemText, fontHeightInPixels,
 			bindingForItemSelected,
 			null, // bindingForItemValue
-			DataBinding.fromTrue(), // isEnabled
+			DataBinding.fromGet(x -> true), // isEnabled
 			null, // confirm
 			1 // widthInItems
 		);
@@ -180,14 +182,14 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		DataBinding<TItem,TValue> bindingForItemValue
 	)
 	{
-		return new ControlList
+		return new ControlList<TContext,TItem,TValue>
 		(
 			name, pos, size, items,
 			bindingForItemText,
 			fontHeightInPixels,
 			bindingForItemSelected,
 			bindingForItemValue,
-			DataBinding.fromTrue(),
+			DataBinding.fromGet(x -> true),
 			null, // confirm
 			1 // widthInItems
 		);
@@ -206,7 +208,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		DataBinding<TContext,Boolean> bindingForIsEnabled
 	)
 	{
-		return new ControlList
+		return new ControlList<TContext,TItem,TValue>
 		(
 			name, pos, size, items,
 			bindingForItemText,
@@ -233,7 +235,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 		Consumer<Universe> confirm
 	)
 	{
-		return new ControlList
+		return new ControlList<TContext,TItem,TValue>
 		(
 			name, pos, size, items,
 			bindingForItemText,

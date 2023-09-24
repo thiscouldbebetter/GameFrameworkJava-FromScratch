@@ -5,18 +5,22 @@ import Display.*;
 import Input.*;
 import Main.*;
 import Media.*;
+import Profiles.*;
 import Utility.*;
 
 public class Universe
 {
 	public Display display;
 	public InputHelper inputHelper;
+	public MediaLibrary mediaLibrary;
 	public PlatformHelper platformHelper;
 	public SoundHelper soundHelper;
 	public TimerHelper timerHelper;
 	public World world;
 
 	public ControlBuilder controlBuilder;
+
+	public Profile profile;
 
 	public Venue venueCurrent;
 	public Venue venueNext;
@@ -25,6 +29,7 @@ public class Universe
 	(
 		Display display,
 		InputHelper inputHelper,
+		MediaLibrary mediaLibrary,
 		PlatformHelper platformHelper,
 		SoundHelper soundHelper,
 		TimerHelper timerHelper,
@@ -33,6 +38,7 @@ public class Universe
 	{
 		this.display = display;
 		this.inputHelper = inputHelper;
+		this.mediaLibrary = mediaLibrary;
 		this.platformHelper = platformHelper;
 		this.soundHelper = soundHelper;
 		this.timerHelper = timerHelper;

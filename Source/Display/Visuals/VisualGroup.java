@@ -34,22 +34,34 @@ public class VisualGroup implements Visual<VisualGroup>
 
 	public VisualGroup clone()
 	{
+		var childrenCloned = new Visual[this.children.length];
+
+		for (var i = 0; i < this.children.length; i++)
+		{
+			childrenCloned[i] = this.children[i].clone();
+		}
+
 		return new VisualGroup
 		(
-			ArrayHelper.clone(this.children).toArray(new Visual[] {})
+			childrenCloned
 		);
 	}
 
 	public VisualGroup overwriteWith(VisualGroup other)
 	{
 		var otherAsVisualGroup = (VisualGroup)other;
-		ArrayHelper.overwriteWith(this.children, otherAsVisualGroup.children);
+
+		for (var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].overwriteWith(other.children[i]);
+		}
+
 		return this;
 	}
 
 	// Transformable.
 
-	public Coords[] coordsGroupToTranslate() { throw new Exception("todo"); }
+	public Coords[] coordsGroupToTranslate() { return new Coords[] {}; }
 
 	public VisualGroup transform(Transform transformToApply)
 	{

@@ -65,10 +65,12 @@ public class DataBinding<TContext,TValue>
 		);
 	}
 
+	/*
 	public static DataBinding fromTrue()
 	{
 		return DataBinding.fromContext((Boolean)true);
 	}
+	*/
 
 	public DataBinding<TContext,TValue> contextSet(TContext value)
 	{

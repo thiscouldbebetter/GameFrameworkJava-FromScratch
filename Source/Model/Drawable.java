@@ -1,7 +1,6 @@
-package Main;
+package Model;
 
 import Display.*;
-import Model.*;
 
 public class Drawable implements EntityProperty
 {
@@ -10,6 +9,11 @@ public class Drawable implements EntityProperty
 	public Drawable(Visual visual)
 	{
 		this.visual = visual;
+	}
+
+	public static Drawable fromVisual(Visual visual)
+	{
+		return new Drawable(visual);
 	}
 
 	// Clonable.

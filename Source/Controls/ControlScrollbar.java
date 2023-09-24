@@ -47,7 +47,7 @@ public class ControlScrollbar<TContext,TItem> extends ControlBase
 			"-", // text
 			this.fontHeightInPixels,
 			true, // hasBorder
-			DataBinding.fromTrue(), // isEnabled
+			DataBinding.fromGet(x -> true), // isEnabled
 			() -> this.scrollUp() // click
 		);
 
@@ -59,7 +59,7 @@ public class ControlScrollbar<TContext,TItem> extends ControlBase
 			"+", // text
 			this.fontHeightInPixels,
 			true, // hasBorder
-			DataBinding.fromTrue(), // hasBorder
+			DataBinding.fromGet(x -> true), // hasBorder
 			() -> this.scrollDown() // click
 		);
 
@@ -95,6 +95,7 @@ public class ControlScrollbar<TContext,TItem> extends ControlBase
 		this.fontHeightInPixels *= scaleFactor.y;
 		this.buttonScrollUp.scalePosAndSize(scaleFactor);
 		this.buttonScrollDown.scalePosAndSize(scaleFactor);
+		return this;
 	}
 
 	public void scrollDown()

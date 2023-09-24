@@ -7,8 +7,8 @@ import Geometry.*;
 import Geometry.Transforms.*;
 import Media.*;
 import Model.*;
-import Model.Places.*;
-import Model.Physics.*;
+//import Model.Places.*;
+//import Model.Physics.*;
 
 public class ControlVisual<TContext,TVisual extends Visual> extends ControlBase
 {
@@ -42,7 +42,7 @@ public class ControlVisual<TContext,TVisual extends Visual> extends ControlBase
 			this.name(),
 			new EntityProperty[]
 			{
-				new Audible(),
+				// todo - new Audible(),
 				Locatable.fromPos(this._drawPos),
 				Drawable.fromVisual(new VisualNone())
 			}
@@ -50,7 +50,7 @@ public class ControlVisual<TContext,TVisual extends Visual> extends ControlBase
 		this._sizeHalf = Coords.create();
 	}
 
-	public static <TContext,TVisual> ControlVisual from4
+	public static <TContext,TVisual extends Visual> ControlVisual from4
 	(
 		String name,
 		Coords pos,
@@ -58,10 +58,10 @@ public class ControlVisual<TContext,TVisual extends Visual> extends ControlBase
 		DataBinding<TContext,TVisual> visual
 	)
 	{
-		return new ControlVisual(name, pos, size, visual, null, null);
+		return new ControlVisual<TContext,TVisual>(name, pos, size, visual, null, null);
 	}
 
-	public static <TContext, TVisual> ControlVisual from5
+	public static <TContext, TVisual extends Visual> ControlVisual from5
 	(
 		String name,
 		Coords pos,
@@ -70,7 +70,7 @@ public class ControlVisual<TContext,TVisual extends Visual> extends ControlBase
 		Color colorBackground
 	)
 	{
-		return new ControlVisual(name, pos, size, visual, colorBackground, null);
+		return new ControlVisual<TContext,TVisual>(name, pos, size, visual, colorBackground, null);
 	}
 
 	public boolean actionHandle(String actionName, Universe universe)

@@ -48,6 +48,14 @@ public class Coords
 		return this;
 	}
 
+	public Coords addDimensions(double x, double y, double z)
+	{
+		this.x += x;
+		this.y += y;
+		this.z += z;
+		return this;
+	}
+
 	public Coords clear()
 	{
 		this.x = 0;
@@ -114,6 +122,14 @@ public class Coords
 	public double dotProduct(Coords other)
 	{
 		return this.x * other.x + this.y * other.y + this.z * other.z;
+	}
+
+	public Coords floor()
+	{
+		this.x = Math.floor(this.x);
+		this.y = Math.floor(this.y);
+		this.z = Math.floor(this.z);
+		return this;
 	}
 
 	public Coords half()

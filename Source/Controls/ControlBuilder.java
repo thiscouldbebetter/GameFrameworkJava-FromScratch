@@ -11,7 +11,7 @@ import Media.*;
 import Model.*;
 import Model.Actors.*;
 // import Model.Places.*;
-// import Profiles.*;
+import Profiles.*;
 // import Storage.*;
 import Utility.*;
 
@@ -1035,6 +1035,7 @@ public class ControlBuilder
 
 		return returnValue;
 	}
+	*/
 
 	public <T> ControlBase message
 	(
@@ -1063,14 +1064,14 @@ public class ControlBuilder
 		);
 	}
 
-	public ControlBase opening(Universe universe, Coords size)
+	public ControlBase opening(Universe universe, Coords sizeIncoming)
 	{
 		var controlBuilder = this;
 
-		if (size == null)
-		{
-			size = universe.display.sizeDefault();
-		}
+		var size =
+			sizeIncoming != null
+			? sizeIncoming
+			: universe.display.sizeDefault();
 
 		var scaleMultiplier =
 			this._scaleMultiplier.overwriteWith(size).divide(this.sizeBase);
@@ -1111,7 +1112,7 @@ public class ControlBuilder
 			// children
 			new ControlBase[]
 			{
-				new ControlVisual
+				new ControlVisual<VisualGroup,VisualGroup>
 				(
 					"imageOpening",
 					this._zeroes.clone(),
@@ -1128,7 +1129,7 @@ public class ControlBuilder
 					"Next",
 					fontHeight * 2,
 					false, // hasBorder
-					DataBinding.fromTrue(), // isEnabled
+					DataBinding.fromGet(x -> true), // isEnabled
 					() ->
 						goToVenueNext.accept
 						(
@@ -1151,14 +1152,11 @@ public class ControlBuilder
 		return returnValue;
 	}
 
-	public ControlBase producer(Universe universe, Coords size)
+	public ControlBase producer(Universe universe, Coords sizeIncoming)
 	{
 		var controlBuilder = this;
 
-		if (size == null)
-		{
-			size = universe.display.sizeDefault();
-		}
+		var size = sizeIncoming != null ? sizeIncoming : universe.display.sizeDefault();
 
 		var scaleMultiplier =
 			this._scaleMultiplier.overwriteWith(size).divide(this.sizeBase);
@@ -1199,7 +1197,7 @@ public class ControlBuilder
 			// children
 			new ControlBase[]
 			{
-				new ControlVisual
+				new ControlVisual<Visual,Visual>
 				(
 					"imageProducer",
 					this._zeroes.clone(),
@@ -1216,7 +1214,7 @@ public class ControlBuilder
 					"Next",
 					fontHeight * 2,
 					false, // hasBorder
-					DataBinding.fromTrue(), // isEnabled
+					DataBinding.fromGet(x -> true), // isEnabled
 					goToVenueNext // click
 				)
 			}, // end children
@@ -1242,6 +1240,8 @@ public class ControlBuilder
 
 		return returnValue;
 	}
+
+	/*
 
 	public ControlBase settings
 	(
@@ -1599,6 +1599,7 @@ public class ControlBuilder
 
 		return controlsForSlides.get(0);
 	}
+	*/
 
 	public ControlBase title(Universe universe, Coords size)
 	{
@@ -1617,6 +1618,10 @@ public class ControlBuilder
 		Runnable start = () ->
 		{
 			var venueMessage = VenueMessage.fromText("Loading profiles...");
+
+			/*
+
+			// todo
 
 			var venueTask = new VenueTask<ControlBase>
 			(
@@ -1641,6 +1646,10 @@ public class ControlBuilder
 			(
 				universe.venueCurrent, venueTask
 			);
+			*/
+
+			universe.venueNext =
+				Profile.toControlProfileSelect(universe, null, universe.venueCurrent).toVenue();
 		};
 
 		var visual = new VisualGroup
@@ -1679,7 +1688,7 @@ public class ControlBuilder
 					"Start",
 					fontHeight * 2,
 					false, // hasBorder
-					DataBinding.fromTrue(), // isEnabled
+					DataBinding.fromGet(x -> true), // isEnabled
 					start // click
 				)
 			}, // end children
@@ -1708,9 +1717,12 @@ public class ControlBuilder
 
 	public Venue venueTransitionalFromTo(Venue venueFrom, Venue venueTo)
 	{
-		return this._venueTransitionalFromTo.apply(venueFrom, venueTo);
+		return venueTo;
+		// todo - return this._venueTransitionalFromTo.apply(venueFrom, venueTo);
 	}
 
+	/*
+	 * 
 	public ControlBase worldDetail
 	(
 		Universe universe, Coords size, Venue venuePrev

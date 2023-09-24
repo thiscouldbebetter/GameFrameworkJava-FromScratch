@@ -25,6 +25,17 @@ public class GameFrameworkDemo
 
 		var platformHelper = new PlatformHelper();
 
+		var mediaLibrary = new MediaLibrary
+		(
+			new Image2[]
+			{
+				Image2.fromSourcePath
+				(
+					"../Content/Images/Friendly.png"
+				).load(platformHelper)
+			}
+		);
+
 		var soundHelper = new SoundHelper();
 
 		var timerHelper = new TimerHelper(20); // ticksPerSecond
@@ -89,6 +100,7 @@ public class GameFrameworkDemo
 		(
 			display,
 			inputHelper,
+			mediaLibrary,
 			platformHelper,
 			soundHelper,
 			timerHelper,
