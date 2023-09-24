@@ -47,15 +47,15 @@ public class VenueControls implements Venue
 		var inputNames = Input.Names();
 
 		var inactivate = true;
-		var actionToInputsMappings = Arrays.asList(new ActionToInputsMapping[]
+		var actionToInputsMappingsArray = new ActionToInputsMapping[]
 		{
 			new ActionToInputsMapping
 			(
 				controlActionNames.ControlIncrement,
 				ArrayHelper.addMany(
-					Arrays.asList(new String[] { inputNames.ArrowDown }),
+					new String[] { inputNames.ArrowDown },
 					buildGamepadInputs.apply(inputNames.GamepadMoveDown)
-				).toArray(new String[] {}),
+				).toArray(String[]::new),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -63,9 +63,9 @@ public class VenueControls implements Venue
 				controlActionNames.ControlPrev,
 				ArrayHelper.addMany
 				(
-					Arrays.asList(new String[] { inputNames.ArrowLeft }),
+					new String[] { inputNames.ArrowLeft },
 					buildGamepadInputs.apply(inputNames.GamepadMoveLeft)
-				).toArray(new String[] {}),
+				).toArray(String[]::new),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -73,16 +73,13 @@ public class VenueControls implements Venue
 				controlActionNames.ControlNext,
 				ArrayHelper.addMany
 				(
-					Arrays.asList(new String[] { inputNames.ArrowRight }),
+					new String[] { inputNames.ArrowRight },
 					ArrayHelper.addMany
 					(
-						Arrays.asList
-						(
-							new String[] { inputNames.ArrowRight, inputNames.Tab }
-						),
+						new String[] { inputNames.ArrowRight, inputNames.Tab },
 						buildGamepadInputs.apply(inputNames.GamepadMoveRight)
-					)
-				).toArray(new String[] {}),
+					).toArray(String[]::new)
+				).toArray(String[]::new),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -90,9 +87,9 @@ public class VenueControls implements Venue
 				controlActionNames.ControlDecrement,
 				ArrayHelper.addMany
 				(
-					Arrays.asList(new String[] { inputNames.ArrowUp }),
+					new String[] { inputNames.ArrowUp },
 					buildGamepadInputs.apply(inputNames.GamepadMoveUp)
-				).toArray(new String[] {}),
+				).toArray(String[]::new),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -100,9 +97,9 @@ public class VenueControls implements Venue
 				controlActionNames.ControlConfirm,
 				ArrayHelper.addMany
 				(
-					Arrays.asList(new String[] { inputNames.Enter }),
+					new String[] { inputNames.Enter },
 					buildGamepadInputs.apply(inputNames.GamepadButton1)
-				).toArray(new String[] {}),
+				).toArray(String[]::new),
 				inactivate
 			),
 			new ActionToInputsMapping
@@ -110,12 +107,12 @@ public class VenueControls implements Venue
 				controlActionNames.ControlCancel,
 				ArrayHelper.addMany
 				(
-					Arrays.asList(new String[] { inputNames.Escape }),
+					new String[] { inputNames.Escape },
 					buildGamepadInputs.apply(inputNames.GamepadButton0)
-				).toArray(new String[] {}),
+				).toArray(String[]::new),
 				inactivate
 			)
-		});
+		};
 
 		if (ignoreKeyboardAndGamepadInputs)
 		{
@@ -124,7 +121,10 @@ public class VenueControls implements Venue
 
 		var control = (ControlContainer)this.controlRoot;
 		var mappings = control.actionToInputsMappings();
-		actionToInputsMappings.addAll(Arrays.asList(mappings));
+		var actionToInputsMappings = ArrayHelper.addMany
+		(
+			actionToInputsMappingsArray, Arrays.asList(mappings)
+		);
 
 		this.actionToInputsMappings =
 			actionToInputsMappings.toArray(new ActionToInputsMapping[] {});

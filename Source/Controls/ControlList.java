@@ -60,7 +60,7 @@ public class ControlList<TContext,TItem,TValue> extends ControlBase
 
 		this.isHighlighted = false;
 
-		this.scrollbar = new ControlScrollbar
+		this.scrollbar = new ControlScrollbar<TContext,TItem>
 		(
 			new Coords(this.size.x - scrollbarWidth, 0, 0), // pos
 			new Coords(scrollbarWidth, this.size.y, 0), // size

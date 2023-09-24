@@ -16,12 +16,44 @@ public class ArrayHelper
 	}
 	*/
 
-	public static <T, U extends T> List<T> addMany
+	public static List<String> addMany
 	(
-		List<T> list, List<U> elements
+		String[] arrayToAddTo, String[] elementsToAdd
 	)
 	{
-		list.addAll(elements);
+		var listToAddTo = new ArrayList<String>(Arrays.asList(arrayToAddTo));
+		for (var i = 0; i < elementsToAdd.length; i++)
+		{
+			var element = elementsToAdd[i];
+			listToAddTo.add(element);
+		}
+		return listToAddTo;
+	}
+
+	public static <T> List<T> addMany
+	(
+		T[] arrayToAddTo, List<T> elementsToAdd
+	)
+	{
+		var listToAddTo = new ArrayList<T>(Arrays.asList(arrayToAddTo));
+		for (var i = 0; i < elementsToAdd.size(); i++)
+		{
+			var element = elementsToAdd.get(i);
+			listToAddTo.add(element);
+		}
+		return listToAddTo;
+	}
+
+	public static <T, U extends T> List<T> addMany
+	(
+		List<T> list, List<U> elementsToAdd
+	)
+	{
+		for (var i = 0; i < elementsToAdd.size(); i++)
+		{
+			var element = elementsToAdd.get(i);
+			list.add(element);
+		}
 		return list;
 	}
 

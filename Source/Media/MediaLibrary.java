@@ -12,6 +12,18 @@ public class MediaLibrary
 
 	public Image2 imageGetByName(String name)
 	{
-		return images[0]; // todo
+		Image2 imageFound = null;
+
+		for (var i = 0; i < images.length; i++)
+		{
+			var image = images[i];
+			if (image.name == name)
+			{
+				imageFound = image;
+				break;
+			}
+		}
+
+		return imageFound;
 	}
 }

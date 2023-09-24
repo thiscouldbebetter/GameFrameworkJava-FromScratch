@@ -1,5 +1,8 @@
 package Main;
 
+import java.util.*;
+import java.util.stream.*;
+
 import Display.*;
 import Display.Visuals.*;
 import Geometry.*;
@@ -25,31 +28,40 @@ public class GameFrameworkDemo
 
 		var platformHelper = new PlatformHelper();
 
-		var mediaLibrary = new MediaLibrary
-		(
-			new Image2[]
-			{
-				Image2.fromSourcePath
-				(
-					"../Content/Images/Friendly.png"
-				).load(platformHelper)
-			}
-		);
+		var imageDirectoryPath = "../Content/Images/";
+		var imageFileExtension = ".png";
+		var imageNames = new String[]
+		{
+			"Friendly",
+			"Opening",
+			"Producer",
+			"Title",
+		};
+		var images = new Image2[imageNames.length];
+
+		for (var i = 0; i < imageNames.length; i++)
+		{
+			var imageName = imageNames[i];
+			var imageFilePath =
+				imageDirectoryPath + imageName + imageFileExtension;
+			var image =
+				new Image2(imageName, imageFilePath).load(platformHelper);
+			images[i] = image;
+		}
+
+		var mediaLibrary = new MediaLibrary(images);
 
 		var soundHelper = new SoundHelper();
 
 		var timerHelper = new TimerHelper(20); // ticksPerSecond
 
-		var visualImage = Image2.fromSourcePath
-		(
-			"../Content/Images/Friendly.png"
-		).load(platformHelper);
+		var visualFriendlyImage = mediaLibrary.imageGetByName("Friendly");
+		var visualFriendly = VisualImageImmediate.fromImage(visualFriendlyImage);
 
-		var visual2 = VisualImageImmediate.fromImage(visualImage);
+		var visualOpeningImage = mediaLibrary.imageGetByName("Opening");
+		var visualOpening = VisualImageImmediate.fromImage(visualOpeningImage);
 
-		var visual = VisualRectangle.fromSize(Coords.fromXY(40, 30) );
-
-		var entity0 = new Entity
+		var entityPlayer = new Entity
 		(
 			"Player",
 
@@ -62,7 +74,7 @@ public class GameFrameworkDemo
 
 				new Drawable
 				(
-					visual2
+					visualFriendly
 				),
 
 				new Locatable
@@ -80,7 +92,7 @@ public class GameFrameworkDemo
 			"Place0",
 			new Entity[]
 			{
-				entity0
+				entityPlayer
 			}
 		);
 

@@ -65,13 +65,6 @@ public class DataBinding<TContext,TValue>
 		);
 	}
 
-	/*
-	public static DataBinding fromTrue()
-	{
-		return DataBinding.fromContext((Boolean)true);
-	}
-	*/
-
 	public DataBinding<TContext,TValue> contextSet(TContext value)
 	{
 		this.context = value;
@@ -85,14 +78,6 @@ public class DataBinding<TContext,TValue>
 
 	public void set(TValue value)
 	{
-		if (this._set == null)
-		{
-			// todo - Causes lint warning.  Probably should refactor so _set is never null.
-			this.context = (TContext)value;
-		}
-		else
-		{
-			this._set.accept(this.context, value);
-		}
+		this._set.accept(this.context, value);
 	}
 }

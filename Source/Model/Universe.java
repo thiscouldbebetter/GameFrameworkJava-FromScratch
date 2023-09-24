@@ -49,7 +49,13 @@ public class Universe
 
 	public void initialize()
 	{
-		var venueInitial = this.world.toVenue(this);
+		var controlOpening = this.controlBuilder.opening
+		(
+			this, this.display.sizeInPixels()
+		);
+		var venueInitial =
+			// this.world.toVenue(this);
+			controlOpening.toVenue();
 		this.venueTransitionTo(venueInitial);
 
 		this.platformHelper.initialize();

@@ -53,7 +53,8 @@ public class VisualGroup implements Visual<VisualGroup>
 
 		for (var i = 0; i < this.children.length; i++)
 		{
-			this.children[i].overwriteWith(other.children[i]);
+			var otherChild = other.children[i];
+			this.children[i].overwriteWith(otherChild);
 		}
 
 		return this;

@@ -34,26 +34,35 @@ public class VenueMessage<TContext> implements Venue
 		this.showMessageOnly = showMessageOnly;
 	}
 
-	public static <TContext> VenueMessage fromMessage
+	public static VenueMessage<String> fromMessage
 	(
-		DataBinding<TContext,String> message
+		DataBinding<String,String> message
 	)
 	{
 		return VenueMessage.fromMessageAndAcknowledge(message, null);
 	}
 
-	public static <TContext> VenueMessage fromMessageAndAcknowledge
+	public static <TContext> VenueMessage<TContext> fromMessageAndAcknowledge
 	(
 		DataBinding<TContext,String> messageToShow,
 		Consumer<UniverseWorldPlaceEntities> acknowledge
 	)
 	{
-		return new VenueMessage(messageToShow, acknowledge, null, null, false);
+		return new VenueMessage<TContext>
+		(
+			messageToShow, acknowledge, null, null, false
+		);
 	}
 
-	public static VenueMessage fromText(String message)
+	public static VenueMessage<String> fromText(String message)
 	{
-		return VenueMessage.fromMessage(DataBinding.fromContext(message));
+		var dataBinding = new DataBinding<String,String>
+		(
+			message,
+			(String c) -> message,
+			(String c, String v) -> {}
+		);
+		return VenueMessage.fromMessage(dataBinding);
 	}
 
 	// instance methods
