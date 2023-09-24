@@ -44,11 +44,13 @@ public class ControlContainer extends ControlBase
 		this.children = Arrays.asList(children);
 		this.actions = (actions != null ? actions : new ActorAction[] {});
 		this._actionToInputsMappings = (actionToInputsMappings != null ? actionToInputsMappings : new ActionToInputsMapping[] {});
+		/*
 		this._actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
 		(
 			Arrays.asList(this._actionToInputsMappings),
 			x -> x.inputNames
 		);
+		*/
 
 		this.childrenByName = ArrayHelper.addLookupsByName(this.children);
 		this.actionsByName = ArrayHelper.addLookupsByName(this.actions);

@@ -74,6 +74,8 @@ class ActorAction_Instances
 			// perform
 			(UniverseWorldPlaceEntities uwpe) ->
 			{
+				// todo
+				/*
 				var universe = uwpe.universe;
 				var actor = uwpe.entity;
 				var control = actor.controllable().toControl
@@ -89,6 +91,7 @@ class ActorAction_Instances
 					venueNext, universe.venueCurrent
 				);
 				universe.venueNext = venueNext;
+				*/
 			}
 		);
 
@@ -98,6 +101,8 @@ class ActorAction_Instances
 			// perform
 			(UniverseWorldPlaceEntities uwpe) ->
 			{
+				// todo
+				/*
 				var universe = uwpe.universe;
 				var controlBuilder = universe.controlBuilder;
 				var control = controlBuilder.gameAndSettings1(universe);
@@ -107,6 +112,7 @@ class ActorAction_Instances
 					venueNext, universe.venueCurrent
 				);
 				universe.venueNext = venueNext;
+				*/
 			}
 		);
 	}

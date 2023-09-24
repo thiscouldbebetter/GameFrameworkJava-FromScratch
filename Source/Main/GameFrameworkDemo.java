@@ -56,7 +56,7 @@ public class GameFrameworkDemo
 
 				new Locatable
 				(
-					new Location
+					new Disposition
 					(
 						displaySize.clone().half(), // pos
 						Coords.zeroes() // vel

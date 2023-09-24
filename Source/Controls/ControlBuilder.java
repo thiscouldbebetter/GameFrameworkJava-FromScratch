@@ -95,8 +95,6 @@ public class ControlBuilder
 		return returnValue;
 	}
 
-	/*
-
 	// Controls.
 
 	public <TContext> ControlBase choice
@@ -136,7 +134,7 @@ public class ControlBuilder
 			100, labelPosYBase - fontHeight * (numberOfLinesInMessageMinusOne / 4)
 		);
 
-		var labelMessage = new ControlLabel
+		var labelMessage = new ControlLabel<TContext>
 		(
 			"labelMessage",
 			labelPos,
@@ -223,6 +221,8 @@ public class ControlBuilder
 
 		return returnValue;
 	}
+
+	/*
 
 	public ControlBase choiceList
 	(
@@ -2152,7 +2152,6 @@ public class ControlBuilder
 
 		return returnValue;
 	}
-
 	*/
 
 }

@@ -77,12 +77,14 @@ public interface Display extends Platformable
 	(
 		Coords pos, Coords size, Color colorFill, Color colorBorder
 	);
+	*/
 	void drawText
 	(
 		String text, double fontHeightInPixels, Coords pos,
 		Color colorFill, Color colorOutline, boolean areColorsReversed,
 		boolean isCentered, Double widthMaxInPixels
 	);
+	/*
 	void drawWedge
 	(
 		Coords center, double radius, double angleStartInTurns,

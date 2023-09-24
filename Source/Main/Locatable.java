@@ -5,9 +5,9 @@ import Model.*;
 
 public class Locatable implements EntityProperty
 {
-	public Location loc;
+	public Disposition loc;
 
-	public Locatable(Location loc)
+	public Locatable(Disposition loc)
 	{
 		this.loc = loc;
 	}

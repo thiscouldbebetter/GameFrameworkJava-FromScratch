@@ -135,6 +135,16 @@ public class Display2D extends JPanel implements Display
 		}
 	}
 
+	void drawText
+	(
+		String text, double fontHeightInPixels, Coords pos,
+		Color colorFill, Color colorOutline, boolean areColorsReversed,
+		boolean isCentered, Double widthMaxInPixels
+	)
+	{
+		// todo
+	}
+
 	// todo - Display methods.
 
 	public void eraseModeSet(boolean value) {}

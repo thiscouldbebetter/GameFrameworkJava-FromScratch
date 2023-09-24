@@ -1,5 +1,6 @@
 package Input;
 
+import Geometry.*;
 import Model.*;
 import Utility.*;
 
@@ -10,7 +11,11 @@ import javax.swing.*;
 
 public class InputHelper extends JComponent implements KeyListener, Platformable
 {
+	public java.util.List<Input> inputsPressed;
 	public java.util.List<Integer> keyCodesPressed;
+	public Coords mouseClickPos;
+	public Coords mouseMovePos;
+	public Coords mouseMovePosPrev;
 
 	public void initialize(Universe universe)
 	{
@@ -18,6 +23,9 @@ public class InputHelper extends JComponent implements KeyListener, Platformable
 		platformHelper.platformableAdd(this);
 
 		this.keyCodesPressed = new ArrayList<Integer>();
+		this.mouseClickPos = Coords.zeroes();
+		this.mouseMovePos = Coords.zeroes();
+		this.mouseMovePosPrev = Coords.zeroes();
 	}
 
 	public void updateForTimerTick(Universe universe)

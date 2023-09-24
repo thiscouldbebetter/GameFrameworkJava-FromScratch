@@ -46,6 +46,12 @@ public class Coords
 		return this;
 	}
 
+	public Coords clearZ()
+	{
+		this.z = 0;
+		return this;
+	}
+
 	public Coords divide(Coords other)
 	{
 		this.x /= other.x;
@@ -67,11 +73,42 @@ public class Coords
 		return this.divideScalar(2);
 	}
 
+	public boolean isInRangeMinMax(Coords min, Coords max)
+	{
+		var returnValue =
+		(
+			this.x >= min.x
+			&& this.x <= max.x
+			&& this.y >= min.y
+			&& this.y <= max.y
+			&& this.z >= min.z
+			&& this.z <= max.z
+		);
+
+		return returnValue;
+	}
+
+	public Coords multiply(Coords other)
+	{
+		this.x *= other.x;
+		this.y *= other.y;
+		this.z *= other.z;
+		return this;
+	}
+
 	public Coords multiplyScalar(double scalar)
 	{
 		this.x *= scalar;
 		this.y *= scalar;
 		this.z *= scalar;
+		return this;
+	}
+
+	public Coords overwriteWith(Coords other)
+	{
+		this.x = other.x;
+		this.y = other.y;
+		this.z = other.z;
 		return this;
 	}
 
