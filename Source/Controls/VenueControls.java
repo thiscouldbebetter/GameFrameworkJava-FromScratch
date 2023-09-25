@@ -129,14 +129,11 @@ public class VenueControls implements Venue
 		this.actionToInputsMappings =
 			actionToInputsMappings.toArray(new ActionToInputsMapping[] {});
 
-		/*
-		// todo
-		this.actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
-		(
-			Arrays.asList(this.actionToInputsMappings),
-			(ActionToInputsMapping x) -> x.inputNames
-		);
-		*/
+		this.actionToInputsMappingsByInputName =
+			ActionToInputsMapping.mappingsToMappingsByInputName
+			(
+				this.actionToInputsMappings
+			);
 
 		// Helper variables.
 

@@ -1,5 +1,7 @@
 package Input;
 
+import java.util.*;
+
 import Model.*;
 import Model.Actors.*;
 import Helpers.*;
@@ -33,6 +35,35 @@ public class ActionToInputsMapping
 			actionName, new String[] { inputName }, false
 		);
 	}
+
+	// Static methods.
+
+	public static Map<String,ActionToInputsMapping> mappingsToMappingsByInputName
+	(
+		ActionToInputsMapping[] mappings
+	)
+	{
+		var mappingsByInputName =
+			new HashMap<String,ActionToInputsMapping>();
+
+		for (var i = 0; i < mappings.length; i++)
+		{
+			var mapping = mappings[i];
+			var mappingInputNames = mapping.inputNames;
+			for (var n = 0; n < mappingInputNames.length; n++)
+			{
+				var inputName = mappingInputNames[n];
+				mappingsByInputName.put
+				(
+					inputName, mapping
+				);
+			}
+		}
+
+		return mappingsByInputName;
+	}
+
+	// Instance methods.
 
 	public ActorAction action(Universe universe)
 	{

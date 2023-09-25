@@ -43,6 +43,18 @@ public class PlatformHelper
 				(KeyListener)platformableToAdd;
 			this.frame.addKeyListener(platformableToAddAsKeyListener);
 		}
+
+		if (platformableToAdd.isMouseListener() )
+		{
+			var platformableToAddAsMouseListener =
+				(MouseListener)platformableToAdd;
+			this.frame.addMouseListener(platformableToAddAsMouseListener);
+
+			var platformableToAddAsMouseMotionListener =
+				(MouseMotionListener)platformableToAdd;
+			this.frame.addMouseMotionListener(platformableToAddAsMouseMotionListener);
+
+		}
 	}
 
 	public void resizeForPlatformables()

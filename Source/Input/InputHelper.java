@@ -10,13 +10,16 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class InputHelper extends JComponent implements KeyListener, Platformable
+public class InputHelper
+	extends JComponent
+	implements KeyListener, MouseListener, MouseMotionListener, Platformable
 {
 	public java.util.List<Input> inputsPressed;
 	public Map<String,Input> inputsPressedByName;
 	public java.util.List<Integer> keyCodesPressed;
 	public Coords mouseClickPos;
 	public Coords mouseMovePos;
+	public Coords mouseMovePosNext;
 	public Coords mouseMovePosPrev;
 
 	public void initialize(Universe universe)
@@ -29,6 +32,7 @@ public class InputHelper extends JComponent implements KeyListener, Platformable
 		this.keyCodesPressed = new ArrayList<Integer>();
 		this.mouseClickPos = Coords.zeroes();
 		this.mouseMovePos = Coords.zeroes();
+		this.mouseMovePosNext = Coords.zeroes();
 		this.mouseMovePosPrev = Coords.zeroes();
 	}
 
@@ -142,9 +146,72 @@ public class InputHelper extends JComponent implements KeyListener, Platformable
 		// Do nothing.
 	}
 
+	// MouseListener.
+
+	public void mouseClicked(MouseEvent event)
+	{
+		// Do nothing.
+	}
+
+	public void mousePressed(MouseEvent event)
+	{
+		this.mouseClickPos.overwriteWithDimensions
+		(
+			event.getX(),
+			event.getY(),
+			0
+		);
+		this.inputAdd(Input.Names().MouseClick);
+	}
+
+	public void mouseReleased(MouseEvent event)
+	{
+		this.inputRemove(Input.Names().MouseClick);
+	}
+
+	// MouseMoveListener.
+
+	public void mouseDragged(MouseEvent event)
+	{
+		// Do nothing.
+	}
+
+	public void mouseEntered(MouseEvent event)
+	{
+		// Do nothing.
+	}
+
+	public void mouseExited(MouseEvent event)
+	{
+		// Do nothing.
+	}
+
+	public void mouseMoved(MouseEvent event)
+	{
+		this.mouseMovePosNext.overwriteWithDimensions
+		(
+			event.getX(),
+			event.getY(),
+			0
+		);
+
+		if (this.mouseMovePosNext.equals(this.mouseMovePos) == false)
+		{
+			this.mouseMovePosPrev.overwriteWith(this.mouseMovePos);
+			this.mouseMovePos.overwriteWith(this.mouseMovePosNext);
+			this.inputAdd(Input.Names().MouseMove);
+		}
+	}
+
+
 	// Platformable.
 
 	public boolean isKeyListener()
+	{
+		return true;
+	}
+
+	public boolean isMouseListener()
 	{
 		return true;
 	}

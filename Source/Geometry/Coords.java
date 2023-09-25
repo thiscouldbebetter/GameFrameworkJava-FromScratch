@@ -25,6 +25,11 @@ public class Coords
 		return new Coords(x, y, 0);
 	}
 
+	public static Coords ones()
+	{
+		return new Coords(1, 1, 1);
+	}
+
 	public static Coords zeroes()
 	{
 		return new Coords(0, 0, 0);

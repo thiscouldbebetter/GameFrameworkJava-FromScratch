@@ -7,5 +7,6 @@ import javax.swing.*;
 public interface Platformable
 {
 	boolean isKeyListener();
+	boolean isMouseListener();
 	JComponent toJComponent();
 }

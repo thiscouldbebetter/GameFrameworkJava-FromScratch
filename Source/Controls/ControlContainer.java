@@ -44,13 +44,11 @@ public class ControlContainer extends ControlBase
 		this.children = Arrays.asList(children);
 		this.actions = (actions != null ? actions : new ActorAction[] {});
 		this._actionToInputsMappings = (actionToInputsMappings != null ? actionToInputsMappings : new ActionToInputsMapping[] {});
-		/*
-		this._actionToInputsMappingsByInputName = ArrayHelper.addLookupsMultiple
-		(
-			Arrays.asList(this._actionToInputsMappings),
-			x -> x.inputNames
-		);
-		*/
+		this._actionToInputsMappingsByInputName =
+			ActionToInputsMapping.mappingsToMappingsByInputName
+			(
+				this._actionToInputsMappings
+			);
 
 		this.childrenByName = ArrayHelper.addLookupsByName(this.children);
 		this.actionsByName = ArrayHelper.addLookupsByName(this.actions);
@@ -61,7 +59,7 @@ public class ControlContainer extends ControlBase
 			child.parent = this;
 		}
 
-		this.indexOfChildWithFocus = -1;
+		this.indexOfChildWithFocus = null;
 		this.childrenContainingPos = new ArrayList<ControlBase>();
 		this.childrenContainingPosPrev = new ArrayList<ControlBase>();
 
@@ -190,10 +188,11 @@ public class ControlContainer extends ControlBase
 
 	public ControlBase childWithFocusNextInDirection(int direction)
 	{
-		if (this.indexOfChildWithFocus == -1)
+		if (this.indexOfChildWithFocus == null)
 		{
-			var iStart = (direction == 1 ? 0 : this.children.size() - 1);
-			var iEnd = (direction == 1 ? this.children.size() : -1);
+			var childCount = this.children.size();
+			var iStart = (direction == 1 ? 0 : childCount - 1);
+			var iEnd = (direction == 1 ? childCount : -1);
 
 			for (var i = iStart; i != iEnd; i += direction)
 			{

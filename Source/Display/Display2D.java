@@ -81,6 +81,11 @@ public class Display2D extends JPanel implements Display
 		return false;
 	}
 
+	public boolean isMouseListener()
+	{
+		return false;
+	}
+
 	public JComponent toJComponent()
 	{
 		return this;
@@ -162,7 +167,7 @@ public class Display2D extends JPanel implements Display
 	public Coords sizeInPixelsHalf() { return this._sizeInPixelsHalf; }
 	public Coords[] sizesAvailable() { return null; }
 
-	public Coords scaleFactor() { return null; } 
+	public Coords scaleFactor() { return Coords.ones(); } 
 
 	public void stateRestore()
 	{
