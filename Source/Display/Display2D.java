@@ -11,8 +11,10 @@ import javax.swing.*;
 
 public class Display2D extends JPanel implements Display
 {
+	private Coords _drawPos;
 	private Coords _sizeInPixels;
 	private Coords _sizeInPixelsHalf;
+	private FontNameAndHeight fontNameAndHeight;
 
 	private BufferedImage bufferedImage;
 	private Graphics graphics;
@@ -21,6 +23,9 @@ public class Display2D extends JPanel implements Display
 	{
 		this._sizeInPixels = sizeInPixels;
 		this._sizeInPixelsHalf = this._sizeInPixels.clone().half();
+		this.fontNameAndHeight = new FontNameAndHeight("TimesNewRoman", 20); 
+		
+		this._drawPos = Coords.create();
 	}
 
 	public void paintComponent(Graphics graphics)
@@ -131,7 +136,7 @@ public class Display2D extends JPanel implements Display
 
 		if (colorBorder != null)
 		{
-			this.graphics.setColor(colorBorder.systemColor());
+			this.graphics.setColor(colorBorder.systemColor() );
 
 			this.graphics.drawRect
 			(
@@ -147,7 +152,35 @@ public class Display2D extends JPanel implements Display
 		boolean isCentered, Double widthMaxInPixels
 	)
 	{
-		// todo
+		var g = this.graphics;
+
+		var colorsOutlineAndFill =
+			areColorsReversed
+			? new Color[] { colorFill, colorOutline }
+			: new Color[] { colorOutline, colorFill };
+
+		for (var c = 0; c < colorsOutlineAndFill.length; c++)
+		{
+			var color = colorsOutlineAndFill[c];
+
+			var fontAdjusted = this.fontNameAndHeight.clone();
+
+			fontAdjusted.heightInPixels += 1 - c; // Make outline bigger?
+
+			g.setFont(fontAdjusted.toSystemFont() ); 
+
+			g.setColor(colorFill.systemColor() );
+
+			var drawPos = this._drawPos.overwriteWith(pos);
+			if (isCentered)
+			{
+				int textWidthInPixels = g.getFontMetrics().stringWidth(text);
+				var textWidthInPixelsHalf = textWidthInPixels / 2;
+				drawPos.x -= textWidthInPixelsHalf;
+			}
+
+			g.drawString(text, (int)drawPos.x, (int)drawPos.y);
+		}
 	}
 
 	// todo - Display methods.
@@ -155,7 +188,11 @@ public class Display2D extends JPanel implements Display
 	public void eraseModeSet(boolean value) {}
 	public double fontHeightInPixels() {return -1; }
 	public String fontName() { return null; }
-	public void fontSet(String fontName, double fontHeightInPixels) {}
+	public void fontSet(String fontName, int fontHeightInPixels)
+	{
+		this.fontNameAndHeight.name = fontName;
+		this.fontNameAndHeight.heightInPixels = fontHeightInPixels;
+	}
 	public void flush() {}
 	public void hide(Universe universe) {}
 	public void rotateTurnsAroundCenter

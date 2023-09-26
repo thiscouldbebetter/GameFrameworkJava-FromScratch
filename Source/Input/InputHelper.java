@@ -14,6 +14,8 @@ public class InputHelper
 	extends JComponent
 	implements KeyListener, MouseListener, MouseMotionListener, Platformable
 {
+	public java.util.List<Input> _inputsActive;
+	public Map<String,Input> _inputsActiveByName;
 	public java.util.List<Input> inputsPressed;
 	public Map<String,Input> inputsPressedByName;
 	public java.util.List<Integer> keyCodesPressed;
@@ -27,6 +29,8 @@ public class InputHelper
 		var platformHelper = universe.platformHelper;
 		platformHelper.platformableAdd(this);
 
+		this._inputsActive = new ArrayList<Input>();
+		this._inputsActiveByName = new HashMap<String,Input>();
 		this.inputsPressed = new ArrayList<Input>();
 		this.inputsPressedByName = new HashMap<String,Input>();
 		this.keyCodesPressed = new ArrayList<Integer>();
@@ -41,7 +45,16 @@ public class InputHelper
 		// todo
 	}
 
-	// Ported methods.
+	public void inputActivate(Input inputToActivate)
+	{
+		var inputToActivateName = inputToActivate.name;
+
+		if (this._inputsActiveByName.get(inputToActivateName) == null)
+		{
+			this._inputsActiveByName.put(inputToActivateName, inputToActivate);
+			this._inputsActive.add(inputToActivate);
+		}
+	}
 
 	public void inputAdd(String inputPressedName)
 	{
@@ -50,14 +63,31 @@ public class InputHelper
 			var inputPressed = new Input(inputPressedName);
 			this.inputsPressedByName.put(inputPressedName, inputPressed);
 			this.inputsPressed.add(inputPressed);
+			this.inputActivate(inputPressed);
+		}
+	}
+
+	public void inputInactivate(Input inputToInactivate)
+	{
+		var inputToInactivateName = inputToInactivate.name;
+
+		var inputToInactivateExisting =
+			this._inputsActiveByName.get(inputToInactivateName);
+
+		if (inputToInactivateExisting != null)
+		{
+			this._inputsActiveByName.remove(inputToInactivateName);
+			ArrayHelper.remove(this._inputsActive, inputToInactivateExisting);
 		}
 	}
 
 	public void inputRemove(String inputReleasedName)
 	{
-		if (this.inputsPressedByName.get(inputReleasedName) != null)
+		var inputReleased = this.inputsPressedByName.get(inputReleasedName);
+
+		if (inputReleased != null)
 		{
-			var inputReleased = this.inputsPressedByName.get(inputReleasedName);
+			this.inputInactivate(inputReleased);
 			this.inputsPressedByName.remove(inputReleasedName);
 			ArrayHelper.remove(this.inputsPressed, inputReleased);
 		}
@@ -65,23 +95,22 @@ public class InputHelper
 
 	public java.util.List<Input> inputsActive()
 	{
-		var inputsActive = new ArrayList<Input>();
-		for (var i = 0; i < this.inputsPressed.size(); i++)
-		{
-			var input = this.inputsPressed.get(i);
-			if (input.isActive)
-			{
-				inputsActive.add(input);
-			}
-		}
-		return inputsActive;
+		return this._inputsActive;
 	}
 
 	public void inputsRemoveAll()
 	{
-		for (var i = 0; i < this.inputsPressed.size(); i++)
+		var inputsPressed = this.inputsPressed;
+		for (var i = 0; i < inputsPressed.size(); i++)
 		{
-			var input = this.inputsPressed.get(i);
+			var input = inputsPressed.get(i);
+			this.inputRemove(input.name);
+		}
+
+		var inputsActive = this._inputsActive;
+		for (var i = 0; i < inputsActive.size(); i++)
+		{
+			var input = inputsActive.get(i);
 			this.inputRemove(input.name);
 		}
 	}
@@ -161,6 +190,7 @@ public class InputHelper
 			event.getY(),
 			0
 		);
+
 		this.inputAdd(Input.Names().MouseClick);
 	}
 

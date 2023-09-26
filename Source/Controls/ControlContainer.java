@@ -314,6 +314,7 @@ public class ControlContainer extends ControlBase
 		if (childrenContainingPos.size() > 0)
 		{
 			var child = childrenContainingPos.get(0);
+
 			var wasClickHandledByChild = child.mouseClick(mouseClickPos);
 			if (wasClickHandledByChild)
 			{

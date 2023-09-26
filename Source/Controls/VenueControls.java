@@ -166,86 +166,85 @@ public class VenueControls implements Venue
 		this.draw(universe);
 
 		var inputHelper = universe.inputHelper;
-		var inputsPressed = inputHelper.inputsPressed;
+		var inputsActive = inputHelper.inputsActive();
 		var inputNames = Input.Names();
 
-		for (var i = 0; i < inputsPressed.size(); i++)
+		for (var i = 0; i < inputsActive.size(); i++)
 		{
-			var inputPressed = inputsPressed.get(i);
-			if (inputPressed.isActive)
-			{
-				var inputPressedName = inputPressed.name;
+			var inputActive = inputsActive.get(i);
+			var inputActiveName = inputActive.name;
 
-				var mapping = this.actionToInputsMappingsByInputName.get
+			var mapping = this.actionToInputsMappingsByInputName.get
+			(
+				inputActiveName
+			);
+
+			if (inputActiveName.startsWith("Mouse") == false)
+			{
+				if (mapping == null)
+				{
+					// Pass the raw input, to allow for text entry.
+					var wasActionHandled = this.controlRoot.actionHandle
+					(
+						inputActiveName, universe
+					);
+					if (wasActionHandled)
+					{
+						inputActive.isActive = false;
+					}
+				}
+				else
+				{
+					var actionName = mapping.actionName;
+					this.controlRoot.actionHandle(actionName, universe);
+					if (mapping.inactivateInputWhenActionPerformed)
+					{
+						inputActive.isActive = false;
+					}
+				}
+			}
+			else if (inputActiveName == inputNames.MouseClick)
+			{
+				this._mouseClickPos.overwriteWith
 				(
-					inputPressedName
+					inputHelper.mouseClickPos
+				).divide
+				(
+					universe.display.scaleFactor()
 				);
 
-				if (inputPressedName.startsWith("Mouse") == false)
-				{
-					if (mapping == null)
-					{
-						// Pass the raw input, to allow for text entry.
-						var wasActionHandled = this.controlRoot.actionHandle
-						(
-							inputPressedName, universe
-						);
-						if (wasActionHandled)
-						{
-							inputPressed.isActive = false;
-						}
-					}
-					else
-					{
-						var actionName = mapping.actionName;
-						this.controlRoot.actionHandle(actionName, universe);
-						if (mapping.inactivateInputWhenActionPerformed)
-						{
-							inputPressed.isActive = false;
-						}
-					}
-				}
-				else if (inputPressedName == inputNames.MouseClick)
-				{
-					this._mouseClickPos.overwriteWith
-					(
-						inputHelper.mouseClickPos
-					).divide
-					(
-						universe.display.scaleFactor()
-					);
-					var wasClickHandled =
-						this.controlRoot.mouseClick(this._mouseClickPos);
-					if (wasClickHandled)
-					{
-						//inputHelper.inputRemove(inputPressed);
-						inputPressed.isActive = false;
-					}
-				}
-				else if (inputPressedName == inputNames.MouseMove)
-				{
-					this._mouseMovePos.overwriteWith
-					(
-						inputHelper.mouseMovePos
-					).divide
-					(
-						universe.display.scaleFactor()
-					);
-					this._mouseMovePosPrev.overwriteWith
-					(
-						inputHelper.mouseMovePosPrev
-					).divide
-					(
-						universe.display.scaleFactor()
-					);
+				var wasClickHandled =
+					this.controlRoot.mouseClick(this._mouseClickPos);
 
-					this.controlRoot.mouseMove
-					(
-						this._mouseMovePos //, this._mouseMovePosPrev
-					);
+				if (wasClickHandled)
+				{
+					//inputHelper.inputRemove(inputPressed);
+					inputActive.isActive = false;
 				}
+			}
+			else if (inputActiveName == inputNames.MouseMove)
+			{
+				this._mouseMovePos.overwriteWith
+				(
+					inputHelper.mouseMovePos
+				).divide
+				(
+					universe.display.scaleFactor()
+				);
 
-			} // end if isActive
+				this._mouseMovePosPrev.overwriteWith
+				(
+					inputHelper.mouseMovePosPrev
+				).divide
+				(
+					universe.display.scaleFactor()
+				);
+
+				this.controlRoot.mouseMove
+				(
+					this._mouseMovePos //, this._mouseMovePosPrev
+				);
+			}
 
 		} // end for
 

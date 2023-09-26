@@ -217,6 +217,11 @@ public class Coords
 		return new Dimension((int)this.x, (int)this.y);
 	}
 
+	public String toString()
+	{
+		return "(" + this.x + "," + this.y + "," + this.z + ")";
+	}
+
 	public Coords trimToMagnitudeMax(double magnitudeMax)
 	{
 		var magnitude = this.magnitude();

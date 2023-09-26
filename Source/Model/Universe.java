@@ -69,13 +69,7 @@ public class Universe
 
 	public void updateForTimerTick()
 	{
-		/*
 		this.display.clear();
-
-		this.world.updateForTimerTick(this);
-
-		this.display.updateForTimerTick(this);
-		*/
 
 		this.inputHelper.updateForTimerTick(this);
 
@@ -92,6 +86,8 @@ public class Universe
 			this.venueCurrent.initialize(this);
 		}
 		this.venueCurrent.updateForTimerTick(this);
+
+		this.display.updateForTimerTick(this);
 
 		//this.displayRecorder.updateForTimerTick(this);
 	}

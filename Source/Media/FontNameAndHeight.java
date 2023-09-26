@@ -1,19 +1,21 @@
 
 package Media;
 
+import java.awt.*;
+
 public class FontNameAndHeight // implements Clonable<FontNameAndHeight>, Equatable<FontNameAndHeight>
 {
 	public String name;
-	public double heightInPixels;
+	public int heightInPixels;
 
 	public FontNameAndHeight
 	(
 		String name,
-		double heightInPixels
+		int heightInPixels
 	)
 	{
 		this.name = name != null ? name : "Font";
-		this.heightInPixels = heightInPixels != 0 ? heightInPixels || 10;
+		this.heightInPixels = heightInPixels != 0 ? heightInPixels : 10;
 	}
 
 	public static FontNameAndHeight create()
@@ -21,16 +23,15 @@ public class FontNameAndHeight // implements Clonable<FontNameAndHeight>, Equata
 		return new FontNameAndHeight(null, 0);
 	}
 
-	public static FontNameAndHeight fromHeightInPixels(double heightInPixels)
+	public static FontNameAndHeight fromHeightInPixels(int heightInPixels)
 	{
 		return new FontNameAndHeight(null, heightInPixels);
 	}
 
-	public String toStringSystemFont()
+	public java.awt.Font toSystemFont()
 	{
-		return this.heightInPixels + "px " + this.name;
+		return new java.awt.Font(this.name, java.awt.Font.PLAIN, this.heightInPixels);
 	}
-
 
 	// Clonable.
 
@@ -57,6 +58,4 @@ public class FontNameAndHeight // implements Clonable<FontNameAndHeight>, Equata
 		);
 		return returnValue;
 	}
-}
-
 }

@@ -94,7 +94,7 @@ public interface Display extends Platformable
 	void eraseModeSet(boolean value);
 	double fontHeightInPixels();
 	String fontName();
-	void fontSet(String fontName, double fontHeightInPixels);
+	void fontSet(String fontName, int fontHeightInPixels);
 	void flush();
 	void hide(Universe universe);
 	Display initialize(Universe universe);
